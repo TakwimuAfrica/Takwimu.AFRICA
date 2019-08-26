@@ -2,6 +2,7 @@
   "name": "@takwimuafrica/takwimu.africa",
   "version": "0.1.0-alpha",
   "private": true,
+  "homepage":"https://TakwimuAfrica.github.io/Takwimu.AFRICA",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
