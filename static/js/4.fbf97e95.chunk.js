@@ -1,0 +1,2 @@
+(window["webpackJsonp@takwimuafrica/takwimu.africa"]=window["webpackJsonp@takwimuafrica/takwimu.africa"]||[]).push([[4],{6228:function(a,i){},6230:function(a,i){},6274:function(a,i){},6275:function(a,i){},6388:function(a,i,t){"use strict";t.r(i);var n=t(6223);i.default={ReactPDF:n.h,Document:n.a,Page:n.d,Text:n.f,View:n.g,Image:n.b,Link:n.c,StyleSheet:n.e}}}]);
+//# sourceMappingURL=4.fbf97e95.chunk.js.map
