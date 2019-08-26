@@ -1,0 +1,66 @@
+{
+  "name": "@takwimuafrica/takwimu.africa",
+  "version": "0.1.0-alpha",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "@react-pdf/renderer": "^1.5.6",
+    "classnames": "^2.2.6",
+    "dom-to-image": "^2.6.0",
+    "html2canvas": "^1.0.0-rc.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.8.4",
+    "react-app-polyfill": "^1.0.1",
+    "react-dom": "^16.8.4",
+    "react-pdf-js": "^5.1.0",
+    "react-scripts": "3.1.1",
+    "react-share": "^3.0.0",
+    "typescript": "*"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-json": "^1.4.0",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-markdown": "^1.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.4",
+    "prettier": "^1.16.1",
+    "source-map-explorer": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,json,scss,md}": [
+      "yarn lint-staged",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md' './'",
+    "lint-staged": "yarn eslint --fix"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "proxy": "https://takwimu.africa"
+}
