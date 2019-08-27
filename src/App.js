@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
+import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import NotFound from './pages/404';
 import ScrollToTop from './components/ScrollToTop';
@@ -14,6 +15,7 @@ function App() {
       <ScrollToTop>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/contact" component={Contact} />
           <Route exact path="/legal" component={Legal} />
           <Route
             exact

@@ -168,7 +168,7 @@ class Navigation extends React.Component {
             component={RouterLink}
             color="textSecondary"
             className={classes.link}
-            href="/about"
+            to="/about"
           >
             About Us
           </Link>
@@ -176,7 +176,7 @@ class Navigation extends React.Component {
             component={RouterLink}
             color="textSecondary"
             className={classes.link}
-            href="/faqs"
+            to="/faqs"
           >
             FAQs
           </Link>
@@ -184,7 +184,7 @@ class Navigation extends React.Component {
             component={RouterLink}
             color="textSecondary"
             className={classes.link}
-            href="/contact"
+            to="/contact"
           >
             Contact Us
           </Link>
@@ -271,20 +271,12 @@ class Navigation extends React.Component {
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <Link
-                component={RouterLink}
-                className={classes.link}
-                href="/about"
-              >
+              <Link component={RouterLink} className={classes.link} to="/about">
                 About
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link
-                component={RouterLink}
-                className={classes.link}
-                href="/faqs"
-              >
+              <Link component={RouterLink} className={classes.link} to="/faqs">
                 FAQs
               </Link>
             </MenuItem>
@@ -292,7 +284,7 @@ class Navigation extends React.Component {
               <Link
                 component={RouterLink}
                 className={classes.link}
-                href="/contact"
+                to="/contact"
               >
                 Contact Us
               </Link>
