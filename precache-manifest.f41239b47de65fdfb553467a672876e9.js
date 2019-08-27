@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "68f5d983efeab6fd408e9ebe4e537e6c",
+    "revision": "cb29dbb68a91b3cdb5b40350f1703180",
     "url": "/Takwimu.AFRICA/index.html"
   },
   {
