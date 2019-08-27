@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import { Grid, Link } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -38,7 +40,12 @@ function StayInTouch({ classes, settings: { support, socialMedia } }) {
   return (
     <div className={classes.root}>
       <Title>
-        <Link href="/contact" variant="subtitle1" className={classes.title}>
+        <Link
+          component={RouterLink}
+          to="/contact"
+          variant="subtitle1"
+          className={classes.title}
+        >
           Stay in touch
         </Link>
       </Title>

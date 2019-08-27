@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import { withStyles, Link, Typography } from '@material-ui/core';
 
+import config from '../config';
 import Error from '../components/Error';
 import ErrorPage from '../components/ErrorPage';
 
@@ -14,13 +17,17 @@ const styles = () => ({
 
 function ServerError({ classes }) {
   return (
-    <ErrorPage classes={{ root: classes.root }} title="Internal Server Error">
+    <ErrorPage
+      classes={{ root: classes.root }}
+      takwimu={config}
+      title="Internal Server Error"
+    >
       <Error title="500 - Internal Server Error">
         <Typography variant="body1">
           We’re having some trouble processing your request. We’ve logged the
           error and will investigate. You can try again or if the issue
           persists, please{' '}
-          <Link href="/contact" underline="always">
+          <Link component={RouterLink} to="/contact" underline="always">
             contact us
           </Link>
         </Typography>

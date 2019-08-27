@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import classNames from 'classnames';
 import { withStyles, Link, MenuList } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
@@ -105,11 +107,12 @@ function TableOfContent({
               hidden={current !== index}
             />
             <Link
+              component={RouterLink}
               classes={{ root: classes.linkRoot }}
               className={classNames({
                 [classes.activeLink]: current !== index
               })}
-              href={generateHref(index)}
+              to={generateHref(index)}
               color={current !== index ? 'primary' : 'textPrimary'}
               onClick={e => {
                 e.preventDefault();

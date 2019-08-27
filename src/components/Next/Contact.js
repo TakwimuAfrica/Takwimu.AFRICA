@@ -49,7 +49,7 @@ function ContactWhereToNext({ classes, socialMedia }) {
 
         <Card
           component={RouterLink}
-          href="/about"
+          to="/about"
           classes={{ root: classes.cardMargin }}
           variant="dual"
         >

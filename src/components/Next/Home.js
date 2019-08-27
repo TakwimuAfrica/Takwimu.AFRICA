@@ -47,7 +47,7 @@ function HomeWhereToNext({ classes }) {
 
         <Card
           component={RouterLink}
-          href="/services"
+          to="/services"
           classes={{ root: classes.cardMargin }}
         >
           Looking for other <br /> services?
@@ -55,7 +55,7 @@ function HomeWhereToNext({ classes }) {
 
         <Card
           component={RouterLink}
-          href="/contact"
+          to="/contact"
           classes={{ root: classes.cardMargin }}
         >
           Talk to us

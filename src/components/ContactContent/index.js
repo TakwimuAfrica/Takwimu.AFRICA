@@ -1,8 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography, Grid, Link, Icon } from '@material-ui/core';
+import { withStyles, Typography, Grid, Icon } from '@material-ui/core';
 
+import A from '../A';
 import ContactContentNav from './ContactContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';
@@ -101,7 +102,7 @@ function ContactContent({
             {keyContacts.contacts.map(keyContact => (
               <Grid container direction="column">
                 <Typography>{keyContact.title}</Typography>
-                <Link href={keyContact.link}>{keyContact.contact_details}</Link>
+                <A href={keyContact.link}>{keyContact.contact_details}</A>
               </Grid>
             ))}
           </div>
@@ -125,9 +126,10 @@ function ContactContent({
         >
           <Grid container direction="row">
             {socialMedia.accounts.map(account => (
-              <Link
+              <A
                 className={classes.social}
                 href={socialMediaSettings[account.name]}
+                underline="hover"
               >
                 <img
                   src={SOCIAL_MEDIA[account.name].logo}
@@ -136,7 +138,7 @@ function ContactContent({
                 />
                 <Icon className={classes.social} />
                 {SOCIAL_MEDIA[account.name].name}
-              </Link>
+              </A>
             ))}
           </Grid>
         </ContentSection>

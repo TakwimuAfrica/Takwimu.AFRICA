@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import { Link, Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
@@ -59,8 +61,9 @@ function ContentNavigation({
       <div className={classes.topicLinks}>
         {content.map((c, index) => (
           <Link
+            component={RouterLink}
             key={generateHref(index)}
-            href={generateHref(index)}
+            to={generateHref(index)}
             variant="body2"
             color={current === index ? linksSecondaryColor : linksPrimaryColor}
             classes={{ root: classes.topicLink }}
