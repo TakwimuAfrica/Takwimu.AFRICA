@@ -14,7 +14,7 @@ const styles = () => ({
 
 function ServerError({ classes }) {
   return (
-    <ErrorPage classes={{ root: classes.root }}>
+    <ErrorPage classes={{ root: classes.root }} title="Internal Server Error">
       <Error title="500 - Internal Server Error">
         <Typography variant="body1">
           We’re having some trouble processing your request. We’ve logged the
