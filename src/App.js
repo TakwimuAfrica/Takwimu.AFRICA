@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
+import About from './pages/About';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import NotFound from './pages/404';
@@ -15,18 +16,12 @@ function App() {
       <ScrollToTop>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/faqs" component={About} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/legal" component={Legal} />
-          <Route
-            exact
-            path="/privacy"
-            render={props => <Legal activeContent="privacy" {...props} />}
-          />
-          <Route
-            exact
-            path="/terms"
-            render={props => <Legal activeContent="terms" {...props} />}
-          />
+          <Route exact path="/privacy" component={Legal} />
+          <Route exact path="/terms" component={Legal} />
           <Route component={NotFound} />
         </Switch>
       </ScrollToTop>

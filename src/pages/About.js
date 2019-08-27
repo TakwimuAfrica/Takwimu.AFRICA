@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 
+import config from '../config';
 import AboutContent from '../components/AboutContent/index';
 import ContentPage from '../components/ContentPage';
+import Page from '../components/Page';
 import TableOfContent from '../components/AboutContent/TableOfContent';
 
 const styles = () => ({
@@ -14,92 +16,93 @@ const styles = () => ({
   }
 });
 
-class About extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { current: 0 };
-
-    this.getContentHeadings = this.getContentHeadings.bind(this);
-    this.changeActiveContent = this.changeActiveContent.bind(this);
-  }
-
-  componentDidMount() {
-    const {
-      takwimu: { page }
-    } = this.props;
-    const { active_content: activeContent } = page;
-    const contentHeadings = this.getContentHeadings();
-    const foundIndex = contentHeadings.findIndex(x => x.link === activeContent);
-
-    if (foundIndex !== -1) {
-      this.changeActiveContent(foundIndex);
-    }
-    this.setState({ current: foundIndex });
-  }
-
-  getContentHeadings() {
-    const {
-      takwimu: {
-        page: { about_takwimu: aboutTakwimu, methodology, faqs, services }
-      }
-    } = this.props;
-    const contentHeadings = [];
-    if (aboutTakwimu && aboutTakwimu.value) {
-      contentHeadings.push({
-        title: aboutTakwimu.value.label,
-        link: 'about'
+function About({ classes }) {
+  const [takwimu, setTakwimu] = useState(undefined);
+  useEffect(() => {
+    const { url } = config;
+    fetch(`${url}/api/v2/pages/?type=takwimu.AboutPage&fields=*&format=json`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          Object.assign(config.page, data.items[0]);
+          setTakwimu(config);
+        }
       });
-    }
-    if (methodology && methodology.value) {
-      contentHeadings.push({
-        title: methodology.value.label,
-        link: 'methodology'
-      });
-    }
-    if (services && services.value) {
-      contentHeadings.push({ title: services.value.label, link: 'services' });
-    }
-    if (faqs && faqs.value) {
-      contentHeadings.push({ title: faqs.value.label, link: 'faqs' });
-    }
-    return contentHeadings;
-  }
+  }, []);
 
-  changeActiveContent(index) {
-    this.setState({
-      current: index
+  const {
+    page: {
+      title,
+      about_takwimu: aboutTakwimu,
+      content_navigation: contentNavigation,
+      faqs,
+      methodology,
+      related_content: relatedContent,
+      services
+    },
+    settings: { socialMedia }
+  } = takwimu || {
+    page: {
+      about_takwimu: {},
+      methodology: {},
+      faqs: {},
+      services: {},
+      related_content: {}
+    },
+    settings: {}
+  };
+  const contentHeadings = [];
+  if (aboutTakwimu && aboutTakwimu.value) {
+    contentHeadings.push({
+      title: aboutTakwimu.value.label,
+      link: 'about'
     });
-    const contentHeadings = this.getContentHeadings();
-    const activeElement = document.getElementById(contentHeadings[index].link);
-    window.scrollTo(0, activeElement.offsetTop - 90);
+  }
+  if (methodology && methodology.value) {
+    contentHeadings.push({
+      title: methodology.value.label,
+      link: 'methodology'
+    });
+  }
+  if (services && services.value) {
+    contentHeadings.push({ title: services.value.label, link: 'services' });
+  }
+  if (faqs && faqs.value) {
+    contentHeadings.push({ title: faqs.value.label, link: 'faqs' });
   }
 
-  render() {
-    const {
-      classes,
-      takwimu: {
-        page: {
-          title,
-          content_navigation: contentNavigation,
-          about_takwimu: aboutTakwimu,
-          methodology,
-          related_content: relatedContent,
-          faqs,
-          services
-        },
-        settings: { socialMedia }
-      }
-    } = this.props;
-    const { current } = this.state;
-    const contentHeadings = this.getContentHeadings();
+  const [current, setCurrent] = useState(-1);
+  const changeActiveContent = useCallback(
+    index => {
+      setCurrent(index);
+      const activeElement = document.getElementById(
+        contentHeadings[index].link
+      );
+      window.scrollTo(0, activeElement.offsetTop - 90);
+    },
+    [contentHeadings]
+  );
+  useEffect(() => {
+    const foundIndex = contentHeadings.findIndex(
+      x => x.link === window.location.pathname.replace(/^\//, '')
+    );
+    if (foundIndex !== -1) {
+      changeActiveContent(foundIndex);
+    }
+  }, [changeActiveContent, contentHeadings]);
 
-    return (
+  if (!takwimu) {
+    return null;
+  }
+
+  return (
+    <Page takwimu={takwimu} title={title}>
       <ContentPage
         aside={
           <TableOfContent
             current={current}
             contentHeadings={contentHeadings}
-            changeActiveContent={this.changeActiveContent}
+            changeActiveContent={changeActiveContent}
           />
         }
         classes={{ root: classes.root }}
@@ -115,49 +118,16 @@ class About extends React.Component {
           socialMedia={socialMedia}
           current={current}
           contentHeadings={contentHeadings}
-          changeActiveContent={this.changeActiveContent}
+          changeActiveContent={changeActiveContent}
         />
       </ContentPage>
-    );
-  }
+    </Page>
+  );
 }
 
 About.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    page: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      active_content: PropTypes.string,
-      content_navigation: PropTypes.shape({
-        value: PropTypes.shape({
-          title: PropTypes.string.isRequired
-        }).isRequired
-      }).isRequired,
-      about_takwimu: PropTypes.shape({
-        value: PropTypes.shape({
-          label: PropTypes.string
-        })
-      }),
-      faqs: PropTypes.shape({
-        value: PropTypes.shape({
-          label: PropTypes.string
-        })
-      }),
-      methodology: PropTypes.shape({
-        value: PropTypes.shape({
-          label: PropTypes.string
-        })
-      }),
-      related_content: PropTypes.shape({}),
-      services: PropTypes.shape({
-        value: PropTypes.shape({
-          label: PropTypes.string
-        })
-      })
-    }).isRequired,
-    settings: PropTypes.shape({
-      socialMedia: PropTypes.shape({}).isRequired
-    }).isRequired
+  classes: PropTypes.shape({
+    root: PropTypes.shape({}).isRequired
   }).isRequired
 };
 

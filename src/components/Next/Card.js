@@ -52,6 +52,7 @@ function Card({ classes, children, component, href, onClick, variant }) {
   return (
     <ButtonBase
       href={href}
+      to={component ? href : undefined}
       onClick={onClick}
       className={classNames(classes.root, variantClass)}
       color="primary"

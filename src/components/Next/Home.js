@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import { Grid, withStyles } from '@material-ui/core';
 
 import A from '../A';
@@ -43,11 +45,19 @@ function HomeWhereToNext({ classes }) {
           Stay up-to-date with <br /> new data and analysis
         </Card>
 
-        <Card href="/services" classes={{ root: classes.cardMargin }}>
+        <Card
+          component={RouterLink}
+          href="/services"
+          classes={{ root: classes.cardMargin }}
+        >
           Looking for other <br /> services?
         </Card>
 
-        <Card href="/contact" classes={{ root: classes.cardMargin }}>
+        <Card
+          component={RouterLink}
+          href="/contact"
+          classes={{ root: classes.cardMargin }}
+        >
           Talk to us
         </Card>
       </Grid>

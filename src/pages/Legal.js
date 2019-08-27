@@ -16,7 +16,7 @@ const styles = () => ({
   }
 });
 
-function Legal({ classes, activeContent }) {
+function Legal({ classes }) {
   const [takwimu, setTakwimu] = useState(undefined);
   useEffect(() => {
     const { url } = config;
@@ -69,11 +69,13 @@ function Legal({ classes, activeContent }) {
   );
 
   useEffect(() => {
-    const foundIndex = contentHeadings.findIndex(x => x.link === activeContent);
+    const foundIndex = contentHeadings.findIndex(
+      x => x.link === window.location.pathname.replace(/^\//, '')
+    );
     if (foundIndex !== -1) {
       changeActiveContent(foundIndex);
     }
-  }, [activeContent, changeActiveContent, contentHeadings]);
+  }, [changeActiveContent, contentHeadings]);
 
   if (contents.length === 0) {
     return null;
@@ -108,12 +110,7 @@ function Legal({ classes, activeContent }) {
 Legal.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.shape({}).isRequired
-  }).isRequired,
-  activeContent: PropTypes.string
-};
-
-Legal.defaultProps = {
-  activeContent: undefined
+  }).isRequired
 };
 
 export default withStyles(styles)(Legal);
