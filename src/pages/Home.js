@@ -6,11 +6,10 @@ import { withStyles } from '@material-ui/core';
 import config from '../config';
 import FeaturedAnalysis from '../components/FeaturedAnalysis';
 import FeaturedData from '../components/FeaturedData';
-import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import LatestNewsStories from '../components/LatestNewsStories';
 import MakingOfTakwimu from '../components/MakingOfTakwimu';
-import Navigation from '../components/Navigation';
+import Page from '../components/Page';
 import WhatYouDoWithTakwimu from '../components/WhatYouCanDoWithTakwimu';
 import WhereToNext from '../components/Next';
 
@@ -38,8 +37,7 @@ function Home() {
   }
 
   return (
-    <>
-      <Navigation takwimu={takwimu} />
+    <Page takwimu={takwimu}>
       <Hero takwimu={takwimu} />
       <FeaturedAnalysis takwimu={takwimu} />
       <FeaturedData takwimu={takwimu} />
@@ -47,8 +45,7 @@ function Home() {
       <MakingOfTakwimu takwimu={takwimu} />
       <LatestNewsStories takwimu={takwimu} />
       <WhereToNext />
-      <Footer takwimu={takwimu} />
-    </>
+    </Page>
   );
 }
 
