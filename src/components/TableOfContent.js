@@ -70,7 +70,7 @@ function TableOfContent({
 
   useEffect(() => {
     const calculateScrollDistance = () => {
-      const footer = document.getElementById('takwimuFooter');
+      const footer = document.getElementById('footer');
       const { top } = footer.getBoundingClientRect();
       if (top < window.innerHeight) {
         return window.innerHeight - top;

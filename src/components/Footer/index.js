@@ -81,6 +81,7 @@ const styles = theme => ({
 function Footer({ classes, takwimu: { settings } }) {
   return (
     <Grid
+      id="footer"
       container
       className={classes.root}
       justify="center"

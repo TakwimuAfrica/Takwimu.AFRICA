@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 
+import config from '../config';
 import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
+import Page from '../components/Page';
 import TableOfContent from '../components/LegalContent/TableOfContent';
 
 const styles = () => ({
@@ -14,22 +16,31 @@ const styles = () => ({
   }
 });
 
-function Legal({
-  classes,
-  takwimu: {
+function Legal({ classes, activeContent }) {
+  const [takwimu, setTakwimu] = useState(undefined);
+  useEffect(() => {
+    const { url } = config;
+    fetch(`${url}/api/v2/pages/?type=takwimu.LegalPage&fields=*&format=json`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          Object.assign(config.page, data.items[0]);
+          setTakwimu(config);
+        }
+      });
+  }, []);
+  const [current, setCurrent] = useState(-1);
+  const contentHeadings = [];
+  const {
     page: {
       title,
       content_navigation: {
         value: { title: navigationTitle }
       },
-      body: contents,
-      active_content: activeContent,
+      body: contents = [],
       related_content: relatedContent
     }
-  }
-}) {
-  const [current, setCurrent] = useState(-1);
-  const contentHeadings = [];
+  } = takwimu || { page: { content_navigation: { value: {} } } };
   const termsIndex = contents.findIndex(c => c.type === 'terms');
   const privacyIndex = contents.findIndex(c => c.type === 'privacy');
   contentHeadings.length = contents.length;
@@ -69,26 +80,28 @@ function Legal({
   }
 
   return (
-    <ContentPage
-      aside={
-        <TableOfContent
-          current={current}
+    <Page takwimu={takwimu} title="Legal">
+      <ContentPage
+        aside={
+          <TableOfContent
+            current={current}
+            contentHeadings={contentHeadings}
+            changeActiveContent={changeActiveContent}
+          />
+        }
+        classes={{ root: classes.root }}
+      >
+        <LegalContent
+          title={title}
+          navigationTitle={navigationTitle}
+          contents={contents}
           contentHeadings={contentHeadings}
+          current={current}
           changeActiveContent={changeActiveContent}
+          relatedContent={relatedContent}
         />
-      }
-      classes={{ root: classes.root }}
-    >
-      <LegalContent
-        title={title}
-        navigationTitle={navigationTitle}
-        contents={contents}
-        contentHeadings={contentHeadings}
-        current={current}
-        changeActiveContent={changeActiveContent}
-        relatedContent={relatedContent}
-      />
-    </ContentPage>
+      </ContentPage>
+    </Page>
   );
 }
 
@@ -96,24 +109,11 @@ Legal.propTypes = {
   classes: PropTypes.shape({
     root: PropTypes.shape({}).isRequired
   }).isRequired,
-  takwimu: PropTypes.shape({
-    page: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      content_navigation: PropTypes.shape({
-        value: PropTypes.shape({
-          title: PropTypes.string.isRequired
-        }).isRequired
-      }).isRequired,
-      body: PropTypes.arrayOf(
-        PropTypes.shape({
-          type: PropTypes.string,
-          value: PropTypes.shape({})
-        })
-      ),
-      active_content: PropTypes.string,
-      related_content: PropTypes.shape({})
-    }).isRequired
-  }).isRequired
+  activeContent: PropTypes.string
+};
+
+Legal.defaultProps = {
+  activeContent: undefined
 };
 
 export default withStyles(styles)(Legal);
