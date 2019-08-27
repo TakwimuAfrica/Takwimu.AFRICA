@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import {
   withWidth,
   withStyles,
@@ -113,7 +115,7 @@ class Navigation extends React.Component {
         <Layout>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <Link href="/">
+              <Link component={RouterLink} to="/">
                 <img alt="logo" src={logoWhite} height={19} />
               </Link>
             </Grid>
@@ -162,13 +164,28 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Link color="textSecondary" className={classes.link} href="/about">
+          <Link
+            component={RouterLink}
+            color="textSecondary"
+            className={classes.link}
+            href="/about"
+          >
             About Us
           </Link>
-          <Link color="textSecondary" className={classes.link} href="/faqs">
+          <Link
+            component={RouterLink}
+            color="textSecondary"
+            className={classes.link}
+            href="/faqs"
+          >
             FAQs
           </Link>
-          <Link color="textSecondary" className={classes.link} href="/contact">
+          <Link
+            component={RouterLink}
+            color="textSecondary"
+            className={classes.link}
+            href="/contact"
+          >
             Contact Us
           </Link>
           <ButtonBase
@@ -254,17 +271,29 @@ class Navigation extends React.Component {
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <Link className={classes.link} href="/about">
+              <Link
+                component={RouterLink}
+                className={classes.link}
+                href="/about"
+              >
                 About
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/faqs">
+              <Link
+                component={RouterLink}
+                className={classes.link}
+                href="/faqs"
+              >
                 FAQs
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/contact">
+              <Link
+                component={RouterLink}
+                className={classes.link}
+                href="/contact"
+              >
                 Contact Us
               </Link>
             </MenuItem>
