@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "608abf6ca33ddf44617ed3c93635e1f5",
+    "revision": "74b63afcda3ae7f471563ddec1ef7479",
     "url": "/Takwimu.AFRICA/index.html"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Takwimu.AFRICA/static/js/6.e749a422.chunk.js"
   },
   {
-    "revision": "0ae2df20862d26dabdab",
-    "url": "/Takwimu.AFRICA/static/js/main.40fed38c.chunk.js"
+    "revision": "0b3a4592c7b51d8790f9",
+    "url": "/Takwimu.AFRICA/static/js/main.546be8de.chunk.js"
   },
   {
     "revision": "871fe1ced4787127fb4d",
