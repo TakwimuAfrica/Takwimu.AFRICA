@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, withTheme } from '@material-ui/core/styles';
+import { withStyles, withTheme } from '@material-ui/styles';
 
 import DataActions from './DataActions';
 import { shareIndicator, uploadImage } from './common';
@@ -173,4 +173,4 @@ DataContainer.defaultProps = {
   id: ''
 };
 
-export default withTheme()(withStyles(styles)(DataContainer));
+export default withTheme(withStyles(styles)(DataContainer));
