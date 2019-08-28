@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Takwimu.AFRICA/precache-manifest.0a23c22e3dea47748c261be71546214b.js"
+  "/Takwimu.AFRICA/precache-manifest.0284faebb236017a6968003df2691d10.js"
 );
 
 self.addEventListener('message', (event) => {
