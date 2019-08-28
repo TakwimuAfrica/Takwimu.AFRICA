@@ -252,12 +252,13 @@ class SearchResultsContainer extends React.Component {
 
 SearchResultsContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  results: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  filter: PropTypes.string
+  filter: PropTypes.string,
+  results: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 SearchResultsContainer.defaultProps = {
-  filter: 'All'
+  filter: 'All',
+  results: []
 };
 
 export default withStyles(styles)(SearchResultsContainer);

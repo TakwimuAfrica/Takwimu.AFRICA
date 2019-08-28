@@ -45,9 +45,8 @@ class SearchResults extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {
-      search: { query, results }
-    } = this.state;
+    const { search } = this.state;
+    const { query, results } = search || {};
 
     return (
       <Section classes={{ root: classes.root }}>
