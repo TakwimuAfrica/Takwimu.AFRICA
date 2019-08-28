@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data, theme, countryName }) {
+function DataContainer({ id, classes, data, theme, countryName, url }) {
   const [animated, setAnimated] = useState(false);
   const [animatedId, setAnimatedId] = useState('');
 
@@ -118,6 +118,20 @@ function DataContainer({ id, classes, data, theme, countryName }) {
     frameHead.appendChild(style);
   };
 
+  /**
+   * First time the onLoad function is called, we get:
+   * `TypeError: iframe.contentDocument is null`.
+   *
+   * This function is temporary fix to get around that... The downside being
+   * when we do add the second `onLoad` listener, the `load` event could
+   * have been already fired.
+   * @param {*} e .
+   */
+  const handleIframeCreated = e => {
+    const iframe = e.target;
+    iframe.addEventListener('load', handleIframeLoaded);
+  };
+
   if (animated) {
     const iframe = document.getElementById(`data-indicator-${id}`);
     updateIframe(iframe, iframe.contentDocument.getElementById(animatedId));
@@ -126,7 +140,7 @@ function DataContainer({ id, classes, data, theme, countryName }) {
   const embedCode = `<iframe title="${data.title}"
  frameborder="0"
  scrolling="no"
- src="https://takwimu.africa/flourish/${data.html}" />`;
+ src="${url}/flourish/${data.html}" />`;
 
   return (
     <>
@@ -135,8 +149,8 @@ function DataContainer({ id, classes, data, theme, countryName }) {
         frameBorder="0"
         scrolling="no"
         title={data.title}
-        src={`/flourish/${data.html}`}
-        onLoad={handleIframeLoaded}
+        onLoad={handleIframeCreated}
+        src={`${url}/flourish/${data.html}`}
         className={classes.root}
       />
       <DataActions
@@ -166,7 +180,8 @@ DataContainer.propTypes = {
     typography: PropTypes.shape({
       fontText: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

@@ -21,14 +21,14 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data, countryName }) {
+function DataContainer({ id, classes, data, countryName, url }) {
   const [documents, setDocuments] = useState({});
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
 
   useEffect(() => {
     if (data.document) {
-      fetch(`/api/v2/documents/${data.document}`)
+      fetch(`${url}/api/v2/documents/${data.document}`)
         .then(response => response.json())
         .then(json =>
           setDocuments(prev => ({
@@ -38,7 +38,7 @@ function DataContainer({ id, classes, data, countryName }) {
         );
     }
     return () => {};
-  }, [data.document]);
+  }, [data.document, url]);
 
   const handleDownload = () => {
     const link = document.createElement('a');
@@ -110,7 +110,8 @@ DataContainer.propTypes = {
   id: PropTypes.string,
   data: PropTypes.shape({}).isRequired,
   classes: PropTypes.shape({}).isRequired,
-  countryName: PropTypes.string.isRequired
+  countryName: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {
