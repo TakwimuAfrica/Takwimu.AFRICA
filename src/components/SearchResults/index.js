@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -14,57 +14,46 @@ const styles = () => ({
   }
 });
 
-class SearchResults extends React.Component {
-  constructor(props) {
-    super(props);
+function SearchResults({ classes, takwimu: { url, page } }) {
+  const [search, setSearch] = useState(page.search);
 
-    const {
-      takwimu: {
-        page: { search }
-      }
-    } = props;
-    this.state = { search };
+  const handleSearch = useCallback(
+    searchTerm => {
+      fetch(`${url}/api/search/?q=${searchTerm}&format=json`).then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            setSearch(data.search);
+          });
+        }
+      });
+    },
+    [url]
+  );
 
-    this.handleSearch = this.handleSearch.bind(this);
-  }
+  const { query, results } = search || {};
+  useEffect(() => {
+    if (query) {
+      handleSearch(query);
+    }
+  }, [handleSearch, query]);
 
-  handleSearch(searchTerm) {
-    const {
-      takwimu: { page }
-    } = this.props;
-    fetch(`/api/search/?q=${searchTerm}&format=json`).then(response => {
-      if (response.status === 200) {
-        response.json().then(json => {
-          Object.assign(page, json);
-          const { search } = json;
-          this.setState({ search });
-        });
-      }
-    });
-  }
-
-  render() {
-    const { classes } = this.props;
-    const { search } = this.state;
-    const { query, results } = search || {};
-
-    return (
-      <Section classes={{ root: classes.root }}>
-        <SearchInput onRefresh={this.handleSearch} query={query} />
-        <SearchResultsContainer results={results} filter="All" />
-      </Section>
-    );
-  }
+  return (
+    <Section classes={{ root: classes.root }}>
+      <SearchInput onRefresh={handleSearch} query={query} />
+      <SearchResultsContainer results={results} filter="All" />
+    </Section>
+  );
 }
 
 SearchResults.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
+    url: PropTypes.string.isRequired,
     page: PropTypes.shape({
       search: PropTypes.shape({
-        query: PropTypes.string.isRequired,
-        results: PropTypes.arrayOf(PropTypes.shape({})).isRequired
-      }).isRequired
+        query: PropTypes.string,
+        results: PropTypes.arrayOf(PropTypes.shape({}))
+      })
     }).isRequired
   }).isRequired
 };

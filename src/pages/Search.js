@@ -5,18 +5,22 @@ import Page from '../components/Page';
 import SearchResults from '../components/SearchResults';
 
 function Search() {
-  const [query, setQuery] = useState(undefined);
+  const [takwimu, setTakwimu] = useState(undefined);
   useEffect(() => {
     const params = new URL(window.location).searchParams;
-    const q = params.get('q');
-    if (q && q.length) {
-      setQuery(q);
+    const query = params.get('q');
+    if (query && query.length) {
+      config.page.search = { query };
     }
+    setTakwimu(config);
   }, []);
 
+  if (!takwimu) {
+    return null;
+  }
   return (
-    <Page takwimu={config} title="Search">
-      <SearchResults searchParams={query} takwimu={config} />
+    <Page takwimu={takwimu} title="Search">
+      <SearchResults takwimu={takwimu} />
     </Page>
   );
 }
