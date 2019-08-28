@@ -119,6 +119,11 @@ function DataContainer({ id, classes, data, theme, countryName, url }) {
     frameHead.appendChild(style);
   };
 
+  const handleIframeCreated = e => {
+    const iframe = e.target;
+    iframe.addEventListener('load', handleIframeLoaded);
+  };
+
   if (animated) {
     const iframe = document.getElementById(`data-indicator-${id}`);
     updateIframe(iframe, iframe.contentDocument.getElementById(animatedId));
@@ -136,7 +141,7 @@ function DataContainer({ id, classes, data, theme, countryName, url }) {
         frameBorder="0"
         scrolling="no"
         title={data.title}
-        onLoad={handleIframeLoaded}
+        onLoad={handleIframeCreated}
         src={`${url}/flourish/${data.html}`}
         className={classes.root}
       />
