@@ -69,9 +69,11 @@ function Legal({ classes }) {
   );
 
   useEffect(() => {
-    const foundIndex = contentHeadings.findIndex(
-      x => x.link === window.location.pathname.replace(/\//g, '')
-    );
+    const currentLink = window.location.pathname
+      .split('/')
+      .filter(value => value && value.length)
+      .pop();
+    const foundIndex = contentHeadings.findIndex(x => x.link === currentLink);
     if (foundIndex !== -1) {
       changeActiveContent(foundIndex);
     }
