@@ -12,4 +12,4 @@ Takwimu.AFRICA is a single page [React](https://reactjs.org/) web app deployable
 
 ### License
 
-React is [GNU GPLv3 licensed](./LICENSE).
+Takwimu.AFRICA is [GNU GPLv3 licensed](./LICENSE).
