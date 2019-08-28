@@ -110,7 +110,10 @@ function AnalysisPage({
   }
 
   return (
-    <Page takwimu={takwimu} title="Legal">
+    <Page
+      takwimu={takwimu}
+      title={`${takwimu.country.short_name}'s ${analysis[current].title} Analysis`}
+    >
       <ContentPage
         aside={
           <AnalysisTableOfContent

@@ -84,7 +84,7 @@ function Legal({ classes }) {
   }
 
   return (
-    <Page takwimu={takwimu} title="Legal">
+    <Page takwimu={takwimu} title={takwimu.page.title}>
       <ContentPage
         aside={
           <TableOfContent

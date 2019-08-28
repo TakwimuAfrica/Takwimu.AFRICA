@@ -93,7 +93,7 @@ function Contact({ classes }) {
   }
 
   return (
-    <Page takwimu={takwimu} title="Contact Us">
+    <Page takwimu={takwimu} title={takwimu.page.title}>
       <ContentPage
         aside={
           <TableOfContent
