@@ -222,11 +222,12 @@ class Navigation extends React.Component {
   }
 
   renderSearchDrawer() {
-    const { width } = this.props;
+    const { takwimu, width } = this.props;
     const { openDrawer } = this.state;
     return (
       <SearchDrawer
         active={openDrawer === 'search'}
+        takwimu={takwimu}
         toggle={
           isWidthUp('md', width)
             ? this.toggleDrawer(null)

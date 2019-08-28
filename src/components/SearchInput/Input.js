@@ -1,5 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+
+import { withRouter } from 'react-router-dom';
+
 import { withStyles, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -43,7 +46,7 @@ class Input extends React.Component {
   }
 
   render() {
-    const { classes, onRefresh, placeholder, query } = this.props;
+    const { classes, history, onRefresh, placeholder, query } = this.props;
     const { searchTerm } = this.state;
 
     const handleSearchClick = () => {
@@ -55,7 +58,10 @@ class Input extends React.Component {
           window.history.pushState(null, '', `/search/?q=${searchTerm}`);
           onRefresh(searchTerm);
         } else {
-          window.location = `/search/?q=${searchTerm}`;
+          history.push({
+            pathname: '/search',
+            search: `?q=${searchTerm}`
+          });
         }
       }
     };
@@ -97,6 +103,9 @@ class Input extends React.Component {
 
 Input.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
   onRefresh: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   query: PropTypes.string.isRequired
@@ -106,4 +115,4 @@ Input.defaultProps = {
   placeholder: 'Enter search term'
 };
 
-export default withStyles(styles)(Input);
+export default withRouter(withStyles(styles)(Input));
