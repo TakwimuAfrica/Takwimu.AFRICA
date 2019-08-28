@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core';
 
 import ContentSection from './ContentSection';
+import Page from './Page';
 
 const styles = theme => ({
   root: {
@@ -21,12 +24,13 @@ const styles = theme => ({
 
 function ErrorPage({ children, classes, ...props }) {
   return (
-    /* eslint-disable-next-line react/jsx-props-no-spreading */
-    <div className={classes.root} {...props}>
-      <ContentSection classes={{ root: classes.section }}>
-        {children}
-      </ContentSection>
-    </div>
+    <Page {...props}>
+      <div className={classes.root} {...props}>
+        <ContentSection classes={{ root: classes.section }}>
+          {children}
+        </ContentSection>
+      </div>
+    </Page>
   );
 }
 

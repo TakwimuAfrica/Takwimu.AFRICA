@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import classNames from 'classnames';
 
 import { Link, Typography } from '@material-ui/core';
@@ -63,7 +65,8 @@ function QuickLinks({ classes }) {
         {LINKS.map(link => (
           <li key={link.label}>
             <Link
-              href={link.href}
+              component={RouterLink}
+              to={link.href}
               underline="always"
               className={classNames([classes.text, classes.link])}
               onClick={() => handleClick(link.href)}
@@ -81,7 +84,8 @@ function QuickLinks({ classes }) {
         {LEGAL.map(link => (
           <li key={link.label}>
             <Link
-              href={link.href}
+              component={RouterLink}
+              to={link.href}
               className={classNames([classes.text, classes.link])}
               underline="always"
             >

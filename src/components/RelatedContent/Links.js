@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import { withStyles, Link, Tooltip, Typography } from '@material-ui/core';
 
 import A from '../A';
@@ -45,7 +47,8 @@ function Links({ classes, items }) {
               {/* Otherwise, they should be opened in new tab */}
               {/^\/(?!\/)/.test(item.value.value.link) ? (
                 <Link
-                  href={item.value.value.link}
+                  component={RouterLink}
+                  to={item.value.value.link}
                   variant="inherit"
                   color="inherit"
                   underline="always"

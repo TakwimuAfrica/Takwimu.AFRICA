@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import { Link, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -33,7 +35,12 @@ function Takwimu({ classes }) {
         champions.
       </Typography>
       <Typography variant="subtitle2" className={classes.text}>
-        <Link href="/about" className={classes.text} underline="always">
+        <Link
+          component={RouterLink}
+          to="/about"
+          className={classes.text}
+          underline="always"
+        >
           Find out more about us.
         </Link>
       </Typography>

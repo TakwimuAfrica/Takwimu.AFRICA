@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { withRouter } from 'react-router-dom';
+
 import {
   Grid,
   Drawer,
@@ -154,6 +156,9 @@ class SearchDrawer extends React.Component {
   }
 
   handleSearchInput(e) {
+    const {
+      takwimu: { url }
+    } = this.props;
     const { backgroundVisible } = this.state;
     if (!backgroundVisible && e.target.value.length > 0) {
       this.setState({ backgroundVisible: true });
@@ -162,7 +167,7 @@ class SearchDrawer extends React.Component {
     }
 
     if (e.target.value.length > 0) {
-      fetch(`/api/autocomplete/?q=${e.target.value}&format=json`).then(
+      fetch(`${url}/api/autocomplete/?q=${e.target.value}&format=json`).then(
         response => {
           if (response.status === 200) {
             response.json().then(json => {
@@ -178,12 +183,15 @@ class SearchDrawer extends React.Component {
   }
 
   render() {
-    const { classes, children, active, toggle } = this.props;
+    const { classes, children, active, history, toggle } = this.props;
     const { backgroundVisible, searchResults } = this.state;
     const handleInput = e => {
       if (e.target.value.length > 0) {
         const query = e.target.value;
-        window.location = `/search/?q=${query}`;
+        history.push({
+          pathname: '/search',
+          search: `?q=${query}`
+        });
       }
     };
 
@@ -239,6 +247,7 @@ class SearchDrawer extends React.Component {
                   <MenuList className={classes.searchResults}>
                     {searchResults.map(result => (
                       <MenuItem
+                        key={result.title}
                         component="a"
                         href={`/search/?q=${result.title}`}
                       >
@@ -267,6 +276,12 @@ class SearchDrawer extends React.Component {
 SearchDrawer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   active: PropTypes.bool,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  takwimu: PropTypes.shape({
+    url: PropTypes.string.isRequired
+  }).isRequired,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -278,4 +293,4 @@ SearchDrawer.defaultProps = {
   active: false
 };
 
-export default withStyles(styles)(SearchDrawer);
+export default withRouter(withStyles(styles)(SearchDrawer));

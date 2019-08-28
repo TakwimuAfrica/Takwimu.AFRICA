@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import {
   withStyles,
   Grid,
@@ -165,7 +167,8 @@ function DropDownContent({
               className={classes.countryButton}
             >
               <Link
-                href={`/profiles/${profile(country)}`}
+                component={RouterLink}
+                to={`/profiles/${profile(country)}`}
                 color="textSecondary"
                 className={classes.countryLink}
                 underline="none"

@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import { withStyles, Grid } from '@material-ui/core';
 
 import A from '../A';
@@ -46,7 +48,8 @@ function ContactWhereToNext({ classes, socialMedia }) {
         </Card>
 
         <Card
-          href="/about"
+          component={RouterLink}
+          to="/about"
           classes={{ root: classes.cardMargin }}
           variant="dual"
         >

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
@@ -46,16 +47,14 @@ const styles = theme => ({
   }
 });
 
-function Card({ classes, children, component, href, onClick, variant }) {
+function Card({ classes, children, variant, ...props }) {
   const variantClass =
     variant === 'triple' ? classes.cardTriple : classes.cardDual;
   return (
     <ButtonBase
-      href={href}
-      onClick={onClick}
       className={classNames(classes.root, variantClass)}
       color="primary"
-      component={component}
+      {...props}
     >
       <Typography
         variant="subtitle1"

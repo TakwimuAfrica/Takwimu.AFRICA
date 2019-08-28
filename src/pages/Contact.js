@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 
+import config from '../config';
 import ContactContent from '../components/ContactContent';
 import ContentPage from '../components/ContentPage';
+import Page from '../components/Page';
 import TableOfContent from '../components/ContactContent/TableOfContent';
 
 const styles = () => ({
@@ -14,9 +16,22 @@ const styles = () => ({
   }
 });
 
-function Contact({
-  classes,
-  takwimu: {
+function Contact({ classes }) {
+  const [takwimu, setTakwimu] = useState(undefined);
+  useEffect(() => {
+    const { url } = config;
+    fetch(`${url}/api/v2/pages/?type=takwimu.ContactPage&fields=*&format=json`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          Object.assign(config.page, data.items[0]);
+          setTakwimu(config);
+        }
+      });
+  }, []);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+  const contentHeadings = [];
+  const {
     page: {
       title,
       key_contacts: keyContacts,
@@ -25,10 +40,14 @@ function Contact({
       address
     },
     settings
-  }
-}) {
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const contentHeadings = [];
+  } = takwimu || {
+    page: {
+      address: {},
+      key_contacts: {},
+      related_content: {},
+      social_media: {}
+    }
+  };
   let keyContactsIndex = -1;
   let addressIndex = -1;
   let socialMediaIndex = -1;
@@ -74,32 +93,34 @@ function Contact({
   }
 
   return (
-    <ContentPage
-      aside={
-        <TableOfContent
+    <Page takwimu={takwimu} title={takwimu.page.title}>
+      <ContentPage
+        aside={
+          <TableOfContent
+            current={currentSectionIndex}
+            contentHeadings={contentHeadings}
+            changeActiveContent={changeActiveContent}
+          />
+        }
+        classes={{ root: classes.root }}
+      >
+        <ContactContent
+          title={title}
+          address={address}
+          addressIndex={addressIndex}
+          keyContacts={keyContacts}
+          keyContactsIndex={keyContactsIndex}
+          socialMedia={socialMedia}
+          socialMediaIndex={socialMediaIndex}
           current={currentSectionIndex}
           contentHeadings={contentHeadings}
+          relatedContent={relatedContent}
           changeActiveContent={changeActiveContent}
+          settingsSocialMedia={settings.socialMedia}
+          settings={settings}
         />
-      }
-      classes={{ root: classes.root }}
-    >
-      <ContactContent
-        title={title}
-        address={address}
-        addressIndex={addressIndex}
-        keyContacts={keyContacts}
-        keyContactsIndex={keyContactsIndex}
-        socialMedia={socialMedia}
-        socialMediaIndex={socialMediaIndex}
-        current={currentSectionIndex}
-        contentHeadings={contentHeadings}
-        relatedContent={relatedContent}
-        changeActiveContent={changeActiveContent}
-        settingsSocialMedia={settings.socialMedia}
-        settings={settings}
-      />
-    </ContentPage>
+      </ContentPage>
+    </Page>
   );
 }
 

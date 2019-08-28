@@ -1,7 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+
+import { withStyles, Link, Typography } from '@material-ui/core';
 
 import { RichTypography } from '../core';
 
@@ -36,11 +38,11 @@ function SearchResultItem({
       <Typography variant="body1" className={classes.resultType}>
         {resultType}
       </Typography>
-      <a href={link} className={classes.link}>
+      <Link component={RouterLink} to={link} className={classes.link}>
         <Typography variant="body1" className={classes.searchResultItem}>
           {country} - {title}
         </Typography>
-      </a>
+      </Link>
       <RichTypography variant="body2">{summary}</RichTypography>
     </div>
   );
