@@ -8,13 +8,26 @@ import {
   Switch
 } from 'react-router-dom';
 
+import config from './config';
+
 import Home from './pages/Home';
 import About from './pages/About';
+import Analysis from './pages/Analysis';
 import Contact from './pages/Contact';
 import Legal from './pages/Legal';
 import NotFound from './pages/404';
 import ScrollToTop from './components/ScrollToTop';
 
+const supportedCountries = config.countries.reduce(
+  (previousValue, currentValue) =>
+    previousValue ? `${previousValue}|${currentValue.slug}` : currentValue.slug,
+  undefined
+);
+
+/**
+ * NOTE: We use redirect to ensure all urls end with `/` consistently.
+ *       Otherwise `/about` and `/about/` would be treated as 2 URLs for SEO, etc.
+ */
 function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -34,6 +47,10 @@ function App() {
           <Route exact path="/legal" component={Legal} />
           <Route exact path="/methodology" component={About} />
           <Route exact path="/privacy" component={Legal} />
+          <Route
+            path={`/profiles/:countrySlug(${supportedCountries})`}
+            component={Analysis}
+          />
           <Route exact path="/services" component={About} />
           <Route exact path="/terms" component={Legal} />
           <Route component={NotFound} />

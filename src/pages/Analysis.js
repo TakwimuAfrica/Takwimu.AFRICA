@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 
+import config from '../config';
 import AnalysisContent from '../components/AnalysisContent';
 import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent';
 import ContentPage from '../components/ContentPage';
+import Page from '../components/Page';
 
 const styles = () => ({
   root: {
@@ -14,140 +16,128 @@ const styles = () => ({
   asideRoot: {}
 });
 
-class AnalysisPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      analysis: null,
-      current: 0,
-      topicIndex: 0
-    };
-
-    this.changeContent = this.changeContent.bind(this);
-    this.changeTopic = this.changeTopic.bind(this);
+function AnalysisPage({
+  classes,
+  match: {
+    params: { countrySlug }
   }
-
-  componentDidMount() {
-    const {
-      takwimu: {
-        country: { slug }
-      }
-    } = this.props;
-    fetch(
-      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&fields=*&format=json`
-    ).then(response => {
-      if (response.status === 200) {
-        response.json().then(json => {
-          const { items: analysis } = json;
-          if (analysis.length) {
-            // For ProfilePage, label is used to provide descriptive title since
-            // title is just the country name
-            analysis[0].title = analysis[0].label;
-          }
-          this.fetchWithAnalyses(analysis);
-        });
-      }
-    });
-  }
-
-  fetchWithAnalyses(analyses) {
-    fetch(
-      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${analyses[0].id}&format=json`
-    ).then(response => {
-      if (response.status === 200) {
-        response.json().then(json => {
-          const {
-            takwimu: {
-              country: { slug }
-            }
-          } = this.props;
-          const paths = window.location.pathname.split(`/profiles/${slug}/`);
-
-          let foundIndex = -1;
-          if (paths.length === 2) {
-            const sectionSlug = paths[1].replace('/', '');
-            foundIndex = json.items.findIndex(
-              item => item.meta.slug === sectionSlug
+}) {
+  const [analysis, setAnalysis] = useState(undefined);
+  const [current, setCurrent] = useState(0);
+  const [takwimu, setTakwimu] = useState(undefined);
+  const [topicIndex, setTopicIndex] = useState(0);
+  useEffect(() => {
+    const { url } = config;
+    const fetchSectionPages = countryAnalysis => {
+      fetch(
+        `${url}/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${countryAnalysis[0].id}&format=json`
+      ).then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            const paths = window.location.pathname.split(
+              `/profiles/${countrySlug}/`
             );
-          }
 
-          this.setState(prevState => {
-            let { current, topicIndex } = prevState;
-            if (foundIndex !== -1) {
-              current = foundIndex;
+            let foundIndex = -1;
+            if (paths.length === 2) {
+              const sectionSlug = paths[1].replace('/', '');
+              foundIndex = data.items.findIndex(
+                item => item.meta.slug === sectionSlug
+              );
             }
-
-            let analysis = analyses;
-
-            if (analysis) {
+            let nextCurrent = foundIndex !== -1 ? foundIndex : current;
+            let nextAnalysis = countryAnalysis;
+            if (nextAnalysis) {
               if (foundIndex !== -1) {
                 // Adjust for `Country Overview`
-                current += analysis.length;
+                nextCurrent += nextAnalysis.length;
               }
-              analysis = analysis.concat(json.items);
+              nextAnalysis = nextAnalysis.concat(data.items);
             }
 
+            let nextTopicIndex = topicIndex;
             const { hash } = window.location;
             if (hash.length) {
               const topicId = hash.replace('#', '');
-              const foundTopicIndex = analysis[current].body.findIndex(
+              const foundTopicIndex = nextAnalysis[current].body.findIndex(
                 body => body.id === topicId
               );
               if (foundTopicIndex !== -1) {
-                topicIndex = foundTopicIndex;
+                nextTopicIndex = foundTopicIndex;
               }
             }
 
-            return { current, topicIndex, analysis };
+            setCurrent(nextCurrent);
+            setTopicIndex(nextTopicIndex);
+            setAnalysis(nextAnalysis);
           });
+        }
+      });
+    };
+
+    fetch(
+      `${url}/api/v2/pages/?type=takwimu.ProfilePage&slug=${countrySlug}&fields=*&format=json`
+    ).then(response => {
+      if (response.status === 200) {
+        response.json().then(data => {
+          const { items: countryAnalysis } = data;
+          if (countryAnalysis.length) {
+            // For ProfilePage, label is used to provide descriptive title since
+            // title is just the country name
+            countryAnalysis[0].title = countryAnalysis[0].label;
+            Object.assign(config.page, countryAnalysis[0]);
+            Object.assign(config.country, config.page.country);
+            setTakwimu(config);
+          }
+          fetchSectionPages(countryAnalysis);
         });
       }
     });
-  }
+  }, [countrySlug, current, topicIndex]);
 
-  changeContent(contentIndex) {
-    this.setState({ current: contentIndex, topicIndex: 0 });
+  const changeContent = nextCurrent => {
+    setCurrent(nextCurrent);
+    setTopicIndex(0);
     window.scrollTo(0, 0);
-  }
+  };
 
-  changeTopic(topicIndex) {
-    this.setState({ topicIndex });
+  const changeTopic = nextTopicIndex => {
+    setTopicIndex(nextTopicIndex);
     window.scrollTo(0, 0);
+  };
+  if (!analysis) {
+    return null;
   }
 
-  render() {
-    const { analysis, current, topicIndex } = this.state;
-    const { classes, takwimu } = this.props;
-
-    return analysis !== null ? (
+  return (
+    <Page takwimu={takwimu} title="Legal">
       <ContentPage
         aside={
           <AnalysisTableOfContent
             country={takwimu.country}
             content={analysis}
             current={current}
-            onChangeContent={this.changeContent}
+            onChangeContent={changeContent}
           />
         }
         classes={{ root: classes.root, aside: classes.asideRoot }}
       >
         <AnalysisContent
           content={analysis[current]}
-          onChange={this.changeTopic}
+          onChange={changeTopic}
           takwimu={takwimu}
           topicIndex={topicIndex}
         />
       </ContentPage>
-    ) : null;
-  }
+    </Page>
+  );
 }
 
 AnalysisPage.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    country: PropTypes.shape({
-      slug: PropTypes.string
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      countrySlug: PropTypes.string
     }).isRequired
   }).isRequired
 };

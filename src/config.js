@@ -1,5 +1,6 @@
 const config = {
   url: 'https://takwimu.africa',
+  country: {},
   countries: [
     {
       iso_code: 'BF',
