@@ -118,6 +118,15 @@ function DataContainer({ id, classes, data, theme, countryName, url }) {
     frameHead.appendChild(style);
   };
 
+  /**
+   * First time the onLoad function is called, we get:
+   * `TypeError: iframe.contentDocument is null`.
+   *
+   * This function is temporary fix to get around that... The downside being
+   * when we do add the second `onLoad` listener, the `load` event could
+   * have been already fired.
+   * @param {*} e .
+   */
   const handleIframeCreated = e => {
     const iframe = e.target;
     iframe.addEventListener('load', handleIframeLoaded);
