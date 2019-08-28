@@ -155,7 +155,7 @@ const styles = theme => ({
   }
 });
 
-function Topic({ classes, data, onIndexChanged }) {
+function Topic({ classes, data, onIndexChanged, url }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [images, setImages] = useState({});
 
@@ -168,7 +168,7 @@ function Topic({ classes, data, onIndexChanged }) {
 
   useEffect(() => {
     data.forEach(item =>
-      fetch(`/api/v2/images/${item.image}`)
+      fetch(`${url}/api/v2/images/${item.image}`)
         .then(response => response.json())
         .then(json =>
           setImages(prev => ({
@@ -177,7 +177,7 @@ function Topic({ classes, data, onIndexChanged }) {
           }))
         )
     );
-  }, [data]);
+  }, [data, url]);
   const { name } = data[selectedIndex];
   let { title } = data[selectedIndex];
   if (name && name.length > 0) {
@@ -264,7 +264,8 @@ Topic.propTypes = {
       title: PropTypes.string
     })
   ).isRequired,
-  onIndexChanged: PropTypes.func.isRequired
+  onIndexChanged: PropTypes.func.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(Topic);

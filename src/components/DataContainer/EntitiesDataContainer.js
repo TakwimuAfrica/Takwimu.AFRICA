@@ -13,14 +13,14 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data, countryName }) {
+function DataContainer({ id, classes, data, countryName, url }) {
   const [images, setImages] = useState({});
 
   useEffect(() => {
     data.entities.forEach(
       entity =>
         entity.image &&
-        fetch(`/api/v2/images/${entity.image}`)
+        fetch(`${url}/api/v2/images/${entity.image}`)
           .then(response => response.json())
           .then(json =>
             setImages(prev => ({
@@ -31,7 +31,7 @@ function DataContainer({ id, classes, data, countryName }) {
     );
 
     return () => {};
-  }, [data.entities]);
+  }, [data.entities, url]);
 
   return (
     <>
@@ -53,7 +53,8 @@ DataContainer.propTypes = {
     title: PropTypes.string
   }).isRequired,
   classes: PropTypes.shape({}).isRequired,
-  countryName: PropTypes.string.isRequired
+  countryName: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

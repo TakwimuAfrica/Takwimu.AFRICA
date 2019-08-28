@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data, theme, countryName }) {
+function DataContainer({ id, classes, data, theme, countryName, url }) {
   const [animated, setAnimated] = useState(false);
   const [animatedId, setAnimatedId] = useState('');
 
@@ -85,6 +85,7 @@ function DataContainer({ id, classes, data, theme, countryName }) {
 
   const handleIframeLoaded = e => {
     const iframe = e.target;
+    console.log('IFRAME', iframe);
     // Most static charts have a wrapper element with id `wrapper`
     const wrapper = iframe.contentDocument.getElementById('wrapper');
     if (wrapper) {
@@ -126,7 +127,7 @@ function DataContainer({ id, classes, data, theme, countryName }) {
   const embedCode = `<iframe title="${data.title}"
  frameborder="0"
  scrolling="no"
- src="https://takwimu.africa/flourish/${data.html}" />`;
+ src="${url}/flourish/${data.html}" />`;
 
   return (
     <>
@@ -135,8 +136,8 @@ function DataContainer({ id, classes, data, theme, countryName }) {
         frameBorder="0"
         scrolling="no"
         title={data.title}
-        src={`/flourish/${data.html}`}
         onLoad={handleIframeLoaded}
+        src={`${url}/flourish/${data.html}`}
         className={classes.root}
       />
       <DataActions
@@ -166,7 +167,8 @@ DataContainer.propTypes = {
     typography: PropTypes.shape({
       fontText: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

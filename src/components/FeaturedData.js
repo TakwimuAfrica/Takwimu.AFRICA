@@ -21,6 +21,7 @@ const styles = () => ({
 function FeaturedData({
   classes,
   takwimu: {
+    url,
     page: {
       featured_data: { value: featuredData }
     }
@@ -49,6 +50,7 @@ function FeaturedData({
             country={{
               name: 'Featured Data'
             }}
+            url={url}
           />
           {indicators.length > 1 && (
             <DataContainer
@@ -59,6 +61,7 @@ function FeaturedData({
               country={{
                 name: 'Featured Data'
               }}
+              url={url}
             />
           )}
         </Grid>
@@ -70,6 +73,7 @@ function FeaturedData({
 FeaturedData.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
+    url: PropTypes.string.isRequired,
     page: PropTypes.shape({
       featured_data: PropTypes.shape({
         value: PropTypes.shape({
