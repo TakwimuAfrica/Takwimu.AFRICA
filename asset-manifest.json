@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/Takwimu.AFRICA/static/js/main.d17ef9bd.chunk.js",
-    "main.js.map": "/Takwimu.AFRICA/static/js/main.d17ef9bd.chunk.js.map",
+    "main.js": "/Takwimu.AFRICA/static/js/main.8053fee0.chunk.js",
+    "main.js.map": "/Takwimu.AFRICA/static/js/main.8053fee0.chunk.js.map",
     "runtime~main.js": "/Takwimu.AFRICA/static/js/runtime~main.f55fa498.js",
     "runtime~main.js.map": "/Takwimu.AFRICA/static/js/runtime~main.f55fa498.js.map",
     "static/js/2.a9ba4fa5.chunk.js": "/Takwimu.AFRICA/static/js/2.a9ba4fa5.chunk.js",
@@ -15,7 +15,7 @@
     "static/js/6.e749a422.chunk.js": "/Takwimu.AFRICA/static/js/6.e749a422.chunk.js",
     "static/js/6.e749a422.chunk.js.map": "/Takwimu.AFRICA/static/js/6.e749a422.chunk.js.map",
     "index.html": "/Takwimu.AFRICA/index.html",
-    "precache-manifest.0284faebb236017a6968003df2691d10.js": "/Takwimu.AFRICA/precache-manifest.0284faebb236017a6968003df2691d10.js",
+    "precache-manifest.b221ccdfa69894d6fd07e1ecd2c058b3.js": "/Takwimu.AFRICA/precache-manifest.b221ccdfa69894d6fd07e1ecd2c058b3.js",
     "service-worker.js": "/Takwimu.AFRICA/service-worker.js",
     "static/media/a-chart-active.svg": "/Takwimu.AFRICA/static/media/a-chart-active.2935d4d6.svg",
     "static/media/a-chart-bg.svg": "/Takwimu.AFRICA/static/media/a-chart-bg.ad81313b.svg",
