@@ -85,7 +85,6 @@ function DataContainer({ id, classes, data, theme, countryName, url }) {
 
   const handleIframeLoaded = e => {
     const iframe = e.target;
-    console.log('IFRAME', iframe);
     // Most static charts have a wrapper element with id `wrapper`
     const wrapper = iframe.contentDocument.getElementById('wrapper');
     if (wrapper) {
