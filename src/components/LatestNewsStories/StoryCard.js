@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 
-import A from '../A';
+import { A } from '@codeforafrica/hurumap-ui';
 
 const styles = theme => ({
   root: {},

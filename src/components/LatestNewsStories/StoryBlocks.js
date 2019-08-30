@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { Grid } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import StoryCard from './StoryCard';
 import StorySummary from './StorySummary';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
@@ -25,9 +25,10 @@ const styles = theme => ({
       width: '23.625rem'
     }
   }
-});
+}));
 
-function StoryBlocks({ classes, stories }) {
+function StoryBlocks({ stories }) {
+  const classes = useStyles();
   return (
     <Grid container className={classes.root}>
       {stories.slice(0, 3).map((story, index) => (
@@ -53,8 +54,7 @@ function StoryBlocks({ classes, stories }) {
 }
 
 StoryBlocks.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
 };
 
-export default withStyles(styles)(StoryBlocks);
+export default StoryBlocks;

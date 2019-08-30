@@ -5,7 +5,6 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import {
   withWidth,
-  withStyles,
   Grid,
   MenuList,
   Link,
@@ -14,6 +13,7 @@ import {
   MenuItem,
   ButtonBase
 } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 import { Search, MenuOutlined, Close } from '@material-ui/icons';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
@@ -107,7 +107,7 @@ class Navigation extends React.Component {
   }
 
   renderNavBar(inDrawer = false) {
-    const { classes, width } = this.props;
+    const { width, classes } = this.props;
     return (
       <nav
         className={classNames(classes.root, { [classes.noShadow]: inDrawer })}
@@ -153,6 +153,7 @@ class Navigation extends React.Component {
       takwimu: { page, countries }
     } = this.props;
     const { openDrawer } = this.state;
+
     return (
       <>
         <Grid item>
@@ -245,6 +246,7 @@ class Navigation extends React.Component {
       takwimu: { page, countries }
     } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
+
     return (
       <Drawer
         anchor="top"

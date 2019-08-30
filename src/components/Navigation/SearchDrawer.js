@@ -7,12 +7,12 @@ import {
   Grid,
   Drawer,
   Input,
-  withStyles,
   MenuList,
   MenuItem,
   Tooltip,
   Typography
 } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
 import classNames from 'classnames';
 

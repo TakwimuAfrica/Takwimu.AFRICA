@@ -3,13 +3,14 @@ import { PropTypes } from 'prop-types';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { withStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-import A from '../A';
+import { A } from '@codeforafrica/hurumap-ui';
 import Card from './Card';
 import ContentSection from '../ContentSection';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   sectionRoot: {
     padding: 0
   },
@@ -29,8 +30,9 @@ const styles = theme => ({
       marginTop: 0
     }
   }
-});
-function ContactWhereToNext({ classes, socialMedia }) {
+}));
+function ContactWhereToNext({ socialMedia }) {
+  const classes = useStyles();
   return (
     <ContentSection
       title="Where to next..."
@@ -61,10 +63,9 @@ function ContactWhereToNext({ classes, socialMedia }) {
 }
 
 ContactWhereToNext.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({
     medium: PropTypes.string
   }).isRequired
 };
 
-export default withStyles(styles)(ContactWhereToNext);
+export default ContactWhereToNext;

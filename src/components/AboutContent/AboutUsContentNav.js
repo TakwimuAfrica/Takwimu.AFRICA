@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Typography, ButtonBase, withStyles } from '@material-ui/core';
+import { Typography, ButtonBase } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
@@ -8,7 +9,7 @@ import classNames from 'classnames';
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'fixed',
     top: 0,
@@ -40,15 +41,15 @@ const styles = theme => ({
     marginTop: '1rem',
     marginBottom: '0.5rem'
   }
-});
+}));
 
 function AboutContentNav({
-  classes,
   title,
   current,
   contentHeadings,
   changeActiveContent
 }) {
+  const classes = useStyles();
   const showShadow = useScrollListener(10);
   const generateHref = index => {
     const item = contentHeadings[index];
@@ -89,7 +90,6 @@ function AboutContentNav({
 }
 
 AboutContentNav.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(
@@ -100,4 +100,4 @@ AboutContentNav.propTypes = {
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(AboutContentNav);
+export default AboutContentNav;

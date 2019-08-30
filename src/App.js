@@ -18,6 +18,7 @@ import Legal from './pages/Legal';
 import NotFound from './pages/404';
 import Search from './pages/Search';
 import ScrollToTop from './components/ScrollToTop';
+import Profile from './pages/Profile';
 
 const supportedCountries = config.countries.reduce(
   (previousValue, currentValue) =>
@@ -52,6 +53,7 @@ function App() {
             path={`/profiles/:countrySlug(${supportedCountries})`}
             component={Analysis}
           />
+          <Route exact path="/profiles/:geoId" component={Profile} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/services" component={About} />
           <Route exact path="/terms" component={Legal} />

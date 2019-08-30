@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import Section from '../Section';
 import Selection from './Selection';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.light,
     margin: '0 0 2.3125rem 0',
@@ -53,7 +54,7 @@ const styles = theme => ({
     paddingTop: '1.125rem',
     paddingBottom: '1.0625rem'
   }
-});
+}));
 
 const VIEW_ITEMS = [
   {
@@ -105,7 +106,6 @@ class ViewAnalysis extends Component {
 
   render() {
     const {
-      classes,
       content: { value: countryContent },
       takwimu: { countries }
     } = this.props;
@@ -113,6 +113,7 @@ class ViewAnalysis extends Component {
       return null;
     }
 
+    const classes = useStyles();
     const { view, countrySlug } = this.state;
     const country = countries.find(c => c.slug === countrySlug);
     const href = hrefForView(view, country);
@@ -159,7 +160,6 @@ class ViewAnalysis extends Component {
 }
 
 ViewAnalysis.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   content: PropTypes.shape({
     value: PropTypes.shape({
       content_selection_label: PropTypes.string,
@@ -179,4 +179,4 @@ ViewAnalysis.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(ViewAnalysis);
+export default ViewAnalysis;

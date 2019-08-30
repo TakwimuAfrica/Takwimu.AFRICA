@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/styles';
 import { RichTypography } from './core';
 import Section from './Section';
 
-const styles = () => ({
+const useStyles = makeStyles({
   container: {
     position: 'relative',
     paddingBottom: '56.25%',
@@ -26,13 +25,13 @@ const styles = () => ({
 });
 
 function MakingOfTakwimu({
-  classes,
   takwimu: {
     page: {
       making_of_takwimu: { value: makingOf = {} }
     }
   }
 }) {
+  const classes = useStyles();
   const { title, description, link } = makingOf;
   const iframeId = 'making-of-takwimu-yt-iframe';
 
@@ -83,7 +82,6 @@ function MakingOfTakwimu({
 }
 
 MakingOfTakwimu.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
       making_of_takwimu: PropTypes.shape({
@@ -97,4 +95,4 @@ MakingOfTakwimu.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(MakingOfTakwimu);
+export default MakingOfTakwimu;

@@ -2,7 +2,6 @@ import React, { createRef, useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import {
-  withStyles,
   IconButton,
   Typography,
   Grid,
@@ -10,13 +9,15 @@ import {
   ClickAwayListener
 } from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/styles';
+
 import shareIcon from '../../assets/images/network-connection.svg';
 import embedIcon from '../../assets/images/code.svg';
 import compareIcon from '../../assets/images/compare.svg';
 import downloadIcon from '../../assets/images/download.svg';
 import showIcon from '../../assets/images/tablet-reader-31.svg';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     backgroundColor: 'white',
     borderRadius: '0.625rem',
@@ -50,7 +51,8 @@ const styles = () => ({
   }
 });
 
-function ActionButtonComponent({ classes, children, onClick, ...props }) {
+function ActionButtonComponent({ children, onClick, ...props }) {
+  const classes = useStyles();
   return (
     /* eslint-disable-next-line react/jsx-props-no-spreading */
     <IconButton className={classes.button} onClick={onClick} {...props}>
@@ -68,7 +70,6 @@ function ActionButtonComponent({ classes, children, onClick, ...props }) {
 }
 
 ActionButtonComponent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -80,7 +81,7 @@ ActionButtonComponent.defaultProps = {
   onClick: null
 };
 
-const ActionButton = withStyles(styles)(ActionButtonComponent);
+const ActionButton = ActionButtonComponent;
 
 const EmbedCodeTextArea = ({ code }) => {
   const ref = createRef();
@@ -121,7 +122,6 @@ EmbedCodeTextArea.propTypes = {
 };
 
 function DataActions({
-  classes,
   title,
   onShare,
   onDownload,
@@ -129,6 +129,7 @@ function DataActions({
   onCompare,
   embedCode
 }) {
+  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleEmbed = event => {
@@ -235,7 +236,6 @@ function DataActions({
 }
 
 DataActions.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   onDownload: PropTypes.func,
   onShare: PropTypes.func,
@@ -252,4 +252,4 @@ DataActions.defaultProps = {
   onCompare: null
 };
 
-export default withStyles(styles)(DataActions);
+export default DataActions;

@@ -2,11 +2,11 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import DataActions from './DataActions';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     width: '100%',
     display: 'flex',
@@ -17,17 +17,17 @@ const styles = {
       height: 'auto'
     }
   }
-};
+});
 
 function DataContainer({
   id,
-  classes,
   data: {
     title,
     image: { src }
   },
   countryName
 }) {
+  const classes = useStyles();
   const handleDownload = () => {
     const index = src.lastIndexOf('.');
     const ext = index !== -1 ? src.substring(index + 1) : '';
@@ -66,7 +66,6 @@ function DataContainer({
 
 DataContainer.propTypes = {
   id: PropTypes.string,
-  classes: PropTypes.shape({}).isRequired,
   data: PropTypes.shape({
     image: PropTypes.shape({
       src: PropTypes.string
@@ -80,4 +79,4 @@ DataContainer.defaultProps = {
   id: ''
 };
 
-export default withStyles(styles)(DataContainer);
+export default DataContainer;

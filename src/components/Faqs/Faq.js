@@ -8,10 +8,10 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  withStyles,
   IconButton
 } from '@material-ui/core';
 
+import { withStyles } from '@material-ui/styles';
 import { RichTypography } from '../core';
 
 const styles = theme => ({

@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import Links from './Links';
 import Section from '../Section';
 
-const styles = () => ({
+const useStyles = makeStyles({
   sectionRoot: {
     margin: '0 0 2.3125rem 0'
   },
@@ -15,7 +16,8 @@ const styles = () => ({
   }
 });
 
-function RelatedContent({ classes, content: { value: relatedContent } }) {
+function RelatedContent({ content: { value: relatedContent } }) {
+  const classes = useStyles();
   if (!relatedContent) {
     return null;
   }
@@ -23,7 +25,6 @@ function RelatedContent({ classes, content: { value: relatedContent } }) {
   const { title, related_links: relatedLinks } = relatedContent;
   const firstBatch = relatedLinks.slice(0, 4);
   const secondBatch = relatedLinks.slice(4, 8);
-
   return (
     firstBatch.length > 0 && (
       <Section
@@ -46,7 +47,6 @@ function RelatedContent({ classes, content: { value: relatedContent } }) {
 }
 
 RelatedContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   content: PropTypes.shape({
     value: PropTypes.shape({
       title: PropTypes.string,
@@ -63,4 +63,4 @@ RelatedContent.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(RelatedContent);
+export default RelatedContent;

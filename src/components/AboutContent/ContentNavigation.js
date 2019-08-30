@@ -1,11 +1,11 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ContentNavigation from '../ContentNavigation';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   label: {
     color: theme.palette.text.secondary
@@ -13,10 +13,9 @@ const styles = theme => ({
   topicSelected: {
     fontWeight: 'bold'
   }
-});
+}));
 
 function AboutContentNavigation({
-  classes,
   title,
   current,
   contentHeadings,
@@ -24,6 +23,7 @@ function AboutContentNavigation({
   linksPrimaryColor,
   linksSecondaryColor
 }) {
+  const classes = useStyles();
   const generateHref = index => {
     const item = contentHeadings[index];
     return `/${item.link}/`;
@@ -55,7 +55,6 @@ function AboutContentNavigation({
 }
 
 AboutContentNavigation.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(
@@ -74,4 +73,4 @@ AboutContentNavigation.defaultProps = {
   linksSecondaryColor: 'textPrimary'
 };
 
-export default withStyles(styles)(AboutContentNavigation);
+export default AboutContentNavigation;

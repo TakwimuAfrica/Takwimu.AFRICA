@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import config from '../config';
 import { About } from '../components/Next';
@@ -9,14 +9,16 @@ import Error from '../components/Error';
 import ErrorPage from '../components/ErrorPage';
 import SearchInput from '../components/SearchInput';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {}
 });
 
-function NotFoundError({ classes }) {
+function NotFoundError() {
   const {
     settings: { socialMedia }
   } = config;
+
+  const classes = useStyles();
   return (
     <ErrorPage
       classes={{ root: classes.root }}
@@ -34,8 +36,4 @@ function NotFoundError({ classes }) {
   );
 }
 
-NotFoundError.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
-
-export default withStyles(styles)(NotFoundError);
+export default NotFoundError;

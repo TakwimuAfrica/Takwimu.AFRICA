@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     position: 'relative',
     width: '100%',
@@ -33,9 +33,10 @@ const styles = theme => ({
       background: theme.palette.data.light
     }
   }
-});
+}));
 
-function IFrame({ id, classes, data }) {
+function IFrame({ id, data }) {
+  const classes = useStyles();
   const [iframeChartLoaded, setIframeChartLoaded] = useState(false);
   useEffect(
     () => {
@@ -114,7 +115,6 @@ function IFrame({ id, classes, data }) {
 }
 
 IFrame.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   id: PropTypes.string.isRequired,
   data: PropTypes.shape({
     chart_qualifier: PropTypes.string,
@@ -128,4 +128,4 @@ IFrame.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(IFrame);
+export default IFrame;

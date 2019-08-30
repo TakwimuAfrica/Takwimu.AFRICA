@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import config from '../config';
 import AboutContent from '../components/AboutContent/index';
@@ -9,14 +8,15 @@ import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
 import TableOfContent from '../components/AboutContent/TableOfContent';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     marginTop: '2.875rem',
     marginBottom: '4.375rem'
   }
 });
 
-function About({ classes }) {
+function About() {
+  const classes = useStyles();
   const [takwimu, setTakwimu] = useState(undefined);
   useEffect(() => {
     const { url } = config;
@@ -127,10 +127,4 @@ function About({ classes }) {
   );
 }
 
-About.propTypes = {
-  classes: PropTypes.shape({
-    root: PropTypes.shape({}).isRequired
-  }).isRequired
-};
-
-export default withStyles(styles)(About);
+export default About;

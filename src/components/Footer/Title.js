@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = () => ({
+const useStyles = makeStyles({
   text: {
     fontSize: '1.125rem',
     lineHeight: '1.44',
@@ -12,7 +12,8 @@ const styles = () => ({
   }
 });
 
-function Title({ classes, children }) {
+function Title({ children }) {
+  const classes = useStyles();
   return (
     <Typography variant="subtitle1" className={classes.text}>
       {children}
@@ -21,11 +22,10 @@ function Title({ classes, children }) {
 }
 
 Title.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired
 };
 
-export default withStyles(styles)(Title);
+export default Title;

@@ -1,9 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography, Grid, Icon } from '@material-ui/core';
+import { Typography, Grid, Icon } from '@material-ui/core';
 
-import A from '../A';
+import { makeStyles } from '@material-ui/styles';
+import { A } from '@codeforafrica/hurumap-ui';
 import ContactContentNav from './ContactContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';
@@ -17,7 +18,7 @@ import linkedin from '../../assets/images/group-3-copy.svg';
 import medium from '../../assets/images/logo-medium.svg';
 import twitter from '../../assets/images/logo-twitter.svg';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '58.313rem'
   },
@@ -53,7 +54,7 @@ const styles = theme => ({
   whereToNext: {
     marginTop: '7.75rem'
   }
-});
+}));
 
 const SOCIAL_MEDIA = {
   facebook: { name: 'Facebook', logo: facebook },
@@ -65,7 +66,6 @@ const SOCIAL_MEDIA = {
 };
 
 function ContactContent({
-  classes,
   title,
   address: { value: address },
   addressIndex,
@@ -80,6 +80,7 @@ function ContactContent({
   relatedContent,
   settings: { socialMedia: socialMediaSettings }
 }) {
+  const classes = useStyles();
   return (
     <>
       <ContactContentNav
@@ -153,7 +154,6 @@ function ContactContent({
 }
 
 ContactContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   address: PropTypes.shape({
     description: PropTypes.string,
@@ -189,4 +189,4 @@ ContactContent.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(ContactContent);
+export default ContactContent;

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
-import A from '../A';
+import { A } from '@codeforafrica/hurumap-ui';
 import Section from '../Section';
 
 import Takwimu from './Takwimu';
@@ -13,7 +13,7 @@ import StayInTouch from './StayInTouch';
 import Initiative from './Initiative';
 import Support from './Support';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
     zIndex: 1,
@@ -76,9 +76,10 @@ const styles = theme => ({
     fontSize: '0.9375rem',
     color: 'white'
   }
-});
+}));
 
-function Footer({ classes, takwimu: { settings } }) {
+function Footer({ takwimu: { settings } }) {
+  const classes = useStyles();
   return (
     <Grid
       id="footer"
@@ -121,10 +122,9 @@ function Footer({ classes, takwimu: { settings } }) {
 }
 
 Footer.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     settings: PropTypes.shape({}).isRequired
   }).isRequired
 };
 
-export default withStyles(styles)(Footer);
+export default Footer;

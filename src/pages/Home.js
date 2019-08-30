@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-
-import { withStyles } from '@material-ui/core';
 
 import config from '../config';
 import FeaturedAnalysis from '../components/FeaturedAnalysis';
@@ -12,12 +9,6 @@ import MakingOfTakwimu from '../components/MakingOfTakwimu';
 import Page from '../components/Page';
 import WhatYouDoWithTakwimu from '../components/WhatYouCanDoWithTakwimu';
 import WhereToNext from '../components/Next';
-
-const styles = () => ({
-  root: {
-    marginBottom: '14.375rem'
-  }
-});
 
 function Home() {
   const [takwimu, setTakwimu] = useState(undefined);
@@ -49,8 +40,4 @@ function Home() {
   );
 }
 
-Home.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
-
-export default withStyles(styles)(Home);
+export default Home;

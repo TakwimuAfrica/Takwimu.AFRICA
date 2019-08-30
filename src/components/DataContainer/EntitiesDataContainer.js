@@ -2,19 +2,20 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import DataActions from './DataActions';
 import { RichTypography } from '../core';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     width: '100%'
   }
-};
+});
 
-function DataContainer({ id, classes, data, countryName, url }) {
+function DataContainer({ id, data, countryName, url }) {
   const [images, setImages] = useState({});
+  const classes = useStyles();
 
   useEffect(() => {
     data.entities.forEach(
@@ -52,7 +53,6 @@ DataContainer.propTypes = {
     entities: PropTypes.arrayOf(PropTypes.shape({})),
     title: PropTypes.string
   }).isRequired,
-  classes: PropTypes.shape({}).isRequired,
   countryName: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 };
@@ -61,4 +61,4 @@ DataContainer.defaultProps = {
   id: ''
 };
 
-export default withStyles(styles)(DataContainer);
+export default DataContainer;

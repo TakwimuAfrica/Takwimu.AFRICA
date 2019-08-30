@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Grid, Link } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
-import A from '../A';
+import { A } from '@codeforafrica/hurumap-ui';
 import Title from './Title';
 
 import email from '../../assets/images/email.svg';
@@ -15,7 +15,7 @@ import group3 from '../../assets/images/group-3.svg';
 import group3Copy from '../../assets/images/group-3-copy.svg';
 import twitter from '../../assets/images/twitter.svg';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     width: '14.375rem'
   },
@@ -36,7 +36,8 @@ const styles = () => ({
   }
 });
 
-function StayInTouch({ classes, settings: { support, socialMedia } }) {
+function StayInTouch({ settings: { support, socialMedia } }) {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Title>
@@ -92,7 +93,6 @@ function StayInTouch({ classes, settings: { support, socialMedia } }) {
 }
 
 StayInTouch.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   settings: PropTypes.shape({
     support: PropTypes.shape({
       hello: PropTypes.string
@@ -106,4 +106,4 @@ StayInTouch.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(StayInTouch);
+export default StayInTouch;

@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, ButtonBase } from '@material-ui/core';
+import { ButtonBase } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import DataActions from './DataActions';
 
@@ -11,7 +12,7 @@ import rightArrow from '../../assets/images/right-arrow.svg';
 
 const PDF = React.lazy(() => import('../../modules/pdf'));
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     display: 'flex',
     justifyContent: 'center'
@@ -19,9 +20,10 @@ const styles = {
   pageButton: {
     margin: '20px'
   }
-};
+});
 
-function DataContainer({ id, classes, data, countryName, url }) {
+function DataContainer({ id, data, countryName, url }) {
+  const classes = useStyles();
   const [documents, setDocuments] = useState({});
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -109,7 +111,6 @@ function DataContainer({ id, classes, data, countryName, url }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   data: PropTypes.shape({}).isRequired,
-  classes: PropTypes.shape({}).isRequired,
   countryName: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 };
@@ -118,4 +119,4 @@ DataContainer.defaultProps = {
   id: ''
 };
 
-export default withStyles(styles)(DataContainer);
+export default DataContainer;

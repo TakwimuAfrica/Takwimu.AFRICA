@@ -2,12 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ContentSection from './ContentSection';
 import Page from './Page';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     marginTop: '4.1875rem',
@@ -20,9 +20,10 @@ const styles = theme => ({
     padding: '2.3125rem 0 1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
   }
-});
+}));
 
-function ErrorPage({ children, classes, ...props }) {
+function ErrorPage({ children, ...props }) {
+  const classes = useStyles();
   return (
     <Page {...props}>
       <div className={classes.root} {...props}>
@@ -38,8 +39,7 @@ ErrorPage.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired,
-  classes: PropTypes.shape({}).isRequired
+  ]).isRequired
 };
 
-export default withStyles(styles)(ErrorPage);
+export default ErrorPage;

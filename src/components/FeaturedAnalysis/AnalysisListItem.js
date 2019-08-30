@@ -3,11 +3,12 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { withStyles, ButtonBase } from '@material-ui/core';
+import { ButtonBase } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../core';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   button: {
     width: '100%',
     display: 'flex',
@@ -47,9 +48,10 @@ const styles = theme => ({
   currentLabel: {
     color: 'white'
   }
-});
+}));
 
-function AnalysisListItem({ children, classes, isCurrent, onClick }) {
+function AnalysisListItem({ children, isCurrent, onClick }) {
+  const classes = useStyles();
   return (
     <ButtonBase
       className={classNames(classes.button, {
@@ -70,7 +72,6 @@ function AnalysisListItem({ children, classes, isCurrent, onClick }) {
 }
 AnalysisListItem.propTypes = {
   children: PropTypes.string.isRequired,
-  classes: PropTypes.shape({}).isRequired,
   isCurrent: PropTypes.bool,
   onClick: PropTypes.func.isRequired
 };
@@ -79,4 +80,4 @@ AnalysisListItem.defaultProps = {
   isCurrent: false
 };
 
-export default withStyles(styles)(AnalysisListItem);
+export default AnalysisListItem;

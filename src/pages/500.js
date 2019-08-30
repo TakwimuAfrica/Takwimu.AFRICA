@@ -1,21 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/styles';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { withStyles, Link, Typography } from '@material-ui/core';
+import { Link, Typography } from '@material-ui/core';
 
 import config from '../config';
 import Error from '../components/Error';
 import ErrorPage from '../components/ErrorPage';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     marginBottom: '14.375rem'
   }
 });
 
-function ServerError({ classes }) {
+function ServerError() {
+  const classes = useStyles();
   return (
     <ErrorPage
       classes={{ root: classes.root }}
@@ -36,8 +37,4 @@ function ServerError({ classes }) {
   );
 }
 
-ServerError.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
-
-export default withStyles(styles)(ServerError);
+export default ServerError;

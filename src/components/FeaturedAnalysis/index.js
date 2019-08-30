@@ -1,7 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Grid, withStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
 import { countrify } from '../core';
 import AnalysisList from './AnalysisList';
@@ -46,7 +47,6 @@ class FeaturedAnalysis extends React.Component {
     if (!featuredAnalysis) {
       return null;
     }
-
     const {
       title,
       featured_analyses: featuredAnalyses,

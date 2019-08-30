@@ -1,11 +1,12 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Grid, withStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import Section from './Section';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   aside: {
     width: '100%',
@@ -25,9 +26,10 @@ const styles = theme => ({
       width: '58.4375rem'
     }
   }
-});
+}));
 
-function ContentPage({ aside, children, classes }) {
+function ContentPage({ aside, children }) {
+  const classes = useStyles();
   return (
     <Section classes={{ root: classes.root }}>
       <Grid container direction="row">
@@ -39,7 +41,6 @@ function ContentPage({ aside, children, classes }) {
 }
 
 ContentPage.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   aside: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -50,4 +51,4 @@ ContentPage.propTypes = {
   ]).isRequired
 };
 
-export default withStyles(styles)(ContentPage);
+export default ContentPage;

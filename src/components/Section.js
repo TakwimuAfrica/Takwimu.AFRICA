@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
 import Layout from './Layout';
 import { RichTypography } from './core';
@@ -19,7 +19,7 @@ const styles = theme => ({
   }
 });
 
-function Section({ children, classes, title, variant, ...props }) {
+function Section({ classes, children, title, variant, ...props }) {
   return (
     <Layout classes={{ root: classes.root }} {...props}>
       {title && (

@@ -1,7 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
 import AboutUsContentNav from './AboutUsContentNav';
 import { About as AboutWhereToNext } from '../Next';
