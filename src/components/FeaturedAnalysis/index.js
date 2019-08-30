@@ -35,6 +35,7 @@ class FeaturedAnalysis extends React.Component {
   }
 
   render() {
+    const classes = useStyles();
     const {
       takwimu: {
         countries,
@@ -46,7 +47,6 @@ class FeaturedAnalysis extends React.Component {
     if (!featuredAnalysis) {
       return null;
     }
-    const classes = useStyles();
     const {
       title,
       featured_analyses: featuredAnalyses,
