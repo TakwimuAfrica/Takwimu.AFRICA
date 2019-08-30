@@ -112,8 +112,8 @@ const createPdfStyles = StyleSheet =>
   });
 
 const createPdf = (Document, Image, Link, Page, Text, View) => {
-  function AnalysisPDF({ topic, data, takwimu }) {
-    const classes = useStyles();
+  function AnalysisPDF({ pdfClasses, topic, data, takwimu }) {
+    const classes = pdfClasses;
     return (
       <Document>
         <Page size="A4" style={classes.page}>
@@ -190,6 +190,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
   }
 
   AnalysisPDF.propTypes = {
+    pdfClasses: PropTypes.shape({}).isRequired,
     data: PropTypes.shape({
       content: PropTypes.shape({
         body: PropTypes.arrayOf(PropTypes.shape({})),
@@ -247,7 +248,7 @@ function DownloadPDF({ title, topic, data, takwimu, top }) {
       const AnalysisPDF = createPdf(Document, Image, Link, Page, Text, View);
       ReactPDF.pdf(
         <AnalysisPDF
-          classes={pdfClasses}
+          pdfClasses={pdfClasses}
           topic={topic}
           data={data}
           takwimu={takwimu}
