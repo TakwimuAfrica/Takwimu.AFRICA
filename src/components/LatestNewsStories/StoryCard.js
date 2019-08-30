@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   media: {
     height: '17.625rem',

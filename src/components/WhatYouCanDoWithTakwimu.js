@@ -13,16 +13,16 @@ import reasearchIcon from '../assets/images/a-chart.svg';
 import downloadIcon from '../assets/images/cloud-download-93.svg';
 import presentIcon from '../assets/images/computer-upload.svg';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     backgroundColor: theme.palette.info.main,
     padding: '2.438rem 0.625rem',
     flexDirection: 'column',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       flexDirection: 'row',
       padding: '2.438rem 1.875rem 2.9375rem 4.03125rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       padding: '2.438rem 2.5rem 2.9375rem 5.375rem'
     }
   },
@@ -33,19 +33,19 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     margin: '1.25rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '14.25rem',
       margin: '0'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '19rem'
     }
   },
   marginLeft: {
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginLeft: '4.03125rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       marginLeft: '5.9375rem'
     }
   },

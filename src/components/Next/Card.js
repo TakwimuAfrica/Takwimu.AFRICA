@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { ButtonBase, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     height: '14.875rem',
@@ -24,19 +24,19 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
   },
   cardDual: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '21.09375rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '28.125rem'
     }
   },
   cardTriple: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '18.375rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '24.5rem'
     }
   },

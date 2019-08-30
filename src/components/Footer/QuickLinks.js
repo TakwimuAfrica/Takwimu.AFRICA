@@ -9,10 +9,10 @@ import { makeStyles } from '@material-ui/styles';
 
 import Title from './Title';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '12.8125rem',
       paddingBottom: '0.5rem'
     }

@@ -9,13 +9,13 @@ import { makeStyles } from '@material-ui/styles';
 import Card from './Card';
 import Section from '../Section';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '100%'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '100%'
     }
   },
@@ -25,7 +25,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
   cardMargin: {
     marginTop: '2rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '1.734375rem' // .75 of lg
     }

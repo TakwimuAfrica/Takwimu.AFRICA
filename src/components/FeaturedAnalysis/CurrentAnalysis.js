@@ -8,13 +8,13 @@ import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '43.734375rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '58.3125rem'
     }
   },
@@ -25,11 +25,11 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       paddingLeft: '2.4375rem', // .75 of lg
       paddingRight: '2.71875rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       paddingLeft: '3.25rem',
       paddingRight: '3.625rem'
     }
@@ -63,11 +63,11 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     marginTop: '1rem',
     padding: 0,
     borderWidth: '0.125rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '2.15625rem' // .75 lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       marginLeft: '2.875rem'
     },
 

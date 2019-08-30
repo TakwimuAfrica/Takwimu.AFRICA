@@ -8,17 +8,17 @@ import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   list: {},
   listItem: {
     display: 'block',
     lineHeight: 2.28,
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '21.375rem'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '28.5rem'
     }
   },

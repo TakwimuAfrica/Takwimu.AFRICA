@@ -10,7 +10,7 @@ import LegalContentNav from './LegalContentNav';
 import RelatedContent from '../RelatedContent';
 import RichTextSection from '../RichTextSection';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '58.313rem'
   },

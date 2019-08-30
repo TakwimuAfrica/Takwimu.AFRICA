@@ -9,24 +9,24 @@ import A from '../A';
 import Card from './Card';
 import Section from '../Section';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     paddingBottom: '6.25rem'
   },
   link: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: 'auto'
     }
   },
   cardMargin: {
     marginTop: '2rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '1.5rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       marginLeft: '2rem'
     }
   }

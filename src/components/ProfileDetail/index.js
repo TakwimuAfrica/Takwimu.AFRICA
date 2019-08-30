@@ -21,7 +21,7 @@ import downArrow from '../../assets/images/down-arrow-green.svg';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     height: '30rem',
@@ -31,7 +31,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
       borderRadius: '0 0 1.063rem 1.063rem',
@@ -44,7 +44,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     height: '34rem',
     display: 'flex',
     justifyContent: 'flex-start',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       position: 'absolute',
       pointerEvents: 'none'
     }

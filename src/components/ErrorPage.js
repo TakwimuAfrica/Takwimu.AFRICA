@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/styles';
 import ContentSection from './ContentSection';
 import Page from './Page';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     marginTop: '4.1875rem',

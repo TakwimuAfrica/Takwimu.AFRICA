@@ -18,7 +18,7 @@ import linkedin from '../../assets/images/group-3-copy.svg';
 import medium from '../../assets/images/logo-medium.svg';
 import twitter from '../../assets/images/logo-twitter.svg';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '58.313rem'
   },

@@ -8,7 +8,7 @@ import ContentSection from '../ContentSection';
 import Faq from './Faq';
 import { RichTypography } from '../core';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   contentGrid: {
     paddingTop: '2rem',

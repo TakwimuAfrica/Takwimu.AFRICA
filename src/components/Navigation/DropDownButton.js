@@ -10,16 +10,16 @@ import downArrow from '../../assets/images/down-arrow.svg';
 import downArrowGreen from '../../assets/images/down-arrow-green.svg';
 import upArrow from '../../assets/images/up-arrow.svg';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     justifyContent: 'unset',
     color: theme.palette.text.primary,
     outline: 'none !important',
     margin: '1.25rem 1.75rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       margin: '0.625rem'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       margin: '1.563rem'
     }
   },

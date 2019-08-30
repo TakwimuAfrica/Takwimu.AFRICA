@@ -14,7 +14,7 @@ import {
 import { makeStyles } from '@material-ui/styles';
 import { RichTypography } from '../core';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   panel: {
     marginTop: '0.3125rem',
     marginBottom: '0.0625rem',

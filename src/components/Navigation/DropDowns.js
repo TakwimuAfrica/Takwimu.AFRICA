@@ -15,30 +15,30 @@ import topicIconActive from '../../assets/images/a-chart-active.svg';
 import analysisIcon from '../../assets/images/file-paragraph.svg';
 import analysisIconActive from '../../assets/images/file-paragraph-active.svg';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'unset'
     }
   },
   modalTopic: {
     top: '18.313rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       top: '0'
     }
   },
   modalAnalysis: {
     top: '13.313rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       top: '0'
     }
   },
   backdrop: {
     marginTop: '17.313rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginTop: '0'
     },
     backgroundColor: 'transparent'
@@ -46,7 +46,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
   drawer: {
     backgroundColor: theme.palette.primary.main,
     outline: 'none',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
     }
   }

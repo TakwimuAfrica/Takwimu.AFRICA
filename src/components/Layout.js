@@ -3,18 +3,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '58.265625rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '77.6875rem'
     }
   },
   title: {
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '51.125rem'
     }
   }

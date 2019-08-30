@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../core';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   button: {
     width: '100%',
     display: 'flex',
@@ -16,14 +16,14 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     alignItems: 'center',
     backgroundColor: '#ededec',
     padding: '2.015625rem 0.75rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       justifyContent: 'flex-start',
       paddingTop: '2.015625rem', // .75 of lg
       paddingLeft: '1.78125rem', // .75 of lg
       paddingBottom: '2.015625rem', // .75 of lg
       paddingRight: '0.84375rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       paddingTop: '2.6875rem',
       paddingLeft: '2.375rem',
       paddingBottom: '2.6875rem',
@@ -34,10 +34,10 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     backgroundColor: '#29a87c', // bluey-green
     borderLeft: '0.375rem solid #a0d9b3', // hospital-green
     paddingLeft: '0.375rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       paddingLeft: '1.78125rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       paddingLeft: '2.375rem'
     }
   },

@@ -10,7 +10,7 @@ import AnalysisContentNavigation from './ContentNavigation';
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'fixed',
     top: 0,
@@ -47,10 +47,10 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
   navigation: {
     backgroundColor: 'unset',
     padding: 0,
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '100%'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '100%'
     }
   }

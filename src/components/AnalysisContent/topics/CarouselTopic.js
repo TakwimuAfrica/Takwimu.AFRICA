@@ -12,7 +12,7 @@ import { RichTypography } from '../../core';
 import leftArrow from '../../../assets/images/left-arrow.svg';
 import rightArrow from '../../../assets/images/right-arrow.svg';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
@@ -25,10 +25,10 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     borderRadius: '0.25rem',
     backgroundColor: '#f6f6f6',
     display: 'flex',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '44.265625rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '58.4375rem'
     }
   },

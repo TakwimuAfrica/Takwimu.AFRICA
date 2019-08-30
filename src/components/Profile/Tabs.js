@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import Layout from '../Layout';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   layoutRoot: {
     margin: '0 auto'
   },
@@ -25,7 +25,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     fontSize: '1.0625rem', // 17px
     textTransform: 'none',
     padding: '0.6875rem 1rem 0.6875rem 1.125rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       minWidth: 0
     },
     '&$tabSelected': {

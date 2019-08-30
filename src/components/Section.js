@@ -7,13 +7,13 @@ import { makeStyles } from '@material-ui/styles';
 import Layout from './Layout';
 import { RichTypography } from './core';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     margin: '0 auto'
   },
   title: {
     margin: '1.375rem 0',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '51.125rem'
     }
   }

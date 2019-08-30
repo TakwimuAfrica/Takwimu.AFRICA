@@ -15,7 +15,7 @@ import ihub from '../../assets/images/ihub.png';
 import ihub2 from '../../assets/images/ihub@2x.png';
 import ihub3 from '../../assets/images/ihub@3x.png';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '19.375rem'
   },
@@ -25,11 +25,11 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   imgCfa: {
     marginLeft: '1rem',
     marginRight: '1rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginLeft: '2.15625rem',
       marginRight: '2.25rem'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       marginLeft: '2.875rem',
       marginRight: '3rem'
     }

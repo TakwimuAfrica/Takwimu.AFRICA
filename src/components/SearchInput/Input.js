@@ -8,7 +8,7 @@ import { InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     marginTop: '1rem',
     marginBottom: '1rem'

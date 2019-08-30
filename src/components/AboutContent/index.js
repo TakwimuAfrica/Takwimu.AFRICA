@@ -13,7 +13,7 @@ import RelatedContent from '../RelatedContent';
 import RichTextSection from '../RichTextSection';
 import Services from '../Services';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '933px'
   },

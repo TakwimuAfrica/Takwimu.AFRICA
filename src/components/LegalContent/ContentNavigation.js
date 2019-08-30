@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import ContentNavigation from '../ContentNavigation';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   label: {
     color: theme.palette.text.secondary

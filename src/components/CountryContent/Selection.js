@@ -5,17 +5,17 @@ import { FormControl, Input, MenuItem, Select } from '@material-ui/core';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     marginTop: '0.9375rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '0.703125rem',
       marginRight: '0.796875rem',
       width: '12.09375rem'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       marginTop: 0,
       marginLeft: '0.9375rem',
       marginRight: '1.0625rem',

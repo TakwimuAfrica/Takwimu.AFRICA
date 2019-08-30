@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 import { CountrySelector } from '../ProfileDetail';
 import TableOfContent from '../TableOfContent';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   countrySelectorLabel: {
     fontSize: theme.typography.caption.fontSize

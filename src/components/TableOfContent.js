@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/styles';
 import activeContentIcon from '../assets/images/active-page.svg';
 
 const DEFAULT_TOP = 120; // Navigation height + padding
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
     display: 'flex',
@@ -19,7 +19,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     width: '100%',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       position: 'fixed',
       width: '14.375rem',
       top: `${DEFAULT_TOP}px`,

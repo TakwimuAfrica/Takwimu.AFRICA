@@ -6,14 +6,14 @@ import { makeStyles } from '@material-ui/styles';
 
 import AnalysisListItem from './AnalysisListItem';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '14.53125rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '19.375rem'
     }
   },

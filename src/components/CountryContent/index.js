@@ -7,19 +7,19 @@ import { makeStyles } from '@material-ui/styles';
 import Section from '../Section';
 import Selection from './Selection';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.light,
     margin: '0 0 2.3125rem 0',
     paddingTop: '3.125rem',
     paddingBottom: '3.5rem',
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '44.015625rem', // .75 of lg
       paddingLeft: '1.625rem',
       paddingRight: '1.625rem'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '58.6875rem',
       paddingLeft: '2.8125rem',
       paddingRight: '2.8125rem'
@@ -31,7 +31,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
   },
   countryText: {
     marginTop: '0.9375rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginTop: 0
     }
   },
@@ -39,10 +39,10 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     width: '100%',
     padding: 0,
     marginTop: '0.9375rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '6.609375rem'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       marginTop: 0,
       marginLeft: '0.9375rem',
       width: '8.8125rem'

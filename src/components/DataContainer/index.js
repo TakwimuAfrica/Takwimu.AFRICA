@@ -15,13 +15,13 @@ import ImageDataContainer from './ImageDataContainer';
 import PDFDataContainer from './PDFDataContainer';
 import FlourishDataContainer from './FlourishDataContainer';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     padding: '1.25rem'
   },
   layoutHalf: {
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '50%'
     }
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     padding: '0.625rem',
     backgroundColor: theme.palette.data.light,
     overflow: 'hidden',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       padding: '1.25rem'
     }
   },
@@ -37,7 +37,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     marginTop: '1.25rem',
     marginLeft: 'auto',
     marginRight: 'auto',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '90%'
     }
   },

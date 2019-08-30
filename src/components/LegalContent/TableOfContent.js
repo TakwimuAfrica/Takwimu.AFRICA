@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import TableOfContent from '../TableOfContent';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   sideMenuHeader: {
     color: theme.palette.info.other

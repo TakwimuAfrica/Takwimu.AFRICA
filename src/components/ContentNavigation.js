@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/styles';
 import ContentSection from './ContentSection';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.info.main,
     padding: '1.125rem 1.625rem'

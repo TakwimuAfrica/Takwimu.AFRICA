@@ -10,7 +10,7 @@ import A from '../A';
 import Card from './Card';
 import ContentSection from '../ContentSection';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   sectionRoot: {
     padding: 0
   },
@@ -20,13 +20,13 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
   link: {
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: 'auto'
     }
   },
   cardMargin: {
     marginTop: '2rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       marginTop: 0
     }
   }

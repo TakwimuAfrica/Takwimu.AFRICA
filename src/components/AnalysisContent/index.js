@@ -17,7 +17,7 @@ import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 
-const useStyles = makeStyles(({ theme, breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '933px'
   },
@@ -42,11 +42,11 @@ const useStyles = makeStyles(({ theme, breakpoints }) => ({
     marginTop: '0.375rem',
     width: '100%',
     height: '21.125rem',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       height: '17.125rem',
       backgroundPositionY: '-3rem'
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       height: '21.125rem',
       backgroundPositionY: '-6.25rem'
     }

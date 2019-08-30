@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'fixed',
     top: 0,

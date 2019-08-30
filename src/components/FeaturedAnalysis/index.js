@@ -2,14 +2,14 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
 import { countrify } from '../core';
 import AnalysisList from './AnalysisList';
 import CurrentAnalysis from './CurrentAnalysis';
 import Section from '../Section';
 
-const useStyles = makeStyles(({ theme }) => ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.info.main
@@ -20,7 +20,7 @@ const useStyles = makeStyles(({ theme }) => ({
   list: {
     height: '100%'
   }
-}));
+});
 
 class FeaturedAnalysis extends React.Component {
   constructor(props) {
@@ -35,8 +35,8 @@ class FeaturedAnalysis extends React.Component {
   }
 
   render() {
-    const classes = useStyles();
     const {
+      classes,
       takwimu: {
         countries,
         page: {
@@ -92,6 +92,7 @@ class FeaturedAnalysis extends React.Component {
 }
 
 FeaturedAnalysis.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     countries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     page: PropTypes.shape({
@@ -114,4 +115,4 @@ FeaturedAnalysis.propTypes = {
   }).isRequired
 };
 
-export default FeaturedAnalysis;
+export default withStyles(styles)(FeaturedAnalysis);

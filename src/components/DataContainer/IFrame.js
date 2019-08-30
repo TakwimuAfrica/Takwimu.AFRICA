@@ -5,14 +5,14 @@ import classNames from 'classnames';
 
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     position: 'relative',
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '28.03125rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '37.375rem'
     },
     minHeight: 450
@@ -22,10 +22,10 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     top: 0,
     left: 0,
     width: '100%',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       width: '26.71875rem' // .75 of lg
     },
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '33.875rem'
     },
     border: 0,

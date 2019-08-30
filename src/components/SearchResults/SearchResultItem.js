@@ -8,7 +8,7 @@ import { Link, Typography } from '@material-ui/core';
 
 import { RichTypography } from '../core';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     marginTop: '1.5rem'
   },

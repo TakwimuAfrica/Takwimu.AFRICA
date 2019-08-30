@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/styles';
 import ContentSection from './ContentSection';
 import { RichTypography } from './core';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   serviceHeading: {
     fontWeight: 'bold',

@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import SearchResultItem from './SearchResultItem';
 
-const useStyles = makeStyles(({ theme }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },

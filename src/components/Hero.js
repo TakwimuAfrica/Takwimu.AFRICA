@@ -10,7 +10,7 @@ import Section from './Section';
 import africanParliament from '../assets/images/africanparliament.jpg';
 import triangle from '../assets/images/triangle.svg';
 
-const useStyles = makeStyles(({ breakpoints, theme }) => ({
+const useStyles = makeStyles(theme => ({
   section: {
     marginTop: '2.25rem'
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
 
     // Some words are too big to fit mobile so break them
     wordBreak: 'break-all',
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       maxWidth: '40rem',
       wordBreak: 'initial'
     }
@@ -47,7 +47,7 @@ const useStyles = makeStyles(({ breakpoints, theme }) => ({
     '& a': {
       color: theme.palette.primary.main
     },
-    [breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       maxWidth: '27.375rem'
     }
   },

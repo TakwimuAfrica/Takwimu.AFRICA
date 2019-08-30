@@ -9,19 +9,19 @@ import { makeStyles } from '@material-ui/styles';
 import StoryCard from './StoryCard';
 import StorySummary from './StorySummary';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
   margin: {
     marginLeft: '2.53125rem',
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       marginLeft: '3.375rem'
     }
   },
   story: {
     width: '17.72625rem',
-    [breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '23.625rem'
     }
   }
