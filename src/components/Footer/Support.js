@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 import Title from './Title';
@@ -10,7 +9,7 @@ import gates from '../../assets/images/gates.png';
 import gates2 from '../../assets/images/gates@2x.png';
 import gates3 from '../../assets/images/gates@3x.png';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     width: '14.375rem'
   },
@@ -19,7 +18,8 @@ const styles = () => ({
   }
 });
 
-function Support({ classes }) {
+function Support() {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Title>With support from</Title>
@@ -35,8 +35,6 @@ function Support({ classes }) {
   );
 }
 
-Support.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
+Support.propTypes = {};
 
-export default withStyles(styles)(Support);
+export default Support;

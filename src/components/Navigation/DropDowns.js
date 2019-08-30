@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 
-import { Drawer, withStyles } from '@material-ui/core';
+import { Drawer } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import DropDownButton from './DropDownButton';
 
 import DataByTopic from './DataByTopic';
@@ -14,30 +15,30 @@ import topicIconActive from '../../assets/images/a-chart-active.svg';
 import analysisIcon from '../../assets/images/file-paragraph.svg';
 import analysisIconActive from '../../assets/images/file-paragraph-active.svg';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       display: 'unset'
     }
   },
   modalTopic: {
     top: '18.313rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       top: '0'
     }
   },
   modalAnalysis: {
     top: '13.313rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       top: '0'
     }
   },
   backdrop: {
     marginTop: '17.313rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginTop: '0'
     },
     backgroundColor: 'transparent'
@@ -45,20 +46,20 @@ const styles = theme => ({
   drawer: {
     backgroundColor: theme.palette.primary.main,
     outline: 'none',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
     }
   }
-});
+}));
 
 function DropDownDrawerComponent({
-  classes,
   children,
   countries,
   active,
   navigation,
   toggle
 }) {
+  const classes = useStyles();
   return (
     <Drawer
       anchor="top"
@@ -92,7 +93,6 @@ function DropDownDrawerComponent({
 }
 
 DropDownDrawerComponent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   active: PropTypes.string,
   toggle: PropTypes.func.isRequired,
@@ -107,10 +107,11 @@ DropDownDrawerComponent.defaultProps = {
   active: null
 };
 
-const DropDownDrawer = withStyles(styles)(DropDownDrawerComponent);
+const DropDownDrawer = DropDownDrawerComponent;
 export { DropDownDrawer };
 
-function DropDowns({ classes, active, page, toggle }) {
+function DropDowns({ active, page, toggle }) {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <DropDownButton
@@ -134,7 +135,6 @@ function DropDowns({ classes, active, page, toggle }) {
 }
 
 DropDowns.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   active: PropTypes.string,
   toggle: PropTypes.func.isRequired,
   page: PropTypes.shape({
@@ -146,4 +146,4 @@ DropDowns.defaultProps = {
   active: null
 };
 
-export default withStyles(styles)(DropDowns);
+export default DropDowns;

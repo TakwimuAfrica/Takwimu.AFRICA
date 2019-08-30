@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { withStyles, Link, Tooltip, Typography } from '@material-ui/core';
+import { Link, Tooltip, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {},
   list: {},
   listItem: {
     display: 'block',
     lineHeight: 2.28,
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '21.375rem'
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '28.5rem'
     }
   },
@@ -25,9 +26,10 @@ const styles = theme => ({
     fontSize: theme.typography.caption.fontSize,
     backgroundColor: theme.palette.primary.main
   }
-});
+}));
 
-function Links({ classes, items }) {
+function Links({ items }) {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Typography
@@ -78,8 +80,7 @@ function Links({ classes, items }) {
 }
 
 Links.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   items: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
 };
 
-export default withStyles(styles)(Links);
+export default Links;

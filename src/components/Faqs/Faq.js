@@ -8,13 +8,13 @@ import {
   ExpansionPanel,
   ExpansionPanelSummary,
   ExpansionPanelDetails,
-  withStyles,
   IconButton
 } from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/styles';
 import { RichTypography } from '../core';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   panel: {
     marginTop: '0.3125rem',
     marginBottom: '0.0625rem',
@@ -53,7 +53,7 @@ const styles = theme => ({
   },
   iconExpanded: { fontSize: '2.4375rem', color: 'white' },
   panelDetails: { backgroundColor: theme.palette.info.main }
-});
+}));
 
 class Faq extends React.Component {
   constructor(props) {
@@ -71,7 +71,8 @@ class Faq extends React.Component {
   }
 
   render() {
-    const { classes, expandTitle, children } = this.props;
+    const classes = useStyles();
+    const { expandTitle, children } = this.props;
     const { expanded } = this.state;
 
     return (
@@ -128,7 +129,6 @@ class Faq extends React.Component {
 }
 
 Faq.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   expandTitle: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -139,4 +139,4 @@ Faq.defaultProps = {
   expandTitle: ''
 };
 
-export default withStyles(styles)(Faq);
+export default Faq;

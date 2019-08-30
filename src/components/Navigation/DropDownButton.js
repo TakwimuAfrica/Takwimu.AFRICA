@@ -3,22 +3,23 @@ import { PropTypes } from 'prop-types';
 
 import classnames from 'classnames';
 
-import { ButtonBase, withStyles, Grid, Typography } from '@material-ui/core';
+import { ButtonBase, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import downArrow from '../../assets/images/down-arrow.svg';
 import downArrowGreen from '../../assets/images/down-arrow-green.svg';
 import upArrow from '../../assets/images/up-arrow.svg';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     justifyContent: 'unset',
     color: theme.palette.text.primary,
     outline: 'none !important',
     margin: '1.25rem 1.75rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       margin: '0.625rem'
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       margin: '1.563rem'
     }
   },
@@ -47,10 +48,9 @@ const styles = theme => ({
     width: 0,
     zIndex: 1
   }
-});
+}));
 
 function DropDownButton({
-  classes,
   icon,
   iconActive,
   title,
@@ -58,6 +58,7 @@ function DropDownButton({
   isHighlighted,
   isActive
 }) {
+  const classes = useStyles();
   return (
     <ButtonBase
       disableRipple
@@ -112,7 +113,6 @@ function DropDownButton({
 }
 
 DropDownButton.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   icon: PropTypes.string.isRequired,
   iconActive: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -121,4 +121,4 @@ DropDownButton.propTypes = {
   handleClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(DropDownButton);
+export default DropDownButton;

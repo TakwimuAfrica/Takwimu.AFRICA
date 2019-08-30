@@ -1,7 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ContentNavigation from './ContentNavigation';
 import ContentSection from '../ContentSection';
@@ -9,7 +10,7 @@ import LegalContentNav from './LegalContentNav';
 import RelatedContent from '../RelatedContent';
 import RichTextSection from '../RichTextSection';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {
     maxWidth: '58.313rem'
   },
@@ -45,10 +46,9 @@ const styles = theme => ({
   whereToNext: {
     marginTop: '7.75rem'
   }
-});
+}));
 
 function LegalContent({
-  classes,
   title,
   navigationTitle,
   contents,
@@ -57,6 +57,7 @@ function LegalContent({
   changeActiveContent,
   relatedContent
 }) {
+  const classes = useStyles();
   return (
     <>
       <LegalContentNav
@@ -89,7 +90,6 @@ function LegalContent({
 }
 
 LegalContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   navigationTitle: PropTypes.string.isRequired,
   contents: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
@@ -103,4 +103,4 @@ LegalContent.propTypes = {
   relatedContent: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(LegalContent);
+export default LegalContent;

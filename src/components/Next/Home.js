@@ -1,38 +1,39 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { Grid, withStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 import Card from './Card';
 import Section from '../Section';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     flexGrow: 1,
     paddingBottom: '6.25rem'
   },
   link: {
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: 'auto'
     }
   },
   cardMargin: {
     marginTop: '2rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '1.5rem' // .75 of lg
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       marginLeft: '2rem'
     }
   }
-});
+}));
 
-function HomeWhereToNext({ classes }) {
+function HomeWhereToNext() {
+  const classes = useStyles();
   return (
     <Section title="Where to next" variant="h3">
       <Grid
@@ -65,8 +66,6 @@ function HomeWhereToNext({ classes }) {
   );
 }
 
-HomeWhereToNext.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
+HomeWhereToNext.propTypes = {};
 
-export default withStyles(styles)(HomeWhereToNext);
+export default HomeWhereToNext;

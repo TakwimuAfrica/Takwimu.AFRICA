@@ -1,17 +1,16 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ContentNavigation from '../ContentNavigation';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {},
   label: {}
 });
 
 function AnalysisContentNavigation({
-  classes,
   labelText,
   labelTextStrong,
   current,
@@ -20,6 +19,7 @@ function AnalysisContentNavigation({
   linksPrimaryColor,
   linksSecondaryColor
 }) {
+  const classes = useStyles();
   const generateHref = index => {
     const item = content.body[index];
     return `#${item.id}`;
@@ -52,7 +52,6 @@ function AnalysisContentNavigation({
 AnalysisContentNavigation.propTypes = {
   labelText: PropTypes.string.isRequired,
   labelTextStrong: PropTypes.string.isRequired,
-  classes: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({
     body: PropTypes.arrayOf(
@@ -75,4 +74,4 @@ AnalysisContentNavigation.defaultProps = {
   linksSecondaryColor: 'textPrimary'
 };
 
-export default withStyles(styles)(AnalysisContentNavigation);
+export default AnalysisContentNavigation;

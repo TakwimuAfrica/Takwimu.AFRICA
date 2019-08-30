@@ -7,12 +7,12 @@ import {
   Grid,
   Drawer,
   Input,
-  withStyles,
   MenuList,
   MenuItem,
   Tooltip,
   Typography
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import classNames from 'classnames';
 
@@ -21,12 +21,12 @@ import rightArrowTransparent from '../../assets/images/right-arrow-transparent.s
 
 import Layout from '../Layout';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       display: 'unset'
     }
   },
@@ -44,20 +44,20 @@ const styles = theme => ({
   search: {
     height: '100vh',
     marginTop: '2.813rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginTop: '3.75rem'
     }
   },
   arrow: {
     marginLeft: '1rem',
     marginRight: '1.25rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginLeft: '4.406rem'
     }
   },
   searchField: {
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       maxWidth: '46.875rem'
     },
     '& > input': {
@@ -71,7 +71,7 @@ const styles = theme => ({
       fontStretch: 'normal',
       lineHeight: 'normal',
       letterSpacing: 'normal',
-      [theme.breakpoints.up('md')]: {
+      [breakpoints.up('md')]: {
         fontSize: '3.563rem'
       }
     }
@@ -87,7 +87,7 @@ const styles = theme => ({
     alignItems: 'center',
     borderRadius: '0.563rem',
     marginLeft: '1.25rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       maxWidth: '46.875rem',
       padding: '1.25rem 0.938rem'
     }
@@ -110,7 +110,7 @@ const styles = theme => ({
 
     // Firefox only
     scrollbarColor: `white ${theme.palette.primary.main}`,
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginRight: '6.25rem',
       paddingLeft: '0.625rem'
     },
@@ -141,7 +141,7 @@ const styles = theme => ({
     fontSize: theme.typography.caption.fontSize,
     backgroundColor: theme.palette.primary.dark
   }
-});
+}));
 
 class SearchDrawer extends React.Component {
   constructor(props) {
@@ -183,7 +183,8 @@ class SearchDrawer extends React.Component {
   }
 
   render() {
-    const { classes, children, active, history, toggle } = this.props;
+    const { children, active, history, toggle } = this.props;
+    const classes = useStyles();
     const { backgroundVisible, searchResults } = this.state;
     const handleInput = e => {
       if (e.target.value.length > 0) {
@@ -274,7 +275,6 @@ class SearchDrawer extends React.Component {
 }
 
 SearchDrawer.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   active: PropTypes.bool,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
@@ -293,4 +293,4 @@ SearchDrawer.defaultProps = {
   active: false
 };
 
-export default withRouter(withStyles(styles)(SearchDrawer));
+export default withRouter(SearchDrawer);

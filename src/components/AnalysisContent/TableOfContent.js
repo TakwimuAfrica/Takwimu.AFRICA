@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { CountrySelector } from '../ProfileDetail';
 import TableOfContent from '../TableOfContent';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {},
   countrySelectorLabel: {
     fontSize: theme.typography.caption.fontSize
   }
-});
+}));
 
 function AnalysisTableOfContent({
-  classes,
   content,
   current,
   country,
   onChangeContent
 }) {
+  const classes = useStyles();
   const { slug: countrySlug } = country;
   const generateHref = index => {
     const analysisUrl = `/profiles/${countrySlug}`;
@@ -47,7 +47,6 @@ function AnalysisTableOfContent({
 }
 
 AnalysisTableOfContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   content: PropTypes.arrayOf(
     PropTypes.shape({
       meta: PropTypes.shape({
@@ -62,4 +61,4 @@ AnalysisTableOfContent.propTypes = {
   onChangeContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(AnalysisTableOfContent);
+export default AnalysisTableOfContent;

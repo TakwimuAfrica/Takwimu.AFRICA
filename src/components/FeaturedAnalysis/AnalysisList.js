@@ -1,25 +1,27 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Grid, withStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import AnalysisListItem from './AnalysisListItem';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '14.53125rem' // .75 of lg
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '19.375rem'
     }
   },
   content: {}
-});
+}));
 
-function AnalysisList({ classes, countrifyTitle, content, current, onClick }) {
+function AnalysisList({ countrifyTitle, content, current, onClick }) {
+  const classes = useStyles();
   return (
     <Grid
       container
@@ -42,7 +44,6 @@ function AnalysisList({ classes, countrifyTitle, content, current, onClick }) {
 }
 
 AnalysisList.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   countrifyTitle: PropTypes.func.isRequired,
   content: PropTypes.arrayOf(
     PropTypes.shape({
@@ -57,4 +58,4 @@ AnalysisList.defaultProps = {
   current: 0
 };
 
-export default withStyles(styles)(AnalysisList);
+export default AnalysisList;

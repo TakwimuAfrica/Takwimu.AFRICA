@@ -1,21 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import SearchInput from '../SearchInput';
 import SearchResultsContainer from './SearchResultsContainer';
 import Section from '../Section';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     marginTop: '3.875rem',
     marginBottom: '4.75rem'
   }
 });
 
-function SearchResults({ classes, takwimu: { url, page } }) {
+function SearchResults({ takwimu: { url, page } }) {
   const [search, setSearch] = useState(page.search);
+  const classes = useStyles();
 
   const handleSearch = useCallback(
     searchTerm => {
@@ -46,7 +47,6 @@ function SearchResults({ classes, takwimu: { url, page } }) {
 }
 
 SearchResults.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({
@@ -58,4 +58,4 @@ SearchResults.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(SearchResults);
+export default SearchResults;

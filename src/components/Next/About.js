@@ -3,13 +3,14 @@ import { PropTypes } from 'prop-types';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { withStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 import Card from './Card';
 import ContentSection from '../ContentSection';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   sectionRoot: {
     padding: 0
   },
@@ -19,18 +20,19 @@ const styles = theme => ({
   },
   link: {
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: 'auto'
     }
   },
   cardMargin: {
     marginTop: '2rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginTop: 0
     }
   }
-});
-function AboutWhereToNext({ classes, socialMedia, title }) {
+}));
+function AboutWhereToNext({ socialMedia, title }) {
+  const classes = useStyles();
   return (
     <ContentSection
       title={title}
@@ -61,7 +63,6 @@ function AboutWhereToNext({ classes, socialMedia, title }) {
 }
 
 AboutWhereToNext.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({
     medium: PropTypes.string
   }).isRequired,
@@ -72,4 +73,4 @@ AboutWhereToNext.defaultProps = {
   title: 'Where to next...'
 };
 
-export default withStyles(styles)(AboutWhereToNext);
+export default AboutWhereToNext;

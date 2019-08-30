@@ -4,14 +4,15 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../../core';
 
 import leftArrow from '../../../assets/images/left-arrow.svg';
 import rightArrow from '../../../assets/images/right-arrow.svg';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     width: '100%'
   },
@@ -24,10 +25,10 @@ const styles = theme => ({
     borderRadius: '0.25rem',
     backgroundColor: '#f6f6f6',
     display: 'flex',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '44.265625rem' // .75 of lg
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '58.4375rem'
     }
   },
@@ -153,9 +154,10 @@ const styles = theme => ({
   body: {
     padding: '3.125rem'
   }
-});
+}));
 
-function Topic({ classes, data, onIndexChanged }) {
+function Topic({ data, onIndexChanged }) {
+  const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [images, setImages] = useState({});
 
@@ -256,7 +258,6 @@ function Topic({ classes, data, onIndexChanged }) {
 }
 
 Topic.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string,
@@ -267,4 +268,4 @@ Topic.propTypes = {
   onIndexChanged: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Topic);
+export default Topic;

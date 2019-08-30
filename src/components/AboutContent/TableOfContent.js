@@ -2,23 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import TableOfContent from '../TableOfContent';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {},
   sideMenuHeader: {
     color: theme.palette.info.other
   }
-});
+}));
 
 function AboutUsTableOfContent({
-  classes,
   current,
   contentHeadings,
   changeActiveContent
 }) {
+  const classes = useStyles();
   const generateHref = index => {
     const item = contentHeadings[index];
     return `/${item.link}`;
@@ -40,7 +40,6 @@ function AboutUsTableOfContent({
 }
 
 AboutUsTableOfContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(
     PropTypes.shape({
@@ -50,4 +49,4 @@ AboutUsTableOfContent.propTypes = {
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(AboutUsTableOfContent);
+export default AboutUsTableOfContent;

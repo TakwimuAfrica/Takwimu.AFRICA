@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {},
   media: {
     height: '17.625rem',
@@ -23,9 +23,10 @@ const styles = theme => ({
     color: theme.palette.primary.main,
     fontWeight: 'bold'
   }
-});
+}));
 
-function StoryCard({ classes, story }) {
+function StoryCard({ story }) {
+  const classes = useStyles();
   return (
     <Card classes={{ root: classes.root }}>
       <CardMedia
@@ -54,7 +55,6 @@ function StoryCard({ classes, story }) {
 }
 
 StoryCard.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
     preview_image: PropTypes.shape({
       url: PropTypes.string
@@ -64,4 +64,4 @@ StoryCard.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(StoryCard);
+export default StoryCard;

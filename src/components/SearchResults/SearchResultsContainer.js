@@ -1,10 +1,11 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { withStyles, ButtonBase, Grid, Typography } from '@material-ui/core';
+import { ButtonBase, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import SearchResultItem from './SearchResultItem';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {
     flexGrow: 1
   },
@@ -55,10 +56,9 @@ const styles = theme => ({
   pagesList: {
     marginTop: '1rem'
   }
-});
+}));
 
 function RenderPaginator({
-  classes,
   items,
   activePage,
   handleNextClick,
@@ -68,6 +68,7 @@ function RenderPaginator({
 }) {
   const numPages = Math.floor(items / 10);
   const pages = Array.from({ length: numPages }, (v, k) => k + 1);
+  const classes = useStyles();
 
   return (
     <div className={classes.pagesList}>
@@ -99,7 +100,6 @@ function RenderPaginator({
   );
 }
 RenderPaginator.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   items: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
   handleNextClick: PropTypes.func.isRequired,
@@ -107,7 +107,7 @@ RenderPaginator.propTypes = {
   handlePageClick: PropTypes.func.isRequired,
   endIndex: PropTypes.number.isRequired
 };
-export const Paginator = withStyles(styles)(RenderPaginator);
+export const Paginator = RenderPaginator;
 
 class SearchResultsContainer extends React.Component {
   constructor(props) {
@@ -157,8 +157,9 @@ class SearchResultsContainer extends React.Component {
   }
 
   render() {
-    const { classes, results } = this.props;
+    const { results } = this.props;
     const { activePage, startIndex, filter } = this.state;
+    const classes = useStyles();
 
     let filteredResults = results;
     // filter results with result_type equals to state's filter
@@ -251,7 +252,6 @@ class SearchResultsContainer extends React.Component {
 }
 
 SearchResultsContainer.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   filter: PropTypes.string,
   results: PropTypes.arrayOf(PropTypes.shape({}))
 };
@@ -261,4 +261,4 @@ SearchResultsContainer.defaultProps = {
   results: []
 };
 
-export default withStyles(styles)(SearchResultsContainer);
+export default SearchResultsContainer;

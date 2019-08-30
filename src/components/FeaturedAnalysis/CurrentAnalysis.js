@@ -1,19 +1,20 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '43.734375rem' // .75 of lg
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '58.3125rem'
     }
   },
@@ -24,11 +25,11 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       paddingLeft: '2.4375rem', // .75 of lg
       paddingRight: '2.71875rem' // .75 of lg
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       paddingLeft: '3.25rem',
       paddingRight: '3.625rem'
     }
@@ -62,11 +63,11 @@ const styles = theme => ({
     marginTop: '1rem',
     padding: 0,
     borderWidth: '0.125rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '2.15625rem' // .75 lg
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       marginLeft: '2.875rem'
     },
 
@@ -81,15 +82,15 @@ const styles = theme => ({
     paddingTop: '1rem',
     paddingBottom: '0.9375rem'
   }
-});
+}));
 
 function CurrentAnalysis({
-  classes,
   countrifyTitle,
   content: { value: currentAnalysis },
   readAnalysisTitle,
   viewProfileTitle
 }) {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Grid
@@ -154,7 +155,6 @@ function CurrentAnalysis({
 }
 
 CurrentAnalysis.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   countrifyTitle: PropTypes.func.isRequired,
   content: PropTypes.shape({
     value: PropTypes.shape({}).isRequired
@@ -163,4 +163,4 @@ CurrentAnalysis.propTypes = {
   viewProfileTitle: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(CurrentAnalysis);
+export default CurrentAnalysis;

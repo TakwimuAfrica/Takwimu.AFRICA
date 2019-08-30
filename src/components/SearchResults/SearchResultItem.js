@@ -1,13 +1,14 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import { makeStyles } from '@material-ui/styles';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { withStyles, Link, Typography } from '@material-ui/core';
+import { Link, Typography } from '@material-ui/core';
 
 import { RichTypography } from '../core';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {
     marginTop: '1.5rem'
   },
@@ -23,16 +24,10 @@ const styles = theme => ({
   resultType: {
     fontWeight: 'bold'
   }
-});
+}));
 
-function SearchResultItem({
-  classes,
-  country,
-  title,
-  link,
-  summary,
-  resultType
-}) {
+function SearchResultItem({ country, title, link, summary, resultType }) {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Typography variant="body1" className={classes.resultType}>
@@ -49,7 +44,6 @@ function SearchResultItem({
 }
 
 SearchResultItem.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   country: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   resultType: PropTypes.string.isRequired,
@@ -57,4 +51,4 @@ SearchResultItem.propTypes = {
   title: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(SearchResultItem);
+export default SearchResultItem;

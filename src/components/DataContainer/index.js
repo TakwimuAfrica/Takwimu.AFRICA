@@ -2,8 +2,9 @@
 import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/styles';
 
 import classNames from 'classnames';
 import EntitiesDataContainer from './EntitiesDataContainer';
@@ -14,13 +15,13 @@ import ImageDataContainer from './ImageDataContainer';
 import PDFDataContainer from './PDFDataContainer';
 import FlourishDataContainer from './FlourishDataContainer';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     width: '100%',
     padding: '1.25rem'
   },
   layoutHalf: {
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '50%'
     }
   },
@@ -28,7 +29,7 @@ const styles = theme => ({
     padding: '0.625rem',
     backgroundColor: theme.palette.data.light,
     overflow: 'hidden',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       padding: '1.25rem'
     }
   },
@@ -36,7 +37,7 @@ const styles = theme => ({
     marginTop: '1.25rem',
     marginLeft: 'auto',
     marginRight: 'auto',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '90%'
     }
   },
@@ -52,17 +53,17 @@ const styles = theme => ({
     lineHeight: 1.2,
     marginBottom: '0.625rem'
   }
-});
+}));
 
 function DataContainer({
   id,
-  classes,
   indicator: {
     value: { widget: data, summary },
     meta
   },
   country: { name: countryName }
 }) {
+  const classes = useStyles();
   useEffect(() => {
     const params = new URL(window.location).searchParams;
     const indicatorId = params.get('indicator');
@@ -176,7 +177,6 @@ function DataContainer({
 
 DataContainer.propTypes = {
   id: PropTypes.string,
-  classes: PropTypes.shape({}).isRequired,
   indicator: PropTypes.shape({
     value: PropTypes.shape({
       summary: PropTypes.string,
@@ -197,4 +197,4 @@ DataContainer.defaultProps = {
   id: ''
 };
 
-export default withStyles(styles)(DataContainer);
+export default DataContainer;

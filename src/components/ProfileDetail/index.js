@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Typography,
-  withStyles,
   ButtonBase,
   Button,
   Grid,
@@ -12,6 +11,7 @@ import {
   MenuList,
   MenuItem
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import classNames from 'classnames';
 import Layout from '../Layout';
@@ -21,7 +21,7 @@ import downArrow from '../../assets/images/down-arrow-green.svg';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     width: '100%',
     height: '30rem',
@@ -31,7 +31,7 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
       borderRadius: '0 0 1.063rem 1.063rem',
@@ -44,7 +44,7 @@ const styles = theme => ({
     height: '34rem',
     display: 'flex',
     justifyContent: 'flex-start',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       position: 'absolute',
       pointerEvents: 'none'
     }
@@ -107,9 +107,10 @@ const styles = theme => ({
   popperIndex: {
     zIndex: 2
   }
-});
+}));
 
-function CountrySelectorComponent({ classes, country, context }) {
+function CountrySelectorComponent({ country, context }) {
+  const classes = useStyles();
   return (
     <div>
       <Typography
@@ -137,7 +138,6 @@ function CountrySelectorComponent({ classes, country, context }) {
 }
 
 CountrySelectorComponent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   context: PropTypes.string.isRequired,
   country: PropTypes.shape({
     slug: PropTypes.string,
@@ -145,7 +145,7 @@ CountrySelectorComponent.propTypes = {
   }).isRequired
 };
 
-const CountrySelector = withStyles(styles)(CountrySelectorComponent);
+const CountrySelector = CountrySelectorComponent;
 
 export { CountrySelector };
 
@@ -189,8 +189,8 @@ class ProfileDetail extends React.Component {
 
   render() {
     const { showSearchResults } = this.state;
+    const classes = useStyles();
     const {
-      classes,
       takwimu: { countries },
       profile: {
         comparable = false,
@@ -340,7 +340,6 @@ class ProfileDetail extends React.Component {
 }
 
 ProfileDetail.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     countries: PropTypes.arrayOf(
       PropTypes.shape({
@@ -375,4 +374,4 @@ ProfileDetail.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(ProfileDetail);
+export default ProfileDetail;

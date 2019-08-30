@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Link, Tabs, Tab } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import Layout from '../Layout';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   layoutRoot: {
     margin: '0 auto'
   },
@@ -25,7 +25,7 @@ const styles = theme => ({
     fontSize: '1.0625rem', // 17px
     textTransform: 'none',
     padding: '0.6875rem 1rem 0.6875rem 1.125rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       minWidth: 0
     },
     '&$tabSelected': {
@@ -36,14 +36,15 @@ const styles = theme => ({
   tabSelected: {
     fontWeight: 700
   }
-});
+}));
 
 function LinkTab(props) {
   /* eslint-disable-next-line react/jsx-props-no-spreading */
   return <Tab component={Link} {...props} />;
 }
 
-function ProfileTabs({ classes, handleChange, tabs, value }) {
+function ProfileTabs({ handleChange, tabs, value }) {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Layout classes={{ root: classes.layoutRoot }}>
@@ -73,7 +74,6 @@ function ProfileTabs({ classes, handleChange, tabs, value }) {
 }
 
 ProfileTabs.propTypes = {
-  classes: PropTypes.shape().isRequired,
   handleChange: PropTypes.func,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
@@ -88,4 +88,4 @@ ProfileTabs.defaultProps = {
   handleChange: null
 };
 
-export default withStyles(styles)(ProfileTabs);
+export default ProfileTabs;

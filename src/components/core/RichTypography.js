@@ -2,17 +2,20 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, withStyles } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {
     '& a': {
       color: theme.palette.primary.main
     }
   }
-});
+}));
 
-function RichTypography({ classes, children, variant, ...props }) {
+function RichTypography({ children, variant, ...props }) {
+  const classes = useStyles();
+
   if (!children) {
     return null;
   }
@@ -30,7 +33,6 @@ function RichTypography({ classes, children, variant, ...props }) {
 }
 
 RichTypography.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.string,
   variant: PropTypes.string
 };
@@ -40,4 +42,4 @@ RichTypography.defaultProps = {
   variant: 'body1'
 };
 
-export default withStyles(styles)(RichTypography);
+export default RichTypography;

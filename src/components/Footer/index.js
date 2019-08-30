@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 import Section from '../Section';
@@ -13,7 +13,7 @@ import StayInTouch from './StayInTouch';
 import Initiative from './Initiative';
 import Support from './Support';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     position: 'relative',
     zIndex: 1,
@@ -28,12 +28,12 @@ const styles = theme => ({
   },
   takwimu: {
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '14.375rem', // match thinnest component
       // Should be marginRight: '2.578125rem' but won't fit
       marginRight: '2rem'
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '19.5625rem',
       marginRight: '3.4375rem'
     }
@@ -43,14 +43,14 @@ const styles = theme => ({
   },
   links: {
     paddingTop: '2.25rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       paddingTop: 0,
       paddingLeft: '4.6875rem',
       paddingRight: '3.9375rem',
       borderLeft: '0.125rem solid rgba(151, 151, 151, 0.45)',
       borderRight: '0.125rem solid rgba(151, 151, 151, 0.45)'
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       paddingLeft: '6.25rem',
       paddingRight: '5.25rem'
     }
@@ -58,13 +58,13 @@ const styles = theme => ({
   project: {
     width: '100%',
     paddingTop: '2.25rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '14.53125rem', // .75 of lg
       // Should be marginLeft: '5.109375rem' but won't fit
       marginLeft: '2rem',
       padding: 0
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '19.375rem',
       marginLeft: '6.8125rem'
     }
@@ -76,9 +76,10 @@ const styles = theme => ({
     fontSize: '0.9375rem',
     color: 'white'
   }
-});
+}));
 
-function Footer({ classes, takwimu: { settings } }) {
+function Footer({ takwimu: { settings } }) {
+  const classes = useStyles();
   return (
     <Grid
       id="footer"
@@ -121,10 +122,9 @@ function Footer({ classes, takwimu: { settings } }) {
 }
 
 Footer.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     settings: PropTypes.shape({}).isRequired
   }).isRequired
 };
 
-export default withStyles(styles)(Footer);
+export default Footer;

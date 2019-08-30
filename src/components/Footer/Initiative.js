@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 import Title from './Title';
@@ -16,7 +15,7 @@ import ihub from '../../assets/images/ihub.png';
 import ihub2 from '../../assets/images/ihub@2x.png';
 import ihub3 from '../../assets/images/ihub@3x.png';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     width: '19.375rem'
   },
@@ -26,18 +25,19 @@ const styles = theme => ({
   imgCfa: {
     marginLeft: '1rem',
     marginRight: '1rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       marginLeft: '2.15625rem',
       marginRight: '2.25rem'
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       marginLeft: '2.875rem',
       marginRight: '3rem'
     }
   }
-});
+}));
 
-function Initiative({ classes }) {
+function Initiative() {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Title>An initiative by</Title>
@@ -62,8 +62,6 @@ function Initiative({ classes }) {
   );
 }
 
-Initiative.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
+Initiative.propTypes = {};
 
-export default withStyles(styles)(Initiative);
+export default Initiative;

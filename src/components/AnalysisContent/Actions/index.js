@@ -2,7 +2,8 @@
 /* eslint-disable import/no-named-as-default */
 import React, { useState, useEffect } from 'react';
 
-import { withStyles, Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { PropTypes } from 'prop-types';
 
 import { TwitterShareButton } from 'react-share';
@@ -11,7 +12,7 @@ import DownloadPDF from './DownloadPDF';
 
 import shareIcon from '../../../assets/images/analysis/share.svg';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     padding: '30px',
     display: 'flex',
@@ -45,9 +46,10 @@ const styles = {
     width: '20.313rem',
     padding: '10px'
   }
-};
+});
 
-function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
+function Actions({ hideLastUpdated, title, data, topic, takwimu }) {
+  const classes = useStyles();
   const [analysisLink, setAnalysisLink] = useState(window.location.href);
 
   useEffect(() => {
@@ -105,7 +107,6 @@ function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
 }
 
 Actions.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   hideLastUpdated: PropTypes.bool,
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({}).isRequired,
@@ -121,4 +122,4 @@ Actions.defaultProps = {
   hideLastUpdated: false
 };
 
-export default withStyles(styles)(Actions);
+export default Actions;

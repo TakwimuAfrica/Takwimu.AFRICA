@@ -2,10 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
 import { Link } from '@material-ui/core';
-
-const styles = () => ({});
 
 function A({ children, href, variant, underline, ...props }) {
   return (
@@ -37,4 +34,4 @@ A.defaultProps = {
   variant: 'inherit'
 };
 
-export default withStyles(styles)(A);
+export default A;

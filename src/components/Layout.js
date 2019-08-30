@@ -1,26 +1,27 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '58.265625rem' // .75 of lg
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '77.6875rem'
     }
   },
   title: {
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '51.125rem'
     }
   }
-});
+}));
 
-function Layout({ children, classes, ...props }) {
+function Layout({ children, ...props }) {
+  const classes = useStyles();
   return (
     <div className={classes.root} {...props}>
       {children}
@@ -29,11 +30,10 @@ function Layout({ children, classes, ...props }) {
 }
 
 Layout.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired
 };
 
-export default withStyles(styles)(Layout);
+export default Layout;

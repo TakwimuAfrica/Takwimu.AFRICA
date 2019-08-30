@@ -2,19 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import TableOfContent from '../TableOfContent';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {},
   sideMenuHeader: {
     color: theme.palette.info.other
   }
-});
+}));
 
 function ContactUsTableOfContent({
-  classes,
   current,
   contentHeadings,
   changeActiveContent
@@ -23,6 +22,7 @@ function ContactUsTableOfContent({
     const item = contentHeadings[index];
     return `#${item.link}`;
   };
+  const classes = useStyles();
 
   return (
     <TableOfContent
@@ -40,7 +40,6 @@ function ContactUsTableOfContent({
 }
 
 ContactUsTableOfContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(
     PropTypes.shape({
@@ -50,4 +49,4 @@ ContactUsTableOfContent.propTypes = {
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ContactUsTableOfContent);
+export default ContactUsTableOfContent;

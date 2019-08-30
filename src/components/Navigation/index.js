@@ -5,7 +5,6 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import {
   withWidth,
-  withStyles,
   Grid,
   MenuList,
   Link,
@@ -14,6 +13,7 @@ import {
   MenuItem,
   ButtonBase
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { Search, MenuOutlined, Close } from '@material-ui/icons';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
@@ -24,7 +24,7 @@ import Layout from '../Layout';
 import DropDowns, { DropDownDrawer } from './DropDowns';
 import SearchDrawer from './SearchDrawer';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     position: 'relative',
@@ -49,10 +49,10 @@ const styles = theme => ({
   link: {
     color: theme.palette.text.secondary,
     margin: '1.375rem 3.25rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       margin: '0.625rem'
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       margin: '1.375rem'
     },
 
@@ -69,7 +69,7 @@ const styles = theme => ({
   iconLink: {
     margin: '1.375rem 0.7rem'
   }
-});
+}));
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -107,7 +107,8 @@ class Navigation extends React.Component {
   }
 
   renderNavBar(inDrawer = false) {
-    const { classes, width } = this.props;
+    const { width } = this.props;
+    const classes = useStyles();
     return (
       <nav
         className={classNames(classes.root, { [classes.noShadow]: inDrawer })}
@@ -149,10 +150,10 @@ class Navigation extends React.Component {
 
   renderDesktopNav() {
     const {
-      classes,
       takwimu: { page, countries }
     } = this.props;
     const { openDrawer } = this.state;
+    const classes = useStyles();
     return (
       <>
         <Grid item>
@@ -241,10 +242,10 @@ class Navigation extends React.Component {
 
   renderMobileDrawer() {
     const {
-      classes,
       takwimu: { page, countries }
     } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
+    const classes = useStyles();
     return (
       <Drawer
         anchor="top"
@@ -317,7 +318,6 @@ class Navigation extends React.Component {
 }
 
 Navigation.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({}).isRequired,
@@ -328,4 +328,4 @@ Navigation.propTypes = {
   }).isRequired
 };
 
-export default withWidth()(withStyles(styles)(Navigation));
+export default withWidth()(Navigation);

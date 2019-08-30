@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 
 import classNames from 'classnames';
-import { withStyles, Link, MenuList } from '@material-ui/core';
+import { Link, MenuList } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import { makeStyles } from '@material-ui/styles';
 
 import activeContentIcon from '../assets/images/active-page.svg';
 
 const DEFAULT_TOP = 120; // Navigation height + padding
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     position: 'relative',
     display: 'flex',
@@ -18,7 +19,7 @@ const styles = theme => ({
     width: '100%',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       position: 'fixed',
       width: '14.375rem',
       top: `${DEFAULT_TOP}px`,
@@ -57,17 +58,17 @@ const styles = theme => ({
   activeLink: {
     textDecoration: 'underline'
   }
-});
+}));
 
 function TableOfContent({
   children,
-  classes,
   content,
   current,
   generateHref,
   onChange,
   width
 }) {
+  const classes = useStyles();
   const [scrollDistance, setScrollDistance] = useState(0);
 
   useEffect(() => {
@@ -136,7 +137,6 @@ TableOfContent.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  classes: PropTypes.shape({}).isRequired,
   content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
@@ -148,4 +148,4 @@ TableOfContent.defaultProps = {
   children: null
 };
 
-export default withWidth()(withStyles(styles)(TableOfContent));
+export default withWidth()(TableOfContent);

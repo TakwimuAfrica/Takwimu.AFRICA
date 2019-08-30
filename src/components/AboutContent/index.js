@@ -1,7 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import AboutUsContentNav from './AboutUsContentNav';
 import { About as AboutWhereToNext } from '../Next';
@@ -12,7 +13,7 @@ import RelatedContent from '../RelatedContent';
 import RichTextSection from '../RichTextSection';
 import Services from '../Services';
 
-const styles = theme => ({
+const useStyles = makeStyles(({ theme }) => ({
   root: {
     maxWidth: '933px'
   },
@@ -29,7 +30,7 @@ const styles = theme => ({
     paddingBottom: '1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
   }
-});
+}));
 
 class AboutContent extends React.Component {
   constructor(props) {
@@ -46,8 +47,8 @@ class AboutContent extends React.Component {
   }
 
   render() {
+    const classes = useStyles();
     const {
-      classes,
       title,
       contentNavigation,
       aboutTakwimu,
@@ -109,7 +110,6 @@ class AboutContent extends React.Component {
 }
 
 AboutContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   contentNavigation: PropTypes.shape({
     value: PropTypes.shape({
@@ -137,4 +137,4 @@ AboutContent.propTypes = {
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(AboutContent);
+export default AboutContent;

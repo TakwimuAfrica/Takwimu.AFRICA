@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, ButtonBase } from '@material-ui/core';
+import { ButtonBase } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { countrify } from '../../core';
 
 import logoWhite from '../../../assets/images/logo-white-all.png';
 import downloadIcon from '../../../assets/images/analysis/download.svg';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     fontSize: '0.813rem',
     color: '#848484'
@@ -16,7 +17,7 @@ const styles = {
   actionIcon: {
     marginRight: '21px'
   }
-};
+});
 
 const createPdfStyles = StyleSheet =>
   StyleSheet.create({
@@ -111,7 +112,8 @@ const createPdfStyles = StyleSheet =>
   });
 
 const createPdf = (Document, Image, Link, Page, Text, View) => {
-  function AnalysisPDF({ classes, topic, data, takwimu }) {
+  function AnalysisPDF({ topic, data, takwimu }) {
+    const classes = useStyles();
     return (
       <Document>
         <Page size="A4" style={classes.page}>
@@ -188,7 +190,6 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
   }
 
   AnalysisPDF.propTypes = {
-    classes: PropTypes.shape({}).isRequired,
     data: PropTypes.shape({
       content: PropTypes.shape({
         body: PropTypes.arrayOf(PropTypes.shape({})),
@@ -215,7 +216,8 @@ const isEmpty = obj =>
   obj === null ||
   (Object.keys(obj).length === 0 && obj.constructor === Object);
 
-function DownloadPDF({ classes, title, topic, data, takwimu, top }) {
+function DownloadPDF({ title, topic, data, takwimu, top }) {
+  const classes = useStyles();
   const [reactPdf, setReactPdf] = useState(false);
   const [pdfBlob, setPdfBlob] = useState(null);
 
@@ -286,7 +288,6 @@ function DownloadPDF({ classes, title, topic, data, takwimu, top }) {
 }
 
 DownloadPDF.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({
@@ -308,4 +309,4 @@ DownloadPDF.propTypes = {
   topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired
 };
 
-export default withStyles(styles)(DownloadPDF);
+export default DownloadPDF;

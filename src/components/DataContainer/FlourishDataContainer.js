@@ -2,18 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, withTheme } from '@material-ui/styles';
+import { makeStyles, withTheme } from '@material-ui/styles';
 
 import DataActions from './DataActions';
 import { shareIndicator, uploadImage } from './common';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     width: '100%'
   }
-};
+});
 
-function DataContainer({ id, classes, data, theme, countryName }) {
+function DataContainer({ id, data, theme, countryName }) {
+  const classes = useStyles();
   const [animated, setAnimated] = useState(false);
   const [animatedId, setAnimatedId] = useState('');
 
@@ -150,7 +151,6 @@ function DataContainer({ id, classes, data, theme, countryName }) {
 }
 
 DataContainer.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   countryName: PropTypes.string.isRequired,
   data: PropTypes.shape({
     html: PropTypes.string,
@@ -173,4 +173,4 @@ DataContainer.defaultProps = {
   id: ''
 };
 
-export default withTheme(withStyles(styles)(DataContainer));
+export default withTheme(DataContainer);

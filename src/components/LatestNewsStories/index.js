@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles, Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import { makeStyles } from '@material-ui/styles';
 
 import A from '../A';
 import { RichTypography } from '../core';
@@ -10,7 +11,7 @@ import Section from '../Section';
 import StoryBlocks from './StoryBlocks';
 import StoryList from './StoryList';
 
-const styles = () => ({
+const useStyles = makeStyles({
   sectionTitle: {
     margin: '0 0 1.1875rem 0'
   },
@@ -25,7 +26,6 @@ const styles = () => ({
 });
 
 function LatestNewsStories({
-  classes,
   takwimu: {
     page: {
       latest_news_stories: {
@@ -41,6 +41,7 @@ function LatestNewsStories({
   },
   width
 }) {
+  const classes = useStyles();
   if (!title) {
     return null;
   }
@@ -52,6 +53,7 @@ function LatestNewsStories({
     description !== '<p></p>' &&
     description !== '<div class="rich-text"></div>';
   const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
+
   return (
     <Section
       title={title}
@@ -87,7 +89,6 @@ function LatestNewsStories({
 }
 
 LatestNewsStories.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
       latest_news_stories: PropTypes.shape({
@@ -106,4 +107,4 @@ LatestNewsStories.propTypes = {
   width: PropTypes.string.isRequired
 };
 
-export default withWidth()(withStyles(styles)(LatestNewsStories));
+export default withWidth()(LatestNewsStories);

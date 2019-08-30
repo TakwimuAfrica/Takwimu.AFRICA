@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 
 import {
-  withStyles,
   Grid,
   Link,
   Typography,
@@ -12,12 +11,14 @@ import {
   withWidth
 } from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/styles';
+
 import { isWidthDown } from '@material-ui/core/withWidth';
 import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
-const styles = theme => ({
+const useStyles = makeStyles(({ breakpoints, theme }) => ({
   root: {
     display: 'flex',
     padding: '0 1.25rem',
@@ -25,13 +26,13 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.main
   },
   container: {
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       width: '58.265625rem', // .75 of lg
       paddingTop: '1.5rem',
       paddingLeft: '1.5rem',
       paddingBottom: '0.75rem'
     },
-    [theme.breakpoints.up('lg')]: {
+    [breakpoints.up('lg')]: {
       width: '80.6875rem'
     }
   },
@@ -48,11 +49,11 @@ const styles = theme => ({
       backgroundColor: 'transparent'
     },
     width: '100%',
-    [theme.breakpoints.up('sm')]: {
+    [breakpoints.up('sm')]: {
       width: 'auto',
       minWidth: '11.25rem'
     },
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       margin: '0 1.5rem'
     }
   },
@@ -66,11 +67,11 @@ const styles = theme => ({
   flagsContainer: {
     overflow: 'auto',
     justifyContent: 'space-between',
-    [theme.breakpoints.up('sm')]: {
+    [breakpoints.up('sm')]: {
       overflow: 'visible',
       justifyContent: 'unset'
     },
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       paddingLeft: '1.5rem'
     }
   },
@@ -90,7 +91,7 @@ const styles = theme => ({
   leftContent: {
     height: 'fit-content',
     marginBottom: '1.25rem',
-    [theme.breakpoints.up('md')]: {
+    [breakpoints.up('md')]: {
       height: '15.625rem',
       marginBottom: '0'
     },
@@ -103,16 +104,10 @@ const styles = theme => ({
   title: {
     marginBottom: '1.25rem'
   }
-});
+}));
 
-function DropDownContent({
-  classes,
-  width,
-  title,
-  description,
-  countries,
-  profile
-}) {
+function DropDownContent({ width, title, description, countries, profile }) {
+  const classes = useStyles();
   useEffect(() => {
     /**
      * Fix flagsContainer height to avoid modal overflow
@@ -192,11 +187,10 @@ function DropDownContent({
 
 DropDownContent.propTypes = {
   width: PropTypes.string.isRequired,
-  classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   profile: PropTypes.func.isRequired
 };
 
-export default withWidth()(withStyles(styles)(DropDownContent));
+export default withWidth()(DropDownContent);
