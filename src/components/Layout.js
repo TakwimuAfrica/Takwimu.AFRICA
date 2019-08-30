@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -18,10 +18,9 @@ const useStyles = makeStyles(theme => ({
       width: '51.125rem'
     }
   }
-}));
+});
 
-function Layout({ children, ...props }) {
-  const classes = useStyles();
+function Layout({ classes, children, ...props }) {
   return (
     <div className={classes.root} {...props}>
       {children}
@@ -30,10 +29,11 @@ function Layout({ children, ...props }) {
 }
 
 Layout.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired
 };
 
-export default Layout;
+export default withStyles(styles)(Layout);

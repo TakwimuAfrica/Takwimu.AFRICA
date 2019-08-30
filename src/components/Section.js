@@ -2,12 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
 import Layout from './Layout';
 import { RichTypography } from './core';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     margin: '0 auto'
   },
@@ -17,10 +17,9 @@ const useStyles = makeStyles(theme => ({
       width: '51.125rem'
     }
   }
-}));
+});
 
-function Section({ children, title, variant, ...props }) {
-  const classes = useStyles();
+function Section({ classes, children, title, variant, ...props }) {
   return (
     <Layout classes={{ root: classes.root }} {...props}>
       {title && (
@@ -34,6 +33,7 @@ function Section({ children, title, variant, ...props }) {
 }
 
 Section.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -47,4 +47,4 @@ Section.defaultProps = {
   variant: 'h2'
 };
 
-export default Section;
+export default withStyles(styles)(Section);
