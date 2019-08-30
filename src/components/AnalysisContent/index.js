@@ -141,6 +141,7 @@ function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
             key={topicIndex}
             data={content.body[topicIndex].value.body}
             onIndexChanged={setCarouselItemIndex}
+            url={takwimu.url}
           />
         ) : (
           <Grid container direction="row">
@@ -157,6 +158,7 @@ function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
                     classes={{ root: classes.dataContainer }}
                     indicator={c}
                     country={takwimu.country}
+                    url={takwimu.url}
                   />
                 )}
               </Fragment>
@@ -222,6 +224,7 @@ AnalysisContent.propTypes = {
   topicIndex: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   takwimu: PropTypes.shape({
+    url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
     country: PropTypes.shape({}).isRequired
   }).isRequired

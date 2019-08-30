@@ -61,7 +61,8 @@ function DataContainer({
     value: { widget: data, summary },
     meta
   },
-  country: { name: countryName }
+  country: { name: countryName },
+  url
 }) {
   const classes = useStyles();
   useEffect(() => {
@@ -130,6 +131,7 @@ function DataContainer({
               id={id}
               data={data.value}
               countryName={countryName}
+              url={url}
             />
           )}
 
@@ -138,6 +140,7 @@ function DataContainer({
               id={id}
               data={data.value}
               countryName={countryName}
+              url={url}
             />
           )}
 
@@ -146,6 +149,7 @@ function DataContainer({
               id={id}
               data={data.value}
               countryName={countryName}
+              url={url}
             />
           )}
         </Grid>
@@ -190,7 +194,8 @@ DataContainer.propTypes = {
   }).isRequired,
   country: PropTypes.shape({
     name: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 
 function FeaturedData({
   takwimu: {
+    url,
     page: {
       featured_data: { value: featuredData }
     }
@@ -50,6 +51,7 @@ function FeaturedData({
             country={{
               name: 'Featured Data'
             }}
+            url={url}
           />
           {indicators.length > 1 && (
             <DataContainer
@@ -60,6 +62,7 @@ function FeaturedData({
               country={{
                 name: 'Featured Data'
               }}
+              url={url}
             />
           )}
         </Grid>
@@ -70,6 +73,7 @@ function FeaturedData({
 
 FeaturedData.propTypes = {
   takwimu: PropTypes.shape({
+    url: PropTypes.string.isRequired,
     page: PropTypes.shape({
       featured_data: PropTypes.shape({
         value: PropTypes.shape({

@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   }
 });
 
-function DataContainer({ id, data, countryName }) {
+function DataContainer({ id, data, countryName, url }) {
   const [images, setImages] = useState({});
   const classes = useStyles();
 
@@ -21,7 +21,7 @@ function DataContainer({ id, data, countryName }) {
     data.entities.forEach(
       entity =>
         entity.image &&
-        fetch(`/api/v2/images/${entity.image}`)
+        fetch(`${url}/api/v2/images/${entity.image}`)
           .then(response => response.json())
           .then(json =>
             setImages(prev => ({
@@ -32,7 +32,7 @@ function DataContainer({ id, data, countryName }) {
     );
 
     return () => {};
-  }, [data.entities]);
+  }, [data.entities, url]);
 
   return (
     <>
@@ -53,8 +53,8 @@ DataContainer.propTypes = {
     entities: PropTypes.arrayOf(PropTypes.shape({})),
     title: PropTypes.string
   }).isRequired,
-
-  countryName: PropTypes.string.isRequired
+  countryName: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

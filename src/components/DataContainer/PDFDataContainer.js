@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   }
 });
 
-function DataContainer({ id, data, countryName }) {
+function DataContainer({ id, data, countryName, url }) {
   const classes = useStyles();
   const [documents, setDocuments] = useState({});
   const [page, setPage] = useState(1);
@@ -30,7 +30,7 @@ function DataContainer({ id, data, countryName }) {
 
   useEffect(() => {
     if (data.document) {
-      fetch(`/api/v2/documents/${data.document}`)
+      fetch(`${url}/api/v2/documents/${data.document}`)
         .then(response => response.json())
         .then(json =>
           setDocuments(prev => ({
@@ -40,7 +40,7 @@ function DataContainer({ id, data, countryName }) {
         );
     }
     return () => {};
-  }, [data.document]);
+  }, [data.document, url]);
 
   const handleDownload = () => {
     const link = document.createElement('a');
@@ -111,7 +111,8 @@ function DataContainer({ id, data, countryName }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   data: PropTypes.shape({}).isRequired,
-  countryName: PropTypes.string.isRequired
+  countryName: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

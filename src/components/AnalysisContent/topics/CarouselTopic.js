@@ -156,7 +156,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Topic({ data, onIndexChanged }) {
+function Topic({ data, onIndexChanged, url }) {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [images, setImages] = useState({});
@@ -170,7 +170,7 @@ function Topic({ data, onIndexChanged }) {
 
   useEffect(() => {
     data.forEach(item =>
-      fetch(`/api/v2/images/${item.image}`)
+      fetch(`${url}/api/v2/images/${item.image}`)
         .then(response => response.json())
         .then(json =>
           setImages(prev => ({
@@ -179,7 +179,7 @@ function Topic({ data, onIndexChanged }) {
           }))
         )
     );
-  }, [data]);
+  }, [data, url]);
   const { name } = data[selectedIndex];
   let { title } = data[selectedIndex];
   if (name && name.length > 0) {
@@ -265,7 +265,8 @@ Topic.propTypes = {
       title: PropTypes.string
     })
   ).isRequired,
-  onIndexChanged: PropTypes.func.isRequired
+  onIndexChanged: PropTypes.func.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default Topic;
