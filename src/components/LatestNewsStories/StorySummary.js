@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 
 import { Typography } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles({
+const styles = {
   root: {
     lineHeight: 2.05
   }
-});
+};
 
-function StorySummary({ story }) {
-  const classes = useStyles();
+function StorySummary({ classes, story }) {
   return (
     <Typography
       gutterBottom
@@ -26,9 +25,10 @@ function StorySummary({ story }) {
 }
 
 StorySummary.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
     subtitle: PropTypes.string.isRequired
   }).isRequired
 };
 
-export default StorySummary;
+export default withStyles(styles)(StorySummary);

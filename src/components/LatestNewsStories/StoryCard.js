@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
 import { A } from '@codeforafrica/hurumap-ui';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {},
   media: {
     height: '17.625rem',
@@ -23,10 +23,9 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main,
     fontWeight: 'bold'
   }
-}));
+});
 
-function StoryCard({ story }) {
-  const classes = useStyles();
+function StoryCard({ classes, story }) {
   return (
     <Card classes={{ root: classes.root }}>
       <CardMedia
@@ -55,6 +54,7 @@ function StoryCard({ story }) {
 }
 
 StoryCard.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
     preview_image: PropTypes.shape({
       url: PropTypes.string
@@ -64,4 +64,4 @@ StoryCard.propTypes = {
   }).isRequired
 };
 
-export default StoryCard;
+export default withStyles(styles)(StoryCard);
