@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Grid, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import A from '../A';
+import A from '@codeforafrica/hurumap-ui';
 import Title from './Title';
 
 import email from '../../assets/images/email.svg';

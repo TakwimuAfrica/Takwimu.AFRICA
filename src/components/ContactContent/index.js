@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { Typography, Grid, Icon } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
-import A from '../A';
+import A from '@codeforafrica/hurumap-ui';
 import ContactContentNav from './ContactContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';

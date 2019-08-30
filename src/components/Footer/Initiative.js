@@ -2,7 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/styles';
 
-import A from '../A';
+import A from '@codeforafrica/hurumap-ui';
 import Title from './Title';
 
 import ap from '../../assets/images/ap.png';
