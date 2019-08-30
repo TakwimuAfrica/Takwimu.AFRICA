@@ -2,11 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 
 import Section from './Section';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     width: '100%',
     margin: 0,
@@ -18,10 +18,9 @@ const useStyles = makeStyles(theme => ({
       width: '58.3125rem'
     }
   }
-}));
+});
 
-function ContentSection({ children, title, variant, ...props }) {
-  const classes = useStyles();
+function ContentSection({ classes, children, title, variant, ...props }) {
   return (
     <Section
       classes={{ root: classes.root }}
@@ -35,6 +34,7 @@ function ContentSection({ children, title, variant, ...props }) {
 }
 
 ContentSection.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -48,4 +48,4 @@ ContentSection.defaultProps = {
   variant: 'h2'
 };
 
-export default ContentSection;
+export default withStyles(styles)(ContentSection);
