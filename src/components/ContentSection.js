@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core';
 
 import Section from './Section';
 
@@ -20,7 +20,7 @@ const styles = theme => ({
   }
 });
 
-function ContentSection({ classes, children, title, variant, ...props }) {
+function ContentSection({ children, classes, title, variant, ...props }) {
   return (
     <Section
       classes={{ root: classes.root }}
