@@ -11,10 +11,10 @@ import {
   IconButton
 } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 import { RichTypography } from '../core';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   panel: {
     marginTop: '0.3125rem',
     marginBottom: '0.0625rem',
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
   },
   iconExpanded: { fontSize: '2.4375rem', color: 'white' },
   panelDetails: { backgroundColor: theme.palette.info.main }
-}));
+});
 
 class Faq extends React.Component {
   constructor(props) {
@@ -71,8 +71,7 @@ class Faq extends React.Component {
   }
 
   render() {
-    const classes = useStyles();
-    const { expandTitle, children } = this.props;
+    const { classes, expandTitle, children } = this.props;
     const { expanded } = this.state;
 
     return (
@@ -129,6 +128,7 @@ class Faq extends React.Component {
 }
 
 Faq.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   expandTitle: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -139,4 +139,4 @@ Faq.defaultProps = {
   expandTitle: ''
 };
 
-export default Faq;
+export default withStyles(styles)(Faq);
