@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import A from '@codeforafrica/hurumap-ui';
+import { A } from '@codeforafrica/hurumap-ui';
 import Card from './Card';
 import ContentSection from '../ContentSection';
 

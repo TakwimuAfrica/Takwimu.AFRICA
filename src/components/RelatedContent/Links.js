@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Link, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import A from '@codeforafrica/hurumap-ui';
+import { A } from '@codeforafrica/hurumap-ui';
 
 const useStyles = makeStyles(theme => ({
   root: {},

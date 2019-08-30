@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import A from '@codeforafrica/hurumap-ui';
+import { A } from '@codeforafrica/hurumap-ui';
 import Section from '../Section';
 
 import Takwimu from './Takwimu';
