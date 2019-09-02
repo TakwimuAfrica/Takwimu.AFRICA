@@ -1,13 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import GET_PROFILE from '../data/queries';
+import { MapIt } from '@codeforafrica/hurumap-ui';
+import { GET_PROFILE } from '../data/queries';
 
 import Page from '../components/Page';
 import NotFound from './404';
 import config from '../config';
+
+import ProfileSection from '../components/ProfileSection';
+import ProfileDetail from '../components/ProfileDetail';
 
 function Profile({
   match: {
@@ -29,9 +32,20 @@ function Profile({
   if (error) return <NotFound />;
   return (
     <Page takwimu={config}>
-      <Typography variant="body1">
-        Testing graphql: You have accessed {geo.name} hurumap profile
-      </Typography>
+      <ProfileDetail
+        profile={{
+          geo
+        }}
+      />
+
+      <div style={{ width: '100%', height: '500px', overflow: 'hidden' }}>
+        <MapIt
+          codeType="AFR"
+          geoLevel={geoId.split('-')[0]}
+          geoCode={geoId.split('-')[1]}
+        />
+      </div>
+      <ProfileSection profile={{ geo }} tabs={[]} />
     </Page>
   );
 }

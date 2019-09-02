@@ -1,8 +1,8 @@
 // A file that defines needed graphql queries
-
 import gql from 'graphql-tag';
 
-const GET_PROFILE = gql`
+// eslint-disable-next-line import/prefer-default-export
+export const GET_PROFILE = gql`
   query profile($geoCode: String!, $geoLevel: String!) {
     geo: wazimapGeographyByGeoLevelAndGeoCodeAndVersion(
       geoLevel: $geoLevel
@@ -19,5 +19,3 @@ const GET_PROFILE = gql`
     }
   }
 `;
-
-export default GET_PROFILE;
