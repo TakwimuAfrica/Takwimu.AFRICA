@@ -112,13 +112,129 @@
             "x": "populationResidence2013",
             "y": "total"
           }]
+        },
+        {
+          "title": "Population by Residence",
+          "visuals": [{
+            "type": "column",
+            "table": "allPopulationResidence2013S",
+            "reference": {},
+            "x": "populationResidence2013",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Youth Unemployment Sex per year",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allYouthUnemployments",
+            "reference": {},
+            "x": "sex",
+            "grouped_by": "youthUnemploymentYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Youth Unemployment",
+          "visuals": [{
+            "type": "column",
+            "table": "allYouthUnemploymentGenerals",
+            "reference": {},
+            "x": "youthUnemploymentPeriod",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allEmploymentToPopulationRatio",
+            "reference": {},
+            "x": "sex",
+            "group_by": "employmentToPoppulationRatioYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Percentage of population in poverty",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allPovertyAgeResidences",
+            "reference": {},
+            "x": "residence",
+            "group_by": "poverty_type",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Percentage of population living in poverty by age and residence",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allPovertyAgeResidences",
+            "reference": {},
+            "x": "residence",
+            "group_by": "age",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Human Development Indices",
+          "visuals": [{
+            "type": "column",
+            "table": "allHumanDevIndiceses",
+            "reference": {},
+            "x": "humanDevIndices",
+            "y": "total"
+          }]
         }
+
       ]
     },
+    {
+      "sectionTitle": "Elections",
+      "charts": [{
+          "title": "Valid vs invalid votes",
+          "visuals": [{
+            "type": "pie",
+            "table": "allValidInvalidVotess",
+            "reference": {},
+            "x": "votes",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Registered voters vs total votes cast",
+          "visuals": [{
+            "type": "pie",
+            "table": "allRegisteredAccreditedVoters",
+            "x": "candidate",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Proportion of seats held by women in national parliaments (%)",
+          "visuals": [{
+            "type": "column",
+            "table": "allWomenInParliaments",
+            "reference": {},
+            "x": "womenParliamentYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Position held by women in government",
+          "visuals": [{
+            "type": "column",
+            "table": "allWomenInGovernments",
+            "reference": {},
+            "x": "position",
+            "y": "total"
+          }]
+        }
+      ]
+  },
   {
       "sectionTitle": "Health",
-      "sectionIcon": "users",
-      "sectionDescription": "",
       "charts": [{
           "title": "Population",
           "visuals": [{
@@ -134,8 +250,6 @@
   },
   {
       "sectionTitle": "Agriculture",
-      "sectionIcon": "users",
-      "sectionDescription": "",
       "charts": [{
           "title": "Population",
           "visuals": [{
