@@ -3,17 +3,218 @@
     "sectionIcon": "users",
     "sectionDescription": "",
     "charts": [{
-        "title": "Population",
-        "subtitle": "People living there",
-        "layout": "2/3",
+        "title": "Population by Sex",
         "visuals": [{
-          "type": "circle_nested_proportional_area",
-          "table": "allPopulationResidence2009S",
+          "type": "pie",
+          "table": "allPopulationSex2006S",
           "reference": {},
-          "label": "longName",
-          "x": "populationResidence2009",
+          "x": "populationSex2006",
           "y": "total"
         }]
-      }
-    ]
-}]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2007S",
+            "reference": {},
+            "x": "populationSex2007",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2009S",
+            "reference": {},
+            "x": "populationSex2009",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2011S",
+            "reference": {},
+            "x": "populationSex2011",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2012S",
+            "reference": {},
+            "x": "populationSex2012",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2013S",
+            "reference": {},
+            "x": "populationSex2013",
+            "y": "total"
+          }]
+      },
+      {
+        "title": "Population by Sex per year",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allPopulationSexYears",
+          "reference": {},
+          "x": "popolationYear",
+          "grouped_by": "populationSex",
+          "y": "total"
+        }]
+      },
+      {
+          "title": "Population by Residence",
+          "visuals": [{
+            "type": "column",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Residence",
+          "visuals": [{
+            "type": "column",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Population by Residence",
+          "visuals": [{
+            "type": "column",
+            "table": "allPopulationResidence2012S",
+            "reference": {},
+            "x": "populationResidence2012",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Population by Residence",
+          "visuals": [{
+            "type": "column",
+            "table": "allPopulationResidence2013S",
+            "reference": {},
+            "x": "populationResidence2013",
+            "y": "total"
+          }]
+        }
+      ]
+    },
+  {
+      "sectionTitle": "Health",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Agriculture",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Education",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Financial Inclusion",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Public Finances",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "ODA",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  }
+]
