@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import takwimu from '../../assets/images/takwimu-logo.png';
 import takwimu2 from '../../assets/images/takwimu-logo@2x.png';
 import takwimu3 from '../../assets/images/takwimu-logo@3x.png';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     width: '19.5625rem'
   },
@@ -21,7 +20,8 @@ const styles = () => ({
   }
 });
 
-function Takwimu({ classes }) {
+function Takwimu() {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <img
@@ -48,8 +48,6 @@ function Takwimu({ classes }) {
   );
 }
 
-Takwimu.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
+Takwimu.propTypes = {};
 
-export default withStyles(styles)(Takwimu);
+export default Takwimu;

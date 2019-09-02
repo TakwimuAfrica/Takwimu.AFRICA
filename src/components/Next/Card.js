@@ -4,9 +4,10 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { ButtonBase, Typography, withStyles } from '@material-ui/core';
+import { ButtonBase, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     height: '14.875rem',
@@ -45,9 +46,10 @@ const styles = theme => ({
     marginTop: '5.25rem',
     marginBottom: '5.25rem'
   }
-});
+}));
 
-function Card({ classes, children, variant, ...props }) {
+function Card({ children, variant, ...props }) {
+  const classes = useStyles();
   const variantClass =
     variant === 'triple' ? classes.cardTriple : classes.cardDual;
   return (
@@ -72,7 +74,6 @@ Card.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  classes: PropTypes.shape({}).isRequired,
   component: PropTypes.elementType,
   href: PropTypes.string,
   onClick: PropTypes.func,
@@ -86,4 +87,4 @@ Card.defaultProps = {
   onClick: null,
   variant: 'triple'
 };
-export default withStyles(styles)(Card);
+export default Card;

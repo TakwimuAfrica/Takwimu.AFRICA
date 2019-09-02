@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ContentSection from '../ContentSection';
 import Faq from './Faq';
 import { RichTypography } from '../core';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   contentGrid: {
     paddingTop: '2rem',
@@ -16,9 +17,10 @@ const styles = theme => ({
       color: theme.palette.primary.main
     }
   }
-});
+}));
 
-function Faqs({ classes, faqs: { value: currentFaqs }, ...props }) {
+function Faqs({ faqs: { value: currentFaqs }, ...props }) {
+  const classes = useStyles();
   if (!currentFaqs) {
     return null;
   }
@@ -49,7 +51,6 @@ function Faqs({ classes, faqs: { value: currentFaqs }, ...props }) {
 }
 
 Faqs.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   faqs: PropTypes.shape({
     value: PropTypes.shape({
       title: PropTypes.string,
@@ -66,4 +67,4 @@ Faqs.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(Faqs);
+export default Faqs;

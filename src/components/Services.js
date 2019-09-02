@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 
-import { withStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import ContentSection from './ContentSection';
 import { RichTypography } from './core';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   serviceHeading: {
     fontWeight: 'bold',
@@ -23,9 +24,10 @@ const styles = theme => ({
   contentGrid: {
     paddingTop: '1rem'
   }
-});
+}));
 
-function Services({ classes, services: { value: currentServices }, ...props }) {
+function Services({ services: { value: currentServices }, ...props }) {
+  const classes = useStyles();
   if (!currentServices) {
     return null;
   }
@@ -59,7 +61,6 @@ function Services({ classes, services: { value: currentServices }, ...props }) {
 }
 
 Services.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   services: PropTypes.shape({
     value: PropTypes.shape({
       title: PropTypes.string,
@@ -76,4 +77,4 @@ Services.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(Services);
+export default Services;

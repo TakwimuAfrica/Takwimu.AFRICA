@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withTheme } from '@material-ui/core/styles';
+import { withTheme } from '@material-ui/styles';
 
 import DataActions from './DataActions';
 import IFrame from './IFrame';
@@ -105,4 +105,4 @@ DataContainer.propTypes = {
   }).isRequired
 };
 
-export default withTheme()(DataContainer);
+export default withTheme(DataContainer);

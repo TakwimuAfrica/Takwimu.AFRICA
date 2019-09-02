@@ -5,19 +5,20 @@ import classNames from 'classnames';
 
 import { Grid } from '@material-ui/core';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import StoryCard from './StoryCard';
 import StorySummary from './StorySummary';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {},
   story: {
     width: '100%'
   }
 });
 
-function Story({ classes, story }) {
+function Story({ story }) {
+  const classes = useStyles();
   return (
     <Grid
       container
@@ -33,7 +34,6 @@ function Story({ classes, story }) {
 }
 
 Story.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
     img: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -42,4 +42,4 @@ Story.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(Story);
+export default Story;

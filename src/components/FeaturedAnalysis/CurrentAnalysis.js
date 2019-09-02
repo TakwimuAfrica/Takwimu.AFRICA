@@ -1,13 +1,14 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -81,15 +82,15 @@ const styles = theme => ({
     paddingTop: '1rem',
     paddingBottom: '0.9375rem'
   }
-});
+}));
 
 function CurrentAnalysis({
-  classes,
   countrifyTitle,
   content: { value: currentAnalysis },
   readAnalysisTitle,
   viewProfileTitle
 }) {
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <Grid
@@ -154,7 +155,6 @@ function CurrentAnalysis({
 }
 
 CurrentAnalysis.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   countrifyTitle: PropTypes.func.isRequired,
   content: PropTypes.shape({
     value: PropTypes.shape({}).isRequired
@@ -163,4 +163,4 @@ CurrentAnalysis.propTypes = {
   viewProfileTitle: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(CurrentAnalysis);
+export default CurrentAnalysis;

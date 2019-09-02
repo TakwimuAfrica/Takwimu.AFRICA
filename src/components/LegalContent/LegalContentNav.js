@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { Typography, ButtonBase, withStyles } from '@material-ui/core';
+import { Typography, ButtonBase } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
+import { makeStyles } from '@material-ui/styles';
 
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'fixed',
     top: 0,
@@ -40,15 +41,15 @@ const styles = theme => ({
     marginTop: '1rem',
     marginBottom: '0.5rem'
   }
-});
+}));
 
 function LegalContentNav({
-  classes,
   title,
   current,
   contentHeadings,
   changeActiveContent
 }) {
+  const classes = useStyles();
   const showShadow = useScrollListener(10);
   const generateHref = index => `/${contentHeadings[index].link}`;
   return (
@@ -86,7 +87,6 @@ function LegalContentNav({
 }
 
 LegalContentNav.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   contentHeadings: PropTypes.arrayOf(
     PropTypes.shape({
@@ -97,4 +97,4 @@ LegalContentNav.propTypes = {
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(LegalContentNav);
+export default LegalContentNav;

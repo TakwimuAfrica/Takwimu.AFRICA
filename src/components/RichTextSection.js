@@ -1,24 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import Section from './Section';
 import { RichTypography } from './core';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {},
   text: {}
 });
 
-function RichTextSection({
-  classes,
-  component,
-  title,
-  value,
-  variant,
-  ...props
-}) {
+function RichTextSection({ component, title, value, variant, ...props }) {
+  const classes = useStyles();
   const text = (
     <RichTypography classes={{ root: classes.text }}>{value}</RichTypography>
   );
@@ -35,7 +29,6 @@ function RichTextSection({
 }
 
 RichTextSection.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   component: PropTypes.elementType,
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -47,4 +40,4 @@ RichTextSection.defaultProps = {
   component: Section
 };
 
-export default withStyles(styles)(RichTextSection);
+export default RichTextSection;

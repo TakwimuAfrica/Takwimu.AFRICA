@@ -2,12 +2,24 @@ import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+
 import * as serviceWorker from './serviceWorker';
 import withRoot from './withRoot';
 import App from './App';
 
 const ThemedApp = withRoot(App);
-ReactDOM.render(<ThemedApp />, document.getElementById('root'));
+const client = new ApolloClient({
+  uri: 'https://graphql.takwimu.africa/graphql'
+});
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <ThemedApp />
+  </ApolloProvider>,
+  document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

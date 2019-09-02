@@ -1,7 +1,8 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Button, Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from './core';
 import Section from './Section';
@@ -9,7 +10,7 @@ import Section from './Section';
 import africanParliament from '../assets/images/africanparliament.jpg';
 import triangle from '../assets/images/triangle.svg';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   section: {
     marginTop: '2.25rem'
   },
@@ -59,16 +60,16 @@ const styles = theme => ({
   buttonIcon: {
     marginLeft: '1.9375rem'
   }
-});
+}));
 
 function Hero({
-  classes,
   takwimu: {
     page: {
       hero: { value: currentHero }
     }
   }
 }) {
+  const classes = useStyles();
   if (!currentHero) {
     return null;
   }
@@ -112,7 +113,6 @@ function Hero({
 }
 
 Hero.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
       hero: PropTypes.shape({
@@ -126,4 +126,4 @@ Hero.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(Hero);
+export default Hero;

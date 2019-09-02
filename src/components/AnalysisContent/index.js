@@ -2,7 +2,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, withStyles, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../core';
 import Actions from './Actions';
@@ -16,7 +17,7 @@ import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '933px'
   },
@@ -50,9 +51,10 @@ const styles = theme => ({
       backgroundPositionY: '-6.25rem'
     }
   }
-});
+}));
 
-function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
+function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
+  const classes = useStyles();
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
   );
@@ -197,7 +199,6 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
 }
 
 AnalysisContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   content: PropTypes.shape({
     id: PropTypes.string,
     body: PropTypes.arrayOf(
@@ -229,4 +230,4 @@ AnalysisContent.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(AnalysisContent);
+export default AnalysisContent;

@@ -2,14 +2,15 @@ import React from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { Link, Typography, withStyles } from '@material-ui/core';
+import { Link, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
+import { makeStyles } from '@material-ui/styles';
 import ContentSection from './ContentSection';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.info.main,
     padding: '1.125rem 1.625rem'
@@ -35,10 +36,9 @@ const styles = theme => ({
   other: {
     color: '#848484'
   }
-});
+}));
 
 function ContentNavigation({
-  classes,
   title,
   contentTitle,
   current,
@@ -50,6 +50,7 @@ function ContentNavigation({
   linksSecondaryColor,
   ...props
 }) {
+  const classes = useStyles();
   return (
     /* eslint-disable-next-line react/jsx-props-no-spreading */
     <ContentSection classes={{ root: classes.root }} {...props}>
@@ -83,7 +84,6 @@ function ContentNavigation({
 ContentNavigation.propTypes = {
   title: PropTypes.string.isRequired,
   contentTitle: PropTypes.string,
-  classes: PropTypes.shape({}).isRequired,
   content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
@@ -99,4 +99,4 @@ ContentNavigation.defaultProps = {
   linksSecondaryColor: 'textPrimary'
 };
 
-export default withStyles(styles)(ContentNavigation);
+export default ContentNavigation;

@@ -1,12 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Grid, withStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import Section from './Section';
 import DataContainer from './DataContainer';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1
   },
@@ -19,7 +20,6 @@ const styles = () => ({
 });
 
 function FeaturedData({
-  classes,
   takwimu: {
     url,
     page: {
@@ -27,6 +27,7 @@ function FeaturedData({
     }
   }
 }) {
+  const classes = useStyles();
   if (!featuredData) {
     return null;
   }
@@ -71,7 +72,6 @@ function FeaturedData({
 }
 
 FeaturedData.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({
@@ -90,4 +90,4 @@ FeaturedData.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(FeaturedData);
+export default FeaturedData;

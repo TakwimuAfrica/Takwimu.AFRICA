@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Typography } from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
@@ -14,9 +14,10 @@ const styles = theme => ({
     padding: '1.3125rem 2rem 1.5625rem 2.125rem',
     backgroundColor: theme.palette.info.main
   }
-});
+}));
 
-function Error({ children, classes, title, ...props }) {
+function Error({ children, title, ...props }) {
+  const classes = useStyles();
   return (
     /* eslint-disable-next-line react/jsx-props-no-spreading */
     <div className={classes.root} {...props}>
@@ -29,7 +30,6 @@ function Error({ children, classes, title, ...props }) {
 }
 
 Error.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -40,4 +40,4 @@ Error.defaultProps = {
   title: ''
 };
 
-export default withStyles(styles)(Error);
+export default Error;

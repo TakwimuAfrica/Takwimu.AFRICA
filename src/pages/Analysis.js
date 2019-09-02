@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import config from '../config';
 import AnalysisContent from '../components/AnalysisContent';
@@ -9,7 +9,7 @@ import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     marginBottom: '5.5rem'
   },
@@ -17,11 +17,11 @@ const styles = () => ({
 });
 
 function AnalysisPage({
-  classes,
   match: {
     params: { countrySlug }
   }
 }) {
+  const classes = useStyles();
   const [analysis, setAnalysis] = useState(undefined);
   const [current, setCurrent] = useState(0);
   const [takwimu, setTakwimu] = useState(undefined);
@@ -137,7 +137,6 @@ function AnalysisPage({
 }
 
 AnalysisPage.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       countrySlug: PropTypes.string
@@ -145,4 +144,4 @@ AnalysisPage.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(AnalysisPage);
+export default AnalysisPage;

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 
 import {
-  withStyles,
   Grid,
   Link,
   Typography,
@@ -12,12 +11,14 @@ import {
   withWidth
 } from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/styles';
+
 import { isWidthDown } from '@material-ui/core/withWidth';
 import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     padding: '0 1.25rem',
@@ -103,16 +104,10 @@ const styles = theme => ({
   title: {
     marginBottom: '1.25rem'
   }
-});
+}));
 
-function DropDownContent({
-  classes,
-  width,
-  title,
-  description,
-  countries,
-  profile
-}) {
+function DropDownContent({ width, title, description, countries, profile }) {
+  const classes = useStyles();
   useEffect(() => {
     /**
      * Fix flagsContainer height to avoid modal overflow
@@ -192,11 +187,10 @@ function DropDownContent({
 
 DropDownContent.propTypes = {
   width: PropTypes.string.isRequired,
-  classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   profile: PropTypes.func.isRequired
 };
 
-export default withWidth()(withStyles(styles)(DropDownContent));
+export default withWidth()(DropDownContent);

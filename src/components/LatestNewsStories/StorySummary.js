@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import { Typography } from '@material-ui/core';
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 
-const styles = () => ({
+const styles = {
   root: {
     lineHeight: 2.05
   }
-});
+};
 
 function StorySummary({ classes, story }) {
   return (

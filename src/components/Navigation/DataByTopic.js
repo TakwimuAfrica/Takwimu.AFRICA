@@ -1,28 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import DropDownContent from './DropDownContent';
 
 import bg from '../../assets/images/a-chart-bg.svg';
 
-const styles = {
+const useStyles = makeStyles({
   container: {
     backgroundImage: `url(${bg})`,
     backgroundRepeat: 'no-repeat'
   }
-};
+});
 
 function profile(country) {
   return `country-${country.iso_code}-${country.slug}`;
 }
 
 function DataByTopic({
-  classes,
   countries,
   navigation: { data_by_topic: dataByTopic }
 }) {
+  const classes = useStyles();
   return (
     <DropDownContent
       classes={{
@@ -37,11 +37,10 @@ function DataByTopic({
 }
 
 DataByTopic.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   navigation: PropTypes.shape({
     data_by_topic: PropTypes.string
   }).isRequired
 };
 
-export default withStyles(styles)(DataByTopic);
+export default DataByTopic;

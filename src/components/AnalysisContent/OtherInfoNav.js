@@ -3,14 +3,14 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import AnalysisContentNavigation from './ContentNavigation';
 
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     position: 'fixed',
     top: 0,
@@ -54,16 +54,16 @@ const styles = theme => ({
       width: '100%'
     }
   }
-});
+}));
 
 function OtherInfoNav({
   labelText,
   labelTextStrong,
-  classes,
   content,
   current,
   showContent
 }) {
+  const classes = useStyles();
   const showShadow = useScrollListener(10);
   return (
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
@@ -90,10 +90,9 @@ function OtherInfoNav({
 OtherInfoNav.propTypes = {
   labelText: PropTypes.string.isRequired,
   labelTextStrong: PropTypes.string.isRequired,
-  classes: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({}).isRequired,
   showContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(OtherInfoNav);
+export default OtherInfoNav;

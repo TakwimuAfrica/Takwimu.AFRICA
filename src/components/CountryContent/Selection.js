@@ -1,16 +1,11 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import {
-  withStyles,
-  FormControl,
-  Input,
-  MenuItem,
-  Select
-} from '@material-ui/core';
+import { FormControl, Input, MenuItem, Select } from '@material-ui/core';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     marginTop: '0.9375rem',
@@ -54,9 +49,10 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default
     }
   }
-});
+}));
 
-function SelectionIcon({ classes, open }) {
+function SelectionIcon({ open }) {
+  const classes = useStyles();
   if (open) {
     return <KeyboardArrowUp className={classes.keyboardArrow} />;
   }
@@ -64,11 +60,10 @@ function SelectionIcon({ classes, open }) {
 }
 
 SelectionIcon.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   open: PropTypes.bool.isRequired
 };
 
-const SelectionIconComponent = withStyles(styles)(SelectionIcon);
+const SelectionIconComponent = SelectionIcon;
 
 class Selection extends React.Component {
   constructor(props) {
@@ -86,7 +81,8 @@ class Selection extends React.Component {
   }
 
   render() {
-    const { classes, onChange, items, value } = this.props;
+    const classes = useStyles();
+    const { onChange, items, value } = this.props;
     const { open } = this.state;
 
     return (
@@ -130,7 +126,6 @@ class Selection extends React.Component {
 }
 
 Selection.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   onChange: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   value: PropTypes.string
@@ -141,4 +136,4 @@ Selection.defaultProps = {
   value: null
 };
 
-export default withStyles(styles)(Selection);
+export default Selection;

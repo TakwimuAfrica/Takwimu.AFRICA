@@ -3,12 +3,13 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { withStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import Card from './Card';
 import Section from '../Section';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -29,10 +30,11 @@ const styles = theme => ({
       marginLeft: '1.734375rem' // .75 of lg
     }
   }
-});
+}));
 
-function AnalysisReadNext({ classes, current, content, showContent, title }) {
+function AnalysisReadNext({ current, content, showContent, title }) {
   const hasContent = current < content.body.length - 1;
+  const classes = useStyles();
 
   return hasContent ? (
     <Section classes={{ root: classes.root }} title={title} variant="h3">
@@ -62,7 +64,6 @@ function AnalysisReadNext({ classes, current, content, showContent, title }) {
 }
 
 AnalysisReadNext.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({
@@ -71,4 +72,4 @@ AnalysisReadNext.propTypes = {
   showContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(AnalysisReadNext);
+export default AnalysisReadNext;

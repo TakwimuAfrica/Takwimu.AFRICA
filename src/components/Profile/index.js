@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../core';
 import Section from '../Section';
 import Tabs from './Tabs';
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {},
   sectionTitle: {
     margin: '2.75rem 0'
@@ -37,7 +37,8 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { classes, profile } = this.props;
+    const { profile } = this.props;
+    const classes = useStyles();
     const {
       geography: { this: geography },
       tabs,
@@ -77,7 +78,6 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = {
-  classes: PropTypes.shape().isRequired,
   profile: PropTypes.shape({
     geography: PropTypes.shape({
       this: PropTypes.shape({
@@ -95,4 +95,4 @@ Profile.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(Profile);
+export default Profile;

@@ -4,14 +4,15 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 import { RichTypography } from '../../core';
 
 import leftArrow from '../../../assets/images/left-arrow.svg';
 import rightArrow from '../../../assets/images/right-arrow.svg';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
   },
@@ -153,9 +154,10 @@ const styles = theme => ({
   body: {
     padding: '3.125rem'
   }
-});
+}));
 
-function Topic({ classes, data, onIndexChanged, url }) {
+function Topic({ data, onIndexChanged, url }) {
+  const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [images, setImages] = useState({});
 
@@ -256,7 +258,6 @@ function Topic({ classes, data, onIndexChanged, url }) {
 }
 
 Topic.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       description: PropTypes.string,
@@ -268,4 +269,4 @@ Topic.propTypes = {
   url: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(Topic);
+export default Topic;

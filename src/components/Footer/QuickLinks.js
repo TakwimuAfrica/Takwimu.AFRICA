@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Link as RouterLink } from 'react-router-dom';
 
 import classNames from 'classnames';
 
 import { Link, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import Title from './Title';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -29,7 +28,7 @@ const styles = theme => ({
   link: {
     fontSize: '0.9375rem'
   }
-});
+}));
 
 const LINKS = [
   { href: '#topic', label: 'Explore data by topic' },
@@ -43,7 +42,8 @@ const LEGAL = [
   { href: '/privacy', label: 'Privacy Policy' }
 ];
 
-function QuickLinks({ classes }) {
+function QuickLinks() {
+  const classes = useStyles();
   const handleClick = clicked => {
     if (clicked === '#topic') {
       return window.toggleDrawer('topic')();
@@ -98,8 +98,6 @@ function QuickLinks({ classes }) {
   );
 }
 
-QuickLinks.propTypes = {
-  classes: PropTypes.shape({}).isRequired
-};
+QuickLinks.propTypes = {};
 
-export default withStyles(styles)(QuickLinks);
+export default QuickLinks;
