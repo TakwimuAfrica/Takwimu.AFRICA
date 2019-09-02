@@ -1,0 +1,19 @@
+[{
+    "sectionTitle": "Demographics",
+    "sectionIcon": "users",
+    "sectionDescription": "",
+    "charts": [{
+        "title": "Population",
+        "subtitle": "People living there",
+        "layout": "2/3",
+        "visuals": [{
+          "type": "circle_nested_proportional_area",
+          "table": "allPopulationResidence2009S",
+          "reference": {},
+          "label": "longName",
+          "x": "populationResidence2009",
+          "y": "total"
+        }]
+      }
+    ]
+}]
