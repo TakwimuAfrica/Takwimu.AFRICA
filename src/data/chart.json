@@ -92,105 +92,105 @@
             "x": "populationResidence2009",
             "y": "total"
           }]
-        },
-        {
-          "title": "Population by Residence",
-          "visuals": [{
-            "type": "column",
-            "table": "allPopulationResidence2012S",
-            "reference": {},
-            "x": "populationResidence2012",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Population by Residence",
-          "visuals": [{
-            "type": "column",
-            "table": "allPopulationResidence2013S",
-            "reference": {},
-            "x": "populationResidence2013",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Population by Residence",
-          "visuals": [{
-            "type": "column",
-            "table": "allPopulationResidence2013S",
-            "reference": {},
-            "x": "populationResidence2013",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Youth Unemployment Sex per year",
-          "visuals": [{
-            "type": "grouped_column",
-            "table": "allYouthUnemployments",
-            "reference": {},
-            "x": "sex",
-            "grouped_by": "youthUnemploymentYear",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Youth Unemployment",
-          "visuals": [{
-            "type": "column",
-            "table": "allYouthUnemploymentGenerals",
-            "reference": {},
-            "x": "youthUnemploymentPeriod",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
-          "visuals": [{
-            "type": "grouped_column",
-            "table": "allEmploymentToPopulationRatio",
-            "reference": {},
-            "x": "sex",
-            "group_by": "employmentToPoppulationRatioYear",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Percentage of population in poverty",
-          "visuals": [{
-            "type": "grouped_column",
-            "table": "allPovertyAgeResidences",
-            "reference": {},
-            "x": "residence",
-            "group_by": "poverty_type",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Percentage of population living in poverty by age and residence",
-          "visuals": [{
-            "type": "grouped_column",
-            "table": "allPovertyAgeResidences",
-            "reference": {},
-            "x": "residence",
-            "group_by": "age",
-            "y": "total"
-          }]
-        },
-        {
-          "title": "Human Development Indices",
-          "visuals": [{
-            "type": "column",
-            "table": "allHumanDevIndiceses",
-            "reference": {},
-            "x": "humanDevIndices",
-            "y": "total"
-          }]
-        }
+      },
+      {
+        "title": "Population by Residence",
+        "visuals": [{
+          "type": "column",
+          "table": "allPopulationResidence2012S",
+          "reference": {},
+          "x": "populationResidence2012",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Population by Residence",
+        "visuals": [{
+          "type": "column",
+          "table": "allPopulationResidence2013S",
+          "reference": {},
+          "x": "populationResidence2013",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Population by Residence",
+        "visuals": [{
+          "type": "column",
+          "table": "allPopulationResidence2013S",
+          "reference": {},
+          "x": "populationResidence2013",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Youth Unemployment Sex per year",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allYouthUnemployments",
+          "reference": {},
+          "x": "sex",
+          "grouped_by": "youthUnemploymentYear",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Youth Unemployment",
+        "visuals": [{
+          "type": "column",
+          "table": "allYouthUnemploymentGenerals",
+          "reference": {},
+          "x": "youthUnemploymentPeriod",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allEmploymentToPopulationRatio",
+          "reference": {},
+          "x": "sex",
+          "groupBy": "employmentToPoppulationRatioYear",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Percentage of population in poverty",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allPovertyAgeResidences",
+          "reference": {},
+          "x": "residence",
+          "groupBy": "poverty_type",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Percentage of population living in poverty by age and residence",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allPovertyAgeResidences",
+          "reference": {},
+          "x": "residence",
+          "groupBy": "age",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Human Development Indices",
+        "visuals": [{
+          "type": "column",
+          "table": "allHumanDevIndiceses",
+          "reference": {},
+          "x": "humanDevIndices",
+          "y": "total"
+        }]
+      }
 
-      ]
-    },
-    {
+    ]
+  },
+  {
       "sectionTitle": "Elections",
       "charts": [{
           "title": "Valid vs invalid votes",
@@ -272,7 +272,7 @@
             "table": "allLifeExpectancyAtBirths",
             "reference": {},
             "x": "sex",
-            "group_by": "lifeExpectancyAtBirthYear",
+            "groupBy": "lifeExpectancyAtBirthYear",
             "y": "total"
           }]
         },
@@ -303,7 +303,7 @@
             "table": "allHivPrevalences",
             "reference": {},
             "x": "sex",
-            "group_by": "hivPrevalenceYear",
+            "groupBy": "hivPrevalenceYear",
             "y": "total"
           }]
         },
@@ -314,17 +314,101 @@
             "table": "allHivPatientsDistributions",
             "reference": {},
             "x": "sex",
-            "group_by": "hivPatientsDistributionYear",
+            "groupBy": "hivPatientsDistributionYear",
             "y": "total"
           }]
         },
         {
-          "title": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
+          "title": "Prevalence of Malaria in Children - Number of children",
           "visuals": [{
             "type": "column",
-            "table": "allMaternalMortalities",
+            "table": "allMalariaPrevalences",
             "reference": {},
-            "x": "maternalMortalityYear",
+            "x": "malariaPrevalenceTest",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Births attended by skilled health staff (% of total)",
+          "visuals": [{
+            "type": "column",
+            "table": "allBirthsAttendedBySkilledHealthStaffs",
+            "reference": {},
+            "x": "birthsAttendedBySkilledHealthStaffYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Female Genital Mutilation Prevelence (%)",
+          "visuals": [{
+            "type": "column",
+            "table": "allFgmPrevalences",
+            "reference": {},
+            "x": "fgmPrevalenceYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Nurses and midwives (per 1,000 people)",
+          "visuals": [{
+            "type": "column",
+            "table": "allNursesAndMidwivess",
+            "reference": {},
+            "x": "nursesAndMidwivesYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Incidence of malaria per 1000 population at risk",
+          "visuals": [{
+            "type": "column",
+            "table": "allIncidenceOfMalariaPer1000PopAtRisks",
+            "reference": {},
+            "x": "incidenceOfMalariaPer1000PopAtRiskYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Infant and Under 5 Mortality rate (per 1000 live births)",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allInfantUnder5Mortalities",
+            "reference": {},
+            "x": "infantUnder5",
+            "groupBy": "mortalityYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Health worker density and distribution",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allHealthWorkersDistributions",
+            "reference": {},
+            "x": "workers",
+            "groupBy": "year",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Number of Doctors by Year and Sex (2015-2017)",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allNumberOfDoctorsYearSexes",
+            "reference": {},
+            "x": "numberOfDoctorsSex",
+            "groupBy": "numberOfDoctorsYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Number of Dentists by Year and Sex (2015-2017)",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allNumberOfDentistYearSexes",
+            "reference": {},
+            "x": "numberOfDentistSex",
+            "groupBy": "numberOfDentistYear",
             "y": "total"
           }]
         }
@@ -333,13 +417,42 @@
   {
       "sectionTitle": "Agriculture",
       "charts": [{
-          "title": "Population",
+          "title": "Crop production in tonnes",
           "visuals": [{
-            "type": "circle_nested_proportional_area",
-            "table": "allPopulationResidence2009S",
+            "type": "column",
+            "table": "allFoodProductions",
             "reference": {},
-            "label": "longName",
-            "x": "populationResidence2009",
+            "x": "crops",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Cereal yield in kg per hectare (Thousands)",
+          "visuals": [{
+            "type": "column",
+            "table": "allFoodProductions",
+            "reference": {},
+            "x": "crops",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Agricultural land (% of land area)",
+          "visuals": [{
+            "type": "column",
+            "table": "allFoodProductions",
+            "reference": {},
+            "x": "crops",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Employment in agriculture (% of male vs female employment)",
+          "visuals": [{
+            "type": "column",
+            "table": "allFoodProductions",
+            "reference": {},
+            "x": "crops",
             "y": "total"
           }]
         }
