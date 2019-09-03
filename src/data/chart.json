@@ -236,13 +236,95 @@
   {
       "sectionTitle": "Health",
       "charts": [{
-          "title": "Population",
+          "title": "People using at least basic drinking water services (% of population)",
           "visuals": [{
-            "type": "circle_nested_proportional_area",
-            "table": "allPopulationResidence2009S",
+            "type": "column",
+            "table": "allAccessToBasicServicess",
             "reference": {},
-            "label": "longName",
-            "x": "populationResidence2009",
+            "x": "accessToBasicServicesYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Percent of households with access to water and electricity services",
+          "visuals": [{
+            "type": "column",
+            "table": "allAccessToElecWaterServicess",
+            "reference": {},
+            "x": "accessToElecWaterServices",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Prevalence of undernourishment (% of population)",
+          "visuals": [{
+            "type": "column",
+            "table": "allPrevalenceOfUndernourishments",
+            "reference": {},
+            "x": "prevalenceOfUndernourishmentYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Life expectancy at birth (years)",
+          "visuals": [{
+            "type": "grouped_column",
+            "table": "allLifeExpectancyAtBirths",
+            "reference": {},
+            "x": "sex",
+            "group_by": "lifeExpectancyAtBirthYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Prevalence of FGM among women aged 15 - 49 years",
+          "visuals": [{
+            "type": "column",
+            "table": "allPrevalenceFgms",
+            "reference": {},
+            "x": "prevalenceFgm",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
+          "visuals": [{
+            "type": "column",
+            "table": "allMaternalMortalities",
+            "reference": {},
+            "x": "maternalMortalityYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Prevalence of HIV, (% ages 15-24)",
+          "visuals": [{
+            "type": "column",
+            "table": "allHivPrevalences",
+            "reference": {},
+            "x": "sex",
+            "group_by": "hivPrevalenceYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Distribution of HIV Patients by Year and Sex 2015-2016",
+          "visuals": [{
+            "type": "column",
+            "table": "allHivPatientsDistributions",
+            "reference": {},
+            "x": "sex",
+            "group_by": "hivPatientsDistributionYear",
+            "y": "total"
+          }]
+        },
+        {
+          "title": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
+          "visuals": [{
+            "type": "column",
+            "table": "allMaternalMortalities",
+            "reference": {},
+            "x": "maternalMortalityYear",
             "y": "total"
           }]
         }
