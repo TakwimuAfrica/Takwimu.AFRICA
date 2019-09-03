@@ -430,9 +430,9 @@
           "title": "Cereal yield in kg per hectare (Thousands)",
           "visuals": [{
             "type": "column",
-            "table": "allFoodProductions",
+            "table": "allCerealYieldKgPerHectares",
             "reference": {},
-            "x": "crops",
+            "x": "cerealYieldKgPerHectareYear",
             "y": "total"
           }]
         },
@@ -440,19 +440,20 @@
           "title": "Agricultural land (% of land area)",
           "visuals": [{
             "type": "column",
-            "table": "allFoodProductions",
+            "table": "allAgriculturalLands",
             "reference": {},
-            "x": "crops",
+            "x": "agriculturalLandYear",
             "y": "total"
           }]
         },
         {
           "title": "Employment in agriculture (% of male vs female employment)",
           "visuals": [{
-            "type": "column",
-            "table": "allFoodProductions",
+            "type": "grouped_column",
+            "table": "allEmploymentInAgricultures",
             "reference": {},
-            "x": "crops",
+            "x": "sex",
+            "groupBy": "employmentInAgricultureYear",
             "y": "total"
           }]
         }
