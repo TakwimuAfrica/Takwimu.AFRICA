@@ -69,7 +69,7 @@
           "table": "allPopulationSexYears",
           "reference": {},
           "x": "popolationYear",
-          "grouped_by": "populationSex",
+          "groupBy": "populationSex",
           "y": "total"
         }]
       },
@@ -130,7 +130,7 @@
           "table": "allYouthUnemployments",
           "reference": {},
           "x": "sex",
-          "grouped_by": "youthUnemploymentYear",
+          "groupBy": "youthUnemploymentYear",
           "y": "total"
         }]
       },
