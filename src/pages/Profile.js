@@ -162,7 +162,7 @@ function Profile({
   const chartComponents = useMemo(
     () =>
       profileTabs.slice(1).map(tab => (
-        <Section id={tab.slug} key={tab.slug}>
+        <Grid container spacing={4} id={tab.slug} key={tab.slug}>
           {/* <ProfileSectionTitle loading={chartData.isLoading} tab={tab} /> */}
           {sectionedCharts[tab.index].charts
             .filter(
@@ -181,27 +181,51 @@ function Profile({
                   key={chart.id}
                   loading={chartData.isLoading}
                   title={chart.title}
-                  subtitle={chart.subtitle}
+                  source={{
+                    title: 'Community Survey 2016',
+                    href: 'http://dev.dominion.africa'
+                  }}
                 >
-                  {chartData.isLoading
-                    ? [<div />, <div />]
-                    : chart.visuals.map(
-                        visual =>
-                          profiles.loaded &&
-                          ChartFactory.build(
-                            visual,
-                            chartData.profileVisualsData,
-                            chartData.comparisonVisualsData,
-                            profiles
-                          )
-                      )}
+                  {!chartData.isLoading &&
+                    ChartFactory.build(
+                      { id: 'viz0', type: 'number' },
+                      chartData.profileVisualsData,
+                      null,
+                      profiles
+                    )}
+                  {!chartData.isLoading &&
+                    chart.visuals.map(visual =>
+                      ChartFactory.build(
+                        visual,
+                        chartData.profileVisualsData,
+                        null,
+                        profiles
+                      )
+                    )}
                 </InsightContainer>
               </Grid>
             ))}
-        </Section>
+        </Grid>
       )),
     [chartData, profileTabs, profiles]
   );
+
+  // Show and hide sections
+  useEffect(() => {
+    if (activeTab === 'all') {
+      profileTabs.slice(1).forEach(tab => {
+        document.getElementById(tab.slug).style.display = 'flex';
+      });
+    } else {
+      profileTabs.slice(1).forEach(tab => {
+        if (tab.slug === activeTab) {
+          document.getElementById(tab.slug).style.display = 'flex';
+        } else {
+          document.getElementById(tab.slug).style.display = 'none';
+        }
+      });
+    }
+  }, [profileTabs, activeTab]);
 
   return (
     <Page takwimu={config}>
@@ -228,7 +252,7 @@ function Profile({
           setActiveTab={setActiveTab}
         />
       )}
-      {chartComponents}
+      <Section>{chartComponents}</Section>
     </Page>
   );
 }

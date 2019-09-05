@@ -33,11 +33,6 @@ export default class ChartFactory {
      */
     profiles
   ) {
-    console.log('here', datas);
-    if (!datas) {
-      return null;
-    }
-    const numberFormatter = new Intl.NumberFormat('en-IN');
     const key =
       Math.random()
         .toString(36)
@@ -48,6 +43,43 @@ export default class ChartFactory {
     const refrenceData = datas[`${visualId}Reference`]
       ? datas[`${visualId}Reference`].nodes
       : [];
+
+    const primaryData = (() => {
+      const numberFormatter = new Intl.NumberFormat('en-GB');
+      if (visualType === 'column') {
+        return aggregate ? aggregateData(aggregate, data) : data;
+      }
+
+      if (visualType === 'pie') {
+        return (!aggregate ? data : aggregateData(aggregate, data)).map(d => ({
+          ...d,
+          name: d.x,
+          label: `${d.x} ${numberFormatter.format(d.y)}`
+        }));
+      }
+
+      if (visualType === 'grouped_column') {
+        let groupedData = [...new Set(data.map(d => d.groupBy))].map(group =>
+          !aggregate
+            ? data.filter(d => d.groupBy === group)
+            : aggregateData(
+                aggregate,
+                data.filter(d => d.groupBy === group)
+              ).map(d => ({ ...d, x: group }))
+        );
+
+        groupedData = groupedData[0].map((_c, i) => groupedData.map(r => r[i]));
+        return groupedData;
+      }
+      return [];
+    })();
+
+    if (!datas) {
+      return null;
+    }
+
+    const numberFormatter = new Intl.NumberFormat('en-GB');
+
     switch (visualType) {
       case 'square_nested_proportional_area':
       case 'circle_nested_proportional_area': {
@@ -67,92 +99,105 @@ export default class ChartFactory {
             ? summedReferenceData
             : summedData;
         return (
-          <>
-            <NumberVisuals />
-            <div style={{ width: !isComparison ? 200 : 650 }}>
-              <NestedProportionalAreaChart
-                key={key}
-                square={visualType === 'square_nested_proportional_area'}
-                height={isComparison && 500}
-                width={!isComparison ? 200 : 650}
-                groupSpacing={isComparison && 8}
-                data={
-                  !isComparison
-                    ? [
-                        {
-                          x: summedData,
-                          label: dataLabel
-                        }
-                      ]
-                    : [
-                        {
-                          x: summedData,
-                          label: dataLabel
-                        },
-                        {
-                          x: comparisonData.reduce((a, b) => a + b.y, 0),
-                          label:
-                            comparisonData[0].label ||
-                            profiles.comparisonProfile[label] ||
-                            label
-                        }
-                      ]
+          <div style={{ width: !isComparison ? 200 : 650 }}>
+            <NestedProportionalAreaChart
+              key={key}
+              formatNumberForLabel={x => numberFormatter.format(x)}
+              square={visualType === 'square_nested_proportional_area'}
+              height={isComparison && 500}
+              width={!isComparison ? 200 : 650}
+              groupSpacing={isComparison && 8}
+              data={
+                !isComparison
+                  ? [
+                      {
+                        x: summedData,
+                        label: dataLabel
+                      }
+                    ]
+                  : [
+                      {
+                        x: summedData,
+                        label: dataLabel
+                      },
+                      {
+                        x: comparisonData.reduce((a, b) => a + b.y, 0),
+                        label:
+                          comparisonData[0].label ||
+                          profiles.comparisonProfile[label] ||
+                          label
+                      }
+                    ]
+              }
+              reference={[
+                {
+                  x: summedReferenceData,
+                  label: refrenceLabel
                 }
-                reference={[
-                  {
-                    x: summedReferenceData,
-                    label: refrenceLabel
-                  }
-                ]}
-              />
-            </div>
-          </>
+              ]}
+            />
+          </div>
         );
       }
       case 'pie': {
-        let pieData = !aggregate ? data : aggregateData(aggregate, data);
-        pieData = pieData.map(d => ({
-          ...d,
-          name: d.x,
-          label: `${d.x} ${numberFormatter.format(d.y)}`
-        }));
         return (
-          <>
-            <NumberVisuals />
-            <div>
-              {/* Due to responsiveness of piechart */}
-              <PieChart
-                key={key}
-                width={width || 400}
-                legendWidth={50}
-                height={height}
-                data={pieData}
-                donutLabelKey={{ dataIndex: 0, sortKey: '' }}
-              />
-            </div>
-          </>
+          // Due to responsiveness of piechart
+          <div>
+            <PieChart
+              key={key}
+              width={width || 400}
+              height={height}
+              data={primaryData}
+              donutLabelKey={{ dataIndex: 0, sortKey: '' }}
+            />
+          </div>
         );
       }
       case 'grouped_column': {
-        // Create array of grouped data arrays
-        let groupedData = [...new Set(data.map(d => d.groupBy))].map(group =>
-          !aggregate
-            ? data.filter(d => d.groupBy === group)
-            : aggregateData(
-                aggregate,
-                data.filter(d => d.groupBy === group)
-              ).map(d => ({ ...d, x: group }))
-        );
-        // Transpose
-        groupedData = groupedData[0].map((_c, i) => groupedData.map(r => r[i]));
-
-        console.log('groupedData', groupedData);
+        console.log(primaryData);
         return (
-          <>
-            <NumberVisuals />
+          <div
+            style={{
+              width: primaryData.length * primaryData[0].length * 45,
+              height: '300px'
+            }}
+          >
+            <BarChart
+              key={key}
+              responsive
+              offset={45}
+              barWidth={40}
+              width={primaryData.length * primaryData[0].length * 45}
+              height={height || 300}
+              horizontal={horizontal}
+              labels={datum => numberFormatter.format(datum.y)}
+              labelComponent={undefined}
+              data={primaryData}
+              parts={{
+                axis: {
+                  labelWidth: 40,
+                  independent: {
+                    style: {
+                      tickLabels: {
+                        display: 'block'
+                      }
+                    }
+                  }
+                }
+              }}
+            />
+          </div>
+        );
+      }
+      case 'column': {
+        if (isComparison) {
+          const processedComparisonData = aggregate
+            ? aggregateData(aggregate, comparisonData)
+            : comparisonData;
+          return (
             <div
               style={{
-                width: groupedData.length * groupedData[0].length * 45,
+                width: primaryData.length * 2 * (barWidth || 40) + 5,
                 height: '300px'
               }}
             >
@@ -160,19 +205,22 @@ export default class ChartFactory {
                 key={key}
                 responsive
                 offset={45}
-                barWidth={40}
-                width={groupedData.length * groupedData[0].length * 45}
+                barWidth={barWidth || 40}
+                width={primaryData.length * 2 * ((barWidth || 40) + 5)}
                 height={height || 300}
                 horizontal={horizontal}
                 labels={datum => numberFormatter.format(datum.y)}
-                // Disable tooltip behaviour
-                labelComponent={undefined}
-                data={groupedData}
+                data={[primaryData, processedComparisonData]}
                 parts={{
                   axis: {
-                    labelWidth: 40,
                     independent: {
                       style: {
+                        axis: {
+                          display: 'block'
+                        },
+                        ticks: {
+                          display: 'block'
+                        },
                         tickLabels: {
                           display: 'block'
                         }
@@ -182,93 +230,58 @@ export default class ChartFactory {
                 }}
               />
             </div>
-          </>
-        );
-      }
-      case 'column': {
-        const processedData = aggregate ? aggregateData(aggregate, data) : data;
-        if (isComparison) {
-          const processedComparisonData = aggregate
-            ? aggregateData(aggregate, comparisonData)
-            : comparisonData;
-          return (
-            <>
-              <NumberVisuals />
-              <div
-                style={{
-                  width: processedData.length * 2 * (barWidth || 40) + 5,
-                  height: '300px'
-                }}
-              >
-                <BarChart
-                  key={key}
-                  responsive
-                  offset={45}
-                  barWidth={barWidth || 40}
-                  width={processedData.length * 2 * ((barWidth || 40) + 5)}
-                  height={height || 300}
-                  horizontal={horizontal}
-                  labels={datum => numberFormatter.format(datum.y)}
-                  // Disable tooltip behaviour
-                  labelComponent={undefined}
-                  data={[processedData, processedComparisonData]}
-                  parts={{
-                    axis: {
-                      independent: {
-                        style: {
-                          axis: {
-                            display: 'block'
-                          },
-                          ticks: {
-                            display: 'block'
-                          },
-                          tickLabels: {
-                            display: 'block'
-                          }
-                        }
-                      }
-                    }
-                  }}
-                />
-              </div>
-            </>
           );
         }
         return (
-          <>
-            <NumberVisuals />
-            <div
-              style={{
-                width: processedData.length * (barWidth || 80) + 5,
-                height: '300px'
-              }}
-            >
-              <BarChart
-                key={key}
-                horizontal={horizontal}
-                barWidth={barWidth || 80}
-                width={processedData.length * ((barWidth || 80) + 5)}
-                height={height || 300}
-                labels={datum => numberFormatter.format(datum.y)}
-                // Disable tooltip behaviour
-                labelComponent={undefined}
-                data={processedData}
-                parts={{
-                  axis: {
-                    independent: {
-                      style: {
-                        tickLabels: {
-                          display: 'block'
-                        }
+          <div
+            style={{
+              width: primaryData.length * (barWidth || 80) + 5,
+              height: '300px'
+            }}
+          >
+            <BarChart
+              key={key}
+              responsive
+              horizontal={horizontal}
+              barWidth={barWidth || 80}
+              width={
+                horizontal ? 200 : primaryData.length * ((barWidth || 80) + 5)
+              }
+              height={height || 300}
+              labels={datum => numberFormatter.format(datum.y)}
+              data={primaryData}
+              parts={{
+                axis: {
+                  independent: {
+                    style: {
+                      tickLabels: {
+                        display: 'block'
                       }
                     }
                   }
-                }}
-              />
-            </div>
-          </>
+                }
+              }}
+            />
+          </div>
         );
       }
+      case 'number':
+        return (
+          <NumberVisuals
+            subtitle="Income"
+            statistic="$60,336"
+            statisticDeviation="±0.1"
+            secondaryDeviation="(194, 667, 872 ±241, 381.6)"
+            description="Median household income"
+            comparisonData={[
+              {
+                parentComparison: 'about 90 percent',
+                parentDescription: 'of the amount in United States: $32,397',
+                parentDeviation: '±0.24%'
+              }
+            ]}
+          />
+        );
       default:
         return null;
     }

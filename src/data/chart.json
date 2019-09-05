@@ -128,10 +128,10 @@
         "visuals": [{
           "type": "grouped_column",
           "table": "allYouthUnemployments",
-          "reference": {},
+          "groupdBy": "youthUnemploymentYear",
           "x": "sex",
-          "grouped_by": "youthUnemploymentYear",
-          "y": "total"
+          "y": "total",
+          "aggregate": "sum"
         }]
       },
       {
@@ -150,9 +150,10 @@
           "type": "grouped_column",
           "table": "allEmploymentToPopulationRatios",
           "reference": {},
-          "x": "sex",
           "groupBy": "employmentToPopulationRatioYear",
-          "y": "total"
+          "x": "sex",
+          "y": "total",
+          "aggregate": "sum"
         }]
       },
       {
