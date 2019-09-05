@@ -4,6 +4,13 @@
     "sectionDescription": "",
     "charts": [{
         "title": "Population by Sex",
+        "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+        },
         "visuals": [{
           "type": "pie",
           "table": "allPopulationSex2006S",
@@ -14,6 +21,13 @@
       },
       {
           "title": "Population by Sex",
+          "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+          },
           "visuals": [{
             "type": "pie",
             "table": "allPopulationSex2007S",
@@ -24,6 +38,13 @@
       },
       {
           "title": "Population by Sex",
+          "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+          },
           "visuals": [{
             "type": "pie",
             "table": "allPopulationSex2009S",
@@ -34,6 +55,13 @@
       },
       {
           "title": "Population by Sex",
+          "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+          },
           "visuals": [{
             "type": "pie",
             "table": "allPopulationSex2011S",
@@ -44,6 +72,13 @@
       },
       {
           "title": "Population by Sex",
+          "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+          },
           "visuals": [{
             "type": "pie",
             "table": "allPopulationSex2012S",
@@ -54,6 +89,13 @@
       },
       {
           "title": "Population by Sex",
+          "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+          },
           "visuals": [{
             "type": "pie",
             "table": "allPopulationSex2013S",
@@ -64,6 +106,13 @@
       },
       {
         "title": "Population by Sex per year",
+        "statBlock": {
+          "title": "Population",
+          "description": "People",
+          "statistic": {
+              "aggregrate": "sum"
+          }
+        },
         "visuals": [{
           "type": "grouped_column",
           "table": "allPopulationSexYears",
@@ -75,6 +124,13 @@
       },
       {
           "title": "Population by Residence",
+          "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+          },
           "visuals": [{
             "type": "column",
             "table": "allPopulationResidence2009S",
@@ -85,6 +141,13 @@
       },
       {
           "title": "Population by Residence",
+          "statBlock": {
+            "title": "Population",
+            "description": "People",
+            "statistic": {
+                "aggregrate": "sum"
+            }
+          },
           "visuals": [{
             "type": "column",
             "table": "allPopulationResidence2009S",
@@ -105,6 +168,13 @@
       },
       {
         "title": "Population by Residence",
+        "statBlock": {
+          "title": "Population",
+          "description": "People",
+          "statistic": {
+              "aggregrate": "sum"
+          }
+        },
         "visuals": [{
           "type": "column",
           "table": "allPopulationResidence2013S",
