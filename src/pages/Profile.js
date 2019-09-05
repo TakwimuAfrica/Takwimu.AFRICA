@@ -239,6 +239,8 @@ function Profile({
 
       <div style={{ width: '100%', height: '500px', overflow: 'hidden' }}>
         <MapIt
+          drawProfile
+          drawChildren={geoId.split('-')[1] === 'NG'}
           codeType="AFR"
           geoLevel={geoId.split('-')[0]}
           geoCode={geoId.split('-')[1]}
