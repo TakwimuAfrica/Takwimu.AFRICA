@@ -1,0 +1,292 @@
+[{
+    "sectionTitle": "Demographics",
+    "sectionIcon": "users",
+    "sectionDescription": "",
+    "charts": [{
+        "title": "Population by Sex",
+        "visuals": [{
+          "type": "pie",
+          "table": "allPopulationSex2006S",
+          "reference": {},
+          "x": "populationSex2006",
+          "y": "total"
+        }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2007S",
+            "reference": {},
+            "x": "populationSex2007",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2009S",
+            "reference": {},
+            "x": "populationSex2009",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2011S",
+            "reference": {},
+            "x": "populationSex2011",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2012S",
+            "reference": {},
+            "x": "populationSex2012",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Sex",
+          "visuals": [{
+            "type": "pie",
+            "table": "allPopulationSex2013S",
+            "reference": {},
+            "x": "populationSex2013",
+            "y": "total"
+          }]
+      },
+      {
+        "title": "Population by Sex per year",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allPopulationSexYears",
+          "reference": {},
+          "x": "populationYear",
+          "grouped_by": "populationSex",
+          "y": "total"
+        }]
+      },
+      {
+          "title": "Population by Residence",
+          "visuals": [{
+            "type": "column",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+      },
+      {
+          "title": "Population by Residence",
+          "visuals": [{
+            "type": "column",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+      },
+      {
+        "title": "Population by Residence",
+        "visuals": [{
+          "type": "column",
+          "table": "allPopulationResidence2012S",
+          "reference": {},
+          "x": "populationResidence2012",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Population by Residence",
+        "visuals": [{
+          "type": "column",
+          "table": "allPopulationResidence2013S",
+          "reference": {},
+          "x": "populationResidence2013",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Population by Residence",
+        "visuals": [{
+          "type": "column",
+          "table": "allPopulationResidence2013S",
+          "reference": {},
+          "x": "populationResidence2013",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Youth Unemployment Sex per year",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allYouthUnemployments",
+          "reference": {},
+          "x": "sex",
+          "grouped_by": "youthUnemploymentYear",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Youth Unemployment",
+        "visuals": [{
+          "type": "column",
+          "table": "allYouthUnemploymentGenerals",
+          "reference": {},
+          "x": "youthUnemploymentPeriod",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allEmploymentToPopulationRatios",
+          "reference": {},
+          "x": "sex",
+          "groupBy": "employmentToPopulationRatioYear",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Percentage of population living in poverty by age and residence",
+        "visuals": [{
+          "type": "grouped_column",
+          "table": "allPovertyAgeResidences",
+          "reference": {},
+          "x": "residence",
+          "groupBy": "age",
+          "y": "total"
+        }]
+      },
+      {
+        "title": "Human Development Indices",
+        "visuals": [{
+          "type": "column",
+          "table": "allHumanDevIndices",
+          "reference": {},
+          "x": "humanDevIndices",
+          "y": "total"
+        }]
+      }
+
+     ]
+  },
+  {
+      "sectionTitle": "Elections",
+      "charts": [{
+          "title": "Valid vs invalid votes",
+          "visuals": [{
+            "type": "pie",
+            "table": "allValidInvalidVotes",
+            "reference": {},
+            "x": "votes",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Health",
+      "charts": [{
+          "title": "People using at least basic drinking water services (% of population)",
+          "visuals": [{
+            "type": "column",
+            "table": "allAccessToBasicServices",
+            "reference": {},
+            "x": "accessToBasicServicesYear",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Agriculture",
+      "charts": [{
+          "title": "Crop production in tonnes",
+          "visuals": [{
+            "type": "column",
+            "table": "allFoodProductions",
+            "reference": {},
+            "x": "crops",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Education",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Financial Inclusion",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "Public Finances",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  },
+  {
+      "sectionTitle": "ODA",
+      "sectionIcon": "users",
+      "sectionDescription": "",
+      "charts": [{
+          "title": "Population",
+          "visuals": [{
+            "type": "circle_nested_proportional_area",
+            "table": "allPopulationResidence2009S",
+            "reference": {},
+            "label": "longName",
+            "x": "populationResidence2009",
+            "y": "total"
+          }]
+        }
+      ]
+  }
+]

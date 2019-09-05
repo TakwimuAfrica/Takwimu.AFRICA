@@ -2,7 +2,8 @@ import React from 'react';
 import {
   BarChart,
   PieChart,
-  NestedProportionalAreaChart
+  NestedProportionalAreaChart,
+  NumberVisuals
 } from '@codeforafrica/hurumap-ui';
 import aggregateData from '../utils/aggregateData';
 
@@ -32,6 +33,7 @@ export default class ChartFactory {
      */
     profiles
   ) {
+    console.log('here', datas);
     if (!datas) {
       return null;
     }
@@ -65,43 +67,46 @@ export default class ChartFactory {
             ? summedReferenceData
             : summedData;
         return (
-          <div style={{ width: !isComparison ? 200 : 650 }}>
-            <NestedProportionalAreaChart
-              key={key}
-              square={visualType === 'square_nested_proportional_area'}
-              height={isComparison && 500}
-              width={!isComparison ? 200 : 650}
-              groupSpacing={isComparison && 8}
-              data={
-                !isComparison
-                  ? [
-                      {
-                        x: summedData,
-                        label: dataLabel
-                      }
-                    ]
-                  : [
-                      {
-                        x: summedData,
-                        label: dataLabel
-                      },
-                      {
-                        x: comparisonData.reduce((a, b) => a + b.y, 0),
-                        label:
-                          comparisonData[0].label ||
-                          profiles.comparisonProfile[label] ||
-                          label
-                      }
-                    ]
-              }
-              reference={[
-                {
-                  x: summedReferenceData,
-                  label: refrenceLabel
+          <>
+            <NumberVisuals />
+            <div style={{ width: !isComparison ? 200 : 650 }}>
+              <NestedProportionalAreaChart
+                key={key}
+                square={visualType === 'square_nested_proportional_area'}
+                height={isComparison && 500}
+                width={!isComparison ? 200 : 650}
+                groupSpacing={isComparison && 8}
+                data={
+                  !isComparison
+                    ? [
+                        {
+                          x: summedData,
+                          label: dataLabel
+                        }
+                      ]
+                    : [
+                        {
+                          x: summedData,
+                          label: dataLabel
+                        },
+                        {
+                          x: comparisonData.reduce((a, b) => a + b.y, 0),
+                          label:
+                            comparisonData[0].label ||
+                            profiles.comparisonProfile[label] ||
+                            label
+                        }
+                      ]
                 }
-              ]}
-            />
-          </div>
+                reference={[
+                  {
+                    x: summedReferenceData,
+                    label: refrenceLabel
+                  }
+                ]}
+              />
+            </div>
+          </>
         );
       }
       case 'pie': {
@@ -112,17 +117,20 @@ export default class ChartFactory {
           label: `${d.x} ${numberFormatter.format(d.y)}`
         }));
         return (
-          // Due to responsiveness of piechart
-          <div>
-            <PieChart
-              key={key}
-              width={width || 400}
-              legendWidth={50}
-              height={height}
-              data={pieData}
-              donutLabelKey={{ dataIndex: 0, sortKey: '' }}
-            />
-          </div>
+          <>
+            <NumberVisuals />
+            <div>
+              {/* Due to responsiveness of piechart */}
+              <PieChart
+                key={key}
+                width={width || 400}
+                legendWidth={50}
+                height={height}
+                data={pieData}
+                donutLabelKey={{ dataIndex: 0, sortKey: '' }}
+              />
+            </div>
+          </>
         );
       }
       case 'grouped_column': {
@@ -138,51 +146,13 @@ export default class ChartFactory {
         // Transpose
         groupedData = groupedData[0].map((_c, i) => groupedData.map(r => r[i]));
 
+        console.log('groupedData', groupedData);
         return (
-          <div
-            style={{
-              width: groupedData.length * groupedData[0].length * 45,
-              height: '300px'
-            }}
-          >
-            <BarChart
-              key={key}
-              responsive
-              offset={45}
-              barWidth={40}
-              width={groupedData.length * groupedData[0].length * 45}
-              height={height || 300}
-              horizontal={horizontal}
-              labels={datum => numberFormatter.format(datum.y)}
-              // Disable tooltip behaviour
-              labelComponent={undefined}
-              data={groupedData}
-              parts={{
-                axis: {
-                  labelWidth: 40,
-                  independent: {
-                    style: {
-                      tickLabels: {
-                        display: 'block'
-                      }
-                    }
-                  }
-                }
-              }}
-            />
-          </div>
-        );
-      }
-      case 'column': {
-        const processedData = aggregate ? aggregateData(aggregate, data) : data;
-        if (isComparison) {
-          const processedComparisonData = aggregate
-            ? aggregateData(aggregate, comparisonData)
-            : comparisonData;
-          return (
+          <>
+            <NumberVisuals />
             <div
               style={{
-                width: processedData.length * 2 * (barWidth || 40) + 5,
+                width: groupedData.length * groupedData[0].length * 45,
                 height: '300px'
               }}
             >
@@ -190,24 +160,19 @@ export default class ChartFactory {
                 key={key}
                 responsive
                 offset={45}
-                barWidth={barWidth || 40}
-                width={processedData.length * 2 * ((barWidth || 40) + 5)}
+                barWidth={40}
+                width={groupedData.length * groupedData[0].length * 45}
                 height={height || 300}
                 horizontal={horizontal}
                 labels={datum => numberFormatter.format(datum.y)}
                 // Disable tooltip behaviour
                 labelComponent={undefined}
-                data={[processedData, processedComparisonData]}
+                data={groupedData}
                 parts={{
                   axis: {
+                    labelWidth: 40,
                     independent: {
                       style: {
-                        axis: {
-                          display: 'block'
-                        },
-                        ticks: {
-                          display: 'block'
-                        },
                         tickLabels: {
                           display: 'block'
                         }
@@ -217,38 +182,91 @@ export default class ChartFactory {
                 }}
               />
             </div>
+          </>
+        );
+      }
+      case 'column': {
+        const processedData = aggregate ? aggregateData(aggregate, data) : data;
+        if (isComparison) {
+          const processedComparisonData = aggregate
+            ? aggregateData(aggregate, comparisonData)
+            : comparisonData;
+          return (
+            <>
+              <NumberVisuals />
+              <div
+                style={{
+                  width: processedData.length * 2 * (barWidth || 40) + 5,
+                  height: '300px'
+                }}
+              >
+                <BarChart
+                  key={key}
+                  responsive
+                  offset={45}
+                  barWidth={barWidth || 40}
+                  width={processedData.length * 2 * ((barWidth || 40) + 5)}
+                  height={height || 300}
+                  horizontal={horizontal}
+                  labels={datum => numberFormatter.format(datum.y)}
+                  // Disable tooltip behaviour
+                  labelComponent={undefined}
+                  data={[processedData, processedComparisonData]}
+                  parts={{
+                    axis: {
+                      independent: {
+                        style: {
+                          axis: {
+                            display: 'block'
+                          },
+                          ticks: {
+                            display: 'block'
+                          },
+                          tickLabels: {
+                            display: 'block'
+                          }
+                        }
+                      }
+                    }
+                  }}
+                />
+              </div>
+            </>
           );
         }
         return (
-          <div
-            style={{
-              width: processedData.length * (barWidth || 80) + 5,
-              height: '300px'
-            }}
-          >
-            <BarChart
-              key={key}
-              horizontal={horizontal}
-              barWidth={barWidth || 80}
-              width={processedData.length * ((barWidth || 80) + 5)}
-              height={height || 300}
-              labels={datum => numberFormatter.format(datum.y)}
-              // Disable tooltip behaviour
-              labelComponent={undefined}
-              data={processedData}
-              parts={{
-                axis: {
-                  independent: {
-                    style: {
-                      tickLabels: {
-                        display: 'block'
+          <>
+            <NumberVisuals />
+            <div
+              style={{
+                width: processedData.length * (barWidth || 80) + 5,
+                height: '300px'
+              }}
+            >
+              <BarChart
+                key={key}
+                horizontal={horizontal}
+                barWidth={barWidth || 80}
+                width={processedData.length * ((barWidth || 80) + 5)}
+                height={height || 300}
+                labels={datum => numberFormatter.format(datum.y)}
+                // Disable tooltip behaviour
+                labelComponent={undefined}
+                data={processedData}
+                parts={{
+                  axis: {
+                    independent: {
+                      style: {
+                        tickLabels: {
+                          display: 'block'
+                        }
                       }
                     }
                   }
-                }
-              }}
-            />
-          </div>
+                }}
+              />
+            </div>
+          </>
         );
       }
       default:
