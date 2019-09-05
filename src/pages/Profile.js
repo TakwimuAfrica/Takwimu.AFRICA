@@ -3,7 +3,7 @@ import { useApolloClient } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
 
 import { MapIt, InsightContainer } from '@codeforafrica/hurumap-ui';
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import { GET_PROFILE, buildVisualsQuery } from '../data/queries';
 
 import Page from '../components/Page';
@@ -18,11 +18,18 @@ import slugify from '../utils/slugify';
 import ChartFactory from '../components/ChartFactory';
 import Section from '../components/Section';
 
+const useStyles = makeStyles({
+  chart: {
+    margin: '20px 0'
+  }
+});
+
 function Profile({
   match: {
     params: { geoId }
   }
 }) {
+  const classes = useStyles();
   const client = useApolloClient();
 
   const [activeTab, setActiveTab] = useState(
@@ -162,7 +169,7 @@ function Profile({
   const chartComponents = useMemo(
     () =>
       profileTabs.slice(1).map(tab => (
-        <Grid container spacing={4} id={tab.slug} key={tab.slug}>
+        <Grid item container spacing={4} id={tab.slug} key={tab.slug}>
           {/* <ProfileSectionTitle loading={chartData.isLoading} tab={tab} /> */}
           {sectionedCharts[tab.index].charts
             .filter(
@@ -176,8 +183,9 @@ function Profile({
                   ))
             )
             .map(chart => (
-              <Grid item xs={12} key={`${chart.id}grid`}>
+              <div style={{ margin: '40px 0', maxWidth: '100%' }}>
                 <InsightContainer
+                  classes={{ root: classes.chart }}
                   key={chart.id}
                   loading={chartData.isLoading}
                   title={chart.title}
@@ -203,11 +211,11 @@ function Profile({
                       )
                     )}
                 </InsightContainer>
-              </Grid>
+              </div>
             ))}
         </Grid>
       )),
-    [chartData, profileTabs, profiles]
+    [chartData, profileTabs, profiles, classes]
   );
 
   // Show and hide sections
