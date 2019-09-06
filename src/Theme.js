@@ -1,9 +1,53 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@codeforafrica/hurumap-ui';
 
 const FONT_FAMILY_HEADING = '"Lora", serif';
 const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
-const Theme = createMuiTheme({
+const COLOR_BREWER_DIVERGING = [
+  '#8ed3a5',
+  '#29a87c',
+  '#223a07',
+  '#7d8c6c',
+  '#5bc17d'
+];
+
+const Theme = createTheme({
+  chart: {
+    pie: {
+      legendWidth: 50,
+      colorScale: COLOR_BREWER_DIVERGING
+    },
+    area: {
+      colorScale: COLOR_BREWER_DIVERGING
+    },
+    group: {
+      colorScale: COLOR_BREWER_DIVERGING
+    },
+    bar: {
+      style: {
+        data: {
+          fill: COLOR_BREWER_DIVERGING[0]
+        },
+        labels: {
+          fontFamily: FONT_FAMILY_TEXT,
+          fill: 'rgb(0,0,0)'
+        }
+      }
+    },
+    axis: {
+      labelWidth: 50,
+      style: {
+        tickLabels: {
+          fontFamily: FONT_FAMILY_TEXT,
+          fill: 'rgb(0,0,0)'
+        },
+        axisLabels: {
+          fontFamily: FONT_FAMILY_TEXT,
+          fill: 'rgb(0,0,0)'
+        }
+      }
+    }
+  },
   palette: {
     primary: {
       main: '#29a87c' // dark-mint
