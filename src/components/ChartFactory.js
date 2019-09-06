@@ -154,7 +154,6 @@ export default class ChartFactory {
         );
       }
       case 'grouped_column': {
-        console.log(primaryData);
         return (
           <div
             style={{
