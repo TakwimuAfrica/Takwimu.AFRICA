@@ -4,18 +4,12 @@ const FONT_FAMILY_HEADING = '"Lora", serif';
 const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
 const COLOR_BREWER_DIVERGING = [
-  '#a50026',
-  '#d73027',
-  '#f46d43',
-  '#fdae61',
-  '#fee08b',
-  '#ffffbf',
-  '#d9ef8b',
-  '#a6d96a',
-  '#66bd63',
-  '#1a9850',
-  '#006837'
-].reverse();
+  '#8ed3a5',
+  '#29a87c',
+  '#223a07',
+  '#7d8c6c',
+  '#5bc17d'
+];
 
 const Theme = createTheme({
   chart: {
