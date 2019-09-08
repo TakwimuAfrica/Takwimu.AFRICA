@@ -54,11 +54,11 @@ function ProfileTabs({ handleChange, tabs, value }) {
           value={value}
           variant="scrollable"
         >
-          {tabs.map((tab, index) => (
+          {tabs.map(tab => (
             <LinkTab
-              key={tab.href}
-              value={index}
-              href="#takwimuProfile" // Always show the tabs on click
+              key={tab.slug}
+              value={tab.slug}
+              href={`#${tab.slug}`} // Always show the tabs on click
               label={tab.name}
               className={classes.tab}
               classes={{
@@ -78,10 +78,10 @@ ProfileTabs.propTypes = {
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      href: PropTypes.string.isRequired
+      slug: PropTypes.string.isRequired
     })
   ).isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.string.isRequired
 };
 
 ProfileTabs.defaultProps = {

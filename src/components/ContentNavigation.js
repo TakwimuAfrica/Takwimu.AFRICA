@@ -50,7 +50,7 @@ function ContentNavigation({
   linksSecondaryColor,
   ...props
 }) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   return (
     /* eslint-disable-next-line react/jsx-props-no-spreading */
     <ContentSection classes={{ root: classes.root }} {...props}>

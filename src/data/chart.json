@@ -68,8 +68,8 @@
           "type": "grouped_column",
           "table": "allPopulationSexYears",
           "reference": {},
-          "x": "popolationYear",
-          "grouped_by": "populationSex",
+          "x": "populationYear",
+          "groupBy": "populationSex",
           "y": "total"
         }]
       },
@@ -128,10 +128,10 @@
         "visuals": [{
           "type": "grouped_column",
           "table": "allYouthUnemployments",
-          "reference": {},
+          "groupdBy": "youthUnemploymentYear",
           "x": "sex",
-          "grouped_by": "youthUnemploymentYear",
-          "y": "total"
+          "y": "total",
+          "aggregate": "sum"
         }]
       },
       {
@@ -148,22 +148,12 @@
         "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
         "visuals": [{
           "type": "grouped_column",
-          "table": "allEmploymentToPopulationRatio",
+          "table": "allEmploymentToPopulationRatios",
           "reference": {},
+          "groupBy": "employmentToPopulationRatioYear",
           "x": "sex",
-          "groupBy": "employmentToPoppulationRatioYear",
-          "y": "total"
-        }]
-      },
-      {
-        "title": "Percentage of population in poverty",
-        "visuals": [{
-          "type": "grouped_column",
-          "table": "allPovertyAgeResidences",
-          "reference": {},
-          "x": "residence",
-          "groupBy": "poverty_type",
-          "y": "total"
+          "y": "total",
+          "aggregate": "sum"
         }]
       },
       {
@@ -181,14 +171,14 @@
         "title": "Human Development Indices",
         "visuals": [{
           "type": "column",
-          "table": "allHumanDevIndiceses",
+          "table": "allHumanDevIndices",
           "reference": {},
           "x": "humanDevIndices",
           "y": "total"
         }]
       }
 
-    ]
+     ]
   },
   {
       "sectionTitle": "Elections",
@@ -196,7 +186,7 @@
           "title": "Valid vs invalid votes",
           "visuals": [{
             "type": "pie",
-            "table": "allValidInvalidVotess",
+            "table": "allValidInvalidVotes",
             "reference": {},
             "x": "votes",
             "y": "total"
@@ -239,7 +229,7 @@
           "title": "People using at least basic drinking water services (% of population)",
           "visuals": [{
             "type": "column",
-            "table": "allAccessToBasicServicess",
+            "table": "allAccessToBasicServices",
             "reference": {},
             "x": "accessToBasicServicesYear",
             "y": "total"
