@@ -18,7 +18,10 @@ export default class ChartFactory {
       aggregate,
       width,
       height,
-      barWidth
+      barWidth,
+      subtitle,
+      description,
+      statistic
     },
     datas,
     comparisonDatas,
@@ -264,23 +267,29 @@ export default class ChartFactory {
           </div>
         );
       }
-      case 'number':
+      case 'number': {
+        const dataStat = statistic.aggregate
+          ? aggregateData(statistic.aggregate, data, statistic.unique)
+          : [data[data.length - 1]];
+        const dataStatY = !statistic.unit
+          ? dataStat[0].y
+          : `${dataStat[0].y} ${statistic.unit}`;
+
+        let xDesc = !statistic.unique ? ' ' : ` (${dataStat[0].x})`;
+        xDesc = !dataStat[0].groupBy
+          ? `${xDesc}`
+          : `${xDesc.substring(0, xDesc.length - 1)} - ${dataStat[0].groupBy})`;
         return (
           <NumberVisuals
-            subtitle="Income"
-            statistic="$60,336"
-            statisticDeviation="±0.1"
-            secondaryDeviation="(194, 667, 872 ±241, 381.6)"
-            description="Median household income"
-            comparisonData={[
-              {
-                parentComparison: 'about 90 percent',
-                parentDescription: 'of the amount in United States: $32,397',
-                parentDeviation: '±0.24%'
-              }
-            ]}
+            key={key}
+            subtitle={subtitle}
+            statistic={dataStatY}
+            description={`${description} ${xDesc}`}
+            comparisonData={[]} // TODO: pending NumberVisuals components (HURUmap-UI) fix on this proptypes
+            classes={{}} // TODO: pending NumberVisuals style configurations - update root margin
           />
         );
+      }
       default:
         return null;
     }
