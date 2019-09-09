@@ -142,11 +142,9 @@ function Profile({
             section.charts.filter(
               chart =>
                 chartData.isLoading ||
-                !chart.visuals.find(
-                  visual =>
-                    !chartData.profileVisualsData ||
-                    chartData.profileVisualsData[visual.id].nodes.length === 0
-                )
+                (!chartData.profileVisualsData ||
+                  chartData.profileVisualsData[chart.visuals.id].nodes
+                    .length === 0)
             ).length !== 0
         )
         .map(section => ({
@@ -174,10 +172,7 @@ function Profile({
                 chartData.isLoading ||
                 (chartData.profileVisualsData &&
                   /* data is not missing */
-                  !v.find(
-                    ({ id }) =>
-                      chartData.profileVisualsData[id].nodes.length === 0
-                  ))
+                  !chartData.profileVisualsData[v.id].nodes.length === 0)
             )
             .map(chart => (
               <div style={{ margin: '40px 0', maxWidth: '100%' }}>

@@ -7,7 +7,7 @@
         "visuals": {
           "type": "pie",
           "table": "allPopulationSex2006S",
-          "reference": {},
+
           "x": "populationSex2006",
           "y": "total"
         },
@@ -26,7 +26,7 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2007S",
-            "reference": {},
+
             "x": "populationSex2007",
             "y": "total"
           },
@@ -45,7 +45,7 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2009S",
-            "reference": {},
+
             "x": "populationSex2009",
             "y": "total"
           },
@@ -64,7 +64,7 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2011S",
-            "reference": {},
+
             "x": "populationSex2011",
             "y": "total"
           },
@@ -83,7 +83,7 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2012S",
-            "reference": {},
+
             "x": "populationSex2012",
             "y": "total"
           },
@@ -102,7 +102,7 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2013S",
-            "reference": {},
+
             "x": "populationSex2013",
             "y": "total"
           },
@@ -121,7 +121,7 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allPopulationSexYears",
-          "reference": {},
+
           "x": "populationYear",
           "groupBy": "populationSex",
           "y": "total"
@@ -140,7 +140,7 @@
           "visuals": {
             "type": "column",
             "table": "allPopulationResidence2009S",
-            "reference": {},
+
             "x": "populationResidence2009",
             "y": "total"
           },
@@ -159,7 +159,7 @@
           "visuals": {
             "type": "column",
             "table": "allPopulationResidence2012S",
-            "reference": {},
+
             "x": "populationResidence2012",
             "y": "total"
           },
@@ -177,7 +177,7 @@
         "visuals": {
           "type": "column",
           "table": "allPopulationResidence2013S",
-          "reference": {},
+
           "x": "populationResidence2013",
           "y": "total"
         },
@@ -193,14 +193,14 @@
       },
       {
         "title": "Youth Unemployment Sex per year",
-        "visuals": [{
+        "visuals": {
           "type": "grouped_column",
           "table": "allYouthUnemployments",
           "groupBy": "youthUnemploymentYear",
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
-        }],
+        },
         "blockStat": {
           "type": "number",
           "subtitle": "Unemployment",
@@ -215,7 +215,7 @@
         "visuals": {
           "type": "column",
           "table": "allYouthUnemploymentGenerals",
-          "reference": {},
+
           "x": "youthUnemploymentPeriod",
           "y": "total"
         },
@@ -233,7 +233,7 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allEmploymentToPopulationRatios",
-          "reference": {},
+
           "groupBy": "employmentToPopulationRatioYear",
           "x": "sex",
           "y": "total",
@@ -254,7 +254,7 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allResidencePovertyTypes",
-          "reference": {},
+
           "x": "residence",
           "groupBy": "povertyType",
           "y": "total"
@@ -274,7 +274,7 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allPovertyAgeResidences",
-          "reference": {},
+
           "x": "residence",
           "groupBy": "age",
           "y": "total"
@@ -294,7 +294,7 @@
         "visuals": {
           "type": "column",
           "table": "allHumanDevIndices",
-          "reference": {},
+
           "x": "humanDevIndices",
           "y": "total"
         },
@@ -317,7 +317,7 @@
           "visuals": {
             "type": "pie",
             "table": "allValidInvalidVotes",
-            "reference": {},
+
             "x": "votes",
             "y": "total"
           },
@@ -372,7 +372,7 @@
           "visuals": {
             "type": "column",
             "table": "allWomenInParliaments",
-            "reference": {},
+
             "x": "womenParliamentYear",
             "y": "total"
           },
@@ -391,7 +391,7 @@
           "visuals": {
             "type": "column",
             "table": "allWomenInGovernments",
-            "reference": {},
+
             "x": "position",
             "y": "total"
           },
@@ -413,7 +413,7 @@
           "visuals": {
             "type": "column",
             "table": "allAccessToBasicServices",
-            "reference": {},
+
             "x": "accessToBasicServicesYear",
             "y": "total"
           },
@@ -431,7 +431,7 @@
           "visuals": {
             "type": "column",
             "table": "allAccessToElecWaterServices",
-            "reference": {},
+
             "x": "accessToElecWaterServices",
             "y": "total"
           },
@@ -449,7 +449,7 @@
           "visuals": {
             "type": "column",
             "table": "allPrevalenceOfUndernourishments",
-            "reference": {},
+
             "x": "prevalenceOfUndernourishmentYear",
             "y": "total"
           },
@@ -467,7 +467,7 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allLifeExpectancyAtBirths",
-            "reference": {},
+
             "x": "sex",
             "groupBy": "lifeExpectancyAtBirthYear",
             "y": "total"
@@ -486,7 +486,7 @@
           "visuals": {
             "type": "column",
             "table": "allPrevalenceFgms",
-            "reference": {},
+
             "x": "prevalenceFgm",
             "y": "total"
           },
@@ -504,7 +504,7 @@
           "visuals": {
             "type": "column",
             "table": "allMaternalMortalities",
-            "reference": {},
+
             "x": "maternalMortalityYear",
             "y": "total"
           },
@@ -522,7 +522,7 @@
           "visuals": {
             "type": "column",
             "table": "allHivPrevalences",
-            "reference": {},
+
             "x": "sex",
             "groupBy": "hivPrevalenceYear",
             "y": "total"
@@ -541,7 +541,7 @@
           "visuals": {
             "type": "column",
             "table": "allHivPatientsDistributions",
-            "reference": {},
+
             "x": "sex",
             "groupBy": "hivPatientsDistributionYear",
             "y": "total"
@@ -560,7 +560,7 @@
           "visuals": {
             "type": "column",
             "table": "allMalariaPrevalences",
-            "reference": {},
+
             "x": "malariaPrevalenceTest",
             "y": "total"
           },
@@ -578,7 +578,7 @@
           "visuals": {
             "type": "column",
             "table": "allBirthsAttendedBySkilledHealthStaffs",
-            "reference": {},
+
             "x": "birthsAttendedBySkilledHealthStaffYear",
             "y": "total"
           },
@@ -596,7 +596,7 @@
           "visuals": {
             "type": "column",
             "table": "allFgmPrevalences",
-            "reference": {},
+
             "x": "fgmPrevalenceYear",
             "y": "total"
           },
@@ -614,7 +614,7 @@
           "visuals": {
             "type": "column",
             "table": "allNursesAndMidwives",
-            "reference": {},
+
             "x": "nursesAndMidwivesYear",
             "y": "total"
           },
@@ -632,7 +632,7 @@
           "visuals": {
             "type": "column",
             "table": "allIncidenceOfMalariaPer1000PopAtRisks",
-            "reference": {},
+
             "x": "incidenceOfMalariaPer1000PopAtRiskYear",
             "y": "total"
           },
@@ -650,7 +650,7 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allInfantUnder5Mortalities",
-            "reference": {},
+
             "x": "infantUnder5",
             "groupBy": "mortalityYear",
             "y": "total"
@@ -669,7 +669,7 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allHealthWorkersDistributions",
-            "reference": {},
+
             "x": "workers",
             "groupBy": "year",
             "y": "total"
@@ -688,7 +688,7 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allNumberOfDoctorsYearSexes",
-            "reference": {},
+
             "x": "numberOfDoctorsSex",
             "groupBy": "numberOfDoctorsYear",
             "y": "total"
@@ -707,7 +707,7 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allNumberOfDentistYearSexes",
-            "reference": {},
+
             "x": "numberOfDentistSex",
             "groupBy": "numberOfDentistYear",
             "y": "total"
@@ -730,7 +730,7 @@
           "visuals": {
             "type": "column",
             "table": "allFoodProductions",
-            "reference": {},
+
             "x": "crops",
             "y": "total"
           },
@@ -748,7 +748,7 @@
           "visuals": {
             "type": "column",
             "table": "allCerealYieldKgPerHectares",
-            "reference": {},
+
             "x": "cerealYieldKgPerHectareYear",
             "y": "total"
           },
@@ -766,7 +766,7 @@
           "visuals": {
             "type": "column",
             "table": "allAgriculturalLands",
-            "reference": {},
+
             "x": "agriculturalLandYear",
             "y": "total"
           },
@@ -784,7 +784,7 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allEmploymentInAgricultures",
-            "reference": {},
+
             "x": "sex",
             "groupBy": "employmentInAgricultureYear",
             "y": "total"
@@ -809,7 +809,7 @@
           "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
-            "reference": {},
+
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
@@ -834,7 +834,7 @@
           "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
-            "reference": {},
+
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
@@ -859,7 +859,7 @@
           "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
-            "reference": {},
+
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
@@ -884,7 +884,7 @@
           "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
-            "reference": {},
+
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
