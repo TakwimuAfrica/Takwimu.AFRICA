@@ -121,9 +121,8 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allPopulationSexYears",
-
-          "x": "populationYear",
-          "groupBy": "populationSex",
+          "x": "populationSex",
+          "groupBy": "populationYear",
           "y": "total"
         },
         "blockStat": {
@@ -131,7 +130,8 @@
           "subtitle": "Population",
           "description": "People",
           "statistic": {
-            "aggregate": "sum"
+            "aggregate": "first",
+            "unique": true
           }
         }
       },
@@ -206,7 +206,8 @@
           "subtitle": "Unemployment",
           "description": "% of labour force ages 15-24",
           "statistic": {
-            "unique": true
+            "unique": true,
+            "aggregate": "last"
           }
         }
       },
@@ -215,7 +216,6 @@
         "visuals": {
           "type": "column",
           "table": "allYouthUnemploymentGenerals",
-
           "x": "youthUnemploymentPeriod",
           "y": "total"
         },
@@ -224,7 +224,8 @@
           "subtitle": "Population",
           "description": "People",
           "statistic": {
-            "unique": true
+            "unique": true,
+            "aggregate": "last"
           }
         }
       },

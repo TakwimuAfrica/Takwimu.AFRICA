@@ -2,7 +2,9 @@ const aggregateFunc = {
   sum: data => data.reduce((a, b) => a + b.y, 0),
   max: data => data.reduce((a, b) => (a > b.y ? a : b.y), 0),
   min: data => data.reduce((a, b) => (a < b.y ? a : b.y), 0),
-  avg: data => data.reduce((a, b) => a + b.y, 0) / data.length
+  avg: data => data.reduce((a, b) => a + b.y, 0) / data.length,
+  first: data => data[0].y,
+  last: data => data[data.length - 1].y
 };
 
 export default function aggregateData(func, data, unique = true) {
