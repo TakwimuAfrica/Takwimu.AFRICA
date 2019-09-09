@@ -1,22 +1,21 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useApolloClient } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
 
 import { MapIt, InsightContainer } from '@codeforafrica/hurumap-ui';
 import { Grid, makeStyles } from '@material-ui/core';
-import { GET_PROFILE, buildVisualsQuery } from '../data/queries';
 
 import Page from '../components/Page';
 import config from '../config';
 
 import ProfileSection from '../components/ProfileSection';
 import ProfileDetail from '../components/ProfileDetail';
-import sectionedCharts from '../data/chart.json';
 
 import slugify from '../utils/slugify';
 
 import ChartFactory from '../components/ChartFactory';
 import Section from '../components/Section';
+import useChartDefinitions from '../data/useChartDefinitions';
+import useProfileLoader from '../data/useProfileLoader';
 
 const useStyles = makeStyles({
   chart: {
@@ -30,34 +29,11 @@ function Profile({
   }
 }) {
   const classes = useStyles();
-  const client = useApolloClient();
-
   const [activeTab, setActiveTab] = useState(
     window.location.hash.slice(1) ? window.location.hash.slice(1) : 'all'
   );
-  const [chartData, setChartsData] = useState({
-    isLoading: true
-  });
-  const [profiles, setProfiles] = useState({
-    isLoading: true
-  });
 
-  // Provide the visuals with unique ids for fetching
-  // The unique ids will be used to set alias in graphql
-  let index = 0;
-  let chartIndex = 0;
-  sectionedCharts.forEach(x =>
-    x.charts.forEach(y => {
-      // eslint-disable-next-line no-param-reassign
-      y.id = `chart${chartIndex}`;
-      chartIndex += 1;
-      y.visuals.forEach(z => {
-        // eslint-disable-next-line no-param-reassign
-        z.id = `viz${index}`;
-        index += 1;
-      });
-    })
-  );
+  const sectionedCharts = useChartDefinitions();
 
   const [visuals] = useState(
     sectionedCharts
@@ -67,65 +43,7 @@ function Profile({
       .reduce((a, b) => a.concat(b))
   );
 
-  useEffect(() => {
-    (async () => {
-      setProfiles({
-        isLoading: true
-      });
-
-      const {
-        data: { geo: profile }
-      } = await client.query({
-        query: GET_PROFILE,
-        variables: {
-          geoCode: geoId.split('-')[1],
-          geoLevel: geoId.split('-')[0]
-        }
-      });
-      const {
-        data: { geo: parentProfile }
-      } = await client.query({
-        query: GET_PROFILE,
-        variables: {
-          geoCode: profile.parentCode,
-          geoLevel: profile.parentLevel
-        }
-      });
-
-      setProfiles({
-        isLoading: false,
-        profile,
-        parent: parentProfile
-      });
-    })();
-  }, [client, geoId]);
-
-  useEffect(() => {
-    if (!profiles.isLoading) {
-      (async () => {
-        setChartsData({
-          isLoading: true
-        });
-
-        const parent = {
-          geoLevel: profiles.parent.parentLevel,
-          geoCode: profiles.parent.parentCode
-        };
-        const { data: profileVisualsData } = await client.query({
-          query: buildVisualsQuery(visuals, parent),
-          variables: {
-            geoCode: profiles.profile.geoCode,
-            geoLevel: profiles.profile.geoLevel
-          }
-        });
-
-        setChartsData({
-          isLoading: false,
-          profileVisualsData
-        });
-      })();
-    }
-  }, [profiles, visuals, client]);
+  const { profiles, chartData } = useProfileLoader(geoId, visuals);
 
   // get all available profiletabs
   const profileTabs = useMemo(
@@ -158,7 +76,7 @@ function Profile({
           index: section.index
         }))
     ],
-    [chartData]
+    [chartData.isLoading, chartData.profileVisualsData, sectionedCharts]
   );
 
   /**
@@ -196,7 +114,7 @@ function Profile({
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(
-                      { id: 'viz0', type: 'number' },
+                      { ...chart.visuals[0], type: 'number' },
                       chartData.profileVisualsData,
                       null,
                       profiles
@@ -215,7 +133,14 @@ function Profile({
             ))}
         </Grid>
       )),
-    [chartData, profileTabs, profiles, classes]
+    [
+      profileTabs,
+      sectionedCharts,
+      chartData.isLoading,
+      chartData.profileVisualsData,
+      classes.chart,
+      profiles
+    ]
   );
 
   // Show and hide sections
