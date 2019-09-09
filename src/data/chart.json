@@ -545,8 +545,7 @@
             "subtitle": "Health",
             "description": "HIV Patients Distribution",
             "statistic": {
-              "unique": true,
-              "unit": "%"
+              "unique": true
             }
           }
         },

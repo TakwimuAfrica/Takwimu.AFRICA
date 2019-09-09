@@ -271,9 +271,11 @@ export default class ChartFactory {
         const dataStat = statistic.aggregate
           ? aggregateData(statistic.aggregate, data, statistic.unique)
           : [data[data.length - 1]];
-        const dataStatY = !statistic.unit
-          ? dataStat[0].y
-          : `${dataStat[0].y} ${statistic.unit}`;
+        let dataStatY = numberFormatter.format(dataStat[0].y);
+
+        dataStatY = !statistic.unit
+          ? dataStatY
+          : `${dataStatY} ${statistic.unit}`;
 
         let xDesc = !statistic.unique ? ' ' : ` (${dataStat[0].x})`;
         xDesc = !dataStat[0].groupBy
