@@ -172,7 +172,7 @@ function Profile({
                 chartData.isLoading ||
                 (chartData.profileVisualsData &&
                   /* data is not missing */
-                  !chartData.profileVisualsData[v.id].nodes.length === 0)
+                  chartData.profileVisualsData[v.id].nodes.length !== 0)
             )
             .map(chart => (
               <div style={{ margin: '40px 0', maxWidth: '100%' }}>
