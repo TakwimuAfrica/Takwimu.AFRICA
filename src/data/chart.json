@@ -4,149 +4,233 @@
     "sectionDescription": "",
     "charts": [{
         "title": "Population by Sex",
-        "visuals": [{
+        "visuals": {
           "type": "pie",
           "table": "allPopulationSex2006S",
           "reference": {},
           "x": "populationSex2006",
           "y": "total"
-        }]
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Population",
+          "description": "People",
+          "statistic": {
+            "aggregate": "sum",
+            "unique": false
+          }
+        }
       },
       {
           "title": "Population by Sex",
-          "visuals": [{
+          "visuals": {
             "type": "pie",
             "table": "allPopulationSex2007S",
             "reference": {},
             "x": "populationSex2007",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
       },
       {
           "title": "Population by Sex",
-          "visuals": [{
+          "visuals": {
             "type": "pie",
             "table": "allPopulationSex2009S",
             "reference": {},
             "x": "populationSex2009",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
       },
       {
           "title": "Population by Sex",
-          "visuals": [{
+          "visuals": {
             "type": "pie",
             "table": "allPopulationSex2011S",
             "reference": {},
             "x": "populationSex2011",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
       },
       {
           "title": "Population by Sex",
-          "visuals": [{
+          "visuals": {
             "type": "pie",
             "table": "allPopulationSex2012S",
             "reference": {},
             "x": "populationSex2012",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
       },
       {
           "title": "Population by Sex",
-          "visuals": [{
+          "visuals": {
             "type": "pie",
             "table": "allPopulationSex2013S",
             "reference": {},
             "x": "populationSex2013",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
       },
       {
         "title": "Population by Sex per year",
-        "visuals": [{
+        "visuals": {
           "type": "grouped_column",
           "table": "allPopulationSexYears",
           "reference": {},
           "x": "populationYear",
           "groupBy": "populationSex",
           "y": "total"
-        }]
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Population",
+          "description": "People",
+          "statistic": {
+            "aggregate": "sum"
+          }
+        }
       },
       {
           "title": "Population by Residence",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allPopulationResidence2009S",
             "reference": {},
             "x": "populationResidence2009",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": true
+            }
+          }
       },
       {
           "title": "Population by Residence",
-          "visuals": [{
+          "visuals": {
             "type": "column",
-            "table": "allPopulationResidence2009S",
+            "table": "allPopulationResidence2012S",
             "reference": {},
-            "x": "populationResidence2009",
+            "x": "populationResidence2012",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
       },
       {
         "title": "Population by Residence",
-        "visuals": [{
-          "type": "column",
-          "table": "allPopulationResidence2012S",
-          "reference": {},
-          "x": "populationResidence2012",
-          "y": "total"
-        }]
-      },
-      {
-        "title": "Population by Residence",
-        "visuals": [{
+        "visuals": {
           "type": "column",
           "table": "allPopulationResidence2013S",
           "reference": {},
           "x": "populationResidence2013",
           "y": "total"
-        }]
-      },
-      {
-        "title": "Population by Residence",
-        "visuals": [{
-          "type": "column",
-          "table": "allPopulationResidence2013S",
-          "reference": {},
-          "x": "populationResidence2013",
-          "y": "total"
-        }]
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Population",
+          "description": "People",
+          "statistic": {
+            "aggregate": "sum",
+            "unique": false
+          }
+        }
       },
       {
         "title": "Youth Unemployment Sex per year",
         "visuals": [{
           "type": "grouped_column",
           "table": "allYouthUnemployments",
-          "groupdBy": "youthUnemploymentYear",
+          "groupBy": "youthUnemploymentYear",
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
-        }]
+        }],
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Unemployment",
+          "description": "% of labour force ages 15-24",
+          "statistic": {
+            "unique": true
+          }
+        }
       },
       {
         "title": "Youth Unemployment",
-        "visuals": [{
+        "visuals": {
           "type": "column",
           "table": "allYouthUnemploymentGenerals",
           "reference": {},
           "x": "youthUnemploymentPeriod",
           "y": "total"
-        }]
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Population",
+          "description": "People",
+          "statistic": {
+            "unique": true
+          }
+        }
       },
       {
         "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
-        "visuals": [{
+        "visuals": {
           "type": "grouped_column",
           "table": "allEmploymentToPopulationRatios",
           "reference": {},
@@ -154,72 +238,171 @@
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
-        }]
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Employment",
+          "description": "Employment Ratio",
+          "statistic": {
+            "unique": true,
+            "unit": "%"
+          }
+        }
+      },
+      {
+        "title": "Percentage of population in poverty",
+        "visuals": {
+          "type": "grouped_column",
+          "table": "allResidencePovertyTypes",
+          "reference": {},
+          "x": "residence",
+          "groupBy": "povertyType",
+          "y": "total"
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Percentage of Population",
+          "description": "",
+          "statistic": {
+            "unique": true,
+            "unit": "%"
+          }
+        }
       },
       {
         "title": "Percentage of population living in poverty by age and residence",
-        "visuals": [{
+        "visuals": {
           "type": "grouped_column",
           "table": "allPovertyAgeResidences",
           "reference": {},
           "x": "residence",
           "groupBy": "age",
           "y": "total"
-        }]
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "Percentage Population",
+          "description": "",
+          "statistic": {
+            "unique": true,
+            "unit": "%"
+          }
+        }
       },
       {
         "title": "Human Development Indices",
-        "visuals": [{
+        "visuals": {
           "type": "column",
           "table": "allHumanDevIndices",
           "reference": {},
           "x": "humanDevIndices",
           "y": "total"
-        }]
+        },
+        "blockStat": {
+          "type": "number",
+          "subtitle": "HDI",
+          "description": "",
+          "statistic": {
+            "aggregate": "sum"
+          }
+        }
       }
 
      ]
   },
   {
       "sectionTitle": "Elections",
-      "charts": [{
+      "charts":[{
           "title": "Valid vs invalid votes",
-          "visuals": [{
+          "visuals": {
             "type": "pie",
             "table": "allValidInvalidVotes",
             "reference": {},
             "x": "votes",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Elections",
+            "description": "Votes",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
         },
         {
           "title": "Registered voters vs total votes cast",
-          "visuals": [{
+          "visuals": {
             "type": "pie",
             "table": "allRegisteredAccreditedVoters",
+            "x": "voters",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Elections",
+            "description": "Registered Voters",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
+        },
+        {
+          "title": "Registered voters vs total votes cast",
+          "visuals": {
+            "type": "pie",
+            "table": "allVotesPerCandidates",
             "x": "candidate",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Elections",
+            "description": "Cast Votes",
+            "statistic": {
+              "aggregate": "sum",
+              "unique": false
+            }
+          }
         },
         {
           "title": "Proportion of seats held by women in national parliaments (%)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allWomenInParliaments",
             "reference": {},
             "x": "womenParliamentYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum",
+              "unit": "%"
+            }
+          }
         },
         {
           "title": "Position held by women in government",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allWomenInGovernments",
             "reference": {},
             "x": "position",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         }
       ]
   },
@@ -227,180 +410,316 @@
       "sectionTitle": "Health",
       "charts": [{
           "title": "People using at least basic drinking water services (% of population)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allAccessToBasicServices",
             "reference": {},
             "x": "accessToBasicServicesYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Percent of households with access to water and electricity services",
-          "visuals": [{
+          "visuals": {
             "type": "column",
-            "table": "allAccessToElecWaterServicess",
+            "table": "allAccessToElecWaterServices",
             "reference": {},
             "x": "accessToElecWaterServices",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Prevalence of undernourishment (% of population)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allPrevalenceOfUndernourishments",
             "reference": {},
             "x": "prevalenceOfUndernourishmentYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Life expectancy at birth (years)",
-          "visuals": [{
+          "visuals": {
             "type": "grouped_column",
             "table": "allLifeExpectancyAtBirths",
             "reference": {},
             "x": "sex",
             "groupBy": "lifeExpectancyAtBirthYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Prevalence of FGM among women aged 15 - 49 years",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allPrevalenceFgms",
             "reference": {},
             "x": "prevalenceFgm",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allMaternalMortalities",
             "reference": {},
             "x": "maternalMortalityYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Prevalence of HIV, (% ages 15-24)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allHivPrevalences",
             "reference": {},
             "x": "sex",
             "groupBy": "hivPrevalenceYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Distribution of HIV Patients by Year and Sex 2015-2016",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allHivPatientsDistributions",
             "reference": {},
             "x": "sex",
             "groupBy": "hivPatientsDistributionYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Prevalence of Malaria in Children - Number of children",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allMalariaPrevalences",
             "reference": {},
             "x": "malariaPrevalenceTest",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Births attended by skilled health staff (% of total)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allBirthsAttendedBySkilledHealthStaffs",
             "reference": {},
             "x": "birthsAttendedBySkilledHealthStaffYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Female Genital Mutilation Prevelence (%)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allFgmPrevalences",
             "reference": {},
             "x": "fgmPrevalenceYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Nurses and midwives (per 1,000 people)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
-            "table": "allNursesAndMidwivess",
+            "table": "allNursesAndMidwives",
             "reference": {},
             "x": "nursesAndMidwivesYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Incidence of malaria per 1000 population at risk",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allIncidenceOfMalariaPer1000PopAtRisks",
             "reference": {},
             "x": "incidenceOfMalariaPer1000PopAtRiskYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Infant and Under 5 Mortality rate (per 1000 live births)",
-          "visuals": [{
+          "visuals": {
             "type": "grouped_column",
             "table": "allInfantUnder5Mortalities",
             "reference": {},
             "x": "infantUnder5",
             "groupBy": "mortalityYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Health worker density and distribution",
-          "visuals": [{
+          "visuals": {
             "type": "grouped_column",
             "table": "allHealthWorkersDistributions",
             "reference": {},
             "x": "workers",
             "groupBy": "year",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Number of Doctors by Year and Sex (2015-2017)",
-          "visuals": [{
+          "visuals": {
             "type": "grouped_column",
             "table": "allNumberOfDoctorsYearSexes",
             "reference": {},
             "x": "numberOfDoctorsSex",
             "groupBy": "numberOfDoctorsYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Number of Dentists by Year and Sex (2015-2017)",
-          "visuals": [{
+          "visuals": {
             "type": "grouped_column",
             "table": "allNumberOfDentistYearSexes",
             "reference": {},
             "x": "numberOfDentistSex",
             "groupBy": "numberOfDentistYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         }
       ]
   },
@@ -408,44 +727,76 @@
       "sectionTitle": "Agriculture",
       "charts": [{
           "title": "Crop production in tonnes",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allFoodProductions",
             "reference": {},
             "x": "crops",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Cereal yield in kg per hectare (Thousands)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allCerealYieldKgPerHectares",
             "reference": {},
             "x": "cerealYieldKgPerHectareYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Agricultural land (% of land area)",
-          "visuals": [{
+          "visuals": {
             "type": "column",
             "table": "allAgriculturalLands",
             "reference": {},
             "x": "agriculturalLandYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         },
         {
           "title": "Employment in agriculture (% of male vs female employment)",
-          "visuals": [{
+          "visuals": {
             "type": "grouped_column",
             "table": "allEmploymentInAgricultures",
             "reference": {},
             "x": "sex",
             "groupBy": "employmentInAgricultureYear",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         }
       ]
   },
@@ -455,14 +806,22 @@
       "sectionDescription": "",
       "charts": [{
           "title": "Population",
-          "visuals": [{
+          "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
             "reference": {},
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         }
       ]
   },
@@ -472,14 +831,22 @@
       "sectionDescription": "",
       "charts": [{
           "title": "Population",
-          "visuals": [{
+          "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
             "reference": {},
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         }
       ]
   },
@@ -489,14 +856,22 @@
       "sectionDescription": "",
       "charts": [{
           "title": "Population",
-          "visuals": [{
+          "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
             "reference": {},
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         }
       ]
   },
@@ -506,14 +881,22 @@
       "sectionDescription": "",
       "charts": [{
           "title": "Population",
-          "visuals": [{
+          "visuals": {
             "type": "circle_nested_proportional_area",
             "table": "allPopulationResidence2009S",
             "reference": {},
             "label": "longName",
             "x": "populationResidence2009",
             "y": "total"
-          }]
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Population",
+            "description": "People",
+            "statistic": {
+              "aggregate": "sum"
+            }
+          }
         }
       ]
   }

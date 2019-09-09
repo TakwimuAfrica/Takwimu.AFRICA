@@ -20,7 +20,8 @@ import Section from '../components/Section';
 
 const useStyles = makeStyles({
   chart: {
-    margin: '20px 0'
+    margin: '20px 0',
+    backgroundColor: '#f6f6f6'
   }
 });
 
@@ -45,17 +46,14 @@ function Profile({
   // Provide the visuals with unique ids for fetching
   // The unique ids will be used to set alias in graphql
   let index = 0;
-  let chartIndex = 0;
   sectionedCharts.forEach(x =>
     x.charts.forEach(y => {
       // eslint-disable-next-line no-param-reassign
-      y.id = `chart${chartIndex}`;
-      chartIndex += 1;
-      y.visuals.forEach(z => {
-        // eslint-disable-next-line no-param-reassign
-        z.id = `viz${index}`;
-        index += 1;
-      });
+      y.id = `chart${index}`;
+      const { visuals, blockStat } = y;
+      visuals.id = `viz${index}`;
+      blockStat.id = `viz${index}`;
+      index += 1;
     })
   );
 
@@ -64,7 +62,6 @@ function Profile({
       .map(x => x.charts)
       .reduce((a, b) => a.concat(b))
       .map(x => x.visuals)
-      .reduce((a, b) => a.concat(b))
   );
 
   useEffect(() => {
@@ -196,19 +193,17 @@ function Profile({
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(
-                      { id: 'viz0', type: 'number' },
+                      chart.blockStat,
                       chartData.profileVisualsData,
                       null,
                       profiles
                     )}
                   {!chartData.isLoading &&
-                    chart.visuals.map(visual =>
-                      ChartFactory.build(
-                        visual,
-                        chartData.profileVisualsData,
-                        null,
-                        profiles
-                      )
+                    ChartFactory.build(
+                      chart.visuals,
+                      chartData.profileVisualsData,
+                      null,
+                      profiles
                     )}
                 </InsightContainer>
               </div>
