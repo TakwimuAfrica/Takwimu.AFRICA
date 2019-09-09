@@ -372,16 +372,15 @@
           "visuals": {
             "type": "column",
             "table": "allWomenInParliaments",
-
             "x": "womenParliamentYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Women In Parliament",
+            "description": "Seat Proportion",
             "statistic": {
-              "aggregate": "sum",
+              "unique": true,
               "unit": "%"
             }
           }
@@ -391,14 +390,13 @@
           "visuals": {
             "type": "column",
             "table": "allWomenInGovernments",
-
             "x": "position",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Women in Government",
+            "description": "Total Count",
             "statistic": {
               "aggregate": "sum"
             }
@@ -413,16 +411,16 @@
           "visuals": {
             "type": "column",
             "table": "allAccessToBasicServices",
-
             "x": "accessToBasicServicesYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Basic Dring Water Services",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -431,16 +429,16 @@
           "visuals": {
             "type": "column",
             "table": "allAccessToElecWaterServices",
-
             "x": "accessToElecWaterServices",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -449,16 +447,16 @@
           "visuals": {
             "type": "column",
             "table": "allPrevalenceOfUndernourishments",
-
             "x": "prevalenceOfUndernourishmentYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "undernourishment",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -467,17 +465,16 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allLifeExpectancyAtBirths",
-
             "x": "sex",
             "groupBy": "lifeExpectancyAtBirthYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Life Expectancy",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true
             }
           }
         },
@@ -486,16 +483,15 @@
           "visuals": {
             "type": "column",
             "table": "allPrevalenceFgms",
-
             "x": "prevalenceFgm",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "FGM Prevelance",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true
             }
           }
         },
@@ -504,16 +500,15 @@
           "visuals": {
             "type": "column",
             "table": "allMaternalMortalities",
-
             "x": "maternalMortalityYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Maternal Mortality Ratio",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true
             }
           }
         },
@@ -522,17 +517,17 @@
           "visuals": {
             "type": "column",
             "table": "allHivPrevalences",
-
             "x": "sex",
             "groupBy": "hivPrevalenceYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "HIV Prevalence -Youth",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -541,17 +536,17 @@
           "visuals": {
             "type": "column",
             "table": "allHivPatientsDistributions",
-
             "x": "sex",
             "groupBy": "hivPatientsDistributionYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "HIV Patients Distribution",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -560,16 +555,16 @@
           "visuals": {
             "type": "column",
             "table": "allMalariaPrevalences",
-
             "x": "malariaPrevalenceTest",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Malaria in Children",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -578,16 +573,16 @@
           "visuals": {
             "type": "column",
             "table": "allBirthsAttendedBySkilledHealthStaffs",
-
             "x": "birthsAttendedBySkilledHealthStaffYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Birth by skilled health staff",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -596,16 +591,16 @@
           "visuals": {
             "type": "column",
             "table": "allFgmPrevalences",
-
             "x": "fgmPrevalenceYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "FGM Prevalence",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
@@ -614,16 +609,15 @@
           "visuals": {
             "type": "column",
             "table": "allNursesAndMidwives",
-
             "x": "nursesAndMidwivesYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Ratio of nurses and midwives per 1000 people",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true
             }
           }
         },
@@ -632,16 +626,15 @@
           "visuals": {
             "type": "column",
             "table": "allIncidenceOfMalariaPer1000PopAtRisks",
-
             "x": "incidenceOfMalariaPer1000PopAtRiskYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Malaria Incidence",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true
             }
           }
         },
@@ -650,17 +643,15 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allInfantUnder5Mortalities",
-
             "x": "infantUnder5",
             "groupBy": "mortalityYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Mortality Rate",
             "statistic": {
-              "aggregate": "sum"
             }
           }
         },
@@ -669,17 +660,16 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allHealthWorkersDistributions",
-
             "x": "workers",
             "groupBy": "year",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Health Worker Density",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true
             }
           }
         },
@@ -688,17 +678,17 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allNumberOfDoctorsYearSexes",
-
             "x": "numberOfDoctorsSex",
             "groupBy": "numberOfDoctorsYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Total Number of Doctors",
             "statistic": {
-              "aggregate": "sum"
+              "aggregate": "sum",
+              "unique": false
             }
           }
         },
@@ -707,17 +697,17 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allNumberOfDentistYearSexes",
-
             "x": "numberOfDentistSex",
             "groupBy": "numberOfDentistYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Health",
+            "description": "Total Number of dentist",
             "statistic": {
-              "aggregate": "sum"
+              "aggregate": "sum",
+              "unique": false
             }
           }
         }
@@ -730,16 +720,16 @@
           "visuals": {
             "type": "column",
             "table": "allFoodProductions",
-
             "x": "crops",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Agriculture",
+            "description": "Crop Production",
             "statistic": {
-              "aggregate": "sum"
+              "aggregate": "sum",
+              "unique": false
             }
           }
         },
@@ -748,16 +738,16 @@
           "visuals": {
             "type": "column",
             "table": "allCerealYieldKgPerHectares",
-
             "x": "cerealYieldKgPerHectareYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Agriculture",
+            "description": "Cereal Yield (1997-2016)",
             "statistic": {
-              "aggregate": "sum"
+              "aggregate": "sum",
+              "unique": false
             }
           }
         },
@@ -766,16 +756,16 @@
           "visuals": {
             "type": "column",
             "table": "allAgriculturalLands",
-
             "x": "agriculturalLandYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Agriculture",
+            "description": "Land",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         },
