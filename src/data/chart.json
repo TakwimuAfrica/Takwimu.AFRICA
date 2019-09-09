@@ -774,17 +774,17 @@
           "visuals": {
             "type": "grouped_column",
             "table": "allEmploymentInAgricultures",
-
             "x": "sex",
             "groupBy": "employmentInAgricultureYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Agriculture",
+            "description": "Employment",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true,
+              "unit": "%"
             }
           }
         }
@@ -792,74 +792,392 @@
   },
   {
       "sectionTitle": "Education",
-      "sectionIcon": "users",
       "sectionDescription": "",
       "charts": [{
-          "title": "Population",
+          "title": "Primary School enrollment, Female and Male (% gross)",
           "visuals": {
-            "type": "circle_nested_proportional_area",
-            "table": "allPopulationResidence2009S",
-
-            "label": "longName",
-            "x": "populationResidence2009",
+            "type": "grouped_column",
+            "table": "allPrimarySchoolEnrollments",
+            "x": "sex",
+            "groupBy": "primarySchoolEnrollmentYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
+            "subtitle": "Education",
             "description": "People",
             "statistic": {
-              "aggregate": "sum"
+              "aggregate": "sum",
+              "unique": true,
+              "unit": "%"
             }
           }
-        }
+        },
+        {
+            "title": "Literacy rate, adult (% of population ages 15 and above)",
+            "visuals": {
+              "type": "grouped_column",
+              "table": "allAdultLiteracyRates",
+              "x": "sex",
+              "groupBy": "adultLiteracyRateYear",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Education",
+              "description": "Adult Literacy Rate",
+              "statistic": {
+                "aggregate": "sum",
+                "unique": true,
+                "unit": "%"
+              }
+            }
+          },
+          {
+            "title": "Percentage of Women and Men age 15-24 years who are literate by Sex, 2016/17",
+            "visuals": {
+              "type": "column",
+              "table": "allLiteracySexes",
+              "x": "sex",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Education",
+              "description": "Literate",
+              "statistic": {
+                "unique": true,
+                "unit": "%"
+              }
+            }
+          },
+          {
+            "title": "Primary completion rate,(% of relevant age group)",
+            "visuals": {
+              "type": "column",
+              "table": "allPrimaryEducationCompletionRates",
+              "x": "primaryEducationCompletionRateYear",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Education",
+              "description": "Primary Education completion Rate",
+              "statistic": {
+                "unique": true,
+                "unit": "%"
+              }
+            }
+          },
+          {
+              "title": "Percentage Distribution of Enrolment in Primary Schools by Year and Sex, 2015 -2016",
+              "visuals": {
+                "type": "grouped_column",
+                "table": "allPrimarySchoolEnrollmentDistributions",
+                "x": "sex",
+                "groupBy": "primarySchoolEnrollmentYear",
+                "y": "total"
+              },
+              "blockStat": {
+                "type": "number",
+                "subtitle": "Education",
+                "description": "Primary School Enrolment",
+                "statistic": {
+                  "aggregate": "sum",
+                  "unique": true,
+                  "unit": "%"
+                }
+              }
+            },
+            {
+                "title": "Distribution of Enrolment in Junior Secondary School by Year and sex, 2015 -2016",
+                "visuals": {
+                  "type": "grouped_column",
+                  "table": "allJuniorSecondarySchoolEnrollments",
+                  "x": "sex",
+                  "groupBy": "juniorSecondarySchoolEnrollmentYear",
+                  "y": "total"
+                },
+                "blockStat": {
+                  "type": "number",
+                  "subtitle": "Education",
+                  "description": "Junior Secondary Enrolment",
+                  "statistic": {
+                    "aggregate": "sum",
+                    "unique": true,
+                    "unit": "%"
+                  }
+                }
+              },
+              {
+                  "title": "Distribution of Enrolment in Senior Secondary School by State, Year and Sex, 2015 -2016",
+                  "visuals": {
+                    "type": "grouped_column",
+                    "table": "allSeniorSecondarySchoolEnrollments",
+                    "x": "sex",
+                    "groupBy": "seniorSecondarySchoolEnrollmentYear",
+                    "y": "total"
+                  },
+                  "blockStat": {
+                    "type": "number",
+                    "subtitle": "Education",
+                    "description": "Senior Secondary Enrolment",
+                    "statistic": {
+                      "aggregate": "sum",
+                      "unique": true,
+                      "unit": "%"
+                    }
+                  }
+                },
+                {
+                    "title": "School enrollment, secondary (% gross)",
+                    "visuals": {
+                      "type": "grouped_column",
+                      "table": "allSecondarySchoolEnrollments",
+                      "x": "sex",
+                      "groupBy": "secondarySchoolEnrollmentYear",
+                      "y": "total"
+                    },
+                    "blockStat": {
+                      "type": "number",
+                      "subtitle": "Education",
+                      "description": "Secondary Enrolment",
+                      "statistic": {
+                        "aggregate": "sum",
+                        "unique": true,
+                        "unit": "%"
+                      }
+                    }
+                  },
+                  {
+                    "title": "Primary Completion rate (%)",
+                    "visuals": {
+                      "type": "column",
+                      "table": "allPrimaryEducationCompletionSexes",
+                      "x": "primaryEducationCompletionSex",
+                      "y": "total"
+                    },
+                    "blockStat": {
+                      "type": "number",
+                      "subtitle": "Education",
+                      "description": "Percent Completion Rate",
+                      "statistic": {
+                        "unique": true,
+                        "unit": "%"
+                      }
+                    }
+                  }
       ]
   },
   {
       "sectionTitle": "Financial Inclusion",
-      "sectionIcon": "users",
       "sectionDescription": "",
       "charts": [{
-          "title": "Population",
-          "visuals": {
-            "type": "circle_nested_proportional_area",
-            "table": "allPopulationResidence2009S",
-
-            "label": "longName",
-            "x": "populationResidence2009",
-            "y": "total"
+            "title": "Account ownership at a financial institution or with a mobile-money-service provider, (% of population ages 15+)",
+            "visuals": {
+              "type": "grouped_column",
+              "table": "allAccountOwnerships",
+              "x": "sex",
+              "groupBy": "accountOwnershipYear",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Financial Inclusion",
+              "description": "Account Ownership",
+              "statistic": {
+                "aggregate": "sum",
+                "unique": true,
+                "unit": "%"
+              }
+            }
           },
-          "blockStat": {
-            "type": "number",
-            "subtitle": "Population",
-            "description": "People",
-            "statistic": {
-              "aggregate": "sum"
+          {
+            "title": "Percentage of households where at least one member owns or has a Bank Account",
+            "visuals": {
+              "type": "column",
+              "table": "allAccountOwnershipIndicators",
+              "x": "accountOwnershipYear",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Financial Inclusion",
+              "description": "Percent Completion Rate",
+              "statistic": {
+                "unique": true
+              }
+            }
+          },
+          {
+            "title": "Mobile phone subscriptions (per 100 people)",
+            "visuals": {
+              "type": "column",
+              "table": "allMobilePhoneSubscriptions",
+              "x": "mobilePhoneSubscriptionsYear",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Financial Inclusion",
+              "description": "Mobile Phone subscriptions",
+              "statistic": {
+                "unique": true,
+                "unit": "%"
+              }
             }
           }
-        }
+      ]
+  },
+  {
+      "sectionTitle": "Budget",
+      "sectionDescription": "",
+      "charts": [{
+            "title": "Government spending",
+            "visuals": {
+              "type": "grouped_column",
+              "table": "allGovernmentFundings",
+              "x": "sector",
+              "groupBy": "year",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Budget",
+              "description": "Government spending",
+              "statistic": {
+                "aggregate": "sum",
+                "unique": true,
+                "unit": "%"
+              }
+            }
+          }
       ]
   },
   {
       "sectionTitle": "Public Finances",
-      "sectionIcon": "users",
       "sectionDescription": "",
       "charts": [{
-          "title": "Population",
+          "title": "GINI Index",
           "visuals": {
-            "type": "circle_nested_proportional_area",
-            "table": "allPopulationResidence2009S",
-
-            "label": "longName",
-            "x": "populationResidence2009",
+            "type": "column",
+            "table": "allGiniIndices",
+            "x": "giniIndexYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Public Finances",
+            "description": "Gini Index",
             "statistic": {
-              "aggregate": "sum"
+              "unique": true
+            }
+          }
+        },
+        {
+          "title": "GDP per capita (current US$)",
+          "visuals": {
+            "type": "column",
+            "table": "allGdpPerCapitas",
+            "x": "gdpPerCapitaYear",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Public Finances",
+            "description": "GDP per capita",
+            "statistic": {
+              "unique": true
+            }
+          }
+        },
+        {
+          "title": "GDP per capita growth (annual %)",
+          "visuals": {
+            "type": "column",
+            "table": "allGdpPerCapitaGrowths",
+            "x": "gdpPerCapitaGrowthYear",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Public Finances",
+            "description": "GDP per capita Growth",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+          "title": "Tax as percentage of GDP",
+          "visuals": {
+            "type": "column",
+            "table": "allTaxAsPercentageOfGdps",
+            "x": "taxAsPercentageOfGdpYear",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Public Finances",
+            "description": "Tax (% GDP)",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+          "title": "Tax revenue (current LCU)",
+          "visuals": {
+            "type": "column",
+            "table": "allTaxRevenues",
+            "x": "taxRevenueYear",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Public Finances",
+            "description": "Tax Revenue",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+          "title": "GDP",
+          "visuals": {
+            "type": "column",
+            "table": "allGdps",
+            "x": "gdpYear",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Public Finances",
+            "description": "GDP",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+          "title": "GDP Growth",
+          "visuals": {
+            "type": "column",
+            "table": "allGdpGrowths",
+            "x": "gdpGrowthYear",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Public Finances",
+            "description": "GDP Growth",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
             }
           }
         }
@@ -867,27 +1185,61 @@
   },
   {
       "sectionTitle": "ODA",
-      "sectionIcon": "users",
       "sectionDescription": "",
-      "charts": [{
-          "title": "Population",
+      "charts": [  {
+          "title": "Foreign direct investment, net inflows (% of GDP)",
           "visuals": {
-            "type": "circle_nested_proportional_area",
-            "table": "allPopulationResidence2009S",
-
-            "label": "longName",
-            "x": "populationResidence2009",
+            "type": "column",
+            "table": "allForeignDirectInvestmentNetInflows",
+            "x": "foreignDirectInvestmentNetInflowsYear",
             "y": "total"
           },
           "blockStat": {
             "type": "number",
-            "subtitle": "Population",
-            "description": "People",
+            "subtitle": "Development Assistance",
+            "description": "Net inflows",
             "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+          "title": "Contribution by principal donor",
+          "visuals": {
+            "type": "column",
+            "table": "allDonors",
+            "x": "donor",
+            "y": "total"
+          },
+          "blockStat": {
+            "type": "number",
+            "subtitle": "Development Assistance",
+            "description": "Donor Contribution",
+            "statistic": {
+              "unique": false,
               "aggregate": "sum"
             }
           }
-        }
+        },
+        {
+            "title": "Contribution by programme",
+            "visuals": {
+              "type": "grouped_column",
+              "table": "allDonorFundedProgrammes",
+              "x": "programme",
+              "groupBy": "donor",
+              "y": "total"
+            },
+            "blockStat": {
+              "type": "number",
+              "subtitle": "Development Assistance",
+              "description": "Donor Contribution",
+              "statistic": {
+                "unique": true
+              }
+            }
+          }
       ]
   }
 ]
