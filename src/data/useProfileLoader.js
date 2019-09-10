@@ -18,7 +18,7 @@ export default (geoId, visuals) => {
       });
 
       const {
-        data: { geo: profile }
+        data: { geo: profile, ...populations }
       } = await client.query({
         query: GET_PROFILE,
         variables: {
@@ -26,6 +26,14 @@ export default (geoId, visuals) => {
           geoLevel: geoId.split('-')[0]
         }
       });
+
+      const population = Object.values(populations).find(
+        p => p.nodes.length > 0
+      );
+      profile.totalPopulation = population
+        ? population.nodes.reduce((a, b) => a + b.total, 0)
+        : 0;
+
       const {
         data: { geo: parent }
       } = await client.query({
