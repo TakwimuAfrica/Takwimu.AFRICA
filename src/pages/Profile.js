@@ -12,6 +12,7 @@ import config from '../config';
 import ProfileSection from '../components/ProfileSection';
 import ProfileDetail from '../components/ProfileDetail';
 import sectionedCharts from '../data/chart.json';
+import chartSources from '../data/sources.json';
 
 import slugify from '../utils/slugify';
 
@@ -89,10 +90,22 @@ function Profile({
         }
       });
 
+      // set country name of profile
+      let country;
+      if (profile.geoLevel === 'country') {
+        country = config.countries.find(c => c.iso_code === profile.geoCode);
+      } else {
+        // else we are on level1
+        country = config.countries.find(
+          c => c.iso_code === parentProfile.geoCode
+        );
+      }
+
       setProfiles({
         isLoading: false,
         profile,
-        parent: parentProfile
+        parent: parentProfile,
+        country: country.slug
       });
     })();
   }, [client, geoId]);
@@ -116,9 +129,13 @@ function Profile({
           }
         });
 
+        const sources =
+          chartSources[profiles.country][profiles.profile.geoLevel];
+        console.log(sources);
         setChartsData({
           isLoading: false,
-          profileVisualsData
+          profileVisualsData,
+          sources
         });
       })();
     }
@@ -181,10 +198,11 @@ function Profile({
                   key={chart.id}
                   loading={chartData.isLoading}
                   title={chart.title}
-                  source={{
-                    title: 'Community Survey 2016',
-                    href: 'http://dev.dominion.africa'
-                  }}
+                  source={
+                    !chartData.isLoading
+                      ? chartData.sources[chart.visuals.table].source
+                      : {}
+                  }
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(

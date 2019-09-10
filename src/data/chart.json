@@ -26,7 +26,6 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2007S",
-
             "x": "populationSex2007",
             "y": "total"
           },
@@ -45,7 +44,6 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2009S",
-
             "x": "populationSex2009",
             "y": "total"
           },
@@ -64,7 +62,6 @@
           "visuals": {
             "type": "pie",
             "table": "allPopulationSex2011S",
-
             "x": "populationSex2011",
             "y": "total"
           },
@@ -140,7 +137,6 @@
           "visuals": {
             "type": "column",
             "table": "allPopulationResidence2009S",
-
             "x": "populationResidence2009",
             "y": "total"
           },
@@ -159,7 +155,6 @@
           "visuals": {
             "type": "column",
             "table": "allPopulationResidence2012S",
-
             "x": "populationResidence2012",
             "y": "total"
           },
@@ -177,7 +172,6 @@
         "visuals": {
           "type": "column",
           "table": "allPopulationResidence2013S",
-
           "x": "populationResidence2013",
           "y": "total"
         },
@@ -234,7 +228,6 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allEmploymentToPopulationRatios",
-
           "groupBy": "employmentToPopulationRatioYear",
           "x": "sex",
           "y": "total",
@@ -255,7 +248,6 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allResidencePovertyTypes",
-
           "x": "residence",
           "groupBy": "povertyType",
           "y": "total"
@@ -275,7 +267,6 @@
         "visuals": {
           "type": "grouped_column",
           "table": "allPovertyAgeResidences",
-
           "x": "residence",
           "groupBy": "age",
           "y": "total"
@@ -295,7 +286,6 @@
         "visuals": {
           "type": "column",
           "table": "allHumanDevIndices",
-
           "x": "humanDevIndices",
           "y": "total"
         },
@@ -318,7 +308,6 @@
           "visuals": {
             "type": "pie",
             "table": "allValidInvalidVotes",
-
             "x": "votes",
             "y": "total"
           },
@@ -788,185 +777,6 @@
             }
           }
         }
-      ]
-  },
-  {
-      "sectionTitle": "Education",
-      "sectionDescription": "",
-      "charts": [{
-          "title": "Primary School enrollment, Female and Male (% gross)",
-          "visuals": {
-            "type": "grouped_column",
-            "table": "allPrimarySchoolEnrollments",
-            "x": "sex",
-            "groupBy": "primarySchoolEnrollmentYear",
-            "y": "total"
-          },
-          "blockStat": {
-            "type": "number",
-            "subtitle": "Education",
-            "description": "People",
-            "statistic": {
-              "aggregate": "sum",
-              "unique": true,
-              "unit": "%"
-            }
-          }
-        },
-        {
-            "title": "Literacy rate, adult (% of population ages 15 and above)",
-            "visuals": {
-              "type": "grouped_column",
-              "table": "allAdultLiteracyRates",
-              "x": "sex",
-              "groupBy": "adultLiteracyRateYear",
-              "y": "total"
-            },
-            "blockStat": {
-              "type": "number",
-              "subtitle": "Education",
-              "description": "Adult Literacy Rate",
-              "statistic": {
-                "aggregate": "sum",
-                "unique": true,
-                "unit": "%"
-              }
-            }
-          },
-          {
-            "title": "Percentage of Women and Men age 15-24 years who are literate by Sex, 2016/17",
-            "visuals": {
-              "type": "column",
-              "table": "allLiteracySexes",
-              "x": "sex",
-              "y": "total"
-            },
-            "blockStat": {
-              "type": "number",
-              "subtitle": "Education",
-              "description": "Literate",
-              "statistic": {
-                "unique": true,
-                "unit": "%"
-              }
-            }
-          },
-          {
-            "title": "Primary completion rate,(% of relevant age group)",
-            "visuals": {
-              "type": "column",
-              "table": "allPrimaryEducationCompletionRates",
-              "x": "primaryEducationCompletionRateYear",
-              "y": "total"
-            },
-            "blockStat": {
-              "type": "number",
-              "subtitle": "Education",
-              "description": "Primary Education completion Rate",
-              "statistic": {
-                "unique": true,
-                "unit": "%"
-              }
-            }
-          },
-          {
-              "title": "Percentage Distribution of Enrolment in Primary Schools by Year and Sex, 2015 -2016",
-              "visuals": {
-                "type": "grouped_column",
-                "table": "allPrimarySchoolEnrollmentDistributions",
-                "x": "sex",
-                "groupBy": "primarySchoolEnrollmentYear",
-                "y": "total"
-              },
-              "blockStat": {
-                "type": "number",
-                "subtitle": "Education",
-                "description": "Primary School Enrolment",
-                "statistic": {
-                  "aggregate": "sum",
-                  "unique": true,
-                  "unit": "%"
-                }
-              }
-            },
-            {
-                "title": "Distribution of Enrolment in Junior Secondary School by Year and sex, 2015 -2016",
-                "visuals": {
-                  "type": "grouped_column",
-                  "table": "allJuniorSecondarySchoolEnrollments",
-                  "x": "sex",
-                  "groupBy": "juniorSecondarySchoolEnrollmentYear",
-                  "y": "total"
-                },
-                "blockStat": {
-                  "type": "number",
-                  "subtitle": "Education",
-                  "description": "Junior Secondary Enrolment",
-                  "statistic": {
-                    "aggregate": "sum",
-                    "unique": true,
-                    "unit": "%"
-                  }
-                }
-              },
-              {
-                  "title": "Distribution of Enrolment in Senior Secondary School by State, Year and Sex, 2015 -2016",
-                  "visuals": {
-                    "type": "grouped_column",
-                    "table": "allSeniorSecondarySchoolEnrollments",
-                    "x": "sex",
-                    "groupBy": "seniorSecondarySchoolEnrollmentYear",
-                    "y": "total"
-                  },
-                  "blockStat": {
-                    "type": "number",
-                    "subtitle": "Education",
-                    "description": "Senior Secondary Enrolment",
-                    "statistic": {
-                      "aggregate": "sum",
-                      "unique": true,
-                      "unit": "%"
-                    }
-                  }
-                },
-                {
-                    "title": "School enrollment, secondary (% gross)",
-                    "visuals": {
-                      "type": "grouped_column",
-                      "table": "allSecondarySchoolEnrollments",
-                      "x": "sex",
-                      "groupBy": "secondarySchoolEnrollmentYear",
-                      "y": "total"
-                    },
-                    "blockStat": {
-                      "type": "number",
-                      "subtitle": "Education",
-                      "description": "Secondary Enrolment",
-                      "statistic": {
-                        "aggregate": "sum",
-                        "unique": true,
-                        "unit": "%"
-                      }
-                    }
-                  },
-                  {
-                    "title": "Primary Completion rate (%)",
-                    "visuals": {
-                      "type": "column",
-                      "table": "allPrimaryEducationCompletionSexes",
-                      "x": "primaryEducationCompletionSex",
-                      "y": "total"
-                    },
-                    "blockStat": {
-                      "type": "number",
-                      "subtitle": "Education",
-                      "description": "Percent Completion Rate",
-                      "statistic": {
-                        "unique": true,
-                        "unit": "%"
-                      }
-                    }
-                  }
       ]
   },
   {
