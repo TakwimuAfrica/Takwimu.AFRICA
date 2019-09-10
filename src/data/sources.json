@@ -1160,24 +1160,6 @@
         }},
     "tanzania": {
         "country": {
-          "allPopulationSex2006S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2007S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
           "allPopulationSex2011S": {
             "source": {
               "href": "",
@@ -1190,25 +1172,7 @@
               "title": ""
             }
           },
-          "allPopulationSex2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
           "allPopulationResidence2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2013S": {
             "source": {
               "href": "",
               "title": ""
@@ -1301,7 +1265,7 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationCompletionRates": {
+            "allPrimaryEducationEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=TZ",
                     "title": "WorldBank"
@@ -1413,6 +1377,12 @@
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "allFoodProductions": {
+                "source": {
+                  "href": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=TZ",
+                  "title": "WorldBank"
+                }
             }
         }},
     "senegal": {
@@ -1923,6 +1893,12 @@
     },
     "uganda":{
         "country": {
+          "allAccessToBasicServices": {
+              "source": {
+                  "href": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=UG",
+                  "title": "WorldBank"
+              }
+          },
             "allAccountOwnerships": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=UG",
@@ -1936,6 +1912,12 @@
                     "title": "WorldBank, 2013"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "allGdpGrowths": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=UG",
+                    "title": "WorldBank"
+                }
             },
             "allAgriculturalLands": {
                 "source": {
@@ -1968,6 +1950,12 @@
                     "title": "WorldBank"
                 }
             },
+            "allTaxRevenues": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.CN?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
             "allYouthUnemployments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=UG",
@@ -1988,7 +1976,7 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationCompletionRates": {
+            "allPrimaryEducationEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=UG",
                     "title": "WorldBank, 2018"
@@ -2037,11 +2025,29 @@
                     "href": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=UG",
                     "title": "WorldBank, 2016"
                 }
+            },
+            "allNursesAndMidwives": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
+            "allGdps": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.CD?locations=UG",
+                    "title": "WorldBank"
+                }
             }
         }
     },
     "zambia":{
         "country": {
+          "allAccessToBasicServices": {
+              "source": {
+                  "href": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=ZM",
+                  "title": "WorldBank"
+              }
+          },
             "allAccountOwnerships": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=ZM",
@@ -2160,6 +2166,12 @@
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=ZM",
                     "title": "WorldBank, 2016"
+                }
+            },
+            "allNursesAndMidwives": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=ZM",
+                    "title": "WorldBank"
                 }
             }
         }
