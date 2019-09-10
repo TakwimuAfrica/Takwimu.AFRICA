@@ -28,6 +28,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "react-share": "^3.0.0",
+    "shortid": "^2.2.15",
     "typescript": "*"
   },
   "devDependencies": {
@@ -61,15 +62,17 @@
     ]
   },
   "scripts": {
+    "applyIdsToChartDefinitions": "node scripts/chartsDefinitionsApplyUniqueId.js",
+    "prestart": "yarn applyIdsToChartDefinitions",
+    "prebuild": "yarn lint && yarn applyIdsToChartDefinitions",
+    "predeploy": "yarn build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
-    "prebuild": "yarn lint",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md' './'",
     "lint-staged": "yarn eslint --fix",
-    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {

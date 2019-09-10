@@ -1,24 +1,23 @@
 import { useMemo } from 'react';
 import sectionedCharts from './chart.json';
 
-export default () => {
-  return useMemo(() => {
+export default () =>
+  useMemo(() => {
     // Provide the visuals with unique ids for fetching
     // The unique ids will be used to set alias in graphql
     let index = 0;
     let chartIndex = 0;
     sectionedCharts.forEach(x =>
-      x.charts.forEach(y => {
+      x.charts.forEach(chart => {
         // eslint-disable-next-line no-param-reassign
-        y.id = `chart${chartIndex}`;
+        chart.queryAlias = `chart${chartIndex}`;
         chartIndex += 1;
-        y.visuals.forEach(z => {
+        chart.visuals.forEach(visual => {
           // eslint-disable-next-line no-param-reassign
-          z.id = `viz${index}`;
+          visual.queryAlias = `viz${index}`;
           index += 1;
         });
       })
     );
     return sectionedCharts;
   }, []);
-};

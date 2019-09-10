@@ -23,7 +23,7 @@ export const buildVisualsQuery = (visuals, parent) => gql`
 query charts($geoCode: String!, $geoLevel: String!) {
   ${visuals
     .map(
-      visual => `${visual.id}: ${visual.table} (
+      visual => `${visual.queryAlias}: ${visual.table} (
     condition: { geoCode: $geoCode, geoLevel: $geoLevel }
   ) {
     nodes {
@@ -39,7 +39,8 @@ query charts($geoCode: String!, $geoLevel: String!) {
   }
   ${
     visual.reference
-      ? `${visual.id}Reference: ${visual.reference.table || visual.table} (
+      ? `${visual.queryAlias}Reference: ${visual.reference.table ||
+          visual.table} (
     condition: ${JSON.stringify(
       visual.reference.condition || {
         geoLevel: parent.geoLevel,

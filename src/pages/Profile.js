@@ -64,9 +64,9 @@ function Profile({
               chart =>
                 chartData.isLoading ||
                 !chart.visuals.find(
-                  visual =>
+                  ({ queryAlias }) =>
                     !chartData.profileVisualsData ||
-                    chartData.profileVisualsData[visual.id].nodes.length === 0
+                    chartData.profileVisualsData[queryAlias].nodes.length === 0
                 )
             ).length !== 0
         )
@@ -96,8 +96,9 @@ function Profile({
                 (chartData.profileVisualsData &&
                   /* data is not missing */
                   !v.find(
-                    ({ id }) =>
-                      chartData.profileVisualsData[id].nodes.length === 0
+                    ({ queryAlias }) =>
+                      chartData.profileVisualsData[queryAlias].nodes.length ===
+                      0
                   ))
             )
             .map(chart => (
