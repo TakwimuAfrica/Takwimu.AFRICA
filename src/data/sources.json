@@ -367,24 +367,6 @@
               "title": ""
             }
           },
-          "allPopulationResidence2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
             "allPopulationSexYears": {
                 "source": {
                     "href": "https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls",
@@ -674,6 +656,12 @@
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "allFoodProductions": {
+                "source": {
+                  "href": "https://nigerianstat.gov.ng/",
+                  "title": "National Bureau of Statistics, 2018"
+                }
             }
         },
         "level1": {
@@ -708,24 +696,6 @@
             }
           },
           "allPopulationSex2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2013S": {
             "source": {
               "href": "",
               "title": ""
