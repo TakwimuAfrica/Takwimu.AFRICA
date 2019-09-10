@@ -337,36 +337,6 @@
               "title": ""
             }
           },
-          "allPopulationSex2007S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2011S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
             "allPopulationSexYears": {
                 "source": {
                     "href": "https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls",
@@ -671,36 +641,6 @@
               "title": ""
             }
           },
-          "allPopulationSex2007S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2011S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
             "allPopulationSexYears": {
                 "source": {
                     "href": "https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls",
@@ -825,55 +765,7 @@
     },
     "ethiopia": {
         "country": {
-          "allPopulationSex2006S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
           "allPopulationSex2007S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2011S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2013S": {
             "source": {
               "href": "",
               "title": ""
@@ -1075,57 +967,9 @@
             }
         }
     },
-    "south africa": {
+    "south-africa": {
         "country": {
-          "allPopulationSex2006S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2007S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
           "allPopulationSex2011S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2013S": {
             "source": {
               "href": "",
               "title": ""
@@ -1573,31 +1417,7 @@
         }},
     "senegal": {
         "country": {
-          "allPopulationSex2011S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationSex2012S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
           "allPopulationSex2013S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2009S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
-          "allPopulationResidence2012S": {
             "source": {
               "href": "",
               "title": ""
@@ -1808,6 +1628,12 @@
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "allFoodProductions": {
+                "source": {
+                  "href": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=SN",
+                  "title": "WorldBank"
+                }
             }
         }},
     "burkina-faso": {
