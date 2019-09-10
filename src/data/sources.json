@@ -1990,6 +1990,12 @@
     },
     "democratic-republic-of-congo":{
         "country": {
+          "allAccessToBasicServices": {
+              "source": {
+                  "href": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=BF",
+                  "title": "WorldBank"
+              }
+          },
             "allAccountOwnerships": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=CD",
@@ -2109,6 +2115,12 @@
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=CD",
                     "title": "WorldBank, 2017"
+                }
+            },
+            "allNursesAndMidwives": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=CD",
+                    "title": "WorldBank"
                 }
             }
         }
