@@ -1880,16 +1880,15 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allEmploymentToPopulationRatios": {
-                "source": {
-                    "href": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=BF",
-                    "title": "WorldBank"
-                },
-                "qualifier": "M: Male\nF: Female"
-            },
             "allForeignDirectInvestmentNetInflows": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "allAccessToBasicServices": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=BF",
                     "title": "WorldBank"
                 }
             },
@@ -1979,6 +1978,12 @@
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=BF",
                     "title": "WorldBank, 2017"
+                }
+            },
+            "allNursesAndMidwives": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=BF",
+                    "title": "WorldBank"
                 }
             }
         }
