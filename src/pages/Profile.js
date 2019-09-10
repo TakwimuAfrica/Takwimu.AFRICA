@@ -44,16 +44,16 @@ function Profile({
     isLoading: true
   });
 
-  // Provide the visuals with unique ids for fetching
+  // Provide the visual with unique ids for fetching
   // The unique ids will be used to set alias in graphql
   let index = 0;
   sectionedCharts.forEach(x =>
     x.charts.forEach(y => {
       // eslint-disable-next-line no-param-reassign
       y.id = `chart${index}`;
-      const { visuals, blockStat } = y;
-      visuals.id = `viz${index}`;
-      blockStat.id = `viz${index}`;
+      const { visual, stat } = y;
+      visual.id = `viz${index}`;
+      stat.id = `viz${index}`;
       index += 1;
     })
   );
@@ -62,7 +62,7 @@ function Profile({
     sectionedCharts
       .map(x => x.charts)
       .reduce((a, b) => a.concat(b))
-      .map(x => x.visuals)
+      .map(x => x.visual)
   );
 
   useEffect(() => {
@@ -160,8 +160,8 @@ function Profile({
               chart =>
                 chartData.isLoading ||
                 (!chartData.profileVisualsData ||
-                  chartData.profileVisualsData[chart.visuals.id].nodes
-                    .length === 0)
+                  chartData.profileVisualsData[chart.visual.id].nodes.length ===
+                    0)
             ).length !== 0
         )
         .map(section => ({
@@ -185,7 +185,7 @@ function Profile({
           {/* <ProfileSectionTitle loading={chartData.isLoading} tab={tab} /> */}
           {sectionedCharts[tab.index].charts
             .filter(
-              ({ visuals: v }) =>
+              ({ visual: v }) =>
                 chartData.isLoading ||
                 (chartData.profileVisualsData &&
                   /* data is not missing */
@@ -200,20 +200,20 @@ function Profile({
                   title={chart.title}
                   source={
                     !chartData.isLoading
-                      ? chartData.sources[chart.visuals.table].source
+                      ? chartData.sources[chart.visual.table].source
                       : {}
                   }
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(
-                      chart.blockStat,
+                      chart.stat,
                       chartData.profileVisualsData,
                       null,
                       profiles
                     )}
                   {!chartData.isLoading &&
                     ChartFactory.build(
-                      chart.visuals,
+                      chart.visual,
                       chartData.profileVisualsData,
                       null,
                       profiles
