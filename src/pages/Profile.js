@@ -19,12 +19,20 @@ import slugify from '../utils/slugify';
 import ChartFactory from '../components/ChartFactory';
 import Section from '../components/Section';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(({ breakpoints }) => ({
   chart: {
     margin: '20px 0',
     backgroundColor: '#f6f6f6'
+  },
+  sourceGrid: {
+    [breakpoints.up('md')]: {
+      whiteSpace: 'nowrap'
+    }
+  },
+  numberTitle: {
+    fontWeight: 'bold'
   }
-});
+}));
 
 function Profile({
   match: {
@@ -131,7 +139,7 @@ function Profile({
 
         const sources =
           chartSources[profiles.country][profiles.profile.geoLevel];
-        console.log(sources);
+
         setChartsData({
           isLoading: false,
           profileVisualsData,
@@ -194,7 +202,10 @@ function Profile({
             .map(chart => (
               <div style={{ margin: '40px 0', maxWidth: '100%' }}>
                 <InsightContainer
-                  classes={{ root: classes.chart }}
+                  classes={{
+                    root: classes.chart,
+                    sourceGrid: classes.sourceGrid
+                  }}
                   key={chart.id}
                   loading={chartData.isLoading}
                   title={chart.title}
@@ -209,7 +220,8 @@ function Profile({
                       chart.stat,
                       chartData.profileVisualsData,
                       null,
-                      profiles
+                      profiles,
+                      classes
                     )}
                   {!chartData.isLoading &&
                     ChartFactory.build(

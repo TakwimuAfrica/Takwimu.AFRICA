@@ -26,6 +26,7 @@ export default class ChartFactory {
     },
     datas,
     comparisonDatas,
+    classes, // styling class
     /*
      * Profiles are needed in the chart builder
      * since we have no relationships in the database
@@ -299,8 +300,9 @@ export default class ChartFactory {
             subtitle={subtitle}
             statistic={dataStatY}
             description={`${description} ${xDesc}`}
-            comparisonData={[]} // TODO: pending NumberVisuals components (HURUmap-UI) fix on this proptypes
-            classes={{}} // TODO: pending NumberVisuals style configurations - update root margin
+            classes={{
+              subtitle: classes.numberTitle
+            }}
           />
         );
       }
