@@ -92,9 +92,9 @@ function IFrame({ id, data, url, ...props }) {
     statType: data.data_stat_type,
     chartSourceLink: data.data_source_link,
     chartSourceTitle: data.data_source_title,
-    chartQualifier: (data.chart_qualifier || '')
-      .replace(/<br[ /]*>/g, '\n')
-      .replace(/<[^>]*>/g, '')
+    chartQualifier: data.chart_qualifier
+      ? data.chart_qualifier.replace(/<br[ /]*>/g, '\n').replace(/<[^>]*>/g, '')
+      : ''
   };
   const queryString = Object.keys(params)
     .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
