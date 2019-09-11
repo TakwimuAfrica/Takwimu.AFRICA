@@ -17,9 +17,10 @@ function AnalysisContentNavigation({
   content,
   showContent,
   linksPrimaryColor,
-  linksSecondaryColor
+  linksSecondaryColor,
+  ...props
 }) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const generateHref = index => {
     const item = content.body[index];
     return `#${item.id}`;
