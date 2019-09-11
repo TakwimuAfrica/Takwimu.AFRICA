@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function IFrame({ id, data }) {
-  const classes = useStyles();
+function IFrame({ id, data, url, ...props }) {
+  const classes = useStyles(props);
   const [iframeChartLoaded, setIframeChartLoaded] = useState(false);
   useEffect(
     () => {
@@ -92,7 +92,7 @@ function IFrame({ id, data }) {
     statType: data.data_stat_type,
     chartSourceLink: data.data_source_link,
     chartSourceTitle: data.data_source_title,
-    chartQualifier: data.chart_qualifier
+    chartQualifier: (data.chart_qualifier || '')
       .replace(/<br[ /]*>/g, '\n')
       .replace(/<[^>]*>/g, '')
   };
@@ -106,7 +106,7 @@ function IFrame({ id, data }) {
         id={id}
         title={data.title}
         onLoad={handleFrameLoad}
-        src={`/embed/iframe.html?${queryString}&stylesheet=/static/css/embedchart.css`}
+        src={`${url}/embed/iframe.html?${queryString}&stylesheet=/static/css/embedchart.css`}
         allowFullScreen
         className={classNames(['census-reporter-embed', classes.iframe])}
       />
@@ -125,7 +125,8 @@ IFrame.propTypes = {
     data_source_title: PropTypes.string,
     data_stat_type: PropTypes.string,
     title: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default IFrame;

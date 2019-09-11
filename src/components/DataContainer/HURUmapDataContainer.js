@@ -8,7 +8,7 @@ import DataActions from './DataActions';
 import IFrame from './IFrame';
 import { shareIndicator, uploadImage } from './common';
 
-function DataContainer({ id, data, theme, countryName }) {
+function DataContainer({ id, data, theme, countryName, url }) {
   const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
 
   const toPng = () => {
@@ -33,7 +33,7 @@ function DataContainer({ id, data, theme, countryName }) {
 
   const handleShare = () => {
     toPng().then(dataURL => {
-      uploadImage(id, dataURL).then(success => {
+      uploadImage(id, dataURL, url).then(success => {
         if (success) {
           shareIndicator(id);
         }
@@ -56,22 +56,22 @@ function DataContainer({ id, data, theme, countryName }) {
   const embedCode = `<iframe
     allowFullScreen
     title="${data.title}"
-    src="/embed/iframe.html?geoID=country-${
-      data.data_country
-    }&geoVersion=2009&chartDataID=${data.data_id}&dataYear=2011&chartType=${
+    src="${url}/embed/iframe.html?geoID=country-${
+    data.data_country
+  }&geoVersion=2009&chartDataID=${data.data_id}&dataYear=2011&chartType=${
     data.chart_type
   }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
     data.data_stat_type
   }&chartSourceLink=${data.data_source_link}&chartSourceTitle=${
     data.data_source_title
-  }&chartQualifier=${data.chart_qualifier
+  }&chartQualifier=${(data.chart_qualifier || '')
     .replace('<br/>', '%0A')
     .replace(/<(.|\n)*?>/g, '')}&stylesheet=/static/css/embedchart.css"
 />`;
 
   return (
     <>
-      <IFrame id={iframeId} data={data} />
+      <IFrame id={iframeId} data={data} url={url} />
 
       <DataActions
         title={`${countryName}: ${data.title}`}
@@ -102,7 +102,8 @@ DataContainer.propTypes = {
         light: PropTypes.string
       })
     })
-  }).isRequired
+  }).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default withTheme(DataContainer);

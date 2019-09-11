@@ -53,7 +53,7 @@ function DataContainer({ id, data, theme, countryName, url }) {
 
   const handleShare = () => {
     toCanvas().then(canvas => {
-      uploadImage(id, canvas.toDataURL('image/png')).then(success => {
+      uploadImage(id, canvas.toDataURL('image/png'), url).then(success => {
         if (success) {
           shareIndicator(id);
         }
@@ -119,20 +119,6 @@ function DataContainer({ id, data, theme, countryName, url }) {
     frameHead.appendChild(style);
   };
 
-  /**
-   * First time the onLoad function is called, we get:
-   * `TypeError: iframe.contentDocument is null`.
-   *
-   * This function is temporary fix to get around that... The downside being
-   * when we do add the second `onLoad` listener, the `load` event could
-   * have been already fired.
-   * @param {*} e .
-   */
-  const handleIframeCreated = e => {
-    const iframe = e.target;
-    iframe.addEventListener('load', handleIframeLoaded);
-  };
-
   if (animated) {
     const iframe = document.getElementById(`data-indicator-${id}`);
     updateIframe(iframe, iframe.contentDocument.getElementById(animatedId));
@@ -150,7 +136,7 @@ function DataContainer({ id, data, theme, countryName, url }) {
         frameBorder="0"
         scrolling="no"
         title={data.title}
-        onLoad={handleIframeCreated}
+        onLoad={handleIframeLoaded}
         src={`${url}/flourish/${data.html}`}
         className={classes.root}
       />

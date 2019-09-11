@@ -1,5 +1,5 @@
 const config = {
-  url: 'https://takwimu.africa',
+  url: 'http://localhost:8000',
   country: {},
   countries: [
     {
@@ -107,5 +107,8 @@ const config = {
     last_published_at: '24th July 2019'
   }
 };
+
+// Same-Origin Policy
+document.domain = new URL(config.url).hostname;
 
 export default config;
