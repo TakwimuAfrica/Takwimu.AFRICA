@@ -52,27 +52,27 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn applyIdsToChartDefinitions && git add src/data/chart.json && lint-staged"
     }
   },
   "lint-staged": {
     "src/**/*.{js,json,scss,md}": [
-      "yarn lint-staged",
+      "yarn lint",
       "git add"
     ]
   },
   "scripts": {
+    "commitChartDefinitions": "git add src/data/chart.json && git commit -m 'updated chart ids'",
     "applyIdsToChartDefinitions": "node scripts/chartsDefinitionsApplyUniqueId.js",
-    "prestart": "yarn applyIdsToChartDefinitions",
-    "prebuild": "yarn lint && yarn applyIdsToChartDefinitions",
-    "predeploy": "yarn build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "prestart": "yarn applyIdsToChartDefinitions",
     "start": "react-scripts start",
+    "prebuild": "yarn lint && yarn applyIdsToChartDefinitions",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md' './'",
-    "lint-staged": "yarn eslint --fix",
+    "predeploy": "yarn build && yarn commitChartDefinitions",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
