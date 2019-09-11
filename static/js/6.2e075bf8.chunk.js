@@ -1,0 +1,2 @@
+(window["webpackJsonp@takwimuafrica/takwimu.africa"]=window["webpackJsonp@takwimuafrica/takwimu.africa"]||[]).push([[6],{1270:function(a,i,w){"use strict";w.r(i);var c=w(1093);i.default=c.a}}]);
+//# sourceMappingURL=6.2e075bf8.chunk.js.map
