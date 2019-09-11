@@ -18,6 +18,7 @@ export default class ChartFactory {
       aggregate,
       width,
       height,
+      offset,
       barWidth,
       subtitle,
       description,
@@ -160,16 +161,16 @@ export default class ChartFactory {
         return (
           <div
             style={{
-              width: primaryData.length * primaryData[0].length * 45,
-              height: '300px'
+              width: width || primaryData.length * primaryData[0].length * 45,
+              height: height || '300px'
             }}
           >
             <BarChart
               key={key}
               responsive
-              offset={45}
-              barWidth={40}
-              width={primaryData.length * primaryData[0].length * 45}
+              offset={offset || 42}
+              barWidth={barWidth || 40}
+              width={width || primaryData.length * primaryData[0].length * 45}
               height={height || 300}
               horizontal={horizontal}
               labels={datum => numberFormatter.format(datum.y)}
@@ -180,6 +181,12 @@ export default class ChartFactory {
                   labelWidth: 40,
                   independent: {
                     style: {
+                      axis: {
+                        display: 'block'
+                      },
+                      ticks: {
+                        display: 'block'
+                      },
                       tickLabels: {
                         display: 'block'
                       }
@@ -199,7 +206,7 @@ export default class ChartFactory {
           return (
             <div
               style={{
-                width: primaryData.length * 2 * (barWidth || 40) + 5,
+                width: '400px',
                 height: '300px'
               }}
             >
@@ -208,7 +215,7 @@ export default class ChartFactory {
                 responsive
                 offset={45}
                 barWidth={barWidth || 40}
-                width={primaryData.length * 2 * ((barWidth || 40) + 5)}
+                width={width || primaryData.length * 2 * ((barWidth || 40) + 5)}
                 height={height || 300}
                 horizontal={horizontal}
                 labels={datum => numberFormatter.format(datum.y)}
@@ -237,18 +244,17 @@ export default class ChartFactory {
         return (
           <div
             style={{
-              width: primaryData.length * (barWidth || 80) + 5,
-              height: '300px'
+              width: width || primaryData.length * (barWidth || 80) + 5,
+              height: height || '300px'
             }}
           >
             <BarChart
               key={key}
               responsive
               horizontal={horizontal}
+              offset={offset}
               barWidth={barWidth || 80}
-              width={
-                horizontal ? 200 : primaryData.length * ((barWidth || 80) + 5)
-              }
+              width={width || primaryData.length * ((barWidth || 80) + 5)}
               height={height || 300}
               labels={datum => numberFormatter.format(datum.y)}
               data={primaryData}
@@ -256,6 +262,12 @@ export default class ChartFactory {
                 axis: {
                   independent: {
                     style: {
+                      axis: {
+                        display: 'block'
+                      },
+                      ticks: {
+                        display: 'block'
+                      },
                       tickLabels: {
                         display: 'block'
                       }

@@ -7,7 +7,6 @@
         "visual": {
           "type": "pie",
           "table": "allPopulationSex2006S",
-
           "x": "populationSex2006",
           "y": "total"
         },
@@ -80,7 +79,6 @@
           "visual": {
             "type": "pie",
             "table": "allPopulationSex2012S",
-
             "x": "populationSex2012",
             "y": "total"
           },
@@ -99,7 +97,6 @@
           "visual": {
             "type": "pie",
             "table": "allPopulationSex2013S",
-
             "x": "populationSex2013",
             "y": "total"
           },
@@ -118,16 +115,22 @@
         "visual": {
           "type": "grouped_column",
           "table": "allPopulationSexYears",
+          "horizontal":true,
+          "height": 500,
+          "width":400,
+          "barWidth":15,
+          "offset":12,
           "x": "populationSex",
           "groupBy": "populationYear",
-          "y": "total"
+          "y": "total",
+          "aggregate": "sum"
         },
         "stat": {
           "type": "number",
           "subtitle": "Population",
           "description": "People",
           "statistic": {
-            "aggregate": "first",
+            "aggregate": "last",
             "unique": true
           }
         }
@@ -191,6 +194,11 @@
           "type": "grouped_column",
           "table": "allYouthUnemployments",
           "groupBy": "youthUnemploymentYear",
+          "horizontal":true,
+          "height": 650,
+          "width":400,
+          "barWidth":12,
+          "offset":10,
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
@@ -210,6 +218,7 @@
         "visual": {
           "type": "column",
           "table": "allYouthUnemploymentGenerals",
+          "width":350,
           "x": "youthUnemploymentPeriod",
           "y": "total"
         },
@@ -229,6 +238,11 @@
           "type": "grouped_column",
           "table": "allEmploymentToPopulationRatios",
           "groupBy": "employmentToPopulationRatioYear",
+          "horizontal":true,
+          "height": 600,
+          "width":400,
+          "barWidth":10,
+          "offset":10,
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
@@ -340,10 +354,15 @@
           }
         },
         {
-          "title": "Registered voters vs total votes cast",
+          "title": "Votes per Candidate",
           "visual": {
-            "type": "pie",
+            "type": "column",
             "table": "allVotesPerCandidates",
+            "horizontal": true,
+            "barWidth": 20,
+            "offset": 12,
+            "width": 400,
+            "height": 450,
             "x": "candidate",
             "y": "total"
           },
@@ -401,6 +420,11 @@
           "visual": {
             "type": "column",
             "table": "allAccessToBasicServices",
+            "horizontal":true,
+            "barWidth": 15,
+            "offset": 12,
+            "width": 400,
+            "height": 450,
             "x": "accessToBasicServicesYear",
             "y": "total"
           },
@@ -419,6 +443,7 @@
           "visual": {
             "type": "column",
             "table": "allAccessToElecWaterServices",
+            "width": 250,
             "x": "accessToElecWaterServices",
             "y": "total"
           },
@@ -437,6 +462,11 @@
           "visual": {
             "type": "column",
             "table": "allPrevalenceOfUndernourishments",
+            "horizontal": true,
+            "barWidth": 12,
+            "offset": 14,
+            "width": 400,
+            "height": 450,
             "x": "prevalenceOfUndernourishmentYear",
             "y": "total"
           },
@@ -455,9 +485,15 @@
           "visual": {
             "type": "grouped_column",
             "table": "allLifeExpectancyAtBirths",
+            "horizontal":true,
+            "height": 600,
+            "width":400,
+            "barWidth":10,
+            "offset":10,
             "x": "sex",
             "groupBy": "lifeExpectancyAtBirthYear",
-            "y": "total"
+            "y": "total",
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -490,6 +526,11 @@
           "visual": {
             "type": "column",
             "table": "allMaternalMortalities",
+            "horizontal":true,
+            "width":400,
+            "barWidth":15,
+            "offset":20,
+            "height":500,
             "x": "maternalMortalityYear",
             "y": "total"
           },
@@ -505,11 +546,17 @@
         {
           "title": "Prevalence of HIV, (% ages 15-24)",
           "visual": {
-            "type": "column",
+            "type": "grouped_column",
             "table": "allHivPrevalences",
             "x": "sex",
+            "barWidth":10,
+            "offset":10,
+            "width":400,
+            "height":600,
+            "horizontal":true,
             "groupBy": "hivPrevalenceYear",
-            "y": "total"
+            "y": "total",
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -524,11 +571,13 @@
         {
           "title": "Distribution of HIV Patients by Year and Sex 2015-2016",
           "visual": {
-            "type": "column",
+            "type": "grouped_column",
             "table": "allHivPatientsDistributions",
             "x": "sex",
             "groupBy": "hivPatientsDistributionYear",
-            "y": "total"
+            "y": "total",
+            "aggregate":"sum",
+            "width":300
           },
           "stat": {
             "type": "number",
@@ -544,6 +593,7 @@
           "visual": {
             "type": "column",
             "table": "allMalariaPrevalences",
+            "width": 250,
             "x": "malariaPrevalenceTest",
             "y": "total"
           },
@@ -562,6 +612,8 @@
           "visual": {
             "type": "column",
             "table": "allBirthsAttendedBySkilledHealthStaffs",
+            "barWidth": 40,
+            "width":400,
             "x": "birthsAttendedBySkilledHealthStaffYear",
             "y": "total"
           },
@@ -579,6 +631,7 @@
           "title": "Female Genital Mutilation Prevelence (%)",
           "visual": {
             "type": "column",
+            "width": 400,
             "table": "allFgmPrevalences",
             "x": "fgmPrevalenceYear",
             "y": "total"
@@ -598,6 +651,8 @@
           "visual": {
             "type": "column",
             "table": "allNursesAndMidwives",
+            "barWidth": 40,
+            "width": 400,
             "x": "nursesAndMidwivesYear",
             "y": "total"
           },
@@ -615,6 +670,11 @@
           "visual": {
             "type": "column",
             "table": "allIncidenceOfMalariaPer1000PopAtRisks",
+            "horizontal":true,
+            "barWidth": 20,
+            "offset": 12,
+            "width": 400,
+            "height": 350,
             "x": "incidenceOfMalariaPer1000PopAtRiskYear",
             "y": "total"
           },
@@ -669,7 +729,9 @@
             "table": "allNumberOfDoctorsYearSexes",
             "x": "numberOfDoctorsSex",
             "groupBy": "numberOfDoctorsYear",
-            "y": "total"
+            "y": "total",
+            "aggregate":"sum",
+            "width":350
           },
           "stat": {
             "type": "number",
@@ -688,7 +750,9 @@
             "table": "allNumberOfDentistYearSexes",
             "x": "numberOfDentistSex",
             "groupBy": "numberOfDentistYear",
-            "y": "total"
+            "y": "total",
+            "aggregate":"sum",
+            "width":350
           },
           "stat": {
             "type": "number",
@@ -709,6 +773,11 @@
           "visual": {
             "type": "column",
             "table": "allFoodProductions",
+            "horizontal":true,
+            "barWidth": 15,
+            "offset": 20,
+            "width": 400,
+            "height": 450,
             "x": "crops",
             "y": "total"
           },
@@ -727,6 +796,11 @@
           "visual": {
             "type": "column",
             "table": "allCerealYieldKgPerHectares",
+            "horizontal":true,
+            "barWidth": 10,
+            "offset": 12,
+            "width": 400,
+            "height": 450,
             "x": "cerealYieldKgPerHectareYear",
             "y": "total"
           },
@@ -745,6 +819,11 @@
           "visual": {
             "type": "column",
             "table": "allAgriculturalLands",
+            "horizontal":true,
+            "barWidth": 10,
+            "offset": 12,
+            "width": 400,
+            "height": 450,
             "x": "agriculturalLandYear",
             "y": "total"
           },
@@ -824,6 +903,12 @@
             "visual": {
               "type": "column",
               "table": "allMobilePhoneSubscriptions",
+              "horizontal":true,
+              "barWidth": 10,
+              "offset": 12,
+              "width": 400,
+              "height": 450,
+
               "x": "mobilePhoneSubscriptionsYear",
               "y": "total"
             },
@@ -1001,6 +1086,11 @@
           "visual": {
             "type": "column",
             "table": "allForeignDirectInvestmentNetInflows",
+            "horizontal":true,
+            "barWidth": 10,
+            "offset": 20,
+            "width": 350,
+            "height": 450,
             "x": "foreignDirectInvestmentNetInflowsYear",
             "y": "total"
           },

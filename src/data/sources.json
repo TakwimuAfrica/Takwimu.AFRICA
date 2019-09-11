@@ -1160,12 +1160,6 @@
         }},
     "tanzania": {
         "country": {
-          "allPopulationSex2011S": {
-            "source": {
-              "href": "",
-              "title": ""
-            }
-          },
           "allPopulationSex2012S": {
             "source": {
               "href": "",
