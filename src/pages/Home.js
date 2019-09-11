@@ -13,6 +13,9 @@ import WhereToNext from '../components/Next';
 function Home() {
   const [takwimu, setTakwimu] = useState(undefined);
   useEffect(() => {
+    // Same-Origin Policy
+    document.domain = 'takwimu.africa';
+
     const { url } = config;
     fetch(`${url}/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json`)
       .then(response => response.json())
