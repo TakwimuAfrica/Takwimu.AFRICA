@@ -1,5 +1,5 @@
 const config = {
-  url: 'http://localhost:8000',
+  url: 'https://takwimu.africa',
   country: {},
   countries: [
     {
