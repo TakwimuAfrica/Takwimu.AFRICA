@@ -1,4 +1,5 @@
-[{
+[
+  {
     "sectionTitle": "Demographics",
     "sectionIcon": "users",
     "sectionDescription": "",
@@ -116,10 +117,6 @@
           "type": "grouped_column",
           "table": "allPopulationSexYears",
           "horizontal":true,
-          "height": 500,
-          "width":400,
-          "barWidth":15,
-          "offset":12,
           "x": "populationSex",
           "groupBy": "populationYear",
           "y": "total",
@@ -141,6 +138,7 @@
             "type": "column",
             "table": "allPopulationResidence2009S",
             "x": "populationResidence2009",
+            "width": 250,
             "y": "total"
           },
           "stat": {
@@ -158,6 +156,7 @@
           "visual": {
             "type": "column",
             "table": "allPopulationResidence2012S",
+            "width":250,
             "x": "populationResidence2012",
             "y": "total"
           },
@@ -175,6 +174,7 @@
         "visual": {
           "type": "column",
           "table": "allPopulationResidence2013S",
+          "width":250,
           "x": "populationResidence2013",
           "y": "total"
         },
@@ -195,10 +195,6 @@
           "table": "allYouthUnemployments",
           "groupBy": "youthUnemploymentYear",
           "horizontal":true,
-          "height": 650,
-          "width":400,
-          "barWidth":12,
-          "offset":10,
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
@@ -239,10 +235,6 @@
           "table": "allEmploymentToPopulationRatios",
           "groupBy": "employmentToPopulationRatioYear",
           "horizontal":true,
-          "height": 600,
-          "width":400,
-          "barWidth":10,
-          "offset":10,
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
@@ -264,7 +256,8 @@
           "table": "allResidencePovertyTypes",
           "x": "residence",
           "groupBy": "povertyType",
-          "y": "total"
+          "y": "total",
+          "aggregate": "sum"
         },
         "stat": {
           "type": "number",
@@ -283,7 +276,9 @@
           "table": "allPovertyAgeResidences",
           "x": "residence",
           "groupBy": "age",
-          "y": "total"
+          "y": "total",
+          "horizontal":true,
+          "aggregate":"sum"
         },
         "stat": {
           "type": "number",
@@ -382,6 +377,7 @@
             "type": "column",
             "table": "allWomenInParliaments",
             "x": "womenParliamentYear",
+            "horizontal":true,
             "y": "total"
           },
           "stat": {
@@ -486,10 +482,6 @@
             "type": "grouped_column",
             "table": "allLifeExpectancyAtBirths",
             "horizontal":true,
-            "height": 600,
-            "width":400,
-            "barWidth":10,
-            "offset":10,
             "x": "sex",
             "groupBy": "lifeExpectancyAtBirthYear",
             "y": "total",
@@ -549,10 +541,6 @@
             "type": "grouped_column",
             "table": "allHivPrevalences",
             "x": "sex",
-            "barWidth":10,
-            "offset":10,
-            "width":400,
-            "height":600,
             "horizontal":true,
             "groupBy": "hivPrevalenceYear",
             "y": "total",
@@ -576,8 +564,7 @@
             "x": "sex",
             "groupBy": "hivPatientsDistributionYear",
             "y": "total",
-            "aggregate":"sum",
-            "width":300
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -694,7 +681,9 @@
             "table": "allInfantUnder5Mortalities",
             "x": "infantUnder5",
             "groupBy": "mortalityYear",
-            "y": "total"
+            "y": "total",
+            "aggregate":"sum",
+            "horizontal":true
           },
           "stat": {
             "type": "number",
@@ -709,9 +698,11 @@
           "visual": {
             "type": "grouped_column",
             "table": "allHealthWorkersDistributions",
-            "x": "workers",
-            "groupBy": "year",
-            "y": "total"
+            "x": "year",
+            "groupBy": "workers",
+            "y": "total",
+            "aggregate":"sum",
+            "horizontal":true
           },
           "stat": {
             "type": "number",
@@ -730,8 +721,7 @@
             "x": "numberOfDoctorsSex",
             "groupBy": "numberOfDoctorsYear",
             "y": "total",
-            "aggregate":"sum",
-            "width":350
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -751,8 +741,7 @@
             "x": "numberOfDentistSex",
             "groupBy": "numberOfDentistYear",
             "y": "total",
-            "aggregate":"sum",
-            "width":350
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -766,6 +755,7 @@
         }
       ]
   },
+  
   {
       "sectionTitle": "Agriculture",
       "charts": [{
@@ -844,7 +834,9 @@
             "table": "allEmploymentInAgricultures",
             "x": "sex",
             "groupBy": "employmentInAgricultureYear",
-            "y": "total"
+            "y": "total",
+            "aggregate":"sum",
+            "horizontal":true
           },
           "stat": {
             "type": "number",
@@ -859,6 +851,190 @@
       ]
   },
   {
+    "sectionTitle": "Education",
+    "sectionDescription": "",
+    "charts": [{
+        "title": "Primary School enrollment, Female and Male (% gross)",
+        "visual": {
+          "type": "grouped_column",
+          "table": "allPrimarySchoolEnrollments",
+          "x": "sex",
+          "groupBy": "primarySchoolEnrollmentYear",
+          "y": "total",
+          "horizontal":true,
+          "aggregate": "sum"
+        },
+        "stat": {
+          "type": "number",
+          "subtitle": "Education",
+          "description": "People",
+          "statistic": {
+            "unique": true,
+            "unit": "%"
+          }
+        }
+      },
+      {
+          "title": "Literacy rate, adult (% of population ages 15 and above)",
+          "visual": {
+            "type": "grouped_column",
+            "table": "allAdultLiteracyRates",
+            "x": "sex",
+            "groupBy": "adultLiteracyRateYear",
+            "y": "total",
+            "horizontal":true,
+            "aggregate":"sum"
+          },
+          "stat": {
+            "type": "number",
+            "subtitle": "Education",
+            "description": "Adult Literacy Rate",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+          "title": "Percentage of Women and Men age 15-24 years who are literate by Sex, 2016/17",
+          "visual": {
+            "type": "column",
+            "table": "allLiteracySexes",
+            "horizontal":true,
+            "x": "sex",
+            "y": "total"
+          },
+          "stat": {
+            "type": "number",
+            "subtitle": "Education",
+            "description": "Literate",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+          "title": "Primary completion rate,(% of relevant age group)",
+          "visual": {
+            "type": "column",
+            "table": "allPrimaryEducationCompletionRates",
+            "horizontal":true,
+            "x": "primaryEducationCompletionRateYear",
+            "y": "total"
+          },
+          "stat": {
+            "type": "number",
+            "subtitle": "Education",
+            "description": "Primary Education completion Rate",
+            "statistic": {
+              "unique": true,
+              "unit": "%"
+            }
+          }
+        },
+        {
+            "title": "Percentage Distribution of Enrolment in Primary Schools by Year and Sex, 2015 -2016",
+            "visual": {
+              "type": "grouped_column",
+              "table": "allPrimarySchoolEnrollmentDistributions",
+              "x": "sex",
+              "groupBy": "primarySchoolEnrollmentYear",
+              "y": "total"
+            },
+            "stat": {
+              "type": "number",
+              "subtitle": "Education",
+              "description": "Primary School Enrolment",
+              "statistic": {
+                "aggregate": "sum",
+                "unique": true,
+                "unit": "%"
+              }
+            }
+          },
+          {
+              "title": "Distribution of Enrolment in Junior Secondary School by Year and sex, 2015 -2016",
+              "visual": {
+                "type": "grouped_column",
+                "table": "allJuniorSecondarySchoolEnrollments",
+                "x": "sex",
+                "groupBy": "juniorSecondarySchoolEnrollmentYear",
+                "y": "total"
+              },
+              "stat": {
+                "type": "number",
+                "subtitle": "Education",
+                "description": "Junior Secondary Enrolment",
+                "statistic": {
+                  "aggregate": "sum",
+                  "unique": true,
+                  "unit": "%"
+                }
+              }
+            },
+            {
+                "title": "Distribution of Enrolment in Senior Secondary School by State, Year and Sex, 2015 -2016",
+                "visual": {
+                  "type": "grouped_column",
+                  "table": "allSeniorSecondarySchoolEnrollments",
+                  "x": "sex",
+                  "groupBy": "seniorSecondarySchoolEnrollmentYear",
+                  "y": "total"
+                },
+                "stat": {
+                  "type": "number",
+                  "subtitle": "Education",
+                  "description": "Senior Secondary Enrolment",
+                  "statistic": {
+                    "aggregate": "sum",
+                    "unique": true,
+                    "unit": "%"
+                  }
+                }
+              },
+              {
+                  "title": "School enrollment, secondary (% gross)",
+                  "visual": {
+                    "type": "grouped_column",
+                    "table": "allSecondarySchoolEnrollments",
+                    "x": "sex",
+                    "groupBy": "secondarySchoolEnrollmentYear",
+                    "y": "total",
+                    "aggregate":"sum",
+                    "horizontal":true
+                  },
+                  "stat": {
+                    "type": "number",
+                    "subtitle": "Education",
+                    "description": "Secondary Enrolment",
+                    "statistic": {
+                      "unique": true,
+                      "unit": "%"
+                    }
+                  }
+                },
+                {
+                  "title": "Primary Completion rate (%)",
+                  "visual": {
+                    "type": "column",
+                    "table": "allPrimaryEducationCompletionSexes",
+                    "x": "primaryEducationCompletionSex",
+                    "y": "total"
+                  },
+                  "stat": {
+                    "type": "number",
+                    "subtitle": "Education",
+                    "description": "Percent Completion Rate",
+                    "statistic": {
+                      "unique": true,
+                      "unit": "%"
+                    }
+                  }
+                }
+    ]
+},
+{
       "sectionTitle": "Financial Inclusion",
       "sectionDescription": "",
       "charts": [{
@@ -868,7 +1044,8 @@
               "table": "allAccountOwnerships",
               "x": "sex",
               "groupBy": "accountOwnershipYear",
-              "y": "total"
+              "y": "total",
+              "aggregate":"sum"
             },
             "stat": {
               "type": "number",
@@ -934,7 +1111,9 @@
               "table": "allGovernmentFundings",
               "x": "sector",
               "groupBy": "year",
-              "y": "total"
+              "y": "total",
+              "aggregate":"sum",
+              "horizontal":true
             },
             "stat": {
               "type": "number",
@@ -1110,7 +1289,8 @@
             "type": "column",
             "table": "allDonors",
             "x": "donor",
-            "y": "total"
+            "y": "total",
+            "horizontal":true
           },
           "stat": {
             "type": "number",
@@ -1129,7 +1309,8 @@
               "table": "allDonorFundedProgrammes",
               "x": "programme",
               "groupBy": "donor",
-              "y": "total"
+              "y": "total",
+              "aggregate": "sum"
             },
             "stat": {
               "type": "number",
