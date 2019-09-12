@@ -167,9 +167,11 @@ function Profile({
             section.charts.filter(
               chart =>
                 chartData.isLoading ||
-                (!chartData.profileVisualsData ||
+                !(
+                  !chartData.profileVisualsData ||
                   chartData.profileVisualsData[chart.visual.id].nodes.length ===
-                    0)
+                    0
+                )
             ).length !== 0
         )
         .map(section => ({
