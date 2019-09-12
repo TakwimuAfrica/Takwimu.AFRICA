@@ -162,17 +162,35 @@ export default class ChartFactory {
         return (
           <div
             style={{
-              width: width || primaryData.length * primaryData[0].length * 45,
-              height: height || '300px'
+              width:
+                width ||
+                (horizontal
+                  ? 400
+                  : primaryData.length * primaryData[0].length * 30 * 2),
+              height:
+                height ||
+                (horizontal
+                  ? primaryData.length * primaryData[0].length * 35
+                  : 400)
             }}
           >
             <BarChart
               key={key}
               responsive
-              offset={offset || 42}
-              barWidth={barWidth || 40}
-              width={width || primaryData.length * primaryData[0].length * 45}
-              height={height || 300}
+              offset={offset || 20}
+              barWidth={barWidth || 20}
+              width={
+                width ||
+                (horizontal
+                  ? 400
+                  : primaryData.length * primaryData[0].length * 30 * 2)
+              }
+              height={
+                height ||
+                (horizontal
+                  ? primaryData.length * primaryData[0].length * 35
+                  : 400)
+              }
               horizontal={horizontal}
               labels={datum => numberFormatter.format(datum.y)}
               labelComponent={undefined}
@@ -216,8 +234,12 @@ export default class ChartFactory {
                 responsive
                 offset={45}
                 barWidth={barWidth || 40}
-                width={width || primaryData.length * 2 * ((barWidth || 40) + 5)}
-                height={height || 300}
+                width={400 || primaryData.length * 2 * ((barWidth || 40) + 5)}
+                height={
+                  (horizontal
+                    ? primaryData.length * 2 * ((barWidth || 40) + 5)
+                    : height) || 300
+                }
                 horizontal={horizontal}
                 labels={datum => numberFormatter.format(datum.y)}
                 data={[primaryData, processedComparisonData]}
@@ -245,18 +267,28 @@ export default class ChartFactory {
         return (
           <div
             style={{
-              width: width || primaryData.length * (barWidth || 80) + 5,
-              height: height || '300px'
+              width:
+                width ||
+                (horizontal ? 400 : primaryData.length * (barWidth || 40) * 2),
+              height:
+                height ||
+                (horizontal ? primaryData.length * (barWidth || 45) : 400)
             }}
           >
             <BarChart
               key={key}
               responsive
               horizontal={horizontal}
-              offset={offset}
-              barWidth={barWidth || 80}
-              width={width || primaryData.length * ((barWidth || 80) + 5)}
-              height={height || 300}
+              offset={offset || 40}
+              barWidth={barWidth || 30}
+              width={
+                width ||
+                (horizontal ? 400 : primaryData.length * (barWidth || 40) * 2)
+              }
+              height={
+                height ||
+                (horizontal ? primaryData.length * (barWidth || 45) : 400)
+              }
               labels={datum => numberFormatter.format(datum.y)}
               data={primaryData}
               parts={{
