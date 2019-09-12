@@ -2,13 +2,12 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withRouter } from 'react-router-dom';
-import { makeStyles } from '@material-ui/styles';
 
-import { InputBase, IconButton } from '@material-ui/core';
+import { withStyles, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     marginTop: '1rem',
     marginBottom: '1rem'
@@ -31,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   iconStyle: {
     color: theme.palette.text.primary
   }
-}));
+});
 
 class Input extends React.Component {
   constructor(props) {
@@ -47,9 +46,8 @@ class Input extends React.Component {
   }
 
   render() {
-    const { history, onRefresh, placeholder, query } = this.props;
+    const { classes, history, onRefresh, placeholder, query } = this.props;
     const { searchTerm } = this.state;
-    const classes = useStyles();
     const handleSearchClick = () => {
       if (query !== searchTerm && searchTerm.length > 0) {
         // On the search page, onRefresh will be a function used to query the
@@ -115,4 +113,4 @@ Input.defaultProps = {
   placeholder: 'Enter search term'
 };
 
-export default withRouter(Input);
+export default withRouter(withStyles(styles)(Input));

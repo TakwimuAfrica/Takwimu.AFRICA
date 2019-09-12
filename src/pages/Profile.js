@@ -17,11 +17,20 @@ import Section from '../components/Section';
 import useChartDefinitions from '../data/useChartDefinitions';
 import useProfileLoader from '../data/useProfileLoader';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(({ breakpoints }) => ({
   chart: {
-    margin: '20px 0'
+    margin: '20px 0',
+    backgroundColor: '#f6f6f6'
+  },
+  sourceGrid: {
+    [breakpoints.up('md')]: {
+      whiteSpace: 'nowrap'
+    }
+  },
+  numberTitle: {
+    fontWeight: 'bold'
   }
-});
+}));
 
 function Profile({
   match: {
@@ -39,8 +48,7 @@ function Profile({
     sectionedCharts
       .map(x => x.charts)
       .reduce((a, b) => a.concat(b))
-      .map(x => x.visuals)
-      .reduce((a, b) => a.concat(b))
+      .map(x => x.visual)
   );
 
   const { profiles, chartData } = useProfileLoader(geoId, visuals);
@@ -61,12 +69,11 @@ function Profile({
         .filter(
           section =>
             section.charts.filter(
-              chart =>
+              ({ visual: { queryAlias } }) =>
                 chartData.isLoading ||
-                !chart.visuals.find(
-                  ({ queryAlias }) =>
-                    !chartData.profileVisualsData ||
-                    chartData.profileVisualsData[queryAlias].nodes.length === 0
+                !(
+                  !chartData.profileVisualsData ||
+                  chartData.profileVisualsData[queryAlias].nodes.length === 0
                 )
             ).length !== 0
         )
@@ -91,43 +98,42 @@ function Profile({
           {/* <ProfileSectionTitle loading={chartData.isLoading} tab={tab} /> */}
           {sectionedCharts[tab.index].charts
             .filter(
-              ({ visuals: v }) =>
+              ({ visual: { queryAlias } }) =>
                 chartData.isLoading ||
                 (chartData.profileVisualsData &&
                   /* data is not missing */
-                  !v.find(
-                    ({ queryAlias }) =>
-                      chartData.profileVisualsData[queryAlias].nodes.length ===
-                      0
-                  ))
+                  chartData.profileVisualsData[queryAlias].nodes.length !== 0)
             )
             .map(chart => (
               <div style={{ margin: '40px 0', maxWidth: '100%' }}>
                 <InsightContainer
-                  classes={{ root: classes.chart }}
+                  classes={{
+                    root: classes.chart,
+                    sourceGrid: classes.sourceGrid
+                  }}
                   key={chart.id}
                   loading={chartData.isLoading}
                   title={chart.title}
-                  source={{
-                    title: 'Community Survey 2016',
-                    href: 'http://dev.dominion.africa'
-                  }}
+                  source={
+                    !chartData.isLoading
+                      ? chartData.sources[chart.visual.table].source
+                      : {}
+                  }
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(
-                      { ...chart.visuals[0], type: 'number' },
+                      chart.stat,
+                      chartData.profileVisualsData,
+                      null,
+                      profiles,
+                      classes
+                    )}
+                  {!chartData.isLoading &&
+                    ChartFactory.build(
+                      chart.visual,
                       chartData.profileVisualsData,
                       null,
                       profiles
-                    )}
-                  {!chartData.isLoading &&
-                    chart.visuals.map(visual =>
-                      ChartFactory.build(
-                        visual,
-                        chartData.profileVisualsData,
-                        null,
-                        profiles
-                      )
                     )}
                 </InsightContainer>
               </div>
@@ -139,7 +145,8 @@ function Profile({
       sectionedCharts,
       chartData.isLoading,
       chartData.profileVisualsData,
-      classes.chart,
+      chartData.sources,
+      classes,
       profiles
     ]
   );

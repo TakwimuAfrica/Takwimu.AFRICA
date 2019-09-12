@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { useApolloClient } from '@apollo/react-hooks';
 import { buildVisualsQuery, GET_PROFILE } from './queries';
 
+import config from '../config';
+import chartSources from './sources.json';
+
 export default (geoId, visuals) => {
   const client = useApolloClient();
   const [chartData, setChartsData] = useState({
@@ -43,11 +46,20 @@ export default (geoId, visuals) => {
           geoLevel: profile.parentLevel
         }
       });
+      // set country name of profile
+      let country;
+      if (profile.geoLevel === 'country') {
+        country = config.countries.find(c => c.iso_code === profile.geoCode);
+      } else {
+        // else we are on level1
+        country = config.countries.find(c => c.iso_code === parent.geoCode);
+      }
 
       setProfiles({
         isLoading: false,
         profile,
-        parent
+        parent,
+        country
       });
     })();
   }, [client, geoId]);
@@ -70,9 +82,14 @@ export default (geoId, visuals) => {
             geoLevel: profiles.profile.geoLevel
           }
         });
+
+        const sources =
+          chartSources[profiles.country.slug][profiles.profile.geoLevel];
+
         setChartsData({
           isLoading: false,
-          profileVisualsData
+          profileVisualsData,
+          sources
         });
       })();
     }

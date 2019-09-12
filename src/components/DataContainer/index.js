@@ -115,6 +115,7 @@ function DataContainer({
               id={id}
               data={data.value}
               countryName={countryName}
+              url={url}
             />
           )}
 

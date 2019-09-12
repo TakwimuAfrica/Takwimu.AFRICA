@@ -5,19 +5,21 @@ const sectionedCharts = require('../src/data/chart.json');
 sectionedCharts.forEach(section => {
   if (!section.id) {
     // eslint-disable-next-line no-param-reassign
-    section.id = `section${shortid.generate()}`;
+    section.id = `section-${shortid.generate()}`;
   }
   section.charts.forEach(chart => {
     if (!chart.id) {
       // eslint-disable-next-line no-param-reassign
-      chart.id = `chart${shortid.generate()}`;
+      chart.id = `chart-${shortid.generate()}`;
     }
-    chart.visuals.forEach(visual => {
-      if (!visual.id) {
-        // eslint-disable-next-line no-param-reassign
-        visual.id = `visual${shortid.generate()}`;
-      }
-    });
+    if (!chart.visual.id) {
+      // eslint-disable-next-line no-param-reassign
+      chart.visual.id = `visual-${shortid.generate()}`;
+    }
+    if (!chart.stat.id) {
+      // eslint-disable-next-line no-param-reassign
+      chart.stat.id = `stat-${shortid.generate()}`;
+    }
   });
 });
 
