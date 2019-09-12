@@ -1141,6 +1141,7 @@
             "type": "column",
             "table": "allTaxAsPercentageOfGdps",
             "x": "taxAsPercentageOfGdpYear",
+            "horizontal":true,
             "y": "total"
           },
           "stat": {
@@ -1167,7 +1168,8 @@
             "subtitle": "Public Finances",
             "description": "Tax Revenue",
             "statistic": {
-              "unique": true
+              "unique": true,
+              "unit": "US$"
             }
           }
         },
@@ -1185,7 +1187,8 @@
             "subtitle": "Public Finances",
             "description": "GDP",
             "statistic": {
-              "unique": true
+              "unique": true,
+              "unit": "US$"
             }
           }
         },

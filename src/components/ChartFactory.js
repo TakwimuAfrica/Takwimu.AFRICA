@@ -316,7 +316,15 @@ export default class ChartFactory {
         const dataStat = statistic.aggregate
           ? aggregateData(statistic.aggregate, data, statistic.unique)
           : [data[data.length - 1]];
-        let dataStatY = numberFormatter.format(dataStat[0].y);
+
+        let dataStatY;
+
+        if (dataStat[0].y > 1000000000) {
+          dataStatY = numberFormatter.format(dataStat[0].y / 1000000000);
+          dataStatY = `${dataStatY} Billion`;
+        } else {
+          dataStatY = numberFormatter.format(dataStat[0].y);
+        }
 
         dataStatY = !statistic.unit
           ? dataStatY
