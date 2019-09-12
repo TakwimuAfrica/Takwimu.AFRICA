@@ -12,17 +12,27 @@ import config from '../config';
 import ProfileSection from '../components/ProfileSection';
 import ProfileDetail from '../components/ProfileDetail';
 import sectionedCharts from '../data/chart.json';
+import chartSources from '../data/sources.json';
 
 import slugify from '../utils/slugify';
 
 import ChartFactory from '../components/ChartFactory';
 import Section from '../components/Section';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(({ breakpoints }) => ({
   chart: {
-    margin: '20px 0'
+    margin: '20px 0',
+    backgroundColor: '#f6f6f6'
+  },
+  sourceGrid: {
+    [breakpoints.up('md')]: {
+      whiteSpace: 'nowrap'
+    }
+  },
+  numberTitle: {
+    fontWeight: 'bold'
   }
-});
+}));
 
 function Profile({
   match: {
@@ -42,20 +52,17 @@ function Profile({
     isLoading: true
   });
 
-  // Provide the visuals with unique ids for fetching
+  // Provide the visual with unique ids for fetching
   // The unique ids will be used to set alias in graphql
   let index = 0;
-  let chartIndex = 0;
   sectionedCharts.forEach(x =>
     x.charts.forEach(y => {
       // eslint-disable-next-line no-param-reassign
-      y.id = `chart${chartIndex}`;
-      chartIndex += 1;
-      y.visuals.forEach(z => {
-        // eslint-disable-next-line no-param-reassign
-        z.id = `viz${index}`;
-        index += 1;
-      });
+      y.id = `chart${index}`;
+      const { visual, stat } = y;
+      visual.id = `viz${index}`;
+      stat.id = `viz${index}`;
+      index += 1;
     })
   );
 
@@ -63,8 +70,7 @@ function Profile({
     sectionedCharts
       .map(x => x.charts)
       .reduce((a, b) => a.concat(b))
-      .map(x => x.visuals)
-      .reduce((a, b) => a.concat(b))
+      .map(x => x.visual)
   );
 
   useEffect(() => {
@@ -92,10 +98,22 @@ function Profile({
         }
       });
 
+      // set country name of profile
+      let country;
+      if (profile.geoLevel === 'country') {
+        country = config.countries.find(c => c.iso_code === profile.geoCode);
+      } else {
+        // else we are on level1
+        country = config.countries.find(
+          c => c.iso_code === parentProfile.geoCode
+        );
+      }
+
       setProfiles({
         isLoading: false,
         profile,
-        parent: parentProfile
+        parent: parentProfile,
+        country: country.slug
       });
     })();
   }, [client, geoId]);
@@ -119,9 +137,13 @@ function Profile({
           }
         });
 
+        const sources =
+          chartSources[profiles.country][profiles.profile.geoLevel];
+
         setChartsData({
           isLoading: false,
-          profileVisualsData
+          profileVisualsData,
+          sources
         });
       })();
     }
@@ -145,10 +167,10 @@ function Profile({
             section.charts.filter(
               chart =>
                 chartData.isLoading ||
-                !chart.visuals.find(
-                  visual =>
-                    !chartData.profileVisualsData ||
-                    chartData.profileVisualsData[visual.id].nodes.length === 0
+                !(
+                  !chartData.profileVisualsData ||
+                  chartData.profileVisualsData[chart.visual.id].nodes.length ===
+                    0
                 )
             ).length !== 0
         )
@@ -173,42 +195,42 @@ function Profile({
           {/* <ProfileSectionTitle loading={chartData.isLoading} tab={tab} /> */}
           {sectionedCharts[tab.index].charts
             .filter(
-              ({ visuals: v }) =>
+              ({ visual: v }) =>
                 chartData.isLoading ||
                 (chartData.profileVisualsData &&
                   /* data is not missing */
-                  !v.find(
-                    ({ id }) =>
-                      chartData.profileVisualsData[id].nodes.length === 0
-                  ))
+                  chartData.profileVisualsData[v.id].nodes.length !== 0)
             )
             .map(chart => (
               <div style={{ margin: '40px 0', maxWidth: '100%' }}>
                 <InsightContainer
-                  classes={{ root: classes.chart }}
+                  classes={{
+                    root: classes.chart,
+                    sourceGrid: classes.sourceGrid
+                  }}
                   key={chart.id}
                   loading={chartData.isLoading}
                   title={chart.title}
-                  source={{
-                    title: 'Community Survey 2016',
-                    href: 'http://dev.dominion.africa'
-                  }}
+                  source={
+                    !chartData.isLoading
+                      ? chartData.sources[chart.visual.table].source
+                      : {}
+                  }
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(
-                      { id: 'viz0', type: 'number' },
+                      chart.stat,
+                      chartData.profileVisualsData,
+                      null,
+                      profiles,
+                      classes
+                    )}
+                  {!chartData.isLoading &&
+                    ChartFactory.build(
+                      chart.visual,
                       chartData.profileVisualsData,
                       null,
                       profiles
-                    )}
-                  {!chartData.isLoading &&
-                    chart.visuals.map(visual =>
-                      ChartFactory.build(
-                        visual,
-                        chartData.profileVisualsData,
-                        null,
-                        profiles
-                      )
                     )}
                 </InsightContainer>
               </div>

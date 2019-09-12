@@ -18,10 +18,15 @@ export default class ChartFactory {
       aggregate,
       width,
       height,
-      barWidth
+      offset,
+      barWidth,
+      subtitle,
+      description,
+      statistic
     },
     datas,
     comparisonDatas,
+    classes, // styling class
     /*
      * Profiles are needed in the chart builder
      * since we have no relationships in the database
@@ -157,17 +162,35 @@ export default class ChartFactory {
         return (
           <div
             style={{
-              width: primaryData.length * primaryData[0].length * 45,
-              height: '300px'
+              width:
+                width ||
+                (horizontal
+                  ? 400
+                  : primaryData.length * primaryData[0].length * 30 * 2),
+              height:
+                height ||
+                (horizontal
+                  ? primaryData.length * primaryData[0].length * 35
+                  : 400)
             }}
           >
             <BarChart
               key={key}
               responsive
-              offset={45}
-              barWidth={40}
-              width={primaryData.length * primaryData[0].length * 45}
-              height={height || 300}
+              offset={offset || 20}
+              barWidth={barWidth || 20}
+              width={
+                width ||
+                (horizontal
+                  ? 400
+                  : primaryData.length * primaryData[0].length * 30 * 2)
+              }
+              height={
+                height ||
+                (horizontal
+                  ? primaryData.length * primaryData[0].length * 35
+                  : 400)
+              }
               horizontal={horizontal}
               labels={datum => numberFormatter.format(datum.y)}
               labelComponent={undefined}
@@ -177,6 +200,12 @@ export default class ChartFactory {
                   labelWidth: 40,
                   independent: {
                     style: {
+                      axis: {
+                        display: 'block'
+                      },
+                      ticks: {
+                        display: 'block'
+                      },
                       tickLabels: {
                         display: 'block'
                       }
@@ -196,7 +225,7 @@ export default class ChartFactory {
           return (
             <div
               style={{
-                width: primaryData.length * 2 * (barWidth || 40) + 5,
+                width: '400px',
                 height: '300px'
               }}
             >
@@ -205,8 +234,12 @@ export default class ChartFactory {
                 responsive
                 offset={45}
                 barWidth={barWidth || 40}
-                width={primaryData.length * 2 * ((barWidth || 40) + 5)}
-                height={height || 300}
+                width={400 || primaryData.length * 2 * ((barWidth || 40) + 5)}
+                height={
+                  (horizontal
+                    ? primaryData.length * 2 * ((barWidth || 40) + 5)
+                    : height) || 300
+                }
                 horizontal={horizontal}
                 labels={datum => numberFormatter.format(datum.y)}
                 data={[primaryData, processedComparisonData]}
@@ -234,25 +267,40 @@ export default class ChartFactory {
         return (
           <div
             style={{
-              width: primaryData.length * (barWidth || 80) + 5,
-              height: '300px'
+              width:
+                width ||
+                (horizontal ? 400 : primaryData.length * (barWidth || 40) * 2),
+              height:
+                height ||
+                (horizontal ? primaryData.length * (barWidth || 45) : 400)
             }}
           >
             <BarChart
               key={key}
               responsive
               horizontal={horizontal}
-              barWidth={barWidth || 80}
+              offset={offset || 40}
+              barWidth={barWidth || 30}
               width={
-                horizontal ? 200 : primaryData.length * ((barWidth || 80) + 5)
+                width ||
+                (horizontal ? 400 : primaryData.length * (barWidth || 40) * 2)
               }
-              height={height || 300}
+              height={
+                height ||
+                (horizontal ? primaryData.length * (barWidth || 45) : 400)
+              }
               labels={datum => numberFormatter.format(datum.y)}
               data={primaryData}
               parts={{
                 axis: {
                   independent: {
                     style: {
+                      axis: {
+                        display: 'block'
+                      },
+                      ticks: {
+                        display: 'block'
+                      },
                       tickLabels: {
                         display: 'block'
                       }
@@ -264,23 +312,40 @@ export default class ChartFactory {
           </div>
         );
       }
-      case 'number':
+      case 'number': {
+        const dataStat = statistic.aggregate
+          ? aggregateData(statistic.aggregate, data, statistic.unique)
+          : [data[data.length - 1]];
+
+        let dataStatY;
+
+        if (dataStat[0].y > 1000000000) {
+          dataStatY = numberFormatter.format(dataStat[0].y / 1000000000);
+          dataStatY = `${dataStatY} Billion`;
+        } else {
+          dataStatY = numberFormatter.format(dataStat[0].y);
+        }
+
+        dataStatY = !statistic.unit
+          ? dataStatY
+          : `${dataStatY} ${statistic.unit}`;
+
+        let xDesc = !statistic.unique ? ' ' : ` (${dataStat[0].x})`;
+        xDesc = !dataStat[0].groupBy
+          ? `${xDesc}`
+          : `${xDesc.substring(0, xDesc.length - 1)} - ${dataStat[0].groupBy})`;
         return (
           <NumberVisuals
-            subtitle="Income"
-            statistic="$60,336"
-            statisticDeviation="±0.1"
-            secondaryDeviation="(194, 667, 872 ±241, 381.6)"
-            description="Median household income"
-            comparisonData={[
-              {
-                parentComparison: 'about 90 percent',
-                parentDescription: 'of the amount in United States: $32,397',
-                parentDeviation: '±0.24%'
-              }
-            ]}
+            key={key}
+            subtitle={subtitle}
+            statistic={dataStatY}
+            description={`${description} ${xDesc}`}
+            classes={{
+              subtitle: classes.numberTitle
+            }}
           />
         );
+      }
       default:
         return null;
     }
