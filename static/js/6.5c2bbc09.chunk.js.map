@@ -1,1 +1,0 @@
-{"version":3,"sources":["modules/pdf.js"],"names":["PDF"],"mappings":"2JAAA,qBAEeA,YAAf","file":"static/js/6.5c2bbc09.chunk.js","sourcesContent":["import PDF from 'react-pdf-js';\n\nexport default PDF;\n"],"sourceRoot":""}
