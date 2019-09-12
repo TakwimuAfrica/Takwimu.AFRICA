@@ -11,7 +11,7 @@
           "table": "allPopulationSex2006S",
           "x": "populationSex2006",
           "y": "total",
-          "id": "visual-fzR5i84D"
+          "id": "visual-XJxJbHj7"
         },
         "stat": {
           "type": "number",
@@ -21,9 +21,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-0Mv6zYEw"
+          "id": "stat-9zCsLYIX"
         },
-        "id": "chart--VcRGwt"
+        "id": "chart-OXOrBg8t"
       },
       {
         "title": "Population by Sex",
@@ -32,7 +32,7 @@
           "table": "allPopulationSex2007S",
           "x": "populationSex2007",
           "y": "total",
-          "id": "visual-JMe6q5PH"
+          "id": "visual-RbgZ1DUJ"
         },
         "stat": {
           "type": "number",
@@ -42,9 +42,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-Vfkj1ven"
+          "id": "stat-2QJnW-Wm"
         },
-        "id": "chart-HEoMnY6i"
+        "id": "chart-jCpNkVRH"
       },
       {
         "title": "Population by Sex",
@@ -53,7 +53,7 @@
           "table": "allPopulationSex2009S",
           "x": "populationSex2009",
           "y": "total",
-          "id": "visual-zaPVxiAw"
+          "id": "visual-5GuZSLc7"
         },
         "stat": {
           "type": "number",
@@ -63,9 +63,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-mR_mRF_Y"
+          "id": "stat-VmubCwpV"
         },
-        "id": "chart-cw0vlnRf"
+        "id": "chart-JnFGC4vp"
       },
       {
         "title": "Population by Sex",
@@ -74,7 +74,7 @@
           "table": "allPopulationSex2011S",
           "x": "populationSex2011",
           "y": "total",
-          "id": "visual-kgbQaN5z"
+          "id": "visual-jmRK7piY"
         },
         "stat": {
           "type": "number",
@@ -84,9 +84,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-a4Jhr1Kk"
+          "id": "stat-0wFXYq7W"
         },
-        "id": "chart-3g9Ot8hb"
+        "id": "chart-puRwDdfW"
       },
       {
         "title": "Population by Sex",
@@ -95,7 +95,7 @@
           "table": "allPopulationSex2012S",
           "x": "populationSex2012",
           "y": "total",
-          "id": "visual-ONIRI2We"
+          "id": "visual-DQz2J4n7"
         },
         "stat": {
           "type": "number",
@@ -105,9 +105,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-45Xs1kBH"
+          "id": "stat-_zs8KAwm"
         },
-        "id": "chart-gytVxrfK"
+        "id": "chart-PftEYOw8"
       },
       {
         "title": "Population by Sex",
@@ -116,7 +116,7 @@
           "table": "allPopulationSex2013S",
           "x": "populationSex2013",
           "y": "total",
-          "id": "visual-zjCjbdBiV"
+          "id": "visual-6IelI_47_"
         },
         "stat": {
           "type": "number",
@@ -126,9 +126,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-wMcHtg8qB"
+          "id": "stat-I1O_3lGm7"
         },
-        "id": "chart-TH4eUlmo"
+        "id": "chart-aL6bwKusJ"
       },
       {
         "title": "Population by Sex per year",
@@ -140,7 +140,7 @@
           "groupBy": "populationYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-WnRLnWaYN"
+          "id": "visual-de5U0FSxq"
         },
         "stat": {
           "type": "number",
@@ -150,9 +150,9 @@
             "aggregate": "last",
             "unique": true
           },
-          "id": "stat-U18EI-puF"
+          "id": "stat-7Qx7ETH0f"
         },
-        "id": "chart-xBUSlAks8"
+        "id": "chart-B_2N04vyq"
       },
       {
         "title": "Population by Residence",
@@ -161,7 +161,7 @@
           "table": "allPopulationResidence2009S",
           "x": "populationResidence2009",
           "y": "total",
-          "id": "visual-RZwq7vCd4"
+          "id": "visual-yK5rShqQU"
         },
         "stat": {
           "type": "number",
@@ -171,9 +171,9 @@
             "aggregate": "sum",
             "unique": true
           },
-          "id": "stat-4Is2NSUQo"
+          "id": "stat-l_DkKYdu7"
         },
-        "id": "chart-gE_NcLkCa"
+        "id": "chart-nChGuiAIB"
       },
       {
         "title": "Population by Residence",
@@ -182,7 +182,7 @@
           "table": "allPopulationResidence2012S",
           "x": "populationResidence2012",
           "y": "total",
-          "id": "visual-ZBlEoOGU4"
+          "id": "visual-8nxH1Wzjm"
         },
         "stat": {
           "type": "number",
@@ -191,9 +191,9 @@
           "statistic": {
             "aggregate": "sum"
           },
-          "id": "stat-SK2_RVt77"
+          "id": "stat-yujN_xpRb"
         },
-        "id": "chart-klFQqPJHw"
+        "id": "chart-kVVZoPIYV"
       },
       {
         "title": "Population by Residence",
@@ -202,7 +202,7 @@
           "table": "allPopulationResidence2013S",
           "x": "populationResidence2013",
           "y": "total",
-          "id": "visual-xfBO3K0w9"
+          "id": "visual-Q81z9TyyJ"
         },
         "stat": {
           "type": "number",
@@ -212,9 +212,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-yCLu7wsrm"
+          "id": "stat-m2e1kZ4U3"
         },
-        "id": "chart-xz9majuKv"
+        "id": "chart-kyvGaTSjz"
       },
       {
         "title": "Youth Unemployment Sex per year",
@@ -226,7 +226,7 @@
           "x": "sex",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-alPEIf6j2"
+          "id": "visual-AfNlXt4Sr"
         },
         "stat": {
           "type": "number",
@@ -236,9 +236,9 @@
             "unique": true,
             "aggregate": "last"
           },
-          "id": "stat-ydANJByo3"
+          "id": "stat-PgESSkqNi"
         },
-        "id": "chart-iCyue7Vfr"
+        "id": "chart-w3Zkjt5YS"
       },
       {
         "title": "Youth Unemployment",
@@ -247,7 +247,7 @@
           "table": "allYouthUnemploymentGenerals",
           "x": "youthUnemploymentPeriod",
           "y": "total",
-          "id": "visual-Q5_sT4iLJ"
+          "id": "visual-7ePmadnw4"
         },
         "stat": {
           "type": "number",
@@ -257,9 +257,9 @@
             "unique": true,
             "aggregate": "last"
           },
-          "id": "stat-R4_8UdN4M"
+          "id": "stat-D3Pg_7_SC"
         },
-        "id": "chart-60zcvZM5r"
+        "id": "chart-0ObxlR5E4"
       },
       {
         "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
@@ -271,7 +271,7 @@
           "x": "sex",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-NcBqZoAy-"
+          "id": "visual-r2i5qbnrj"
         },
         "stat": {
           "type": "number",
@@ -281,9 +281,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-RPaMDG5OM"
+          "id": "stat-jUkONCR_-"
         },
-        "id": "chart-5k1-sKZBh"
+        "id": "chart-Cp-GP6L4-"
       },
       {
         "title": "Percentage of population in poverty",
@@ -294,7 +294,7 @@
           "groupBy": "povertyType",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-Vron8Xgqs"
+          "id": "visual-33dwKjP6_"
         },
         "stat": {
           "type": "number",
@@ -304,9 +304,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-XLJ7uX3-N"
+          "id": "stat-1zlssCY7y"
         },
-        "id": "chart-ltrLN_hq6"
+        "id": "chart-VQl3Q8Zkj"
       },
       {
         "title": "Percentage of population living in poverty by age and residence",
@@ -318,7 +318,7 @@
           "y": "total",
           "horizontal": true,
           "aggregate": "sum",
-          "id": "visual-YQflYuCu5"
+          "id": "visual-0bfC0wSuc"
         },
         "stat": {
           "type": "number",
@@ -328,9 +328,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat--fblT28Nt"
+          "id": "stat-r24l90dDf"
         },
-        "id": "chart-jiVq7F3Je"
+        "id": "chart-ZKG0OTCj_"
       },
       {
         "title": "Human Development Indices",
@@ -339,7 +339,7 @@
           "table": "allHumanDevIndices",
           "x": "humanDevIndices",
           "y": "total",
-          "id": "visual-N-laUD28Q"
+          "id": "visual-2xd-3z9Dd"
         },
         "stat": {
           "type": "number",
@@ -348,12 +348,12 @@
           "statistic": {
             "aggregate": "sum"
           },
-          "id": "stat-iOCpKJ6eX"
+          "id": "stat-sgMgytSz2"
         },
-        "id": "chart-lYxfYtcxx"
+        "id": "chart-0lqx-TKlt"
       }
     ],
-    "id": "section0UNM6ur"
+    "id": "section-v5bGz4M"
   },
   {
     "sectionTitle": "Elections",
@@ -365,7 +365,7 @@
           "table": "allValidInvalidVotes",
           "x": "votes",
           "y": "total",
-          "id": "visual-xj0Di-NUX"
+          "id": "visual-TPgvcLQoq"
         },
         "stat": {
           "type": "number",
@@ -375,9 +375,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-BBgt9nnUd"
+          "id": "stat-6wIFHaap1"
         },
-        "id": "chart-bjummRNe2"
+        "id": "chart-XVRVUJ0fo"
       },
       {
         "title": "Registered voters vs total votes cast",
@@ -386,7 +386,7 @@
           "table": "allRegisteredAccreditedVoters",
           "x": "voters",
           "y": "total",
-          "id": "visual-FBzqTO2pJ"
+          "id": "visual-75aCzBSRH"
         },
         "stat": {
           "type": "number",
@@ -396,9 +396,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-kI2f6IFFy"
+          "id": "stat-nlWEkm8pf"
         },
-        "id": "chart-2XM_vKdnf"
+        "id": "chart-7hXyn0JH9"
       },
       {
         "title": "Votes per Candidate",
@@ -408,7 +408,7 @@
           "horizontal": true,
           "x": "candidate",
           "y": "total",
-          "id": "visual-MKX-iwJKW"
+          "id": "visual-zVOtvzDJ7"
         },
         "stat": {
           "type": "number",
@@ -418,9 +418,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-ahwgpKXtW"
+          "id": "stat-JcwFlxUUD"
         },
-        "id": "chart-emEdkFKQ5"
+        "id": "chart-FtbmOujP4"
       },
       {
         "title": "Proportion of seats held by women in national parliaments (%)",
@@ -430,7 +430,7 @@
           "x": "womenParliamentYear",
           "horizontal": true,
           "y": "total",
-          "id": "visual-gXcChmH2O"
+          "id": "visual-neMow1qA4"
         },
         "stat": {
           "type": "number",
@@ -440,9 +440,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-Uo8d4lgXJ"
+          "id": "stat-RUpViJ4Om"
         },
-        "id": "chart-cRNLkuEF2"
+        "id": "chart-c4YvJDlg7"
       },
       {
         "title": "Position held by women in government",
@@ -451,7 +451,7 @@
           "table": "allWomenInGovernments",
           "x": "position",
           "y": "total",
-          "id": "visual-r6nAdtfd3"
+          "id": "visual-zTWMlaDmR"
         },
         "stat": {
           "type": "number",
@@ -460,12 +460,12 @@
           "statistic": {
             "aggregate": "sum"
           },
-          "id": "stat-jrt5Wqd5L"
+          "id": "stat-FNIwu3e6n"
         },
-        "id": "chart-4fviDWiKH"
+        "id": "chart-BVy7XqW1-"
       }
     ],
-    "id": "section-b5lsNzPu3"
+    "id": "section-D7gJ8-P2Q"
   },
   {
     "sectionTitle": "Health",
@@ -478,7 +478,7 @@
           "horizontal": true,
           "x": "accessToBasicServicesYear",
           "y": "total",
-          "id": "visual-todqEV4q4"
+          "id": "visual-rKreT767z"
         },
         "stat": {
           "type": "number",
@@ -488,9 +488,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-UpCzDp0QN"
+          "id": "stat-JxmJCZ7FF"
         },
-        "id": "chart-s6IEqH-Ra"
+        "id": "chart-83mjLT06a"
       },
       {
         "title": "Percent of households with access to water and electricity services",
@@ -499,7 +499,7 @@
           "table": "allAccessToElecWaterServices",
           "x": "accessToElecWaterServices",
           "y": "total",
-          "id": "visual-VgEkA14z8"
+          "id": "visual-mP4mHhc3a"
         },
         "stat": {
           "type": "number",
@@ -509,9 +509,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-ko5BuAlt0"
+          "id": "stat-Ve430zAo5"
         },
-        "id": "chart-KP3f-zWCv"
+        "id": "chart-9KqhjUKgr"
       },
       {
         "title": "Prevalence of undernourishment (% of population)",
@@ -521,7 +521,7 @@
           "horizontal": true,
           "x": "prevalenceOfUndernourishmentYear",
           "y": "total",
-          "id": "visual-alNz4Rj-f"
+          "id": "visual-deQuTcynB"
         },
         "stat": {
           "type": "number",
@@ -531,9 +531,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-nxjsi5IRE"
+          "id": "stat-lD3GchgUL"
         },
-        "id": "chart-L968VqnW3"
+        "id": "chart-3y7HI6SgN"
       },
       {
         "title": "Life expectancy at birth (years)",
@@ -545,7 +545,7 @@
           "groupBy": "lifeExpectancyAtBirthYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-T_qb4rEf4"
+          "id": "visual-Rf-OW6kSH"
         },
         "stat": {
           "type": "number",
@@ -554,9 +554,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-NMxmgNrHf"
+          "id": "stat-YrkRFlSkd"
         },
-        "id": "chart-e8Xbiw-4l"
+        "id": "chart-YjeXUwUUl"
       },
       {
         "title": "Prevalence of FGM among women aged 15 - 49 years",
@@ -565,7 +565,7 @@
           "table": "allPrevalenceFgms",
           "x": "prevalenceFgm",
           "y": "total",
-          "id": "visual-TIza1AsF_"
+          "id": "visual-T_MLaY2MB"
         },
         "stat": {
           "type": "number",
@@ -574,9 +574,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-Sk1GocxDW"
+          "id": "stat-maMVRIDe5"
         },
-        "id": "chart-8bB2mVURi"
+        "id": "chart-2gFX61spg"
       },
       {
         "title": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
@@ -586,7 +586,7 @@
           "horizontal": true,
           "x": "maternalMortalityYear",
           "y": "total",
-          "id": "visual-viFqhix9r"
+          "id": "visual-eMEgPOmp4"
         },
         "stat": {
           "type": "number",
@@ -595,9 +595,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-jjSfqoFtx"
+          "id": "stat-T3pav-8Ea"
         },
-        "id": "chart-22w5UWSyI"
+        "id": "chart-yN51SNEqY"
       },
       {
         "title": "Prevalence of HIV, (% ages 15-24)",
@@ -609,7 +609,7 @@
           "groupBy": "hivPrevalenceYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-RrsraEJnP"
+          "id": "visual-HWvN9eMVo"
         },
         "stat": {
           "type": "number",
@@ -619,9 +619,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-bmQCEAXGR"
+          "id": "stat-50LHnVx1_"
         },
-        "id": "chart-yNm6w9dyd"
+        "id": "chart-bmYXD8HlG"
       },
       {
         "title": "Distribution of HIV Patients by Year and Sex 2015-2016",
@@ -632,7 +632,7 @@
           "groupBy": "hivPatientsDistributionYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-ua6p3VZsu"
+          "id": "visual-re6Nks1BU"
         },
         "stat": {
           "type": "number",
@@ -641,9 +641,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-TOlkx0U6a"
+          "id": "stat-lM8uHqxmi"
         },
-        "id": "chart-QJqoeDF84"
+        "id": "chart-pH8Nuvx5G"
       },
       {
         "title": "Prevalence of Malaria in Children - Number of children",
@@ -652,7 +652,7 @@
           "table": "allMalariaPrevalences",
           "x": "malariaPrevalenceTest",
           "y": "total",
-          "id": "visual-lc4W40gK4"
+          "id": "visual-krL3lFllf"
         },
         "stat": {
           "type": "number",
@@ -662,9 +662,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-EyF91NWm2"
+          "id": "stat-hOopkb9uv"
         },
-        "id": "chart-V71HLlmkd"
+        "id": "chart-rjYO5G1Af"
       },
       {
         "title": "Births attended by skilled health staff (% of total)",
@@ -673,7 +673,7 @@
           "table": "allBirthsAttendedBySkilledHealthStaffs",
           "x": "birthsAttendedBySkilledHealthStaffYear",
           "y": "total",
-          "id": "visual-P3d-S6K8H"
+          "id": "visual--K-mlL1Cx"
         },
         "stat": {
           "type": "number",
@@ -683,9 +683,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-ExhcmSmQd"
+          "id": "stat-Eqns7M4tp"
         },
-        "id": "chart-sKo_xZo_d"
+        "id": "chart-fMOptjSbu"
       },
       {
         "title": "Female Genital Mutilation Prevelence (%)",
@@ -694,7 +694,7 @@
           "table": "allFgmPrevalences",
           "x": "fgmPrevalenceYear",
           "y": "total",
-          "id": "visual-HuOFl7ZGf"
+          "id": "visual-SVhCQFKpS"
         },
         "stat": {
           "type": "number",
@@ -704,9 +704,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-rlb446Sta"
+          "id": "stat-UQMmHf9Rn"
         },
-        "id": "chart-Kg0ELZbEy"
+        "id": "chart-EHr0m_PMg"
       },
       {
         "title": "Nurses and midwives (per 1,000 people)",
@@ -715,7 +715,7 @@
           "table": "allNursesAndMidwives",
           "x": "nursesAndMidwivesYear",
           "y": "total",
-          "id": "visual-ZjYmi8oT3"
+          "id": "visual-0HC4mvk3f"
         },
         "stat": {
           "type": "number",
@@ -724,9 +724,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-MG62bT3te"
+          "id": "stat-bsGzv4Dnk"
         },
-        "id": "chart-k35JIoL5x"
+        "id": "chart-Psz0uktCv"
       },
       {
         "title": "Incidence of malaria per 1000 population at risk",
@@ -735,7 +735,7 @@
           "table": "allIncidenceOfMalariaPer1000PopAtRisks",
           "x": "incidenceOfMalariaPer1000PopAtRiskYear",
           "y": "total",
-          "id": "visual-v_7QrUGVg"
+          "id": "visual-CTWii_doU"
         },
         "stat": {
           "type": "number",
@@ -744,9 +744,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-V7PHPS-cS"
+          "id": "stat-Pat8HjxXm"
         },
-        "id": "chart-Bp8u8FbNX"
+        "id": "chart-S-D0awlXB"
       },
       {
         "title": "Infant and Under 5 Mortality rate (per 1000 live births)",
@@ -758,16 +758,16 @@
           "y": "total",
           "aggregate": "sum",
           "horizontal": true,
-          "id": "visual-Yg5Rn2u8g"
+          "id": "visual-yolAxJLNk"
         },
         "stat": {
           "type": "number",
           "subtitle": "Health",
           "description": "Mortality Rate",
           "statistic": {},
-          "id": "stat-4LlQ0gMLz"
+          "id": "stat-UzaVlmvXN"
         },
-        "id": "chart-H20kZGAW-"
+        "id": "chart-Ff-BMUdaD"
       },
       {
         "title": "Health worker density and distribution",
@@ -779,7 +779,7 @@
           "y": "total",
           "aggregate": "sum",
           "horizontal": true,
-          "id": "visual-Tc3T-NA90"
+          "id": "visual--_m4Avnlk"
         },
         "stat": {
           "type": "number",
@@ -788,9 +788,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-O7yy3vsuR"
+          "id": "stat-rlUHL6eL8"
         },
-        "id": "chart-q6NOhrO35"
+        "id": "chart-Wbwjw9JSD"
       },
       {
         "title": "Number of Doctors by Year and Sex (2015-2017)",
@@ -801,7 +801,7 @@
           "groupBy": "numberOfDoctorsYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-VLpiXBi0m"
+          "id": "visual-mUyX2XmRj"
         },
         "stat": {
           "type": "number",
@@ -811,9 +811,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-jF7jvkUX1"
+          "id": "stat-GA9f2Rph3"
         },
-        "id": "chart-8RGqjFzey"
+        "id": "chart-8txgWYxcZ"
       },
       {
         "title": "Number of Dentists by Year and Sex (2015-2017)",
@@ -824,7 +824,7 @@
           "groupBy": "numberOfDentistYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-g8_s0CkOI"
+          "id": "visual-CRy_jwUnc"
         },
         "stat": {
           "type": "number",
@@ -834,12 +834,12 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-E4OINTidJ"
+          "id": "stat-7Gq2u1we1"
         },
-        "id": "chart-ulybdnL8S"
+        "id": "chart-y3SmRGPYc"
       }
     ],
-    "id": "section-aaewbg40Y"
+    "id": "section-6ZdGce1FU"
   },
   {
     "sectionTitle": "Agriculture",
@@ -852,7 +852,7 @@
           "horizontal": true,
           "x": "crops",
           "y": "total",
-          "id": "visual-iZ7E33j-_"
+          "id": "visual-AY5UAjWcL"
         },
         "stat": {
           "type": "number",
@@ -862,9 +862,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat--lNbgl8t5"
+          "id": "stat-xPTLmcL4x"
         },
-        "id": "chart-T_ExhuaEt"
+        "id": "chart-FXfaxKGm5"
       },
       {
         "title": "Cereal yield in kg per hectare (Thousands)",
@@ -874,7 +874,7 @@
           "horizontal": true,
           "x": "cerealYieldKgPerHectareYear",
           "y": "total",
-          "id": "visual-9Ml3FAGue"
+          "id": "visual-Qf1Ym5cKB"
         },
         "stat": {
           "type": "number",
@@ -884,9 +884,9 @@
             "aggregate": "sum",
             "unique": false
           },
-          "id": "stat-d7TNVd26b"
+          "id": "stat-unjSs8hAP"
         },
-        "id": "chart-lDnumPlb9"
+        "id": "chart-ZjYHHIhLi"
       },
       {
         "title": "Agricultural land (% of land area)",
@@ -896,7 +896,7 @@
           "horizontal": true,
           "x": "agriculturalLandYear",
           "y": "total",
-          "id": "visual-2djfrB9Kc"
+          "id": "visual-fm897wsXV"
         },
         "stat": {
           "type": "number",
@@ -906,9 +906,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-mXuvxzZU-"
+          "id": "stat-83KKJIHOx"
         },
-        "id": "chart-nW8roKlCC"
+        "id": "chart-g10fwaaCN"
       },
       {
         "title": "Employment in agriculture (% of male vs female employment)",
@@ -920,7 +920,7 @@
           "y": "total",
           "aggregate": "sum",
           "horizontal": true,
-          "id": "visual-5AnF8-Tyt"
+          "id": "visual-vgDM08G5C"
         },
         "stat": {
           "type": "number",
@@ -930,12 +930,12 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-MC6tK9bU0"
+          "id": "stat-X25JYxSD9"
         },
-        "id": "chart-cdo69J39d"
+        "id": "chart-AiWHkhTjM"
       }
     ],
-    "id": "section-DNgN89CKn"
+    "id": "section-M7GQCg6VF"
   },
   {
     "sectionTitle": "Education",
@@ -951,7 +951,7 @@
           "y": "total",
           "horizontal": true,
           "aggregate": "sum",
-          "id": "visual-XTWsWRbEk"
+          "id": "visual-C2LVyvrXJ"
         },
         "stat": {
           "type": "number",
@@ -961,9 +961,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-oIRlS6vYw"
+          "id": "stat-SKrplhnhq"
         },
-        "id": "chart-yUh8_c7hb"
+        "id": "chart-aTGOJd56v"
       },
       {
         "title": "Literacy rate, adult (% of population ages 15 and above)",
@@ -975,7 +975,7 @@
           "y": "total",
           "horizontal": true,
           "aggregate": "sum",
-          "id": "visual-OpZjZtWg-"
+          "id": "visual-yXUiLmKVw"
         },
         "stat": {
           "type": "number",
@@ -985,9 +985,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-n-ADdg31m"
+          "id": "stat-Rx65Mt-md"
         },
-        "id": "chart-_u2zN9SHQ"
+        "id": "chart-XxfE08Xx2"
       },
       {
         "title": "Percentage of Women and Men age 15-24 years who are literate by Sex, 2016/17",
@@ -997,7 +997,7 @@
           "horizontal": true,
           "x": "sex",
           "y": "total",
-          "id": "visual-GexYEqIEO"
+          "id": "visual-XOQWElkQ8"
         },
         "stat": {
           "type": "number",
@@ -1007,9 +1007,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-b5AMgbc-X"
+          "id": "stat-AGV0LBBA4"
         },
-        "id": "chart-TOiiZxgc3"
+        "id": "chart-ZXg3tihfU"
       },
       {
         "title": "Primary completion rate,(% of relevant age group)",
@@ -1019,7 +1019,7 @@
           "horizontal": true,
           "x": "primaryEducationCompletionRateYear",
           "y": "total",
-          "id": "visual-RAQsIFz-m"
+          "id": "visual-GQItDi5Mu"
         },
         "stat": {
           "type": "number",
@@ -1029,9 +1029,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-pHGP7GZlz"
+          "id": "stat-Nc_6kBn9v"
         },
-        "id": "chart-upSOtm-3n"
+        "id": "chart-KoLwjKP7k"
       },
       {
         "title": "Percentage Distribution of Enrolment in Primary Schools by Year and Sex, 2015 -2016",
@@ -1041,7 +1041,7 @@
           "x": "sex",
           "groupBy": "primarySchoolEnrollmentYear",
           "y": "total",
-          "id": "visual-GI-V4A29b"
+          "id": "visual--8yMvvZVJ"
         },
         "stat": {
           "type": "number",
@@ -1052,9 +1052,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-ayJ4wVj-3"
+          "id": "stat-zX-bx8bOv"
         },
-        "id": "chart-rPsIMB0Z5"
+        "id": "chart-CjGs2smTy"
       },
       {
         "title": "Distribution of Enrolment in Junior Secondary School by Year and sex, 2015 -2016",
@@ -1064,7 +1064,7 @@
           "x": "sex",
           "groupBy": "juniorSecondarySchoolEnrollmentYear",
           "y": "total",
-          "id": "visual-rp8SyYM67"
+          "id": "visual-GexJ0Z1Xc"
         },
         "stat": {
           "type": "number",
@@ -1075,9 +1075,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-jugrdE62v"
+          "id": "stat-pTCiIoo0X"
         },
-        "id": "chart-NYLLJ6lNs"
+        "id": "chart-0o-ck-Y8Y"
       },
       {
         "title": "Distribution of Enrolment in Senior Secondary School by State, Year and Sex, 2015 -2016",
@@ -1087,7 +1087,7 @@
           "x": "sex",
           "groupBy": "seniorSecondarySchoolEnrollmentYear",
           "y": "total",
-          "id": "visual-x8zjv1RNQ"
+          "id": "visual-pk3mL-Icy"
         },
         "stat": {
           "type": "number",
@@ -1098,9 +1098,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-KrjZYQehk"
+          "id": "stat-cOiepWkCc"
         },
-        "id": "chart-qMa2yttIq"
+        "id": "chart-yvXIpD18F"
       },
       {
         "title": "School enrollment, secondary (% gross)",
@@ -1112,7 +1112,7 @@
           "y": "total",
           "aggregate": "sum",
           "horizontal": true,
-          "id": "visual-SUf-WJyj3"
+          "id": "visual-g-HjbDKTT"
         },
         "stat": {
           "type": "number",
@@ -1122,9 +1122,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-aIBSufQXo"
+          "id": "stat-_hz3jcZ28"
         },
-        "id": "chart-NqouUqjQd"
+        "id": "chart-df4LROXqA"
       },
       {
         "title": "Primary Completion rate (%)",
@@ -1133,7 +1133,7 @@
           "table": "allPrimaryEducationCompletionSexes",
           "x": "primaryEducationCompletionSex",
           "y": "total",
-          "id": "visual-I8_Hn17du"
+          "id": "visual-uA1B2kEln"
         },
         "stat": {
           "type": "number",
@@ -1143,12 +1143,12 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-ShAj-7mVU"
+          "id": "stat-iA6dY3_78"
         },
-        "id": "chart-yOFXIh9A3"
+        "id": "chart-Me2AMe6YE"
       }
     ],
-    "id": "section-PGU0MuglB"
+    "id": "section-WuD7UVUtt"
   },
   {
     "sectionTitle": "Financial Inclusion",
@@ -1163,7 +1163,7 @@
           "groupBy": "accountOwnershipYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-BhF7kmxkR"
+          "id": "visual-QMnnL9H88"
         },
         "stat": {
           "type": "number",
@@ -1174,9 +1174,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-qRuB4DmQH"
+          "id": "stat-Tr50yoJ5F"
         },
-        "id": "chart-CKAU5xAey"
+        "id": "chart-2i66RH9nd"
       },
       {
         "title": "Percentage of households where at least one member owns or has a Bank Account",
@@ -1185,7 +1185,7 @@
           "table": "allAccountOwnershipIndicators",
           "x": "accountOwnershipYear",
           "y": "total",
-          "id": "visual-hMHjVTcBu"
+          "id": "visual-vZA-Xx0Rx"
         },
         "stat": {
           "type": "number",
@@ -1194,9 +1194,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-lwa2nTHpx"
+          "id": "stat-Zzs9o7GbI"
         },
-        "id": "chart-4kxTJbkb2"
+        "id": "chart-84EKplBU2"
       },
       {
         "title": "Mobile phone subscriptions (per 100 people)",
@@ -1206,7 +1206,7 @@
           "horizontal": true,
           "x": "mobilePhoneSubscriptionsYear",
           "y": "total",
-          "id": "visual-mVXlI4jUk"
+          "id": "visual-xBZLAGfu6"
         },
         "stat": {
           "type": "number",
@@ -1216,12 +1216,12 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-xdh9kdZ-Z"
+          "id": "stat-_wwYZdyPN"
         },
-        "id": "chart-oSHfEHQhB"
+        "id": "chart-JRuWq_pyp"
       }
     ],
-    "id": "section-rgctRNKMW"
+    "id": "section-Atgc7ZfPP"
   },
   {
     "sectionTitle": "Budget",
@@ -1237,7 +1237,7 @@
           "y": "total",
           "aggregate": "sum",
           "horizontal": true,
-          "id": "visual-LnYg2cDxx"
+          "id": "visual-bZ9J1Koqj"
         },
         "stat": {
           "type": "number",
@@ -1248,12 +1248,12 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-PSPqK2rwA"
+          "id": "stat-ZHRHpRME-"
         },
-        "id": "chart-owQIhfzSa"
+        "id": "chart-5ndLPl_g0"
       }
     ],
-    "id": "section-p-CHZQWQ5"
+    "id": "section-nV9D-mx1D"
   },
   {
     "sectionTitle": "Public Finances",
@@ -1266,7 +1266,7 @@
           "table": "allGiniIndices",
           "x": "giniIndexYear",
           "y": "total",
-          "id": "visual-HVnhkLdo5"
+          "id": "visual-SggYnLbcW"
         },
         "stat": {
           "type": "number",
@@ -1275,9 +1275,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-IpyVOcQA0"
+          "id": "stat-uRytKMGdE"
         },
-        "id": "chart-WgarcgCEl"
+        "id": "chart-ykz9ztbIF"
       },
       {
         "title": "GDP per capita (current US$)",
@@ -1287,7 +1287,7 @@
           "x": "gdpPerCapitaYear",
           "horizontal": true,
           "y": "total",
-          "id": "visual-ceL3AB0j4"
+          "id": "visual-p8dERxcAL"
         },
         "stat": {
           "type": "number",
@@ -1296,9 +1296,9 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-NPvadHi_-"
+          "id": "stat-uHKWMqlJk"
         },
-        "id": "chart-8TsMDCDM3"
+        "id": "chart-mEMVS_bKc"
       },
       {
         "title": "GDP per capita growth (annual %)",
@@ -1308,7 +1308,7 @@
           "horizontal": true,
           "x": "gdpPerCapitaGrowthYear",
           "y": "total",
-          "id": "visual-mYvsUvl5h"
+          "id": "visual-e_hgydv78"
         },
         "stat": {
           "type": "number",
@@ -1318,9 +1318,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-QEdCoN2Kj"
+          "id": "stat-U6nFwAcP6"
         },
-        "id": "chart-XQ3AMDurA"
+        "id": "chart-FiED1wEBG"
       },
       {
         "title": "Tax as percentage of GDP",
@@ -1330,7 +1330,7 @@
           "x": "taxAsPercentageOfGdpYear",
           "horizontal": true,
           "y": "total",
-          "id": "visual-VtRAIYF1C"
+          "id": "visual-OtyQpAdzX"
         },
         "stat": {
           "type": "number",
@@ -1340,9 +1340,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-lK4Yk6w__"
+          "id": "stat-O3yMLyi7W"
         },
-        "id": "chart-hZASeLNcS"
+        "id": "chart-tcme7PdDY"
       },
       {
         "title": "Tax revenue (current LCU)",
@@ -1352,7 +1352,7 @@
           "x": "taxRevenueYear",
           "horizontal": true,
           "y": "total",
-          "id": "visual-HnXa_Dq2g"
+          "id": "visual-GV9l-rXRi"
         },
         "stat": {
           "type": "number",
@@ -1362,9 +1362,9 @@
             "unique": true,
             "unit": "US$"
           },
-          "id": "stat-H1xqUxCKu"
+          "id": "stat-yvV-LPxAr"
         },
-        "id": "chart-B7aPBBckz"
+        "id": "chart-D2VkbJWYe"
       },
       {
         "title": "GDP",
@@ -1374,7 +1374,7 @@
           "x": "gdpYear",
           "y": "total",
           "horizontal": true,
-          "id": "visual-I2GOmj1YD"
+          "id": "visual-XH9LgCyGG"
         },
         "stat": {
           "type": "number",
@@ -1384,9 +1384,9 @@
             "unique": true,
             "unit": "US$"
           },
-          "id": "stat-iJQD4q8p7"
+          "id": "stat-5RJuRlx2Y"
         },
-        "id": "chart-n_uz9bHHp"
+        "id": "chart-Nxbu2Tps5"
       },
       {
         "title": "GDP Growth",
@@ -1396,7 +1396,7 @@
           "x": "gdpGrowthYear",
           "horizontal": true,
           "y": "total",
-          "id": "visual-Ibl_EL9vC"
+          "id": "visual-ZvWdH9yYz"
         },
         "stat": {
           "type": "number",
@@ -1406,12 +1406,12 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-KDVb18QYy"
+          "id": "stat--2kYGzV-9"
         },
-        "id": "chart-jh38XUFAS"
+        "id": "chart-r4l5ucyg6"
       }
     ],
-    "id": "section-cFKM3D58a"
+    "id": "section-Pc-bWeAI4"
   },
   {
     "sectionTitle": "ODA",
@@ -1425,7 +1425,7 @@
           "horizontal": true,
           "x": "foreignDirectInvestmentNetInflowsYear",
           "y": "total",
-          "id": "visual-V8sIr4Ztx"
+          "id": "visual-2iczA3njO"
         },
         "stat": {
           "type": "number",
@@ -1435,9 +1435,9 @@
             "unique": true,
             "unit": "%"
           },
-          "id": "stat-42SlcJOoh"
+          "id": "stat-JN0jhq1tl"
         },
-        "id": "chart-ZtIB-xs7_"
+        "id": "chart-sz7KNbrrb"
       },
       {
         "title": "Contribution by principal donor",
@@ -1447,7 +1447,7 @@
           "x": "donor",
           "y": "total",
           "horizontal": true,
-          "id": "visual-rP7k-0hz1"
+          "id": "visual-hU1E8FVOd"
         },
         "stat": {
           "type": "number",
@@ -1457,9 +1457,9 @@
             "unique": false,
             "aggregate": "sum"
           },
-          "id": "stat-vtQpkLYyv"
+          "id": "stat-ETYLsmiO9"
         },
-        "id": "chart-0fwPgDG2s"
+        "id": "chart-7XkfrkuzC"
       },
       {
         "title": "Contribution by Worldbank & DFID per programme",
@@ -1470,7 +1470,7 @@
           "groupBy": "donor",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-CbnkEw1vB"
+          "id": "visual-L50E9twtI"
         },
         "stat": {
           "type": "number",
@@ -1479,11 +1479,11 @@
           "statistic": {
             "unique": true
           },
-          "id": "stat-ZGhUXnxN1"
+          "id": "stat-ew3afyfkK"
         },
-        "id": "chart-yBEEP6tc5"
+        "id": "chart-tWCCdz8RV"
       }
     ],
-    "id": "section-s_J86gz-h"
+    "id": "section-Nf4PbTAv_"
   }
 ]
