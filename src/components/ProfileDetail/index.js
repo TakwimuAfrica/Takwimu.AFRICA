@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function CountrySelectorComponent({ country }) {
+function CountrySelectorComponent({ context, country }) {
   const classes = useStyles();
   return (
     <div>
@@ -127,7 +127,7 @@ function CountrySelectorComponent({ country }) {
         disableTouchRipple
         style={{ outline: 'none' }}
         className={classes.chooserButton}
-        // onClick={window.toggleDrawer(context)}
+        onClick={window.toggleDrawer(context)}
       >
         <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
         <Typography variant="subtitle2" className={classes.countryName}>
@@ -140,7 +140,7 @@ function CountrySelectorComponent({ country }) {
 }
 
 CountrySelectorComponent.propTypes = {
-  // context: PropTypes.string.isRequired,
+  context: PropTypes.string.isRequired,
   country: PropTypes.shape({
     slug: PropTypes.string,
     short_name: PropTypes.string
