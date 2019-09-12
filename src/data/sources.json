@@ -220,13 +220,6 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationCompletionRates": {
-                "source": {
-                    "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=KE",
-                    "title": "WorldBank"
-                },
-                "qualifier": "M: Male\nF: Female"
-            },
             "allPrevalenceOfUndernourishments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE",
@@ -498,12 +491,6 @@
             "total_population": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NG",
-                    "title": "WorldBank"
-                }
-            },
-            "allPrimaryEducationCompletionRates": {
-                "source": {
-                    "href": "https://data.worldbank.org/indicator/SE.PRM.CMPT.MA.ZS?locations=NG",
                     "title": "WorldBank"
                 }
             },
@@ -1752,6 +1739,12 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "allTaxRevenues": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.CN?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
             "allMaternalMortalities": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=BF",
@@ -1769,6 +1762,18 @@
                     "href": "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=BF",
                     "title": "WorldBank"
                 }
+            },
+            "allGdps": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.CD?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "allGdpGrowths": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=BF",
+                    "title": "WorldBank"
+                }
             }
         }
     },
@@ -1776,7 +1781,7 @@
         "country": {
           "allAccessToBasicServices": {
               "source": {
-                  "href": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=BF",
+                  "href": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=CD",
                   "title": "WorldBank"
               }
           },
@@ -1898,6 +1903,24 @@
             "allMaternalMortalities": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "allTaxRevenues": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.CN?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "allGdps": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.CD?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "allGdpGrowths": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=CD",
                     "title": "WorldBank"
                 }
             },
@@ -2068,6 +2091,12 @@
                     "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.CD?locations=UG",
                     "title": "WorldBank"
                 }
+            },
+            "allTaxAsPercentageOfGdps": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
             }
         }
     },
@@ -2079,6 +2108,18 @@
                   "title": "WorldBank"
               }
           },
+          "allGdps": {
+            "source": {
+                "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.CD?locations=ZM",
+                "title": "WorldBank"
+            }
+        },
+          "allTaxRevenues": {
+            "source": {
+                "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.CN?locations=ZM",
+                "title": "WorldBank"
+            }
+        },
             "allAccountOwnerships": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=ZM",
@@ -2216,6 +2257,12 @@
             "allNursesAndMidwives": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "allGdpGrowths": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=UG",
                     "title": "WorldBank"
                 }
             }
