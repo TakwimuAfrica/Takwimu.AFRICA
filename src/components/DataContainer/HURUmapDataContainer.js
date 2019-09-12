@@ -33,7 +33,7 @@ function DataContainer({ id, data, theme, countryName, url }) {
 
   const handleShare = () => {
     toPng().then(dataURL => {
-      uploadImage(id, dataURL, url).then(success => {
+      uploadImage(id, dataURL).then(success => {
         if (success) {
           shareIndicator(id);
         }

@@ -53,7 +53,7 @@ function DataContainer({ id, data, theme, countryName, url }) {
 
   const handleShare = () => {
     toCanvas().then(canvas => {
-      uploadImage(id, canvas.toDataURL('image/png'), url).then(success => {
+      uploadImage(id, canvas.toDataURL('image/png')).then(success => {
         if (success) {
           shareIndicator(id);
         }
