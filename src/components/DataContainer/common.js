@@ -1,3 +1,4 @@
+import config from '../../config';
 // eslint-disable-next-line import/prefer-default-export
 import { getCookie } from '../../common';
 
@@ -8,7 +9,7 @@ export const shareIndicator = id => {
 };
 
 export const uploadImage = (id, data) =>
-  fetch('/api/twitter_view/', {
+  fetch(`${config.url}/api/twitter_view/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
