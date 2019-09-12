@@ -61,6 +61,12 @@
                 "title": ""
               }
             },
+            "allPrimarySchoolEnrollments": {
+                "source": {
+                  "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=NG",
+                  "title": "Worldbank"
+                }
+              },
             "allFoodProductions": {
                 "source": {
                     "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
@@ -361,6 +367,12 @@
                 "title": ""
               }
             },
+            "allPrimarySchoolEnrollments": {
+                "source": {
+                  "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=NG",
+                  "title": "Worldbank"
+                }
+              },
             "allSeniorSecondarySchoolEnrollments": {
                 "source": {
                     "href": "https://nigerianstat.gov.ng/download/952",
@@ -671,6 +683,12 @@
                     "title": " National Bureau of Statistics, 2018"
                 }
             },
+            "allPrimarySchoolEnrollments": {
+                "source": {
+                  "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=NG",
+                  "title": "Worldbank"
+                }
+              },
             "allSeniorSecondarySchoolEnrollments": {
                 "source": {
                     "href": "https://nigerianstat.gov.ng/download/952",
@@ -852,7 +870,7 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationCompletionRates": {
+            "allPrimarySchoolEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=ET",
                     "title": "WorldBank"
@@ -1044,7 +1062,7 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationCompletionRates": {
+            "allPrimarySchoolEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=ZA",
                     "title": "WorldBank"
@@ -1259,7 +1277,7 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationEnrollments": {
+            "allPrimarySchoolEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=TZ",
                     "title": "WorldBank"
@@ -1480,7 +1498,7 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationCompletionRates": {
+            "allPrimarySchoolEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=SN",
                     "title": "WorldBank"
@@ -1683,6 +1701,12 @@
                     "title": "WorldBank, 2017"
                 }
             },
+            "allPrimarySchoolEnrollments": {
+                "source": {
+                  "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=BF",
+                  "title": "Worldbank"
+                }
+              },
             "allSecondarySchoolEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=BF",
@@ -1820,6 +1844,12 @@
                     "title": "WorldBank, 2017"
                 }
             },
+            "allPrimarySchoolEnrollments": {
+                "source": {
+                  "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=CD",
+                  "title": "Worldbank"
+                }
+              },
             "allSecondarySchoolEnrollments": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=CD",
@@ -1970,7 +2000,14 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
-            "allPrimaryEducationEnrollments": {
+            "allPrimarySchoolEnrollments": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=UG",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allPrimaryEducationCompletionRates": {
                 "source": {
                     "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=UG",
                     "title": "WorldBank, 2018"
@@ -2111,6 +2148,20 @@
                     "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=ZM",
                     "title": "WorldBank, 2017"
                 }
+            },
+            "allSecondarySchoolEnrollments": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=ZM",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allPrimarySchoolEnrollments": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=ZM",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
             },
             "allPrimaryEducationCompletionRates": {
                 "source": {
