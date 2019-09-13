@@ -1019,6 +1019,7 @@
           "table": "allPrimarySchoolEnrollmentDistributions",
           "x": "sex",
           "groupBy": "primarySchoolEnrollmentYear",
+          "aggregate": "sum",
           "y": "total",
           "id": "visual--8yMvvZVJ"
         },
@@ -1042,6 +1043,7 @@
           "table": "allJuniorSecondarySchoolEnrollments",
           "x": "sex",
           "groupBy": "juniorSecondarySchoolEnrollmentYear",
+          "aggregate": "sum",
           "y": "total",
           "id": "visual-GexJ0Z1Xc"
         },
@@ -1065,6 +1067,7 @@
           "table": "allSeniorSecondarySchoolEnrollments",
           "x": "sex",
           "groupBy": "seniorSecondarySchoolEnrollmentYear",
+          "aggregate": "sum",
           "y": "total",
           "id": "visual-pk3mL-Icy"
         },
