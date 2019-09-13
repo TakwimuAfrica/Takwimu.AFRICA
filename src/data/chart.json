@@ -116,7 +116,6 @@
         "visual": {
           "type": "grouped_column",
           "table": "allPopulationSexYears",
-          
           "x": "populationSex",
           "groupBy": "populationYear",
           "y": "total",
@@ -271,7 +270,6 @@
           "x": "residence",
           "groupBy": "age",
           "y": "total",
-          
           "aggregate":"sum"
         },
         "stat": {
@@ -458,7 +456,6 @@
           "visual": {
             "type": "grouped_column",
             "table": "allLifeExpectancyAtBirths",
-            
             "x": "sex",
             "groupBy": "lifeExpectancyAtBirthYear",
             "y": "total",
@@ -822,7 +819,6 @@
             "x": "sex",
             "groupBy": "adultLiteracyRateYear",
             "y": "total",
-            
             "aggregate":"sum"
           },
           "stat": {
