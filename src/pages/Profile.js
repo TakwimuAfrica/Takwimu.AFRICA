@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useApolloClient } from '@apollo/react-hooks';
 import PropTypes from 'prop-types';
 
 import { MapIt, InsightContainer } from '@codeforafrica/hurumap-ui';
 import { Grid, makeStyles } from '@material-ui/core';
-import { GET_PROFILE, buildVisualsQuery } from '../data/queries';
 
 import Page from '../components/Page';
 import config from '../config';
 
 import ProfileSection from '../components/ProfileSection';
 import ProfileDetail from '../components/ProfileDetail';
-import sectionedCharts from '../data/chart.json';
-import chartSources from '../data/sources.json';
 
 import slugify from '../utils/slugify';
 
 import ChartFactory from '../components/ChartFactory';
 import Section from '../components/Section';
+import useChartDefinitions from '../data/useChartDefinitions';
+import useProfileLoader from '../data/useProfileLoader';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   chart: {
@@ -40,31 +38,11 @@ function Profile({
   }
 }) {
   const classes = useStyles();
-  const client = useApolloClient();
-
   const [activeTab, setActiveTab] = useState(
     window.location.hash.slice(1) ? window.location.hash.slice(1) : 'all'
   );
-  const [chartData, setChartsData] = useState({
-    isLoading: true
-  });
-  const [profiles, setProfiles] = useState({
-    isLoading: true
-  });
 
-  // Provide the visual with unique ids for fetching
-  // The unique ids will be used to set alias in graphql
-  let index = 0;
-  sectionedCharts.forEach(x =>
-    x.charts.forEach(y => {
-      // eslint-disable-next-line no-param-reassign
-      y.id = `chart${index}`;
-      const { visual, stat } = y;
-      visual.id = `viz${index}`;
-      stat.id = `viz${index}`;
-      index += 1;
-    })
-  );
+  const sectionedCharts = useChartDefinitions();
 
   const [visuals] = useState(
     sectionedCharts
@@ -73,81 +51,7 @@ function Profile({
       .map(x => x.visual)
   );
 
-  useEffect(() => {
-    (async () => {
-      setProfiles({
-        isLoading: true
-      });
-
-      const {
-        data: { geo: profile }
-      } = await client.query({
-        query: GET_PROFILE,
-        variables: {
-          geoCode: geoId.split('-')[1],
-          geoLevel: geoId.split('-')[0]
-        }
-      });
-      const {
-        data: { geo: parentProfile }
-      } = await client.query({
-        query: GET_PROFILE,
-        variables: {
-          geoCode: profile.parentCode,
-          geoLevel: profile.parentLevel
-        }
-      });
-
-      // set country name of profile
-      let country;
-      if (profile.geoLevel === 'country') {
-        country = config.countries.find(c => c.iso_code === profile.geoCode);
-      } else {
-        // else we are on level1
-        country = config.countries.find(
-          c => c.iso_code === parentProfile.geoCode
-        );
-      }
-
-      setProfiles({
-        isLoading: false,
-        profile,
-        parent: parentProfile,
-        country: country.slug
-      });
-    })();
-  }, [client, geoId]);
-
-  useEffect(() => {
-    if (!profiles.isLoading) {
-      (async () => {
-        setChartsData({
-          isLoading: true
-        });
-
-        const parent = {
-          geoLevel: profiles.parent.parentLevel,
-          geoCode: profiles.parent.parentCode
-        };
-        const { data: profileVisualsData } = await client.query({
-          query: buildVisualsQuery(visuals, parent),
-          variables: {
-            geoCode: profiles.profile.geoCode,
-            geoLevel: profiles.profile.geoLevel
-          }
-        });
-
-        const sources =
-          chartSources[profiles.country][profiles.profile.geoLevel];
-
-        setChartsData({
-          isLoading: false,
-          profileVisualsData,
-          sources
-        });
-      })();
-    }
-  }, [profiles, visuals, client]);
+  const { profiles, chartData } = useProfileLoader(geoId, visuals);
 
   // get all available profiletabs
   const profileTabs = useMemo(
@@ -165,12 +69,11 @@ function Profile({
         .filter(
           section =>
             section.charts.filter(
-              chart =>
+              ({ visual: { queryAlias } }) =>
                 chartData.isLoading ||
                 !(
                   !chartData.profileVisualsData ||
-                  chartData.profileVisualsData[chart.visual.id].nodes.length ===
-                    0
+                  chartData.profileVisualsData[queryAlias].nodes.length === 0
                 )
             ).length !== 0
         )
@@ -180,7 +83,7 @@ function Profile({
           index: section.index
         }))
     ],
-    [chartData]
+    [chartData.isLoading, chartData.profileVisualsData, sectionedCharts]
   );
 
   /**
@@ -195,11 +98,11 @@ function Profile({
           {/* <ProfileSectionTitle loading={chartData.isLoading} tab={tab} /> */}
           {sectionedCharts[tab.index].charts
             .filter(
-              ({ visual: v }) =>
+              ({ visual: { queryAlias } }) =>
                 chartData.isLoading ||
                 (chartData.profileVisualsData &&
                   /* data is not missing */
-                  chartData.profileVisualsData[v.id].nodes.length !== 0)
+                  chartData.profileVisualsData[queryAlias].nodes.length !== 0)
             )
             .map(chart => (
               <div style={{ margin: '40px 0', maxWidth: '100%' }}>
@@ -237,7 +140,15 @@ function Profile({
             ))}
         </Grid>
       )),
-    [chartData, profileTabs, profiles, classes]
+    [
+      profileTabs,
+      sectionedCharts,
+      chartData.isLoading,
+      chartData.profileVisualsData,
+      chartData.sources,
+      classes,
+      profiles
+    ]
   );
 
   // Show and hide sections

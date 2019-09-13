@@ -151,9 +151,7 @@ const CountrySelector = CountrySelectorComponent;
 
 export { CountrySelector };
 
-function ProfileDetail({
-  profile: { comparable = false, demographics = {}, geo = {} }
-}) {
+function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
   const classes = useStyles();
   const searchBarRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -168,19 +166,10 @@ function ProfileDetail({
       setShowSearchResults(false);
     }
   };
-  let population;
-  if (demographics.total_population && demographics.total_population.values) {
-    population = demographics.total_population.values.this.toFixed(0);
-  }
-  let populationDensity;
-  if (
-    demographics.population_density &&
-    demographics.population_density.values
-  ) {
-    populationDensity = demographics.population_density.values.this.toFixed(1);
-  }
 
-  const { squareKms, geoLevel } = geo;
+  const { squareKms, geoLevel, totalPopulation } = geo;
+  const population = totalPopulation.toFixed(0);
+  const populationDensity = (population / squareKms).toFixed(1);
   let country;
   if (geoLevel === 'country') {
     const { geoCode } = geo;
@@ -317,7 +306,8 @@ ProfileDetail.propTypes = {
       geoCode: PropTypes.string,
       geoLevel: PropTypes.string,
       name: PropTypes.string,
-      squareKms: PropTypes.number
+      squareKms: PropTypes.number,
+      totalPopulation: PropTypes.number
     })
   }).isRequired
 };
