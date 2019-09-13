@@ -79,6 +79,13 @@ export const GET_PROFILE = gql`
         total
       }
     }
+    population9: allPopulationResidence2013S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
     population10: allTotalPopulations(
       condition: { geoCode: $geoCode, geoLevel: $geoLevel }
     ) {
