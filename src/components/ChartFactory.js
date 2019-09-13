@@ -13,7 +13,6 @@ export default class ChartFactory {
       id: visualId,
       type: visualType,
       label,
-      horizontal,
       reference: { label: referenceLabel } = {},
       aggregate,
       width,
@@ -84,6 +83,7 @@ export default class ChartFactory {
     }
 
     const numberFormatter = new Intl.NumberFormat('en-GB');
+    let horizontal = true;
 
     switch (visualType) {
       case 'square_nested_proportional_area':
@@ -159,6 +159,9 @@ export default class ChartFactory {
         );
       }
       case 'grouped_column': {
+        if (primaryData.length * primaryData[0].length < 7) {
+          horizontal = false;
+        }
         return (
           <div
             style={{
@@ -218,6 +221,9 @@ export default class ChartFactory {
         );
       }
       case 'column': {
+        if (primaryData.length < 7) {
+          horizontal = false;
+        }
         if (isComparison) {
           const processedComparisonData = aggregate
             ? aggregateData(aggregate, comparisonData)

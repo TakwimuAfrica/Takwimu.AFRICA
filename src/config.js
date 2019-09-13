@@ -109,6 +109,6 @@ const config = {
 };
 
 // Same-Origin Policy
-document.domain = new URL(config.url).hostname;
+// document.domain = new URL(config.url).hostname;
 
 export default config;

@@ -116,7 +116,7 @@
         "visual": {
           "type": "grouped_column",
           "table": "allPopulationSexYears",
-          "horizontal":true,
+          
           "x": "populationSex",
           "groupBy": "populationYear",
           "y": "total",
@@ -191,7 +191,6 @@
           "type": "grouped_column",
           "table": "allYouthUnemployments",
           "groupBy": "youthUnemploymentYear",
-          "horizontal":true,
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
@@ -230,7 +229,6 @@
           "type": "grouped_column",
           "table": "allEmploymentToPopulationRatios",
           "groupBy": "employmentToPopulationRatioYear",
-          "horizontal":true,
           "x": "sex",
           "y": "total",
           "aggregate": "sum"
@@ -273,7 +271,7 @@
           "x": "residence",
           "groupBy": "age",
           "y": "total",
-          "horizontal":true,
+          
           "aggregate":"sum"
         },
         "stat": {
@@ -349,7 +347,6 @@
           "visual": {
             "type": "column",
             "table": "allVotesPerCandidates",
-            "horizontal": true,
             "x": "candidate",
             "y": "total"
           },
@@ -369,7 +366,6 @@
             "type": "column",
             "table": "allWomenInParliaments",
             "x": "womenParliamentYear",
-            "horizontal":true,
             "y": "total"
           },
           "stat": {
@@ -408,7 +404,6 @@
           "visual": {
             "type": "column",
             "table": "allAccessToBasicServices",
-            "horizontal":true,
             "x": "accessToBasicServicesYear",
             "y": "total"
           },
@@ -445,7 +440,6 @@
           "visual": {
             "type": "column",
             "table": "allPrevalenceOfUndernourishments",
-            "horizontal": true,
             "x": "prevalenceOfUndernourishmentYear",
             "y": "total"
           },
@@ -464,7 +458,7 @@
           "visual": {
             "type": "grouped_column",
             "table": "allLifeExpectancyAtBirths",
-            "horizontal":true,
+            
             "x": "sex",
             "groupBy": "lifeExpectancyAtBirthYear",
             "y": "total",
@@ -501,7 +495,6 @@
           "visual": {
             "type": "column",
             "table": "allMaternalMortalities",
-            "horizontal":true,
             "x": "maternalMortalityYear",
             "y": "total"
           },
@@ -520,7 +513,6 @@
             "type": "grouped_column",
             "table": "allHivPrevalences",
             "x": "sex",
-            "horizontal":true,
             "groupBy": "hivPrevalenceYear",
             "y": "total",
             "aggregate":"sum"
@@ -650,8 +642,7 @@
             "x": "infantUnder5",
             "groupBy": "mortalityYear",
             "y": "total",
-            "aggregate":"sum",
-            "horizontal":true
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -669,8 +660,7 @@
             "x": "year",
             "groupBy": "workers",
             "y": "total",
-            "aggregate":"sum",
-            "horizontal":true
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -730,7 +720,6 @@
           "visual": {
             "type": "column",
             "table": "allFoodProductions",
-            "horizontal":true,
             "x": "crops",
             "y": "total"
           },
@@ -749,7 +738,6 @@
           "visual": {
             "type": "column",
             "table": "allCerealYieldKgPerHectares",
-            "horizontal":true,
             "x": "cerealYieldKgPerHectareYear",
             "y": "total"
           },
@@ -768,7 +756,6 @@
           "visual": {
             "type": "column",
             "table": "allAgriculturalLands",
-            "horizontal":true,
             "x": "agriculturalLandYear",
             "y": "total"
           },
@@ -790,8 +777,7 @@
             "x": "sex",
             "groupBy": "employmentInAgricultureYear",
             "y": "total",
-            "aggregate":"sum",
-            "horizontal":true
+            "aggregate":"sum"
           },
           "stat": {
             "type": "number",
@@ -816,7 +802,6 @@
           "x": "sex",
           "groupBy": "primarySchoolEnrollmentYear",
           "y": "total",
-          "horizontal":true,
           "aggregate": "sum"
         },
         "stat": {
@@ -837,7 +822,7 @@
             "x": "sex",
             "groupBy": "adultLiteracyRateYear",
             "y": "total",
-            "horizontal":true,
+            
             "aggregate":"sum"
           },
           "stat": {
@@ -855,7 +840,6 @@
           "visual": {
             "type": "column",
             "table": "allLiteracySexes",
-            "horizontal":true,
             "x": "sex",
             "y": "total"
           },
@@ -874,7 +858,6 @@
           "visual": {
             "type": "column",
             "table": "allPrimaryEducationCompletionRates",
-            "horizontal":true,
             "x": "primaryEducationCompletionRateYear",
             "y": "total"
           },
@@ -895,7 +878,8 @@
               "table": "allPrimarySchoolEnrollmentDistributions",
               "x": "sex",
               "groupBy": "primarySchoolEnrollmentYear",
-              "y": "total"
+              "y": "total",
+              "aggregate": "sum"
             },
             "stat": {
               "type": "number",
@@ -915,7 +899,8 @@
                 "table": "allJuniorSecondarySchoolEnrollments",
                 "x": "sex",
                 "groupBy": "juniorSecondarySchoolEnrollmentYear",
-                "y": "total"
+                "y": "total",
+                "aggregate":"sum"
               },
               "stat": {
                 "type": "number",
@@ -935,7 +920,8 @@
                   "table": "allSeniorSecondarySchoolEnrollments",
                   "x": "sex",
                   "groupBy": "seniorSecondarySchoolEnrollmentYear",
-                  "y": "total"
+                  "y": "total",
+                  "aggregate":"sum"
                 },
                 "stat": {
                   "type": "number",
@@ -956,8 +942,7 @@
                     "x": "sex",
                     "groupBy": "secondarySchoolEnrollmentYear",
                     "y": "total",
-                    "aggregate":"sum",
-                    "horizontal":true
+                    "aggregate":"sum"
                   },
                   "stat": {
                     "type": "number",
@@ -1035,7 +1020,6 @@
             "visual": {
               "type": "column",
               "table": "allMobilePhoneSubscriptions",
-              "horizontal":true,
               "x": "mobilePhoneSubscriptionsYear",
               "y": "total"
             },
@@ -1062,8 +1046,7 @@
               "x": "sector",
               "groupBy": "year",
               "y": "total",
-              "aggregate":"sum",
-              "horizontal":true
+              "aggregate":"sum"
             },
             "stat": {
               "type": "number",
@@ -1104,7 +1087,6 @@
             "type": "column",
             "table": "allGdpPerCapitas",
             "x": "gdpPerCapitaYear",
-            "horizontal":true,
             "y": "total"
           },
           "stat": {
@@ -1121,7 +1103,6 @@
           "visual": {
             "type": "column",
             "table": "allGdpPerCapitaGrowths",
-            "horizontal":true,
             "x": "gdpPerCapitaGrowthYear",
             "y": "total"
           },
@@ -1141,7 +1122,6 @@
             "type": "column",
             "table": "allTaxAsPercentageOfGdps",
             "x": "taxAsPercentageOfGdpYear",
-            "horizontal":true,
             "y": "total"
           },
           "stat": {
@@ -1160,7 +1140,6 @@
             "type": "column",
             "table": "allTaxRevenues",
             "x": "taxRevenueYear",
-            "horizontal":true,
             "y": "total"
           },
           "stat": {
@@ -1179,8 +1158,7 @@
             "type": "column",
             "table": "allGdps",
             "x": "gdpYear",
-            "y": "total",
-            "horizontal":true
+            "y": "total"
           },
           "stat": {
             "type": "number",
@@ -1198,7 +1176,6 @@
             "type": "column",
             "table": "allGdpGrowths",
             "x": "gdpGrowthYear",
-            "horizontal":true,
             "y": "total"
           },
           "stat": {
@@ -1221,7 +1198,6 @@
           "visual": {
             "type": "column",
             "table": "allForeignDirectInvestmentNetInflows",
-            "horizontal":true,
             "x": "foreignDirectInvestmentNetInflowsYear",
             "y": "total"
           },
@@ -1241,8 +1217,7 @@
             "type": "column",
             "table": "allDonors",
             "x": "donor",
-            "y": "total",
-            "horizontal":true
+            "y": "total"
           },
           "stat": {
             "type": "number",
