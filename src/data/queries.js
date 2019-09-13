@@ -16,6 +16,76 @@ export const GET_PROFILE = gql`
       longName
       name
     }
+    population0: allPopulationSex2006S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population1: allPopulationSex2007S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population2: allPopulationSex2009S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population3: allPopulationSex2011S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population4: allPopulationSex2012S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population5: allPopulationSex2013S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population6: allPopulationSexYears(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population7: allPopulationResidence2009S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population8: allPopulationResidence2012S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
+    population9: allPopulationResidence2013S(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
   }
 `;
 
@@ -23,7 +93,7 @@ export const buildVisualsQuery = (visuals, parent) => gql`
 query charts($geoCode: String!, $geoLevel: String!) {
   ${visuals
     .map(
-      visual => `${visual.id}: ${visual.table} (
+      visual => `${visual.queryAlias}: ${visual.table} (
     condition: { geoCode: $geoCode, geoLevel: $geoLevel }
   ) {
     nodes {
@@ -39,7 +109,8 @@ query charts($geoCode: String!, $geoLevel: String!) {
   }
   ${
     visual.reference
-      ? `${visual.id}Reference: ${visual.reference.table || visual.table} (
+      ? `${visual.queryAlias}Reference: ${visual.reference.table ||
+          visual.table} (
     condition: ${JSON.stringify(
       visual.reference.condition || {
         geoLevel: parent.geoLevel,
