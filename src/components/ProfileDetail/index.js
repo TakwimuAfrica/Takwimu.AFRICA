@@ -167,7 +167,7 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
     }
   };
 
-  const { squareKms, geoLevel, totalPopulation } = geo;
+  const { squareKms, geoLevel, totalPopulation, parentCode } = geo;
   const population = totalPopulation.toFixed(0);
   const populationDensity = (population / squareKms).toFixed(1);
   let country;
@@ -176,9 +176,7 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
     country = config.countries.find(c => c.iso_code === geoCode);
   } else {
     // if level is not country, then we are in level 1
-    // const { parent_geoid: countryGeoId } = geography.this;
-    // country = config.countries.find(c => c.iso_code === countryGeoId.slice(8));
-    // country.name = geography.this.name;
+    country = config.countries.find(c => c.iso_code === parentCode);
   }
 
   return (
@@ -305,6 +303,7 @@ ProfileDetail.propTypes = {
     geo: PropTypes.shape({
       geoCode: PropTypes.string,
       geoLevel: PropTypes.string,
+      parentCode: PropTypes.string,
       name: PropTypes.string,
       squareKms: PropTypes.number,
       totalPopulation: PropTypes.number

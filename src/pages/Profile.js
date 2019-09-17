@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import { MapIt, InsightContainer } from '@codeforafrica/hurumap-ui';
 import { Grid, makeStyles } from '@material-ui/core';
@@ -35,7 +36,8 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 function Profile({
   match: {
     params: { geoId }
-  }
+  },
+  history
 }) {
   const classes = useStyles();
   const [activeTab, setActiveTab] = useState(
@@ -52,6 +54,13 @@ function Profile({
   );
 
   const { profiles, chartData } = useProfileLoader(geoId, visuals);
+
+  const onClickGeoLayer = useCallback(
+    area => {
+      history.push(`/profiles/${area.codes.AFR}`);
+    },
+    [history]
+  );
 
   // get all available profiletabs
   const profileTabs = useMemo(
@@ -185,6 +194,7 @@ function Profile({
           codeType="AFR"
           geoLevel={geoId.split('-')[0]}
           geoCode={geoId.split('-')[1]}
+          onClickGeoLayer={onClickGeoLayer}
         />
       </div>
       {!profiles.isLoading && (
@@ -205,7 +215,10 @@ Profile.propTypes = {
     params: PropTypes.shape({
       geoId: PropTypes.string.isRequired
     }).isRequired
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
   }).isRequired
 };
 
-export default Profile;
+export default withRouter(Profile);

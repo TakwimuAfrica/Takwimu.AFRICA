@@ -765,6 +765,176 @@
                     "href": "https://africacheck.org/wp-content/uploads/2018/03/q1-q3_2017_unemployment_report_VOLUME_1-1.pdf2",
                     "title": "National Bureau of Statistics, 2017"
                 }
+            },
+            "allGdps": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gpds.MKTP.CD?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allEmploymentToPopulationRatios": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allLifeExpectancyAtBirths": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allGiniIndices": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allAgriculturalLands": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allGdpGrowths": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "total_population": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allTaxRevenues": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.CN?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allMobilePhoneSubscriptions": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allSecondarySchoolEnrollments": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allPrimaryEducationCompletionRates": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allPrevalenceOfUndernourishments": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allAccessToBasicServices": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allIncidenceOfMalariaPer1000PopAtRisks": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allPhysiciansNursesAndMidwives": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allGdpPerCapitaGrowths": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.PCAP.KD.ZG?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allCerealYieldKgPerHectares": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allYouthUnemployments": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allTaxAsPercentageOfGdps": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allForeignDirectInvestmentNetInflows": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allFgmPrevalences": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allNursesAndMidwives": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allAdultLiteracyRates": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allHivPrevalences": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/SH.HIV.1524.MA.ZS?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allGdpPerCapitas": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/NY.gdp.PCAP.CD?locations=NG",
+                    "title": "WorldBank"
+                }
+            },
+            "allAccountOwnerships": {
+                "source": {
+                    "href": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=NG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "allFoodProductions": {
+                "source": {
+                  "href": "https://nigerianstat.gov.ng/",
+                  "title": "National Bureau of Statistics, 2018"
+                }
             }
         }
     },

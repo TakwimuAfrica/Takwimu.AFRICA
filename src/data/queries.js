@@ -86,6 +86,13 @@ export const GET_PROFILE = gql`
         total
       }
     }
+    population10: allTotalPopulations(
+      condition: { geoCode: $geoCode, geoLevel: $geoLevel }
+    ) {
+      nodes {
+        total
+      }
+    }
   }
 `;
 
