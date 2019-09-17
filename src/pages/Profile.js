@@ -5,18 +5,17 @@ import { withRouter } from 'react-router-dom';
 import { MapIt, InsightContainer } from '@codeforafrica/hurumap-ui';
 import { Grid, makeStyles } from '@material-ui/core';
 
-import Page from '../components/Page';
 import config from '../config';
-
-import ProfileSection from '../components/ProfileSection';
-import ProfileDetail from '../components/ProfileDetail';
-
+import { shareIndicator, uploadImage } from '../common';
 import slugify from '../utils/slugify';
-
-import ChartFactory from '../components/ChartFactory';
-import Section from '../components/Section';
 import useChartDefinitions from '../data/useChartDefinitions';
 import useProfileLoader from '../data/useProfileLoader';
+
+import ChartFactory from '../components/ChartFactory';
+import Page from '../components/Page';
+import ProfileDetail from '../components/ProfileDetail';
+import ProfileSection from '../components/ProfileSection';
+import Section from '../components/Section';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   chart: {
@@ -95,6 +94,14 @@ function Profile({
     [chartData.isLoading, chartData.profileVisualsData, sectionedCharts]
   );
 
+  const handleShare = (id, e, dataURL) => {
+    uploadImage(id, dataURL).then(success => {
+      if (success) {
+        shareIndicator(id);
+      }
+    });
+  };
+
   /**
    * Victory renders take alot of time
    * causing a few seconds UI block which is bad UX.
@@ -128,6 +135,11 @@ function Profile({
                       ? chartData.sources[chart.visual.table].source
                       : {}
                   }
+                  insightActions={{
+                    handleShare: handleShare.bind(null, chart.id),
+                    handleShowData: () => {},
+                    handleCompare: () => {}
+                  }}
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(
