@@ -6,7 +6,7 @@ import { withTheme } from '@material-ui/styles';
 
 import DataActions from './DataActions';
 import IFrame from './IFrame';
-import { shareIndicator, uploadImage } from './common';
+import { shareIndicator, uploadImage } from '../../common';
 
 function DataContainer({ id, data, theme, countryName, url }) {
   const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
