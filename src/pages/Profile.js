@@ -14,15 +14,21 @@ import useProfileLoader from '../data/useProfileLoader';
 import ChartFactory from '../components/ChartFactory';
 import Page from '../components/Page';
 import ProfileDetail from '../components/ProfileDetail';
-import ProfileSection from '../components/ProfileSection';
+import ProfileSection, {
+  ProfileSectionTitle
+} from '../components/ProfileSection';
 import Section from '../components/Section';
 
 const useStyles = makeStyles(({ breakpoints }) => ({
-  chart: {
-    margin: '20px 0',
-    backgroundColor: '#f6f6f6'
+  container: {
+    marginBottom: '0.625rem',
+    maxWidth: '100%'
   },
-  sourceGrid: {
+  containerRoot: {
+    backgroundColor: '#f6f6f6',
+    margin: 0
+  },
+  containerSourceGrid: {
     [breakpoints.up('md')]: {
       whiteSpace: 'nowrap'
     }
@@ -110,8 +116,8 @@ function Profile({
   const chartComponents = useMemo(
     () =>
       profileTabs.slice(1).map(tab => (
-        <Grid item container spacing={4} id={tab.slug} key={tab.slug}>
-          {/* <ProfileSectionTitle loading={chartData.isLoading} tab={tab} /> */}
+        <Grid item container id={tab.slug} key={tab.slug}>
+          <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
           {sectionedCharts[tab.index].charts
             .filter(
               ({ visual: { queryAlias } }) =>
@@ -121,11 +127,11 @@ function Profile({
                   chartData.profileVisualsData[queryAlias].nodes.length !== 0)
             )
             .map(chart => (
-              <div style={{ margin: '40px 0', maxWidth: '100%' }}>
+              <div className={classes.container}>
                 <InsightContainer
                   classes={{
-                    root: classes.chart,
-                    sourceGrid: classes.sourceGrid
+                    root: classes.containerRoot,
+                    sourceGrid: classes.containerSourceGrid
                   }}
                   key={chart.id}
                   loading={chartData.isLoading}
@@ -176,18 +182,24 @@ function Profile({
   useEffect(() => {
     if (activeTab === 'all') {
       profileTabs.slice(1).forEach(tab => {
-        document.getElementById(tab.slug).style.display = 'flex';
+        const tabElement = document.getElementById(tab.slug);
+        // Remember to display all section titles
+        tabElement.children[0].style.display = 'block';
+        tabElement.style.display = 'flex';
       });
     } else {
       profileTabs.slice(1).forEach(tab => {
+        const tabElement = document.getElementById(tab.slug);
         if (tab.slug === activeTab) {
-          document.getElementById(tab.slug).style.display = 'flex';
+          // Hide section title for active tab
+          tabElement.children[0].style.display = 'none';
+          tabElement.style.display = 'flex';
         } else {
-          document.getElementById(tab.slug).style.display = 'none';
+          tabElement.style.display = 'none';
         }
       });
     }
-  }, [profileTabs, activeTab]);
+  }, [activeTab, profileTabs]);
 
   return (
     <Page takwimu={config}>

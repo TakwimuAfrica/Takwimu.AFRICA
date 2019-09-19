@@ -132,4 +132,6 @@ ProfileSection.defaultProps = {
   description: undefined
 };
 
+export { default as ProfileSectionTitle } from './Title';
+
 export default ProfileSection;
