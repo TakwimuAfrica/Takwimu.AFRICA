@@ -7,58 +7,16 @@
                     "title": "OECD, 2016"
                 }
             },
-            "allPopulationSex2006S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2007S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
             "allPopulationSex2009S": {
               "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2011S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2012S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2013S": {
-              "source": {
-                "href": "",
-                "title": ""
+                "href": "https://s3-eu-west-1.amazonaws.com/s3.sourceafrica.net/documents/21195/Census-2009.pdf",
+                "title": "Census, 2009"
               }
             },
             "allPopulationResidence2009S": {
               "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationResidence2012S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationResidence2013S": {
-              "source": {
-                "href": "",
-                "title": ""
+                "href": "https://s3-eu-west-1.amazonaws.com/s3.sourceafrica.net/documents/21195/Census-2009.pdf",
+                "title": "Census, 2009"
               }
             },
             "allPrimarySchoolEnrollments": {
@@ -332,8 +290,8 @@
         "country": {
           "allPopulationSex2006S": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls",
+                "title": "Nigeria Bureau of Statistics, 2016"
             }
           },
             "allPopulationSexYears": {
@@ -636,8 +594,8 @@
         "level1": {
           "allPopulationSex2006S": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls",
+                "title": "Nigeria Bureau of Statistics, 2016"
             }
           },
             "allPopulationSexYears": {
@@ -942,8 +900,8 @@
         "country": {
           "allPopulationSex2007S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "http://catalog.ihsn.org/index.php/catalog/3583",
+              "title": "Population and Housing Census, 2007"
             }
           },
             "sex_dist": {
@@ -1337,14 +1295,14 @@
         "country": {
           "allPopulationSex2012S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "http://www.tzdpg.or.tz/fileadmin/documents/dpg_internal/dpg_working_groups_clusters/cluster_2/water/WSDP/Background_information/2012_Census_General_Report.pdf",
+              "title": "General Census, 2012"
             }
           },
           "allPopulationResidence2012S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "http://www.tzdpg.or.tz/fileadmin/documents/dpg_internal/dpg_working_groups_clusters/cluster_2/water/WSDP/Background_information/2012_Census_General_Report.pdf",
+              "title": "General Census, 2012"
             }
           },
           "allValidInvalidVotes": {
@@ -1558,14 +1516,14 @@
         "country": {
           "allPopulationSex2013S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://africaopendata.org/dataset/senegal-census-data",
+              "title": "Census Data, 2013"
             }
           },
           "allPopulationResidence2013S": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "https://africaopendata.org/dataset/senegal-census-data",
+                "title": "Census Data, 2013"
             }
           },
           "allValidInvalidVotes": {
