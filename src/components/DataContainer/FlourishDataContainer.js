@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 import { makeStyles, withTheme } from '@material-ui/styles';
 
 import DataActions from './DataActions';
-import { shareIndicator, uploadImage } from './common';
+import { shareIndicator, uploadImage } from '../../common';
 
 const useStyles = makeStyles({
   root: {

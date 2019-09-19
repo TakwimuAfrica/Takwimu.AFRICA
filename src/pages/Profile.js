@@ -6,6 +6,7 @@ import { MapIt, InsightContainer } from '@codeforafrica/hurumap-ui';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import config from '../config';
+import { shareIndicator, uploadImage } from '../common';
 import slugify from '../utils/slugify';
 import useChartDefinitions from '../data/useChartDefinitions';
 import useProfileLoader from '../data/useProfileLoader';
@@ -99,6 +100,14 @@ function Profile({
     [chartData.isLoading, chartData.profileVisualsData, sectionedCharts]
   );
 
+  const handleShare = (id, e, dataURL) => {
+    uploadImage(id, dataURL).then(success => {
+      if (success) {
+        shareIndicator(id);
+      }
+    });
+  };
+
   /**
    * Victory renders take alot of time
    * causing a few seconds UI block which is bad UX.
@@ -132,6 +141,11 @@ function Profile({
                       ? chartData.sources[chart.visual.table].source
                       : {}
                   }
+                  insightActions={{
+                    handleShare: handleShare.bind(null, chart.id),
+                    handleShowData: () => {},
+                    handleCompare: () => {}
+                  }}
                 >
                   {!chartData.isLoading &&
                     ChartFactory.build(
