@@ -21,7 +21,6 @@ export default class ChartFactory {
       offset,
       labelWidth,
       legendRow,
-      legendWidth,
       barWidth,
       subtitle,
       description,
@@ -154,7 +153,6 @@ export default class ChartFactory {
               width={width || 400}
               height={height}
               data={primaryData}
-              legendWidth={legendWidth}
               donutLabelKey={{ dataIndex: 0, sortKey: '' }}
               parts={{
                 legend: {
