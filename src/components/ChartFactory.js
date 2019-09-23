@@ -19,6 +19,9 @@ export default class ChartFactory {
       width,
       height,
       offset,
+      labelWidth,
+      legendRow,
+      legendWidth,
       barWidth,
       subtitle,
       description,
@@ -56,7 +59,7 @@ export default class ChartFactory {
         return (!aggregate ? data : aggregateData(aggregate, data)).map(d => ({
           ...d,
           name: d.x,
-          label: `${d.x} ${numberFormatter.format(d.y)}`
+          label: `${d.x}\n${numberFormatter.format(d.y)}`
         }));
       }
 
@@ -151,7 +154,13 @@ export default class ChartFactory {
               width={width || 400}
               height={height}
               data={primaryData}
+              legendWidth={legendWidth}
               donutLabelKey={{ dataIndex: 0, sortKey: '' }}
+              parts={{
+                legend: {
+                  rowGutter: legendRow
+                }
+              }}
             />
           </div>
         );
@@ -285,6 +294,7 @@ export default class ChartFactory {
               horizontal={horizontal}
               offset={offset || 40}
               barWidth={barWidth || 30}
+              labelWidth={labelWidth}
               width={
                 width ||
                 (horizontal ? 400 : primaryData.length * (barWidth || 40) * 2)

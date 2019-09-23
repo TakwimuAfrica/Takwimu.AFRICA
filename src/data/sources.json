@@ -302,20 +302,20 @@
             },
             "allValidInvalidVotes": {
               "source": {
-                "href": "",
-                "title": ""
+                "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allRegisteredAccreditedVoters": {
               "source": {
-                "href": "",
-                "title": ""
+                "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allVotesPerCandidates": {
               "source": {
-                "href": "",
-                "title": ""
+                "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allPrimarySchoolEnrollments": {
@@ -605,23 +605,23 @@
                 }
             },
             "allValidInvalidVotes": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allRegisteredAccreditedVoters": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allVotesPerCandidates": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
+                "source": {
+                  "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                  "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
+                }
+              },
+              "allRegisteredAccreditedVoters": {
+                "source": {
+                  "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                  "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
+                }
+              },
+              "allVotesPerCandidates": {
+                "source": {
+                  "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                  "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
+                }
+              },
             "allMaternalMortalities": {
                 "source": {
                     "href": "https://nigerianstat.gov.ng/download/952",
@@ -1104,8 +1104,8 @@
         "country": {
           "allPopulationSex2011S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "http://cs2016.statssa.gov.za/wp-content/uploads/2016/07/NT-30-06-2016-RELEASE-for-CS-2016-_Statistical-releas_1-July-2016.pdf",
+              "title": "Community Survey, 2016"
             }
           },
             "allGdps": {
@@ -1307,20 +1307,20 @@
           },
           "allValidInvalidVotes": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://thecommonwealth.org/sites/default/files/inline/2015%20Tanzania%20COG%20FINAL%20REPORT_PRINT.PDF",
+              "title": "Commonwealth, Tanzania General Election 2015"
             }
           },
           "allRegisteredAccreditedVoters": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://thecommonwealth.org/sites/default/files/inline/2015%20Tanzania%20COG%20FINAL%20REPORT_PRINT.PDF",
+              "title": "Commonwealth, Tanzania General Election 2015"
             }
           },
           "allVotesPerCandidates": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://thecommonwealth.org/sites/default/files/inline/2015%20Tanzania%20COG%20FINAL%20REPORT_PRINT.PDF",
+              "title": "Commonwealth, Tanzania General Election 2015"
             }
           },
             "allGdps": {
@@ -1528,20 +1528,20 @@
           },
           "allValidInvalidVotes": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "http://africanelections.tripod.com/sn_detail.html#2012_Presidential_Election_(Second_Round)/",
+                "title": "African Election Database"
             }
           },
           "allRegisteredAccreditedVoters": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "http://africanelections.tripod.com/sn_detail.html#2012_Presidential_Election_(Second_Round)/",
+                "title": "African Election Database"
             }
           },
           "allVotesPerCandidates": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "http://africanelections.tripod.com/sn_detail.html#2012_Presidential_Election_(Second_Round)/",
+              "title": "African Election Database"
             }
           },
             "allGdps": {

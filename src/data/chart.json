@@ -380,6 +380,7 @@
         "visual": {
           "type": "pie",
           "table": "allRegisteredAccreditedVoters",
+          "legendRow": 20,
           "x": "voters",
           "y": "total",
           "id": "visual-75aCzBSRH"
@@ -402,6 +403,7 @@
           "type": "column",
           "table": "allVotesPerCandidates",
           "x": "candidate",
+          "labelWidth": 70,
           "y": "total",
           "id": "visual-zVOtvzDJ7"
         },
