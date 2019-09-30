@@ -111,6 +111,7 @@ function AnalysisPage({
 
   return (
     <Page
+      image="/static/images/profile-hero-line.png"
       takwimu={takwimu}
       title={`${takwimu.country.short_name}'s ${analysis[current].title} Analysis`}
     >
