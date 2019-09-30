@@ -3,6 +3,12 @@ const config = {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
+  name: 'Takwimu',
+  media: {
+    imageUrl: 'https://takwimu.s3.eu-west-1.amazonaws.com/media/images',
+    imageRendition: '.width-600',
+    imageType: '.png'
+  },
   country: {},
   countries: [
     {
@@ -102,6 +108,12 @@ const config = {
       twitter: 'https://twitter.com/TakwimuAfrica',
       medium: 'https://medium.com/@takwimu_africa',
       linkedin: 'https://www.linkedin.com/company/takwimu-africa/'
+    },
+    address: {
+      locality: 'Westlands',
+      region: 'Nairobi',
+      country: 'Kenya',
+      postalCode: '00100'
     }
   },
   page: {
