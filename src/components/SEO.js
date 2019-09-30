@@ -37,8 +37,8 @@ function SEO({ title, type, description, image, location = '' }) {
 		"sameAs": [
 			"${config.settings.socialMedia.facebook}",
 			"${config.settings.socialMedia.twitter}",
-			"${config.settings.socialMedia.Medium}",
-			"${config.settings.socialMedia.linkedin}",
+			"${config.settings.socialMedia.medium}",
+			"${config.settings.socialMedia.linkedin}"
 		]
     }`;
 
