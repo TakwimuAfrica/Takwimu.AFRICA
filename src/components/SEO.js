@@ -47,7 +47,6 @@ function SEO({ title, type, description, image, location = '' }) {
       {/* The description that appears under the title of your website appears on search engines results */}
       <meta name="description" content={description || config.description} />
 
-      {/* The thumbnail of your website */}
       <meta name="image" content={imageUrl} />
 
       {/* OpenGraph (Facebook & LinkedIn) */}
