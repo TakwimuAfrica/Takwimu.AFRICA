@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 import config from '../config';
 import defaultImage from '../assets/images/africanparliament.jpg';
 
-function SEO({ title, type, description, image, location = '' }) {
+function SEO({ title, description, image, location = '' }) {
   const pageTitle = title ? `${title} | ${config.name}` : config.name;
   const params = new URL(window.location).searchParams;
   const indicatorId = params.get('indicator');
@@ -54,10 +54,7 @@ function SEO({ title, type, description, image, location = '' }) {
         property="og:url"
         content={`${config.url}/${location}?ref=takwimu.africa`}
       />
-      <meta
-        property="og:type"
-        content={type === 'NewsArticle' ? 'NewsArticle' : 'website'}
-      />
+      <meta property="og:type" content="website" />
       <meta property="og:title" content={pageTitle} />
       <meta
         property="og:description"
@@ -90,16 +87,14 @@ SEO.propTypes = {
   description: PropTypes.string,
   image: PropTypes.string,
   location: PropTypes.string,
-  title: PropTypes.string,
-  type: PropTypes.string
+  title: PropTypes.string
 };
 
 SEO.defaultProps = {
   description: undefined,
   image: undefined,
   location: undefined,
-  title: undefined,
-  type: undefined
+  title: undefined
 };
 
 export default SEO;

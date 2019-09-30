@@ -4,6 +4,8 @@ const config = {
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
   name: 'Takwimu',
+  description:
+    'Data driven analysis on development policies, programmes & outcomes in 10 African countries.',
   media: {
     imageUrl: 'https://takwimu.s3.eu-west-1.amazonaws.com/media/images',
     imageRendition: '.width-600',
