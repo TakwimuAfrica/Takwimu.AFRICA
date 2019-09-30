@@ -4,7 +4,6 @@ import { PropTypes } from 'prop-types';
 import Helmet from 'react-helmet';
 
 import config from '../config';
-import logo from '../assets/images/logo-white-all.png';
 import defaultImage from '../assets/images/africanparliament.jpg';
 
 function SEO({ title, type, description, image, location = '' }) {
@@ -21,9 +20,10 @@ function SEO({ title, type, description, image, location = '' }) {
 		"@type": "Organization",
 		"legalName": "${config.legalName || config.name}",
 		"url": "${config.url}",
-		"logo": "${logo}",
+		"logo": "${config.url}/static/images/logo-white-all.png",
 		"contactPoint": [{
-			"@type": "ContactPoint",
+      "@type": "ContactPoint",
+			"url": "${config.url}/contact",
 			"email": "${config.settings.support.hello}",
 			"contactType": "customer service"
 		}],
