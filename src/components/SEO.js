@@ -8,6 +8,14 @@ import logo from '../assets/images/logo-white-all.png';
 import defaultImage from '../assets/images/africanparliament.jpg';
 
 function SEO({ title, type, description, image, location = '' }) {
+  const pageTitle = title ? `${title} | ${config.name}` : config.name;
+  const params = new URL(window.location).searchParams;
+  const indicatorId = params.get('indicator');
+  // indicator should override image, image should override defaultImage.
+  let imageUrl = `${config.url}${image || defaultImage}`;
+  if (indicatorId) {
+    imageUrl = `${config.media.imageUrl}/${indicatorId}${config.media.imageRendition}${config.media.imageType}`;
+  }
   const structuredDataOrganization = `{
 		"@context": "http://schema.org",
 		"@type": "Organization",
@@ -33,13 +41,6 @@ function SEO({ title, type, description, image, location = '' }) {
 			"${config.settings.socialMedia.linkedin}",
 		]
     }`;
-  const params = new URL(window.location).searchParams;
-  const indicatorId = params.get('indicator');
-  // indicator should override image, image should override defaultImage.
-  let imageUrl = `${config.url}${image || defaultImage}`;
-  if (indicatorId) {
-    imageUrl = `${config.media.imageUrl}/${indicatorId}${config.media.imageRendition}${config.media.imageType}`;
-  }
 
   return (
     <Helmet>
@@ -58,10 +59,7 @@ function SEO({ title, type, description, image, location = '' }) {
         property="og:type"
         content={type === 'NewsArticle' ? 'NewsArticle' : 'website'}
       />
-      <meta
-        property="og:title"
-        content={title ? `${title} | ${config.title}` : config.title}
-      />
+      <meta property="og:title" content={pageTitle} />
       <meta
         property="og:description"
         content={description || config.description}
@@ -74,10 +72,7 @@ function SEO({ title, type, description, image, location = '' }) {
         name="twitter:site"
         content={`@${config.settings.socialMedia.twitter.split('/').pop()}`}
       />
-      <meta
-        name="twitter:title"
-        content={title ? `${title} | ${config.title}` : config.title}
-      />
+      <meta name="twitter:title" content={pageTitle} />
       <meta
         name="twitter:description"
         content={description || config.description}
@@ -87,7 +82,7 @@ function SEO({ title, type, description, image, location = '' }) {
       {/* Structured data (Google) */}
       <script type="application/ld+json">{structuredDataOrganization}</script>
 
-      <title>{title ? `${title} | ${config.title}` : config.title}</title>
+      <title>{pageTitle}</title>
     </Helmet>
   );
 }
