@@ -76,7 +76,7 @@
     "applyIdsToChartDefinitions": "node scripts/chartsDefinitionsApplyUniqueId.js",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "prestart": "yarn applyIdsToChartDefinitions",
-    "prebuild": "yarn lint && yarn applyIdsToChartDefinitions",
+    "prebuild": "yarn applyIdsToChartDefinitions",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md' './'",
