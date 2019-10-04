@@ -149,4 +149,6 @@ TableOfContent.defaultProps = {
   children: null
 };
 
-export default withWidth()(TableOfContent);
+export default withWidth({
+  initialWidth: 'md'
+})(TableOfContent);

@@ -198,4 +198,6 @@ DropDownContent.defaultProps = {
   isAnalysis: false
 };
 
-export default withWidth()(DropDownContent);
+export default withWidth({
+  initialWidth: 'md'
+})(DropDownContent);

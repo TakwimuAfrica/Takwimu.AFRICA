@@ -329,4 +329,6 @@ Navigation.propTypes = {
   }).isRequired
 };
 
-export default withWidth()(withStyles(styles)(Navigation));
+export default withWidth({
+  initialWidth: 'md'
+})(withStyles(styles)(Navigation));

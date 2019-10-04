@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Head from 'next/head';
-
 import Footer from './Footer';
 import Navigation from './Navigation';
+import SEO from './SEO';
 
-function Page({ children, takwimu, title: propTitle }) {
-  const title = propTitle ? `${propTitle} | Takwimu` : 'Takwimu';
-
+function Page({ children, takwimu, ...props }) {
   return (
     <>
-      <Head>
-        <title>{title}</title>
-      </Head>
+      <SEO {...props} />
       <Navigation takwimu={takwimu} />
       {children}
       <Footer takwimu={takwimu} />

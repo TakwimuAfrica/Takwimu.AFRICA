@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   asideRoot: {}
 });
 
-function AnalysisPage({ takwimu, initial, analyses }) {
+function AnalysisPage({ takwimu, initial, analyses, indicatorId }) {
   const classes = useStyles();
   const [current, setCurrent] = useState(initial);
   const [topicIndex, setTopicIndex] = useState(0);
@@ -48,6 +48,7 @@ function AnalysisPage({ takwimu, initial, analyses }) {
   return (
     <Page
       takwimu={takwimu}
+      indicatorId={indicatorId}
       title={`${takwimu.country.short_name}'s ${analyses[current].title} Analysis`}
     >
       <ContentPage
@@ -74,6 +75,7 @@ function AnalysisPage({ takwimu, initial, analyses }) {
 
 AnalysisPage.propTypes = {
   initial: PropTypes.number.isRequired,
+  indicatorId: PropTypes.string,
   analyses: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -92,9 +94,13 @@ AnalysisPage.propTypes = {
   }).isRequired
 };
 
+AnalysisPage.defaultProps = {
+  indicatorId: undefined
+};
+
 AnalysisPage.getInitialProps = async ({ query }) => {
   const { url } = config;
-  const { countrySlug, analysisSlug } = query;
+  const { countrySlug, analysisSlug, indicator: indicatorId } = query;
 
   const configs = await fetch(
     `${url}/api/v2/pages/?type=takwimu.ProfilePage&slug=${countrySlug}&fields=*&format=json`
@@ -143,7 +149,7 @@ AnalysisPage.getInitialProps = async ({ query }) => {
     return Promise.reject();
   });
 
-  return { takwimu, ...content };
+  return { takwimu, ...content, indicatorId };
 };
 
 export default AnalysisPage;

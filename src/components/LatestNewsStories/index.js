@@ -107,4 +107,6 @@ LatestNewsStories.propTypes = {
   width: PropTypes.string.isRequired
 };
 
-export default withWidth()(LatestNewsStories);
+export default withWidth({
+  initialWidth: 'md'
+})(LatestNewsStories);
