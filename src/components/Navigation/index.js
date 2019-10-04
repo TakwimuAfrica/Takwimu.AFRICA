@@ -82,7 +82,9 @@ class Navigation extends React.Component {
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleMobileDrawer = this.toggleMobileDrawer.bind(this);
 
-    window.toggleDrawer = this.toggleDrawer;
+    if (process.browser) {
+      window.toggleDrawer = this.toggleDrawer;
+    }
   }
 
   toggleMobileDrawer() {
