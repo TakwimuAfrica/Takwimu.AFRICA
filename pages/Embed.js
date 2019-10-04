@@ -1,12 +1,19 @@
 import React, { useMemo } from 'react';
 import InsightContainer from '@codeforafrica/hurumap-ui/dist/InsightContainer';
 import PropTypes from 'prop-types';
-import { Typography } from '@material-ui/core';
-import ChartFactory from '../src/components/ChartFactory';
+import Typography from '@material-ui/core/Typography';
 
+import dynamic from 'next/dynamic';
 import useChartDefinitions from '../src/data/useChartDefinitions';
 import useProfileLoader from '../src/data/useProfileLoader';
 import Error from '../src/components/Error';
+
+const Chart = dynamic({
+  ssr: false,
+  loader: () => {
+    return import('../src/components/ChartFactory');
+  }
+});
 
 function Embed({
   match: {
@@ -62,22 +69,20 @@ function Embed({
           href: 'http://dev.dominion.africa'
         }}
       >
-        {!chartData.isLoading &&
-          ChartFactory.build(
-            { ...chart.visuals[0], type: 'number' },
-            chartData.profileVisualsData,
-            null,
-            profiles
-          )}
-        {!chartData.isLoading &&
-          chart.visuals.map(visual =>
-            ChartFactory.build(
-              visual,
-              chartData.profileVisualsData,
-              null, // No comparison data
-              profiles
-            )
-          )}
+        {!chartData.isLoading && (
+          <Chart
+            definition={chart.stat}
+            primaryData={chartData.profileVisualsData}
+            profiles={profiles}
+          />
+        )}
+        {!chartData.isLoading && (
+          <Chart
+            definition={chart.visual}
+            primaryData={chartData.profileVisualsData}
+            profiles={profiles}
+          />
+        )}
       </InsightContainer>
     </div>
   );
