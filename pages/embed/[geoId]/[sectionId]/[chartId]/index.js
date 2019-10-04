@@ -1,25 +1,24 @@
 import React, { useMemo } from 'react';
 import InsightContainer from '@codeforafrica/hurumap-ui/dist/InsightContainer';
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 
 import dynamic from 'next/dynamic';
-import useChartDefinitions from '../src/data/useChartDefinitions';
-import useProfileLoader from '../src/data/useProfileLoader';
-import Error from '../src/components/Error';
+import { useRouter } from 'next/router';
+import useChartDefinitions from '../../../../../src/data/useChartDefinitions';
+import useProfileLoader from '../../../../../src/data/useProfileLoader';
+import Error from '../../../../../src/components/Error';
 
 const Chart = dynamic({
   ssr: false,
   loader: () => {
-    return import('../src/components/ChartFactory');
+    return import('../../../../../src/components/ChartFactory');
   }
 });
 
-function Embed({
-  match: {
-    params: { geoId, sectionId, chartId }
-  }
-}) {
+function Embed() {
+  const {
+    query: { geoId, sectionId, chartId }
+  } = useRouter();
   const sectionedCharts = useChartDefinitions();
 
   const chart = useMemo(() => {
@@ -87,15 +86,5 @@ function Embed({
     </div>
   );
 }
-
-Embed.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      geoId: PropTypes.string.isRequired,
-      sectionId: PropTypes.string.isRequired,
-      chartId: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
-};
 
 export default Embed;
