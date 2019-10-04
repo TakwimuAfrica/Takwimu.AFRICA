@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 
-import { makeStyles } from '@material-ui/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 
-import config from '../config';
+import { useRouter } from 'next/router';
 import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
 import Page from '../components/Page';
 import TableOfContent from '../components/LegalContent/TableOfContent';
+import getTakwimuPage from '../getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {
@@ -15,22 +16,10 @@ const useStyles = makeStyles({
   }
 });
 
-function Legal() {
+function Legal(takwimu) {
   const classes = useStyles();
-  const [takwimu, setTakwimu] = useState(undefined);
-  useEffect(() => {
-    const { url } = config;
-    fetch(`${url}/api/v2/pages/?type=takwimu.LegalPage&fields=*&format=json`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.items && data.items.length) {
-          Object.assign(config.page, data.items[0]);
-          setTakwimu(config);
-        }
-      });
-  }, []);
+  const { pathname } = useRouter();
   const [current, setCurrent] = useState(-1);
-  const contentHeadings = [];
   const {
     page: {
       title,
@@ -40,22 +29,29 @@ function Legal() {
       body: contents = [],
       related_content: relatedContent
     }
-  } = takwimu || { page: { content_navigation: { value: {} } } };
-  const termsIndex = contents.findIndex(c => c.type === 'terms');
-  const privacyIndex = contents.findIndex(c => c.type === 'privacy');
-  contentHeadings.length = contents.length;
-  if (termsIndex !== -1) {
-    contentHeadings[termsIndex] = {
-      title: contents[termsIndex].value.label,
-      link: 'terms'
-    };
-  }
-  if (privacyIndex !== -1) {
-    contentHeadings[privacyIndex] = {
-      title: contents[privacyIndex].value.label,
-      link: 'privacy'
-    };
-  }
+  } = takwimu;
+
+  const contentHeadings = useMemo(() => {
+    const {
+      page: { body = [] }
+    } = takwimu;
+    const termsIndex = body.findIndex(c => c.type === 'terms');
+    const privacyIndex = body.findIndex(c => c.type === 'privacy');
+    const headings = [];
+    if (termsIndex !== -1) {
+      headings.push({
+        title: body[termsIndex].value.label,
+        link: 'terms'
+      });
+    }
+    if (privacyIndex !== -1) {
+      headings.push({
+        title: body[privacyIndex].value.label,
+        link: 'privacy'
+      });
+    }
+    return headings;
+  }, [takwimu]);
 
   const changeActiveContent = useCallback(
     index => {
@@ -69,19 +65,12 @@ function Legal() {
   );
 
   useEffect(() => {
-    const currentLink = window.location.pathname
-      .split('/')
-      .filter(value => value && value.length)
-      .pop();
+    const currentLink = pathname.split('/').pop();
     const foundIndex = contentHeadings.findIndex(x => x.link === currentLink);
     if (foundIndex !== -1) {
       changeActiveContent(foundIndex);
     }
-  }, [changeActiveContent, contentHeadings]);
-
-  if (contents.length === 0) {
-    return null;
-  }
+  }, [changeActiveContent, contentHeadings, pathname]);
 
   return (
     <Page takwimu={takwimu} title={takwimu.page.title}>
@@ -108,5 +97,9 @@ function Legal() {
     </Page>
   );
 }
+
+Legal.getInitialProps = async () => {
+  return getTakwimuPage('takwimu.LegalPage');
+};
 
 export default Legal;

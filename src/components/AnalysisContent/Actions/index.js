@@ -50,7 +50,9 @@ const useStyles = makeStyles({
 
 function Actions({ hideLastUpdated, title, data, topic, takwimu }) {
   const classes = useStyles();
-  const [analysisLink, setAnalysisLink] = useState(window.location.href);
+  const [analysisLink, setAnalysisLink] = useState(
+    process.browser ? window.location.href : ''
+  );
 
   useEffect(() => {
     function locationHashChanged() {

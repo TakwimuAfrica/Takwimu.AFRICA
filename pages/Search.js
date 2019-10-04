@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import config from '../config';
-import Page from '../components/Page';
-import SearchResults from '../components/SearchResults';
+import config from '../src/config';
+import Page from '../src/components/Page';
+import SearchResults from '../src/components/SearchResults';
 
 function Search() {
   const [takwimu, setTakwimu] = useState(undefined);

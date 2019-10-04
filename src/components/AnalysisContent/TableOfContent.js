@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 
 import { CountrySelector } from '../ProfileDetail';
 import TableOfContent from '../TableOfContent';
@@ -22,7 +22,7 @@ function AnalysisTableOfContent({
   const classes = useStyles();
   const { slug: countrySlug } = country;
   const generateHref = index => {
-    const analysisUrl = `/profiles/${countrySlug}`;
+    const analysisUrl = `/profiles/analysis/${countrySlug}`;
     if (content[index].meta.slug === countrySlug) {
       return analysisUrl;
     }

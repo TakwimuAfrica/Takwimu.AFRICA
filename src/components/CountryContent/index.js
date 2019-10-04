@@ -62,13 +62,13 @@ const VIEW_ITEMS = [
     label: 'Data by topic'
   },
   {
-    value: '/profiles/',
+    value: '/profiles/analysis/',
     label: 'Country analysis'
   }
 ];
 
 const hrefForView = (view, country) => {
-  if (view === '/profiles/') {
+  if (view === '/profiles/analysis/') {
     return `${view}${country.slug}`;
   }
   if (view === '/profiles/country-') {

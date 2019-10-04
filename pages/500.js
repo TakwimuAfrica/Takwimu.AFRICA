@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import { Link, Typography } from '@material-ui/core';
 
-import config from '../config';
-import Error from '../components/Error';
-import ErrorPage from '../components/ErrorPage';
+import config from '../src/config';
+import Error from '../src/components/Error';
+import ErrorPage from '../src/components/ErrorPage';
 
 const useStyles = makeStyles({
   root: {
@@ -28,9 +28,11 @@ function ServerError() {
           We’re having some trouble processing your request. We’ve logged the
           error and will investigate. You can try again or if the issue
           persists, please{' '}
-          <Link component={RouterLink} to="/contact" underline="always">
-            contact us
-          </Link>
+          <NextLink href="/contact">
+            <Link to="/contact" underline="always">
+              contact us
+            </Link>
+          </NextLink>
         </Typography>
       </Error>
     </ErrorPage>

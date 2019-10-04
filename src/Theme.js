@@ -1,4 +1,4 @@
-import { createTheme } from '@codeforafrica/hurumap-ui';
+import createTheme from '@codeforafrica/hurumap-ui/dist/styles/createTheme';
 
 const FONT_FAMILY_HEADING = '"Lora", serif';
 const FONT_FAMILY_TEXT = '"Muli", sans-serif';
@@ -184,6 +184,13 @@ const Theme = createTheme({
     }
   },
   overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '*': {
+          outline: 'none'
+        }
+      }
+    },
     MuiLink: {
       root: {
         fontFamily: FONT_FAMILY_TEXT,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import classNames from 'classnames';
 import { Link, MenuList } from '@material-ui/core';
@@ -107,24 +107,25 @@ function TableOfContent({
               className={classes.activeContentIndicator}
               hidden={current !== index}
             />
-            <Link
-              component={RouterLink}
-              classes={{ root: classes.linkRoot }}
-              className={classNames({
-                [classes.activeLink]: current !== index
-              })}
-              to={generateHref(index)}
-              color={current !== index ? 'primary' : 'textPrimary'}
-              onClick={e => {
-                e.preventDefault();
+            <NextLink href={generateHref(index)}>
+              <Link
+                classes={{ root: classes.linkRoot }}
+                className={classNames({
+                  [classes.activeLink]: current !== index
+                })}
+                to={generateHref(index)}
+                color={current !== index ? 'primary' : 'textPrimary'}
+                onClick={e => {
+                  e.preventDefault();
 
-                window.history.pushState(null, '', generateHref(index));
-                onChange(index);
-              }}
-              underline="none"
-            >
-              {c.title}
-            </Link>
+                  window.history.pushState(null, '', generateHref(index));
+                  onChange(index);
+                }}
+                underline="none"
+              >
+                {c.title}
+              </Link>
+            </NextLink>
           </li>
         ))}
       </MenuList>

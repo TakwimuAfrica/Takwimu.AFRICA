@@ -3,11 +3,11 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import config from '../config';
-import { About } from '../components/Next';
-import Error from '../components/Error';
-import ErrorPage from '../components/ErrorPage';
-import SearchInput from '../components/SearchInput';
+import config from '../src/config';
+import { About } from '../src/components/Next';
+import Error from '../src/components/Error';
+import ErrorPage from '../src/components/ErrorPage';
+import SearchInput from '../src/components/SearchInput';
 
 const useStyles = makeStyles({
   root: {}

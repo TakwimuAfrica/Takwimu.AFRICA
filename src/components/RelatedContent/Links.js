@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import { Link, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -48,17 +48,18 @@ function Links({ items }) {
               {/* Only relative URLs should be opened on the same page. */}
               {/* Otherwise, they should be opened in new tab */}
               {/^\/(?!\/)/.test(item.value.value.link) ? (
-                <Link
-                  component={RouterLink}
-                  to={item.value.value.link}
-                  variant="inherit"
-                  color="inherit"
-                  underline="always"
-                  noWrap
-                  className={classes.listItem}
-                >
-                  {item.value.value.title}
-                </Link>
+                <NextLink to={item.value.value.link}>
+                  <Link
+                    to={item.value.value.link}
+                    variant="inherit"
+                    color="inherit"
+                    underline="always"
+                    noWrap
+                    className={classes.listItem}
+                  >
+                    {item.value.value.title}
+                  </Link>
+                </NextLink>
               ) : (
                 <A
                   href={item.value.value.link}

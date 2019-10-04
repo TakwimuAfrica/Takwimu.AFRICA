@@ -25,6 +25,7 @@ function CountryAnalysis({
   const classes = useStyles();
   return (
     <DropDownContent
+      isAnalysis
       classes={{
         container: classes.container
       }}

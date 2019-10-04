@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
-import { InsightContainer } from '@codeforafrica/hurumap-ui';
+import InsightContainer from '@codeforafrica/hurumap-ui/dist/InsightContainer';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
-import ChartFactory from '../components/ChartFactory';
+import ChartFactory from '../src/components/ChartFactory';
 
-import useChartDefinitions from '../data/useChartDefinitions';
-import useProfileLoader from '../data/useProfileLoader';
-import Error from '../components/Error';
+import useChartDefinitions from '../src/data/useChartDefinitions';
+import useProfileLoader from '../src/data/useProfileLoader';
+import Error from '../src/components/Error';
 
 function Embed({
   match: {

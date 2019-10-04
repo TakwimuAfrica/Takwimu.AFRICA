@@ -228,7 +228,9 @@ function DataActions({
         }}
       >
         <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
-          <EmbedCodeTextArea code={embedCode} />
+          <div>
+            <EmbedCodeTextArea code={embedCode} />
+          </div>
         </ClickAwayListener>
       </Popover>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import { Link, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
@@ -48,9 +48,10 @@ function ContentNavigation({
   onClick,
   linksPrimaryColor,
   linksSecondaryColor,
+  classes: propClasses,
   ...props
 }) {
-  const classes = useStyles(props);
+  const classes = useStyles({ classes: propClasses, ...props });
   return (
     /* eslint-disable-next-line react/jsx-props-no-spreading */
     <ContentSection classes={{ root: classes.root }} {...props}>
@@ -61,20 +62,23 @@ function ContentNavigation({
 
       <div className={classes.topicLinks}>
         {content.map((c, index) => (
-          <Link
-            component={RouterLink}
-            key={generateHref(index)}
-            to={generateHref(index)}
-            variant="body2"
-            color={current === index ? linksSecondaryColor : linksPrimaryColor}
-            classes={{ root: classes.topicLink }}
-            className={classNames({
-              [classes.topic]: current !== index
-            })}
-            onClick={e => onClick(e, index)}
-          >
-            {generateTitle(index)}
-          </Link>
+          <NextLink key={generateHref(index)} href={generateHref(index)}>
+            <Link
+              key={generateHref(index)}
+              to={generateHref(index)}
+              variant="body2"
+              color={
+                current === index ? linksSecondaryColor : linksPrimaryColor
+              }
+              classes={{ root: classes.topicLink }}
+              className={classNames({
+                [classes.topic]: current !== index
+              })}
+              onClick={e => onClick(e, index)}
+            >
+              {generateTitle(index)}
+            </Link>
+          </NextLink>
         ))}
       </div>
     </ContentSection>

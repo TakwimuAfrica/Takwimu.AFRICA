@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { Typography, Grid, Icon } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import ContactContentNav from './ContactContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';
@@ -132,13 +132,15 @@ function ContactContent({
                 href={socialMediaSettings[account.name]}
                 underline="hover"
               >
-                <img
-                  src={SOCIAL_MEDIA[account.name].logo}
-                  alt=""
-                  className={classes.icon}
-                />
-                <Icon className={classes.social} />
-                {SOCIAL_MEDIA[account.name].name}
+                <>
+                  <img
+                    src={SOCIAL_MEDIA[account.name].logo}
+                    alt=""
+                    className={classes.icon}
+                  />
+                  <Icon className={classes.social} />
+                  {SOCIAL_MEDIA[account.name].name}
+                </>
               </A>
             ))}
           </Grid>

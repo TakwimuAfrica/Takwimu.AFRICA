@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import Card from './Card';
 import Section from '../Section';
 
@@ -46,21 +46,17 @@ function HomeWhereToNext() {
           Stay up-to-date with <br /> new data and analysis
         </Card>
 
-        <Card
-          component={RouterLink}
-          to="/services"
-          classes={{ root: classes.cardMargin }}
-        >
-          Looking for other <br /> services?
-        </Card>
+        <NextLink href="/services">
+          <Card component="a" classes={{ root: classes.cardMargin }}>
+            Looking for other <br /> services?
+          </Card>
+        </NextLink>
 
-        <Card
-          component={RouterLink}
-          to="/contact"
-          classes={{ root: classes.cardMargin }}
-        >
-          Talk to us
-        </Card>
+        <NextLink href="/contact">
+          <Card component="a" classes={{ root: classes.cardMargin }}>
+            Talk to us
+          </Card>
+        </NextLink>
       </Grid>
     </Section>
   );

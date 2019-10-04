@@ -1,8 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withRouter } from 'react-router-dom';
-
 import { withStyles, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -113,4 +111,4 @@ Input.defaultProps = {
   placeholder: 'Enter search term'
 };
 
-export default withRouter(withStyles(styles)(Input));
+export default withStyles(styles)(Input);

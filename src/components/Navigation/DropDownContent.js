@@ -1,17 +1,11 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
-import {
-  Grid,
-  Link,
-  Typography,
-  ButtonBase,
-  withWidth
-} from '@material-ui/core';
+import { Grid, Link, Typography, withWidth } from '@material-ui/core';
 
-import { makeStyles } from '@material-ui/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 
 import { isWidthDown } from '@material-ui/core/withWidth';
 import { RichTypography } from '../core';
@@ -34,27 +28,6 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       width: '80.6875rem'
-    }
-  },
-  countryButton: {
-    height: 'fit-content',
-    marginBottom: '1.25em',
-    textTransform: 'none',
-    padding: 0,
-    display: 'flex',
-    minWidth: '9rem',
-    margin: 0,
-    justifyContent: 'left',
-    '&:hover': {
-      backgroundColor: 'transparent'
-    },
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 'auto',
-      minWidth: '11.25rem'
-    },
-    [theme.breakpoints.up('md')]: {
-      margin: '0 1.5rem'
     }
   },
   flag: {
@@ -80,8 +53,24 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     // Override original takwimu.css & Bootstrap styles
     '&:hover': {
+      backgroundColor: 'transparent',
       color: theme.palette.text.secondary,
       textDecoration: 'none'
+    },
+    height: 'fit-content',
+    marginBottom: '1.25em',
+    textTransform: 'none',
+    padding: 0,
+    minWidth: '9rem',
+    margin: 0,
+    justifyContent: 'left',
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 'auto',
+      minWidth: '11.25rem'
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: '0 1.5rem'
     }
   },
   countryName: {
@@ -106,7 +95,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DropDownContent({ width, title, description, countries, profile }) {
+function DropDownContent({
+  width,
+  title,
+  description,
+  countries,
+  profile,
+  isAnalysis
+}) {
   const classes = useStyles();
   useEffect(() => {
     /**
@@ -155,18 +151,22 @@ function DropDownContent({ width, title, description, countries, profile }) {
           className={classes.flagsContainer}
         >
           {countries.map(country => (
-            <ButtonBase
+            <NextLink
               key={country.slug}
-              disableRipple
-              disableTouchRipple
-              className={classes.countryButton}
+              href={
+                isAnalysis ? '/profiles/analysis/[id]' : '/profiles/[geoId]'
+              }
+              as={
+                isAnalysis
+                  ? `/profiles/analysis/${profile(country)}`
+                  : `/profiles/${profile(country)}`
+              }
             >
               <Link
-                component={RouterLink}
-                to={`/profiles/${profile(country)}`}
-                color="textSecondary"
-                className={classes.countryLink}
                 underline="none"
+                color="textSecondary"
+                href={`/profiles/${profile(country)}`}
+                className={classes.countryLink}
               >
                 <img
                   alt={country.name}
@@ -177,7 +177,7 @@ function DropDownContent({ width, title, description, countries, profile }) {
                   {country.short_name}
                 </span>
               </Link>
-            </ButtonBase>
+            </NextLink>
           ))}
         </Grid>
       </Grid>
@@ -190,7 +190,12 @@ DropDownContent.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  profile: PropTypes.func.isRequired
+  profile: PropTypes.func.isRequired,
+  isAnalysis: PropTypes.bool
+};
+
+DropDownContent.defaultProps = {
+  isAnalysis: false
 };
 
 export default withWidth()(DropDownContent);

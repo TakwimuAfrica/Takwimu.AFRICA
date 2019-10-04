@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 
 import Footer from './Footer';
 import Navigation from './Navigation';
@@ -11,9 +11,9 @@ function Page({ children, takwimu, title: propTitle }) {
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{title}</title>
-      </Helmet>
+      </Head>
       <Navigation takwimu={takwimu} />
       {children}
       <Footer takwimu={takwimu} />
