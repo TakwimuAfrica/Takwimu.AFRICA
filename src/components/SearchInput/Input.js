@@ -44,7 +44,7 @@ class Input extends React.Component {
   }
 
   render() {
-    const { classes, history, onRefresh, placeholder, query } = this.props;
+    const { classes, onRefresh, placeholder, query } = this.props;
     const { searchTerm } = this.state;
     const handleSearchClick = () => {
       if (query !== searchTerm && searchTerm.length > 0) {
@@ -55,7 +55,7 @@ class Input extends React.Component {
           window.history.pushState(null, '', `/search?q=${searchTerm}`);
           onRefresh(searchTerm);
         } else {
-          history.push({
+          window.history.push({
             pathname: '/search',
             search: `?q=${searchTerm}`
           });
@@ -99,9 +99,6 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
   onRefresh: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   query: PropTypes.string.isRequired
