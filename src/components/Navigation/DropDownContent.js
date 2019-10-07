@@ -95,14 +95,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DropDownContent({
-  width,
-  title,
-  description,
-  countries,
-  profile,
-  isAnalysis
-}) {
+function DropDownContent({ width, title, description, countries, profile }) {
   const classes = useStyles();
   useEffect(() => {
     /**
@@ -153,14 +146,8 @@ function DropDownContent({
           {countries.map(country => (
             <NextLink
               key={country.slug}
-              href={
-                isAnalysis ? '/profiles/analysis/[id]' : '/profiles/[geoId]'
-              }
-              as={
-                isAnalysis
-                  ? `/profiles/analysis/${profile(country)}`
-                  : `/profiles/${profile(country)}`
-              }
+              href="/profiles/[geoIdOrCountrySlug]"
+              as={`/profiles/${profile(country)}`}
             >
               <Link
                 underline="none"
@@ -190,12 +177,7 @@ DropDownContent.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  profile: PropTypes.func.isRequired,
-  isAnalysis: PropTypes.bool
-};
-
-DropDownContent.defaultProps = {
-  isAnalysis: false
+  profile: PropTypes.func.isRequired
 };
 
 export default withWidth({

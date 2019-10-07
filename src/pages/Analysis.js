@@ -107,12 +107,11 @@ AnalysisPage.defaultProps = {
 };
 
 AnalysisPage.getInitialProps = async ({ query, req }) => {
-  console.time('download');
   const { url } = config;
-  const { countrySlug, analysisSlug, indicator: indicatorId } = query;
+  const { geoIdOrCountrySlug, analysisSlug, indicator: indicatorId } = query;
 
   const configs = await fetch(
-    `${url}/api/v2/pages/?type=takwimu.ProfilePage&slug=${countrySlug}&fields=*&format=json`
+    `${url}/api/v2/pages/?type=takwimu.ProfilePage&slug=${geoIdOrCountrySlug}&fields=*&format=json`
   ).then(response => {
     if (response.status === 200) {
       return response.json().then(data => {
@@ -158,7 +157,6 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
     return Promise.reject();
   });
 
-  console.timeEnd('download');
   return {
     takwimu,
     ...content,

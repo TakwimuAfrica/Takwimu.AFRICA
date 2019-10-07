@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import config from '../src/config';
 import Page from '../src/components/Page';
 import SearchResults from '../src/components/SearchResults';
 
-function Search() {
-  const [takwimu, setTakwimu] = useState(undefined);
-  useEffect(() => {
-    const params = new URL(window.location).searchParams;
-    const query = params.get('q');
-    if (query && query.length) {
-      config.page.search = { query };
-    }
-    setTakwimu(config);
-  }, []);
-
-  if (!takwimu) {
-    return null;
-  }
+function Search(takwimu) {
   return (
     <Page takwimu={takwimu} title="Search">
       <SearchResults takwimu={takwimu} />
@@ -26,5 +13,21 @@ function Search() {
 }
 
 Search.propTypes = {};
+
+Search.getInitialProps = async ({ query: { q: query } }) => {
+  let results = [];
+  if (query && query.length) {
+    results = await fetch(
+      `${config.url}/api/search?q=${query}&format=json`
+    ).then(response => {
+      if (response.status === 200) {
+        return response.json().then(data => data.search);
+      }
+      return Promise.resolve({});
+    });
+    config.page.search = { query, results };
+  }
+  return config;
+};
 
 export default Search;

@@ -248,7 +248,7 @@ class SearchDrawer extends React.Component {
                       <MenuItem
                         key={result.title}
                         component="a"
-                        href={`/search/?q=${result.title}`}
+                        href={`/search?q=${result.title}`}
                       >
                         <Tooltip
                           title={result.title}

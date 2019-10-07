@@ -134,13 +134,13 @@ function CurrentAnalysis({
             className={classes.actions}
           >
             <Button
-              href={`/profiles/analysis/${currentAnalysis.country.slug}/${currentAnalysis.slug}`}
+              href={`/profiles/${currentAnalysis.country.slug}/${currentAnalysis.slug}`}
               className={classes.primaryAction}
             >
               {readAnalysisTitle}
             </Button>
             <Button
-              href={`/profiles/analysis/${currentAnalysis.country.slug}`}
+              href={`/profiles/${currentAnalysis.country.slug}`}
               className={classes.secondaryAction}
               classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"

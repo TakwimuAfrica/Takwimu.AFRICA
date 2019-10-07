@@ -6,23 +6,23 @@ import { useRouter } from 'next/router';
 import InsightContainer from '@codeforafrica/hurumap-ui/dist/InsightContainer';
 import { Grid, makeStyles } from '@material-ui/core';
 
-import config from '../../../src/config';
-import { shareIndicator, uploadImage } from '../../../src/common';
-import slugify from '../../../src/utils/slugify';
-import useChartDefinitions from '../../../src/data/useChartDefinitions';
-import useProfileLoader from '../../../src/data/useProfileLoader';
+import config from '../config';
+import { shareIndicator, uploadImage } from '../common';
+import slugify from '../utils/slugify';
+import useChartDefinitions from '../data/useChartDefinitions';
+import useProfileLoader from '../data/useProfileLoader';
 
-import Page from '../../../src/components/Page';
-import ProfileDetail from '../../../src/components/ProfileDetail';
+import Page from '../components/Page';
+import ProfileDetail from '../components/ProfileDetail';
 import ProfileSection, {
   ProfileSectionTitle
-} from '../../../src/components/ProfileSection';
-import Section from '../../../src/components/Section';
+} from '../components/ProfileSection';
+import Section from '../components/Section';
 
 const Chart = dynamic({
   ssr: false,
   loader: () => {
-    return import('../../../src/components/ChartFactory');
+    return import('../components/ChartFactory');
   }
 });
 const MapIt = dynamic({
@@ -57,7 +57,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 function Profile() {
   const router = useRouter();
   const {
-    query: { geoId = '' }
+    query: { geoIdOrCountrySlug: geoId = '' }
   } = router;
 
   const classes = useStyles();

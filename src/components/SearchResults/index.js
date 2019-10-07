@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 import SearchInput from '../SearchInput';
 import SearchResultsContainer from './SearchResultsContainer';
 import Section from '../Section';
+import config from '../../config';
 
 const useStyles = makeStyles({
   root: {
@@ -14,22 +15,21 @@ const useStyles = makeStyles({
   }
 });
 
-function SearchResults({ takwimu: { url, page } }) {
+function SearchResults({ takwimu: { page } }) {
   const [search, setSearch] = useState(page.search);
   const classes = useStyles();
 
-  const handleSearch = useCallback(
-    searchTerm => {
-      fetch(`${url}/api/search/?q=${searchTerm}&format=json`).then(response => {
+  const handleSearch = useCallback(searchTerm => {
+    fetch(`${config.url}/api/search?q=${searchTerm}&format=json`).then(
+      response => {
         if (response.status === 200) {
           response.json().then(data => {
             setSearch(data.search);
           });
         }
-      });
-    },
-    [url]
-  );
+      }
+    );
+  }, []);
 
   const { query, results } = search || {};
   useEffect(() => {
@@ -48,7 +48,6 @@ function SearchResults({ takwimu: { url, page } }) {
 
 SearchResults.propTypes = {
   takwimu: PropTypes.shape({
-    url: PropTypes.string.isRequired,
     page: PropTypes.shape({
       search: PropTypes.shape({
         query: PropTypes.string,

@@ -52,7 +52,7 @@ class Input extends React.Component {
         // API. On all other pages that this component is used, onRefresh is
         // expected to be null
         if (typeof onRefresh === 'function') {
-          window.history.pushState(null, '', `/search/?q=${searchTerm}`);
+          window.history.pushState(null, '', `/search?q=${searchTerm}`);
           onRefresh(searchTerm);
         } else {
           history.push({

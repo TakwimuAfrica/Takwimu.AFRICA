@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { ButtonBase, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
@@ -109,146 +109,133 @@ RenderPaginator.propTypes = {
 };
 export const Paginator = RenderPaginator;
 
-class SearchResultsContainer extends React.Component {
-  constructor(props) {
-    super(props);
+function SearchResultsContainer({ results, filter: propFilter }) {
+  const classes = useStyles();
+  const [state, setState] = useState({
+    activePage: 0,
+    startIndex: 0,
+    filter: propFilter
+  });
 
-    const { filter } = this.props;
-    this.state = {
-      activePage: 0,
-      startIndex: 0,
-      filter
-    };
-
-    this.handleNextClick = this.handleNextClick.bind(this);
-    this.handlePreviousClick = this.handlePreviousClick.bind(this);
-    this.handlePageClick = this.handlePageClick.bind(this);
-    this.handleFilterClick = this.handleFilterClick.bind(this);
-  }
-
-  handleNextClick() {
-    this.setState(prevState => ({
+  const handleNextClick = () => {
+    setState(prevState => ({
       activePage: prevState.activePage + 1,
       startIndex: prevState.startIndex + 10
     }));
-  }
+  };
 
-  handlePreviousClick() {
-    this.setState(prevState => ({
+  const handlePreviousClick = () => {
+    setState(prevState => ({
       activePage: prevState.activePage - 1,
       startIndex: prevState.startIndex - 10
     }));
-  }
+  };
 
-  handlePageClick(pageNum) {
+  const handlePageClick = pageNum => {
     const startIndex = (pageNum - 1) * 10;
-    this.setState({
+    setState({
       activePage: pageNum - 1,
       startIndex
     });
-  }
+  };
 
-  handleFilterClick(category) {
-    this.setState({
+  const handleFilterClick = category => {
+    setState({
       activePage: 0,
       startIndex: 0,
       filter: category
     });
-  }
+  };
 
-  render() {
-    const { results } = this.props;
-    const { activePage, startIndex, filter } = this.state;
-    const classes = useStyles();
+  const { activePage, startIndex, filter } = state;
 
-    let filteredResults = results;
-    // filter results with result_type equals to state's filter
-    if (filter !== 'All') {
-      filteredResults = results.filter(
-        resultItem => resultItem.value.result_type === filter
-      );
-    }
-
-    // compose show result string
-    let resultIndexText = '';
-    let endIndex = 10;
-    const resultsLength = filteredResults.length;
-    if (resultsLength > 10) {
-      endIndex += 10 * activePage;
-
-      if (resultsLength - startIndex < 10) {
-        endIndex = startIndex + (resultsLength - startIndex);
-      }
-      resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
-    }
-
-    return (
-      <div className={classes.root}>
-        <Grid className={classes.resultsFilter}>
-          <Typography variant="body2" className={classes.showResult}>
-            {`Showing ${resultIndexText}${filteredResults.length} results`}
-          </Typography>
-          <Grid item className={classes.filter}>
-            <Typography
-              variant="body2"
-              color="inherit"
-              className={classes.filterItemLabel}
-            >
-              Show:
-            </Typography>
-            {['All', 'Analysis', 'Data'].map(type => (
-              <ButtonBase
-                key={type}
-                className={classNames([
-                  classes.filterItem,
-                  { [classes.filterActive]: filter === type }
-                ])}
-                onClick={() => this.handleFilterClick(type)}
-              >
-                {`${type} Results`}
-              </ButtonBase>
-            ))}
-          </Grid>
-        </Grid>
-        <div className={classes.borderDiv} />
-        {filteredResults.length > 0 ? (
-          <div className={classes.searchResultsList}>
-            {filteredResults.slice(startIndex, endIndex).map(result => (
-              <SearchResultItem
-                resultType={result.value.result_type}
-                country={result.value.country}
-                link={result.value.link}
-                title={result.value.title}
-                summary={result.value.summary}
-                key={result.value.content_id}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className={classes.searchResultsList}>
-            <Typography variant="h3"> No Results Found</Typography>
-          </div>
-        )}
-        <div className={classes.borderDiv} />
-
-        <div className={classes.paginationContainer}>
-          <Typography variant="body2">
-            {`Showing ${resultIndexText}${filteredResults.length} results`}
-          </Typography>
-          {filteredResults.length > 10 && (
-            <Paginator
-              items={filteredResults.length}
-              activePage={activePage}
-              handleNextClick={this.handleNextClick}
-              handlePreviousClick={this.handlePreviousClick}
-              handlePageClick={this.handlePageClick}
-              endIndex={endIndex}
-            />
-          )}
-        </div>
-      </div>
+  let filteredResults = results;
+  // filter results with result_type equals to state's filter
+  if (filter !== 'All') {
+    filteredResults = results.filter(
+      resultItem => resultItem.value.result_type === filter
     );
   }
+
+  // compose show result string
+  let resultIndexText = '';
+  let endIndex = 10;
+  const resultsLength = filteredResults.length;
+  if (resultsLength > 10) {
+    endIndex += 10 * activePage;
+
+    if (resultsLength - startIndex < 10) {
+      endIndex = startIndex + (resultsLength - startIndex);
+    }
+    resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
+  }
+
+  return (
+    <div className={classes.root}>
+      <Grid className={classes.resultsFilter}>
+        <Typography variant="body2" className={classes.showResult}>
+          {`Showing ${resultIndexText}${filteredResults.length} results`}
+        </Typography>
+        <Grid item className={classes.filter}>
+          <Typography
+            variant="body2"
+            color="inherit"
+            className={classes.filterItemLabel}
+          >
+            Show:
+          </Typography>
+          {['All', 'Analysis', 'Data'].map(type => (
+            <ButtonBase
+              key={type}
+              className={classNames([
+                classes.filterItem,
+                { [classes.filterActive]: filter === type }
+              ])}
+              onClick={() => handleFilterClick(type)}
+            >
+              {`${type} Results`}
+            </ButtonBase>
+          ))}
+        </Grid>
+      </Grid>
+      <div className={classes.borderDiv} />
+      {filteredResults.length > 0 ? (
+        <div className={classes.searchResultsList}>
+          {filteredResults.slice(startIndex, endIndex).map(result => (
+            <SearchResultItem
+              resultType={result.value.result_type}
+              country={result.value.country}
+              link={result.value.link}
+              title={result.value.title}
+              summary={result.value.summary}
+              key={result.value.content_id}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className={classes.searchResultsList}>
+          <Typography variant="h3"> No Results Found</Typography>
+        </div>
+      )}
+      <div className={classes.borderDiv} />
+
+      <div className={classes.paginationContainer}>
+        <Typography variant="body2">
+          {`Showing ${resultIndexText}${filteredResults.length} results`}
+        </Typography>
+        {filteredResults.length > 10 && (
+          <Paginator
+            items={filteredResults.length}
+            activePage={activePage}
+            handleNextClick={handleNextClick}
+            handlePreviousClick={handlePreviousClick}
+            handlePageClick={handlePageClick}
+            endIndex={endIndex}
+          />
+        )}
+      </div>
+    </div>
+  );
 }
 
 SearchResultsContainer.propTypes = {

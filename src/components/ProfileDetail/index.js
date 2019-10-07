@@ -276,7 +276,7 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
               </Grid>
             )}
           </Grid>
-          <Button href={`/profiles/analysis/${country.slug}`} fullWidth>
+          <Button href={`/profiles/${country.slug}`} fullWidth>
             Read the full country analysis
           </Button>
         </div>

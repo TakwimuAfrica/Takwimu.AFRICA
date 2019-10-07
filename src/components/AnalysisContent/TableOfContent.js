@@ -22,7 +22,7 @@ function AnalysisTableOfContent({
   const classes = useStyles();
   const { slug: countrySlug } = country;
   const generateHref = index => {
-    const analysisUrl = `/profiles/analysis/${countrySlug}`;
+    const analysisUrl = `/profiles/${countrySlug}`;
     if (content[index].meta.slug === countrySlug) {
       return analysisUrl;
     }
