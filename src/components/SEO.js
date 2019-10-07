@@ -71,7 +71,7 @@ function SEO({ title, description, image, location = '', indicatorId }) {
         name="twitter:description"
         content={description || config.description}
       />
-      <meta name="twitter:image:src" content={imageUrl} />
+      <meta name="twitter:image" content={imageUrl} />
 
       {/* Structured data (Google) */}
       <script type="application/ld+json">{structuredDataOrganization}</script>
