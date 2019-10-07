@@ -13,8 +13,10 @@ import {
   MenuItem,
   ButtonBase
 } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
-import { Search, MenuOutlined, Close } from '@material-ui/icons';
+import withStyles from '@material-ui/styles/withStyles';
+import Close from '@material-ui/icons/Close';
+import MenuOutlined from '@material-ui/icons/MenuOutlined';
+import Search from '@material-ui/icons/Search';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
 import classNames from 'classnames';

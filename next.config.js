@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const withCSS = require('@zeit/next-css');
 const withTM = require('next-transpile-modules');
 const withImages = require('next-images');

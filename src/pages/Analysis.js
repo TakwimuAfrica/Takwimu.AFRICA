@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 
 import config from '../config';
 import AnalysisContent from '../components/AnalysisContent';
@@ -67,6 +67,7 @@ function AnalysisPage({ takwimu, initial, analyses, indicatorId }) {
           onChange={changeTopic}
           takwimu={takwimu}
           topicIndex={topicIndex}
+          analysisLink=""
         />
       </ContentPage>
     </Page>
@@ -98,7 +99,8 @@ AnalysisPage.defaultProps = {
   indicatorId: undefined
 };
 
-AnalysisPage.getInitialProps = async ({ query }) => {
+AnalysisPage.getInitialProps = async ({ query, ...props }) => {
+  console.time('download', props);
   const { url } = config;
   const { countrySlug, analysisSlug, indicator: indicatorId } = query;
 
@@ -149,6 +151,7 @@ AnalysisPage.getInitialProps = async ({ query }) => {
     return Promise.reject();
   });
 
+  console.timeEnd('download');
   return { takwimu, ...content, indicatorId };
 };
 

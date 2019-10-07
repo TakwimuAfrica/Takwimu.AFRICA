@@ -1,13 +1,14 @@
 /* eslint-disable react/no-danger */
 import React, { Fragment, useEffect, useState } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
-import { Typography, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import makeStyles from '@material-ui/styles/makeStyles';
 
 import { RichTypography } from '../core';
 import Actions from './Actions';
-import { Analysis as AnalysisReadNext } from '../Next';
+import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
