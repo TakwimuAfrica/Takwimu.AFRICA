@@ -54,7 +54,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
+function AnalysisContent({
+  content,
+  topicIndex,
+  takwimu,
+  onChange,
+  analysisLink
+}) {
   const classes = useStyles();
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
@@ -135,6 +141,7 @@ function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
           topic={topic}
           data={data}
           takwimu={takwimu}
+          link={analysisLink}
         />
 
         {content.body[topicIndex].type === 'carousel_topic' ? (
@@ -174,6 +181,7 @@ function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
           data={data}
           takwimu={takwimu}
           hideLastUpdated
+          link={analysisLink}
         />
         <ContentNavigation
           labelText={profileNavigation.title}
@@ -228,7 +236,8 @@ AnalysisContent.propTypes = {
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
     country: PropTypes.shape({}).isRequired
-  }).isRequired
+  }).isRequired,
+  analysisLink: PropTypes.string.isRequired
 };
 
 export default AnalysisContent;

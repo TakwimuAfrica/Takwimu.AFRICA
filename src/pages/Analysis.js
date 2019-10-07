@@ -16,7 +16,13 @@ const useStyles = makeStyles({
   asideRoot: {}
 });
 
-function AnalysisPage({ takwimu, initial, analyses, indicatorId }) {
+function AnalysisPage({
+  takwimu,
+  initial,
+  analyses,
+  indicatorId,
+  analysisLink
+}) {
   const classes = useStyles();
   const [current, setCurrent] = useState(initial);
   const [topicIndex, setTopicIndex] = useState(0);
@@ -67,7 +73,7 @@ function AnalysisPage({ takwimu, initial, analyses, indicatorId }) {
           onChange={changeTopic}
           takwimu={takwimu}
           topicIndex={topicIndex}
-          analysisLink=""
+          analysisLink={analysisLink}
         />
       </ContentPage>
     </Page>
@@ -92,15 +98,16 @@ AnalysisPage.propTypes = {
       short_name: PropTypes.string,
       slug: PropTypes.string
     })
-  }).isRequired
+  }).isRequired,
+  analysisLink: PropTypes.string.isRequired
 };
 
 AnalysisPage.defaultProps = {
   indicatorId: undefined
 };
 
-AnalysisPage.getInitialProps = async ({ query, ...props }) => {
-  console.time('download', props);
+AnalysisPage.getInitialProps = async ({ query, req }) => {
+  console.time('download');
   const { url } = config;
   const { countrySlug, analysisSlug, indicator: indicatorId } = query;
 
@@ -152,7 +159,12 @@ AnalysisPage.getInitialProps = async ({ query, ...props }) => {
   });
 
   console.timeEnd('download');
-  return { takwimu, ...content, indicatorId };
+  return {
+    takwimu,
+    ...content,
+    indicatorId,
+    analysisLink: `${req.protocol}://${req.headers.host}${req.url}`
+  };
 };
 
 export default AnalysisPage;
