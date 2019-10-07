@@ -144,11 +144,7 @@ function DropDownContent({ width, title, description, countries, profile }) {
           className={classes.flagsContainer}
         >
           {countries.map(country => (
-            <NextLink
-              key={country.slug}
-              href="/profiles/[geoIdOrCountrySlug]"
-              as={`/profiles/${profile(country)}`}
-            >
+            <NextLink key={country.slug} href={`/profiles/${profile(country)}`}>
               <Link
                 underline="none"
                 color="textSecondary"
