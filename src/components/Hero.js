@@ -91,7 +91,7 @@ function Hero({
           >
             <Grid item xs={12}>
               <RichTypography
-                component="p"
+                component="div"
                 variant="h1"
                 className={classes.title}
               >
@@ -99,7 +99,7 @@ function Hero({
               </RichTypography>
             </Grid>
             <Grid item xs={12}>
-              <RichTypography component="p" className={classes.description}>
+              <RichTypography component="div" className={classes.description}>
                 {tagline}
               </RichTypography>
             </Grid>
