@@ -47,7 +47,7 @@ function NotFoundError({ statusCode }) {
             error and will investigate. You can try again or if the issue
             persists, please{' '}
             <NextLink href="/contact">
-              <Link to="/contact" underline="always">
+              <Link href="/contact" underline="always">
                 contact us
               </Link>
             </NextLink>

@@ -42,7 +42,7 @@ function StayInTouch({ settings: { support, socialMedia } }) {
     <div className={classes.root}>
       <Title>
         <NextLink href="/contact">
-          <Link to="/contact" variant="subtitle1" className={classes.title}>
+          <Link href="/contact" variant="subtitle1" className={classes.title}>
             Stay in touch
           </Link>
         </NextLink>

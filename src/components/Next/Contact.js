@@ -51,7 +51,8 @@ function ContactWhereToNext({ socialMedia }) {
 
         <NextLink href="/about">
           <Card
-            to="/about"
+            href="/about"
+            component="a"
             classes={{ root: classes.cardMargin }}
             variant="dual"
           >

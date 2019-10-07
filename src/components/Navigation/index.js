@@ -120,7 +120,7 @@ class Navigation extends React.Component {
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <NextLink href="/">
-                <Link to="/">
+                <Link href="/">
                   <img alt="logo" src={logoWhite} height={19} />
                 </Link>
               </NextLink>
@@ -276,21 +276,21 @@ class Navigation extends React.Component {
             />
             <MenuItem>
               <NextLink href="/about">
-                <Link className={classes.link} to="/about">
+                <Link className={classes.link} href="/about">
                   About
                 </Link>
               </NextLink>
             </MenuItem>
             <MenuItem>
               <NextLink href="/faqs">
-                <Link className={classes.link} to="/faqs">
+                <Link className={classes.link} href="/faqs">
                   FAQs
                 </Link>
               </NextLink>
             </MenuItem>
             <MenuItem>
               <NextLink href="/contact">
-                <Link className={classes.link} to="/contact">
+                <Link className={classes.link} href="/contact">
                   Contact Us
                 </Link>
               </NextLink>

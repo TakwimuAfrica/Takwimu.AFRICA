@@ -113,7 +113,7 @@ function TableOfContent({
                 className={classNames({
                   [classes.activeLink]: current !== index
                 })}
-                to={generateHref(index)}
+                href={generateHref(index)}
                 color={current !== index ? 'primary' : 'textPrimary'}
                 onClick={e => {
                   e.preventDefault();

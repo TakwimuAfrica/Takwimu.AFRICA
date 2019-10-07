@@ -48,9 +48,9 @@ function Links({ items }) {
               {/* Only relative URLs should be opened on the same page. */}
               {/* Otherwise, they should be opened in new tab */}
               {/^\/(?!\/)/.test(item.value.value.link) ? (
-                <NextLink to={item.value.value.link}>
+                <NextLink href={item.value.value.link}>
                   <Link
-                    to={item.value.value.link}
+                    href={item.value.value.link}
                     variant="inherit"
                     color="inherit"
                     underline="always"

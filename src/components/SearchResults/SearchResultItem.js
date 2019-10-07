@@ -34,7 +34,7 @@ function SearchResultItem({ country, title, link, summary, resultType }) {
         {resultType}
       </Typography>
       <NextLink href={link}>
-        <Link to={link} className={classes.link}>
+        <Link href={link} className={classes.link}>
           <Typography variant="body1" className={classes.searchResultItem}>
             {country} - {title}
           </Typography>

@@ -65,7 +65,7 @@ function ContentNavigation({
           <NextLink key={generateHref(index)} href={generateHref(index)}>
             <Link
               key={generateHref(index)}
-              to={generateHref(index)}
+              href={generateHref(index)}
               variant="body2"
               color={
                 current === index ? linksSecondaryColor : linksPrimaryColor

@@ -66,7 +66,7 @@ function QuickLinks() {
           <li key={link.label}>
             <NextLink href={link.href}>
               <Link
-                to={link.href}
+                href={link.href}
                 underline="always"
                 className={classNames([classes.text, classes.link])}
                 onClick={() => handleClick(link.href)}
@@ -86,7 +86,7 @@ function QuickLinks() {
           <li key={link.label}>
             <NextLink href={link.href}>
               <Link
-                to={link.href}
+                href={link.href}
                 className={classNames([classes.text, classes.link])}
                 underline="always"
               >
