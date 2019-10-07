@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTyes from 'prop-types';
 
 import FeaturedAnalysis from '../src/components/FeaturedAnalysis';
 import FeaturedData from '../src/components/FeaturedData';
@@ -10,22 +11,30 @@ import WhatYouDoWithTakwimu from '../src/components/WhatYouCanDoWithTakwimu';
 import WhereToNext from '../src/components/Next';
 import getTakwimuPage from '../src/getTakwimuPage';
 
-function Home(props) {
+function Home({ takwimu, indicatorId }) {
   return (
-    <Page takwimu={props}>
-      <Hero takwimu={props} />
-      <FeaturedAnalysis takwimu={props} />
-      <FeaturedData takwimu={props} />
-      <WhatYouDoWithTakwimu takwimu={props} />
-      <MakingOfTakwimu takwimu={props} />
-      <LatestNewsStories takwimu={props} />
+    <Page takwimu={takwimu} indicatorId={indicatorId}>
+      <Hero takwimu={takwimu} />
+      <FeaturedAnalysis takwimu={takwimu} />
+      <FeaturedData takwimu={takwimu} />
+      <WhatYouDoWithTakwimu takwimu={takwimu} />
+      <MakingOfTakwimu takwimu={takwimu} />
+      <LatestNewsStories takwimu={takwimu} />
       <WhereToNext />
     </Page>
   );
 }
 
-Home.getInitialProps = async () => {
-  return getTakwimuPage('takwimu.IndexPage');
+Home.propTypes = {
+  takwimu: PropTyes.shape({}).isRequired,
+  indicatorId: PropTyes.string.isRequired
+};
+
+Home.getInitialProps = async ({ query: { indicator: indicatorId } }) => {
+  return {
+    indicatorId,
+    takwimu: await getTakwimuPage('takwimu.IndexPage')
+  };
 };
 
 export default Home;
