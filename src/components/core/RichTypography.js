@@ -22,6 +22,7 @@ function RichTypography({ children, variant, ...props }) {
 
   return (
     <Typography
+      component="span"
       variant={variant}
       className={classes.root}
       dangerouslySetInnerHTML={{
