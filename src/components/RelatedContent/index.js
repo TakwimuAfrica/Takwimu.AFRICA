@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 
 function RelatedContent({ content: relatedContent }) {
   const classes = useStyles();
-  if (!relatedContent.relatedLinks) {
+  if (!(relatedContent && relatedContent.relatedLinks)) {
     return null;
   }
   const { title, relatedLinks } = relatedContent;

@@ -21,7 +21,7 @@ function Contact(takwimu) {
   const contentHeadings = [];
   const {
     page: {
-      page_title: title,
+      title,
       contact_title: keyContactTitle,
       contact_label: keyContactLabel,
       contacts,

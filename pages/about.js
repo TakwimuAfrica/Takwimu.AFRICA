@@ -22,9 +22,9 @@ function About(takwimu) {
 
   const {
     page: {
-      page_title: title,
-      page_body: [aboutTakwimu, methodology, services],
-      page_navigation: contentNavigation,
+      title,
+      content,
+      navigation_title: contentNavigation,
       faqs_label: faqsLabel,
       faqs_title: faqsTitle,
       faqs_description: faqsDescription,
@@ -34,6 +34,10 @@ function About(takwimu) {
     },
     settings: { socialMedia }
   } = takwimu;
+
+  const aboutTakwimu = content.find(c => c.type === 'about');
+  const methodology = content.find(c => c.type === 'methodology');
+  const services = content.find(c => c.type === 'services');
 
   const faqs = {
     label: faqsLabel,
@@ -48,19 +52,19 @@ function About(takwimu) {
   const contentHeadings = [];
   if (aboutTakwimu) {
     contentHeadings.push({
-      title: aboutTakwimu.page_section_label,
+      title: aboutTakwimu.label,
       link: 'about'
     });
   }
   if (methodology) {
     contentHeadings.push({
-      title: methodology.page_section_label,
+      title: methodology.label,
       link: 'methodology'
     });
   }
   if (services) {
     contentHeadings.push({
-      title: services.page_section_label,
+      title: services.label,
       link: 'services'
     });
   }

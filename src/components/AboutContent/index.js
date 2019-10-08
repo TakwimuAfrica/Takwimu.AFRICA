@@ -80,8 +80,8 @@ class AboutContent extends React.Component {
         {aboutTakwimu && (
           <RichTextSection
             classes={{ root: classes.section }}
-            title={aboutTakwimu.page_section_title}
-            value={aboutTakwimu.page_section_description}
+            title={aboutTakwimu.title}
+            value={aboutTakwimu.description}
             id="about"
             component={ContentSection}
           />
@@ -89,8 +89,8 @@ class AboutContent extends React.Component {
         {methodology && (
           <RichTextSection
             classes={{ root: classes.section }}
-            title={methodology.page_section_title}
-            value={methodology.page_section_description}
+            title={methodology.title}
+            value={methodology.description}
             id="methodology"
             component={ContentSection}
           />
@@ -98,8 +98,8 @@ class AboutContent extends React.Component {
         {services && (
           <RichTextSection
             classes={{ root: classes.section }}
-            title={services.page_section_title}
-            value={services.page_section_description}
+            title={services.title}
+            value={services.description}
             id="services"
             component={ContentSection}
           />
@@ -117,17 +117,17 @@ AboutContent.propTypes = {
   title: PropTypes.string.isRequired,
   contentNavigation: PropTypes.string.isRequired,
   aboutTakwimu: PropTypes.shape({
-    page_section_title: PropTypes.string,
-    page_section_description: PropTypes.string
+    title: PropTypes.string,
+    description: PropTypes.string
   }).isRequired,
   methodology: PropTypes.shape({
-    page_section_title: PropTypes.string,
-    page_section_description: PropTypes.string
+    title: PropTypes.string,
+    description: PropTypes.string
   }).isRequired,
   faqs: PropTypes.shape({}).isRequired,
   services: PropTypes.shape({
-    page_section_title: PropTypes.string,
-    page_section_description: PropTypes.string
+    title: PropTypes.string,
+    description: PropTypes.string
   }).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape({}).isRequired,
