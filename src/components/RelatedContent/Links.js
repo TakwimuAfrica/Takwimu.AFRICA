@@ -39,37 +39,37 @@ function Links({ items }) {
         component="ul"
       >
         {items.map(item => (
-          <li key={item.value.value.link}>
+          <li key={item.link}>
             <Tooltip
-              title={item.value.value.title}
+              title={item.title}
               placement="bottom-start"
               classes={{ tooltip: classes.tooltip }}
             >
               {/* Only relative URLs should be opened on the same page. */}
               {/* Otherwise, they should be opened in new tab */}
-              {/^\/(?!\/)/.test(item.value.value.link) ? (
-                <NextLink href={item.value.value.link}>
+              {/^\/(?!\/)/.test(item.link) ? (
+                <NextLink href={item.link}>
                   <Link
-                    href={item.value.value.link}
+                    href={item.link}
                     variant="inherit"
                     color="inherit"
                     underline="always"
                     noWrap
                     className={classes.listItem}
                   >
-                    {item.value.value.title}
+                    {item.title}
                   </Link>
                 </NextLink>
               ) : (
                 <A
-                  href={item.value.value.link}
+                  href={item.link}
                   variant="inherit"
                   color="inherit"
                   underline="always"
                   noWrap
                   className={classes.listItem}
                 >
-                  {item.value.value.title}
+                  {item.title}
                 </A>
               )}
             </Tooltip>

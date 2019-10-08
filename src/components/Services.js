@@ -26,35 +26,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Services({ services: { value: currentServices }, ...props }) {
+function Services({ services, ...props }) {
   const classes = useStyles();
-  if (!currentServices) {
+  if (!services) {
     return null;
   }
+  const { description, title } = services;
 
   return (
     <ContentSection
-      title={currentServices.title}
+      title={title}
       variant="h3"
       classes={{ root: classes.root }}
       /* eslint-disable-next-line react/jsx-props-no-spreading */
       {...props}
     >
-      <RichTypography className={classes.content}>
-        {currentServices.description}
-      </RichTypography>
+      <RichTypography className={classes.content}>{description}</RichTypography>
       <Grid className={classNames(classes.content, classes.contentGrid)}>
-        {currentServices.services.map(({ value: service }) => (
-          <React.Fragment key={service.title}>
-            <RichTypography
-              variant="subtitle2"
-              className={classes.serviceHeading}
-            >
-              {service.title}
-            </RichTypography>
-            <RichTypography>{service.description}</RichTypography>
-          </React.Fragment>
-        ))}
+        <RichTypography variant="subtitle2" className={classes.serviceHeading}>
+          {title}
+        </RichTypography>
+        <RichTypography>{description}</RichTypography>
       </Grid>
     </ContentSection>
   );
@@ -62,18 +54,8 @@ function Services({ services: { value: currentServices }, ...props }) {
 
 Services.propTypes = {
   services: PropTypes.shape({
-    value: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-      services: PropTypes.arrayOf(
-        PropTypes.shape({
-          value: PropTypes.shape({
-            title: PropTypes.string,
-            description: PropTypes.string
-          })
-        })
-      )
-    })
+    title: PropTypes.string,
+    description: PropTypes.string
   }).isRequired
 };
 

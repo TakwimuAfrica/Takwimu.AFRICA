@@ -19,28 +19,29 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Faqs({ faqs: { value: currentFaqs }, ...props }) {
+function Faqs({ faqs, ...props }) {
   const classes = useStyles();
-  if (!currentFaqs) {
+  if (!faqs) {
     return null;
   }
+  const { title, description, questionsAnswers } = faqs;
 
   return (
     <ContentSection
-      title={currentFaqs.title}
+      title={title}
       variant="h3"
       classes={{ root: classes.root }}
       /* eslint-disable-next-line react/jsx-props-no-spreading */
       {...props}
     >
-      <RichTypography>{currentFaqs.description}</RichTypography>
+      <RichTypography>{description}</RichTypography>
       <Grid
         container
         className={classes.contentGrid}
         direction="column"
         justify="flex-start"
       >
-        {currentFaqs.faqs.map(({ value: faq }) => (
+        {questionsAnswers.map(faq => (
           <Faq expandTitle={faq.question} key={faq.question}>
             <RichTypography variant="body2">{faq.answer}</RichTypography>
           </Faq>
@@ -52,18 +53,14 @@ function Faqs({ faqs: { value: currentFaqs }, ...props }) {
 
 Faqs.propTypes = {
   faqs: PropTypes.shape({
-    value: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string,
-      faqs: PropTypes.arrayOf(
-        PropTypes.shape({
-          value: PropTypes.shape({
-            question: PropTypes.string,
-            answer: PropTypes.string
-          })
-        })
-      )
-    })
+    title: PropTypes.string,
+    description: PropTypes.string,
+    questionsAnswers: PropTypes.arrayOf(
+      PropTypes.shape({
+        question: PropTypes.string,
+        answer: PropTypes.string
+      })
+    )
   }).isRequired
 };
 

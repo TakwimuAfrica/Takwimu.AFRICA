@@ -7,7 +7,7 @@ import AboutContent from '../src/components/AboutContent';
 import ContentPage from '../src/components/ContentPage';
 import Page from '../src/components/Page';
 import TableOfContent from '../src/components/AboutContent/TableOfContent';
-import getTakwimuPage from '../src/getTakwimuPage';
+import { getSitePage } from '../src/getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {
@@ -22,37 +22,50 @@ function About(takwimu) {
 
   const {
     page: {
-      title,
-      about_takwimu: aboutTakwimu,
-      content_navigation: contentNavigation,
-      faqs,
-      methodology,
-      related_content: relatedContent,
-      services
+      page_title: title,
+      page_body: [aboutTakwimu, methodology, services],
+      page_navigation: contentNavigation,
+      faqs_label: faqsLabel,
+      faqs_title: faqsTitle,
+      faqs_description: faqsDescription,
+      questions_answers: questionsAnswers,
+      related_content_title: relatedContentTitle,
+      related_links: relatedLinks
     },
     settings: { socialMedia }
   } = takwimu;
+
+  const faqs = {
+    label: faqsLabel,
+    title: faqsTitle,
+    description: faqsDescription,
+    questionsAnswers
+  };
+  const relatedContent = {
+    title: relatedContentTitle,
+    relatedLinks
+  };
   const contentHeadings = [];
-  if (aboutTakwimu && aboutTakwimu.value) {
+  if (aboutTakwimu) {
     contentHeadings.push({
-      title: aboutTakwimu.value.label,
+      title: aboutTakwimu.page_section_label,
       link: 'about'
     });
   }
-  if (methodology && methodology.value) {
+  if (methodology) {
     contentHeadings.push({
-      title: methodology.value.label,
+      title: methodology.page_section_label,
       link: 'methodology'
     });
   }
-  if (services && services.value) {
+  if (services) {
     contentHeadings.push({
-      title: services.value.label,
+      title: services.page_section_label,
       link: 'services'
     });
   }
-  if (faqs && faqs.value) {
-    contentHeadings.push({ title: faqs.value.label, link: 'faqs' });
+  if (faqs) {
+    contentHeadings.push({ title: faqs.label, link: 'faqs' });
   }
 
   const [current, setCurrent] = useState(-1);
@@ -107,7 +120,7 @@ function About(takwimu) {
 }
 
 About.getInitialProps = async () => {
-  return getTakwimuPage('takwimu.AboutPage');
+  return getSitePage('about');
 };
 
 export default About;
