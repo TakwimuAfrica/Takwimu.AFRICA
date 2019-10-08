@@ -75,7 +75,7 @@ function LegalContent({
         current={current}
         changeActiveContent={index => () => changeActiveContent(index)}
       />
-      {contents.map(({ value: content }, i) => (
+      {contents.map((content, i) => (
         <RichTextSection
           id={contentHeadings[i].link}
           classes={{ root: classes.section }}

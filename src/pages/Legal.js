@@ -7,7 +7,7 @@ import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
 import Page from '../components/Page';
 import TableOfContent from '../components/LegalContent/TableOfContent';
-import getTakwimuPage from '../getTakwimuPage';
+import { getSitePage } from '../getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {
@@ -21,32 +21,27 @@ function Legal(takwimu) {
   const { pathname } = useRouter();
   const [current, setCurrent] = useState(-1);
   const {
-    page: {
-      title,
-      content_navigation: {
-        value: { title: navigationTitle }
-      },
-      body: contents = [],
-      related_content: relatedContent
-    }
+    page: { title, content, navigation_title: navigationTitle }
   } = takwimu;
 
   const contentHeadings = useMemo(() => {
     const {
-      page: { body = [] }
+      page: { content: body = [] }
     } = takwimu;
-    const termsIndex = body.findIndex(c => c.type === 'terms');
-    const privacyIndex = body.findIndex(c => c.type === 'privacy');
+
+    const terms = body.find(c => c.type === 'terms');
+    const privacy = body.find(c => c.type === 'privacy');
+
     const headings = [];
-    if (termsIndex !== -1) {
+    if (terms) {
       headings.push({
-        title: body[termsIndex].value.label,
+        title: terms.label,
         link: 'terms'
       });
     }
-    if (privacyIndex !== -1) {
+    if (privacy) {
       headings.push({
-        title: body[privacyIndex].value.label,
+        title: privacy.label,
         link: 'privacy'
       });
     }
@@ -73,7 +68,7 @@ function Legal(takwimu) {
   }, [changeActiveContent, contentHeadings, pathname]);
 
   return (
-    <Page takwimu={takwimu} title={takwimu.page.title}>
+    <Page takwimu={takwimu} title={title}>
       <ContentPage
         aside={
           <TableOfContent
@@ -87,11 +82,10 @@ function Legal(takwimu) {
         <LegalContent
           title={title}
           navigationTitle={navigationTitle}
-          contents={contents}
+          contents={content}
           contentHeadings={contentHeadings}
           current={current}
           changeActiveContent={changeActiveContent}
-          relatedContent={relatedContent}
         />
       </ContentPage>
     </Page>
@@ -99,7 +93,7 @@ function Legal(takwimu) {
 }
 
 Legal.getInitialProps = async () => {
-  return getTakwimuPage('takwimu.LegalPage');
+  return getSitePage('legal');
 };
 
 export default Legal;
