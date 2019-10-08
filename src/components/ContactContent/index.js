@@ -67,18 +67,17 @@ const SOCIAL_MEDIA = {
 
 function ContactContent({
   title,
-  address: { value: address },
+  address,
   addressIndex,
-  keyContacts: { value: keyContacts },
+  keyContacts,
   keyContactsIndex,
-  socialMedia: { value: socialMedia },
+  socialMedia,
   socialMediaIndex,
   current,
   contentHeadings,
   changeActiveContent,
   settingsSocialMedia,
-  relatedContent,
-  settings: { socialMedia: socialMediaSettings }
+  relatedContent
 }) {
   const classes = useStyles();
   return (
@@ -129,8 +128,9 @@ function ContactContent({
             {socialMedia.accounts.map(account => (
               <A
                 className={classes.social}
-                href={socialMediaSettings[account.name]}
+                href={account.account_url}
                 underline="hover"
+                key={account.name}
               >
                 <>
                   <img
@@ -159,18 +159,17 @@ ContactContent.propTypes = {
   title: PropTypes.string.isRequired,
   address: PropTypes.shape({
     description: PropTypes.string,
-    value: PropTypes.shape({}),
     title: PropTypes.string
   }).isRequired,
   addressIndex: PropTypes.number.isRequired,
   keyContacts: PropTypes.shape({
     title: PropTypes.string,
-    contacts: PropTypes.arrayOf(PropTypes.shape({})),
-    value: PropTypes.shape({})
+    contacts: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
   keyContactsIndex: PropTypes.number.isRequired,
   socialMedia: PropTypes.shape({
-    value: PropTypes.shape({})
+    title: PropTypes.string,
+    accounts: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
   socialMediaIndex: PropTypes.number.isRequired,
   settingsSocialMedia: PropTypes.shape({}).isRequired,
