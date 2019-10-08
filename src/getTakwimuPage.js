@@ -18,7 +18,7 @@ export default async function getTakwimuPage(type) {
 export async function getSitePage(slug) {
   console.time('download');
   const res = await fetch(
-    `https://takwimutech.wpengine.com/wp-json/wp/v2/pages?slug=${slug}`
+    `${config.WP_BACKEND_URL}/wp-json/wp/v2/pages?slug=${slug}`
   );
   const data = await res.json();
 
