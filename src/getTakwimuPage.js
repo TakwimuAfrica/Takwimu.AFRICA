@@ -14,3 +14,17 @@ export default async function getTakwimuPage(type) {
 
   return config;
 }
+
+export async function getSitePage(slug) {
+  console.time('download');
+  const res = await fetch(
+    `https://takwimutech.wpengine.com/wp-json/wp/v2/pages?slug=${slug}`
+  );
+  const data = await res.json();
+
+  console.timeEnd('download');
+
+  Object.assign(config.page, data[0].acf);
+
+  return config;
+}
