@@ -102,16 +102,32 @@ const config = {
       twitter: 'https://twitter.com/TakwimuAfrica',
       medium: 'https://medium.com/@takwimu_africa',
       linkedin: 'https://www.linkedin.com/company/takwimu-africa/'
+    },
+    address: {
+      locality: 'Westlands',
+      region: 'Nairobi',
+      country: 'Kenya',
+      postalCode: '00100'
     }
   },
   page: {
     name: 'base',
     first_published_at: '10th April 2019',
     last_published_at: '24th July 2019'
+  },
+  name: 'Takwimu',
+  description:
+    'Data driven analysis on development policies, programmes & outcomes in 10 African countries.',
+  media: {
+    imageUrl: 'https://takwimu.s3.eu-west-1.amazonaws.com/media/images',
+    imageRendition: '.width-600',
+    imageType: '.png'
   }
 };
 
-// Same-Origin Policy
-document.domain = new URL(config.url).hostname;
+if (typeof document !== 'undefined') {
+  // Same-Origin Policy
+  document.domain = new URL(config.url).hostname;
+}
 
 export default config;

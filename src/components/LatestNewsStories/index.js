@@ -5,7 +5,7 @@ import { Button, Grid } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { makeStyles } from '@material-ui/styles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import { RichTypography } from '../core';
 import Section from '../Section';
 import StoryBlocks from './StoryBlocks';
@@ -107,4 +107,6 @@ LatestNewsStories.propTypes = {
   width: PropTypes.string.isRequired
 };
 
-export default withWidth()(LatestNewsStories);
+export default withWidth({
+  initialWidth: 'md'
+})(LatestNewsStories);

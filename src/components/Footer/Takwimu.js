@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import { Link, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
@@ -35,14 +35,11 @@ function Takwimu() {
         champions.
       </Typography>
       <Typography variant="subtitle2" className={classes.text}>
-        <Link
-          component={RouterLink}
-          to="/about"
-          className={classes.text}
-          underline="always"
-        >
-          Find out more about us.
-        </Link>
+        <NextLink href="/about">
+          <Link href="/about" underline="always" className={classes.text}>
+            Find out more about us.
+          </Link>
+        </NextLink>
       </Typography>
     </div>
   );

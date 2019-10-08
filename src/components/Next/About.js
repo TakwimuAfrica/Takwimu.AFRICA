@@ -1,12 +1,12 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import Grid from '@material-ui/core/Grid';
+import makeStyles from '@material-ui/styles/makeStyles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import Card from './Card';
 import ContentSection from '../ContentSection';
 
@@ -49,14 +49,11 @@ function AboutWhereToNext({ socialMedia, title }) {
           Read our latest articles <br /> on Medium
         </Card>
 
-        <Card
-          component={RouterLink}
-          to="/contact"
-          classes={{ root: classes.cardMargin }}
-          variant="dual"
-        >
-          Contact Us
-        </Card>
+        <NextLink href="/contact">
+          <Card classes={{ root: classes.cardMargin }} variant="dual">
+            Contact Us
+          </Card>
+        </NextLink>
       </Grid>
     </ContentSection>
   );

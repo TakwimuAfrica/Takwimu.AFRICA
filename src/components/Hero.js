@@ -90,12 +90,16 @@ function Hero({
             className={classes.hero}
           >
             <Grid item xs={12}>
-              <RichTypography variant="h1" className={classes.title}>
+              <RichTypography
+                component="div"
+                variant="h1"
+                className={classes.title}
+              >
                 {title}
               </RichTypography>
             </Grid>
             <Grid item xs={12}>
-              <RichTypography className={classes.description}>
+              <RichTypography component="div" className={classes.description}>
                 {tagline}
               </RichTypography>
             </Grid>

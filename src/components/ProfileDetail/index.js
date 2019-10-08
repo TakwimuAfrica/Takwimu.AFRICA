@@ -127,7 +127,7 @@ function CountrySelectorComponent({ context, country }) {
         disableTouchRipple
         style={{ outline: 'none' }}
         className={classes.chooserButton}
-        onClick={window.toggleDrawer(context)}
+        onClick={process.browser && window.toggleDrawer(context)}
       >
         <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
         <Typography variant="subtitle2" className={classes.countryName}>

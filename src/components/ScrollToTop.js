@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import { withRouter } from 'react-router-dom';
-
-const ScrollToTop = ({ children, location: { pathname } }) => {
+const ScrollToTop = ({ children }) => {
+  const { pathname } = useRouter();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -10,4 +10,4 @@ const ScrollToTop = ({ children, location: { pathname } }) => {
   return children || null;
 };
 
-export default withRouter(ScrollToTop);
+export default ScrollToTop;

@@ -153,7 +153,7 @@ function DataContainer({ id, data, theme, countryName, url }) {
 DataContainer.propTypes = {
   countryName: PropTypes.string.isRequired,
   data: PropTypes.shape({
-    html: PropTypes.string,
+    html: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     title: PropTypes.string
   }).isRequired,
   id: PropTypes.string,

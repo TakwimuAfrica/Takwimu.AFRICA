@@ -2,11 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/styles';
 
-import config from '../config';
-import AboutContent from '../components/AboutContent/index';
-import ContentPage from '../components/ContentPage';
-import Page from '../components/Page';
-import TableOfContent from '../components/AboutContent/TableOfContent';
+import { useRouter } from 'next/router';
+import AboutContent from '../src/components/AboutContent';
+import ContentPage from '../src/components/ContentPage';
+import Page from '../src/components/Page';
+import TableOfContent from '../src/components/AboutContent/TableOfContent';
+import getTakwimuPage from '../src/getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {
@@ -15,20 +16,9 @@ const useStyles = makeStyles({
   }
 });
 
-function About() {
+function About(takwimu) {
   const classes = useStyles();
-  const [takwimu, setTakwimu] = useState(undefined);
-  useEffect(() => {
-    const { url } = config;
-    fetch(`${url}/api/v2/pages/?type=takwimu.AboutPage&fields=*&format=json`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.items && data.items.length) {
-          Object.assign(config.page, data.items[0]);
-          setTakwimu(config);
-        }
-      });
-  }, []);
+  const { pathname } = useRouter();
 
   const {
     page: {
@@ -41,16 +31,7 @@ function About() {
       services
     },
     settings: { socialMedia }
-  } = takwimu || {
-    page: {
-      about_takwimu: {},
-      methodology: {},
-      faqs: {},
-      services: {},
-      related_content: {}
-    },
-    settings: {}
-  };
+  } = takwimu;
   const contentHeadings = [];
   if (aboutTakwimu && aboutTakwimu.value) {
     contentHeadings.push({
@@ -65,7 +46,10 @@ function About() {
     });
   }
   if (services && services.value) {
-    contentHeadings.push({ title: services.value.label, link: 'services' });
+    contentHeadings.push({
+      title: services.value.label,
+      link: 'services'
+    });
   }
   if (faqs && faqs.value) {
     contentHeadings.push({ title: faqs.value.label, link: 'faqs' });
@@ -78,24 +62,19 @@ function About() {
       const activeElement = document.getElementById(
         contentHeadings[index].link
       );
-      window.scrollTo(0, activeElement.offsetTop - 90);
+      if (activeElement) {
+        window.scrollTo(0, activeElement.offsetTop - 90);
+      }
     },
     [contentHeadings]
   );
   useEffect(() => {
-    const currentLink = window.location.pathname
-      .split('/')
-      .filter(value => value && value.length)
-      .pop();
+    const currentLink = pathname.split('/').pop();
     const foundIndex = contentHeadings.findIndex(x => x.link === currentLink);
     if (foundIndex !== -1) {
       changeActiveContent(foundIndex);
     }
-  }, [changeActiveContent, contentHeadings]);
-
-  if (!takwimu) {
-    return null;
-  }
+  }, [pathname, changeActiveContent, contentHeadings]);
 
   return (
     <Page takwimu={takwimu} title={title}>
@@ -126,5 +105,9 @@ function About() {
     </Page>
   );
 }
+
+About.getInitialProps = async () => {
+  return getTakwimuPage('takwimu.AboutPage');
+};
 
 export default About;

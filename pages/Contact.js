@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/styles';
 
-import config from '../config';
-import ContactContent from '../components/ContactContent';
-import ContentPage from '../components/ContentPage';
-import Page from '../components/Page';
-import TableOfContent from '../components/ContactContent/TableOfContent';
+import ContactContent from '../src/components/ContactContent';
+import ContentPage from '../src/components/ContentPage';
+import Page from '../src/components/Page';
+import TableOfContent from '../src/components/ContactContent/TableOfContent';
+import getTakwimuPage from '../src/getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {
@@ -16,20 +15,8 @@ const useStyles = makeStyles({
   }
 });
 
-function Contact() {
+function Contact(takwimu) {
   const classes = useStyles();
-  const [takwimu, setTakwimu] = useState(undefined);
-  useEffect(() => {
-    const { url } = config;
-    fetch(`${url}/api/v2/pages/?type=takwimu.ContactPage&fields=*&format=json`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.items && data.items.length) {
-          Object.assign(config.page, data.items[0]);
-          setTakwimu(config);
-        }
-      });
-  }, []);
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const contentHeadings = [];
   const {
@@ -125,23 +112,8 @@ function Contact() {
   );
 }
 
-Contact.propTypes = {
-  takwimu: PropTypes.shape({
-    page: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      address: PropTypes.shape({
-        value: PropTypes.shape({
-          label: PropTypes.string
-        })
-      }).isRequired,
-      key_contacts: PropTypes.shape({}).isRequired,
-      related_content: PropTypes.shape({}).isRequired,
-      social_media: PropTypes.shape({}).isRequired
-    }).isRequired,
-    settings: PropTypes.shape({
-      socialMedia: PropTypes.shape({}).isRequired
-    }).isRequired
-  }).isRequired
+Contact.getInitialProps = async () => {
+  return getTakwimuPage('takwimu.ContactPage');
 };
 
 export default Contact;

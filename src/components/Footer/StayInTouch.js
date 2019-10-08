@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import { Grid, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import Title from './Title';
 
 import email from '../../assets/images/email.svg';
@@ -41,14 +41,11 @@ function StayInTouch({ settings: { support, socialMedia } }) {
   return (
     <div className={classes.root}>
       <Title>
-        <Link
-          component={RouterLink}
-          to="/contact"
-          variant="subtitle1"
-          className={classes.title}
-        >
-          Stay in touch
-        </Link>
+        <NextLink href="/contact">
+          <Link href="/contact" variant="subtitle1" className={classes.title}>
+            Stay in touch
+          </Link>
+        </NextLink>
       </Title>
       <Grid
         container

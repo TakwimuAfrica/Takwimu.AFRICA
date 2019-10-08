@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { PropTypes } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
+import makeStyles from '@material-ui/styles/makeStyles';
 
 import config from '../config';
 import AnalysisContent from '../components/AnalysisContent';
@@ -17,108 +17,51 @@ const useStyles = makeStyles({
 });
 
 function AnalysisPage({
-  match: {
-    params: { countrySlug }
-  }
+  takwimu,
+  initial,
+  analyses,
+  indicatorId,
+  analysisLink
 }) {
   const classes = useStyles();
-  const [analysis, setAnalysis] = useState(undefined);
-  const [current, setCurrent] = useState(0);
-  const [takwimu, setTakwimu] = useState(undefined);
+  const [current, setCurrent] = useState(initial);
   const [topicIndex, setTopicIndex] = useState(0);
-  useEffect(() => {
-    const { url } = config;
-    const fetchSectionPages = countryAnalysis => {
-      fetch(
-        `${url}/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${countryAnalysis[0].id}&format=json`
-      ).then(response => {
-        if (response.status === 200) {
-          response.json().then(data => {
-            const paths = window.location.pathname.split(
-              `/profiles/${countrySlug}/`
-            );
 
-            let foundIndex = -1;
-            if (paths.length === 2) {
-              const sectionSlug = paths[1].replace('/', '');
-              foundIndex = data.items.findIndex(
-                item => item.meta.slug === sectionSlug
-              );
-            }
-            let nextCurrent = foundIndex !== -1 ? foundIndex : current;
-            let nextAnalysis = countryAnalysis;
-            if (nextAnalysis) {
-              if (foundIndex !== -1) {
-                // Adjust for `Country Overview`
-                nextCurrent += nextAnalysis.length;
-              }
-              nextAnalysis = nextAnalysis.concat(data.items);
-            }
-
-            let nextTopicIndex = topicIndex;
-            const { hash } = window.location;
-            if (hash.length) {
-              const topicId = hash.replace('#', '');
-              const foundTopicIndex = nextAnalysis[current].body.findIndex(
-                body => body.id === topicId
-              );
-              if (foundTopicIndex !== -1) {
-                nextTopicIndex = foundTopicIndex;
-              }
-            }
-
-            setCurrent(nextCurrent);
-            setTopicIndex(nextTopicIndex);
-            setAnalysis(nextAnalysis);
-          });
-        }
-      });
-    };
-
-    fetch(
-      `${url}/api/v2/pages/?type=takwimu.ProfilePage&slug=${countrySlug}&fields=*&format=json`
-    ).then(response => {
-      if (response.status === 200) {
-        response.json().then(data => {
-          const { items: countryAnalysis } = data;
-          if (countryAnalysis.length) {
-            // For ProfilePage, label is used to provide descriptive title since
-            // title is just the country name
-            countryAnalysis[0].title = countryAnalysis[0].label;
-            Object.assign(config.page, countryAnalysis[0]);
-            Object.assign(config.country, config.page.country);
-            setTakwimu(config);
-          }
-          fetchSectionPages(countryAnalysis);
-        });
-      }
-    });
-  }, [countrySlug, current, topicIndex]);
-
-  const changeContent = nextCurrent => {
-    setCurrent(nextCurrent);
+  const changeContent = next => {
+    setCurrent(next);
     setTopicIndex(0);
     window.scrollTo(0, 0);
   };
 
-  const changeTopic = nextTopicIndex => {
-    setTopicIndex(nextTopicIndex);
+  const changeTopic = next => {
+    setTopicIndex(next);
     window.scrollTo(0, 0);
   };
-  if (!analysis) {
-    return null;
-  }
+
+  useEffect(() => {
+    const topicId = window.location.hash
+      ? window.location.hash.split('#')[1]
+      : '';
+    if (topicId) {
+      const foundTopicIndex = analyses[initial].body.findIndex(
+        body => body.id === topicId
+      );
+
+      setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
+    }
+  }, [analyses, initial]);
 
   return (
     <Page
       takwimu={takwimu}
-      title={`${takwimu.country.short_name}'s ${analysis[current].title} Analysis`}
+      indicatorId={indicatorId}
+      title={`${takwimu.country.short_name}'s ${analyses[current].title} Analysis`}
     >
       <ContentPage
         aside={
           <AnalysisTableOfContent
             country={takwimu.country}
-            content={analysis}
+            content={analyses}
             current={current}
             onChangeContent={changeContent}
           />
@@ -126,10 +69,11 @@ function AnalysisPage({
         classes={{ root: classes.root, aside: classes.asideRoot }}
       >
         <AnalysisContent
-          content={analysis[current]}
+          content={analyses[current]}
           onChange={changeTopic}
           takwimu={takwimu}
           topicIndex={topicIndex}
+          analysisLink={analysisLink}
         />
       </ContentPage>
     </Page>
@@ -137,11 +81,88 @@ function AnalysisPage({
 }
 
 AnalysisPage.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      countrySlug: PropTypes.string
-    }).isRequired
-  }).isRequired
+  initial: PropTypes.number.isRequired,
+  indicatorId: PropTypes.string,
+  analyses: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      body: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string
+        })
+      )
+    })
+  ).isRequired,
+  takwimu: PropTypes.shape({
+    country: PropTypes.shape({
+      short_name: PropTypes.string,
+      slug: PropTypes.string
+    })
+  }).isRequired,
+  analysisLink: PropTypes.string.isRequired
+};
+
+AnalysisPage.defaultProps = {
+  indicatorId: undefined
+};
+
+AnalysisPage.getInitialProps = async ({ query, req }) => {
+  const { url } = config;
+  const { geoIdOrCountrySlug, analysisSlug, indicator: indicatorId } = query;
+
+  const configs = await fetch(
+    `${url}/api/v2/pages/?type=takwimu.ProfilePage&slug=${geoIdOrCountrySlug}&fields=*&format=json`
+  ).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        const { items: countryAnalysis } = data;
+        if (countryAnalysis.length) {
+          // For ProfilePage, label is used to provide descriptive title since
+          // title is just the country name
+          countryAnalysis[0].title = countryAnalysis[0].label;
+          Object.assign(config.page, countryAnalysis[0]);
+          Object.assign(config.country, config.page.country);
+
+          return { takwimu: config, countryAnalysis };
+        }
+
+        return Promise.reject();
+      });
+    }
+    return Promise.reject();
+  });
+
+  const { takwimu, countryAnalysis } = configs;
+
+  const content = await fetch(
+    `${url}/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${countryAnalysis[0].id}&format=json`
+  ).then(response => {
+    if (response.status === 200) {
+      return response.json().then(data => {
+        const analyses = countryAnalysis.concat(data.items);
+
+        let foundIndex = -1;
+        if (analysisSlug) {
+          foundIndex = analyses.findIndex(
+            item => item.meta.slug === analysisSlug
+          );
+        }
+        return {
+          analyses,
+          initial: foundIndex !== -1 ? foundIndex : 0
+        };
+      });
+    }
+
+    return Promise.reject();
+  });
+
+  return {
+    takwimu,
+    ...content,
+    indicatorId,
+    analysisLink: `${req.protocol}://${req.headers.host}${req.url}`
+  };
 };
 
 export default AnalysisPage;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import Card from './Card';
 import ContentSection from '../ContentSection';
 
@@ -49,14 +49,16 @@ function ContactWhereToNext({ socialMedia }) {
           Read our latest articles <br /> on Medium
         </Card>
 
-        <Card
-          component={RouterLink}
-          to="/about"
-          classes={{ root: classes.cardMargin }}
-          variant="dual"
-        >
-          About Us
-        </Card>
+        <NextLink href="/about">
+          <Card
+            href="/about"
+            component="a"
+            classes={{ root: classes.cardMargin }}
+            variant="dual"
+          >
+            About Us
+          </Card>
+        </NextLink>
       </Grid>
     </ContentSection>
   );

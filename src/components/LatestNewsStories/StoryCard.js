@@ -5,7 +5,7 @@ import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/styles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 
 const styles = theme => ({
   root: {},

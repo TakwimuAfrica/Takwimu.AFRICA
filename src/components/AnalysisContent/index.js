@@ -1,13 +1,14 @@
 /* eslint-disable react/no-danger */
 import React, { Fragment, useEffect, useState } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 
-import { Typography, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import makeStyles from '@material-ui/styles/makeStyles';
 
 import { RichTypography } from '../core';
 import Actions from './Actions';
-import { Analysis as AnalysisReadNext } from '../Next';
+import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
@@ -53,7 +54,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
+function AnalysisContent({
+  content,
+  topicIndex,
+  takwimu,
+  onChange,
+  analysisLink
+}) {
   const classes = useStyles();
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
@@ -134,6 +141,7 @@ function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
           topic={topic}
           data={data}
           takwimu={takwimu}
+          link={analysisLink}
         />
 
         {content.body[topicIndex].type === 'carousel_topic' ? (
@@ -173,6 +181,7 @@ function AnalysisContent({ content, topicIndex, takwimu, onChange }) {
           data={data}
           takwimu={takwimu}
           hideLastUpdated
+          link={analysisLink}
         />
         <ContentNavigation
           labelText={profileNavigation.title}
@@ -227,7 +236,8 @@ AnalysisContent.propTypes = {
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
     country: PropTypes.shape({}).isRequired
-  }).isRequired
+  }).isRequired,
+  analysisLink: PropTypes.string.isRequired
 };
 
 export default AnalysisContent;

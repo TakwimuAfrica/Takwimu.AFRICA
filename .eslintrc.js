@@ -12,6 +12,8 @@ module.exports = {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-    "react/prop-types": [2, { ignore: ['classes'] }]
+    "react/prop-types": [2, { ignore: ['classes'] }],
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-fragments": 0
   }
 };

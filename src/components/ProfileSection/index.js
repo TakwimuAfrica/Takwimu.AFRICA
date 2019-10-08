@@ -71,7 +71,7 @@ function ProfileSection({
   const { geo } = profile;
 
   const tab = tabs.find(t => t.slug === activeTab);
-  const title = activeTab === 'all' ? 'Data by Topic' : tab.name;
+  const title = activeTab === 'all' || !tab ? 'Data by Topic' : tab.name;
 
   // Wagtail inserts div/p when RichTextField is empty
   const hasDescription = () =>
