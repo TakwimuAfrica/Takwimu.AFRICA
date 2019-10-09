@@ -35,9 +35,9 @@ function About(takwimu) {
     settings: { socialMedia }
   } = takwimu;
 
-  const aboutTakwimu = content.find(c => c.type === 'about');
-  const methodology = content.find(c => c.type === 'methodology');
-  const services = content.find(c => c.type === 'services');
+  const aboutTakwimu = content.find(c => c.type === 'about') || {};
+  const methodology = content.find(c => c.type === 'methodology') || {};
+  const services = content.find(c => c.type === 'services') || {};
 
   const faqs = {
     label: faqsLabel,
@@ -47,7 +47,7 @@ function About(takwimu) {
   };
   const relatedContent = {
     title: relatedContentTitle,
-    relatedLinks
+    relatedLinks: relatedLinks? relatedLinks: []
   };
   const contentHeadings = [];
   if (aboutTakwimu) {
