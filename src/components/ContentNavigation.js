@@ -65,8 +65,8 @@ function ContentNavigation({
           <NextLink key={generateHref(index)} href={generateHref(index)}>
             <Link
               key={generateHref(index)}
-              href={generateHref(index)}
               variant="body2"
+              href={generateHref(index)}
               color={
                 current === index ? linksSecondaryColor : linksPrimaryColor
               }
@@ -74,7 +74,6 @@ function ContentNavigation({
               className={classNames({
                 [classes.topic]: current !== index
               })}
-              onClick={e => onClick(e, index)}
             >
               {generateTitle(index)}
             </Link>

@@ -19,14 +19,13 @@ function AboutContentNavigation({
   title,
   current,
   contentHeadings,
-  changeActiveContent,
   linksPrimaryColor,
   linksSecondaryColor
 }) {
   const classes = useStyles();
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `/${item.link}/`;
+    return `/${item.link}`;
   };
   const generateTitle = index => contentHeadings[index].title;
 
@@ -42,12 +41,6 @@ function AboutContentNavigation({
       current={current}
       generateHref={generateHref}
       generateTitle={generateTitle}
-      onClick={(e, index) => {
-        e.preventDefault();
-
-        window.history.pushState(null, '', generateHref(index));
-        changeActiveContent(index)();
-      }}
       linksPrimaryColor={linksPrimaryColor}
       linksSecondaryColor={linksSecondaryColor}
     />
@@ -63,7 +56,6 @@ AboutContentNavigation.propTypes = {
       title: PropTypes.string
     }).isRequired
   ).isRequired,
-  changeActiveContent: PropTypes.func.isRequired,
   linksPrimaryColor: PropTypes.string,
   linksSecondaryColor: PropTypes.string
 };

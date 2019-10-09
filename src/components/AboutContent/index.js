@@ -77,33 +77,28 @@ class AboutContent extends React.Component {
           current={current}
           changeActiveContent={this.showContent}
         />
-        {aboutTakwimu && (
-          <RichTextSection
-            classes={{ root: classes.section }}
-            title={aboutTakwimu.title}
-            value={aboutTakwimu.description}
-            id="about"
-            component={ContentSection}
-          />
-        )}
-        {methodology && (
-          <RichTextSection
-            classes={{ root: classes.section }}
-            title={methodology.title}
-            value={methodology.description}
-            id="methodology"
-            component={ContentSection}
-          />
-        )}
-        {services && (
-          <RichTextSection
-            classes={{ root: classes.section }}
-            title={services.title}
-            value={services.description}
-            id="services"
-            component={ContentSection}
-          />
-        )}
+        <RichTextSection
+          classes={{ root: classes.section }}
+          title={aboutTakwimu.title}
+          value={aboutTakwimu.description}
+          id="about"
+          component={ContentSection}
+        />
+
+        <RichTextSection
+          classes={{ root: classes.section }}
+          title={methodology.title}
+          value={methodology.description}
+          id="methodology"
+          component={ContentSection}
+        />
+        <RichTextSection
+          classes={{ root: classes.section }}
+          title={services.title}
+          value={services.description}
+          id="services"
+          component={ContentSection}
+        />
         <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
         <AboutWhereToNext socialMedia={socialMedia} />
         <RelatedContent content={relatedContent} />

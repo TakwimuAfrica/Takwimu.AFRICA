@@ -47,7 +47,7 @@ function About(takwimu) {
   };
   const relatedContent = {
     title: relatedContentTitle,
-    relatedLinks: relatedLinks? relatedLinks: []
+    relatedLinks: relatedLinks || []
   };
   const contentHeadings = [];
   if (aboutTakwimu) {

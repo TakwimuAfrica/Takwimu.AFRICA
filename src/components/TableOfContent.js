@@ -60,14 +60,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function TableOfContent({
-  children,
-  content,
-  current,
-  generateHref,
-  onChange,
-  width
-}) {
+function TableOfContent({ children, content, current, generateHref, width }) {
   const classes = useStyles();
   const [scrollDistance, setScrollDistance] = useState(0);
 
@@ -110,17 +103,11 @@ function TableOfContent({
             <NextLink href={generateHref(index)}>
               <Link
                 classes={{ root: classes.linkRoot }}
+                href={generateHref(index)}
                 className={classNames({
                   [classes.activeLink]: current !== index
                 })}
-                href={generateHref(index)}
                 color={current !== index ? 'primary' : 'textPrimary'}
-                onClick={e => {
-                  e.preventDefault();
-
-                  window.history.pushState(null, '', generateHref(index));
-                  onChange(index);
-                }}
                 underline="none"
               >
                 {c.title}
@@ -141,7 +128,6 @@ TableOfContent.propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   width: PropTypes.string.isRequired
 };
 
