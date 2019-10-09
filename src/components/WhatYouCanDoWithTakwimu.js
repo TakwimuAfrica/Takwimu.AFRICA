@@ -68,22 +68,22 @@ const icons = [reasearchIcon, downloadIcon, presentIcon];
 function WhatYouCanDoWithTakwimu({
   takwimu: {
     page: {
-      what_you_can_do_with_takwimu: { value: whatYouCanDo }
+      what_can_you_do_with_takwimu_title: title,
+      uses_of_takwimu: usesOfTakwimu
     }
   }
 }) {
   const classes = useStyles();
 
-  if (!whatYouCanDo) {
+  if (!title || !usesOfTakwimu) {
     return null;
   }
-  const { title, uses_of_takwimu: usesOfTakwimu } = whatYouCanDo;
 
   return (
     <Section title={title}>
       {usesOfTakwimu && usesOfTakwimu.length > 0 && (
         <Grid container justify="flex-start" className={classes.container}>
-          {usesOfTakwimu.map(({ value: u }, i) => (
+          {usesOfTakwimu.map((u, i) => (
             <Grid key={u.title} item>
               <div
                 className={classNames([
@@ -110,19 +110,13 @@ function WhatYouCanDoWithTakwimu({
 WhatYouCanDoWithTakwimu.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      what_you_can_do_with_takwimu: PropTypes.shape({
-        value: PropTypes.shape({
+      what_can_you_do_with_takwimu_title: PropTypes.string,
+      uses_of_takwimu: PropTypes.arrayOf(
+        PropTypes.shape({
           title: PropTypes.string,
-          uses_of_takwimu: PropTypes.arrayOf(
-            PropTypes.shape({
-              value: PropTypes.shape({
-                title: PropTypes.string,
-                description: PropTypes.string
-              })
-            })
-          )
+          description: PropTypes.string
         })
-      }).isRequired
+      )
     }).isRequired
   }).isRequired
 };

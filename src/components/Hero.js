@@ -64,21 +64,13 @@ const useStyles = makeStyles(theme => ({
 
 function Hero({
   takwimu: {
-    page: {
-      hero: { value: currentHero }
-    }
+    page: { title, tagline, watch_video_link_label: watchVideoLinkTitle }
   }
 }) {
   const classes = useStyles();
-  if (!currentHero) {
+  if (!title || !tagline || !watchVideoLinkTitle) {
     return null;
   }
-
-  const {
-    title,
-    tagline,
-    watch_video_link_label: watchVideoLinkTitle
-  } = currentHero;
   return (
     <div className={classes.root}>
       <div className={classes.gradient}>
@@ -119,13 +111,9 @@ function Hero({
 Hero.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      hero: PropTypes.shape({
-        value: PropTypes.shape({
-          title: PropTypes.string,
-          tagline: PropTypes.string,
-          watch_video_link_label: PropTypes.string
-        })
-      })
+      title: PropTypes.string.isRequired,
+      tagline: PropTypes.string.isRequired,
+      watch_video_link_label: PropTypes.string.isRequired
     }).isRequired
   }).isRequired
 };
