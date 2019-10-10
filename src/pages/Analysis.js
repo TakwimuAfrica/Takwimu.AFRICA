@@ -43,8 +43,8 @@ function AnalysisPage({
       ? window.location.hash.split('#')[1]
       : '';
     if (topicId) {
-      const foundTopicIndex = analyses[initial].body.findIndex(
-        body => body.id === topicId
+      const foundTopicIndex = analyses[initial].section.topics.findIndex(
+        ({ profile_section_topic: topic }) => topic.topic_name === topicId
       );
 
       setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
@@ -55,7 +55,7 @@ function AnalysisPage({
     <Page
       takwimu={takwimu}
       indicatorId={indicatorId}
-      title={`${takwimu.country.short_name}'s ${analyses[current].title} Analysis`}
+      title={`${takwimu.country.short_name}'s ${analyses[current].section.post_title} Analysis`}
     >
       <ContentPage
         aside={
@@ -69,7 +69,7 @@ function AnalysisPage({
         classes={{ root: classes.root, aside: classes.asideRoot }}
       >
         <AnalysisContent
-          content={analyses[current]}
+          content={analyses[current].section}
           onChange={changeTopic}
           takwimu={takwimu}
           topicIndex={topicIndex}
@@ -85,12 +85,15 @@ AnalysisPage.propTypes = {
   indicatorId: PropTypes.string,
   analyses: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string,
-      body: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string
-        })
-      )
+      section: PropTypes.shape({
+        post_title: PropTypes.string,
+        topics: PropTypes.arrayOf(
+          PropTypes.shape({
+            ID: PropTypes.string,
+            findIndex: PropTypes.func
+          })
+        )
+      })
     })
   ).isRequired,
   takwimu: PropTypes.shape({
@@ -107,59 +110,71 @@ AnalysisPage.defaultProps = {
 };
 
 AnalysisPage.getInitialProps = async ({ query, req }) => {
-  const { url } = config;
+  const { WP_BACKEND_URL, countries } = config;
   const { geoIdOrCountrySlug, analysisSlug, indicator: indicatorId } = query;
 
   const configs = await fetch(
-    `${url}/api/v2/pages/?type=takwimu.ProfilePage&slug=${geoIdOrCountrySlug}&fields=*&format=json`
+    `${WP_BACKEND_URL}/wp-json/wp/v2/profile?slug=${geoIdOrCountrySlug}`
   ).then(response => {
     if (response.status === 200) {
-      return response.json().then(data => {
-        const { items: countryAnalysis } = data;
-        if (countryAnalysis.length) {
-          // For ProfilePage, label is used to provide descriptive title since
-          // title is just the country name
-          countryAnalysis[0].title = countryAnalysis[0].label;
-          Object.assign(config.page, countryAnalysis[0]);
-          Object.assign(config.country, config.page.country);
+      return response.json().then(async data => {
+        const {
+          acf: { sections, geography }
+        } = data[0];
+        const country = countries.find(c => c.slug === geography);
+        if (sections.length) {
+          Object.assign(config.page, sections[0].section);
+          Object.assign(config.country, country);
 
-          return { takwimu: config, countryAnalysis };
+          let foundIndex = -1;
+          if (analysisSlug) {
+            foundIndex = sections.findIndex(
+              ({ section }) => section.post_name === analysisSlug
+            );
+          }
+          const initial = foundIndex !== -1 ? foundIndex : 0;
+
+          // topics as section topics is an acf field on profile section
+          // so for each profile section page, get the acfs fields
+          await Promise.all(
+            sections.map(async ({ section }) => {
+              const res = await fetch(
+                `${WP_BACKEND_URL}/wp-json/wp/v2/profile_section_page/${section.ID}`
+              );
+              const {
+                acf: {
+                  geography: sectionGeography,
+                  section_topics: sectionTopics
+                }
+              } = await res.json();
+
+              await Promise.all(
+                sectionTopics.map(({ profile_section_topic: topic }) => {
+                  if (topic.post_content === '') {
+                    topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
+                    // add another backend call to fetch the carousel_topic
+                  } else {
+                    topic.type = 'topic'; // eslint-disable-line no-param-reassign
+                  }
+                  return topic;
+                })
+              );
+              section.topics = sectionTopics; // eslint-disable-line no-param-reassign
+              section.geography = sectionGeography; // eslint-disable-line no-param-reassign
+              return section;
+            })
+          );
+
+          return { takwimu: config, initial, analyses: sections };
         }
-
         return Promise.reject();
       });
     }
     return Promise.reject();
   });
 
-  const { takwimu, countryAnalysis } = configs;
-
-  const content = await fetch(
-    `${url}/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${countryAnalysis[0].id}&format=json`
-  ).then(response => {
-    if (response.status === 200) {
-      return response.json().then(data => {
-        const analyses = countryAnalysis.concat(data.items);
-
-        let foundIndex = -1;
-        if (analysisSlug) {
-          foundIndex = analyses.findIndex(
-            item => item.meta.slug === analysisSlug
-          );
-        }
-        return {
-          analyses,
-          initial: foundIndex !== -1 ? foundIndex : 0
-        };
-      });
-    }
-
-    return Promise.reject();
-  });
-
   return {
-    takwimu,
-    ...content,
+    ...configs,
     indicatorId,
     analysisLink: `${req.protocol}://${req.headers.host}${req.url}`
   };
