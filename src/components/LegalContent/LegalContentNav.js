@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/styles';
-import NextLink from 'next/link';
+import Router from 'next/router';
 
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
@@ -56,19 +56,20 @@ function LegalContentNav({ title, current, contentHeadings }) {
         </Typography>
         <div className={classes.otherTopicLinks}>
           {contentHeadings.map((item, index) => (
-            <NextLink key={item.link} href={generateHref(index)}>
-              <ButtonBase>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  className={classNames(classes.otherTopic, {
-                    [classes.topicSelected]: current === index
-                  })}
-                >
-                  {item.title}
-                </Typography>
-              </ButtonBase>
-            </NextLink>
+            <ButtonBase
+              key={item.link}
+              onClick={() => Router.push(generateHref(index))}
+            >
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                className={classNames(classes.otherTopic, {
+                  [classes.topicSelected]: current === index
+                })}
+              >
+                {item.title}
+              </Typography>
+            </ButtonBase>
           ))}
         </div>
       </Layout>
