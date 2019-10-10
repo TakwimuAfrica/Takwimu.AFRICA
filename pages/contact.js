@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/styles';
 
+import { useRouter } from 'next/router';
 import ContactContent from '../src/components/ContactContent';
 import ContentPage from '../src/components/ContentPage';
 import Page from '../src/components/Page';
@@ -96,6 +97,18 @@ function Contact(takwimu) {
       changeActiveContent(currentIndex);
     }
   }, [changeActiveContent, contentHeadings]);
+
+  const router = useRouter();
+  useEffect(() => {
+    router.events.on('hashChangeComplete', () => {
+      const index = contentHeadings.findIndex(
+        heading => heading.link === window.location.hash.slice(1)
+      );
+      if (index !== -1) {
+        changeActiveContent(index);
+      }
+    });
+  }, [changeActiveContent, contentHeadings, router]);
 
   if (count < 1) {
     return null;

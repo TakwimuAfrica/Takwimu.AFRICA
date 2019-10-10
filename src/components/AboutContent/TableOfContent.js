@@ -13,11 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AboutUsTableOfContent({
-  current,
-  contentHeadings,
-  changeActiveContent
-}) {
+function AboutUsTableOfContent({ current, contentHeadings }) {
   const classes = useStyles();
   const generateHref = index => {
     const item = contentHeadings[index];
@@ -30,7 +26,6 @@ function AboutUsTableOfContent({
       content={contentHeadings}
       current={current}
       generateHref={generateHref}
-      onChange={changeActiveContent}
     >
       <Typography variant="subtitle2" className={classes.sideMenuHeader}>
         Jump to:
@@ -45,8 +40,7 @@ AboutUsTableOfContent.propTypes = {
     PropTypes.shape({
       link: PropTypes.string
     }).isRequired
-  ).isRequired,
-  changeActiveContent: PropTypes.func.isRequired
+  ).isRequired
 };
 
 export default AboutUsTableOfContent;
