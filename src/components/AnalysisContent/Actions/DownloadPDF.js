@@ -135,7 +135,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           <View style={classes.section}>
             <Text style={classes.title}>
               {countrify(
-                data.content.title,
+                data.content.post_title,
                 takwimu.country,
                 takwimu.countries,
                 ' : '
@@ -144,16 +144,11 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           </View>
           {topic === 'topic' ? (
             <View style={classes.section}>
-              {data.content.body.map(c => {
-                if (c.type === 'text') {
-                  return c.value.split('</p>').map(t => (
-                    <Text key={t} style={classes.text}>
-                      {t.replace(/<(?:.|\n)*?>/gi, '')}
-                    </Text>
-                  ));
-                }
-                return null;
-              })}
+              {data.content.post_content.split('</p>').map(t => (
+                <Text key={t} style={classes.text}>
+                  {t.replace(/<(?:.|\n)*?>/gi, '')}
+                </Text>
+              ))}
             </View>
           ) : (
             <View style={classes.section}>
@@ -193,8 +188,9 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
     pdfClasses: PropTypes.shape({}).isRequired,
     data: PropTypes.shape({
       content: PropTypes.shape({
-        body: PropTypes.arrayOf(PropTypes.shape({})),
-        title: PropTypes.string
+        post_title: PropTypes.string,
+        post_name: PropTypes.string,
+        post_content: PropTypes.string
       }),
       item: PropTypes.shape({
         description: PropTypes.string,

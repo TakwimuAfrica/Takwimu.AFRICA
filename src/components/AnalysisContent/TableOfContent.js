@@ -23,16 +23,21 @@ function AnalysisTableOfContent({
   const { slug: countrySlug } = country;
   const generateHref = index => {
     const analysisUrl = `/profiles/${countrySlug}`;
-    if (content[index].meta.slug === countrySlug) {
+    if (index === 0) {
+      // if politics
       return analysisUrl;
     }
-    return `${analysisUrl}/${content[index].meta.slug}`;
+    return `${analysisUrl}/${content[index].section.post_name}`;
   };
+
+  const allSectionTitle = content.map(({ section }) => {
+    return { title: section.post_title };
+  });
 
   return (
     <TableOfContent
       classes={{ root: classes.root }}
-      content={content}
+      content={allSectionTitle}
       current={current}
       generateHref={generateHref}
       onChange={onChangeContent}
@@ -49,8 +54,8 @@ function AnalysisTableOfContent({
 AnalysisTableOfContent.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
-      meta: PropTypes.shape({
-        slug: PropTypes.string
+      section: PropTypes.shape({
+        post_name: PropTypes.string
       })
     }).isRequired
   ).isRequired,

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
@@ -9,14 +9,15 @@ import makeStyles from '@material-ui/styles/makeStyles';
 import { RichTypography } from '../core';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
-import CarouselTopic from './topics/CarouselTopic';
+// import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
-import DataContainer from '../DataContainer';
+// import DataContainer from '../DataContainer';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
+// import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -62,60 +63,62 @@ function AnalysisContent({
   analysisLink
 }) {
   const classes = useStyles();
+
   const [carouselItemIndex, setCarouselItemIndex] = useState(
-    content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
+    content.topics[topicIndex].profile_section_topic.type === 'carousel_topic'
+      ? 0
+      : -1
   );
   useEffect(() => {
     setCarouselItemIndex(
-      content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
+      content.topics[topicIndex].profile_section_topic.type === 'carousel_topic'
+        ? 0
+        : -1
     );
-  }, [content.body, topicIndex]);
+  }, [content.topics, topicIndex]);
 
-  const [id, setId] = useState(`${content.id}-${topicIndex}`);
-  useEffect(() => {
-    if (`${content.id}-${topicIndex}` !== id) {
-      setId(`${content.id}-${topicIndex}`);
-    }
-  }, [content.id, topicIndex, id]);
+  // const [id, setId] = useState(`${content.id}-${topicIndex}`);
+  // useEffect(() => {
+  //   if (`${content.id}-${topicIndex}` !== id) {
+  //     setId(`${content.id}-${topicIndex}`);
+  //   }
+  // }, [content.id, topicIndex, id]);
 
-  useEffect(() => {
-    if (document.getElementsByClassName('flourish-embed')) {
-      const script = document.createElement('script');
-      const oldScript = document.getElementById('flourish-script');
-      if (oldScript) {
-        oldScript.remove();
-      }
+  // useEffect(() => {
+  //   if (document.getElementsByClassName('flourish-embed')) {
+  //     const script = document.createElement('script');
+  //     const oldScript = document.getElementById('flourish-script');
+  //     if (oldScript) {
+  //       oldScript.remove();
+  //     }
 
-      window.FlourishLoaded = false;
-      script.id = 'flourish-script';
-      script.src = 'https://public.flourish.studio/resources/embed.js';
-      document.body.appendChild(script);
-    }
-  }, [id, carouselItemIndex]);
+  //     window.FlourishLoaded = false;
+  //     script.id = 'flourish-script';
+  //     script.src = 'https://public.flourish.studio/resources/embed.js';
+  //     document.body.appendChild(script);
+  //   }
+  // }, [id, carouselItemIndex]);
 
   const showContent = index => () => {
     onChange(index);
   };
+  const profileNavigation = 'Other topics in';
+  const readNext = 'Read next...';
 
-  const {
-    profile_navigation: { value: profileNavigation },
-    read_next: { value: readNext }
-  } = content;
-
-  const topic = content.body[topicIndex].type;
+  const topicType = content.topics[topicIndex].profile_section_topic.type;
   const data = {
+    content: content.topics[topicIndex].profile_section_topic,
     item:
       carouselItemIndex !== -1
-        ? content.body[topicIndex].value.body[carouselItemIndex]
-        : null,
-    content: content.body[topicIndex].value
+        ? content.topics[topicIndex].profile_section_topic
+        : null
   };
 
   return (
     <>
       <OtherInfoNav
-        labelText={profileNavigation.title}
-        labelTextStrong={content.title}
+        labelText={profileNavigation}
+        labelTextStrong={content.post_title}
         content={content}
         current={topicIndex}
         showContent={showContent}
@@ -124,84 +127,68 @@ function AnalysisContent({
 
       <div className={classes.root}>
         <Typography className={classes.title} variant="h2">
-          {content.body[topicIndex].value.title}
+          {content.topics[topicIndex].profile_section_topic.post_title}
         </Typography>
 
         <ContentNavigation
-          labelText={profileNavigation.title}
-          labelTextStrong={content.title}
+          labelText={profileNavigation}
+          labelTextStrong={content.post_title}
           current={topicIndex}
           content={content}
           showContent={showContent}
         />
 
         <Actions
-          title={content.body[topicIndex].value.title}
+          title={content.post_title}
           page={takwimu.page}
-          topic={topic}
+          topic={topicType}
           data={data}
           takwimu={takwimu}
           link={analysisLink}
         />
 
-        {content.body[topicIndex].type === 'carousel_topic' ? (
-          <CarouselTopic
-            key={topicIndex}
-            data={content.body[topicIndex].value.body}
-            onIndexChanged={setCarouselItemIndex}
-            url={takwimu.url}
-          />
-        ) : (
+        {topicType === 'topic' ? (
           <Grid container direction="row">
-            {content.body[topicIndex].value.body.map(c => (
-              <Fragment key={c.id}>
-                {c.type === 'text' && (
-                  <RichTypography className={classes.body}>
-                    {c.value}
-                  </RichTypography>
-                )}
-                {c.type === 'indicator' && (
-                  <DataContainer
-                    id={c.id}
-                    classes={{ root: classes.dataContainer }}
-                    indicator={c}
-                    country={takwimu.country}
-                    url={takwimu.url}
-                  />
-                )}
-              </Fragment>
-            ))}
+            <RichTypography className={classes.body} component="div">
+              {content.topics[topicIndex].profile_section_topic.post_content}
+            </RichTypography>
           </Grid>
+        ) : (
+          <div onIndexChanged={setCarouselItemIndex}> Carousel Topic</div>
+          // if topic post content is empty then we it is probably a carouseltopic
+          //   <CarouselTopic
+          //   key={topicIndex}
+          //   data={content.topics[topicIndex].profile_section_topic}
+          //   onIndexChanged={setCarouselItemIndex}
+          //   url={takwimu.url}
+          // />
         )}
 
         <Actions
-          title={content.body[topicIndex].value.title}
+          title={content.topics[topicIndex].profile_section_topic.post_title}
           page={takwimu.page}
-          topic={topic}
+          topic={topicType}
           data={data}
           takwimu={takwimu}
           hideLastUpdated
           link={analysisLink}
         />
         <ContentNavigation
-          labelText={profileNavigation.title}
-          labelTextStrong={content.title}
+          labelText={profileNavigation}
+          labelTextStrong={content.post_title}
           current={topicIndex}
           content={content}
           showContent={showContent}
         />
         <AnalysisReadNext
           classes={{ container: classes.readNextContainer }}
-          title={readNext.title}
+          title={readNext}
           content={content}
           current={topicIndex}
           showContent={showContent}
         />
-        <CountryContent
-          content={content.view_country_content}
-          takwimu={takwimu}
-        />
-        <RelatedContent content={content.related_content} />
+        <CountryContent content={{}} takwimu={takwimu} />
+        <RelatedContent content={{}} />
       </div>
     </>
   );
@@ -209,13 +196,13 @@ function AnalysisContent({
 
 AnalysisContent.propTypes = {
   content: PropTypes.shape({
-    id: PropTypes.string,
-    body: PropTypes.arrayOf(
+    ID: PropTypes.string,
+    post_title: PropTypes.string,
+    topics: PropTypes.arrayOf(
       PropTypes.shape({
-        type: PropTypes.string,
-        value: PropTypes.shape({
-          body: PropTypes.arrayOf(PropTypes.shape({})),
-          title: PropTypes.string,
+        profile_section_topic: PropTypes.shape({
+          post_content: PropTypes.arrayOf(PropTypes.shape({})),
+          post_title: PropTypes.string,
           type: PropTypes.string
         })
       })
