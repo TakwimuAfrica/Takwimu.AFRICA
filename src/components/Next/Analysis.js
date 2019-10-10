@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AnalysisReadNext({ current, content, showContent, title }) {
-  const hasContent = current < content.body.length - 1;
+  const hasContent = current < content.topics.length - 1;
   const classes = useStyles();
 
   return hasContent ? (
@@ -44,17 +44,17 @@ function AnalysisReadNext({ current, content, showContent, title }) {
         alignItems="center"
         className={classes.container}
       >
-        {content.body.map((c, index) =>
+        {content.topics.map(({ profile_section_topic: c }, index) =>
           index > current && index - current <= 2 ? (
             <Card
-              key={c.id}
+              key={c.ID}
               variant="dual"
               classes={{
                 root: classNames({ [classes.cardMargin]: index - current > 1 })
               }}
               onClick={showContent(index)}
             >
-              {c.value.title}
+              {c.post_title}
             </Card>
           ) : null
         )}
@@ -67,7 +67,7 @@ AnalysisReadNext.propTypes = {
   title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({
-    body: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+    topics: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
   }).isRequired,
   showContent: PropTypes.func.isRequired
 };
