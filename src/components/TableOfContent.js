@@ -97,8 +97,8 @@ function TableOfContent({ children, content, current, generateHref, width }) {
             <img
               alt=""
               src={activeContentIcon}
-              className={classes.activeContentIndicator}
               hidden={current !== index}
+              className={classes.activeContentIndicator}
             />
             <NextLink href={generateHref(index)}>
               <Link

@@ -3,7 +3,7 @@ import React from 'react';
 import { Typography, ButtonBase } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { PropTypes } from 'prop-types';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 import classNames from 'classnames';
 
@@ -46,6 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 function AboutContentNav({ title, current, contentHeadings }) {
   const classes = useStyles();
+  const router = useRouter();
   const showShadow = useScrollListener(10);
   const generateHref = index => {
     const item = contentHeadings[index];
@@ -61,7 +62,7 @@ function AboutContentNav({ title, current, contentHeadings }) {
           {contentHeadings.map((item, index) => (
             <ButtonBase
               key={item.link}
-              onClick={() => Router.push(generateHref(index))}
+              onClick={() => router.push(generateHref(index))}
             >
               <Typography
                 variant="body2"
