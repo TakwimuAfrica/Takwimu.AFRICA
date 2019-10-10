@@ -19,7 +19,6 @@ function LegalContentNavigation({
   title,
   current,
   contentHeadings,
-  changeActiveContent,
   linksPrimaryColor,
   linksSecondaryColor
 }) {
@@ -39,12 +38,6 @@ function LegalContentNavigation({
       current={current}
       generateHref={generateHref}
       generateTitle={generateTitle}
-      onClick={(e, index) => {
-        e.preventDefault();
-
-        window.history.pushState(null, '', generateHref(index));
-        changeActiveContent(index)();
-      }}
       linksPrimaryColor={linksPrimaryColor}
       linksSecondaryColor={linksSecondaryColor}
     />
@@ -60,7 +53,6 @@ LegalContentNavigation.propTypes = {
       title: PropTypes.string
     }).isRequired
   ).isRequired,
-  changeActiveContent: PropTypes.func.isRequired,
   linksPrimaryColor: PropTypes.string,
   linksSecondaryColor: PropTypes.string
 };

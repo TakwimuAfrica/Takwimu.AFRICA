@@ -16,13 +16,12 @@ const useStyles = makeStyles({
   }
 });
 
-function RelatedContent({ content: { value: relatedContent } }) {
+function RelatedContent({ content: relatedContent }) {
   const classes = useStyles();
-  if (!relatedContent) {
+  if (!(relatedContent && relatedContent.relatedLinks)) {
     return null;
   }
-
-  const { title, related_links: relatedLinks } = relatedContent;
+  const { title, relatedLinks } = relatedContent;
   const firstBatch = relatedLinks.slice(0, 4);
   const secondBatch = relatedLinks.slice(4, 8);
   return (
@@ -48,18 +47,14 @@ function RelatedContent({ content: { value: relatedContent } }) {
 
 RelatedContent.propTypes = {
   content: PropTypes.shape({
-    value: PropTypes.shape({
-      title: PropTypes.string,
-      related_links: PropTypes.arrayOf(
-        PropTypes.shape({
-          type: PropTypes.string,
-          value: PropTypes.shape({
-            title: PropTypes.string,
-            link: PropTypes.string
-          })
-        })
-      )
-    })
+    title: PropTypes.string,
+    relatedLinks: PropTypes.arrayOf(
+      PropTypes.shape({
+        type: PropTypes.string,
+        title: PropTypes.string,
+        link: PropTypes.string
+      })
+    )
   }).isRequired
 };
 

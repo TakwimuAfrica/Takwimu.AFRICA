@@ -1,5 +1,5 @@
 const countrify = (title, country, countries, conj = '&rsquo;s ') => {
-  const foundCountry = countries.find(c => c.slug === country.slug);
+  const foundCountry = countries.find(c => c.slug === country);
   if (
     foundCountry &&
     !title.toLowerCase().startsWith(foundCountry.short_name.toLowerCase())

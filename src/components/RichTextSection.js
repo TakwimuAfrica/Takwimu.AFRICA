@@ -14,7 +14,9 @@ const useStyles = makeStyles({
 function RichTextSection({ component, title, value, variant, ...props }) {
   const classes = useStyles();
   const text = (
-    <RichTypography classes={{ root: classes.text }}>{value}</RichTypography>
+    <RichTypography classes={{ root: classes.text }} component="div">
+      {value}
+    </RichTypography>
   );
   return React.createElement(
     component,

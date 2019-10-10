@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/styles';
+import Router from 'next/router';
 
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
@@ -43,12 +44,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LegalContentNav({
-  title,
-  current,
-  contentHeadings,
-  changeActiveContent
-}) {
+function LegalContentNav({ title, current, contentHeadings }) {
   const classes = useStyles();
   const showShadow = useScrollListener(10);
   const generateHref = index => `/${contentHeadings[index].link}`;
@@ -62,12 +58,7 @@ function LegalContentNav({
           {contentHeadings.map((item, index) => (
             <ButtonBase
               key={item.link}
-              onClick={e => {
-                e.preventDefault();
-
-                window.history.pushState(null, '', generateHref(index));
-                changeActiveContent(index)();
-              }}
+              onClick={() => Router.push(generateHref(index))}
             >
               <Typography
                 variant="body2"
@@ -93,8 +84,7 @@ LegalContentNav.propTypes = {
       link: PropTypes.string
     }).isRequired
   ).isRequired,
-  current: PropTypes.number.isRequired,
-  changeActiveContent: PropTypes.func.isRequired
+  current: PropTypes.number.isRequired
 };
 
 export default LegalContentNav;

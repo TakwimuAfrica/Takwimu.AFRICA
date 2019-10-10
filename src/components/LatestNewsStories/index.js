@@ -28,18 +28,16 @@ const useStyles = makeStyles({
 function LatestNewsStories({
   takwimu: {
     page: {
-      latest_news_stories: {
-        title,
-        description,
-        read_more_link_label: readMore,
-        stories
-      }
+      latest_news_title: title,
+      latest_news_description: description,
+      read_more_link_label: readMore
     },
     settings: {
       socialMedia: { medium }
     }
   },
-  width
+  width,
+  stories = []
 }) {
   const classes = useStyles();
   if (!title) {
@@ -91,12 +89,9 @@ function LatestNewsStories({
 LatestNewsStories.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      latest_news_stories: PropTypes.shape({
-        title: PropTypes.string,
-        description: PropTypes.string,
-        read_more_link_label: PropTypes.string,
-        stories: PropTypes.arrayOf(PropTypes.shape({}))
-      })
+      latest_news_title: PropTypes.string.isRequired,
+      latest_news_description: PropTypes.string.isRequired,
+      read_more_link_label: PropTypes.string.isRequired
     }).isRequired,
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({
@@ -104,6 +99,7 @@ LatestNewsStories.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
+  stories: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   width: PropTypes.string.isRequired
 };
 

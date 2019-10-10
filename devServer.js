@@ -32,7 +32,7 @@ app.prepare().then(() => {
               )
             );
           })
-          .catch(() => res.send('Error'));
+          .catch(() => res.sendStatus(400));
       });
   }
   server.use(handle).listen(port, err => {

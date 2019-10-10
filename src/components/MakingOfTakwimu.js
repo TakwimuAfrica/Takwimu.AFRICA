@@ -27,12 +27,13 @@ const useStyles = makeStyles({
 function MakingOfTakwimu({
   takwimu: {
     page: {
-      making_of_takwimu: { value: makingOf = {} }
+      making_of_takwimu_title: title,
+      making_of_takwimu_description: description,
+      making_of_takwimu_link: link
     }
   }
 }) {
   const classes = useStyles();
-  const { title, description, link } = makingOf;
   const iframeId = 'making-of-takwimu-yt-iframe';
 
   useEffect(() => {
@@ -84,13 +85,9 @@ function MakingOfTakwimu({
 MakingOfTakwimu.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      making_of_takwimu: PropTypes.shape({
-        value: PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          description: PropTypes.string.isRequired,
-          link: PropTypes.string.isRequired
-        })
-      }).isRequired
+      making_of_takwimu_title: PropTypes.string.isRequired,
+      making_of_takwimu_description: PropTypes.string.isRequired,
+      making_of_takwimu_link: PropTypes.string.isRequired
     }).isRequired
   }).isRequired
 };

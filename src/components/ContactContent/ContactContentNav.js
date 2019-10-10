@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 
 import { makeStyles } from '@material-ui/styles';
+import { useRouter } from 'next/router';
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
@@ -43,17 +44,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ContactContentNav({
-  title,
-  current,
-  contentHeadings,
-  changeActiveContent
-}) {
+function ContactContentNav({ title, current, contentHeadings }) {
   const classes = useStyles();
+  const router = useRouter();
+
   const showShadow = useScrollListener(10);
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `#${item.link}`;
+    return `/contact#${item.link}`;
   };
   return (
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
@@ -65,12 +63,7 @@ function ContactContentNav({
           {contentHeadings.map((item, index) => (
             <ButtonBase
               key={item.link}
-              onClick={e => {
-                e.preventDefault();
-
-                window.history.pushState(null, '', generateHref(index));
-                changeActiveContent(index);
-              }}
+              onClick={() => router.push(generateHref(index))}
             >
               <Typography
                 variant="body2"
@@ -96,8 +89,7 @@ ContactContentNav.propTypes = {
     PropTypes.shape({
       link: PropTypes.string
     }).isRequired
-  ).isRequired,
-  changeActiveContent: PropTypes.func.isRequired
+  ).isRequired
 };
 
 export default ContactContentNav;

@@ -11,7 +11,6 @@ import ContentSection from '../ContentSection';
 import Faqs from '../Faqs';
 import RelatedContent from '../RelatedContent';
 import RichTextSection from '../RichTextSection';
-import Services from '../Services';
 
 const styles = theme => ({
   root: {
@@ -64,7 +63,7 @@ class AboutContent extends React.Component {
     return (
       <>
         <AboutUsContentNav
-          title={contentNavigation.value.title}
+          title={contentNavigation}
           current={current}
           contentHeadings={contentHeadings}
           changeActiveContent={this.showContent}
@@ -73,33 +72,32 @@ class AboutContent extends React.Component {
           {title}
         </Typography>
         <ContentNavigation
-          title={contentNavigation.value.title}
+          title={contentNavigation}
           contentHeadings={contentHeadings}
           current={current}
           changeActiveContent={this.showContent}
         />
-        {aboutTakwimu && aboutTakwimu.value && (
-          <RichTextSection
-            classes={{ root: classes.section }}
-            title={aboutTakwimu.value.title}
-            value={aboutTakwimu.value.description}
-            id="about"
-            component={ContentSection}
-          />
-        )}
-        {methodology && methodology.value && (
-          <RichTextSection
-            classes={{ root: classes.section }}
-            title={methodology.value.title}
-            value={methodology.value.description}
-            id="methodology"
-            component={ContentSection}
-          />
-        )}
-        <Services
+        <RichTextSection
           classes={{ root: classes.section }}
-          services={services}
+          title={aboutTakwimu.title}
+          value={aboutTakwimu.description}
+          id="about"
+          component={ContentSection}
+        />
+
+        <RichTextSection
+          classes={{ root: classes.section }}
+          title={methodology.title}
+          value={methodology.description}
+          id="methodology"
+          component={ContentSection}
+        />
+        <RichTextSection
+          classes={{ root: classes.section }}
+          title={services.title}
+          value={services.description}
           id="services"
+          component={ContentSection}
         />
         <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
         <AboutWhereToNext socialMedia={socialMedia} />
@@ -112,25 +110,20 @@ class AboutContent extends React.Component {
 AboutContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
-  contentNavigation: PropTypes.shape({
-    value: PropTypes.shape({
-      title: PropTypes.string
-    })
-  }).isRequired,
+  contentNavigation: PropTypes.string.isRequired,
   aboutTakwimu: PropTypes.shape({
-    value: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string
-    })
+    title: PropTypes.string,
+    description: PropTypes.string
   }).isRequired,
   methodology: PropTypes.shape({
-    value: PropTypes.shape({
-      title: PropTypes.string,
-      description: PropTypes.string
-    })
+    title: PropTypes.string,
+    description: PropTypes.string
   }).isRequired,
   faqs: PropTypes.shape({}).isRequired,
-  services: PropTypes.shape({}).isRequired,
+  services: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string
+  }).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,

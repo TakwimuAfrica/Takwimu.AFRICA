@@ -3,6 +3,7 @@ const config = {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
+  WP_BACKEND_URL: 'https://takwimutech.wpengine.com',
   country: {},
   countries: [
     {

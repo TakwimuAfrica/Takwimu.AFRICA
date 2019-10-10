@@ -41,6 +41,8 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     maxWidth: '100%'
   },
   containerRoot: {
+    width: '100%',
+    minHeight: '500px',
     backgroundColor: '#f6f6f6',
     margin: 0
   },
