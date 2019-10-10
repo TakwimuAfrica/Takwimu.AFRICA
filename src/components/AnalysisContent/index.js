@@ -9,7 +9,7 @@ import makeStyles from '@material-ui/styles/makeStyles';
 import { RichTypography } from '../core';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
-// import CarouselTopic from './topics/CarouselTopic';
+import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
 // import DataContainer from '../DataContainer';
@@ -110,7 +110,7 @@ function AnalysisContent({
     content: content.topics[topicIndex].profile_section_topic,
     item:
       carouselItemIndex !== -1
-        ? content.topics[topicIndex].profile_section_topic
+        ? content.topics[topicIndex].profile_section_topic.carousel
         : null
   };
 
@@ -154,14 +154,12 @@ function AnalysisContent({
             </RichTypography>
           </Grid>
         ) : (
-          <div onIndexChanged={setCarouselItemIndex}> Carousel Topic</div>
-          // if topic post content is empty then we it is probably a carouseltopic
-          //   <CarouselTopic
-          //   key={topicIndex}
-          //   data={content.topics[topicIndex].profile_section_topic}
-          //   onIndexChanged={setCarouselItemIndex}
-          //   url={takwimu.url}
-          // />
+          <CarouselTopic
+            key={topicIndex}
+            data={content.topics[topicIndex].profile_section_topic.carousel}
+            onIndexChanged={setCarouselItemIndex}
+            url={takwimu.url}
+          />
         )}
 
         <Actions
@@ -203,7 +201,8 @@ AnalysisContent.propTypes = {
         profile_section_topic: PropTypes.shape({
           post_content: PropTypes.arrayOf(PropTypes.shape({})),
           post_title: PropTypes.string,
-          type: PropTypes.string
+          type: PropTypes.string,
+          carousel: PropTypes.arrayOf(PropTypes.shape({}))
         })
       })
     ),
