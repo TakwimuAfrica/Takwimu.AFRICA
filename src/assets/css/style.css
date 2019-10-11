@@ -3,22 +3,19 @@
     margin-bottom: 28px;
     flex-wrap: wrap;
 }
- @media (min-width: 782px) {
-      .wp-block-columns {
-        flex-wrap: nowrap; 
-    }
-}
-
-.has-2-columns .wp-block-column {
-    width: 50%;
-}
   
 .wp-block-column {
     margin-bottom: 1em;
     flex-grow: 1;
     min-width: 0;
+    flex-wrap: wrap;
     word-break: break-word;
     overflow-wrap: break-word; 
+}
+
+.indicator-div {
+    width: 100%;
+    display: flex;
 }
 
 @media (max-width: 599px) {
