@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import NextLink from 'next/link';
 
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, Grid } from '@material-ui/core';
 
 import A from '@codeforafrica/hurumap-ui/dist/A';
 import Card from './Card';
@@ -32,8 +32,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function HomeWhereToNext() {
-  const classes = useStyles();
+function HomeWhereToNext({
+  takwimu: {
+    settings: { mailingList }
+  },
+  ...props
+}) {
+  const classes = useStyles(props);
+
   return (
     <Section title="Where to next" variant="h3">
       <Grid
@@ -42,7 +48,7 @@ function HomeWhereToNext() {
         alignItems="center"
         className={classes.root}
       >
-        <Card href="//eepurl.com/dynuAX" component={A}>
+        <Card href={mailingList.href} component={A}>
           Stay up-to-date with <br /> new data and analysis
         </Card>
 
@@ -62,6 +68,13 @@ function HomeWhereToNext() {
   );
 }
 
-HomeWhereToNext.propTypes = {};
+HomeWhereToNext.propTypes = {
+  takwimu: PropTypes.shape({
+    settings: PropTypes.shape({
+      mailingList: PropTypes.shape({ href: PropTypes.string.isRequired })
+        .isRequired
+    }).isRequired
+  }).isRequired
+};
 
 export default HomeWhereToNext;
