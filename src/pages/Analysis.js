@@ -43,7 +43,7 @@ function AnalysisPage({
       ? window.location.hash.split('#')[1]
       : '';
     if (topicId) {
-      const foundTopicIndex = analyses[initial].section.topics.findIndex(
+      const foundTopicIndex = analyses[initial].topics.findIndex(
         ({ profile_section_topic: topic }) => topic.topic_name === topicId
       );
 
@@ -55,7 +55,7 @@ function AnalysisPage({
     <Page
       takwimu={takwimu}
       indicatorId={indicatorId}
-      title={`${takwimu.country.short_name}'s ${analyses[current].section.post_title} Analysis`}
+      title={`${takwimu.country.short_name}'s ${analyses[current].post_title} Analysis`}
     >
       <ContentPage
         aside={
@@ -69,7 +69,7 @@ function AnalysisPage({
         classes={{ root: classes.root, aside: classes.asideRoot }}
       >
         <AnalysisContent
-          content={analyses[current].section}
+          content={analyses[current]}
           onChange={changeTopic}
           takwimu={takwimu}
           topicIndex={topicIndex}
@@ -85,15 +85,13 @@ AnalysisPage.propTypes = {
   indicatorId: PropTypes.string,
   analyses: PropTypes.arrayOf(
     PropTypes.shape({
-      section: PropTypes.shape({
-        post_title: PropTypes.string,
-        topics: PropTypes.arrayOf(
-          PropTypes.shape({
-            ID: PropTypes.string,
-            findIndex: PropTypes.func
-          })
-        )
-      })
+      post_title: PropTypes.string,
+      topics: PropTypes.arrayOf(
+        PropTypes.shape({
+          ID: PropTypes.number,
+          findIndex: PropTypes.func
+        })
+      )
     })
   ).isRequired,
   takwimu: PropTypes.shape({
@@ -109,79 +107,81 @@ AnalysisPage.defaultProps = {
   indicatorId: undefined
 };
 
+const get = async url => {
+  const res = await fetch(url);
+  const data = await res.json();
+
+  return data;
+};
+
 AnalysisPage.getInitialProps = async ({ query, req }) => {
   const { WP_BACKEND_URL, countries } = config;
   const { geoIdOrCountrySlug, analysisSlug, indicator: indicatorId } = query;
 
-  const configs = await fetch(
+  const [profile] = await get(
     `${WP_BACKEND_URL}/wp-json/wp/v2/profile?slug=${geoIdOrCountrySlug}`
-  ).then(response => {
-    if (response.status === 200) {
-      return response.json().then(async data => {
-        const {
-          acf: { sections, geography }
-        } = data[0];
-        const country = countries.find(c => c.slug === geography);
-        if (sections.length) {
-          Object.assign(config.page, sections[0].section);
-          Object.assign(config.country, country);
+  );
 
-          let foundIndex = -1;
-          if (analysisSlug) {
-            foundIndex = sections.findIndex(
-              ({ section }) => section.post_name === analysisSlug
-            );
-          }
-          const initial = foundIndex !== -1 ? foundIndex : 0;
+  let analyses = [];
+  let initial = 0;
 
-          // topics as section topics is an acf field on profile section
-          // so for each profile section page, get the acfs fields
-          await Promise.all(
-            sections.map(async ({ section }) => {
-              const res = await fetch(
-                `${WP_BACKEND_URL}/wp-json/wp/v2/profile_section_page/${section.ID}`
-              );
-              const {
-                acf: {
-                  geography: sectionGeography,
-                  section_topics: sectionTopics
-                }
-              } = await res.json();
+  if (profile && profile.acf) {
+    const {
+      acf: { sections, geography }
+    } = profile;
+    const country = countries.find(c => c.slug === geography);
+    Object.assign(config.country, country);
 
-              await Promise.all(
-                sectionTopics.map(async ({ profile_section_topic: topic }) => {
-                  if (topic.post_content === '') {
-                    topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
-                    // add another backend call to fetch the carousel_topic
-                    const resCarousel = await fetch(
-                      `${WP_BACKEND_URL}/wp-json/wp/v2/carousel_topic/${topic.ID}`
-                    );
-                    const {
-                      acf: { topic_carousel_body: carousel }
-                    } = await resCarousel.json();
-                    topic.carousel = carousel; // eslint-disable-line no-param-reassign
-                  } else {
-                    topic.type = 'topic'; // eslint-disable-line no-param-reassign
-                  }
-                  return topic;
-                })
-              );
-              section.topics = sectionTopics; // eslint-disable-line no-param-reassign
-              section.geography = sectionGeography; // eslint-disable-line no-param-reassign
-              return section;
-            })
+    if (sections.length) {
+      let foundIndex = -1;
+      if (analysisSlug) {
+        foundIndex = sections.findIndex(
+          ({ section }) => section.post_name === analysisSlug
+        );
+      }
+      initial = foundIndex !== -1 ? foundIndex : 0;
+      console.log(initial);
+
+      // topics as section topics is an acf field on profile section
+      // so for each profile section page, get the acfs fields
+      analyses = await Promise.all(
+        sections.map(async ({ section }) => {
+          const {
+            acf: { geography: sectionGeography, section_topics: sectionTopics }
+          } = await get(
+            `${WP_BACKEND_URL}/wp-json/wp/v2/profile_section_page/${section.ID}`
           );
 
-          return { takwimu: config, initial, analyses: sections };
-        }
-        return Promise.reject();
-      });
-    }
-    return Promise.reject();
-  });
+          await Promise.all(
+            sectionTopics.map(async ({ profile_section_topic: topic }) => {
+              if (topic.post_content === '') {
+                topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
+                // add another backend call to fetch the carousel_topic
+                const {
+                  acf: { topic_carousel_body: carousel }
+                } = await get(
+                  `${WP_BACKEND_URL}/wp-json/wp/v2/carousel_topic/${topic.ID}`
+                );
+                topic.carousel = carousel; // eslint-disable-line no-param-reassign
+              } else {
+                topic.type = 'topic'; // eslint-disable-line no-param-reassign
+              }
+              return topic;
+            })
+          );
+          section.topics = sectionTopics; // eslint-disable-line no-param-reassign
+          section.geography = sectionGeography; // eslint-disable-line no-param-reassign
+          return section;
+        })
+      );
 
+      Object.assign(config.page, analyses[0]);
+    }
+  }
   return {
-    ...configs,
+    takwimu: config,
+    initial,
+    analyses,
     indicatorId,
     analysisLink: `${req.protocol}://${req.headers.host}${req.url}`
   };
