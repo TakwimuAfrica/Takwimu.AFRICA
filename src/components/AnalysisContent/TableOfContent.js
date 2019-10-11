@@ -27,10 +27,10 @@ function AnalysisTableOfContent({
       // if politics
       return analysisUrl;
     }
-    return `${analysisUrl}/${content[index].section.post_name}`;
+    return `${analysisUrl}/${content[index].post_name}`;
   };
 
-  const allSectionTitle = content.map(({ section }) => {
+  const allSectionTitle = content.map(section => {
     return { title: section.post_title };
   });
 
@@ -54,9 +54,7 @@ function AnalysisTableOfContent({
 AnalysisTableOfContent.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
-      section: PropTypes.shape({
-        post_name: PropTypes.string
-      })
+      post_name: PropTypes.string
     }).isRequired
   ).isRequired,
   current: PropTypes.number.isRequired,

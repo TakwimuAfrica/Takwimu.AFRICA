@@ -194,7 +194,7 @@ function AnalysisContent({
 
 AnalysisContent.propTypes = {
   content: PropTypes.shape({
-    ID: PropTypes.string,
+    ID: PropTypes.number,
     post_title: PropTypes.string,
     topics: PropTypes.arrayOf(
       PropTypes.shape({

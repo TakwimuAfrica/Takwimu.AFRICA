@@ -152,13 +152,17 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
             </View>
           ) : (
             <View style={classes.section}>
-              <Text style={classes.boldText}>
-                {data.item.name}, {data.item.title}
-              </Text>
-              {data.item.description.split('</p>').map(t => (
-                <Text style={classes.text}>
-                  {t.replace(/<(?:.|\n)*?>/gi, '')}
-                </Text>
+              {data.item.map(c => (
+                <>
+                  <Text style={classes.boldText}>
+                    {c.carousel_name}, {c.carousel_title}
+                  </Text>
+                  {c.carousel_description.split('</p>').map(t => (
+                    <Text style={classes.text}>
+                      {t.replace(/<(?:.|\n)*?>/gi, '')}
+                    </Text>
+                  ))}
+                </>
               ))}
             </View>
           )}
@@ -192,11 +196,13 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
         post_name: PropTypes.string,
         post_content: PropTypes.string
       }),
-      item: PropTypes.shape({
-        description: PropTypes.string,
-        name: PropTypes.string,
-        title: PropTypes.string
-      })
+      item: PropTypes.arrayOf(
+        PropTypes.shape({
+          carousel_description: PropTypes.string,
+          carousel_name: PropTypes.string,
+          carousel_title: PropTypes.string
+        })
+      )
     }).isRequired,
     topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
     takwimu: PropTypes.shape({
@@ -288,13 +294,16 @@ DownloadPDF.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({
-      body: PropTypes.arrayOf(PropTypes.shape({})),
-      title: PropTypes.string
+      post_content: PropTypes.arrayOf(PropTypes.shape({})),
+      post_title: PropTypes.string
     }),
-    item: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string
-    })
+    item: PropTypes.arrayOf(
+      PropTypes.shape({
+        carousel_description: PropTypes.string,
+        carousel_name: PropTypes.string,
+        carousel_title: PropTypes.string
+      })
+    )
   }).isRequired,
   takwimu: PropTypes.shape({
     country: PropTypes.shape({
