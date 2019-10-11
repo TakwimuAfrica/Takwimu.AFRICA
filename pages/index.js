@@ -20,7 +20,7 @@ function Home({ takwimu, indicatorId }) {
       <WhatYouDoWithTakwimu takwimu={takwimu} />
       <MakingOfTakwimu takwimu={takwimu} />
       <LatestNewsStories takwimu={takwimu} />
-      <WhereToNext />
+      <WhereToNext takwimu={takwimu} />
     </Page>
   );
 }
