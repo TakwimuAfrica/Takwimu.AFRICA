@@ -17,8 +17,6 @@ import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
-// import config from '../../config';
-// import '@wordpress/block-library/build-style/style.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -117,10 +115,15 @@ function AnalysisContent({
 
   const topicContent =
     content.topics[topicIndex].profile_section_topic.post_content;
-  const indicators = topicContent.match('/<!-- wp:acf/indicator (.*) /-->/');
 
+  const indicatorReg = new RegExp('<!-- wp:acf/indicator ([^|]*?) /-->', 'g');
+  const indicatorsString = topicContent.match(indicatorReg);
+  const indicators = indicatorsString.map(indicatorString => {
+    return JSON.parse(
+      indicatorString.replace('<!-- wp:acf/indicator ', '').replace(' /-->', '')
+    );
+  });
   console.log(indicators);
-
   return (
     <>
       <OtherInfoNav
@@ -159,6 +162,15 @@ function AnalysisContent({
             <RichTypography className={classes.body} component="div">
               {topicContent}
             </RichTypography>
+            {/* { indicators.length > 0 && indicators.map(indicator => (
+              <DataContainer
+                id={indicator.id}
+                classes={{ root: classes.dataContainer }}
+                indicator={indicator.data}
+                country={takwimu.country}
+                url={takwimu.url}
+              />
+            ))} */}
           </Grid>
         ) : (
           <CarouselTopic
@@ -221,7 +233,7 @@ AnalysisContent.propTypes = {
     }),
     related_content: PropTypes.shape({}),
     title: PropTypes.string,
-    view_country_content: PropTypes.shape({}).isRequired
+    view_country_content: PropTypes.shape({})
   }).isRequired,
   topicIndex: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,

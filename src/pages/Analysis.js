@@ -140,7 +140,6 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
         );
       }
       initial = foundIndex !== -1 ? foundIndex : 0;
-      console.log(initial);
 
       // topics as section topics is an acf field on profile section
       // so for each profile section page, get the acfs fields
