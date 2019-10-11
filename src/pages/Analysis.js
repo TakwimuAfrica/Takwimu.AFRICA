@@ -164,7 +164,13 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
                 );
                 topic.carousel = carousel; // eslint-disable-line no-param-reassign
               } else {
+                const {
+                  content: { rendered }
+                } = await get(
+                  `${WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.ID}`
+                );
                 topic.type = 'topic'; // eslint-disable-line no-param-reassign
+                topic.content = rendered; // eslint-disable-line no-param-reassign
               }
               return topic;
             })
