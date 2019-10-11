@@ -139,7 +139,7 @@ function AnalysisContent({
         />
 
         <Actions
-          title={content.post_title}
+          title={content.topics[topicIndex].profile_section_topic.post_title}
           page={takwimu.page}
           topic={topicType}
           data={data}
