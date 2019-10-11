@@ -18,6 +18,7 @@ import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 // import config from '../../config';
+// import '@wordpress/block-library/build-style/style.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -114,6 +115,12 @@ function AnalysisContent({
         : null
   };
 
+  const topicContent =
+    content.topics[topicIndex].profile_section_topic.post_content;
+  const indicators = topicContent.match('/<!-- wp:acf/indicator (.*) /-->/');
+
+  console.log(indicators);
+
   return (
     <>
       <OtherInfoNav
@@ -150,7 +157,7 @@ function AnalysisContent({
         {topicType === 'topic' ? (
           <Grid container direction="row">
             <RichTypography className={classes.body} component="div">
-              {content.topics[topicIndex].profile_section_topic.post_content}
+              {topicContent}
             </RichTypography>
           </Grid>
         ) : (
@@ -199,7 +206,7 @@ AnalysisContent.propTypes = {
     topics: PropTypes.arrayOf(
       PropTypes.shape({
         profile_section_topic: PropTypes.shape({
-          post_content: PropTypes.arrayOf(PropTypes.shape({})),
+          post_content: PropTypes.string,
           post_title: PropTypes.string,
           type: PropTypes.string,
           carousel: PropTypes.arrayOf(PropTypes.shape({}))
@@ -212,7 +219,7 @@ AnalysisContent.propTypes = {
     read_next: PropTypes.shape({
       value: PropTypes.shape({})
     }),
-    related_content: PropTypes.shape({}).isRequired,
+    related_content: PropTypes.shape({}),
     title: PropTypes.string,
     view_country_content: PropTypes.shape({}).isRequired
   }).isRequired,

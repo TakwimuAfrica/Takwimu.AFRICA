@@ -7,7 +7,8 @@ import ContentNavigation from '../ContentNavigation';
 
 const useStyles = makeStyles({
   root: {},
-  label: {}
+  label: {},
+  other: {}
 });
 
 function AnalysisContentNavigation({
@@ -58,7 +59,7 @@ AnalysisContentNavigation.propTypes = {
     topics: PropTypes.arrayOf(
       PropTypes.shape({
         profile_section_topic: PropTypes.shape({
-          ID: PropTypes.string,
+          ID: PropTypes.number,
           type: PropTypes.string,
           post_title: PropTypes.string,
           post_name: PropTypes.string
