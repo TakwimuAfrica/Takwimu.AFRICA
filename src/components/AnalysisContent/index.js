@@ -17,6 +17,7 @@ import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
+import '../../assets/css/style.css';
 // import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +28,8 @@ const useStyles = makeStyles(theme => ({
     margin: '37px 0 22px 19px'
   },
   body: {
-    padding: '0 19px'
+    padding: '0 19px',
+    width: '100%'
   },
   readNextContainer: {
     paddingBottom: '2.25rem'
@@ -150,7 +152,7 @@ function AnalysisContent({
         {topicType === 'topic' ? (
           <Grid container direction="row">
             <RichTypography className={classes.body} component="div">
-              {content.topics[topicIndex].profile_section_topic.post_content}
+              {content.topics[topicIndex].profile_section_topic.content}
             </RichTypography>
           </Grid>
         ) : (
@@ -199,7 +201,7 @@ AnalysisContent.propTypes = {
     topics: PropTypes.arrayOf(
       PropTypes.shape({
         profile_section_topic: PropTypes.shape({
-          post_content: PropTypes.string,
+          content: PropTypes.string,
           post_title: PropTypes.string,
           type: PropTypes.string,
           carousel: PropTypes.arrayOf(PropTypes.shape({}))
