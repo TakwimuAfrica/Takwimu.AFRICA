@@ -294,7 +294,7 @@ DownloadPDF.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({
-      post_content: PropTypes.arrayOf(PropTypes.shape({})),
+      post_content: PropTypes.string,
       post_title: PropTypes.string
     }),
     item: PropTypes.arrayOf(

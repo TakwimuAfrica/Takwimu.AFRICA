@@ -199,7 +199,7 @@ AnalysisContent.propTypes = {
     topics: PropTypes.arrayOf(
       PropTypes.shape({
         profile_section_topic: PropTypes.shape({
-          post_content: PropTypes.arrayOf(PropTypes.shape({})),
+          post_content: PropTypes.string,
           post_title: PropTypes.string,
           type: PropTypes.string,
           carousel: PropTypes.arrayOf(PropTypes.shape({}))
@@ -212,9 +212,9 @@ AnalysisContent.propTypes = {
     read_next: PropTypes.shape({
       value: PropTypes.shape({})
     }),
-    related_content: PropTypes.shape({}).isRequired,
+    related_content: PropTypes.shape({}),
     title: PropTypes.string,
-    view_country_content: PropTypes.shape({}).isRequired
+    view_country_content: PropTypes.shape({})
   }).isRequired,
   topicIndex: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
