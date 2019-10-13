@@ -17,6 +17,9 @@
     width: 100%;
     display: flex;
 }
+.flourish-embed {
+    width: 100%;
+}
 
 @media (max-width: 599px) {
      .wp-block-column {
