@@ -23,11 +23,11 @@ function AnalysisContentNavigation({
 }) {
   const classes = useStyles(props);
   const generateHref = index => {
-    const item = content.topics[index].profile_section_topic;
+    const item = content.topics[index];
     return `#${item.post_name}`;
   };
   const generateTitle = index => {
-    const item = content.topics[index].profile_section_topic;
+    const item = content.topics[index];
     return item.post_title;
   };
 
@@ -58,12 +58,10 @@ AnalysisContentNavigation.propTypes = {
   content: PropTypes.shape({
     topics: PropTypes.arrayOf(
       PropTypes.shape({
-        profile_section_topic: PropTypes.shape({
-          ID: PropTypes.number,
-          type: PropTypes.string,
-          post_title: PropTypes.string,
-          post_name: PropTypes.string
-        })
+        ID: PropTypes.number,
+        type: PropTypes.string,
+        post_title: PropTypes.string,
+        post_name: PropTypes.string
       })
     )
   }).isRequired,
