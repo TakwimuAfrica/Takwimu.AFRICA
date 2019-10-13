@@ -15,6 +15,7 @@
 
 .indicator-div {
     width: 100%;
+    display: flex;
 }
 .flourish-embed {
     width: 100%;
