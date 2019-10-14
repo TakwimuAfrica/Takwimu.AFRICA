@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import dynamic from 'next/dynamic';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -16,10 +17,16 @@ import ContentNavigation from './ContentNavigation';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
 import ThemeContainer from '../ThemedContainer';
+import ApolloContainer from '../ApolloContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
-import '../../assets/css/style.css';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
+
+import '../../assets/css/style.css';
+
+const HURUmapChart = dynamic(() => import('../DataContainer/HURUmapChart'), {
+  ssr: false
+});
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -88,6 +95,25 @@ function AnalysisContent({
           );
         }
         return indicator;
+      });
+    }
+
+    const hurumapCharts = Array.from(
+      document.querySelectorAll('div[data-chart-id]')
+    );
+    if (hurumapCharts && hurumapCharts.length > 0) {
+      hurumapCharts.map(chart => {
+        const chartId = chart.attributes['data-chart-id'].value;
+        const geoId = chart.attributes['data-geo-type'].value;
+        ReactDOM.render(
+          <ApolloContainer>
+            <ThemeContainer>
+              <HURUmapChart geoId={geoId} chartId={chartId} />
+            </ThemeContainer>
+          </ApolloContainer>,
+          chart
+        );
+        return chart;
       });
     }
   }, [takwimu.country.name, topicIndex]);
