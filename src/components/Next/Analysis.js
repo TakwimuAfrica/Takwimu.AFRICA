@@ -44,7 +44,7 @@ function AnalysisReadNext({ current, content, showContent, title }) {
         alignItems="center"
         className={classes.container}
       >
-        {content.topics.map(({ profile_section_topic: c }, index) =>
+        {content.topics.map((c, index) =>
           index > current && index - current <= 2 ? (
             <Card
               key={c.ID}
