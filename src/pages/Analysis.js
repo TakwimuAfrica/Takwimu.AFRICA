@@ -172,9 +172,7 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
         activeAnalysis.geography = sectionGeography; // eslint-disable-line no-param-reassign
       }
       Object.assign(config.page, sections[0].section);
-      analyses = sections.map(({ section }) => {
-        return section;
-      });
+      analyses = sections.map(({ section }) => section);
     }
   } catch (err) {
     console.warn(err);
