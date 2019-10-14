@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 function ContactUsTableOfContent({ current, contentHeadings }) {
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `#${item.link}`;
+    return `/contact#${item.link}`;
   };
   const classes = useStyles();
 
