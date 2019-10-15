@@ -228,7 +228,7 @@ const Theme = createTheme({
             flexGrow: '0'
           }
         },
-        '.*:nth-child(even)': {
+        '.wp-block-column:nth-child(even)': {
           '@media (min-width: 600px)': {
             marginLeft: '32px'
           }
