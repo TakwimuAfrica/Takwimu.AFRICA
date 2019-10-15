@@ -37,7 +37,7 @@ function AnalysisPage({
       : '';
     if (topicId) {
       const foundTopicIndex = activeAnalysis.topics.findIndex(
-        topic => topic.topic_name === topicId
+        topic => topic.post_name === topicId
       );
 
       setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
