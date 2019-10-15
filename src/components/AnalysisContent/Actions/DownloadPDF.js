@@ -144,7 +144,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           </View>
           {topic === 'topic' ? (
             <View style={classes.section}>
-              {data.content.post_content.split('</p>').map(t => (
+              {data.content.content.split('</p>').map(t => (
                 <Text key={t} style={classes.text}>
                   {t.replace(/<(?:.|\n)*?>/gi, '')}
                 </Text>
@@ -194,7 +194,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
       content: PropTypes.shape({
         post_title: PropTypes.string,
         post_name: PropTypes.string,
-        post_content: PropTypes.string
+        content: PropTypes.string
       }),
       item: PropTypes.arrayOf(
         PropTypes.shape({
@@ -294,7 +294,7 @@ DownloadPDF.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({
-      post_content: PropTypes.string,
+      content: PropTypes.string,
       post_title: PropTypes.string
     }),
     item: PropTypes.arrayOf(

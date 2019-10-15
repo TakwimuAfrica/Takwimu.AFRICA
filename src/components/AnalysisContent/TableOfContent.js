@@ -13,12 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AnalysisTableOfContent({
-  content,
-  current,
-  country,
-  onChangeContent
-}) {
+function AnalysisTableOfContent({ content, current, country }) {
   const classes = useStyles();
   const { slug: countrySlug } = country;
   const generateHref = index => {
@@ -40,7 +35,6 @@ function AnalysisTableOfContent({
       content={allSectionTitle}
       current={current}
       generateHref={generateHref}
-      onChange={onChangeContent}
     >
       <CountrySelector
         country={country}
@@ -60,8 +54,7 @@ AnalysisTableOfContent.propTypes = {
   current: PropTypes.number.isRequired,
   country: PropTypes.shape({
     slug: PropTypes.string
-  }).isRequired,
-  onChangeContent: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default AnalysisTableOfContent;

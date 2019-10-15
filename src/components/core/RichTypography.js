@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function RichTypography({ children, variant, ...props }) {
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   if (!children) {
     return null;

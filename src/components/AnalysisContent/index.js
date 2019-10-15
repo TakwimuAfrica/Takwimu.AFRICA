@@ -1,6 +1,8 @@
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import dynamic from 'next/dynamic';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -12,11 +14,19 @@ import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
-// import DataContainer from '../DataContainer';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
+import ThemeContainer from '../ThemedContainer';
+import ApolloContainer from '../ApolloContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
+import PDFDataContainer from '../DataContainer/PDFDataContainer';
+
+import '../../assets/css/style.css';
+
+const HURUmapChart = dynamic(() => import('../DataContainer/HURUmapChart'), {
+  ssr: false
+});
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +36,8 @@ const useStyles = makeStyles(theme => ({
     margin: '37px 0 22px 19px'
   },
   body: {
-    padding: '0 19px'
+    padding: '0 19px',
+    width: '100%'
   },
   readNextContainer: {
     paddingBottom: '2.25rem'
@@ -62,17 +73,57 @@ function AnalysisContent({
   analysisLink
 }) {
   const classes = useStyles();
+  useEffect(() => {
+    const indicators = Array.from(
+      document.querySelectorAll('[id^="indicator-block"]')
+    );
+    if (indicators && indicators.length > 0) {
+      indicators.map(indicator => {
+        if (indicator.attributes['data-layout'].value === 'document_widget') {
+          const title = indicator.attributes['data-title'].value;
+          const documentSource = indicator.attributes['data-src'].value;
+          const { id } = indicator;
+          ReactDOM.render(
+            <ThemeContainer>
+              <PDFDataContainer
+                id={id}
+                countryName={takwimu.country.name}
+                data={{ title, source: documentSource }}
+              />
+            </ThemeContainer>,
+            indicator
+          );
+        }
+        return indicator;
+      });
+    }
+
+    const hurumapCharts = Array.from(
+      document.querySelectorAll('div[data-chart-id]')
+    );
+    if (hurumapCharts && hurumapCharts.length > 0) {
+      hurumapCharts.map(chart => {
+        const chartId = chart.attributes['data-chart-id'].value;
+        const geoId = chart.attributes['data-geo-type'].value;
+        ReactDOM.render(
+          <ApolloContainer>
+            <ThemeContainer>
+              <HURUmapChart geoId={geoId} chartId={chartId} />
+            </ThemeContainer>
+          </ApolloContainer>,
+          chart
+        );
+        return chart;
+      });
+    }
+  }, [takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
-    content.topics[topicIndex].profile_section_topic.type === 'carousel_topic'
-      ? 0
-      : -1
+    content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
   );
   useEffect(() => {
     setCarouselItemIndex(
-      content.topics[topicIndex].profile_section_topic.type === 'carousel_topic'
-        ? 0
-        : -1
+      content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
     );
   }, [content.topics, topicIndex]);
 
@@ -96,7 +147,7 @@ function AnalysisContent({
   //     script.src = 'https://public.flourish.studio/resources/embed.js';
   //     document.body.appendChild(script);
   //   }
-  // }, [id, carouselItemIndex]);
+  // }, [topicIndex]);
 
   const showContent = index => () => {
     onChange(index);
@@ -104,26 +155,12 @@ function AnalysisContent({
   const profileNavigation = 'Other topics in';
   const readNext = 'Read next...';
 
-  const topicType = content.topics[topicIndex].profile_section_topic.type;
+  const topicType = content.topics[topicIndex].type;
   const data = {
-    content: content.topics[topicIndex].profile_section_topic,
-    item:
-      carouselItemIndex !== -1
-        ? content.topics[topicIndex].profile_section_topic.carousel
-        : null
+    content: content.topics[topicIndex],
+    item: carouselItemIndex !== -1 ? content.topics[topicIndex].carousel : null
   };
 
-  const topicContent =
-    content.topics[topicIndex].profile_section_topic.post_content;
-
-  const indicatorReg = new RegExp('<!-- wp:acf/indicator ([^|]*?) /-->', 'g');
-  const indicatorsString = topicContent.match(indicatorReg);
-  const indicators = indicatorsString.map(indicatorString => {
-    return JSON.parse(
-      indicatorString.replace('<!-- wp:acf/indicator ', '').replace(' /-->', '')
-    );
-  });
-  console.log(indicators);
   return (
     <>
       <OtherInfoNav
@@ -137,7 +174,7 @@ function AnalysisContent({
 
       <div className={classes.root}>
         <Typography className={classes.title} variant="h2">
-          {content.topics[topicIndex].profile_section_topic.post_title}
+          {content.topics[topicIndex].post_title}
         </Typography>
 
         <ContentNavigation
@@ -149,7 +186,7 @@ function AnalysisContent({
         />
 
         <Actions
-          title={content.topics[topicIndex].profile_section_topic.post_title}
+          title={content.topics[topicIndex].post_title}
           page={takwimu.page}
           topic={topicType}
           data={data}
@@ -160,29 +197,20 @@ function AnalysisContent({
         {topicType === 'topic' ? (
           <Grid container direction="row">
             <RichTypography className={classes.body} component="div">
-              {topicContent}
+              {content.topics[topicIndex].content}
             </RichTypography>
-            {/* { indicators.length > 0 && indicators.map(indicator => (
-              <DataContainer
-                id={indicator.id}
-                classes={{ root: classes.dataContainer }}
-                indicator={indicator.data}
-                country={takwimu.country}
-                url={takwimu.url}
-              />
-            ))} */}
           </Grid>
         ) : (
           <CarouselTopic
             key={topicIndex}
-            data={content.topics[topicIndex].profile_section_topic.carousel}
+            data={content.topics[topicIndex].carousel}
             onIndexChanged={setCarouselItemIndex}
             url={takwimu.url}
           />
         )}
 
         <Actions
-          title={content.topics[topicIndex].profile_section_topic.post_title}
+          title={content.topics[topicIndex].post_title}
           page={takwimu.page}
           topic={topicType}
           data={data}
@@ -217,12 +245,10 @@ AnalysisContent.propTypes = {
     post_title: PropTypes.string,
     topics: PropTypes.arrayOf(
       PropTypes.shape({
-        profile_section_topic: PropTypes.shape({
-          post_content: PropTypes.string,
-          post_title: PropTypes.string,
-          type: PropTypes.string,
-          carousel: PropTypes.arrayOf(PropTypes.shape({}))
-        })
+        content: PropTypes.string,
+        post_title: PropTypes.string,
+        type: PropTypes.string,
+        carousel: PropTypes.arrayOf(PropTypes.shape({}))
       })
     ),
     profile_navigation: PropTypes.shape({
@@ -240,7 +266,9 @@ AnalysisContent.propTypes = {
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
-    country: PropTypes.shape({}).isRequired
+    country: PropTypes.shape({
+      name: PropTypes.string
+    }).isRequired
   }).isRequired,
   analysisLink: PropTypes.string.isRequired
 };

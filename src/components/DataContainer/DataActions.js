@@ -250,7 +250,7 @@ DataActions.defaultProps = {
   onDownload: null,
   onShare: null,
   onShowData: null,
-  embedCode: null,
+  embedCode: '',
   onCompare: null
 };
 
