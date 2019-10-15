@@ -188,6 +188,59 @@ const Theme = createTheme({
       '@global': {
         '*': {
           outline: 'none'
+        },
+        '.wp-block-columns': {
+          display: 'flex',
+          marginBottom: '28px',
+          flexWrap: 'wrap',
+          '.are-vertically-aligned-top': {
+            alignItems: 'flex-start'
+          },
+          '.are-vertically-aligned-center': {
+            alignItems: 'center'
+          },
+          '.are-vertically-aligned-bottom': {
+            alignItems: 'flex-end'
+          }
+        },
+        '.wp-block-column': {
+          marginBottom: '1em',
+          flexGrow: '1',
+          minWidth: '0',
+          flexWrap: 'wrap',
+          wordBreak: 'break-word',
+          overflowWrap: 'break-word',
+          display: 'flex',
+          '.is-vertically-aligned-top': {
+            alignSelf: 'flex-start'
+          },
+          '.is-vertically-aligned-center': {
+            alignSelf: 'center'
+          },
+          '.is-vertically-aligned-bottom': {
+            alignSelf: 'flex-end'
+          },
+          ' @media (max-width: 599px)': {
+            flexBasis: '100% !important'
+          },
+          '@media (min-width: 600px)': {
+            flexBasis: 'calc(50% - 16px)',
+            flexGrow: '0'
+          }
+        },
+        '.*:nth-child(even)': {
+          '@media (min-width: 600px)': {
+            marginLeft: '32px'
+          }
+        },
+        '.indicator-div': {
+          width: '100%',
+          display: 'flex'
+        },
+        '.wp-block-column:not(:first-child)': {
+          ' @media (min-width: 782px)': {
+            marginLeft: '32px'
+          }
         }
       }
     },

@@ -22,8 +22,6 @@ import ApolloContainer from '../ApolloContainer';
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
-import '../../assets/css/style.css';
-
 const HURUmapChart = dynamic(() => import('../DataContainer/HURUmapChart'), {
   ssr: false
 });
