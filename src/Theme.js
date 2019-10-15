@@ -237,6 +237,9 @@ const Theme = createTheme({
           width: '100%',
           display: 'flex'
         },
+        '.flourish-embed': {
+          width: '100%'
+        },
         '.wp-block-column:not(:first-child)': {
           ' @media (min-width: 782px)': {
             marginLeft: '32px'
