@@ -58,7 +58,6 @@ AnalysisContentNavigation.propTypes = {
   content: PropTypes.shape({
     topics: PropTypes.arrayOf(
       PropTypes.shape({
-        ID: PropTypes.number,
         type: PropTypes.string,
         post_title: PropTypes.string,
         post_name: PropTypes.string
