@@ -5,7 +5,7 @@ import { Button, Grid } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { makeStyles } from '@material-ui/styles';
 
-import A from '@codeforafrica/hurumap-ui/dist/A';
+import A from '@codeforafrica/hurumap-ui/core/A';
 import { RichTypography } from '../core';
 import Section from '../Section';
 import StoryBlocks from './StoryBlocks';

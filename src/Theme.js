@@ -1,4 +1,4 @@
-import createTheme from '@codeforafrica/hurumap-ui/dist/styles/createTheme';
+import createTheme from '@codeforafrica/hurumap-ui/core/styles/createTheme';
 
 const FONT_FAMILY_HEADING = '"Lora", serif';
 const FONT_FAMILY_TEXT = '"Muli", sans-serif';

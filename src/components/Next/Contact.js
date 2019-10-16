@@ -6,7 +6,7 @@ import NextLink from 'next/link';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import A from '@codeforafrica/hurumap-ui/dist/A';
+import A from '@codeforafrica/hurumap-ui/core/A';
 import Card from './Card';
 import ContentSection from '../ContentSection';
 

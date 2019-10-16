@@ -1,17 +1,18 @@
 import React, { useMemo } from 'react';
-import InsightContainer from '@codeforafrica/hurumap-ui/dist/InsightContainer';
+import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import Typography from '@material-ui/core/Typography';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 import useChartDefinitions from '../../../../../src/data/useChartDefinitions';
-import useProfileLoader from '../../../../../src/data/useProfileLoader';
 import Error from '../../../../../src/components/Error';
+import config from '../../../../../src/config';
 
 const Chart = dynamic({
   ssr: false,
   loader: () => {
-    return import('../../../../../src/components/ChartFactory');
+    return import('@codeforafrica/hurumap-ui/factory/ChartFactory');
   }
 });
 
@@ -26,10 +27,11 @@ function Embed() {
     return section ? section.charts.find(c => c.id === chartId) : null;
   }, [sectionedCharts, sectionId, chartId]);
 
-  const { profiles, chartData } = useProfileLoader(
+  const { profiles, chartData } = useProfileLoader({
     geoId,
-    chart ? chart.visuals : []
-  );
+    visuals: chart ? chart.visuals : [],
+    populationTables: config.populationTables
+  });
 
   if (!chart) {
     return (
@@ -70,16 +72,16 @@ function Embed() {
       >
         {!chartData.isLoading && (
           <Chart
-            definition={chart.stat}
-            primaryData={chartData.profileVisualsData}
             profiles={profiles}
+            definition={chart.stat}
+            data={chartData.profileVisualsData[chart.visual.queryAlias].nodes}
           />
         )}
         {!chartData.isLoading && (
           <Chart
-            definition={chart.visual}
-            primaryData={chartData.profileVisualsData}
             profiles={profiles}
+            definition={chart.visual}
+            data={chartData.profileVisualsData[chart.visual.queryAlias].nodes}
           />
         )}
       </InsightContainer>

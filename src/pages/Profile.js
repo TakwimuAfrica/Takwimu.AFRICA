@@ -3,14 +3,14 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-import InsightContainer from '@codeforafrica/hurumap-ui/dist/InsightContainer';
+import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import { Grid, makeStyles } from '@material-ui/core';
 
+import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
+import useChartDefinitions from '../data/useChartDefinitions';
 import config from '../config';
 import { shareIndicator, uploadImage } from '../common';
 import slugify from '../utils/slugify';
-import useChartDefinitions from '../data/useChartDefinitions';
-import useProfileLoader from '../data/useProfileLoader';
 
 import Page from '../components/Page';
 import ProfileDetail from '../components/ProfileDetail';
@@ -19,10 +19,12 @@ import ProfileSection, {
 } from '../components/ProfileSection';
 import Section from '../components/Section';
 
-const Chart = dynamic({
+import chartSources from '../data/sources.json';
+
+const ChartFactory = dynamic({
   ssr: false,
   loader: () => {
-    return import('../components/ChartFactory');
+    return import('@codeforafrica/hurumap-ui/factory/ChartFactory');
   }
 });
 const MapIt = dynamic({
@@ -30,15 +32,14 @@ const MapIt = dynamic({
   loader: () => {
     return (
       typeof window !== 'undefined' &&
-      import('@codeforafrica/hurumap-ui/dist/MapIt')
+      import('@codeforafrica/hurumap-ui/core/MapIt')
     );
   }
 });
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   container: {
-    marginBottom: '0.625rem',
-    maxWidth: '100%'
+    marginBottom: '0.625rem'
   },
   containerRoot: {
     width: '100%',
@@ -55,6 +56,19 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     fontWeight: 'bold'
   }
 }));
+
+function Chart({ chartData, definition, profiles, classes }) {
+  return (
+    !chartData.isLoading && (
+      <ChartFactory
+        definition={definition}
+        data={chartData.profileVisualsData[definition.queryAlias].nodes}
+        profiles={profiles}
+        classes={classes}
+      />
+    )
+  );
+}
 
 function Profile() {
   const router = useRouter();
@@ -78,7 +92,30 @@ function Profile() {
       .map(x => x.visual)
   );
 
-  const { profiles, chartData } = useProfileLoader(geoId, visuals);
+  const { profiles, chartData } = useProfileLoader({
+    geoId,
+    visuals,
+    populationTables: config.populationTables
+  });
+
+  const getSource = useCallback(
+    table => {
+      let country;
+      if (profiles.profile.geoLevel === 'country') {
+        country = config.countries.find(
+          c => c.iso_code === profiles.profile.geoCode
+        );
+      } else {
+        // else we are on level1
+        country = config.countries.find(
+          c => c.iso_code === profiles.parent.geoCode
+        );
+      }
+      return chartSources[country.slug][profiles.profile.geoLevel][table]
+        .source;
+    },
+    [profiles]
+  );
 
   const onClickGeoLayer = useCallback(
     area => {
@@ -150,7 +187,12 @@ function Profile() {
                         0)
                 )
                 .map(chart => (
-                  <div className={classes.container}>
+                  <Grid
+                    item
+                    xs={12}
+                    key={chart.id}
+                    className={classes.container}
+                  >
                     <InsightContainer
                       classes={{
                         root: classes.containerRoot,
@@ -161,7 +203,7 @@ function Profile() {
                       title={chart.title}
                       source={
                         !chartData.isLoading
-                          ? chartData.sources[chart.visual.table].source
+                          ? getSource(chart.visual.table).source
                           : {}
                       }
                       insightActions={{
@@ -170,39 +212,24 @@ function Profile() {
                         handleCompare: () => {}
                       }}
                     >
-                      {!chartData.isLoading ? (
-                        <Chart
-                          definition={chart.stat}
-                          primaryData={chartData.profileVisualsData}
-                          profiles={profiles}
-                          classes={classes}
-                        />
-                      ) : (
-                        <div />
-                      )}
-                      {!chartData.isLoading ? (
-                        <Chart
-                          definition={chart.visual}
-                          primaryData={chartData.profileVisualsData}
-                          profiles={profiles}
-                        />
-                      ) : (
-                        <div />
-                      )}
+                      <Chart
+                        chartData={chartData}
+                        definition={chart.stat}
+                        profiles={profiles}
+                        classes={classes}
+                      />
+                      <Chart
+                        chartData={chartData}
+                        definition={chart.visual}
+                        profiles={profiles}
+                        classes={classes}
+                      />
                     </InsightContainer>
-                  </div>
+                  </Grid>
                 ))}
             </Grid>
           )),
-    [
-      profileTabs,
-      sectionedCharts,
-      chartData.isLoading,
-      chartData.profileVisualsData,
-      chartData.sources,
-      classes,
-      profiles
-    ]
+    [profileTabs, chartData, sectionedCharts, classes, getSource, profiles]
   );
 
   // Show and hide sections

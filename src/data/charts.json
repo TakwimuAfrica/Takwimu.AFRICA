@@ -7,6 +7,9 @@
       {
         "title": "Population by Sex",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "pie",
           "table": "allPopulationSex2006S",
           "x": "populationSex2006",
@@ -49,6 +52,9 @@
       {
         "title": "Population by Sex",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "pie",
           "table": "allPopulationSex2009S",
           "x": "populationSex2009",
@@ -70,6 +76,9 @@
       {
         "title": "Population by Sex",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "pie",
           "table": "allPopulationSex2011S",
           "x": "populationSex2011",
@@ -91,6 +100,9 @@
       {
         "title": "Population by Sex",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "pie",
           "table": "allPopulationSex2012S",
           "x": "populationSex2012",
@@ -112,6 +124,9 @@
       {
         "title": "Population by Sex",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "pie",
           "table": "allPopulationSex2013S",
           "x": "populationSex2013",
@@ -133,6 +148,9 @@
       {
         "title": "Population by Sex per year",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allPopulationSexYears",
           "x": "populationSex",
@@ -156,6 +174,9 @@
       {
         "title": "Population by Residence",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allPopulationResidence2009S",
           "x": "populationResidence2009",
@@ -177,6 +198,9 @@
       {
         "title": "Population by Residence",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allPopulationResidence2012S",
           "x": "populationResidence2012",
@@ -197,6 +221,9 @@
       {
         "title": "Population by Residence",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allPopulationResidence2013S",
           "x": "populationResidence2013",
@@ -218,6 +245,9 @@
       {
         "title": "Youth Unemployment Sex per year",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allYouthUnemployments",
           "groupBy": "youthUnemploymentYear",
@@ -241,6 +271,9 @@
       {
         "title": "Youth Unemployment",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allYouthUnemploymentGenerals",
           "x": "youthUnemploymentPeriod",
@@ -262,6 +295,9 @@
       {
         "title": "Employment to population ratio, 15+ (%) (modeled ILO estimate)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allEmploymentToPopulationRatios",
           "groupBy": "employmentToPopulationRatioYear",
@@ -285,6 +321,9 @@
       {
         "title": "Percentage of population in poverty",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allResidencePovertyTypes",
           "x": "residence",
@@ -308,6 +347,9 @@
       {
         "title": "Percentage of population living in poverty by age and residence",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allPovertyAgeResidences",
           "x": "residence",
@@ -331,6 +373,9 @@
       {
         "title": "Human Development Indices",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allHumanDevIndices",
           "x": "humanDevIndices",
@@ -357,6 +402,9 @@
       {
         "title": "Valid vs invalid votes",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "pie",
           "table": "allValidInvalidVotes",
           "x": "votes",
@@ -378,6 +426,9 @@
       {
         "title": "Registered voters vs total votes cast",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "pie",
           "table": "allRegisteredAccreditedVoters",
           "x": "voters",
@@ -399,6 +450,9 @@
       {
         "title": "Votes per Candidate",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allVotesPerCandidates",
           "x": "candidate",
@@ -420,6 +474,9 @@
       {
         "title": "Proportion of seats held by women in national parliaments (%)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allWomenInParliaments",
           "x": "womenParliamentYear",
@@ -441,6 +498,9 @@
       {
         "title": "Position held by women in government",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allWomenInGovernments",
           "x": "position",
@@ -467,6 +527,9 @@
       {
         "title": "People using at least basic drinking water services (% of population)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allAccessToBasicServices",
           "x": "accessToBasicServicesYear",
@@ -488,6 +551,9 @@
       {
         "title": "Percent of households with access to water and electricity services",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allAccessToElecWaterServices",
           "x": "accessToElecWaterServices",
@@ -509,6 +575,9 @@
       {
         "title": "Prevalence of undernourishment (% of population)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allPrevalenceOfUndernourishments",
           "x": "prevalenceOfUndernourishmentYear",
@@ -530,6 +599,9 @@
       {
         "title": "Life expectancy at birth (years)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allLifeExpectancyAtBirths",
           "x": "sex",
@@ -552,6 +624,9 @@
       {
         "title": "Prevalence of FGM among women aged 15 - 49 years",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allPrevalenceFgms",
           "x": "prevalenceFgm",
@@ -572,6 +647,9 @@
       {
         "title": "Maternal mortality ratio (modeled estimate, per 100,000 live births)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allMaternalMortalities",
           "x": "maternalMortalityYear",
@@ -592,6 +670,9 @@
       {
         "title": "Prevalence of HIV, (% ages 15-24)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allHivPrevalences",
           "x": "sex",
@@ -615,6 +696,9 @@
       {
         "title": "Distribution of HIV Patients by Year and Sex 2015-2016",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allHivPatientsDistributions",
           "x": "sex",
@@ -637,6 +721,9 @@
       {
         "title": "Prevalence of Malaria in Children - Number of children",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allMalariaPrevalences",
           "x": "malariaPrevalenceTest",
@@ -740,6 +827,9 @@
       {
         "title": "Infant and Under 5 Mortality rate (per 1000 live births)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allInfantUnder5Mortalities",
           "x": "infantUnder5",
@@ -760,6 +850,9 @@
       {
         "title": "Health worker density and distribution",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allHealthWorkersDistributions",
           "x": "year",
@@ -782,6 +875,9 @@
       {
         "title": "Number of Doctors by Year and Sex (2015-2017)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allNumberOfDoctorsYearSexes",
           "x": "numberOfDoctorsSex",
@@ -805,6 +901,9 @@
       {
         "title": "Number of Dentists by Year and Sex (2015-2017)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allNumberOfDentistYearSexes",
           "x": "numberOfDentistSex",
@@ -834,6 +933,9 @@
       {
         "title": "Crop production in tonnes",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allFoodProductions",
           "x": "crops",
@@ -855,6 +957,9 @@
       {
         "title": "Cereal yield in kg per hectare (Thousands)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allCerealYieldKgPerHectares",
           "x": "cerealYieldKgPerHectareYear",
@@ -876,6 +981,9 @@
       {
         "title": "Agricultural land (% of land area)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allAgriculturalLands",
           "x": "agriculturalLandYear",
@@ -897,6 +1005,9 @@
       {
         "title": "Employment in agriculture (% of male vs female employment)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allEmploymentInAgricultures",
           "x": "sex",
@@ -927,6 +1038,9 @@
       {
         "title": "Primary School enrollment, Female and Male (% gross)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allPrimarySchoolEnrollments",
           "x": "sex",
@@ -950,6 +1064,9 @@
       {
         "title": "Literacy rate, adult (% of population ages 15 and above)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allAdultLiteracyRates",
           "x": "sex",
@@ -973,6 +1090,9 @@
       {
         "title": "Percentage of Women and Men age 15-24 years who are literate by Sex, 2016/17",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allLiteracySexes",
           "x": "sex",
@@ -994,6 +1114,9 @@
       {
         "title": "Primary completion rate,(% of relevant age group)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allPrimaryEducationCompletionRates",
           "x": "primaryEducationCompletionRateYear",
@@ -1015,6 +1138,9 @@
       {
         "title": "Percentage Distribution of Enrolment in Primary Schools by Year and Sex, 2015 -2016",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allPrimarySchoolEnrollmentDistributions",
           "x": "sex",
@@ -1039,6 +1165,9 @@
       {
         "title": "Distribution of Enrolment in Junior Secondary School by Year and sex, 2015 -2016",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allJuniorSecondarySchoolEnrollments",
           "x": "sex",
@@ -1063,6 +1192,9 @@
       {
         "title": "Distribution of Enrolment in Senior Secondary School by State, Year and Sex, 2015 -2016",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allSeniorSecondarySchoolEnrollments",
           "x": "sex",
@@ -1087,6 +1219,9 @@
       {
         "title": "School enrollment, secondary (% gross)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allSecondarySchoolEnrollments",
           "x": "sex",
@@ -1110,6 +1245,9 @@
       {
         "title": "Primary Completion rate (%)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allPrimaryEducationCompletionSexes",
           "x": "primaryEducationCompletionSex",
@@ -1138,6 +1276,9 @@
       {
         "title": "Account ownership at a financial institution or with a mobile-money-service provider, (% of population ages 15+)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allAccountOwnerships",
           "x": "sex",
@@ -1162,6 +1303,9 @@
       {
         "title": "Percentage of households where at least one member owns or has a Bank Account",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allAccountOwnershipIndicators",
           "x": "accountOwnershipYear",
@@ -1182,6 +1326,9 @@
       {
         "title": "Mobile phone subscriptions (per 100 people)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allMobilePhoneSubscriptions",
           "x": "mobilePhoneSubscriptionsYear",
@@ -1210,6 +1357,9 @@
       {
         "title": "Government spending",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allGovernmentFundings",
           "x": "sector",
@@ -1261,6 +1411,9 @@
       {
         "title": "GDP per capita (current US$)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allGdpPerCapitas",
           "x": "gdpPerCapitaYear",
@@ -1281,6 +1434,9 @@
       {
         "title": "GDP per capita growth (annual %)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allGdpPerCapitaGrowths",
           "x": "gdpPerCapitaGrowthYear",
@@ -1302,6 +1458,9 @@
       {
         "title": "Tax as percentage of GDP",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allTaxAsPercentageOfGdps",
           "x": "taxAsPercentageOfGdpYear",
@@ -1323,6 +1482,9 @@
       {
         "title": "Tax revenue (current LCU)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allTaxRevenues",
           "x": "taxRevenueYear",
@@ -1344,6 +1506,9 @@
       {
         "title": "GDP",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allGdps",
           "x": "gdpYear",
@@ -1365,6 +1530,9 @@
       {
         "title": "GDP Growth",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allGdpGrowths",
           "x": "gdpGrowthYear",
@@ -1393,6 +1561,9 @@
       {
         "title": "Foreign direct investment, net inflows (% of GDP)",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allForeignDirectInvestmentNetInflows",
           "x": "foreignDirectInvestmentNetInflowsYear",
@@ -1414,6 +1585,9 @@
       {
         "title": "Contribution by principal donor",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "column",
           "table": "allDonors",
           "x": "donor",
@@ -1435,6 +1609,9 @@
       {
         "title": "Contribution by Worldbank & DFID per programme",
         "visual": {
+          "props": {
+            "horizontal": true
+          },
           "type": "grouped_column",
           "table": "allDonorFundedProgrammes",
           "x": "programme",

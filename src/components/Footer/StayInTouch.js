@@ -6,7 +6,7 @@ import NextLink from 'next/link';
 import { Grid, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import A from '@codeforafrica/hurumap-ui/dist/A';
+import A from '@codeforafrica/hurumap-ui/core/A';
 import Title from './Title';
 
 import email from '../../assets/images/email.svg';

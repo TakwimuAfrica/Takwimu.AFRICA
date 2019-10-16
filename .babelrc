@@ -1,10 +1,3 @@
 {
-  "presets": [
-    "next/babel"
-  ],
-  "plugins": [
-    [
-      "syntax-dynamic-import"
-    ]
-  ]
+  "presets": ["next/babel"]
 }
