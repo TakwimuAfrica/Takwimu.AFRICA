@@ -111,6 +111,11 @@ const createPdfStyles = StyleSheet =>
     }
   });
 
+const getPlainText = content => {
+  const text = content.match(new RegExp('<p>(.+?)</p>', 'g'));
+  return text || [];
+};
+
 const createPdf = (Document, Image, Link, Page, Text, View) => {
   function AnalysisPDF({ pdfClasses, topic, data, takwimu }) {
     const classes = pdfClasses;
@@ -144,7 +149,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           </View>
           {topic === 'topic' ? (
             <View style={classes.section}>
-              {data.content.content.split('</p>').map(t => (
+              {getPlainText(data.content.content).map(t => (
                 <Text key={t} style={classes.text}>
                   {t.replace(/<(?:.|\n)*?>/gi, '')}
                 </Text>
@@ -157,7 +162,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
                   <Text style={classes.boldText}>
                     {c.carousel_name}, {c.carousel_title}
                   </Text>
-                  {c.carousel_description.split('</p>').map(t => (
+                  {getPlainText(c.carousel_description).map(t => (
                     <Text style={classes.text}>
                       {t.replace(/<(?:.|\n)*?>/gi, '')}
                     </Text>
