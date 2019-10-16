@@ -57,6 +57,7 @@ class AboutContent extends React.Component {
       contentHeadings,
       faqs,
       services,
+      whereToNext,
       socialMedia
     } = this.props;
 
@@ -100,7 +101,7 @@ class AboutContent extends React.Component {
           component={ContentSection}
         />
         <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
-        <AboutWhereToNext socialMedia={socialMedia} />
+        <AboutWhereToNext whereToNext={whereToNext} socialMedia={socialMedia} />
         <RelatedContent content={relatedContent} />
       </>
     );
@@ -123,6 +124,10 @@ AboutContent.propTypes = {
   services: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string
+  }).isRequired,
+  whereToNext: PropTypes.shape({
+    title: PropTypes.string,
+    whereLink: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape({}).isRequired,

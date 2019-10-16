@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-function AboutWhereToNext({ socialMedia, title }) {
+function AboutWhereToNext({ socialMedia, whereToNext: { title, whereLink } }) {
   const classes = useStyles();
   return (
     <ContentSection
@@ -45,6 +45,13 @@ function AboutWhereToNext({ socialMedia, title }) {
         alignItems="center"
         className={classes.root}
       >
+        {whereLink &&
+          whereLink.length > 0 &&
+          whereLink.map(where => (
+            <Card href={where.link} variant="dual" component={A}>
+              {where.title}
+            </Card>
+          ))}
         <Card href={socialMedia.medium} variant="dual" component={A}>
           Read our latest articles <br /> on Medium
         </Card>
@@ -63,11 +70,15 @@ AboutWhereToNext.propTypes = {
   socialMedia: PropTypes.shape({
     medium: PropTypes.string
   }).isRequired,
-  title: PropTypes.string
-};
-
-AboutWhereToNext.defaultProps = {
-  title: 'Where to next...'
+  whereToNext: PropTypes.shape({
+    title: PropTypes.string,
+    whereLink: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string,
+        link: PropTypes.string
+      })
+    )
+  }).isRequired
 };
 
 export default AboutWhereToNext;

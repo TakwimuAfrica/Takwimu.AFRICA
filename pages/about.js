@@ -30,7 +30,9 @@ function About(takwimu) {
       faqs_description: faqsDescription,
       questions_answers: questionsAnswers,
       related_content_title: relatedContentTitle,
-      related_links: relatedLinks
+      related_links: relatedLinks,
+      where_to_next_title: whereToNextTitle,
+      where_link: whereLink
     },
     settings: { socialMedia }
   } = takwimu;
@@ -48,6 +50,10 @@ function About(takwimu) {
   const relatedContent = {
     title: relatedContentTitle,
     relatedLinks: relatedLinks || []
+  };
+  const whereToNext = {
+    title: whereToNextTitle,
+    whereLink
   };
   const contentHeadings = [];
   if (aboutTakwimu) {
@@ -114,6 +120,7 @@ function About(takwimu) {
           faqs={faqs}
           services={services}
           socialMedia={socialMedia}
+          whereToNext={whereToNext}
           current={current}
           contentHeadings={contentHeadings}
           changeActiveContent={changeActiveContent}
