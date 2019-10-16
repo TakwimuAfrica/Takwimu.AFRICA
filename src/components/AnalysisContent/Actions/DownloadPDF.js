@@ -111,9 +111,10 @@ const createPdfStyles = StyleSheet =>
     }
   });
 
-const getPlainText = content => {
-  const text = content.match(new RegExp('<p>(.+?)</p>', 'g'));
-  return text || [];
+const removeIndicatorWidgets = content => {
+  const pattern = 'id="indicator-block_([^]*?)</style>';
+  const text = content.replace(new RegExp(pattern, 'g'), '');
+  return text;
 };
 
 const createPdf = (Document, Image, Link, Page, Text, View) => {
@@ -149,24 +150,30 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           </View>
           {topic === 'topic' ? (
             <View style={classes.section}>
-              {getPlainText(data.content.content).map(t => (
-                <Text key={t} style={classes.text}>
-                  {t.replace(/<(?:.|\n)*?>/gi, '')}
-                </Text>
-              ))}
+              {removeIndicatorWidgets(data.content.content)
+                .split('</p>')
+                .map(t => (
+                  <Text key={t} style={classes.text}>
+                    {t.replace(/<(?:.|\n)*?>/gi, '')}
+                  </Text>
+                ))}
             </View>
           ) : (
             <View style={classes.section}>
               {data.item.map(c => (
                 <>
                   <Text style={classes.boldText}>
-                    {c.carousel_name}, {c.carousel_title}
+                    {c.carousel_name.length > 0
+                      ? `${c.carousel_name}, ${c.carousel_title}`
+                      : `${c.carousel_title}`}
                   </Text>
-                  {getPlainText(c.carousel_description).map(t => (
-                    <Text style={classes.text}>
-                      {t.replace(/<(?:.|\n)*?>/gi, '')}
-                    </Text>
-                  ))}
+                  {removeIndicatorWidgets(c.carousel_description)
+                    .split('</p>')
+                    .map(t => (
+                      <Text key={t} style={classes.text}>
+                        {t.replace(/<(?:.|\n)*?>/gi, '')}
+                      </Text>
+                    ))}
                 </>
               ))}
             </View>
