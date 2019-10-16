@@ -193,13 +193,13 @@ const Theme = createTheme({
           display: 'flex',
           marginBottom: '28px',
           flexWrap: 'wrap',
-          '.are-vertically-aligned-top': {
+          '& .are-vertically-aligned-top': {
             alignItems: 'flex-start'
           },
-          '.are-vertically-aligned-center': {
+          '& .are-vertically-aligned-center': {
             alignItems: 'center'
           },
-          '.are-vertically-aligned-bottom': {
+          '& .are-vertically-aligned-bottom': {
             alignItems: 'flex-end'
           }
         },
@@ -211,16 +211,16 @@ const Theme = createTheme({
           wordBreak: 'break-word',
           overflowWrap: 'break-word',
           display: 'flex',
-          '.is-vertically-aligned-top': {
+          '& .is-vertically-aligned-top': {
             alignSelf: 'flex-start'
           },
-          '.is-vertically-aligned-center': {
+          '& .is-vertically-aligned-center': {
             alignSelf: 'center'
           },
-          '.is-vertically-aligned-bottom': {
+          '& .is-vertically-aligned-bottom': {
             alignSelf: 'flex-end'
           },
-          ' @media (max-width: 599px)': {
+          '@media (max-width: 599px)': {
             flexBasis: '100% !important'
           },
           '@media (min-width: 600px)': {
@@ -233,15 +233,17 @@ const Theme = createTheme({
             marginLeft: '32px'
           }
         },
+        '.indicator-widget': {
+          width: '100%'
+        },
         '.indicator-div': {
-          width: '100%',
           display: 'flex'
         },
         '.flourish-embed': {
           width: '100%'
         },
         '.wp-block-column:not(:first-child)': {
-          ' @media (min-width: 782px)': {
+          '@media (min-width: 782px)': {
             marginLeft: '32px'
           }
         }
