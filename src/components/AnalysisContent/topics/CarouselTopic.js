@@ -156,10 +156,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Topic({ data, onIndexChanged, url }) {
+function Topic({ data, onIndexChanged }) {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [images, setImages] = useState({});
 
   useEffect(() => {
     const profile = document.getElementById(`profile-${selectedIndex}`);
@@ -168,23 +167,7 @@ function Topic({ data, onIndexChanged, url }) {
     onIndexChanged(selectedIndex);
   }, [onIndexChanged, selectedIndex]);
 
-  useEffect(() => {
-    data.forEach(item =>
-      fetch(`${url}/api/v2/images/${item.image}`)
-        .then(response => response.json())
-        .then(json =>
-          setImages(prev => ({
-            ...prev,
-            [json.id]: json.meta.download_url
-          }))
-        )
-    );
-  }, [data, url]);
-  const { name } = data[selectedIndex];
-  let { title } = data[selectedIndex];
-  if (name && name.length > 0) {
-    title = `${name}, ${title}`;
-  }
+  const { carousel_name: name, carousel_title: title } = data[selectedIndex];
   return (
     <div id="political-figures" className={classes.root}>
       <div className={classes.carouselWrapper}>
@@ -212,7 +195,7 @@ function Topic({ data, onIndexChanged, url }) {
               >
                 <img
                   alt=""
-                  src={images[item.image]}
+                  src={item.carousel_image.url}
                   className={classNames(classes.profilePicture, {
                     [classes.profilePictureSelected]: selectedIndex === index
                   })}
@@ -223,11 +206,11 @@ function Topic({ data, onIndexChanged, url }) {
                       [classes.profileNameSelected]: selectedIndex === index
                     })}
                   >
-                    {item.name}
+                    {item.carousel_name}
                   </Typography>
                 )}
                 <Typography className={classes.profileTitle}>
-                  {item.title}
+                  {item.carousel_title}
                 </Typography>
               </div>
             ))}
@@ -251,7 +234,9 @@ function Topic({ data, onIndexChanged, url }) {
           {title}
         </Typography>
 
-        <RichTypography>{data[selectedIndex].description}</RichTypography>
+        <RichTypography component="div">
+          {data[selectedIndex].carousel_description}
+        </RichTypography>
       </div>
     </div>
   );
@@ -260,13 +245,15 @@ function Topic({ data, onIndexChanged, url }) {
 Topic.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      description: PropTypes.string,
-      name: PropTypes.string,
-      title: PropTypes.string
+      carousel_description: PropTypes.string,
+      carousel_name: PropTypes.string,
+      carousel_title: PropTypes.string,
+      carousel_image: PropTypes.shape({
+        url: PropTypes.string
+      })
     })
   ).isRequired,
-  onIndexChanged: PropTypes.func.isRequired,
-  url: PropTypes.string.isRequired
+  onIndexChanged: PropTypes.func.isRequired
 };
 
 export default Topic;

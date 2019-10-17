@@ -30,13 +30,13 @@ function AnalysisList({ countrifyTitle, content, current, onClick }) {
       alignItems="stretch"
       className={classes.root}
     >
-      {content.map(({ featured_page: c, from_country: country }, index) => (
+      {content.map(({ featured_page: c, from_country: countrySlug }, index) => (
         <AnalysisListItem
-          key={`${country}-${c.post_name}`}
+          key={`${countrySlug}-${c.post_name}`}
           isCurrent={index === current}
           onClick={() => onClick(index)}
         >
-          {countrifyTitle(c, country)}
+          {countrifyTitle(c, countrySlug)}
         </AnalysisListItem>
       ))}
     </Grid>

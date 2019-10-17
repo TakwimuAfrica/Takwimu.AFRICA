@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
 
 function CurrentAnalysis({
   countrifyTitle,
-  content: { featured_page: currentAnalysis, from_country: country },
+  content: { featured_page: currentAnalysis, from_country: countrySlug },
   readAnalysisTitle,
   viewProfileTitle
 }) {
@@ -107,8 +107,8 @@ function CurrentAnalysis({
             className={classes.header}
           >
             <img
-              src={flagSrc(`./${country}.svg`)}
-              alt={country}
+              src={flagSrc(`./${countrySlug}.svg`)}
+              alt={countrySlug}
               className={classes.flag}
             />
 
@@ -117,12 +117,12 @@ function CurrentAnalysis({
               component="h1"
               className={classes.title}
             >
-              {countrifyTitle(currentAnalysis, country)}
+              {countrifyTitle(currentAnalysis, countrySlug)}
             </RichTypography>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <RichTypography className={classes.body}>
+          <RichTypography className={classes.body} component="span">
             {currentAnalysis.post_content}
           </RichTypography>
         </Grid>
@@ -134,13 +134,13 @@ function CurrentAnalysis({
             className={classes.actions}
           >
             <Button
-              href={`/profiles/${country}/${currentAnalysis.post_name}`}
+              href={`/profiles/${countrySlug}/${currentAnalysis.post_name}`}
               className={classes.primaryAction}
             >
               {readAnalysisTitle}
             </Button>
             <Button
-              href={`/profiles/${country}`}
+              href={`/profiles/${countrySlug}`}
               className={classes.secondaryAction}
               classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"

@@ -7,7 +7,8 @@ import ContentNavigation from '../ContentNavigation';
 
 const useStyles = makeStyles({
   root: {},
-  label: {}
+  label: {},
+  other: {}
 });
 
 function AnalysisContentNavigation({
@@ -22,12 +23,12 @@ function AnalysisContentNavigation({
 }) {
   const classes = useStyles(props);
   const generateHref = index => {
-    const item = content.body[index];
-    return `#${item.id}`;
+    const item = content.topics[index];
+    return `#${item.post_name}`;
   };
   const generateTitle = index => {
-    const item = content.body[index];
-    return item.value.title;
+    const item = content.topics[index];
+    return item.post_title;
   };
 
   return (
@@ -39,7 +40,7 @@ function AnalysisContentNavigation({
       }}
       title={labelText}
       contentTitle={labelTextStrong}
-      content={content.body}
+      content={content.topics}
       current={current}
       generateHref={generateHref}
       generateTitle={generateTitle}
@@ -55,13 +56,11 @@ AnalysisContentNavigation.propTypes = {
   labelTextStrong: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({
-    body: PropTypes.arrayOf(
+    topics: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.string,
-        value: PropTypes.shape({
-          type: PropTypes.string,
-          title: PropTypes.string
-        })
+        type: PropTypes.string,
+        post_title: PropTypes.string,
+        post_name: PropTypes.string
       })
     )
   }).isRequired,
