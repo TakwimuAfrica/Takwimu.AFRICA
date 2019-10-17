@@ -52,8 +52,9 @@ class FeaturedAnalysis extends React.Component {
     }
     const { current } = this.state;
 
-    const countrifyTitle = (analysis, country) => {
+    const countrifyTitle = (analysis, countrySlug) => {
       const { post_title: t } = analysis;
+      const country = countries.find(c => c.slug === countrySlug);
       return countrify(t, country, countries);
     };
 

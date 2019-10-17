@@ -1,6 +1,8 @@
 /* eslint-disable react/no-danger */
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import dynamic from 'next/dynamic';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -12,11 +14,17 @@ import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
-import DataContainer from '../DataContainer';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
+import ThemeContainer from '../ThemedContainer';
+import ApolloContainer from '../ApolloContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
+import PDFDataContainer from '../DataContainer/PDFDataContainer';
+
+const HURUmapChart = dynamic(() => import('../DataContainer/HURUmapChart'), {
+  ssr: false
+});
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     margin: '37px 0 22px 19px'
   },
   body: {
-    padding: '0 19px'
+    padding: '0 19px',
+    width: '100%'
   },
   readNextContainer: {
     paddingBottom: '2.25rem'
@@ -62,60 +71,99 @@ function AnalysisContent({
   analysisLink
 }) {
   const classes = useStyles();
+  useEffect(() => {
+    const indicators = Array.from(
+      document.querySelectorAll('[id^="indicator-block"]')
+    );
+    if (indicators && indicators.length > 0) {
+      indicators.map(indicator => {
+        if (indicator.attributes['data-layout'].value === 'document_widget') {
+          const title = indicator.attributes['data-title'].value;
+          const documentSource = indicator.attributes['data-src'].value;
+          const { id } = indicator;
+          ReactDOM.render(
+            <ThemeContainer>
+              <PDFDataContainer
+                id={id}
+                countryName={takwimu.country.name}
+                data={{ title, source: documentSource }}
+              />
+            </ThemeContainer>,
+            indicator
+          );
+        }
+        return indicator;
+      });
+    }
+
+    const hurumapCharts = Array.from(
+      document.querySelectorAll('div[data-chart-id]')
+    );
+    if (hurumapCharts && hurumapCharts.length > 0) {
+      hurumapCharts.map(chart => {
+        const chartId = chart.attributes['data-chart-id'].value;
+        const geoId = chart.attributes['data-geo-type'].value;
+        ReactDOM.render(
+          <ApolloContainer>
+            <ThemeContainer>
+              <HURUmapChart geoId={geoId} chartId={chartId} />
+            </ThemeContainer>
+          </ApolloContainer>,
+          chart
+        );
+        return chart;
+      });
+    }
+  }, [takwimu.country.name, topicIndex]);
+
   const [carouselItemIndex, setCarouselItemIndex] = useState(
-    content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
+    content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
   );
   useEffect(() => {
     setCarouselItemIndex(
-      content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
+      content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
     );
-  }, [content.body, topicIndex]);
+  }, [content.topics, topicIndex]);
 
-  const [id, setId] = useState(`${content.id}-${topicIndex}`);
-  useEffect(() => {
-    if (`${content.id}-${topicIndex}` !== id) {
-      setId(`${content.id}-${topicIndex}`);
-    }
-  }, [content.id, topicIndex, id]);
+  // const [id, setId] = useState(`${content.id}-${topicIndex}`);
+  // useEffect(() => {
+  //   if (`${content.id}-${topicIndex}` !== id) {
+  //     setId(`${content.id}-${topicIndex}`);
+  //   }
+  // }, [content.id, topicIndex, id]);
 
-  useEffect(() => {
-    if (document.getElementsByClassName('flourish-embed')) {
-      const script = document.createElement('script');
-      const oldScript = document.getElementById('flourish-script');
-      if (oldScript) {
-        oldScript.remove();
-      }
+  // useEffect(() => {
+  //   if (document.getElementsByClassName('flourish-embed')) {
+  //     const script = document.createElement('script');
+  //     const oldScript = document.getElementById('flourish-script');
+  //     if (oldScript) {
+  //       oldScript.remove();
+  //     }
 
-      window.FlourishLoaded = false;
-      script.id = 'flourish-script';
-      script.src = 'https://public.flourish.studio/resources/embed.js';
-      document.body.appendChild(script);
-    }
-  }, [id, carouselItemIndex]);
+  //     window.FlourishLoaded = false;
+  //     script.id = 'flourish-script';
+  //     script.src = 'https://public.flourish.studio/resources/embed.js';
+  //     document.body.appendChild(script);
+  //   }
+  // }, [topicIndex]);
 
   const showContent = index => () => {
     onChange(index);
   };
+  const profileNavigation = 'Other topics in';
+  const readNext = 'Read next...';
 
-  const {
-    profile_navigation: { value: profileNavigation },
-    read_next: { value: readNext }
-  } = content;
-
-  const topic = content.body[topicIndex].type;
+  const topicType = content.topics[topicIndex].type;
   const data = {
-    item:
-      carouselItemIndex !== -1
-        ? content.body[topicIndex].value.body[carouselItemIndex]
-        : null,
-    content: content.body[topicIndex].value
+    content: content.topics[topicIndex],
+    item: carouselItemIndex !== -1 ? content.topics[topicIndex].carousel : null
   };
 
   return (
     <>
       <OtherInfoNav
-        labelText={profileNavigation.title}
-        labelTextStrong={content.title}
+        labelText={profileNavigation}
+        labelTextStrong={content.post_title}
         content={content}
         current={topicIndex}
         showContent={showContent}
@@ -124,84 +172,66 @@ function AnalysisContent({
 
       <div className={classes.root}>
         <Typography className={classes.title} variant="h2">
-          {content.body[topicIndex].value.title}
+          {content.topics[topicIndex].post_title}
         </Typography>
 
         <ContentNavigation
-          labelText={profileNavigation.title}
-          labelTextStrong={content.title}
+          labelText={profileNavigation}
+          labelTextStrong={content.post_title}
           current={topicIndex}
           content={content}
           showContent={showContent}
         />
 
         <Actions
-          title={content.body[topicIndex].value.title}
+          title={content.topics[topicIndex].post_title}
           page={takwimu.page}
-          topic={topic}
+          topic={topicType}
           data={data}
           takwimu={takwimu}
           link={analysisLink}
         />
 
-        {content.body[topicIndex].type === 'carousel_topic' ? (
+        {topicType === 'topic' ? (
+          <Grid container direction="row">
+            <RichTypography className={classes.body} component="div">
+              {content.topics[topicIndex].content}
+            </RichTypography>
+          </Grid>
+        ) : (
           <CarouselTopic
             key={topicIndex}
-            data={content.body[topicIndex].value.body}
+            data={content.topics[topicIndex].carousel}
             onIndexChanged={setCarouselItemIndex}
             url={takwimu.url}
           />
-        ) : (
-          <Grid container direction="row">
-            {content.body[topicIndex].value.body.map(c => (
-              <Fragment key={c.id}>
-                {c.type === 'text' && (
-                  <RichTypography className={classes.body}>
-                    {c.value}
-                  </RichTypography>
-                )}
-                {c.type === 'indicator' && (
-                  <DataContainer
-                    id={c.id}
-                    classes={{ root: classes.dataContainer }}
-                    indicator={c}
-                    country={takwimu.country}
-                    url={takwimu.url}
-                  />
-                )}
-              </Fragment>
-            ))}
-          </Grid>
         )}
 
         <Actions
-          title={content.body[topicIndex].value.title}
+          title={content.topics[topicIndex].post_title}
           page={takwimu.page}
-          topic={topic}
+          topic={topicType}
           data={data}
           takwimu={takwimu}
           hideLastUpdated
           link={analysisLink}
         />
         <ContentNavigation
-          labelText={profileNavigation.title}
-          labelTextStrong={content.title}
+          labelText={profileNavigation}
+          labelTextStrong={content.post_title}
           current={topicIndex}
           content={content}
           showContent={showContent}
         />
         <AnalysisReadNext
           classes={{ container: classes.readNextContainer }}
-          title={readNext.title}
+          title={readNext}
           content={content}
           current={topicIndex}
           showContent={showContent}
         />
-        <CountryContent
-          content={content.view_country_content}
-          takwimu={takwimu}
-        />
-        <RelatedContent content={content.related_content} />
+        <CountryContent content={{}} takwimu={takwimu} />
+        <RelatedContent content={{}} />
       </div>
     </>
   );
@@ -209,15 +239,13 @@ function AnalysisContent({
 
 AnalysisContent.propTypes = {
   content: PropTypes.shape({
-    id: PropTypes.string,
-    body: PropTypes.arrayOf(
+    post_title: PropTypes.string,
+    topics: PropTypes.arrayOf(
       PropTypes.shape({
+        content: PropTypes.string,
+        post_title: PropTypes.string,
         type: PropTypes.string,
-        value: PropTypes.shape({
-          body: PropTypes.arrayOf(PropTypes.shape({})),
-          title: PropTypes.string,
-          type: PropTypes.string
-        })
+        carousel: PropTypes.arrayOf(PropTypes.shape({}))
       })
     ),
     profile_navigation: PropTypes.shape({
@@ -226,16 +254,18 @@ AnalysisContent.propTypes = {
     read_next: PropTypes.shape({
       value: PropTypes.shape({})
     }),
-    related_content: PropTypes.shape({}).isRequired,
+    related_content: PropTypes.shape({}),
     title: PropTypes.string,
-    view_country_content: PropTypes.shape({}).isRequired
+    view_country_content: PropTypes.shape({})
   }).isRequired,
   topicIndex: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
-    country: PropTypes.shape({}).isRequired
+    country: PropTypes.shape({
+      name: PropTypes.string
+    }).isRequired
   }).isRequired,
   analysisLink: PropTypes.string.isRequired
 };

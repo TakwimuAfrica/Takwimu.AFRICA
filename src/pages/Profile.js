@@ -7,6 +7,7 @@ import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import { Grid, makeStyles } from '@material-ui/core';
 
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
+import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
 import useChartDefinitions from '../data/useChartDefinitions';
 import config from '../config';
 import { shareIndicator, uploadImage } from '../common';
@@ -21,12 +22,6 @@ import Section from '../components/Section';
 
 import chartSources from '../data/sources.json';
 
-const ChartFactory = dynamic({
-  ssr: false,
-  loader: () => {
-    return import('@codeforafrica/hurumap-ui/factory/ChartFactory');
-  }
-});
 const MapIt = dynamic({
   ssr: false,
   loader: () => {

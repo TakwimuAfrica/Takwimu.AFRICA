@@ -86,6 +86,10 @@ function LatestNewsStories({
   );
 }
 
+LatestNewsStories.defaultProps = {
+  stories: []
+};
+
 LatestNewsStories.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
@@ -99,7 +103,7 @@ LatestNewsStories.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
-  stories: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  stories: PropTypes.arrayOf(PropTypes.shape({})),
   width: PropTypes.string.isRequired
 };
 

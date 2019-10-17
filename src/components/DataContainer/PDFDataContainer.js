@@ -1,8 +1,8 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { ButtonBase } from '@material-ui/core';
+import { ButtonBase, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import DataActions from './DataActions';
@@ -12,40 +12,42 @@ import rightArrow from '../../assets/images/right-arrow.svg';
 
 const PDF = React.lazy(() => import('../../modules/pdf'));
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
+    width: '100%',
+    padding: '1.25rem'
+  },
+  dataContainer: {
+    padding: '0.625rem',
+    backgroundColor: theme.palette.data.light,
+    overflow: 'hidden',
+    [theme.breakpoints.up('md')]: {
+      padding: '1.25rem'
+    }
+  },
+  title: {
+    fontWeight: 'bold',
+    lineHeight: 1.2,
+    marginBottom: '0.625rem'
+  },
+  dataRoot: {
     display: 'flex',
     justifyContent: 'center'
   },
   pageButton: {
     margin: '20px'
   }
-});
+}));
 
-function DataContainer({ id, data, countryName, url }) {
+function DataContainer({ id, data, countryName }) {
   const classes = useStyles();
-  const [documents, setDocuments] = useState({});
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
 
-  useEffect(() => {
-    if (data.document) {
-      fetch(`${url}/api/v2/documents/${data.document}`)
-        .then(response => response.json())
-        .then(json =>
-          setDocuments(prev => ({
-            ...prev,
-            [json.id]: json.meta.download_url
-          }))
-        );
-    }
-    return () => {};
-  }, [data.document, url]);
-
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = documents[data.document];
-    link.download = documents[data.document].split('/').pop();
+    link.href = data.source;
+    link.download = data.source;
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
@@ -53,66 +55,71 @@ function DataContainer({ id, data, countryName, url }) {
   };
 
   const handleShare = () => {
-    window.open(
-      `https://twitter.com/intent/tweet?url=${escape(documents[data.document])}`
-    );
+    window.open(`https://twitter.com/intent/tweet?url=${escape(data.source)}`);
   };
 
   return (
-    data.document && (
-      <>
-        <div id={`data-indicator-${id}`} className={classes.root}>
-          <ButtonBase
-            disabled={page <= 1}
-            ga-on="click"
-            ga-event-category="Data (PDF)"
-            ga-event-action="Paginate"
-            ga-event-label={data.title}
-            ga-event-value={page + 1}
-            className={classes.pageButton}
-            onClick={() => setPage(page - 1)}
-          >
-            <img alt="" src={leftArrow} />
-          </ButtonBase>
-          {documents[data.document] && (
-            <React.Suspense fallback={<div>Loading...</div>}>
-              <PDF
-                scale={1}
-                page={page}
-                file={documents[data.document]}
-                onDocumentComplete={setNumberOfPages}
-              />
-            </React.Suspense>
-          )}
-          <ButtonBase
-            ga-on="click"
-            ga-event-category="Data (PDF)"
-            ga-event-action="Paginate"
-            ga-event-label={data.title}
-            ga-event-value={page + 1}
-            disabled={page >= numberOfPages}
-            className={classes.pageButton}
-            onClick={() => setPage(page + 1)}
-          >
-            <img alt="" src={rightArrow} />
-          </ButtonBase>
-        </div>
+    <div id={`${id}-container`} className={classes.root}>
+      <div className={classes.dataContainer}>
+        <Grid container direction="column" alignItems="center">
+          <Typography variant="body1" align="center" className={classes.title}>
+            {data.title}
+          </Typography>
+          <div id={`data-${id}`} className={classes.dataRoot}>
+            <ButtonBase
+              disabled={page <= 1}
+              ga-on="click"
+              ga-event-category="Data (PDF)"
+              ga-event-action="Paginate"
+              ga-event-label={data.title}
+              ga-event-value={page + 1}
+              className={classes.pageButton}
+              onClick={() => setPage(page - 1)}
+            >
+              <img alt="" src={leftArrow} />
+            </ButtonBase>
+            {data.source && (
+              <React.Suspense fallback={<div>Loading...</div>}>
+                <PDF
+                  scale={1}
+                  page={page}
+                  file={data.source}
+                  onDocumentComplete={setNumberOfPages}
+                />
+              </React.Suspense>
+            )}
+            <ButtonBase
+              ga-on="click"
+              ga-event-category="Data (PDF)"
+              ga-event-action="Paginate"
+              ga-event-label={data.title}
+              ga-event-value={page + 1}
+              disabled={page >= numberOfPages}
+              className={classes.pageButton}
+              onClick={() => setPage(page + 1)}
+            >
+              <img alt="" src={rightArrow} />
+            </ButtonBase>
+          </div>
 
-        <DataActions
-          title={`${countryName}: ${data.title}`}
-          onDownload={handleDownload}
-          onShare={handleShare}
-        />
-      </>
-    )
+          <DataActions
+            title={`${countryName}: ${data.title}`}
+            onDownload={handleDownload}
+            onShare={handleShare}
+          />
+        </Grid>
+      </div>
+    </div>
   );
 }
 
 DataContainer.propTypes = {
   id: PropTypes.string,
-  data: PropTypes.shape({}).isRequired,
-  countryName: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired
+  data: PropTypes.shape({
+    title: PropTypes.string,
+    source: PropTypes.string
+  }).isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {
