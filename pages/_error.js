@@ -7,20 +7,27 @@ import Link from '@material-ui/core/Link';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import config from '../src/config';
-import { About } from '../src/components/Next';
+import WhereToNext from '../src/components/Next';
 import Error from '../src/components/Error';
 import ErrorPage from '../src/components/ErrorPage';
 import SearchInput from '../src/components/SearchInput';
 
-const useStyles = makeStyles({
-  root: {}
-});
+const useStyles = makeStyles(theme => ({
+  root: {},
+  whereToNext: {
+    width: '100%',
+    margin: 0,
+    padding: 0,
+    [theme.breakpoints.up('md')]: {
+      width: '43.734375rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '58.3125rem'
+    }
+  }
+}));
 
 function NotFoundError({ statusCode }) {
-  const {
-    settings: { socialMedia }
-  } = config;
-
   const classes = useStyles();
   return (
     <ErrorPage
@@ -36,7 +43,20 @@ function NotFoundError({ statusCode }) {
             </Typography>
           </Error>
           <SearchInput title="Why not try searching…" />
-          <About title="Explore further" socialMedia={socialMedia} />
+          <WhereToNext
+            variant="dual"
+            whereToNext={{
+              title: 'Explore further',
+              whereLink: [
+                {
+                  title: 'Read our latest articles on Medium',
+                  link: 'https://medium.com/@takwimu_africa'
+                },
+                { title: 'Contact Us', link: '/contact' }
+              ]
+            }}
+            classes={{ sectionRoot: classes.whereToNext }}
+          />
         </>
       )}
 
