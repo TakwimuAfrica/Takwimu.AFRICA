@@ -11,6 +11,7 @@ import WhereToNext from '../src/components/Next';
 import Error from '../src/components/Error';
 import ErrorPage from '../src/components/ErrorPage';
 import SearchInput from '../src/components/SearchInput';
+import { getSitePage } from '../src/getTakwimuPage';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function NotFoundError({ statusCode }) {
+function NotFoundError({ statusCode, whereLink }) {
   const classes = useStyles();
   return (
     <ErrorPage
@@ -47,13 +48,7 @@ function NotFoundError({ statusCode }) {
             variant="dual"
             whereToNext={{
               title: 'Explore further',
-              whereLink: [
-                {
-                  title: 'Read our latest articles on Medium',
-                  link: 'https://medium.com/@takwimu_africa'
-                },
-                { title: 'Contact Us', link: '/contact' }
-              ]
+              whereLink
             }}
             classes={{ sectionRoot: classes.whereToNext }}
           />
@@ -79,12 +74,19 @@ function NotFoundError({ statusCode }) {
 }
 
 NotFoundError.propTypes = {
-  statusCode: PropTypes.number.isRequired
+  statusCode: PropTypes.number.isRequired,
+  whereLink: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
-NotFoundError.getInitialProps = ({ res, err }) => {
+NotFoundError.defaultProps = {
+  whereLink: []
+}
+
+NotFoundError.getInitialProps = async ({ res, err }) => {
+  const { page: { where_link: whereLink } } = await getSitePage('about');
   return {
-    statusCode: (res && res.statusCode) || (err && err.statusCode) || 404
+    statusCode: (res && res.statusCode) || (err && err.statusCode) || 404,
+    whereLink
   };
 };
 
