@@ -20,7 +20,17 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: '1rem',
 
     // Inheritable by `A` component
-    textDecoration: 'none'
+    textDecoration: 'none',
+    '&:not(:first-child)': {
+      marginTop: '2rem',
+      [theme.breakpoints.up('md')]: {
+        marginTop: 0,
+        marginLeft: '1.5rem' // .75 of lg
+      },
+      [theme.breakpoints.up('lg')]: {
+        marginLeft: '2rem'
+      }
+    }
   },
   cardDual: {
     width: '100%',
@@ -49,7 +59,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Card({ children, variant, ...props }) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const variantClass =
     variant === 'triple' ? classes.cardTriple : classes.cardDual;
   return (
@@ -87,4 +97,5 @@ Card.defaultProps = {
   onClick: null,
   variant: 'triple'
 };
+
 export default Card;
