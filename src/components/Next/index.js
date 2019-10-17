@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/styles/makeStyles';
 
 import A from '@codeforafrica/hurumap-ui/dist/A';
-import Analysis from './Analysis';
 import Section from '../Section';
 import Card from './Card';
 
@@ -23,8 +22,6 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-
-export { Analysis };
 
 function WhereToNext({ variant, whereToNext: { title, whereLink }, ...props }) {
   const classes = useStyles(props);
