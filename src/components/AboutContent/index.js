@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import AboutUsContentNav from './AboutUsContentNav';
 import WhereToNext from '../Next';
@@ -12,7 +12,7 @@ import Faqs from '../Faqs';
 import RelatedContent from '../RelatedContent';
 import RichTextSection from '../RichTextSection';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: '933px'
   },
@@ -40,90 +40,72 @@ const styles = theme => ({
       width: '58.3125rem'
     }
   }
-});
+}));
 
-class AboutContent extends React.Component {
-  constructor(props) {
-    super(props);
+function AboutContent({
+  title,
+  contentNavigation,
+  aboutTakwimu,
+  methodology,
+  relatedContent,
+  current,
+  contentHeadings,
+  faqs,
+  services,
+  whereToNext,
+  ...props
+}) {
+  const classes = useStyles(props);
 
-    this.showContent = this.showContent.bind(this);
-  }
+  return (
+    <>
+      <AboutUsContentNav
+        title={contentNavigation}
+        current={current}
+        contentHeadings={contentHeadings}
+      />
+      <Typography variant="h2" className={classes.title}>
+        {title}
+      </Typography>
+      <ContentNavigation
+        title={contentNavigation}
+        contentHeadings={contentHeadings}
+        current={current}
+      />
+      <RichTextSection
+        classes={{ root: classes.section }}
+        title={aboutTakwimu.title}
+        value={aboutTakwimu.description}
+        id="about"
+        component={ContentSection}
+      />
 
-  showContent(currentContent) {
-    const { changeActiveContent } = this.props;
-    return () => {
-      changeActiveContent(currentContent);
-    };
-  }
-
-  render() {
-    const {
-      classes,
-      title,
-      contentNavigation,
-      aboutTakwimu,
-      methodology,
-      relatedContent,
-      current,
-      contentHeadings,
-      faqs,
-      services,
-      whereToNext
-    } = this.props;
-
-    return (
-      <>
-        <AboutUsContentNav
-          title={contentNavigation}
-          current={current}
-          contentHeadings={contentHeadings}
-          changeActiveContent={this.showContent}
-        />
-        <Typography variant="h2" className={classes.title}>
-          {title}
-        </Typography>
-        <ContentNavigation
-          title={contentNavigation}
-          contentHeadings={contentHeadings}
-          current={current}
-          changeActiveContent={this.showContent}
-        />
-        <RichTextSection
-          classes={{ root: classes.section }}
-          title={aboutTakwimu.title}
-          value={aboutTakwimu.description}
-          id="about"
-          component={ContentSection}
-        />
-
-        <RichTextSection
-          classes={{ root: classes.section }}
-          title={methodology.title}
-          value={methodology.description}
-          id="methodology"
-          component={ContentSection}
-        />
-        <RichTextSection
-          classes={{ root: classes.section }}
-          title={services.title}
-          value={services.description}
-          id="services"
-          component={ContentSection}
-        />
-        <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
-        <WhereToNext
-          classes={{ sectionRoot: classes.whereToNext }}
-          whereToNext={whereToNext}
-          variant="dual"
-        />
-        <RelatedContent content={relatedContent} />
-      </>
-    );
-  }
+      <RichTextSection
+        classes={{ root: classes.section }}
+        title={methodology.title}
+        value={methodology.description}
+        id="methodology"
+        component={ContentSection}
+      />
+      <RichTextSection
+        classes={{ root: classes.section }}
+        title={services.title}
+        value={services.description}
+        id="services"
+        component={ContentSection}
+      />
+      <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
+      <WhereToNext
+        classes={{ sectionRoot: classes.whereToNext }}
+        whereToNext={whereToNext}
+        variant="dual"
+      />
+      <RelatedContent content={relatedContent} />
+    </>
+  );
 }
 
 AboutContent.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   contentNavigation: PropTypes.string.isRequired,
   aboutTakwimu: PropTypes.shape({
@@ -149,4 +131,4 @@ AboutContent.propTypes = {
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(AboutContent);
+export default AboutContent;
