@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 import classNames from 'classnames';
-import { Link, MenuList } from '@material-ui/core';
+import { ButtonBase, MenuList, Typography } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { makeStyles } from '@material-ui/styles';
 
@@ -53,15 +53,19 @@ const useStyles = makeStyles(theme => ({
     padding: '0.625rem 0'
   },
   linkRoot: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textDecoration: 'underline',
+    color: theme.palette.primary.main
   },
   activeLink: {
-    textDecoration: 'underline'
+    color: theme.palette.text.primary,
+    textDecoration: 'none'
   }
 }));
 
 function TableOfContent({ children, content, current, generateHref, width }) {
   const classes = useStyles();
+  const router = useRouter();
   const [scrollDistance, setScrollDistance] = useState(0);
 
   useEffect(() => {
@@ -100,19 +104,19 @@ function TableOfContent({ children, content, current, generateHref, width }) {
               hidden={current !== index}
               className={classes.activeContentIndicator}
             />
-            <NextLink href={generateHref(index)}>
-              <Link
-                classes={{ root: classes.linkRoot }}
-                href={generateHref(index)}
-                className={classNames({
-                  [classes.activeLink]: current !== index
+            <ButtonBase
+              key={generateHref(index)}
+              onClick={() => router.push(generateHref(index))}
+            >
+              <Typography
+                variant="body2"
+                className={classNames(classes.linkRoot, {
+                  [classes.activeLink]: current === index
                 })}
-                color={current !== index ? 'primary' : 'textPrimary'}
-                underline="none"
               >
                 {c.title}
-              </Link>
-            </NextLink>
+              </Typography>
+            </ButtonBase>
           </li>
         ))}
       </MenuList>
