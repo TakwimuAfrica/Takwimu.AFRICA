@@ -33,9 +33,10 @@ function Contact(takwimu) {
       related_links: relatedLinks,
       address_title: addressTitle,
       address_label: addressLabel,
-      address_description: addressDescription
-    },
-    settings
+      address_description: addressDescription,
+      where_to_next_title: whereToNextTitle,
+      where_link: whereLink
+    }
   } = takwimu;
 
   const keyContacts = {
@@ -56,6 +57,10 @@ function Contact(takwimu) {
   const relatedContent = {
     title: relatedContentTitle,
     relatedLinks
+  };
+  const whereToNext = {
+    title: whereToNextTitle,
+    whereLink
   };
 
   let keyContactsIndex = -1;
@@ -138,8 +143,7 @@ function Contact(takwimu) {
           contentHeadings={contentHeadings}
           relatedContent={relatedContent}
           changeActiveContent={changeActiveContent}
-          settingsSocialMedia={settings.socialMedia}
-          settings={settings}
+          whereToNext={whereToNext}
         />
       </ContentPage>
     </Page>
