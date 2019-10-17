@@ -68,6 +68,8 @@ function AnalysisContent({
   topicIndex,
   takwimu,
   onChange,
+  topicsNavigation,
+  readNextTitle,
   analysisLink
 }) {
   const classes = useStyles();
@@ -150,8 +152,6 @@ function AnalysisContent({
   const showContent = index => () => {
     onChange(index);
   };
-  const profileNavigation = 'Other topics in';
-  const readNext = 'Read next...';
 
   const topicType = content.topics[topicIndex].type;
   const data = {
@@ -162,7 +162,7 @@ function AnalysisContent({
   return (
     <>
       <OtherInfoNav
-        labelText={profileNavigation}
+        labelText={topicsNavigation}
         labelTextStrong={content.post_title}
         content={content}
         current={topicIndex}
@@ -176,7 +176,7 @@ function AnalysisContent({
         </Typography>
 
         <ContentNavigation
-          labelText={profileNavigation}
+          labelText={topicsNavigation}
           labelTextStrong={content.post_title}
           current={topicIndex}
           content={content}
@@ -217,7 +217,7 @@ function AnalysisContent({
           link={analysisLink}
         />
         <ContentNavigation
-          labelText={profileNavigation}
+          labelText={topicsNavigation}
           labelTextStrong={content.post_title}
           current={topicIndex}
           content={content}
@@ -225,7 +225,7 @@ function AnalysisContent({
         />
         <AnalysisReadNext
           classes={{ container: classes.readNextContainer }}
-          title={readNext}
+          title={readNextTitle}
           content={content}
           current={topicIndex}
           showContent={showContent}
@@ -259,6 +259,8 @@ AnalysisContent.propTypes = {
     view_country_content: PropTypes.shape({})
   }).isRequired,
   topicIndex: PropTypes.number.isRequired,
+  topicsNavigation: PropTypes.string.isRequired,
+  readNextTitle: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
