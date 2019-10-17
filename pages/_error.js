@@ -80,10 +80,12 @@ NotFoundError.propTypes = {
 
 NotFoundError.defaultProps = {
   whereLink: []
-}
+};
 
 NotFoundError.getInitialProps = async ({ res, err }) => {
-  const { page: { where_link: whereLink } } = await getSitePage('about');
+  const {
+    page: { where_link: whereLink }
+  } = await getSitePage('about');
   return {
     statusCode: (res && res.statusCode) || (err && err.statusCode) || 404,
     whereLink
