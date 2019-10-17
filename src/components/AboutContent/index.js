@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 
 import AboutUsContentNav from './AboutUsContentNav';
-import { About as AboutWhereToNext } from '../Next';
+import WhereToNext from '../Next';
 import ContentNavigation from './ContentNavigation';
 import ContentSection from '../ContentSection';
 import Faqs from '../Faqs';
@@ -28,6 +28,17 @@ const styles = theme => ({
     paddingTop: '1rem',
     paddingBottom: '1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
+  },
+  whereToNext: {
+    width: '100%',
+    margin: 0,
+    padding: 0,
+    [theme.breakpoints.up('md')]: {
+      width: '43.734375rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '58.3125rem'
+    }
   }
 });
 
@@ -57,8 +68,7 @@ class AboutContent extends React.Component {
       contentHeadings,
       faqs,
       services,
-      whereToNext,
-      socialMedia
+      whereToNext
     } = this.props;
 
     return (
@@ -101,7 +111,11 @@ class AboutContent extends React.Component {
           component={ContentSection}
         />
         <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
-        <AboutWhereToNext whereToNext={whereToNext} socialMedia={socialMedia} />
+        <WhereToNext
+          classes={{ sectionRoot: classes.whereToNext }}
+          whereToNext={whereToNext}
+          variant="dual"
+        />
         <RelatedContent content={relatedContent} />
       </>
     );
@@ -129,7 +143,6 @@ AboutContent.propTypes = {
     title: PropTypes.string,
     whereLink: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
-  socialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,

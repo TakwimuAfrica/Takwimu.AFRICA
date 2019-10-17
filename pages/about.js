@@ -33,8 +33,7 @@ function About(takwimu) {
       related_links: relatedLinks,
       where_to_next_title: whereToNextTitle,
       where_link: whereLink
-    },
-    settings: { socialMedia }
+    }
   } = takwimu;
 
   const aboutTakwimu = content.find(c => c.type === 'about') || {};
@@ -119,7 +118,6 @@ function About(takwimu) {
           relatedContent={relatedContent}
           faqs={faqs}
           services={services}
-          socialMedia={socialMedia}
           whereToNext={whereToNext}
           current={current}
           contentHeadings={contentHeadings}
