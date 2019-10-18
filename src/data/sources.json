@@ -81,7 +81,7 @@
             },
             "health_centers_dist": {
                 "source": {
-                    "href": "http://www.health.go.ke/wp-content/uploads/2016/04/Kenya-HRH-Strategy-2014-2018.pdf",
+                    "href": "https://africaopendata.org/dataset/kenya-health-sector-human-resources-strategy-2014-2018",
                     "title": "Ministry of Health, 2014"
                 }
             },
@@ -302,19 +302,19 @@
             },
             "allValidInvalidVotes": {
               "source": {
-                "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
                 "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allRegisteredAccreditedVoters": {
               "source": {
-                "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
                 "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allVotesPerCandidates": {
               "source": {
-                "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
                 "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
@@ -344,7 +344,7 @@
             },
             "allPrimaryEducationCompletionSexes": {
                 "source": {
-                    "href": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "href": "https://africaopendata.org/dataset/nigeria-education-indicators-2016",
                     "title": "Nigeria Federal Ministry of Education, 2016"
                 }
             },
@@ -606,19 +606,19 @@
             },
             "allValidInvalidVotes": {
                 "source": {
-                  "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                  "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
                   "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
                 }
               },
               "allRegisteredAccreditedVoters": {
                 "source": {
-                  "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                  "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
                   "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
                 }
               },
               "allVotesPerCandidates": {
                 "source": {
-                  "href": "https://thecommonwealth.org/sites/default/files/inline/Nigeria%2BCOG%2BReport%2BMarch%2B2015.pdf",
+                  "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
                   "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
                 }
               },
@@ -660,7 +660,7 @@
             },
             "allPrimaryEducationCompletionSexes": {
                 "source": {
-                    "href": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "href": "https://africaopendata.org/dataset/nigeria-education-indicators-2016",
                     "title": "Nigeria Federal Ministry of Education, 2016"
                 }
             },
@@ -906,13 +906,13 @@
           },
             "sex_dist": {
                 "source": {
-                    "href": "http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf",
+                    "href": "https://africaopendata.org/dataset/ethiopia-summary-and-statistical-report-of-the-2007-population-and-housing-census",
                     "title": "Summary and Statistical Report of the 2007 Population and Housing Census"
                 }
             },
             "residence_dist": {
                 "source": {
-                    "href": "http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf",
+                    "href": "https://africaopendata.org/dataset/ethiopia-summary-and-statistical-report-of-the-2007-population-and-housing-census",
                     "title": "Summary and Statistical Report of the 2007 Population and Housing Census"
                 }
             },
