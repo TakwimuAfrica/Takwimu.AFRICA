@@ -15,6 +15,10 @@ const Theme = createTheme({
   chart: {
     pie: {
       legendWidth: 50,
+      height: 250,
+      origin: { x: 150, y: 125 },
+      padding: 0,
+      width: 450,
       colorScale: COLOR_BREWER_DIVERGING
     },
     area: {
@@ -24,6 +28,10 @@ const Theme = createTheme({
       colorScale: COLOR_BREWER_DIVERGING
     },
     bar: {
+      domainPadding: { x: [50, 50] },
+      width: 350,
+      height: 350,
+      offset: 40,
       style: {
         data: {
           fill: COLOR_BREWER_DIVERGING[0]
@@ -35,7 +43,7 @@ const Theme = createTheme({
       }
     },
     axis: {
-      labelWidth: 50,
+      labelWidth: 100,
       style: {
         tickLabels: {
           fontFamily: FONT_FAMILY_TEXT,
