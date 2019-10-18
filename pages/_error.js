@@ -7,20 +7,28 @@ import Link from '@material-ui/core/Link';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import config from '../src/config';
-import { About } from '../src/components/Next';
+import WhereToNext from '../src/components/Next';
 import Error from '../src/components/Error';
 import ErrorPage from '../src/components/ErrorPage';
 import SearchInput from '../src/components/SearchInput';
+import { getSitePage } from '../src/getTakwimuPage';
 
-const useStyles = makeStyles({
-  root: {}
-});
+const useStyles = makeStyles(theme => ({
+  root: {},
+  whereToNext: {
+    width: '100%',
+    margin: 0,
+    padding: 0,
+    [theme.breakpoints.up('md')]: {
+      width: '43.734375rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '58.3125rem'
+    }
+  }
+}));
 
-function NotFoundError({ statusCode }) {
-  const {
-    settings: { socialMedia }
-  } = config;
-
+function NotFoundError({ statusCode, whereToNextLink }) {
   const classes = useStyles();
   return (
     <ErrorPage
@@ -36,7 +44,14 @@ function NotFoundError({ statusCode }) {
             </Typography>
           </Error>
           <SearchInput title="Why not try searching…" />
-          <About title="Explore further" socialMedia={socialMedia} />
+          <WhereToNext
+            variant="dual"
+            whereToNext={{
+              title: 'Explore further',
+              whereToNextLink
+            }}
+            classes={{ sectionRoot: classes.whereToNext }}
+          />
         </>
       )}
 
@@ -59,12 +74,21 @@ function NotFoundError({ statusCode }) {
 }
 
 NotFoundError.propTypes = {
-  statusCode: PropTypes.number.isRequired
+  statusCode: PropTypes.number.isRequired,
+  whereToNextLink: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
-NotFoundError.getInitialProps = ({ res, err }) => {
+NotFoundError.defaultProps = {
+  whereToNextLink: []
+};
+
+NotFoundError.getInitialProps = async ({ res, err }) => {
+  const {
+    page: { where_to_next_link: whereToNextLink }
+  } = await getSitePage('about');
   return {
-    statusCode: (res && res.statusCode) || (err && err.statusCode) || 404
+    statusCode: (res && res.statusCode) || (err && err.statusCode) || 404,
+    whereToNextLink
   };
 };
 
