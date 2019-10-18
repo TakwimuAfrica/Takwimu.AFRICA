@@ -111,6 +111,12 @@ const createPdfStyles = StyleSheet =>
     }
   });
 
+const removeIndicatorWidgets = content => {
+  const pattern = 'id="indicator-block_([^]*?)</style>';
+  const text = content.replace(new RegExp(pattern, 'g'), '');
+  return text;
+};
+
 const createPdf = (Document, Image, Link, Page, Text, View) => {
   function AnalysisPDF({ pdfClasses, topic, data, takwimu }) {
     const classes = pdfClasses;
@@ -135,7 +141,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           <View style={classes.section}>
             <Text style={classes.title}>
               {countrify(
-                data.content.title,
+                data.content.post_title,
                 takwimu.country,
                 takwimu.countries,
                 ' : '
@@ -144,26 +150,31 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           </View>
           {topic === 'topic' ? (
             <View style={classes.section}>
-              {data.content.body.map(c => {
-                if (c.type === 'text') {
-                  return c.value.split('</p>').map(t => (
-                    <Text key={t} style={classes.text}>
-                      {t.replace(/<(?:.|\n)*?>/gi, '')}
-                    </Text>
-                  ));
-                }
-                return null;
-              })}
+              {removeIndicatorWidgets(data.content.content)
+                .split('</p>')
+                .map(t => (
+                  <Text key={t} style={classes.text}>
+                    {t.replace(/<(?:.|\n)*?>/gi, '')}
+                  </Text>
+                ))}
             </View>
           ) : (
             <View style={classes.section}>
-              <Text style={classes.boldText}>
-                {data.item.name}, {data.item.title}
-              </Text>
-              {data.item.description.split('</p>').map(t => (
-                <Text style={classes.text}>
-                  {t.replace(/<(?:.|\n)*?>/gi, '')}
-                </Text>
+              {data.item.map(c => (
+                <>
+                  <Text style={classes.boldText}>
+                    {c.carousel_name.length > 0
+                      ? `${c.carousel_name}, ${c.carousel_title}`
+                      : `${c.carousel_title}`}
+                  </Text>
+                  {removeIndicatorWidgets(c.carousel_description)
+                    .split('</p>')
+                    .map(t => (
+                      <Text key={t} style={classes.text}>
+                        {t.replace(/<(?:.|\n)*?>/gi, '')}
+                      </Text>
+                    ))}
+                </>
               ))}
             </View>
           )}
@@ -193,14 +204,17 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
     pdfClasses: PropTypes.shape({}).isRequired,
     data: PropTypes.shape({
       content: PropTypes.shape({
-        body: PropTypes.arrayOf(PropTypes.shape({})),
-        title: PropTypes.string
+        post_title: PropTypes.string,
+        post_name: PropTypes.string,
+        content: PropTypes.string
       }),
-      item: PropTypes.shape({
-        description: PropTypes.string,
-        name: PropTypes.string,
-        title: PropTypes.string
-      })
+      item: PropTypes.arrayOf(
+        PropTypes.shape({
+          carousel_description: PropTypes.string,
+          carousel_name: PropTypes.string,
+          carousel_title: PropTypes.string
+        })
+      )
     }).isRequired,
     topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
     takwimu: PropTypes.shape({
@@ -292,13 +306,16 @@ DownloadPDF.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({
-      body: PropTypes.arrayOf(PropTypes.shape({})),
-      title: PropTypes.string
+      content: PropTypes.string,
+      post_title: PropTypes.string
     }),
-    item: PropTypes.shape({
-      name: PropTypes.string,
-      title: PropTypes.string
-    })
+    item: PropTypes.arrayOf(
+      PropTypes.shape({
+        carousel_description: PropTypes.string,
+        carousel_name: PropTypes.string,
+        carousel_title: PropTypes.string
+      })
+    )
   }).isRequired,
   takwimu: PropTypes.shape({
     country: PropTypes.shape({

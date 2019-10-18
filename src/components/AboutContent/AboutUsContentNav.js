@@ -3,6 +3,7 @@ import React from 'react';
 import { Typography, ButtonBase } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { PropTypes } from 'prop-types';
+import { useRouter } from 'next/router';
 
 import classNames from 'classnames';
 
@@ -43,17 +44,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AboutContentNav({
-  title,
-  current,
-  contentHeadings,
-  changeActiveContent
-}) {
+function AboutContentNav({ title, current, contentHeadings }) {
   const classes = useStyles();
+  const router = useRouter();
   const showShadow = useScrollListener(10);
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `/${item.link}/`;
+    return `/${item.link}`;
   };
   return (
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
@@ -65,12 +62,7 @@ function AboutContentNav({
           {contentHeadings.map((item, index) => (
             <ButtonBase
               key={item.link}
-              onClick={e => {
-                e.preventDefault();
-
-                window.history.pushState(null, '', generateHref(index));
-                changeActiveContent(index)();
-              }}
+              onClick={() => router.push(generateHref(index))}
             >
               <Typography
                 variant="body2"
@@ -96,8 +88,7 @@ AboutContentNav.propTypes = {
     PropTypes.shape({
       link: PropTypes.string
     }).isRequired
-  ).isRequired,
-  changeActiveContent: PropTypes.func.isRequired
+  ).isRequired
 };
 
 export default AboutContentNav;

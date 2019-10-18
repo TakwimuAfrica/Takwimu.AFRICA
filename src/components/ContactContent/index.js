@@ -4,11 +4,11 @@ import { PropTypes } from 'prop-types';
 import { Typography, Grid, Icon } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/styles';
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import ContactContentNav from './ContactContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';
-import { Contact as ContactWhereToNext } from '../Next';
+import WhereToNext from '../Next';
 import RelatedContent from '../RelatedContent';
 
 import facebook from '../../assets/images/logo-facebook.svg';
@@ -52,7 +52,15 @@ const useStyles = makeStyles(theme => ({
     }
   },
   whereToNext: {
-    marginTop: '7.75rem'
+    width: '100%',
+    margin: '7.75rem 0 0 0',
+    padding: 0,
+    [theme.breakpoints.up('md')]: {
+      width: '43.734375rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '58.3125rem'
+    }
   }
 }));
 
@@ -67,18 +75,17 @@ const SOCIAL_MEDIA = {
 
 function ContactContent({
   title,
-  address: { value: address },
+  address,
   addressIndex,
-  keyContacts: { value: keyContacts },
+  keyContacts,
   keyContactsIndex,
-  socialMedia: { value: socialMedia },
+  socialMedia,
   socialMediaIndex,
   current,
   contentHeadings,
   changeActiveContent,
-  settingsSocialMedia,
-  relatedContent,
-  settings: { socialMedia: socialMediaSettings }
+  whereToNext,
+  relatedContent
 }) {
   const classes = useStyles();
   return (
@@ -129,24 +136,28 @@ function ContactContent({
             {socialMedia.accounts.map(account => (
               <A
                 className={classes.social}
-                href={socialMediaSettings[account.name]}
+                href={account.account_url}
                 underline="hover"
+                key={account.name}
               >
-                <img
-                  src={SOCIAL_MEDIA[account.name].logo}
-                  alt=""
-                  className={classes.icon}
-                />
-                <Icon className={classes.social} />
-                {SOCIAL_MEDIA[account.name].name}
+                <>
+                  <img
+                    src={SOCIAL_MEDIA[account.name].logo}
+                    alt=""
+                    className={classes.icon}
+                  />
+                  <Icon className={classes.social} />
+                  {SOCIAL_MEDIA[account.name].name}
+                </>
               </A>
             ))}
           </Grid>
         </ContentSection>
       )}
-      <ContactWhereToNext
+      <WhereToNext
         classes={{ sectionRoot: classes.whereToNext }}
-        socialMedia={settingsSocialMedia}
+        variant="dual"
+        whereToNext={whereToNext}
       />
       <RelatedContent content={relatedContent} />
     </>
@@ -157,21 +168,19 @@ ContactContent.propTypes = {
   title: PropTypes.string.isRequired,
   address: PropTypes.shape({
     description: PropTypes.string,
-    value: PropTypes.shape({}),
     title: PropTypes.string
   }).isRequired,
   addressIndex: PropTypes.number.isRequired,
   keyContacts: PropTypes.shape({
     title: PropTypes.string,
-    contacts: PropTypes.arrayOf(PropTypes.shape({})),
-    value: PropTypes.shape({})
+    contacts: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
   keyContactsIndex: PropTypes.number.isRequired,
   socialMedia: PropTypes.shape({
-    value: PropTypes.shape({})
+    title: PropTypes.string,
+    accounts: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired,
   socialMediaIndex: PropTypes.number.isRequired,
-  settingsSocialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(
@@ -180,13 +189,11 @@ ContactContent.propTypes = {
       title: PropTypes.string
     }).isRequired
   ).isRequired,
-  changeActiveContent: PropTypes.func.isRequired,
-  settings: PropTypes.shape({
-    socialMedia: PropTypes.shape({
-      accounts: PropTypes.arrayOf(PropTypes.shape({})),
-      title: PropTypes.string
-    }).isRequired
-  }).isRequired
+  whereToNext: PropTypes.shape({
+    title: PropTypes.string,
+    whereLink: PropTypes.arrayOf(PropTypes.shape({}))
+  }).isRequired,
+  changeActiveContent: PropTypes.func.isRequired
 };
 
 export default ContactContent;

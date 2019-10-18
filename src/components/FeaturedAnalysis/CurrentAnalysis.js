@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
 
 function CurrentAnalysis({
   countrifyTitle,
-  content: { value: currentAnalysis },
+  content: { featured_page: currentAnalysis, from_country: countrySlug },
   readAnalysisTitle,
   viewProfileTitle
 }) {
@@ -107,8 +107,8 @@ function CurrentAnalysis({
             className={classes.header}
           >
             <img
-              src={flagSrc(`./${currentAnalysis.country.slug}.svg`)}
-              alt={currentAnalysis.country.iso_code}
+              src={flagSrc(`./${countrySlug}.svg`)}
+              alt={countrySlug}
               className={classes.flag}
             />
 
@@ -117,13 +117,13 @@ function CurrentAnalysis({
               component="h1"
               className={classes.title}
             >
-              {countrifyTitle(currentAnalysis)}
+              {countrifyTitle(currentAnalysis, countrySlug)}
             </RichTypography>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <RichTypography className={classes.body}>
-            {currentAnalysis.description}
+          <RichTypography className={classes.body} component="span">
+            {currentAnalysis.post_content}
           </RichTypography>
         </Grid>
         <Grid item xs={12}>
@@ -134,13 +134,13 @@ function CurrentAnalysis({
             className={classes.actions}
           >
             <Button
-              href={`/profiles/${currentAnalysis.country.slug}/${currentAnalysis.slug}`}
+              href={`/profiles/${countrySlug}/${currentAnalysis.post_name}`}
               className={classes.primaryAction}
             >
               {readAnalysisTitle}
             </Button>
             <Button
-              href={`/profiles/${currentAnalysis.country.slug}`}
+              href={`/profiles/${countrySlug}`}
               className={classes.secondaryAction}
               classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"
@@ -157,7 +157,8 @@ function CurrentAnalysis({
 CurrentAnalysis.propTypes = {
   countrifyTitle: PropTypes.func.isRequired,
   content: PropTypes.shape({
-    value: PropTypes.shape({}).isRequired
+    featured_page: PropTypes.shape({}).isRequired,
+    from_country: PropTypes.string.isRequired
   }).isRequired,
   readAnalysisTitle: PropTypes.string.isRequired,
   viewProfileTitle: PropTypes.string.isRequired

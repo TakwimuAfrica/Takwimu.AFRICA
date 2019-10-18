@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 import { makeStyles, withTheme } from '@material-ui/styles';
 
 import DataActions from './DataActions';
-import { shareIndicator, uploadImage } from './common';
+import { shareIndicator, uploadImage } from '../../common';
 
 const useStyles = makeStyles({
   root: {
@@ -153,7 +153,7 @@ function DataContainer({ id, data, theme, countryName, url }) {
 DataContainer.propTypes = {
   countryName: PropTypes.string.isRequired,
   data: PropTypes.shape({
-    html: PropTypes.string,
+    html: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     title: PropTypes.string
   }).isRequired,
   id: PropTypes.string,

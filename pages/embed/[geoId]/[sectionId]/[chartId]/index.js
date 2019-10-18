@@ -1,18 +1,24 @@
 import React, { useMemo } from 'react';
-import { InsightContainer } from '@codeforafrica/hurumap-ui';
-import PropTypes from 'prop-types';
-import { Typography } from '@material-ui/core';
-import ChartFactory from '../components/ChartFactory';
+import InsightContainer from '@codeforafrica/hurumap-ui/dist/InsightContainer';
+import Typography from '@material-ui/core/Typography';
 
-import useChartDefinitions from '../data/useChartDefinitions';
-import useProfileLoader from '../data/useProfileLoader';
-import Error from '../components/Error';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import useChartDefinitions from '../../../../../src/data/useChartDefinitions';
+import useProfileLoader from '../../../../../src/data/useProfileLoader';
+import Error from '../../../../../src/components/Error';
 
-function Embed({
-  match: {
-    params: { geoId, sectionId, chartId }
+const Chart = dynamic({
+  ssr: false,
+  loader: () => {
+    return import('../../../../../src/components/ChartFactory');
   }
-}) {
+});
+
+function Embed() {
+  const {
+    query: { geoId, sectionId, chartId }
+  } = useRouter();
   const sectionedCharts = useChartDefinitions();
 
   const chart = useMemo(() => {
@@ -62,35 +68,23 @@ function Embed({
           href: 'http://dev.dominion.africa'
         }}
       >
-        {!chartData.isLoading &&
-          ChartFactory.build(
-            { ...chart.visuals[0], type: 'number' },
-            chartData.profileVisualsData,
-            null,
-            profiles
-          )}
-        {!chartData.isLoading &&
-          chart.visuals.map(visual =>
-            ChartFactory.build(
-              visual,
-              chartData.profileVisualsData,
-              null, // No comparison data
-              profiles
-            )
-          )}
+        {!chartData.isLoading && (
+          <Chart
+            definition={chart.stat}
+            primaryData={chartData.profileVisualsData}
+            profiles={profiles}
+          />
+        )}
+        {!chartData.isLoading && (
+          <Chart
+            definition={chart.visual}
+            primaryData={chartData.profileVisualsData}
+            profiles={profiles}
+          />
+        )}
       </InsightContainer>
     </div>
   );
 }
-
-Embed.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      geoId: PropTypes.string.isRequired,
-      sectionId: PropTypes.string.isRequired,
-      chartId: PropTypes.string.isRequired
-    }).isRequired
-  }).isRequired
-};
 
 export default Embed;

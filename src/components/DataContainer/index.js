@@ -189,7 +189,7 @@ DataContainer.propTypes = {
     }).isRequired,
     summary: PropTypes.string,
     meta: PropTypes.shape({
-      layout: PropTypes.shape({})
+      layout: PropTypes.string
     }).isRequired,
     widget: PropTypes.shape({})
   }).isRequired,

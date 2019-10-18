@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 import classNames from 'classnames';
-import { Link, MenuList } from '@material-ui/core';
+import { ButtonBase, MenuList, Typography } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { makeStyles } from '@material-ui/styles';
 
@@ -53,22 +53,19 @@ const useStyles = makeStyles(theme => ({
     padding: '0.625rem 0'
   },
   linkRoot: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textDecoration: 'underline',
+    color: theme.palette.primary.main
   },
   activeLink: {
-    textDecoration: 'underline'
+    color: theme.palette.text.primary,
+    textDecoration: 'none'
   }
 }));
 
-function TableOfContent({
-  children,
-  content,
-  current,
-  generateHref,
-  onChange,
-  width
-}) {
+function TableOfContent({ children, content, current, generateHref, width }) {
   const classes = useStyles();
+  const router = useRouter();
   const [scrollDistance, setScrollDistance] = useState(0);
 
   useEffect(() => {
@@ -104,27 +101,22 @@ function TableOfContent({
             <img
               alt=""
               src={activeContentIcon}
-              className={classes.activeContentIndicator}
               hidden={current !== index}
+              className={classes.activeContentIndicator}
             />
-            <Link
-              component={RouterLink}
-              classes={{ root: classes.linkRoot }}
-              className={classNames({
-                [classes.activeLink]: current !== index
-              })}
-              to={generateHref(index)}
-              color={current !== index ? 'primary' : 'textPrimary'}
-              onClick={e => {
-                e.preventDefault();
-
-                window.history.pushState(null, '', generateHref(index));
-                onChange(index);
-              }}
-              underline="none"
+            <ButtonBase
+              key={generateHref(index)}
+              onClick={() => router.push(generateHref(index))}
             >
-              {c.title}
-            </Link>
+              <Typography
+                variant="body2"
+                className={classNames(classes.linkRoot, {
+                  [classes.activeLink]: current === index
+                })}
+              >
+                {c.title}
+              </Typography>
+            </ButtonBase>
           </li>
         ))}
       </MenuList>
@@ -140,7 +132,6 @@ TableOfContent.propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   width: PropTypes.string.isRequired
 };
 
@@ -148,4 +139,6 @@ TableOfContent.defaultProps = {
   children: null
 };
 
-export default withWidth()(TableOfContent);
+export default withWidth({
+  initialWidth: 'md'
+})(TableOfContent);

@@ -228,7 +228,9 @@ function DataActions({
         }}
       >
         <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
-          <EmbedCodeTextArea code={embedCode} />
+          <div>
+            <EmbedCodeTextArea code={embedCode} />
+          </div>
         </ClickAwayListener>
       </Popover>
     </div>
@@ -248,7 +250,7 @@ DataActions.defaultProps = {
   onDownload: null,
   onShare: null,
   onShowData: null,
-  embedCode: null,
+  embedCode: '',
   onCompare: null
 };
 

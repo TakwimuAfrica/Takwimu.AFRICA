@@ -5,7 +5,7 @@ import { Button, Grid } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { makeStyles } from '@material-ui/styles';
 
-import { A } from '@codeforafrica/hurumap-ui';
+import A from '@codeforafrica/hurumap-ui/dist/A';
 import { RichTypography } from '../core';
 import Section from '../Section';
 import StoryBlocks from './StoryBlocks';
@@ -28,18 +28,16 @@ const useStyles = makeStyles({
 function LatestNewsStories({
   takwimu: {
     page: {
-      latest_news_stories: {
-        title,
-        description,
-        read_more_link_label: readMore,
-        stories
-      }
+      latest_news_title: title,
+      latest_news_description: description,
+      read_more_link_label: readMore
     },
     settings: {
       socialMedia: { medium }
     }
   },
-  width
+  width,
+  stories = []
 }) {
   const classes = useStyles();
   if (!title) {
@@ -88,15 +86,16 @@ function LatestNewsStories({
   );
 }
 
+LatestNewsStories.defaultProps = {
+  stories: []
+};
+
 LatestNewsStories.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      latest_news_stories: PropTypes.shape({
-        title: PropTypes.string,
-        description: PropTypes.string,
-        read_more_link_label: PropTypes.string,
-        stories: PropTypes.arrayOf(PropTypes.shape({}))
-      })
+      latest_news_title: PropTypes.string.isRequired,
+      latest_news_description: PropTypes.string.isRequired,
+      read_more_link_label: PropTypes.string.isRequired
     }).isRequired,
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({
@@ -104,7 +103,10 @@ LatestNewsStories.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
+  stories: PropTypes.arrayOf(PropTypes.shape({})),
   width: PropTypes.string.isRequired
 };
 
-export default withWidth()(LatestNewsStories);
+export default withWidth({
+  initialWidth: 'md'
+})(LatestNewsStories);

@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Helmet } from 'react-helmet';
-
 import Footer from './Footer';
 import Navigation from './Navigation';
+import SEO from './SEO';
 
-function Page({ children, takwimu, title: propTitle }) {
-  const title = propTitle ? `${propTitle} | Takwimu` : 'Takwimu';
-
+function Page({ children, takwimu, ...props }) {
   return (
     <>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
+      <SEO {...props} />
       <Navigation takwimu={takwimu} />
       {children}
       <Footer takwimu={takwimu} />

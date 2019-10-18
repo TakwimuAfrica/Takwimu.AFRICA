@@ -13,24 +13,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ContactUsTableOfContent({
-  current,
-  contentHeadings,
-  changeActiveContent
-}) {
+function ContactUsTableOfContent({ current, contentHeadings }) {
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `#${item.link}`;
+    return `/contact#${item.link}`;
   };
   const classes = useStyles();
 
   return (
     <TableOfContent
+      current={current}
       classes={{ root: classes.root }}
       content={contentHeadings}
-      current={current}
       generateHref={generateHref}
-      onChange={changeActiveContent}
     >
       <Typography variant="subtitle2" className={classes.sideMenuHeader}>
         Jump to:
@@ -45,8 +40,7 @@ ContactUsTableOfContent.propTypes = {
     PropTypes.shape({
       link: PropTypes.string
     }).isRequired
-  ).isRequired,
-  changeActiveContent: PropTypes.func.isRequired
+  ).isRequired
 };
 
 export default ContactUsTableOfContent;

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import sectionedCharts from './chart.json';
+import sectionedCharts from './charts.json';
 
 export default () =>
   useMemo(() => {

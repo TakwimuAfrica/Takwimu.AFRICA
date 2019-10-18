@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import {
   withWidth,
@@ -13,8 +13,10 @@ import {
   MenuItem,
   ButtonBase
 } from '@material-ui/core';
-import { withStyles } from '@material-ui/styles';
-import { Search, MenuOutlined, Close } from '@material-ui/icons';
+import withStyles from '@material-ui/styles/withStyles';
+import Close from '@material-ui/icons/Close';
+import MenuOutlined from '@material-ui/icons/MenuOutlined';
+import Search from '@material-ui/icons/Search';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
 import classNames from 'classnames';
@@ -82,7 +84,9 @@ class Navigation extends React.Component {
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleMobileDrawer = this.toggleMobileDrawer.bind(this);
 
-    window.toggleDrawer = this.toggleDrawer;
+    if (process.browser) {
+      window.toggleDrawer = this.toggleDrawer;
+    }
   }
 
   toggleMobileDrawer() {
@@ -115,9 +119,11 @@ class Navigation extends React.Component {
         <Layout>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <Link component={RouterLink} to="/">
-                <img alt="logo" src={logoWhite} height={19} />
-              </Link>
+              <NextLink href="/">
+                <Link href="/">
+                  <img alt="logo" src={logoWhite} height={19} />
+                </Link>
+              </NextLink>
             </Grid>
 
             {isWidthUp('md', width)
@@ -165,30 +171,25 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Link
-            component={RouterLink}
-            color="textSecondary"
-            className={classes.link}
-            to="/about"
-          >
-            About Us
-          </Link>
-          <Link
-            component={RouterLink}
-            color="textSecondary"
-            className={classes.link}
-            to="/faqs"
-          >
-            FAQs
-          </Link>
-          <Link
-            component={RouterLink}
-            color="textSecondary"
-            className={classes.link}
-            to="/contact"
-          >
-            Contact Us
-          </Link>
+          <NextLink href="/about">
+            <Link color="textSecondary" className={classes.link} href="/about">
+              About Us
+            </Link>
+          </NextLink>
+          <NextLink href="/faqs">
+            <Link color="textSecondary" className={classes.link} href="/faqs">
+              FAQs
+            </Link>
+          </NextLink>
+          <NextLink href="/contact">
+            <Link
+              color="textSecondary"
+              className={classes.link}
+              href="/contact"
+            >
+              Contact Us
+            </Link>
+          </NextLink>
           <ButtonBase
             className={classes.searchButton}
             onClick={this.toggleDrawer('search')}
@@ -274,23 +275,25 @@ class Navigation extends React.Component {
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <Link component={RouterLink} className={classes.link} to="/about">
-                About
-              </Link>
+              <NextLink href="/about">
+                <Link className={classes.link} href="/about">
+                  About
+                </Link>
+              </NextLink>
             </MenuItem>
             <MenuItem>
-              <Link component={RouterLink} className={classes.link} to="/faqs">
-                FAQs
-              </Link>
+              <NextLink href="/faqs">
+                <Link className={classes.link} href="/faqs">
+                  FAQs
+                </Link>
+              </NextLink>
             </MenuItem>
             <MenuItem>
-              <Link
-                component={RouterLink}
-                className={classes.link}
-                to="/contact"
-              >
-                Contact Us
-              </Link>
+              <NextLink href="/contact">
+                <Link className={classes.link} href="/contact">
+                  Contact Us
+                </Link>
+              </NextLink>
             </MenuItem>
             <MenuItem>
               <ButtonBase
@@ -330,4 +333,6 @@ Navigation.propTypes = {
   }).isRequired
 };
 
-export default withWidth()(withStyles(styles)(Navigation));
+export default withWidth({
+  initialWidth: 'md'
+})(withStyles(styles)(Navigation));

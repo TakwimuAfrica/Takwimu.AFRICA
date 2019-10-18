@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link as RouterLink } from 'react-router-dom';
+import NextLink from 'next/link';
 
 import classNames from 'classnames';
 
@@ -64,15 +64,16 @@ function QuickLinks() {
       >
         {LINKS.map(link => (
           <li key={link.label}>
-            <Link
-              component={RouterLink}
-              to={link.href}
-              underline="always"
-              className={classNames([classes.text, classes.link])}
-              onClick={() => handleClick(link.href)}
-            >
-              {link.label}
-            </Link>
+            <NextLink href={link.href}>
+              <Link
+                href={link.href}
+                underline="always"
+                className={classNames([classes.text, classes.link])}
+                onClick={() => handleClick(link.href)}
+              >
+                {link.label}
+              </Link>
+            </NextLink>
           </li>
         ))}
       </Typography>
@@ -83,14 +84,15 @@ function QuickLinks() {
       >
         {LEGAL.map(link => (
           <li key={link.label}>
-            <Link
-              component={RouterLink}
-              to={link.href}
-              className={classNames([classes.text, classes.link])}
-              underline="always"
-            >
-              {link.label}
-            </Link>
+            <NextLink href={link.href}>
+              <Link
+                href={link.href}
+                className={classNames([classes.text, classes.link])}
+                underline="always"
+              >
+                {link.label}
+              </Link>
+            </NextLink>
           </li>
         ))}
       </Typography>

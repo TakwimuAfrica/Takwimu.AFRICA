@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withRouter } from 'react-router-dom';
-
 import {
   Grid,
   Drawer,
@@ -16,6 +14,7 @@ import { withStyles } from '@material-ui/styles';
 
 import classNames from 'classnames';
 
+import Router from 'next/router';
 import rightArrow from '../../assets/images/right-arrow.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
@@ -183,12 +182,12 @@ class SearchDrawer extends React.Component {
   }
 
   render() {
-    const { classes, children, active, history, toggle } = this.props;
+    const { classes, children, active, toggle } = this.props;
     const { backgroundVisible, searchResults } = this.state;
     const handleInput = e => {
       if (e.target.value.length > 0) {
         const query = e.target.value;
-        history.push({
+        Router.push({
           pathname: '/search',
           search: `?q=${query}`
         });
@@ -249,7 +248,7 @@ class SearchDrawer extends React.Component {
                       <MenuItem
                         key={result.title}
                         component="a"
-                        href={`/search/?q=${result.title}`}
+                        href={`/search?q=${result.title}`}
                       >
                         <Tooltip
                           title={result.title}
@@ -276,9 +275,6 @@ class SearchDrawer extends React.Component {
 SearchDrawer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   active: PropTypes.bool,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired
-  }).isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired
   }).isRequired,
@@ -293,4 +289,4 @@ SearchDrawer.defaultProps = {
   active: false
 };
 
-export default withRouter(withStyles(styles)(SearchDrawer));
+export default withStyles(styles)(SearchDrawer);

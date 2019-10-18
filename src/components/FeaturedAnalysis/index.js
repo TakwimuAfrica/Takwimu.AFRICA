@@ -40,22 +40,21 @@ class FeaturedAnalysis extends React.Component {
       takwimu: {
         countries,
         page: {
-          featured_analysis: { value: featuredAnalysis }
+          featured_analysis_title: title,
+          read_analysis_link_label: readAnalysisTitle,
+          view_profile_link_label: viewProfileTitle,
+          analysis: featuredAnalyses
         }
       }
     } = this.props;
-    if (!featuredAnalysis) {
+    if (!featuredAnalyses && featuredAnalyses.length === 0) {
       return null;
     }
-    const {
-      title,
-      featured_analyses: featuredAnalyses,
-      read_analysis_link_label: readAnalysisTitle,
-      view_profile_link_label: viewProfileTitle
-    } = featuredAnalysis;
     const { current } = this.state;
-    const countrifyTitle = analysis => {
-      const { title: t, country } = analysis;
+
+    const countrifyTitle = (analysis, countrySlug) => {
+      const { post_title: t } = analysis;
+      const country = countries.find(c => c.slug === countrySlug);
       return countrify(t, country, countries);
     };
 
@@ -96,21 +95,18 @@ FeaturedAnalysis.propTypes = {
   takwimu: PropTypes.shape({
     countries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     page: PropTypes.shape({
-      featured_analysis: PropTypes.shape({
-        value: PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          featured_analyses: PropTypes.arrayOf(
-            PropTypes.shape({
-              value: PropTypes.shape({
-                title: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired,
-                slug: PropTypes.string.isRequired,
-                country: PropTypes.shape({}).isRequired
-              }).isRequired
-            }).isRequired
-          ).isRequired
+      featured_analysis_title: PropTypes.string,
+      read_analysis_link_label: PropTypes.string,
+      view_profile_link_label: PropTypes.string,
+      analysis: PropTypes.arrayOf(
+        PropTypes.shape({
+          feature_page: PropTypes.shape({
+            post_title: PropTypes.string.isRequired,
+            post_content: PropTypes.string.isRequired
+          }),
+          from_country: PropTypes.string.isRequired
         })
-      }).isRequired
+      ).isRequired
     }).isRequired
   }).isRequired
 };

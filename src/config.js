@@ -3,6 +3,7 @@ const config = {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
+  WP_BACKEND_URL: 'https://takwimutech.wpengine.com',
   country: {},
   countries: [
     {
@@ -87,6 +88,10 @@ const config = {
     }
   ],
   settings: {
+    mailingList: {
+      href:
+        'https://sibforms.com/serve/MUIEAAXyVOKndq92iptN5nNOxxO8YIbsJQ6GRLFcss45EFC4D-346vXQNHit8uLluJ44jcDUNQztzGSQSX3H_AHE7J71-tlgBI4-cS6dnZrjzgxQxnK2Hd89yCpi_SJDZyUAKo9GGBNqQmbJEgpCInlf403iFzCqHf75RaNFWuGd73QH6yNWhnvrmDGgj3N_DcbUt3GLDzcm_wIP'
+    },
     navigation: {
       country_analysis:
         '<div class="rich-text"><p>Actionable analysis by geo-political and socioeconomic experts across 10 African countries.</p></div>',
@@ -102,16 +107,32 @@ const config = {
       twitter: 'https://twitter.com/TakwimuAfrica',
       medium: 'https://medium.com/@takwimu_africa',
       linkedin: 'https://www.linkedin.com/company/takwimu-africa/'
+    },
+    address: {
+      locality: 'Westlands',
+      region: 'Nairobi',
+      country: 'Kenya',
+      postalCode: '00100'
     }
   },
   page: {
     name: 'base',
     first_published_at: '10th April 2019',
     last_published_at: '24th July 2019'
+  },
+  name: 'Takwimu',
+  description:
+    'Data driven analysis on development policies, programmes & outcomes in 10 African countries.',
+  media: {
+    imageUrl: 'https://takwimu.s3.eu-west-1.amazonaws.com/media/images',
+    imageRendition: '.width-600',
+    imageType: '.png'
   }
 };
 
-// Same-Origin Policy
-document.domain = new URL(config.url).hostname;
+if (typeof document !== 'undefined') {
+  // Same-Origin Policy
+  document.domain = new URL(config.url).hostname;
+}
 
 export default config;

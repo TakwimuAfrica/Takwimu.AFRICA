@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function RichTypography({ children, variant, ...props }) {
-  const classes = useStyles();
+  const classes = useStyles(props);
 
   if (!children) {
     return null;
@@ -23,6 +23,7 @@ function RichTypography({ children, variant, ...props }) {
   return (
     <Typography
       variant={variant}
+      component="div"
       className={classes.root}
       dangerouslySetInnerHTML={{
         __html: children
