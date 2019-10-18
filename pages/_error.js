@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function NotFoundError({ statusCode, whereLink }) {
+function NotFoundError({ statusCode, whereToNextLink }) {
   const classes = useStyles();
   return (
     <ErrorPage
@@ -48,7 +48,7 @@ function NotFoundError({ statusCode, whereLink }) {
             variant="dual"
             whereToNext={{
               title: 'Explore further',
-              whereLink
+              whereToNextLink
             }}
             classes={{ sectionRoot: classes.whereToNext }}
           />
@@ -75,20 +75,20 @@ function NotFoundError({ statusCode, whereLink }) {
 
 NotFoundError.propTypes = {
   statusCode: PropTypes.number.isRequired,
-  whereLink: PropTypes.arrayOf(PropTypes.shape({}))
+  whereToNextLink: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 NotFoundError.defaultProps = {
-  whereLink: []
+  whereToNextLink: []
 };
 
 NotFoundError.getInitialProps = async ({ res, err }) => {
   const {
-    page: { where_link: whereLink }
+    page: { where_to_next_link: whereToNextLink }
   } = await getSitePage('about');
   return {
     statusCode: (res && res.statusCode) || (err && err.statusCode) || 404,
-    whereLink
+    whereToNextLink
   };
 };
 

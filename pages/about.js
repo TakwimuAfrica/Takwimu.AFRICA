@@ -32,7 +32,7 @@ function About(takwimu) {
       related_content_title: relatedContentTitle,
       related_links: relatedLinks,
       where_to_next_title: whereToNextTitle,
-      where_link: whereLink
+      where_to_next_link: whereToNextLink
     }
   } = takwimu;
 
@@ -52,7 +52,7 @@ function About(takwimu) {
   };
   const whereToNext = {
     title: whereToNextTitle,
-    whereLink
+    whereToNextLink
   };
   const contentHeadings = [];
   if (aboutTakwimu) {

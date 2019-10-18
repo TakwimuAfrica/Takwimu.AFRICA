@@ -35,7 +35,7 @@ function Contact(takwimu) {
       address_label: addressLabel,
       address_description: addressDescription,
       where_to_next_title: whereToNextTitle,
-      where_link: whereLink
+      where_to_next_link: whereToNextLink
     }
   } = takwimu;
 
@@ -60,7 +60,7 @@ function Contact(takwimu) {
   };
   const whereToNext = {
     title: whereToNextTitle,
-    whereLink
+    whereToNextLink
   };
 
   let keyContactsIndex = -1;

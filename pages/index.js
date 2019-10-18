@@ -13,7 +13,10 @@ import { getSitePage } from '../src/getTakwimuPage';
 
 function Home({ takwimu, indicatorId }) {
   const {
-    page: { where_to_next_title: whereToNextTitle, where_link: whereLink }
+    page: {
+      where_to_next_title: whereToNextTitle,
+      where_to_next_link: whereToNextLink
+    }
   } = takwimu;
   return (
     <Page takwimu={takwimu} indicatorId={indicatorId}>
@@ -25,7 +28,7 @@ function Home({ takwimu, indicatorId }) {
       <LatestNewsStories takwimu={takwimu} />
       <WhereToNext
         variant="triple"
-        whereToNext={{ title: whereToNextTitle, whereLink }}
+        whereToNext={{ title: whereToNextTitle, whereToNextLink }}
       />
     </Page>
   );
@@ -35,7 +38,7 @@ Home.propTypes = {
   takwimu: PropTyes.shape({
     page: PropTyes.shape({
       where_to_next_title: PropTyes.string,
-      where_link: PropTyes.arrayOf(PropTyes.shape({}))
+      where_to_next_link: PropTyes.arrayOf(PropTyes.shape({}))
     })
   }).isRequired,
   indicatorId: PropTyes.string.isRequired

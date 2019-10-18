@@ -23,7 +23,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function WhereToNext({ variant, whereToNext: { title, whereLink }, ...props }) {
+function WhereToNext({
+  variant,
+  whereToNext: { title, whereToNextLink },
+  ...props
+}) {
   const classes = useStyles(props);
   return (
     <Section title={title} variant="h3" classes={{ root: classes.sectionRoot }}>
@@ -33,9 +37,9 @@ function WhereToNext({ variant, whereToNext: { title, whereLink }, ...props }) {
         alignItems="center"
         className={classes.root}
       >
-        {whereLink &&
-          whereLink.length > 0 &&
-          whereLink.map(where => (
+        {whereToNextLink &&
+          whereToNextLink.length > 0 &&
+          whereToNextLink.map(where => (
             <>
               {where.link.startsWith('/') ? (
                 <NextLink href={where.link}>
@@ -59,7 +63,7 @@ WhereToNext.propTypes = {
   variant: PropTypes.string,
   whereToNext: PropTypes.shape({
     title: PropTypes.string,
-    whereLink: PropTypes.arrayOf(
+    whereToNextLink: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string,
         link: PropTypes.string
