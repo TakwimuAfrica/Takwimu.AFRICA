@@ -93,23 +93,24 @@ function Profile() {
     populationTables: config.populationTables
   });
 
+  const country = useMemo(() => {
+    if (!profiles.profile || !profiles.profile.geoLevel) {
+      return {};
+    }
+    if (profiles.profile.geoLevel === 'country') {
+      return config.countries.find(
+        c => c.iso_code === profiles.profile.geoCode
+      );
+    }
+    return config.countries.find(c => c.iso_code === profiles.parent.geoCode);
+  }, [profiles]);
+
   const getSource = useCallback(
     table => {
-      let country;
-      if (profiles.profile.geoLevel === 'country') {
-        country = config.countries.find(
-          c => c.iso_code === profiles.profile.geoCode
-        );
-      } else {
-        // else we are on level1
-        country = config.countries.find(
-          c => c.iso_code === profiles.parent.geoCode
-        );
-      }
       return chartSources[country.slug][profiles.profile.geoLevel][table]
         .source;
     },
-    [profiles]
+    [profiles, country]
   );
 
   const onClickGeoLayer = useCallback(
@@ -206,6 +207,12 @@ function Profile() {
                         handleShowData: () => {},
                         handleCompare: () => {}
                       }}
+                      insight={{
+                        dataLink: {
+                          href: `/profiles/${country.slug}`,
+                          title: 'Read the country analysis'
+                        }
+                      }}
                     >
                       <Chart
                         chartData={chartData}
@@ -224,7 +231,15 @@ function Profile() {
                 ))}
             </Grid>
           )),
-    [profileTabs, chartData, sectionedCharts, classes, getSource, profiles]
+    [
+      profileTabs,
+      chartData,
+      sectionedCharts,
+      classes,
+      getSource,
+      country.slug,
+      profiles
+    ]
   );
 
   // Show and hide sections
