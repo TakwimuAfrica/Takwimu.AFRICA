@@ -28,10 +28,9 @@ const Theme = createTheme({
       colorScale: COLOR_BREWER_DIVERGING
     },
     bar: {
-      domainPadding: { x: [50, 50] },
       width: 350,
       height: 350,
-      offset: 40,
+      offset: 50,
       style: {
         data: {
           fill: COLOR_BREWER_DIVERGING[0]

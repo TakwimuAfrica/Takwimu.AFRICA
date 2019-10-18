@@ -296,6 +296,7 @@
       {
         "title": "Percentage of population in poverty",
         "visual": {
+          "horizontal": true,
           "type": "grouped_column",
           "table": "allResidencePovertyTypes",
           "x": "residence",
@@ -727,6 +728,7 @@
       {
         "title": "Nurses and midwives (per 1,000 people)",
         "visual": {
+          "horizontal": true,
           "type": "column",
           "table": "allNursesAndMidwives",
           "x": "nursesAndMidwivesYear",
@@ -747,6 +749,7 @@
       {
         "title": "Incidence of malaria per 1000 population at risk",
         "visual": {
+          "horizontal": true,
           "type": "column",
           "table": "allIncidenceOfMalariaPer1000PopAtRisks",
           "x": "incidenceOfMalariaPer1000PopAtRiskYear",
@@ -1255,6 +1258,7 @@
       {
         "title": "Government spending",
         "visual": {
+          "horizontal": true,
           "type": "grouped_column",
           "table": "allGovernmentFundings",
           "x": "sector",
@@ -1370,6 +1374,7 @@
       {
         "title": "Tax revenue (current LCU)",
         "visual": {
+          "horizontal": true,
           "type": "column",
           "table": "allTaxRevenues",
           "x": "taxRevenueYear",
@@ -1486,6 +1491,7 @@
       {
         "title": "Contribution by Worldbank & DFID per programme",
         "visual": {
+          "horizontal": true,
           "type": "grouped_column",
           "table": "allDonorFundedProgrammes",
           "x": "programme",
