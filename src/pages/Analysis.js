@@ -114,6 +114,8 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
   let analyses = [];
   let activeAnalysis = {};
   let initial = 0;
+  let topicsNavigation = '';
+  let readNextTitle = '';
 
   try {
     const [profile] = await get(
@@ -122,8 +124,15 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
 
     if (profile && profile.acf) {
       const {
-        acf: { sections, geography }
+        acf: {
+          sections,
+          geography,
+          topics_navigation: topicsNav,
+          read_other_topics_label: readTopics
+        }
       } = profile;
+      topicsNavigation = topicsNav;
+      readNextTitle = readTopics;
       const country = countries.find(c => c.slug === geography);
       Object.assign(config.country, country);
 
@@ -183,6 +192,8 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
     activeAnalysis,
     initial,
     analyses,
+    topicsNavigation,
+    readNextTitle,
     indicatorId,
     analysisLink: `${req.protocol}://${req.headers.host}${req.url}`
   };

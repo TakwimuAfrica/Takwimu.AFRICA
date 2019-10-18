@@ -12,6 +12,12 @@ import WhereToNext from '../src/components/Next';
 import { getSitePage } from '../src/getTakwimuPage';
 
 function Home({ takwimu, indicatorId }) {
+  const {
+    page: {
+      where_to_next_title: whereToNextTitle,
+      where_to_next_link: whereToNextLink
+    }
+  } = takwimu;
   return (
     <Page takwimu={takwimu} indicatorId={indicatorId}>
       <Hero takwimu={takwimu} />
@@ -20,13 +26,21 @@ function Home({ takwimu, indicatorId }) {
       <WhatYouDoWithTakwimu takwimu={takwimu} />
       <MakingOfTakwimu takwimu={takwimu} />
       <LatestNewsStories takwimu={takwimu} />
-      <WhereToNext takwimu={takwimu} />
+      <WhereToNext
+        variant="triple"
+        whereToNext={{ title: whereToNextTitle, whereToNextLink }}
+      />
     </Page>
   );
 }
 
 Home.propTypes = {
-  takwimu: PropTyes.shape({}).isRequired,
+  takwimu: PropTyes.shape({
+    page: PropTyes.shape({
+      where_to_next_title: PropTyes.string,
+      where_to_next_link: PropTyes.arrayOf(PropTyes.shape({}))
+    })
+  }).isRequired,
   indicatorId: PropTyes.string.isRequired
 };
 

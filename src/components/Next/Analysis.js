@@ -1,5 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import NextLink from 'next/link';
 
 import classNames from 'classnames';
 
@@ -34,6 +35,10 @@ const useStyles = makeStyles(theme => ({
 
 function AnalysisReadNext({ current, content, showContent, title }) {
   const hasContent = current < content.topics.length - 1;
+  const generateHref = index => {
+    const item = content.topics[index];
+    return `#${item.post_name}`;
+  };
   const classes = useStyles();
 
   return hasContent ? (
@@ -46,16 +51,19 @@ function AnalysisReadNext({ current, content, showContent, title }) {
       >
         {content.topics.map((c, index) =>
           index > current && index - current <= 2 ? (
-            <Card
-              key={c.ID}
-              variant="dual"
-              classes={{
-                root: classNames({ [classes.cardMargin]: index - current > 1 })
-              }}
-              onClick={showContent(index)}
-            >
-              {c.post_title}
-            </Card>
+            <NextLink key={generateHref(index)} href={generateHref(index)}>
+              <Card
+                variant="dual"
+                classes={{
+                  root: classNames({
+                    [classes.cardMargin]: index - current > 1
+                  })
+                }}
+                onClick={showContent(index)}
+              >
+                {c.post_title}
+              </Card>
+            </NextLink>
           ) : null
         )}
       </Grid>
@@ -67,7 +75,12 @@ AnalysisReadNext.propTypes = {
   title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({
-    topics: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+    topics: PropTypes.arrayOf(
+      PropTypes.shape({
+        post_name: PropTypes.string,
+        post_title: PropTypes.string
+      }).isRequired
+    )
   }).isRequired,
   showContent: PropTypes.func.isRequired
 };
