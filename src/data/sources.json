@@ -7,58 +7,16 @@
                     "title": "OECD, 2016"
                 }
             },
-            "allPopulationSex2006S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2007S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
             "allPopulationSex2009S": {
               "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2011S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2012S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationSex2013S": {
-              "source": {
-                "href": "",
-                "title": ""
+                "href": "https://dc.sourceafrica.net/documents/21197-Census-2009.html",
+                "title": "Census, 2009"
               }
             },
             "allPopulationResidence2009S": {
               "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationResidence2012S": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allPopulationResidence2013S": {
-              "source": {
-                "href": "",
-                "title": ""
+                "href": "https://dc.sourceafrica.net/documents/21197-Census-2009.html",
+                "title": "Census, 2009"
               }
             },
             "allPrimarySchoolEnrollments": {
@@ -105,7 +63,7 @@
             },
             "prevention_methods_dist": {
                 "source": {
-                    "href": "https://dhsprogram.com/pubs/pdf/fr308/fr308.pdf",
+                    "href": "https://openafrica.net/dataset/2014-kenya-demographic-and-health-survey",
                     "title": "Kenya Demographic and Health Survey, 2014"
                 }
             },
@@ -123,7 +81,7 @@
             },
             "health_centers_dist": {
                 "source": {
-                    "href": "http://www.health.go.ke/wp-content/uploads/2016/04/Kenya-HRH-Strategy-2014-2018.pdf",
+                    "href": "https://africaopendata.org/dataset/kenya-health-sector-human-resources-strategy-2014-2018",
                     "title": "Ministry of Health, 2014"
                 }
             },
@@ -147,7 +105,7 @@
             },
             "fgm_age_dist": {
                 "source": {
-                    "href": "https://dhsprogram.com/pubs/pdf/fr308/fr308.pdf",
+                    "href": "https://openafrica.net/dataset/2014-kenya-demographic-and-health-survey",
                     "title": "Kenya Demographic and Health Survey, 2014"
                 }
             },
@@ -332,32 +290,32 @@
         "country": {
           "allPopulationSex2006S": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "https://openafrica.net/dataset/population_projections_2007_2016",
+                "title": "Nigeria Bureau of Statistics, 2016"
             }
           },
             "allPopulationSexYears": {
                 "source": {
-                    "href": "https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls",
+                    "href": "https://openafrica.net/dataset/population_projections_2007_2016",
                     "title": "Nigeria Bureau of Statistics, 2016"
                 }
             },
             "allValidInvalidVotes": {
               "source": {
-                "href": "",
-                "title": ""
+                "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
+                "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allRegisteredAccreditedVoters": {
               "source": {
-                "href": "",
-                "title": ""
+                "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
+                "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allVotesPerCandidates": {
               "source": {
-                "href": "",
-                "title": ""
+                "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
+                "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
               }
             },
             "allPrimarySchoolEnrollments": {
@@ -386,7 +344,7 @@
             },
             "allPrimaryEducationCompletionSexes": {
                 "source": {
-                    "href": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "href": "https://africaopendata.org/dataset/nigeria-education-indicators-2016",
                     "title": "Nigeria Federal Ministry of Education, 2016"
                 }
             },
@@ -404,8 +362,8 @@
             },
             "allMalariaPrevalences": {
                 "source": {
-                    "href": "https://dhsprogram.com/pubs/pdf/MIS20/MIS20.pdf",
-                    "title": "Nigeria Demographic Health Survey, 2015"
+                    "href": "https://openafrica.net/dataset/kenya-malaria-indicator-survey-2015-kmis-report",
+                    "title": "Kenya Malaria Indicator Survey, 2015"
                 }
             },
             "allHivPatientsDistributions": {
@@ -434,7 +392,7 @@
             },
             "allYouthUnemploymentGenerals": {
                 "source": {
-                    "href": "https://africacheck.org/wp-content/uploads/2018/03/q1-q3_2017_unemployment_report_VOLUME_1-1.pdf2",
+                    "href": "https://openafrica.net/dataset/labor_force_unemployment_rate_2017_2018",
                     "title": "National Bureau of Statistics, 2017"
                 }
             },
@@ -636,34 +594,34 @@
         "level1": {
           "allPopulationSex2006S": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "https://openafrica.net/dataset/population_projections_2007_2016",
+                "title": "Nigeria Bureau of Statistics, 2016"
             }
           },
             "allPopulationSexYears": {
                 "source": {
-                    "href": "https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls",
+                    "href": "https://openafrica.net/dataset/population_projections_2007_2016",
                     "title": "Nigeria Bureau of Statistics, 2016"
                 }
             },
             "allValidInvalidVotes": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allRegisteredAccreditedVoters": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
-            "allVotesPerCandidates": {
-              "source": {
-                "href": "",
-                "title": ""
-              }
-            },
+                "source": {
+                  "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
+                  "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
+                }
+              },
+              "allRegisteredAccreditedVoters": {
+                "source": {
+                  "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
+                  "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
+                }
+              },
+              "allVotesPerCandidates": {
+                "source": {
+                  "href": "https://africaopendata.org/dataset/nigeria-presidential-and-national-assembly-elections-2015",
+                  "title": "Commonwealth, Nigeria Presidentail and National Assembly Elections 2015"
+                }
+              },
             "allMaternalMortalities": {
                 "source": {
                     "href": "https://nigerianstat.gov.ng/download/952",
@@ -702,7 +660,7 @@
             },
             "allPrimaryEducationCompletionSexes": {
                 "source": {
-                    "href": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "href": "https://africaopendata.org/dataset/nigeria-education-indicators-2016",
                     "title": "Nigeria Federal Ministry of Education, 2016"
                 }
             },
@@ -720,8 +678,8 @@
             },
             "allMalariaPrevalences": {
                 "source": {
-                    "href": "https://dhsprogram.com/pubs/pdf/MIS20/MIS20.pdf",
-                    "title": "Nigeria Demographic Health Survey, 2015"
+                    "href": "https://openafrica.net/dataset/kenya-malaria-indicator-survey-2015-kmis-report",
+                    "title": "Kenya Malaria Indicator Survey, 2015"
                 }
             },
             "allHivPatientsDistributions": {
@@ -762,7 +720,7 @@
             },
             "allYouthUnemploymentGenerals": {
                 "source": {
-                    "href": "https://africacheck.org/wp-content/uploads/2018/03/q1-q3_2017_unemployment_report_VOLUME_1-1.pdf2",
+                    "href": "https://openafrica.net/dataset/labor_force_unemployment_rate_2017_2018",
                     "title": "National Bureau of Statistics, 2017"
                 }
             },
@@ -942,19 +900,19 @@
         "country": {
           "allPopulationSex2007S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "http://catalog.ihsn.org/index.php/catalog/3583",
+              "title": "Population and Housing Census, 2007"
             }
           },
             "sex_dist": {
                 "source": {
-                    "href": "http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf",
+                    "href": "https://africaopendata.org/dataset/ethiopia-summary-and-statistical-report-of-the-2007-population-and-housing-census",
                     "title": "Summary and Statistical Report of the 2007 Population and Housing Census"
                 }
             },
             "residence_dist": {
                 "source": {
-                    "href": "http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf",
+                    "href": "https://africaopendata.org/dataset/ethiopia-summary-and-statistical-report-of-the-2007-population-and-housing-census",
                     "title": "Summary and Statistical Report of the 2007 Population and Housing Census"
                 }
             },
@@ -1146,8 +1104,8 @@
         "country": {
           "allPopulationSex2011S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://openafrica.net/dataset/community-survey-2016",
+              "title": "Community Survey, 2016"
             }
           },
             "allGdps": {
@@ -1337,32 +1295,32 @@
         "country": {
           "allPopulationSex2012S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://openafrica.net/dataset/tanzania-census-data",
+              "title": "General Census, 2012"
             }
           },
           "allPopulationResidence2012S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://openafrica.net/dataset/tanzania-census-data",
+              "title": "General Census, 2012"
             }
           },
           "allValidInvalidVotes": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://openafrica.net/dataset/tanzania-election-result-2015",
+              "title": "Commonwealth, Tanzania General Election 2015"
             }
           },
           "allRegisteredAccreditedVoters": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://openafrica.net/dataset/tanzania-election-result-2015",
+              "title": "Commonwealth, Tanzania General Election 2015"
             }
           },
           "allVotesPerCandidates": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://openafrica.net/dataset/tanzania-election-result-2015",
+              "title": "Commonwealth, Tanzania General Election 2015"
             }
           },
             "allGdps": {
@@ -1558,32 +1516,32 @@
         "country": {
           "allPopulationSex2013S": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "https://africaopendata.org/dataset/senegal-census-data",
+              "title": "Census Data, 2013"
             }
           },
           "allPopulationResidence2013S": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "https://africaopendata.org/dataset/senegal-census-data",
+                "title": "Census Data, 2013"
             }
           },
           "allValidInvalidVotes": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "http://africanelections.tripod.com/sn_detail.html#2012_Presidential_Election_(Second_Round)/",
+                "title": "African Election Database"
             }
           },
           "allRegisteredAccreditedVoters": {
             "source": {
-              "href": "",
-              "title": ""
+                "href": "http://africanelections.tripod.com/sn_detail.html#2012_Presidential_Election_(Second_Round)/",
+                "title": "African Election Database"
             }
           },
           "allVotesPerCandidates": {
             "source": {
-              "href": "",
-              "title": ""
+              "href": "http://africanelections.tripod.com/sn_detail.html#2012_Presidential_Election_(Second_Round)/",
+              "title": "African Election Database"
             }
           },
             "allGdps": {
