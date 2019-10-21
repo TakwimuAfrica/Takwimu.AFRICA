@@ -14,11 +14,11 @@ const COLOR_BREWER_DIVERGING = [
 const Theme = createTheme({
   chart: {
     pie: {
-      legendWidth: 50,
-      height: 250,
-      origin: { x: 150, y: 125 },
+      width: 350,
+      height: 200,
       padding: 0,
-      width: 450,
+      legendWidth: 100,
+      origin: { x: 150, y: 125 },
       colorScale: COLOR_BREWER_DIVERGING
     },
     area: {

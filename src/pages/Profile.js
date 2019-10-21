@@ -36,12 +36,12 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   container: {
     marginBottom: '0.625rem'
   },
-  containerRoot: {
+  containerRoot: ({ loading }) => ({
     width: '100%',
-    minHeight: '500px',
+    minHeight: loading && '300px',
     backgroundColor: '#f6f6f6',
     margin: 0
-  },
+  }),
   containerSourceGrid: {
     [breakpoints.up('md')]: {
       whiteSpace: 'nowrap'
@@ -71,7 +71,6 @@ function Profile() {
     query: { geoIdOrCountrySlug: geoId = '' }
   } = router;
 
-  const classes = useStyles();
   const [activeTab, setActiveTab] = useState(
     process.browser && window.location.hash.slice(1)
       ? window.location.hash.slice(1)
@@ -92,6 +91,7 @@ function Profile() {
     visuals,
     populationTables: config.populationTables
   });
+  const classes = useStyles({ loading: chartData.isLoading });
 
   const country = useMemo(() => {
     if (!profiles.profile || !profiles.profile.geoLevel) {
@@ -107,8 +107,9 @@ function Profile() {
 
   const getSource = useCallback(
     table => {
-      return chartSources[country.slug][profiles.profile.geoLevel][table]
-        .source;
+      const source =
+        chartSources[country.slug][profiles.profile.geoLevel][table];
+      return source.source.title ? source : {};
     },
     [profiles, country]
   );

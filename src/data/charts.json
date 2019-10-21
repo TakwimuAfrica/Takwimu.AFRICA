@@ -18,10 +18,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-9zCsLYIX"
         },
         "id": "chart-OXOrBg8t"
@@ -39,10 +37,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-2QJnW-Wm"
         },
         "id": "chart-jCpNkVRH"
@@ -61,10 +57,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-VmubCwpV"
         },
         "id": "chart-JnFGC4vp"
@@ -83,10 +77,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-0wFXYq7W"
         },
         "id": "chart-puRwDdfW"
@@ -105,10 +97,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-_zs8KAwm"
         },
         "id": "chart-PftEYOw8"
@@ -127,10 +117,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-I1O_3lGm7"
         },
         "id": "chart-aL6bwKusJ"
@@ -151,10 +139,7 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "last",
-            "unique": true
-          },
+          "aggregate": "last",
           "id": "stat-7Qx7ETH0f"
         },
         "id": "chart-B_2N04vyq"
@@ -172,10 +157,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": true
-          },
+          "aggregate": "sum",
+          "unique": true,
           "id": "stat-l_DkKYdu7"
         },
         "id": "chart-nChGuiAIB"
@@ -194,9 +177,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum"
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-yujN_xpRb"
         },
         "id": "chart-kVVZoPIYV"
@@ -215,10 +197,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-m2e1kZ4U3"
         },
         "id": "chart-kyvGaTSjz"
@@ -238,11 +218,9 @@
         "stat": {
           "type": "number",
           "subtitle": "Unemployment",
-          "description": "% of labour force ages 15-24",
-          "statistic": {
-            "unique": true,
-            "aggregate": "last"
-          },
+          "description": "of labour force ages 15-24",
+          "unit": "percent",
+          "aggregate": "last",
           "id": "stat-PgESSkqNi"
         },
         "id": "chart-w3Zkjt5YS"
@@ -261,10 +239,8 @@
           "type": "number",
           "subtitle": "Population",
           "description": "People",
-          "statistic": {
-            "unique": true,
-            "aggregate": "last"
-          },
+          "unique": true,
+          "aggregate": "last",
           "id": "stat-D3Pg_7_SC"
         },
         "id": "chart-0ObxlR5E4"
@@ -279,16 +255,14 @@
           "x": "sex",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-r2i5qbnrj"
+          "id": "visual-r2i5qbnrj",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Employment",
           "description": "Employment Ratio",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-jUkONCR_-"
         },
         "id": "chart-Cp-GP6L4-"
@@ -309,10 +283,7 @@
           "type": "number",
           "subtitle": "Percentage of Population",
           "description": "",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-1zlssCY7y"
         },
         "id": "chart-VQl3Q8Zkj"
@@ -333,10 +304,7 @@
           "type": "number",
           "subtitle": "Percentage Population",
           "description": "",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-r24l90dDf"
         },
         "id": "chart-ZKG0OTCj_"
@@ -355,9 +323,7 @@
           "type": "number",
           "subtitle": "HDI",
           "description": "",
-          "statistic": {
-            "aggregate": "sum"
-          },
+          "aggregate": "sum",
           "id": "stat-sgMgytSz2"
         },
         "id": "chart-0lqx-TKlt"
@@ -382,10 +348,8 @@
           "type": "number",
           "subtitle": "Elections",
           "description": "Votes",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-6wIFHaap1"
         },
         "id": "chart-XVRVUJ0fo"
@@ -404,10 +368,8 @@
           "type": "number",
           "subtitle": "Elections",
           "description": "Registered Voters",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-nlWEkm8pf"
         },
         "id": "chart-7hXyn0JH9"
@@ -426,10 +388,8 @@
           "type": "number",
           "subtitle": "Elections",
           "description": "Cast Votes",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-JcwFlxUUD"
         },
         "id": "chart-FtbmOujP4"
@@ -442,16 +402,14 @@
           "table": "allWomenInParliaments",
           "x": "womenParliamentYear",
           "y": "total",
-          "id": "visual-neMow1qA4"
+          "id": "visual-neMow1qA4",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Women In Parliament",
           "description": "Seat Proportion",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-RUpViJ4Om"
         },
         "id": "chart-c4YvJDlg7"
@@ -470,9 +428,7 @@
           "type": "number",
           "subtitle": "Women in Government",
           "description": "Total Count",
-          "statistic": {
-            "aggregate": "sum"
-          },
+          "aggregate": "sum",
           "id": "stat-FNIwu3e6n"
         },
         "id": "chart-BVy7XqW1-"
@@ -491,16 +447,14 @@
           "table": "allAccessToBasicServices",
           "x": "accessToBasicServicesYear",
           "y": "total",
-          "id": "visual-rKreT767z"
+          "id": "visual-rKreT767z",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Health",
           "description": "Basic Dring Water Services",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-JxmJCZ7FF"
         },
         "id": "chart-83mjLT06a"
@@ -519,10 +473,7 @@
           "type": "number",
           "subtitle": "Health",
           "description": "",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-Ve430zAo5"
         },
         "id": "chart-9KqhjUKgr"
@@ -535,16 +486,14 @@
           "table": "allPrevalenceOfUndernourishments",
           "x": "prevalenceOfUndernourishmentYear",
           "y": "total",
-          "id": "visual-deQuTcynB"
+          "id": "visual-deQuTcynB",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Health",
           "description": "undernourishment",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-lD3GchgUL"
         },
         "id": "chart-3y7HI6SgN"
@@ -565,9 +514,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Life Expectancy",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-YrkRFlSkd"
         },
         "id": "chart-YjeXUwUUl"
@@ -586,9 +532,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "FGM Prevelance",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-maMVRIDe5"
         },
         "id": "chart-2gFX61spg"
@@ -607,9 +550,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Maternal Mortality Ratio",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-T3pav-8Ea"
         },
         "id": "chart-yN51SNEqY"
@@ -624,16 +564,14 @@
           "groupBy": "hivPrevalenceYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-HWvN9eMVo"
+          "id": "visual-HWvN9eMVo",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Health",
           "description": "HIV Prevalence -Youth",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-50LHnVx1_"
         },
         "id": "chart-bmYXD8HlG"
@@ -654,9 +592,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "HIV Patients Distribution",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-lM8uHqxmi"
         },
         "id": "chart-pH8Nuvx5G"
@@ -675,10 +610,7 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Malaria in Children",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-hOopkb9uv"
         },
         "id": "chart-rjYO5G1Af"
@@ -690,16 +622,14 @@
           "table": "allBirthsAttendedBySkilledHealthStaffs",
           "x": "birthsAttendedBySkilledHealthStaffYear",
           "y": "total",
-          "id": "visual--K-mlL1Cx"
+          "id": "visual--K-mlL1Cx",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Health",
           "description": "Birth by skilled health staff",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-Eqns7M4tp"
         },
         "id": "chart-fMOptjSbu"
@@ -717,10 +647,7 @@
           "type": "number",
           "subtitle": "Health",
           "description": "FGM Prevalence",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-UQMmHf9Rn"
         },
         "id": "chart-EHr0m_PMg"
@@ -739,9 +666,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Ratio of nurses and midwives per 1000 people",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-bsGzv4Dnk"
         },
         "id": "chart-Psz0uktCv"
@@ -760,9 +684,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Malaria Incidence",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-Pat8HjxXm"
         },
         "id": "chart-S-D0awlXB"
@@ -783,7 +704,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Mortality Rate",
-          "statistic": {},
           "id": "stat-UzaVlmvXN"
         },
         "id": "chart-Ff-BMUdaD"
@@ -804,9 +724,6 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Health Worker Density",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-rlUHL6eL8"
         },
         "id": "chart-Wbwjw9JSD"
@@ -827,10 +744,8 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Total Number of Doctors",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-GA9f2Rph3"
         },
         "id": "chart-8txgWYxcZ"
@@ -851,10 +766,8 @@
           "type": "number",
           "subtitle": "Health",
           "description": "Total Number of dentist",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-7Gq2u1we1"
         },
         "id": "chart-y3SmRGPYc"
@@ -879,10 +792,8 @@
           "type": "number",
           "subtitle": "Agriculture",
           "description": "Crop Production",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-xPTLmcL4x"
         },
         "id": "chart-FXfaxKGm5"
@@ -901,10 +812,8 @@
           "type": "number",
           "subtitle": "Agriculture",
           "description": "Cereal Yield (1997-2016)",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": false
-          },
+          "aggregate": "sum",
+          "unique": false,
           "id": "stat-unjSs8hAP"
         },
         "id": "chart-ZjYHHIhLi"
@@ -917,16 +826,14 @@
           "table": "allAgriculturalLands",
           "x": "agriculturalLandYear",
           "y": "total",
-          "id": "visual-fm897wsXV"
+          "id": "visual-fm897wsXV",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Agriculture",
           "description": "Land",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-83KKJIHOx"
         },
         "id": "chart-g10fwaaCN"
@@ -941,16 +848,14 @@
           "groupBy": "employmentInAgricultureYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-vgDM08G5C"
+          "id": "visual-vgDM08G5C",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Agriculture",
           "description": "Employment",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-X25JYxSD9"
         },
         "id": "chart-AiWHkhTjM"
@@ -972,16 +877,14 @@
           "groupBy": "primarySchoolEnrollmentYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-C2LVyvrXJ"
+          "id": "visual-C2LVyvrXJ",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Education",
           "description": "People",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-SKrplhnhq"
         },
         "id": "chart-aTGOJd56v"
@@ -995,16 +898,14 @@
           "groupBy": "adultLiteracyRateYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-yXUiLmKVw"
+          "id": "visual-yXUiLmKVw",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Education",
           "description": "Adult Literacy Rate",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-Rx65Mt-md"
         },
         "id": "chart-XxfE08Xx2"
@@ -1023,10 +924,7 @@
           "type": "number",
           "subtitle": "Education",
           "description": "Literate",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-AGV0LBBA4"
         },
         "id": "chart-ZXg3tihfU"
@@ -1039,16 +937,14 @@
           "table": "allPrimaryEducationCompletionRates",
           "x": "primaryEducationCompletionRateYear",
           "y": "total",
-          "id": "visual-GQItDi5Mu"
+          "id": "visual-GQItDi5Mu",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Education",
           "description": "Primary Education completion Rate",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-Nc_6kBn9v"
         },
         "id": "chart-KoLwjKP7k"
@@ -1069,11 +965,9 @@
           "type": "number",
           "subtitle": "Education",
           "description": "Primary School Enrolment",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": true,
-            "unit": "%"
-          },
+          "aggregate": "sum",
+          "unique": true,
+          "unit": "percent",
           "id": "stat-zX-bx8bOv"
         },
         "id": "chart-CjGs2smTy"
@@ -1094,11 +988,9 @@
           "type": "number",
           "subtitle": "Education",
           "description": "Junior Secondary Enrolment",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": true,
-            "unit": "%"
-          },
+          "aggregate": "sum",
+          "unique": true,
+          "unit": "percent",
           "id": "stat-pTCiIoo0X"
         },
         "id": "chart-0o-ck-Y8Y"
@@ -1119,11 +1011,9 @@
           "type": "number",
           "subtitle": "Education",
           "description": "Senior Secondary Enrolment",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": true,
-            "unit": "%"
-          },
+          "aggregate": "sum",
+          "unique": true,
+          "unit": "percent",
           "id": "stat-cOiepWkCc"
         },
         "id": "chart-yvXIpD18F"
@@ -1138,16 +1028,14 @@
           "groupBy": "secondarySchoolEnrollmentYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-g-HjbDKTT"
+          "id": "visual-g-HjbDKTT",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Education",
           "description": "Secondary Enrolment",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-_hz3jcZ28"
         },
         "id": "chart-df4LROXqA"
@@ -1160,16 +1048,14 @@
           "table": "allPrimaryEducationCompletionSexes",
           "x": "primaryEducationCompletionSex",
           "y": "total",
-          "id": "visual-uA1B2kEln"
+          "id": "visual-uA1B2kEln",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Education",
           "description": "Percent Completion Rate",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-iA6dY3_78"
         },
         "id": "chart-Me2AMe6YE"
@@ -1190,17 +1076,16 @@
           "groupBy": "accountOwnershipYear",
           "y": "total",
           "aggregate": "sum",
-          "id": "visual-QMnnL9H88"
+          "id": "visual-QMnnL9H88",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Financial Inclusion",
           "description": "Account Ownership",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": true,
-            "unit": "%"
-          },
+          "aggregate": "sum",
+          "unique": true,
+          "unit": "percent",
           "id": "stat-Tr50yoJ5F"
         },
         "id": "chart-2i66RH9nd"
@@ -1219,9 +1104,6 @@
           "type": "number",
           "subtitle": "Financial Inclusion",
           "description": "Percent Completion Rate",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-Zzs9o7GbI"
         },
         "id": "chart-84EKplBU2"
@@ -1240,10 +1122,6 @@
           "type": "number",
           "subtitle": "Financial Inclusion",
           "description": "Mobile Phone subscriptions",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
           "id": "stat-_wwYZdyPN"
         },
         "id": "chart-JRuWq_pyp"
@@ -1271,11 +1149,9 @@
           "type": "number",
           "subtitle": "Budget",
           "description": "Government spending",
-          "statistic": {
-            "aggregate": "sum",
-            "unique": true,
-            "unit": "%"
-          },
+          "aggregate": "sum",
+          "unique": true,
+          "unit": "percent",
           "id": "stat-ZHRHpRME-"
         },
         "id": "chart-5ndLPl_g0"
@@ -1300,9 +1176,6 @@
           "type": "number",
           "subtitle": "Public Finances",
           "description": "Gini Index",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-uRytKMGdE"
         },
         "id": "chart-ykz9ztbIF"
@@ -1321,9 +1194,6 @@
           "type": "number",
           "subtitle": "Public Finances",
           "description": "GDP per capita",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-uHKWMqlJk"
         },
         "id": "chart-mEMVS_bKc"
@@ -1336,16 +1206,14 @@
           "table": "allGdpPerCapitaGrowths",
           "x": "gdpPerCapitaGrowthYear",
           "y": "total",
-          "id": "visual-e_hgydv78"
+          "id": "visual-e_hgydv78",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Public Finances",
           "description": "GDP per capita Growth",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-U6nFwAcP6"
         },
         "id": "chart-FiED1wEBG"
@@ -1357,16 +1225,14 @@
           "table": "allTaxAsPercentageOfGdps",
           "x": "taxAsPercentageOfGdpYear",
           "y": "total",
+          "unit": "percent",
           "id": "visual-OtyQpAdzX"
         },
         "stat": {
           "type": "number",
           "subtitle": "Public Finances",
           "description": "Tax (% GDP)",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-O3yMLyi7W"
         },
         "id": "chart-tcme7PdDY"
@@ -1385,10 +1251,8 @@
           "type": "number",
           "subtitle": "Public Finances",
           "description": "Tax Revenue",
-          "statistic": {
-            "unique": true,
-            "unit": "US$"
-          },
+          "style": "currency",
+          "currency": "USD",
           "id": "stat-yvV-LPxAr"
         },
         "id": "chart-D2VkbJWYe"
@@ -1407,10 +1271,8 @@
           "type": "number",
           "subtitle": "Public Finances",
           "description": "GDP",
-          "statistic": {
-            "unique": true,
-            "unit": "US$"
-          },
+          "style": "currency",
+          "currency": "USD",
           "id": "stat-5RJuRlx2Y"
         },
         "id": "chart-Nxbu2Tps5"
@@ -1429,10 +1291,7 @@
           "type": "number",
           "subtitle": "Public Finances",
           "description": "GDP Growth",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat--2kYGzV-9"
         },
         "id": "chart-r4l5ucyg6"
@@ -1452,16 +1311,14 @@
           "table": "allForeignDirectInvestmentNetInflows",
           "x": "foreignDirectInvestmentNetInflowsYear",
           "y": "total",
-          "id": "visual-2iczA3njO"
+          "id": "visual-2iczA3njO",
+          "unit": "percent"
         },
         "stat": {
           "type": "number",
           "subtitle": "Development Assistance",
           "description": "Net inflows",
-          "statistic": {
-            "unique": true,
-            "unit": "%"
-          },
+          "unit": "percent",
           "id": "stat-JN0jhq1tl"
         },
         "id": "chart-sz7KNbrrb"
@@ -1480,10 +1337,8 @@
           "type": "number",
           "subtitle": "Development Assistance",
           "description": "Donor Contribution",
-          "statistic": {
-            "unique": false,
-            "aggregate": "sum"
-          },
+          "unique": false,
+          "aggregate": "sum",
           "id": "stat-ETYLsmiO9"
         },
         "id": "chart-7XkfrkuzC"
@@ -1504,9 +1359,6 @@
           "type": "number",
           "subtitle": "Development Assistance",
           "description": "Donor Contribution",
-          "statistic": {
-            "unique": true
-          },
           "id": "stat-ew3afyfkK"
         },
         "id": "chart-tWCCdz8RV"
