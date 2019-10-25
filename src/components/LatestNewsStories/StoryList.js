@@ -29,7 +29,12 @@ function StoryList({ stories }) {
       {stories.slice(0, 3).map((story, index) => (
         <Story
           key={story.link}
-          story={story}
+          story={{
+            title: story.title,
+            img: `https://cdn-images-1.medium.com/max/2600/${story.virtuals.previewImage.imageId}`,
+            link: `https://medium.com/@takwimu_africa/${story.uniqueSlug}`,
+            summary: story.content.subtitle
+          }}
           classes={{ root: classNames({ [classes.margin]: index > 0 }) }}
         />
       ))}

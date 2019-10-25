@@ -11,7 +11,7 @@ const styles = {
   }
 };
 
-function StorySummary({ classes, story }) {
+function StorySummary({ classes, subtitle }) {
   return (
     <Typography
       gutterBottom
@@ -19,16 +19,14 @@ function StorySummary({ classes, story }) {
       component="p"
       classes={{ root: classes.root }}
     >
-      {story.subtitle}
+      {subtitle}
     </Typography>
   );
 }
 
 StorySummary.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  story: PropTypes.shape({
-    subtitle: PropTypes.string.isRequired
-  }).isRequired
+  subtitle: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(StorySummary);

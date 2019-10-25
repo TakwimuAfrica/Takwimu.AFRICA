@@ -33,8 +33,12 @@ function StoryBlocks({ stories }) {
     <Grid container className={classes.root}>
       {stories.slice(0, 3).map((story, index) => (
         <StoryCard
-          key={story.url}
-          story={story}
+          key={story.id}
+          story={{
+            previewImageUrl: `https://cdn-images-1.medium.com/max/2600/${story.virtuals.previewImage.imageId}`,
+            title: story.title,
+            url: `https://medium.com/@takwimu_africa/${story.uniqueSlug}`
+          }}
           classes={{
             root: classNames([classes.story, { [classes.margin]: index > 0 }])
           }}
@@ -42,8 +46,8 @@ function StoryBlocks({ stories }) {
       ))}
       {stories.slice(0, 3).map((story, index) => (
         <StorySummary
-          key={story.url}
-          story={story}
+          key={story.id}
+          subtitle={story.content.subtitle}
           classes={{
             root: classNames([classes.story, { [classes.margin]: index > 0 }])
           }}

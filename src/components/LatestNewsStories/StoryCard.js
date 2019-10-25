@@ -33,7 +33,7 @@ function StoryCard({ classes, story }) {
         component="a"
         href={story.url}
         target="_blank"
-        image={story.preview_image.url}
+        image={story.previewImageUrl}
         title={story.title}
       />
       <CardContent>
@@ -56,9 +56,7 @@ function StoryCard({ classes, story }) {
 StoryCard.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
-    preview_image: PropTypes.shape({
-      url: PropTypes.string
-    }).isRequired,
+    previewImageUrl: PropTypes.string,
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired
   }).isRequired

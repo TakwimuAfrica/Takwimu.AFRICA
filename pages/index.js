@@ -11,7 +11,7 @@ import WhatYouDoWithTakwimu from '../src/components/WhatYouCanDoWithTakwimu';
 import WhereToNext from '../src/components/Next';
 import { getSitePage } from '../src/getTakwimuPage';
 
-function Home({ takwimu, indicatorId }) {
+function Home({ takwimu, indicatorId, latestMediumPosts }) {
   const {
     page: {
       where_to_next_title: whereToNextTitle,
@@ -25,7 +25,7 @@ function Home({ takwimu, indicatorId }) {
       {/* <FeaturedData takwimu={takwimu} /> */}
       <WhatYouDoWithTakwimu takwimu={takwimu} />
       <MakingOfTakwimu takwimu={takwimu} />
-      <LatestNewsStories takwimu={takwimu} />
+      <LatestNewsStories takwimu={takwimu} stories={latestMediumPosts} />
       <WhereToNext
         variant="triple"
         whereToNext={{ title: whereToNextTitle, whereToNextLink }}
@@ -41,13 +41,17 @@ Home.propTypes = {
       where_to_next_link: PropTyes.arrayOf(PropTyes.shape({}))
     })
   }).isRequired,
-  indicatorId: PropTyes.string.isRequired
+  indicatorId: PropTyes.string.isRequired,
+  latestMediumPosts: PropTyes.arrayOf(PropTyes.shape({})).isRequired
 };
 
 Home.getInitialProps = async ({ query: { indicator: indicatorId } }) => {
+  const takwimu = await getSitePage('index');
+  const res = await fetch('https://stories.hurumap.org/@takwimu_africa/latest');
   return {
+    takwimu,
     indicatorId,
-    takwimu: await getSitePage('index')
+    latestMediumPosts: await res.json()
   };
 };
 
