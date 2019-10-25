@@ -8,6 +8,7 @@ import AnalysisContent from '../components/AnalysisContent';
 import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent';
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
+import { getChartDefinitions } from '../getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles({
 });
 
 function AnalysisPage({
+  chartDefinitions,
   takwimu,
   initial,
   activeAnalysis,
@@ -25,6 +27,26 @@ function AnalysisPage({
   analysisLink
 }) {
   const classes = useStyles();
+
+  const { hurumap } = chartDefinitions;
+
+  /**
+   * Apply queryAlias
+   */
+  const [charts] = useState(
+    hurumap.map((chart, i) => ({
+      ...chart,
+      visual: {
+        ...JSON.parse(chart.visual),
+        queryAlias: `v${i}`
+      },
+      stat: {
+        ...JSON.parse(chart.stat),
+        queryAlias: `v${i}`
+      }
+    }))
+  );
+
   const [topicIndex, setTopicIndex] = useState(0);
   const changeTopic = next => {
     setTopicIndex(next);
@@ -70,6 +92,7 @@ function AnalysisPage({
           takwimu={takwimu}
           topicIndex={topicIndex}
           analysisLink={analysisLink}
+          charts={charts}
         />
       </ContentPage>
     </Page>
@@ -94,7 +117,12 @@ AnalysisPage.propTypes = {
       slug: PropTypes.string
     })
   }).isRequired,
-  analysisLink: PropTypes.string.isRequired
+  analysisLink: PropTypes.string.isRequired,
+  chartDefinitions: PropTypes.shape({
+    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
+    floursih: PropTypes.arrayOf(PropTypes.shape({})),
+    sections: PropTypes.arrayOf(PropTypes.shape({}))
+  }).isRequired
 };
 
 AnalysisPage.defaultProps = {
@@ -184,10 +212,14 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
       analyses = sections.map(({ section }) => section);
     }
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.warn(err);
   }
 
+  const chartDefinitions = await getChartDefinitions();
+
   return {
+    chartDefinitions,
     takwimu: config,
     activeAnalysis,
     initial,

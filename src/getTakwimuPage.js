@@ -22,3 +22,10 @@ export async function getSitePage(slug) {
 
   return config;
 }
+
+export async function getChartDefinitions() {
+  const res = await fetch(
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts?published=1`
+  );
+  return res.json();
+}

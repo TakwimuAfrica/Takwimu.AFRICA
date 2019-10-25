@@ -70,7 +70,8 @@ function AnalysisContent({
   onChange,
   topicsNavigation,
   readNextTitle,
-  analysisLink
+  analysisLink,
+  charts
 }) {
   const classes = useStyles();
   useEffect(() => {
@@ -108,7 +109,7 @@ function AnalysisContent({
         ReactDOM.render(
           <ApolloContainer>
             <ThemeContainer>
-              <HURUmapChart geoId={geoId} chartId={chartId} />
+              <HURUmapChart geoId={geoId} chartId={chartId} charts={charts} />
             </ThemeContainer>
           </ApolloContainer>,
           chart
@@ -116,7 +117,7 @@ function AnalysisContent({
         return chart;
       });
     }
-  }, [takwimu.country.name, topicIndex]);
+  }, [charts, takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
@@ -269,7 +270,12 @@ AnalysisContent.propTypes = {
       name: PropTypes.string
     }).isRequired
   }).isRequired,
-  analysisLink: PropTypes.string.isRequired
+  analysisLink: PropTypes.string.isRequired,
+  charts: PropTypes.arrayOf(PropTypes.shape({}))
+};
+
+AnalysisContent.defaultProps = {
+  charts: []
 };
 
 export default AnalysisContent;

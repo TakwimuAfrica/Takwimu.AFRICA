@@ -1,13 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import Typography from '@material-ui/core/Typography';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
-import useChartDefinitions from '../../../../../src/data/useChartDefinitions';
 import Error from '../../../../../src/components/Error';
 import config from '../../../../../src/config';
+import { getChartDefinitions } from '../../../../../src/getTakwimuPage';
 
 const Chart = dynamic({
   ssr: false,
@@ -16,20 +16,14 @@ const Chart = dynamic({
   }
 });
 
-function Embed() {
+function Embed(chart) {
   const {
-    query: { geoId, sectionId, chartId }
+    query: { geoId }
   } = useRouter();
-  const sectionedCharts = useChartDefinitions();
-
-  const chart = useMemo(() => {
-    const section = sectionedCharts.find(s => s.id === sectionId);
-    return section ? section.charts.find(c => c.id === chartId) : null;
-  }, [sectionedCharts, sectionId, chartId]);
 
   const { profiles, chartData } = useProfileLoader({
     geoId,
-    visuals: chart ? chart.visuals : [],
+    visuals: chart ? [chart.visual] : [],
     populationTables: config.populationTables
   });
 
@@ -45,10 +39,7 @@ function Embed() {
 
   if (
     !chartData.isLoading &&
-    chart.visuals.find(
-      ({ queryAlias }) =>
-        chartData.profileVisualsData[queryAlias].nodes.length === 0
-    )
+    chartData.profileVisualsData[chart.visual.queryAlias].nodes.length === 0
   ) {
     return (
       <Error title="400 - Bad request">
@@ -88,5 +79,25 @@ function Embed() {
     </div>
   );
 }
+
+Embed.getInitialProps = async ({ query: { sectionId, chartId } }) => {
+  const { hurumap } = await getChartDefinitions();
+  const chart = hurumap.find(
+    ({ id, section }) => id === chartId && section === sectionId
+  );
+  return chart
+    ? {
+        ...chart,
+        visual: {
+          ...JSON.parse(chart.visual),
+          queryAlias: 'vizEmbeded'
+        },
+        stat: {
+          ...JSON.parse(chart.stat),
+          queryAlias: 'vizEmbeded'
+        }
+      }
+    : null;
+};
 
 export default Embed;

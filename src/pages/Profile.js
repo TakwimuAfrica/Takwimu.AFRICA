@@ -8,7 +8,7 @@ import { Grid, makeStyles } from '@material-ui/core';
 
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
-import useChartDefinitions from '../data/useChartDefinitions';
+import propTypes from 'prop-types';
 import config from '../config';
 import { shareIndicator, uploadImage } from '../common';
 import slugify from '../utils/slugify';
@@ -21,6 +21,7 @@ import ProfileSection, {
 import Section from '../components/Section';
 
 import chartSources from '../data/sources.json';
+import { getChartDefinitions } from '../getTakwimuPage';
 
 const MapIt = dynamic({
   ssr: false,
@@ -65,7 +66,7 @@ function Chart({ chartData, definition, profiles, classes }) {
   );
 }
 
-function Profile() {
+function Profile({ chartDefinitions }) {
   const router = useRouter();
   const {
     query: { geoIdOrCountrySlug: geoId = '' }
@@ -77,14 +78,26 @@ function Profile() {
       : 'all'
   );
 
-  const sectionedCharts = useChartDefinitions();
+  const { hurumap, sections } = chartDefinitions;
 
-  const [visuals] = useState(
-    sectionedCharts
-      .map(x => x.charts)
-      .reduce((a, b) => a.concat(b))
-      .map(x => x.visual)
+  /**
+   * Apply queryAlias
+   */
+  const [charts] = useState(
+    hurumap.map((chart, i) => ({
+      ...chart,
+      visual: {
+        ...JSON.parse(chart.visual),
+        queryAlias: `v${i}`
+      },
+      stat: {
+        ...JSON.parse(chart.stat),
+        queryAlias: `v${i}`
+      }
+    }))
   );
+
+  const [visuals] = useState(charts.map(({ visual }) => visual));
 
   const { profiles, chartData } = useProfileLoader({
     geoId,
@@ -128,7 +141,7 @@ function Profile() {
         name: 'All',
         slug: 'all'
       },
-      ...sectionedCharts
+      ...sections
         .map((section, i) => ({
           ...section,
           index: i
@@ -136,22 +149,24 @@ function Profile() {
         // Filter empty sections
         .filter(
           section =>
-            section.charts.filter(
-              ({ visual: { queryAlias } }) =>
-                chartData.isLoading ||
-                !(
-                  !chartData.profileVisualsData ||
-                  chartData.profileVisualsData[queryAlias].nodes.length === 0
-                )
-            ).length !== 0
+            charts
+              .filter(c => c.section === section.id)
+              .filter(
+                ({ visual: { queryAlias } }) =>
+                  chartData.isLoading ||
+                  !(
+                    !chartData.profileVisualsData ||
+                    chartData.profileVisualsData[queryAlias].nodes.length === 0
+                  )
+              ).length !== 0
         )
         .map(section => ({
-          name: section.sectionTitle,
-          slug: slugify(section.sectionTitle),
+          name: section.name,
+          slug: slugify(section.name),
           index: section.index
         }))
     ],
-    [chartData.isLoading, chartData.profileVisualsData, sectionedCharts]
+    [chartData.isLoading, chartData.profileVisualsData, charts, sections]
   );
 
   const handleShare = (id, e, dataURL) => {
@@ -174,7 +189,14 @@ function Profile() {
         : profileTabs.slice(1).map(tab => (
             <Grid item container id={tab.slug} key={tab.slug}>
               <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
-              {sectionedCharts[tab.index].charts
+              {charts
+                /**
+                 * Filter charts belonging to section
+                 */
+                .filter(chart => sections[tab.index].id === chart.section)
+                /**
+                 * Filter loaded charts
+                 */
                 .filter(
                   ({ visual: { queryAlias } }) =>
                     chartData.isLoading ||
@@ -235,7 +257,8 @@ function Profile() {
     [
       profileTabs,
       chartData,
-      sectionedCharts,
+      charts,
+      sections,
       classes,
       getSource,
       country.slug,
@@ -298,5 +321,20 @@ function Profile() {
     </Page>
   );
 }
+
+Profile.propTypes = {
+  chartDefinitions: propTypes.shape({
+    hurumap: propTypes.arrayOf(propTypes.shape({})),
+    floursih: propTypes.arrayOf(propTypes.shape({})),
+    sections: propTypes.arrayOf(propTypes.shape({}))
+  }).isRequired
+};
+
+Profile.getInitialProps = async () => {
+  const chartDefinitions = await getChartDefinitions();
+  return {
+    chartDefinitions
+  };
+};
 
 export default Profile;
