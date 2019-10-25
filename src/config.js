@@ -127,7 +127,20 @@ const config = {
     imageUrl: 'https://takwimu.s3.eu-west-1.amazonaws.com/media/images',
     imageRendition: '.width-600',
     imageType: '.png'
-  }
+  },
+  populationTables: [
+    'allPopulationSex2006S',
+    'allPopulationSex2007S',
+    'allPopulationSex2009S',
+    'allPopulationSex2011S',
+    'allPopulationSex2012S',
+    'allPopulationSex2013S',
+    'allPopulationSexYears',
+    'allPopulationResidence2009S',
+    'allPopulationResidence2012S',
+    'allPopulationResidence2013S',
+    'allTotalPopulations'
+  ]
 };
 
 if (typeof document !== 'undefined') {

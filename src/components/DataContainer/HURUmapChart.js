@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { ChartContainer } from '@codeforafrica/hurumap-ui';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
-import ChartFactory from '../ChartFactory';
+import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
 
-import useChartDefinitions from '../../data/useChartDefinitions';
-import useProfileLoader from '../../data/useProfileLoader';
+import useProfileLoader from '@codeforafrica/hurumap-ui/factory/useProfileLoader';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,18 +22,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function HURUmapChart({ geoId, chartId }) {
+function HURUmapChart({ geoId, chartId, charts }) {
   const classes = useStyles();
-  const sections = useChartDefinitions();
-  const charts = useMemo(
-    () => sections.reduce((a, b) => a.concat(b.charts), []),
-    [sections]
-  );
   const chart = useMemo(() => charts.find(c => c.id === chartId), [
     charts,
     chartId
   ]);
-
   const visuals = useMemo(() => (chart ? [chart.visual] : []), [chart]);
   const { profiles, chartData } = useProfileLoader(geoId, visuals);
 
@@ -66,7 +59,7 @@ function HURUmapChart({ geoId, chartId }) {
           chartData.profileVisualsData[chart.visual.queryAlias] && (
             <ChartFactory
               definition={chart.visual}
-              primaryData={chartData.profileVisualsData}
+              data={chartData.profileVisualsData[chart.visual.queryAlias].nodes}
               profiles={profiles}
             />
           )}
@@ -77,7 +70,8 @@ function HURUmapChart({ geoId, chartId }) {
 
 HURUmapChart.propTypes = {
   geoId: PropTypes.string,
-  chartId: PropTypes.string
+  chartId: PropTypes.string,
+  charts: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 HURUmapChart.defaultProps = {

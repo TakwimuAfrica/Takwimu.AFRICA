@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles, Grid, Typography } from '@material-ui/core';
-import ContentLoader from '@codeforafrica/hurumap-ui/dist/ContentLoader';
+import ContentLoader from '@codeforafrica/hurumap-ui/core/ContentLoader';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,12 +24,7 @@ function ProfileSectionTitle({ loading, tab: { name }, ...props }) {
   return (
     <Grid item className={classes.root}>
       {loading ? (
-        <ContentLoader
-          primaryOpacity={1}
-          secondaryOpacity={0.5}
-          height={48}
-          width="100%"
-        >
+        <ContentLoader primaryOpacity={1} secondaryOpacity={0.5} height={48}>
           <rect x="0" y="0" height={48} width="100%" />
         </ContentLoader>
       ) : (

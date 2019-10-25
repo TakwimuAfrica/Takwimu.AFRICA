@@ -1,4 +1,4 @@
-import createTheme from '@codeforafrica/hurumap-ui/dist/styles/createTheme';
+import createTheme from '@codeforafrica/hurumap-ui/core/styles/createTheme';
 
 const FONT_FAMILY_HEADING = '"Lora", serif';
 const FONT_FAMILY_TEXT = '"Muli", sans-serif';
@@ -14,7 +14,11 @@ const COLOR_BREWER_DIVERGING = [
 const Theme = createTheme({
   chart: {
     pie: {
-      legendWidth: 50,
+      width: 350,
+      height: 200,
+      padding: 0,
+      legendWidth: 100,
+      origin: { x: 150, y: 125 },
       colorScale: COLOR_BREWER_DIVERGING
     },
     area: {
@@ -24,6 +28,9 @@ const Theme = createTheme({
       colorScale: COLOR_BREWER_DIVERGING
     },
     bar: {
+      width: 350,
+      height: 350,
+      offset: 50,
       style: {
         data: {
           fill: COLOR_BREWER_DIVERGING[0]
@@ -35,7 +42,7 @@ const Theme = createTheme({
       }
     },
     axis: {
-      labelWidth: 50,
+      labelWidth: 100,
       style: {
         tickLabels: {
           fontFamily: FONT_FAMILY_TEXT,
