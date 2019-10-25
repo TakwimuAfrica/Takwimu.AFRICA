@@ -35,7 +35,7 @@ function StoryBlocks({ stories }) {
         <StoryCard
           key={story.id}
           story={{
-            preiveImageUrl: `https://cdn-images-1.medium.com/max/2600/${story.virtuals.previewImage.imageId}`,
+            previewImageUrl: `https://cdn-images-1.medium.com/max/2600/${story.virtuals.previewImage.imageId}`,
             title: story.title,
             url: `https://medium.com/@takwimu_africa/${story.uniqueSlug}`
           }}
