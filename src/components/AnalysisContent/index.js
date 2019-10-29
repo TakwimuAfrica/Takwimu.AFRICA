@@ -16,7 +16,6 @@ import ContentNavigation from './ContentNavigation';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
 import ThemeContainer from '../ThemedContainer';
-import ApolloContainer from '../ApolloContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
@@ -199,14 +198,12 @@ function AnalysisContent({
 
         {hurumapCharts.map(({ element, geoId, chartId }) =>
           ReactDOM.createPortal(
-            <ApolloContainer>
-              <HURUmapChart
-                countrySlug={takwimu.country.slug}
-                geoId={geoId}
-                chartId={chartId}
-                charts={charts}
-              />
-            </ApolloContainer>,
+            <HURUmapChart
+              countrySlug={takwimu.country.slug}
+              geoId={geoId}
+              chartId={chartId}
+              charts={charts}
+            />,
             element
           )
         )}
