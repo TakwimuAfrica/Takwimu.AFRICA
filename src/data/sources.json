@@ -316,6 +316,12 @@
             }
         },
         "level1": {
+            "allPopulationSex2009S": {
+                "source": {
+                  "href": "https://dc.sourceafrica.net/documents/21197-Census-2009.html",
+                  "title": "Census, 2009"
+                }
+             },
             "allPopulationSexYears": {
                 "source": {
                     "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
