@@ -1,35 +1,29 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { ChartContainer } from '@codeforafrica/hurumap-ui';
-import { makeStyles } from '@material-ui/styles';
-import { Typography } from '@material-ui/core';
-import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
+import {
+  ChartFactory,
+  useProfileLoader
+} from '@codeforafrica/hurumap-ui/factory';
+import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
+import { makeStyles } from '@material-ui/core';
+import sources from '../../data/sources.json';
 
-import useProfileLoader from '@codeforafrica/hurumap-ui/factory/useProfileLoader';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    padding: '1.25rem'
-  },
-  dataContainer: {
-    padding: '0.625rem',
-    backgroundColor: theme.palette.data.light,
-    overflow: 'hidden',
-    [theme.breakpoints.up('md')]: {
-      padding: '1.25rem'
+const useStyles = makeStyles({
+  containerRoot: {
+    '& > .MuiBox-root:first-child': {
+      flexBasis: '100%'
     }
   }
-}));
+});
 
-function HURUmapChart({ geoId, chartId, charts }) {
+function HURUmapChart({ countrySlug, geoId, chartId, charts }) {
   const classes = useStyles();
   const chart = useMemo(() => charts.find(c => c.id === chartId), [
     charts,
     chartId
   ]);
   const visuals = useMemo(() => (chart ? [chart.visual] : []), [chart]);
-  const { profiles, chartData } = useProfileLoader(geoId, visuals);
+  const { profiles, chartData } = useProfileLoader({ geoId, visuals });
 
   if (
     !chart ||
@@ -37,40 +31,52 @@ function HURUmapChart({ geoId, chartId, charts }) {
       chartData.profileVisualsData[chart.visual.queryAlias] &&
       chartData.profileVisualsData[chart.visual.queryAlias].nodes.length === 0)
   ) {
-    return (
-      <Typography>{`"${chart.title}" chart cannot be visualized`}</Typography>
-    );
+    /**
+     * If chart failed just don't show it
+     */
+    return null;
   }
   return (
-    <div id={`indicator-hurumap-${chart.id}`} className={classes.root}>
-      <ChartContainer
-        classes={{ root: classes.dataContainer }}
-        key={chart.id}
-        loading={chartData.isLoading}
-        title={chart.title}
-        subtitle={chart.subtitle}
-        source={
-          !chartData.isLoading && chartData.sources[chart.visual.table]
-            ? chartData.sources[chart.visual.table].source
-            : {}
-        }
-      >
-        {!chartData.isLoading &&
-          chartData.profileVisualsData[chart.visual.queryAlias] && (
-            <ChartFactory
-              definition={chart.visual}
-              data={chartData.profileVisualsData[chart.visual.queryAlias].nodes}
-              profiles={profiles}
-            />
-          )}
-      </ChartContainer>
-    </div>
+    <InsightContainer
+      classes={{
+        root: classes.containerRoot
+      }}
+      key={chart.id}
+      variant="analysis"
+      loading={chartData.isLoading}
+      title={chart.title}
+      source={
+        !chartData.isLoading &&
+        sources[countrySlug][profiles.profile.geoLevel][chart.visual.table]
+          ? sources[countrySlug][profiles.profile.geoLevel][chart.visual.table]
+              .source
+          : {}
+      }
+    >
+      {!chartData.isLoading &&
+        chartData.profileVisualsData[chart.visual.queryAlias] && (
+          <ChartFactory
+            definition={chart.stat}
+            data={chartData.profileVisualsData[chart.visual.queryAlias].nodes}
+            profiles={profiles}
+          />
+        )}
+      {!chartData.isLoading &&
+        chartData.profileVisualsData[chart.visual.queryAlias] && (
+          <ChartFactory
+            definition={chart.visual}
+            data={chartData.profileVisualsData[chart.visual.queryAlias].nodes}
+            profiles={profiles}
+          />
+        )}
+    </InsightContainer>
   );
 }
 
 HURUmapChart.propTypes = {
   geoId: PropTypes.string,
   chartId: PropTypes.string,
+  countrySlug: PropTypes.string.isRequired,
   charts: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 

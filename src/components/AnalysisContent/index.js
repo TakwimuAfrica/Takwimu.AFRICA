@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import dynamic from 'next/dynamic';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -17,14 +16,11 @@ import ContentNavigation from './ContentNavigation';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
 import ThemeContainer from '../ThemedContainer';
-import ApolloContainer from '../ApolloContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
-const HURUmapChart = dynamic(() => import('../DataContainer/HURUmapChart'), {
-  ssr: false
-});
+import HURUmapChart from '../DataContainer/HURUmapChart';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -74,6 +70,8 @@ function AnalysisContent({
   charts
 }) {
   const classes = useStyles();
+  const [hurumapCharts, setHurumapCharts] = useState([]);
+
   useEffect(() => {
     const indicators = Array.from(
       document.querySelectorAll('[id^="indicator-block"]')
@@ -98,26 +96,16 @@ function AnalysisContent({
         return indicator;
       });
     }
-
-    const hurumapCharts = Array.from(
-      document.querySelectorAll('div[data-chart-id]')
+    setHurumapCharts(
+      Array.from(document.querySelectorAll('div[id^="indicator-hurumap"]')).map(
+        element => ({
+          element,
+          geoId: element.attributes['data-geo-type'].value,
+          chartId: element.attributes['data-chart-id'].value
+        })
+      )
     );
-    if (hurumapCharts && hurumapCharts.length > 0) {
-      hurumapCharts.map(chart => {
-        const chartId = chart.attributes['data-chart-id'].value;
-        const geoId = chart.attributes['data-geo-type'].value;
-        ReactDOM.render(
-          <ApolloContainer>
-            <ThemeContainer>
-              <HURUmapChart geoId={geoId} chartId={chartId} charts={charts} />
-            </ThemeContainer>
-          </ApolloContainer>,
-          chart
-        );
-        return chart;
-      });
-    }
-  }, [charts, takwimu.country.name, topicIndex]);
+  }, [charts, takwimu.country.name]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
@@ -208,6 +196,18 @@ function AnalysisContent({
           />
         )}
 
+        {hurumapCharts.map(({ element, geoId, chartId }) =>
+          ReactDOM.createPortal(
+            <HURUmapChart
+              countrySlug={takwimu.country.slug}
+              geoId={geoId}
+              chartId={chartId}
+              charts={charts}
+            />,
+            element
+          )
+        )}
+
         <Actions
           title={content.topics[topicIndex].post_title}
           page={takwimu.page}
@@ -267,7 +267,8 @@ AnalysisContent.propTypes = {
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
     country: PropTypes.shape({
-      name: PropTypes.string
+      name: PropTypes.string,
+      slug: PropTypes.string
     }).isRequired
   }).isRequired,
   analysisLink: PropTypes.string.isRequired,
