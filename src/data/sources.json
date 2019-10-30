@@ -284,6 +284,12 @@
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "allPopulationSexYears": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
             "allSecondarySchoolTotEnrollments": {
                 "source": {
                     "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
