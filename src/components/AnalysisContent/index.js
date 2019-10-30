@@ -105,7 +105,7 @@ function AnalysisContent({
         })
       )
     );
-  }, [charts, takwimu.country.name]);
+  }, [charts, takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
