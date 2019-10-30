@@ -97,7 +97,7 @@ function AnalysisContent({
       });
     }
     setHurumapCharts(
-      Array.from(document.querySelectorAll('div[data-chart-id]')).map(
+      Array.from(document.querySelectorAll('div[id^="indicator-hurumap"]')).map(
         element => ({
           element,
           geoId: element.attributes['data-geo-type'].value,
