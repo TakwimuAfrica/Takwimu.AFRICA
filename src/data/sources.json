@@ -283,6 +283,68 @@
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "allSecondarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allPrimarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allBudgetAllocations": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allHealthFacilityBeds": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            }
+        },
+        "level1": {
+            "allPopulationSexYears": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allHivPrevalences": {
+                "source": {
+                    "href": "https://nacc.or.ke/wp-content/uploads/2018/12/HIV-estimates-report-Kenya-20182.pdf",
+                    "title": "Kenya HIV Estimates, NACC, 2018"
+                }
+            },
+            "allSecondarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allPrimarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allBudgetAllocations": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allHealthFacilityBeds": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
             }
         }
     },
