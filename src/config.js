@@ -5,11 +5,14 @@ const config = {
       : 'https://takwimu.africa',
   WP_BACKEND_URL:
     process.env.NODE_ENV === 'development'
-      ? 'https://takwimutech.wpengine.com' // Need to change this to localhost:8080 but currently localhost has no seed data
+      ? 'https://takwimutech.wpengine.com' // TODO: Need to change this to localhost:8080 but currently localhost has no seed data
       : 'https://takwimutech.wpengine.com',
   WP_HURUMAP_DATA_API:
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
+      ? /**
+         * TODO: we need to set this such that we can intercet /flourish request in local dev so that we can test iframe downloads
+         */
+        'https://takwimutech.wpengine.com/wp-json/hurumap-data'
       : 'https://takwimutech.wpengine.com/wp-json/hurumap-data',
   country: {},
   countries: [

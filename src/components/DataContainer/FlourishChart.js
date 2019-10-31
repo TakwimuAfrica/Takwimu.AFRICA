@@ -45,7 +45,7 @@ function FlourishChart({ title, chartId, charts }) {
 
   const handleIframeLoaded = e => {
     const iframe = e.target;
-    if (iframe) {
+    if (iframe && iframe.contentDocument) {
       // Most static charts have a wrapper element with id `wrapper`
       const wrapper = iframe.contentDocument.getElementById('wrapper');
       if (wrapper) {
