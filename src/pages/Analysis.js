@@ -28,13 +28,13 @@ function AnalysisPage({
 }) {
   const classes = useStyles();
 
-  const { hurumap } = chartDefinitions;
+  const { hurumap, flourish } = chartDefinitions;
 
   /**
    * Apply queryAlias
    */
-  const [charts] = useState(
-    hurumap.map((chart, i) => ({
+  const [charts] = useState({
+    hurumap: hurumap.map((chart, i) => ({
       ...chart,
       visual: {
         ...JSON.parse(chart.visual),
@@ -44,8 +44,9 @@ function AnalysisPage({
         ...JSON.parse(chart.stat),
         queryAlias: `v${i}`
       }
-    }))
-  );
+    })),
+    flourish
+  });
 
   const [topicIndex, setTopicIndex] = useState(0);
   const changeTopic = next => {
@@ -120,7 +121,7 @@ AnalysisPage.propTypes = {
   analysisLink: PropTypes.string.isRequired,
   chartDefinitions: PropTypes.shape({
     hurumap: PropTypes.arrayOf(PropTypes.shape({})),
-    floursih: PropTypes.arrayOf(PropTypes.shape({})),
+    flourish: PropTypes.arrayOf(PropTypes.shape({})),
     sections: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired
 };

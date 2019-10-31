@@ -9,11 +9,9 @@ import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import EntitiesDataContainer from './EntitiesDataContainer';
 
-import HURUmapDataContainer from './HURUmapDataContainer';
 import HTMLDataContainer from './HTMLDataContainer';
 import ImageDataContainer from './ImageDataContainer';
 import PDFDataContainer from './PDFDataContainer';
-import FlourishDataContainer from './FlourishDataContainer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -110,29 +108,11 @@ function DataContainer({
             />
           )}
 
-          {(data.type === 'hurumap' || data.type === 'hurumap_snippet') && (
-            <HURUmapDataContainer
-              id={id}
-              data={data.value}
-              countryName={countryName}
-              url={url}
-            />
-          )}
-
           {data.type === 'html' && (
             <HTMLDataContainer
               id={id}
               data={data.value}
               countryName={countryName}
-            />
-          )}
-
-          {data.type === 'flourish' && (
-            <FlourishDataContainer
-              id={id}
-              data={data.value}
-              countryName={countryName}
-              url={url}
             />
           )}
 

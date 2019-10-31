@@ -21,6 +21,7 @@ import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
 import HURUmapChart from '../DataContainer/HURUmapChart';
+import FlourishChart from '../DataContainer/FlourishChart';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -70,7 +71,10 @@ function AnalysisContent({
   charts
 }) {
   const classes = useStyles();
-  const [hurumapCharts, setHurumapCharts] = useState([]);
+  const [chartElemenets, setChartElements] = useState({
+    hurumap: [],
+    flourish: []
+  });
 
   useEffect(() => {
     const indicators = Array.from(
@@ -96,15 +100,22 @@ function AnalysisContent({
         return indicator;
       });
     }
-    setHurumapCharts(
-      Array.from(document.querySelectorAll('div[id^="indicator-hurumap"]')).map(
-        element => ({
-          element,
-          geoId: element.attributes['data-geo-type'].value,
-          chartId: element.attributes['data-chart-id'].value
-        })
-      )
-    );
+    setChartElements({
+      hurumap: Array.from(
+        document.querySelectorAll('div[id^="indicator-hurumap"]')
+      ).map(element => ({
+        element,
+        geoId: element.attributes['data-geo-type'].value,
+        chartId: element.attributes['data-chart-id'].value
+      })),
+      flourish: Array.from(
+        document.querySelectorAll('div[id^="indicator-flourish"]')
+      ).map(element => ({
+        element,
+        title: element.attributes['data-chart-title'].value,
+        chartId: element.attributes['data-chart-id'].value
+      }))
+    });
   }, [charts, takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
@@ -196,13 +207,23 @@ function AnalysisContent({
           />
         )}
 
-        {hurumapCharts.map(({ element, geoId, chartId }) =>
+        {chartElemenets.hurumap.map(({ element, geoId, chartId }) =>
           ReactDOM.createPortal(
             <HURUmapChart
               countrySlug={takwimu.country.slug}
               geoId={geoId}
               chartId={chartId}
-              charts={charts}
+              charts={charts.hurumap}
+            />,
+            element
+          )
+        )}
+        {chartElemenets.flourish.map(({ element, title, chartId }) =>
+          ReactDOM.createPortal(
+            <FlourishChart
+              chartId={chartId}
+              title={title}
+              charts={charts.flourish}
             />,
             element
           )
@@ -272,7 +293,10 @@ AnalysisContent.propTypes = {
     }).isRequired
   }).isRequired,
   analysisLink: PropTypes.string.isRequired,
-  charts: PropTypes.arrayOf(PropTypes.shape({}))
+  charts: PropTypes.shape({
+    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
+    flourish: PropTypes.arrayOf(PropTypes.shape({}))
+  })
 };
 
 AnalysisContent.defaultProps = {

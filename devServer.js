@@ -23,12 +23,14 @@ app.prepare().then(() => {
       )
       .use('/flourish/:id', async (req, res) => {
         axios
-          .get(`https://takwimu.africa/flourish/${req.params.id}`)
+          .get(
+            `https://takwimutech.wpengine.com/wp-json/hurumap-data/flourish/${req.params.id}`
+          )
           .then(({ data }) => {
             res.send(
               data.replace(
-                /https:\/\/takwimu.africa/gi,
-                'http://localhost:3000'
+                /localhost:8080|takwimutech.wpengine.com|takwimu.africa/gi,
+                `http://localhost:3000`
               )
             );
           })

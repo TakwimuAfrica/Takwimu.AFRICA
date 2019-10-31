@@ -3,7 +3,14 @@ const config = {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
-  WP_BACKEND_URL: 'https://takwimutech.wpengine.com',
+  WP_BACKEND_URL:
+    process.env.NODE_ENV === 'development'
+      ? 'https://takwimutech.wpengine.com' // Need to change this to localhost:8080 but currently localhost has no seed data
+      : 'https://takwimutech.wpengine.com',
+  WP_HURUMAP_DATA_API:
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'https://takwimutech.wpengine.com/wp-json/hurumap-data',
   country: {},
   countries: [
     {
