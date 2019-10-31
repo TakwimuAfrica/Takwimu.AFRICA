@@ -15,12 +15,12 @@ import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
-import ThemeContainer from '../ThemedContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
 import HURUmapChart from '../DataContainer/HURUmapChart';
+import FlourishChart from '../DataContainer/FlourishChart';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -70,42 +70,38 @@ function AnalysisContent({
   charts
 }) {
   const classes = useStyles();
-  const [hurumapCharts, setHurumapCharts] = useState([]);
+  const [hydrateElements, setHydrateElements] = useState({
+    hurumap: [],
+    flourish: [],
+    indicators: []
+  });
 
   useEffect(() => {
-    const indicators = Array.from(
-      document.querySelectorAll('[id^="indicator-block"]')
-    );
-    if (indicators && indicators.length > 0) {
-      indicators.map(indicator => {
-        if (indicator.attributes['data-layout'].value === 'document_widget') {
-          const title = indicator.attributes['data-title'].value;
-          const documentSource = indicator.attributes['data-src'].value;
-          const { id } = indicator;
-          ReactDOM.render(
-            <ThemeContainer>
-              <PDFDataContainer
-                id={id}
-                countryName={takwimu.country.name}
-                data={{ title, source: documentSource }}
-              />
-            </ThemeContainer>,
-            indicator
-          );
-        }
-        return indicator;
-      });
-    }
-    setHurumapCharts(
-      Array.from(document.querySelectorAll('div[id^="indicator-hurumap"]')).map(
-        element => ({
-          element,
-          geoId: element.attributes['data-geo-type'].value,
-          chartId: element.attributes['data-chart-id'].value
-        })
-      )
-    );
-  }, [charts, takwimu.country.name]);
+    setHydrateElements({
+      indicators: Array.from(
+        document.querySelectorAll('[id^="indicator-block"]')
+      ).map(element => ({
+        element,
+        layout: element.attributes['data-layout'].value,
+        title: element.attributes['data-title'].value,
+        src: element.attributes['data-src'].value
+      })),
+      hurumap: Array.from(
+        document.querySelectorAll('div[id^="indicator-hurumap"]')
+      ).map(element => ({
+        element,
+        geoId: element.attributes['data-geo-type'].value,
+        chartId: element.attributes['data-chart-id'].value
+      })),
+      flourish: Array.from(
+        document.querySelectorAll('div[id^="indicator-flourish"]')
+      ).map(element => ({
+        element,
+        title: element.attributes['data-chart-title'].value,
+        chartId: element.attributes['data-chart-id'].value
+      }))
+    });
+  }, [charts, takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
@@ -115,28 +111,6 @@ function AnalysisContent({
       content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
     );
   }, [content.topics, topicIndex]);
-
-  // const [id, setId] = useState(`${content.id}-${topicIndex}`);
-  // useEffect(() => {
-  //   if (`${content.id}-${topicIndex}` !== id) {
-  //     setId(`${content.id}-${topicIndex}`);
-  //   }
-  // }, [content.id, topicIndex, id]);
-
-  // useEffect(() => {
-  //   if (document.getElementsByClassName('flourish-embed')) {
-  //     const script = document.createElement('script');
-  //     const oldScript = document.getElementById('flourish-script');
-  //     if (oldScript) {
-  //       oldScript.remove();
-  //     }
-
-  //     window.FlourishLoaded = false;
-  //     script.id = 'flourish-script';
-  //     script.src = 'https://public.flourish.studio/resources/embed.js';
-  //     document.body.appendChild(script);
-  //   }
-  // }, [topicIndex]);
 
   const showContent = index => () => {
     onChange(index);
@@ -196,16 +170,47 @@ function AnalysisContent({
           />
         )}
 
-        {hurumapCharts.map(({ element, geoId, chartId }) =>
+        {hydrateElements.hurumap.map(({ element, geoId, chartId }) =>
           ReactDOM.createPortal(
             <HURUmapChart
               countrySlug={takwimu.country.slug}
               geoId={geoId}
               chartId={chartId}
-              charts={charts}
+              charts={charts.hurumap}
             />,
             element
           )
+        )}
+        {hydrateElements.flourish.map(({ element, title, chartId }) =>
+          ReactDOM.createPortal(
+            <FlourishChart
+              chartId={chartId}
+              title={title}
+              charts={charts.flourish}
+            />,
+            element
+          )
+        )}
+        {hydrateElements.indicators.map(
+          ({ element, layout, title, src: source }) => {
+            if (layout === 'document_widget') {
+              /**
+               * Currently the content returned from wp contains styling.
+               * Remove this styling and render the appropriate container.
+               */
+              // eslint-disable-next-line no-param-reassign
+              element.innerHTML = '';
+              return ReactDOM.createPortal(
+                <PDFDataContainer
+                  id={element.id}
+                  countryName={takwimu.country.name}
+                  data={{ title, source }}
+                />,
+                element
+              );
+            }
+            return null;
+          }
         )}
 
         <Actions
@@ -272,7 +277,10 @@ AnalysisContent.propTypes = {
     }).isRequired
   }).isRequired,
   analysisLink: PropTypes.string.isRequired,
-  charts: PropTypes.arrayOf(PropTypes.shape({}))
+  charts: PropTypes.shape({
+    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
+    flourish: PropTypes.arrayOf(PropTypes.shape({}))
+  })
 };
 
 AnalysisContent.defaultProps = {

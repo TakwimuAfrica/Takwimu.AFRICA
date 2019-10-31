@@ -5,19 +5,9 @@ import {
   useProfileLoader
 } from '@codeforafrica/hurumap-ui/factory';
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
-import { makeStyles } from '@material-ui/core';
 import sources from '../../data/sources.json';
 
-const useStyles = makeStyles({
-  containerRoot: {
-    '& > .MuiBox-root:first-child': {
-      flexBasis: '100%'
-    }
-  }
-});
-
 function HURUmapChart({ countrySlug, geoId, chartId, charts }) {
-  const classes = useStyles();
   const chart = useMemo(() => charts.find(c => c.id === chartId), [
     charts,
     chartId
@@ -38,9 +28,7 @@ function HURUmapChart({ countrySlug, geoId, chartId, charts }) {
   }
   return (
     <InsightContainer
-      classes={{
-        root: classes.containerRoot
-      }}
+      hideInsight
       key={chart.id}
       variant="analysis"
       loading={chartData.isLoading}
