@@ -303,7 +303,9 @@ function Profile({ chartDefinitions }) {
         <MapIt
           drawProfile
           codeType="AFR"
-          drawChildren={geoId.split('-')[1] === 'NG'}
+          drawChildren={
+            geoId.split('-')[1] === 'NG' || geoId.split('-')[1] === 'KE'
+          }
           geoLevel={geoId.split('-')[0]}
           geoCode={geoId.split('-')[1]}
           onClickGeoLayer={onClickGeoLayer}

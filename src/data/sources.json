@@ -283,6 +283,80 @@
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "allPopulationSexYears": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allSecondarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allPrimarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allBudgetAllocations": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allHealthFacilityBeds": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            }
+        },
+        "level1": {
+            "allPopulationSex2009S": {
+                "source": {
+                  "href": "https://dc.sourceafrica.net/documents/21197-Census-2009.html",
+                  "title": "Census, 2009"
+                }
+             },
+            "allPopulationSexYears": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allHivPrevalences": {
+                "source": {
+                    "href": "https://africaopendata.org/dataset/kenya-hiv-estimates-2018",
+                    "title": "Kenya HIV Estimates, NACC, 2018"
+                }
+            },
+            "allSecondarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allPrimarySchoolTotEnrollments": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allBudgetAllocations": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
+            },
+            "allHealthFacilityBeds": {
+                "source": {
+                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "title": "Statistical Abstract, 2018"
+                }
             }
         }
     },
