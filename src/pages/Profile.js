@@ -122,7 +122,7 @@ function Profile({ chartDefinitions }) {
     table => {
       const source =
         chartSources[country.slug][profiles.profile.geoLevel][table];
-      return source.source.title ? source : {};
+      return source && source.source.title ? source : {};
     },
     [profiles, country]
   );
