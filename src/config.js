@@ -149,7 +149,17 @@ const config = {
     'allPopulationResidence2009S',
     'allPopulationResidence2012S',
     'allPopulationResidence2013S',
-    'allTotalPopulations'
+    /**
+     * Countries have their populations in `allTotalPopulations`
+     * Make sure we retrieve the latest population total
+     */
+    [
+      'allTotalPopulations',
+      {
+        orderBy: 'TOTAL_POPULATION_YEAR_DESC',
+        first: 1
+      }
+    ]
   ]
 };
 
