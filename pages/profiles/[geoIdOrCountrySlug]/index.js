@@ -10,10 +10,19 @@ function ProfileOrAnalysis({ isAnalysis, initialProps }) {
     <>
       <Head>
         {/** Graphql Preconnet */}
-        <link rel="preconnect" href="https://graphql.takwimu.africa" />
+        <link
+          rel="preconnect"
+          href="https://graphql.takwimu.africa"
+          crossOrigin
+        />
         {/** MapIt Preconnect */}
-        <link rel="preconnect" href="http://thetrixieapp.com" />
-        <link rel="preconnect" href="https://server.arcgisonline.com" />
+        <link rel="preconnect" href="https://mapit.hurumap.org" crossOrigin />
+        {/** Map Tiles Preconnect */}
+        <link
+          rel="preconnect"
+          href="https://server.arcgisonline.com"
+          crossOrigin
+        />
       </Head>
       {isAnalysis ? (
         <Analysis {...initialProps} />

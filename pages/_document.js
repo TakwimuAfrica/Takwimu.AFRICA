@@ -41,8 +41,9 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#000000" />
           <link rel="manifest" href="/static/manifest.json" />
           <link
+            rel="preload"
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
-            rel="stylesheet"
+            as="stylesheet"
           />
         </Head>
         <body>
