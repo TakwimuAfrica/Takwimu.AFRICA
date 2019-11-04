@@ -1,14 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Head from 'next/head';
 import Analysis from '../../../src/pages/Analysis';
 import Profile from '../../../src/pages/Profile';
 import config from '../../../src/config';
 
 function ProfileOrAnalysis({ isAnalysis, initialProps }) {
-  return isAnalysis ? (
-    <Analysis {...initialProps} />
-  ) : (
-    <Profile {...initialProps} />
+  return (
+    <>
+      <Head>
+        {/** Graphql Preconnet */}
+        <link rel="preconnect" href="https://graphql.takwimu.africa" />
+        {/** MapIt Preconnect */}
+        <link rel="preconnect" href="http://thetrixieapp.com" />
+        <link rel="preconnect" href="https://server.arcgisonline.com" />
+      </Head>
+      {isAnalysis ? (
+        <Analysis {...initialProps} />
+      ) : (
+        <Profile {...initialProps} />
+      )}
+    </>
   );
 }
 
