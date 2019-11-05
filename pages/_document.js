@@ -45,6 +45,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
             as="style"
           />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
+          />
         </Head>
         <body>
           <Main />
