@@ -43,7 +43,7 @@ class MyDocument extends Document {
           <link
             rel="preload"
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
-            as="stylesheet"
+            as="style"
           />
         </Head>
         <body>
