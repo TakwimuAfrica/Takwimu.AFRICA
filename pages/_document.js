@@ -39,16 +39,15 @@ class MyDocument extends Document {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <meta name="theme-color" content="#000000" />
-          <script
-            src="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"
-            integrity="sha256-EPrkNjGEmCWyazb3A/Epj+W7Qm2pB9vnfXw+X6LImPM="
-            crossOrigin="anonymous"
-          />
-          <link rel="stylesheet" href="/static/pace.css" />
           <link rel="manifest" href="/static/manifest.json" />
           <link
+            rel="preload"
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
+            as="style"
+          />
+          <link
             rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
           />
         </Head>
         <body>
