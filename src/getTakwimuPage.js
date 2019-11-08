@@ -12,6 +12,18 @@ export default async function getTakwimuPage(type) {
   return config;
 }
 
+export async function get(type, slug) {
+  const res = await fetch(
+    `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}?slug=${slug}`
+  );
+  const data = await res.json();
+
+  return {
+    takwimu: config,
+    wp: data[0]
+  };
+}
+
 export async function getSitePage(slug) {
   const res = await fetch(
     `${config.WP_BACKEND_URL}/wp-json/wp/v2/pages?slug=${slug}`

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import makeStyles from '@material-ui/styles/makeStyles';
 
+import Head from 'next/head';
 import config from '../config';
 import AnalysisContent from '../components/AnalysisContent';
 import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent';
@@ -77,6 +78,12 @@ function AnalysisPage({
       indicatorId={indicatorId}
       title={`${takwimu.country.short_name}'s ${activeAnalysis.post_title} Analysis`}
     >
+      <Head>
+        <script
+          type="text/javascript"
+          src="http://localhost:8080/wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js"
+        />
+      </Head>
       <ContentPage
         aside={
           <AnalysisTableOfContent

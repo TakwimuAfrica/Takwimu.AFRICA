@@ -21,10 +21,18 @@ app.prepare().then(() => {
           changeOrigin: true
         })
       )
+      .use(
+        proxyMiddleware('/wp-json', {
+          target: 'http://localhost:8080',
+          changeOrigin: true
+        })
+      )
       .use('/flourish/:id', async (req, res) => {
         axios
           .get(
-            `https://takwimutech.wpengine.com/wp-json/hurumap-data/flourish/${req.params.id}`
+            process.env === 'development'
+              ? `http://localhost:8080/wp-json/hurumap-data/flourish/${req.params.id}`
+              : `https://takwimutech.wpengine.com/wp-json/hurumap-data/flourish/${req.params.id}`
           )
           .then(({ data }) => {
             res.send(

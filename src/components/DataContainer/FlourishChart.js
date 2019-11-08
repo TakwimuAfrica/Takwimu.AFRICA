@@ -9,6 +9,10 @@ function FlourishChart({ title, chartId, charts }) {
     chartId
   ]);
 
+  if (!chart) {
+    return null;
+  }
+
   return (
     <InsightContainer
       hideInsight
