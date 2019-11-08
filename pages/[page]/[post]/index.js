@@ -44,7 +44,7 @@ P.propTypes = {
 };
 
 P.getInitialProps = async ({ query: { post } }) => {
-  return get('post', post);
+  return get('posts', post);
 };
 
 export default P;
