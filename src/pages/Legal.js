@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 
-import makeStyles from '@material-ui/styles/makeStyles';
-
 import { useRouter } from 'next/router';
+
+import makeStyles from '@material-ui/core/styles/makeStyles';
+
 import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
 import Page from '../components/Page';

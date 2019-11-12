@@ -8,8 +8,7 @@ import {
   Popover,
   ClickAwayListener
 } from '@material-ui/core';
-
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import shareIcon from '../../assets/images/network-connection.svg';
 import embedIcon from '../../assets/images/code.svg';

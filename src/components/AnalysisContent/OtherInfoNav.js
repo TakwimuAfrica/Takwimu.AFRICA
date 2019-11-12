@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import AnalysisContentNavigation from './ContentNavigation';
 

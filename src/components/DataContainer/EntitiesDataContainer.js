@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import DataActions from './DataActions';
 import { RichTypography } from '../core';

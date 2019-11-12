@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import makeStyles from '@material-ui/styles/makeStyles';
+import NextLink from 'next/link';
 
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import NextLink from 'next/link';
-import PropTypes from 'prop-types';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+
 import config from '../src/config';
 import WhereToNext from '../src/components/Next';
 import Error from '../src/components/Error';

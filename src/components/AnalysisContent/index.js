@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import makeStyles from '@material-ui/styles/makeStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import { RichTypography } from '../core';
 import Actions from './Actions';

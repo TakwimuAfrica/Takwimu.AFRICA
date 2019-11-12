@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 import classNames from 'classnames';
+
 import { ButtonBase, MenuList, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
-import { makeStyles } from '@material-ui/styles';
 
 import activeContentIcon from '../assets/images/active-page.svg';
 

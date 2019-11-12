@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import makeStyles from '@material-ui/styles/makeStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import { CountrySelector } from '../ProfileDetail';
 import TableOfContent from '../TableOfContent';

@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 
 import { Grid, Link } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
+
 import Title from './Title';
 
 import email from '../../assets/images/email.svg';
