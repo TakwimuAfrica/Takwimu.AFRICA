@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 function RichTextSection({ component, title, value, variant, ...props }) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const text = (
     <RichTypography classes={{ root: classes.text }} component="div">
       {value}
