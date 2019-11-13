@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 
 import { Link, Tooltip, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 

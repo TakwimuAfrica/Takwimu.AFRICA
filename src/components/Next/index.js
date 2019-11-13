@@ -3,9 +3,10 @@ import { PropTypes } from 'prop-types';
 import NextLink from 'next/link';
 
 import Grid from '@material-ui/core/Grid';
-import makeStyles from '@material-ui/styles/makeStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
+
 import Section from '../Section';
 import Card from './Card';
 

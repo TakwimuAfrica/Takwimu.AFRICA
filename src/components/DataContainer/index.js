@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { ArrowDropUp } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/styles';
 
 import classNames from 'classnames';
 import EntitiesDataContainer from './EntitiesDataContainer';
@@ -83,8 +83,8 @@ function DataContainer({
     return (
       layout === 'half_width' ||
       (layout === 'auto' &&
-        (!['entities', 'document'].includes(data.type) &&
-          (!summary || summary === '<p></p>')))
+        !['entities', 'document'].includes(data.type) &&
+        (!summary || summary === '<p></p>'))
     );
   };
   return (

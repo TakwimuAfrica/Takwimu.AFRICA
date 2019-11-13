@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { ButtonBase, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+
 import classNames from 'classnames';
+
+import { ButtonBase, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 import SearchResultItem from './SearchResultItem';
 
 const useStyles = makeStyles(theme => ({

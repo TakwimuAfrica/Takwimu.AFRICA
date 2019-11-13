@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
+
 import Title from './Title';
 
 import gates from '../../assets/images/gates.png';

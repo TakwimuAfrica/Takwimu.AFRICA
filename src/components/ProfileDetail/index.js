@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+
+import classNames from 'classnames';
+
 import {
   Typography,
   ButtonBase,
@@ -11,9 +14,8 @@ import {
   MenuList,
   MenuItem
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-import classNames from 'classnames';
 import Layout from '../Layout';
 
 import searchIcon from '../../assets/images/icon-search.svg';

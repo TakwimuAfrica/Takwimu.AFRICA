@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import NextLink from 'next/link';
 
 import { Grid, Link, Typography, withWidth } from '@material-ui/core';
-
-import makeStyles from '@material-ui/styles/makeStyles';
-
+import makeStyles from '@material-ui/core/styles/makeStyles';
 import { isWidthDown } from '@material-ui/core/withWidth';
+
 import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);

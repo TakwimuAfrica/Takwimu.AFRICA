@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import classnames from 'classnames';
 
 import { ButtonBase, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import downArrow from '../../assets/images/down-arrow.svg';
 import downArrowGreen from '../../assets/images/down-arrow-green.svg';

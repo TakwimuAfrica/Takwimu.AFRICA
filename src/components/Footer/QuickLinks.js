@@ -5,7 +5,7 @@ import NextLink from 'next/link';
 import classNames from 'classnames';
 
 import { Link, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Title from './Title';
 

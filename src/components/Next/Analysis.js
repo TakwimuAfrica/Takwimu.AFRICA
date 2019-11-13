@@ -1,11 +1,12 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+
 import NextLink from 'next/link';
 
 import classNames from 'classnames';
 
 import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Card from './Card';
 import Section from '../Section';

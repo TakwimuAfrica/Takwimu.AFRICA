@@ -10,8 +10,8 @@ import {
   ExpansionPanelDetails,
   IconButton
 } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
-import { withStyles } from '@material-ui/styles';
 import { RichTypography } from '../core';
 
 const styles = theme => ({

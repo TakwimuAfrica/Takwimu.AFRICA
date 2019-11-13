@@ -3,9 +3,10 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
 import propTypes from 'prop-types';
@@ -122,7 +123,7 @@ function Profile({ chartDefinitions }) {
     table => {
       const source =
         chartSources[country.slug][profiles.profile.geoLevel][table];
-      return source && source.source.title ? source : {};
+      return source && source.source.href ? source.source : undefined;
     },
     [profiles, country]
   );
@@ -184,76 +185,64 @@ function Profile({ chartDefinitions }) {
    */
   const chartComponents = useMemo(
     () =>
-      !process.browser
-        ? null
-        : profileTabs.slice(1).map(tab => (
-            <Grid item container id={tab.slug} key={tab.slug}>
-              <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
-              {charts
-                /**
-                 * Filter charts belonging to section
-                 */
-                .filter(chart => sections[tab.index].id === chart.section)
-                /**
-                 * Filter loaded charts
-                 */
-                .filter(
-                  ({ visual: { queryAlias } }) =>
-                    chartData.isLoading ||
-                    (chartData.profileVisualsData &&
-                      /* data is not missing */
-                      chartData.profileVisualsData[queryAlias].nodes.length !==
-                        0)
-                )
-                .map(chart => (
-                  <Grid
-                    item
-                    xs={12}
-                    key={chart.id}
-                    className={classes.container}
-                  >
-                    <InsightContainer
-                      classes={{
-                        root: classes.containerRoot,
-                        sourceGrid: classes.containerSourceGrid
-                      }}
-                      key={chart.id}
-                      loading={chartData.isLoading}
-                      title={chart.title}
-                      source={
-                        !chartData.isLoading
-                          ? getSource(chart.visual.table).source
-                          : {}
-                      }
-                      insightActions={{
-                        handleShare: handleShare.bind(null, chart.id),
-                        handleShowData: () => {},
-                        handleCompare: () => {}
-                      }}
-                      insight={{
-                        dataLink: {
-                          href: `/profiles/${country.slug}`,
-                          title: 'Read the country analysis'
-                        }
-                      }}
-                    >
-                      <Chart
-                        chartData={chartData}
-                        definition={chart.stat}
-                        profiles={profiles}
-                        classes={classes}
-                      />
-                      <Chart
-                        chartData={chartData}
-                        definition={chart.visual}
-                        profiles={profiles}
-                        classes={classes}
-                      />
-                    </InsightContainer>
-                  </Grid>
-                ))}
-            </Grid>
-          )),
+      profileTabs.slice(1).map(tab => (
+        <Grid item container id={tab.slug} key={tab.slug}>
+          <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
+          {charts
+            /**
+             * Filter charts belonging to section
+             */
+            .filter(chart => sections[tab.index].id === chart.section)
+            /**
+             * Filter loaded charts
+             */
+            .filter(
+              ({ visual: { queryAlias } }) =>
+                chartData.isLoading ||
+                (chartData.profileVisualsData &&
+                  /* data is not missing */
+                  chartData.profileVisualsData[queryAlias].nodes.length !== 0)
+            )
+            .map(chart => (
+              <Grid item xs={12} key={chart.id} className={classes.container}>
+                <InsightContainer
+                  classes={{
+                    root: classes.containerRoot,
+                    sourceGrid: classes.containerSourceGrid
+                  }}
+                  key={chart.id}
+                  loading={chartData.isLoading}
+                  title={chart.title}
+                  source={!chartData.isLoading && getSource(chart.visual.table)}
+                  insightActions={{
+                    handleShare: handleShare.bind(null, chart.id),
+                    handleShowData: () => {},
+                    handleCompare: () => {}
+                  }}
+                  insight={{
+                    dataLink: {
+                      href: `/profiles/${country.slug}`,
+                      title: 'Read the country analysis'
+                    }
+                  }}
+                >
+                  <Chart
+                    chartData={chartData}
+                    definition={chart.stat}
+                    profiles={profiles}
+                    classes={classes}
+                  />
+                  <Chart
+                    chartData={chartData}
+                    definition={chart.visual}
+                    profiles={profiles}
+                    classes={classes}
+                  />
+                </InsightContainer>
+              </Grid>
+            ))}
+        </Grid>
+      )),
     [
       profileTabs,
       chartData,
@@ -327,7 +316,6 @@ function Profile({ chartDefinitions }) {
 Profile.propTypes = {
   chartDefinitions: propTypes.shape({
     hurumap: propTypes.arrayOf(propTypes.shape({})),
-    floursih: propTypes.arrayOf(propTypes.shape({})),
     sections: propTypes.arrayOf(propTypes.shape({}))
   }).isRequired
 };

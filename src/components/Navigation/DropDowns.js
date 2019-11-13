@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { Drawer } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import DropDownButton from './DropDownButton';
+import { makeStyles } from '@material-ui/core/styles';
 
 import DataByTopic from './DataByTopic';
+import DropDownButton from './DropDownButton';
 import CountryAnalysis from './CountryAnalysis';
 
 import topicIcon from '../../assets/images/a-chart-white.svg';

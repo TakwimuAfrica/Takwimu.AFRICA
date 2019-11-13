@@ -1,9 +1,10 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
+
+import { useRouter } from 'next/router';
 
 import { Typography, ButtonBase } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import { PropTypes } from 'prop-types';
-import { useRouter } from 'next/router';
+import { makeStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
