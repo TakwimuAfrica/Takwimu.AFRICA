@@ -74,7 +74,7 @@ function AboutContent({
       />
       <RichTextSection
         classes={{ root: classes.section }}
-        title={aboutTakwimu.title}
+        title={aboutTakwimu.label}
         value={aboutTakwimu.description}
         id="about"
         component={ContentSection}
@@ -82,14 +82,14 @@ function AboutContent({
 
       <RichTextSection
         classes={{ root: classes.section }}
-        title={methodology.title}
+        title={methodology.label}
         value={methodology.description}
         id="methodology"
         component={ContentSection}
       />
       <RichTextSection
         classes={{ root: classes.section }}
-        title={services.title}
+        title={services.label}
         value={services.description}
         id="services"
         component={ContentSection}
@@ -109,16 +109,16 @@ AboutContent.propTypes = {
   title: PropTypes.string.isRequired,
   contentNavigation: PropTypes.string.isRequired,
   aboutTakwimu: PropTypes.shape({
-    title: PropTypes.string,
+    label: PropTypes.string,
     description: PropTypes.string
   }).isRequired,
   methodology: PropTypes.shape({
-    title: PropTypes.string,
+    label: PropTypes.string,
     description: PropTypes.string
   }).isRequired,
   faqs: PropTypes.shape({}).isRequired,
   services: PropTypes.shape({
-    title: PropTypes.string,
+    label: PropTypes.string,
     description: PropTypes.string
   }).isRequired,
   whereToNext: PropTypes.shape({
