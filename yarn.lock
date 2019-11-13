@@ -840,13 +840,14 @@
   resolved "https://registry.yarnpkg.com/@bundled-es-modules/pdfjs-dist/-/pdfjs-dist-2.1.266-rc.tgz#d77562dcec57b94f9533e1a774b30a3880fd583b"
   integrity sha512-idli/i9GA7hUW8uRIs2Y48m5QHKRv3PaVxlM1VEoOuzWoF2qLdtOepOpIy3BTblakDNt2f/gINPN7X/v9DBKoQ==
 
-"@codeforafrica/hurumap-ui@^0.2.0-alpha.11":
-  version "0.2.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/@codeforafrica/hurumap-ui/-/hurumap-ui-0.2.0-alpha.11.tgz#36339db98d8f0f5a4aa95315b1902bed5a9d180d"
-  integrity sha512-LfKX0IODfo3FPj82RR++GradKjbFHeKnU0GRmuOwAdD8K+WN4b9PsonIJtcJBAdf2znYhmnyUleez34Y67hIbg==
+"@codeforafrica/hurumap-ui@^0.2.0-alpha.12":
+  version "0.2.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/@codeforafrica/hurumap-ui/-/hurumap-ui-0.2.0-alpha.12.tgz#8a9f9ab7e91849c6b22829a505d9ba2461d6a0c4"
+  integrity sha512-qmDudi6p6XzRPIfyPkaeubZN4EDgPRS6bvexHCbQaQSzKNkogLjlumhLFMKkzw7iTj7VYwSlriYtemoKih6P8Q==
   dependencies:
     "@material-ui/core" "^4.5.1"
-    "@material-ui/styles" "^4.5.0"
+    "@types/react" "^16.9.11"
+    apollo-utilities "^1.3.2"
     dequal "^1.0.0"
     dom-to-image "^2.6.0"
     geojson "^0.5.0"
@@ -1146,7 +1147,7 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-"@material-ui/styles@^4.5.0", "@material-ui/styles@^4.6.0":
+"@material-ui/styles@^4.6.0":
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.6.0.tgz#15679fab6dcbe0cc2416f01a22966f3ea26607c5"
   integrity sha512-lqqh4UEMdIYcU1Yth4pQyMTah02uAkg3NOT3MirN9FUexdL8pNA6zCHigEgDSfwmvnXyxHhxTkphfy0DRfnt9w==
@@ -1329,7 +1330,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.2":
+"@types/react@*", "@types/react@^16.9.11", "@types/react@^16.9.2":
   version "16.9.11"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
   integrity sha512-UBT4GZ3PokTXSWmdgC/GeCGEJXE5ofWyibCcecRLUVN2ZBpXQGVgQGtG2foS7CrTKFKlQVVswLvf7Js6XA/CVQ==
