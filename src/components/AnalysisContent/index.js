@@ -173,7 +173,6 @@ function AnalysisContent({
         {hydrateElements.hurumap.map(({ element, geoId, chartId }) =>
           ReactDOM.createPortal(
             <HURUmapChart
-              countrySlug={takwimu.country.slug}
               geoId={geoId}
               chartId={chartId}
               charts={charts.hurumap}
@@ -181,13 +180,9 @@ function AnalysisContent({
             element
           )
         )}
-        {hydrateElements.flourish.map(({ element, title, chartId }) =>
+        {hydrateElements.flourish.map(({ element, chartId }) =>
           ReactDOM.createPortal(
-            <FlourishChart
-              chartId={chartId}
-              title={title}
-              charts={charts.flourish}
-            />,
+            <FlourishChart chartId={chartId} charts={charts.flourish} />,
             element
           )
         )}
