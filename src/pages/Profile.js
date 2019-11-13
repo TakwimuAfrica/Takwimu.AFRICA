@@ -213,7 +213,11 @@ function Profile({ chartDefinitions }) {
                   key={chart.id}
                   loading={chartData.isLoading}
                   title={chart.title}
-                  source={!chartData.isLoading && getSource(chart.visual.table)}
+                  source={
+                    !chartData.isLoading
+                      ? getSource(chart.visual.table)
+                      : undefined
+                  }
                   insightActions={{
                     handleShare: handleShare.bind(null, chart.id),
                     handleShowData: () => {},
