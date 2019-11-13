@@ -74,7 +74,7 @@ function ContentNavigation({
               className={classNames({
                 [classes.topic]: current !== index
               })}
-              onClick={e => onClick(e, index)}
+              onClick={e => onClick && onClick(e, index)}
             >
               {generateTitle(index)}
             </Link>
@@ -92,7 +92,7 @@ ContentNavigation.propTypes = {
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
   generateTitle: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   linksPrimaryColor: PropTypes.string,
   linksSecondaryColor: PropTypes.string
 };
@@ -100,7 +100,8 @@ ContentNavigation.propTypes = {
 ContentNavigation.defaultProps = {
   contentTitle: '',
   linksPrimaryColor: 'primary',
-  linksSecondaryColor: 'textPrimary'
+  linksSecondaryColor: 'textPrimary',
+  onClick: undefined
 };
 
 export default ContentNavigation;

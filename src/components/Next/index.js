@@ -40,21 +40,24 @@ function WhereToNext({
       >
         {whereToNextLink &&
           whereToNextLink.length > 0 &&
-          whereToNextLink.map(where => (
-            <>
-              {where.link.startsWith('/') ? (
-                <NextLink href={where.link}>
-                  <Card component="a" variant={variant}>
-                    {where.title}
-                  </Card>
-                </NextLink>
-              ) : (
-                <Card href={where.link} variant={variant} component={A}>
+          whereToNextLink.map(where =>
+            where.link.startsWith('/') ? (
+              <NextLink href={where.link} key={where.link}>
+                <Card component="a" variant={variant}>
                   {where.title}
                 </Card>
-              )}
-            </>
-          ))}
+              </NextLink>
+            ) : (
+              <Card
+                href={where.link}
+                variant={variant}
+                component={A}
+                key={where.link}
+              >
+                {where.title}
+              </Card>
+            )
+          )}
       </Grid>
     </Section>
   );
