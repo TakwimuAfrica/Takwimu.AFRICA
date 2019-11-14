@@ -8,6 +8,7 @@ import {
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 
 import config from '../../config';
+import { shareIndicator } from '../../common';
 import sources from '../../data/sources.json';
 
 function HURUmapChart({ geoId, chartId, charts }) {
@@ -38,6 +39,9 @@ function HURUmapChart({ geoId, chartId, charts }) {
 
   return (
     <InsightContainer
+      actions={{
+        handleShare: shareIndicator.bind(null, chart.id)
+      }}
       hideInsight
       key={chart.id}
       variant="analysis"
