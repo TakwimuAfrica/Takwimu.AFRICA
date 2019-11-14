@@ -11,7 +11,7 @@ import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
 import propTypes from 'prop-types';
 import config from '../config';
-import { shareIndicator, uploadImage } from '../common';
+import { shareIndicator } from '../common';
 import slugify from '../utils/slugify';
 
 import Page from '../components/Page';
@@ -170,16 +170,8 @@ function Profile({ chartDefinitions }) {
     [chartData.isLoading, chartData.profileVisualsData, charts, sections]
   );
 
-  const handleShare = (id, e, dataURL) => {
-    uploadImage(id, dataURL).then(success => {
-      if (success) {
-        shareIndicator(id);
-      }
-    });
-  };
-
   /**
-   * Victory renders take alot of time
+   * Victory renders take a lot of time
    * causing a few seconds UI block which is bad UX.
    * This caches the components so they do not have to render again.
    */
@@ -218,8 +210,8 @@ function Profile({ chartDefinitions }) {
                       ? getSource(chart.visual.table)
                       : undefined
                   }
-                  insightActions={{
-                    handleShare: handleShare.bind(null, chart.id),
+                  actions={{
+                    handleShare: shareIndicator.bind(null, chart.id),
                     handleShowData: () => {},
                     handleCompare: () => {}
                   }}
