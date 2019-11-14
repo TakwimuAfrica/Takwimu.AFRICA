@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import config from '../../config';
 
-function FlourishChart({ title, chartId, charts }) {
+function FlourishChart({ chartId, charts }) {
   const chart = useMemo(() => charts.find(c => c.id === chartId), [
     charts,
     chartId
   ]);
+  if (!chart) {
+    return null;
+  }
 
   return (
     <InsightContainer
@@ -23,7 +26,7 @@ function FlourishChart({ title, chartId, charts }) {
           id={`data-indicator-${chartId}`}
           frameBorder="0"
           scrolling="no"
-          title={title}
+          title={chart.title}
           style={{ minHeight: 420 }}
           src={`${config.WP_HURUMAP_DATA_API}/flourish/${chartId}`}
         />
@@ -33,7 +36,6 @@ function FlourishChart({ title, chartId, charts }) {
 }
 
 FlourishChart.propTypes = {
-  title: PropTypes.string.isRequired,
   chartId: PropTypes.string.isRequired,
   charts: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
