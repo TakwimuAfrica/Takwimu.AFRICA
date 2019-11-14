@@ -21,6 +21,7 @@ import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
 import HURUmapChart from '../DataContainer/HURUmapChart';
 import FlourishChart from '../DataContainer/FlourishChart';
+import getHydrateContent from '../../utils/getHydrateContent';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,30 +78,9 @@ function AnalysisContent({
   });
 
   useEffect(() => {
-    setHydrateElements({
-      indicators: Array.from(
-        document.querySelectorAll('[id^="indicator-block"]')
-      ).map(element => ({
-        element,
-        layout: element.attributes['data-layout'].value,
-        title: element.attributes['data-title'].value,
-        src: element.attributes['data-src'].value
-      })),
-      hurumap: Array.from(
-        document.querySelectorAll('div[id^="indicator-hurumap"]')
-      ).map(element => ({
-        element,
-        geoId: element.attributes['data-geo-type'].value,
-        chartId: element.attributes['data-chart-id'].value
-      })),
-      flourish: Array.from(
-        document.querySelectorAll('div[id^="indicator-flourish"]')
-      ).map(element => ({
-        element,
-        title: element.attributes['data-chart-title'].value,
-        chartId: element.attributes['data-chart-id'].value
-      }))
-    });
+    setHydrateElements(
+      getHydrateContent(document, 'indicators', 'hurumap', 'flourish')
+    );
   }, [charts, takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
