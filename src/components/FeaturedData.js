@@ -3,36 +3,28 @@ import { PropTypes } from 'prop-types';
 
 import ReactDOM from 'react-dom';
 
-import HURUmapChart from './DataContainer/HURUmapChart';
+import getHydrateContent from '../utils/getHydrateContent';
 import FlourishChart from './DataContainer/FlourishChart';
+import HURUmapChart from './DataContainer/HURUmapChart';
 import Section from './Section';
 
 function FeaturedData({ charts, children }) {
   const [hydrateElements, setHydrateElements] = useState({
+    title: '',
     hurumap: [],
     flourish: []
   });
   useEffect(() => {
+    const featureDataElement = document.getElementById('featured-data');
+    const title = featureDataElement.attributes['data-title'].value;
     setHydrateElements({
-      hurumap: Array.from(
-        document.querySelectorAll('div[id^="indicator-hurumap"]')
-      ).map(element => ({
-        element,
-        geoId: element.attributes['data-geo-type'].value,
-        chartId: element.attributes['data-chart-id'].value
-      })),
-      flourish: Array.from(
-        document.querySelectorAll('div[id^="indicator-flourish"]')
-      ).map(element => ({
-        element,
-        title: element.attributes['data-chart-title'].value,
-        chartId: element.attributes['data-chart-id'].value
-      }))
+      title,
+      ...getHydrateContent(featureDataElement, 'hurumap', 'flourish')
     });
   }, []);
 
   return (
-    <Section title="Featured Data" variant="h2">
+    <Section title={hydrateElements.title} variant="h2">
       {children}
       {hydrateElements.hurumap.map(({ element, geoId, chartId }) =>
         ReactDOM.createPortal(
