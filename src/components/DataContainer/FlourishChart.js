@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
+
 import config from '../../config';
+import { shareIndicator } from '../../common';
 
 function FlourishChart({ chartId, charts }) {
   const chart = useMemo(() => charts.find(c => c.id === chartId), [
@@ -14,6 +17,9 @@ function FlourishChart({ chartId, charts }) {
 
   return (
     <InsightContainer
+      actions={{
+        handleShare: shareIndicator.bind(null, chart.id)
+      }}
       hideInsight
       key={chart.id}
       variant="analysis"
