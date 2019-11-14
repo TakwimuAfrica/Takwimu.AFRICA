@@ -8,6 +8,9 @@ function FlourishChart({ chartId, charts }) {
     charts,
     chartId
   ]);
+  if (!chart) {
+    return null;
+  }
 
   return (
     <InsightContainer
