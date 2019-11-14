@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import RichTypography from '../src/components/core/RichTypography';
 import FeaturedAnalysis from '../src/components/FeaturedAnalysis';
 import FeaturedData from '../src/components/FeaturedData';
 import Hero from '../src/components/Hero';
