@@ -1,5 +1,3 @@
-import config from './config';
-
 export const getCookie = name => {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
@@ -14,14 +12,10 @@ export const getCookie = name => {
   return cookieValue;
 };
 
-export const shareIndicator = id => {
-  const url = new URL(window.location);
-  url.searchParams.set('indicator', id);
-  window.open(`https://twitter.com/intent/tweet?url=${escape(url.href)}`);
-};
-
-export const uploadImage = (id, data) =>
-  fetch(`${config.url}/api/twitter_view/`, {
+export const uploadImage = (id, dataUrl) =>
+  // TODO(kilemensi): We'll continue uploading images to takwimu.africa -> s3
+  // until we have this functionality in WP
+  fetch('https://takwimu.africa/api/twitter_view/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,7 +23,7 @@ export const uploadImage = (id, data) =>
     },
     body: JSON.stringify({
       id,
-      image: data
+      image: dataUrl
     })
   }).then(res => {
     if (res.status === 200) {
@@ -38,3 +32,13 @@ export const uploadImage = (id, data) =>
 
     return false;
   });
+
+export const shareIndicator = (id, e, dataUrl) => {
+  uploadImage(id, dataUrl).then(success => {
+    if (success) {
+      const url = new URL(window.location);
+      url.searchParams.set('indicator', id);
+      window.open(`https://twitter.com/intent/tweet?url=${escape(url.href)}`);
+    }
+  });
+};
