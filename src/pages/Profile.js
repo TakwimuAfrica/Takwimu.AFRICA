@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -9,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
-import propTypes from 'prop-types';
+
 import config from '../config';
 import { shareIndicator } from '../common';
 import slugify from '../utils/slugify';
@@ -23,6 +24,8 @@ import Section from '../components/Section';
 
 import chartSources from '../data/sources.json';
 import { getChartDefinitions } from '../getTakwimuPage';
+
+import logo from '../assets/images/logo-white-all.png';
 
 const MapIt = dynamic({
   ssr: false,
@@ -198,22 +201,14 @@ function Profile({ chartDefinitions }) {
             .map(chart => (
               <Grid item xs={12} key={chart.id} className={classes.container}>
                 <InsightContainer
-                  classes={{
-                    root: classes.containerRoot,
-                    sourceGrid: classes.containerSourceGrid
-                  }}
-                  key={chart.id}
-                  loading={chartData.isLoading}
-                  title={chart.title}
-                  source={
-                    !chartData.isLoading
-                      ? getSource(chart.visual.table)
-                      : undefined
-                  }
                   actions={{
                     handleShare: shareIndicator.bind(null, chart.id),
                     handleShowData: () => {},
                     handleCompare: () => {}
+                  }}
+                  classes={{
+                    root: classes.containerRoot,
+                    sourceGrid: classes.containerSourceGrid
                   }}
                   insight={{
                     dataLink: {
@@ -221,6 +216,15 @@ function Profile({ chartDefinitions }) {
                       title: 'Read the country analysis'
                     }
                   }}
+                  key={chart.id}
+                  loading={chartData.isLoading}
+                  logo={logo}
+                  source={
+                    !chartData.isLoading
+                      ? getSource(chart.visual.table)
+                      : undefined
+                  }
+                  title={chart.title}
                 >
                   <Chart
                     chartData={chartData}
@@ -310,9 +314,9 @@ function Profile({ chartDefinitions }) {
 }
 
 Profile.propTypes = {
-  chartDefinitions: propTypes.shape({
-    hurumap: propTypes.arrayOf(propTypes.shape({})),
-    sections: propTypes.arrayOf(propTypes.shape({}))
+  chartDefinitions: PropTypes.shape({
+    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
+    sections: PropTypes.arrayOf(PropTypes.shape({}))
   }).isRequired
 };
 

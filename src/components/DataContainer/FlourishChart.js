@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 
 import config from '../../config';
+import logo from '../../assets/images/logo-white-all.png';
 import { shareIndicator } from '../../common';
 
 function FlourishChart({ chartId, charts }) {
@@ -22,9 +23,10 @@ function FlourishChart({ chartId, charts }) {
       }}
       hideInsight
       key={chart.id}
-      variant="analysis"
       loading={false}
+      logo={logo}
       title={chart.title}
+      variant="analysis"
     >
       <div />
       <div>
