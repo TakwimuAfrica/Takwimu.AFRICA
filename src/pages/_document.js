@@ -11,11 +11,6 @@ class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <meta charset="utf-8" />
           <meta name="theme-color" content={theme.palette.primary.main} />
 
           <link
@@ -36,7 +31,10 @@ class MyDocument extends Document {
             href="/favicon-16x16.png"
           />
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-          <meta name="msapplication-TileColor" content="#da532c" />
+          <meta
+            name="msapplication-TileColor"
+            content={theme.palette.primary.main}
+          />
 
           <link
             rel="preload"
