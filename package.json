@@ -58,8 +58,7 @@
     "lint-staged": "^9.2.4",
     "now": "^16.5.2",
     "prettier": "^1.16.1",
-    "responsive-loader": "^1.2.0",
-    "source-map-explorer": "^2.0.1"
+    "responsive-loader": "^1.2.0"
   },
   "husky": {
     "hooks": {
@@ -73,16 +72,14 @@
     ]
   },
   "scripts": {
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "lint": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md' './'",
     "lint-staged": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md'",
-    "predeploy": "yarn build",
-    "deploy": "now --prod",
+    "predev": "yarn lint",
     "dev": "NODE_ENV=development PORT=3000 node ./devServer.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "predeploy": "yarn build",
+    "deploy": "now --prod"
   },
   "eslintConfig": {
     "extends": "react-app"
