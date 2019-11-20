@@ -15,12 +15,10 @@ import config from '../config';
 import { shareIndicator } from '../common';
 import slugify from '../utils/slugify';
 
-import Page from '../components/Page';
-import ProfileDetail from '../components/ProfileDetail';
-import ProfileSection, {
-  ProfileSectionTitle
-} from '../components/ProfileSection';
-import Section from '../components/Section';
+import Page from './Page';
+import ProfileDetail from './ProfileDetail';
+import ProfileSection, { ProfileSectionTitle } from './ProfileSection';
+import Section from './Section';
 
 import chartSources from '../data/sources.json';
 import { getChartDefinitions } from '../getTakwimuPage';

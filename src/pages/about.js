@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useRouter } from 'next/router';
-import AboutContent from '../src/components/AboutContent';
-import ContentPage from '../src/components/ContentPage';
-import Page from '../src/components/Page';
-import TableOfContent from '../src/components/AboutContent/TableOfContent';
-import { getSitePage } from '../src/getTakwimuPage';
+import { getSitePage } from '../getTakwimuPage';
+import AboutContent from '../components/AboutContent';
+import ContentPage from '../components/ContentPage';
+import Page from '../components/Page';
+import TableOfContent from '../components/AboutContent/TableOfContent';
 
 const useStyles = makeStyles({
   root: {

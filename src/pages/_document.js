@@ -1,13 +1,23 @@
 import React, { Fragment } from 'react';
+
 import Document, { Head, Main, NextScript } from 'next/document';
+
 import { ServerStyleSheets } from '@material-ui/core/styles';
+
+import theme from '../theme';
 
 class MyDocument extends Document {
   render() {
     return (
       <html lang="en">
         <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
           <meta charset="utf-8" />
+          <meta name="theme-color" content={theme.palette.primary.main} />
+
           <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -25,21 +35,13 @@ class MyDocument extends Document {
             sizes="16x16"
             href="/static/favicon-16x16.png"
           />
-          <link rel="shortcut icon" href="/static/favicon.ico" />
-          <link rel="manifest" href="/static/site.webmanifest" />
           <link
             rel="mask-icon"
             href="/static/safari-pinned-tab.svg"
             color="#5bbad5"
           />
           <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <meta name="theme-color" content="#000000" />
-          <link rel="manifest" href="/static/manifest.json" />
+
           <link
             rel="preload"
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
@@ -49,6 +51,8 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
           />
+
+          <link rel="manifest" href="/static/manifest.json" />
         </Head>
         <body>
           <Main />

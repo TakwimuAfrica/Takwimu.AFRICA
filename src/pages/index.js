@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FeaturedAnalysis from '../src/components/FeaturedAnalysis';
-import FeaturedData from '../src/components/FeaturedData';
-import Hero from '../src/components/Hero';
-import LatestNewsStories from '../src/components/LatestNewsStories';
-import MakingOfTakwimu from '../src/components/MakingOfTakwimu';
-import Page from '../src/components/Page';
-import WhatYouDoWithTakwimu from '../src/components/WhatYouCanDoWithTakwimu';
-import WhereToNext from '../src/components/Next';
-import { getChartDefinitions, getSitePage } from '../src/getTakwimuPage';
+import { getChartDefinitions, getSitePage } from '../getTakwimuPage';
+import FeaturedAnalysis from '../components/FeaturedAnalysis';
+import FeaturedData from '../components/FeaturedData';
+import Hero from '../components/Hero';
+import LatestNewsStories from '../components/LatestNewsStories';
+import MakingOfTakwimu from '../components/MakingOfTakwimu';
+import Page from '../components/Page';
+import WhatYouDoWithTakwimu from '../components/WhatYouCanDoWithTakwimu';
+import WhereToNext from '../components/Next';
 
 function Home({ chartDefinitions, indicatorId, latestMediumPosts, takwimu }) {
   const { hurumap, flourish } = chartDefinitions;

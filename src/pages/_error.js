@@ -7,12 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import config from '../src/config';
-import WhereToNext from '../src/components/Next';
-import Error from '../src/components/Error';
-import ErrorPage from '../src/components/ErrorPage';
-import SearchInput from '../src/components/SearchInput';
-import { getSitePage } from '../src/getTakwimuPage';
+import config from '../config';
+import { getSitePage } from '../getTakwimuPage';
+import Error from '../components/Error';
+import ErrorPage from '../components/ErrorPage';
+import SearchInput from '../components/SearchInput';
+import WhereToNext from '../components/Next';
 
 const useStyles = makeStyles(theme => ({
   root: {},

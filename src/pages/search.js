@@ -1,8 +1,8 @@
 import React from 'react';
 
-import config from '../src/config';
-import Page from '../src/components/Page';
-import SearchResults from '../src/components/SearchResults';
+import config from '../config';
+import Page from '../components/Page';
+import SearchResults from '../components/SearchResults';
 
 function Search(takwimu) {
   return (

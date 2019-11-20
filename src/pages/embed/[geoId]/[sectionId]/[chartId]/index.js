@@ -6,10 +6,11 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 
-import config from '../../../../../src/config';
-import { getChartDefinitions } from '../../../../../src/getTakwimuPage';
-import logo from '../../../../../src/assets/images/logo-white-all.png';
-import Error from '../../../../../src/components/Error';
+import config from '../../../../../config';
+import { getChartDefinitions } from '../../../../../getTakwimuPage';
+import Error from '../../../../../components/Error';
+
+import logo from '../../../../../assets/images/logo-white-all.png';
 
 const Chart = dynamic({
   ssr: false,

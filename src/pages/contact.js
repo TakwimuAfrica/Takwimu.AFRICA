@@ -3,11 +3,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useRouter } from 'next/router';
-import ContactContent from '../src/components/ContactContent';
-import ContentPage from '../src/components/ContentPage';
-import Page from '../src/components/Page';
-import TableOfContent from '../src/components/ContactContent/TableOfContent';
-import { getSitePage } from '../src/getTakwimuPage';
+import { getSitePage } from '../getTakwimuPage';
+import ContactContent from '../components/ContactContent';
+import ContentPage from '../components/ContentPage';
+import Page from '../components/Page';
+import TableOfContent from '../components/ContactContent/TableOfContent';
 
 const useStyles = makeStyles({
   root: {
