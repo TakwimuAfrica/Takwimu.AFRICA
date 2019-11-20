@@ -6,7 +6,8 @@ const withImages = require('next-images');
 module.exports = withCSS(
   withImages(
     withTM({
-      transpileModules: ['@codeforafrica/hurumap-ui']
+      transpileModules: ['@codeforafrica/hurumap-ui'],
+      target: 'serverless'
     })
   )
 );
