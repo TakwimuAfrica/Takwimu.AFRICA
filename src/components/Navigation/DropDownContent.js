@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import NextLink from 'next/link';
-
-import { Grid, Link, Typography, withWidth } from '@material-ui/core';
+import { Grid, Typography, withWidth } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { isWidthDown } from '@material-ui/core/withWidth';
 
+import flags from '../../flags';
+import Link from '../Link';
 import { RichTypography } from '../core';
-
-const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -143,23 +141,21 @@ function DropDownContent({ width, title, description, countries, profile }) {
           className={classes.flagsContainer}
         >
           {countries.map(country => (
-            <NextLink key={country.slug} href={`/profiles/${profile(country)}`}>
-              <Link
-                underline="none"
-                color="textSecondary"
-                href={`/profiles/${profile(country)}`}
-                className={classes.countryLink}
-              >
-                <img
-                  alt={country.name}
-                  src={flagSrc(`./${country.slug}.svg`)}
-                  className={classes.flag}
-                />
-                <span className={classes.countryName}>
-                  {country.short_name}
-                </span>
-              </Link>
-            </NextLink>
+            <Link
+              key={country.slug}
+              underline="none"
+              color="textSecondary"
+              href="/profiles/[geoIdOrCountrySlug]"
+              as={`/profiles/${profile(country)}`}
+              className={classes.countryLink}
+            >
+              <img
+                alt={country.name}
+                src={flags[country.iso_code]}
+                className={classes.flag}
+              />
+              <span className={classes.countryName}>{country.short_name}</span>
+            </Link>
           ))}
         </Grid>
       </Grid>
