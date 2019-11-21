@@ -5,9 +5,12 @@ import Typography from '@material-ui/core/Typography';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
-import Error from '../../../../../src/components/Error';
-import config from '../../../../../src/config';
-import { getChartDefinitions } from '../../../../../src/getTakwimuPage';
+
+import config from '../../../../../config';
+import { getChartDefinitions } from '../../../../../getTakwimuPage';
+import Error from '../../../../../components/Error';
+
+import logo from '../../../../../assets/images/logo-white-all.png';
 
 const Chart = dynamic({
   ssr: false,
@@ -55,11 +58,12 @@ function Embed(chart) {
       <InsightContainer
         key={chart.id}
         loading={chartData.isLoading}
-        title={chart.title}
+        logo={logo}
         source={{
           title: 'Community Survey 2016',
           href: 'http://dev.dominion.africa'
         }}
+        title={chart.title}
       >
         {!chartData.isLoading && (
           <Chart

@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import config from '../config';
-import AnalysisContent from '../components/AnalysisContent';
-import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent';
-import ContentPage from '../components/ContentPage';
-import Page from '../components/Page';
+import AnalysisContent from './AnalysisContent';
+import AnalysisTableOfContent from './AnalysisContent/TableOfContent';
+import ContentPage from './ContentPage';
+import Page from './Page';
 import { getChartDefinitions } from '../getTakwimuPage';
 
 const useStyles = makeStyles({

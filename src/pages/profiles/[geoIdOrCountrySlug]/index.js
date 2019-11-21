@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Head from 'next/head';
-import Analysis from '../../../src/pages/Analysis';
-import Profile from '../../../src/pages/Profile';
-import config from '../../../src/config';
+
+import config from '../../../config';
+import Analysis from '../../../components/AnalysisPage';
+import Profile from '../../../components/ProfilePage';
 
 function ProfileOrAnalysis({ isAnalysis, initialProps }) {
   return (

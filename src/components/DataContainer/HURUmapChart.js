@@ -8,6 +8,7 @@ import {
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 
 import config from '../../config';
+import logo from '../../assets/images/logo-white-all.png';
 import { shareIndicator } from '../../common';
 import sources from '../../data/sources.json';
 
@@ -44,9 +45,8 @@ function HURUmapChart({ geoId, chartId, charts }) {
       }}
       hideInsight
       key={chart.id}
-      variant="analysis"
       loading={chartData.isLoading}
-      title={chart.title}
+      logo={logo}
       source={
         !chartData.isLoading &&
         sources[countrySlug][profiles.profile.geoLevel][chart.visual.table]
@@ -54,6 +54,8 @@ function HURUmapChart({ geoId, chartId, charts }) {
               .source
           : {}
       }
+      title={chart.title}
+      variant="analysis"
     >
       {!chartData.isLoading &&
         chartData.profileVisualsData[chart.visual.queryAlias] && (

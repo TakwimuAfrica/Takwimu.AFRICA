@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
+import { getSitePage } from '../getTakwimuPage';
 import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
 import Page from '../components/Page';
 import TableOfContent from '../components/LegalContent/TableOfContent';
-import { getSitePage } from '../getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {

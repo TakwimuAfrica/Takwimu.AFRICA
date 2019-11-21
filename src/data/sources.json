@@ -27,7 +27,7 @@
               },
             "allFoodProductions": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
@@ -39,13 +39,13 @@
             },
             "allHealthWorkersDistributions": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
             "allWomenInGovernments": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
@@ -69,13 +69,13 @@
             },
             "allDonorFundedProgrammes": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
             "seized_firearms_dist": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
@@ -87,19 +87,19 @@
             },
             "allGovernmentFundings": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
             "allPovertyAgeResidences": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
             "allResidencePovertyTypes": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/economic-survey-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=economic-survey-2018",
                     "title": "Kenya National Bureau of Statistics, 2018"
                 }
             },
@@ -286,31 +286,31 @@
             },
             "allPopulationSexYears": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
             "allSecondarySchoolTotEnrollments": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
             "allPrimarySchoolTotEnrollments": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
             "allBudgetAllocations": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
             "allHealthFacilityBeds": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             }
@@ -324,7 +324,7 @@
              },
             "allPopulationSexYears": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
@@ -336,25 +336,25 @@
             },
             "allSecondarySchoolTotEnrollments": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
             "allPrimarySchoolTotEnrollments": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
             "allBudgetAllocations": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             },
             "allHealthFacilityBeds": {
                 "source": {
-                    "href": "https://www.knbs.or.ke/download/statistics-abstract-2018/",
+                    "href": "https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018",
                     "title": "Statistical Abstract, 2018"
                 }
             }

@@ -1,45 +1,41 @@
 import React, { Fragment } from 'react';
+
 import Document, { Head, Main, NextScript } from 'next/document';
+
 import { ServerStyleSheets } from '@material-ui/core/styles';
+
+import theme from '../theme';
 
 class MyDocument extends Document {
   render() {
     return (
       <html lang="en">
         <Head>
-          <meta charset="utf-8" />
+          <meta name="theme-color" content={theme.palette.primary.main} />
+
           <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="/static/apple-touch-icon.png"
+            href="/apple-touch-icon.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/static/favicon-32x32.png"
+            href="/favicon-32x32.png"
           />
           <link
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/static/favicon-16x16.png"
+            href="/favicon-16x16.png"
           />
-          <link rel="shortcut icon" href="/static/favicon.ico" />
-          <link rel="manifest" href="/static/site.webmanifest" />
-          <link
-            rel="mask-icon"
-            href="/static/safari-pinned-tab.svg"
-            color="#5bbad5"
-          />
-          <meta name="msapplication-TileColor" content="#da532c" />
-          <meta name="theme-color" content="#ffffff" />
+          <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            name="msapplication-TileColor"
+            content={theme.palette.primary.main}
           />
-          <meta name="theme-color" content="#000000" />
-          <link rel="manifest" href="/static/manifest.json" />
+
           <link
             rel="preload"
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
@@ -49,6 +45,8 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
           />
+
+          <link rel="manifest" href="/manifest.json" />
         </Head>
         <body>
           <Main />
