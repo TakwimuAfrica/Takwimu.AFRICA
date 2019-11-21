@@ -137,7 +137,7 @@ const get = async url => {
   return data;
 };
 
-AnalysisPage.getInitialProps = async ({ query, req }) => {
+AnalysisPage.getInitialProps = async ({ query, asPath }) => {
   const { WP_BACKEND_URL, countries } = config;
   const { geoIdOrCountrySlug, analysisSlug, indicator: indicatorId } = query;
   let analyses = [];
@@ -218,6 +218,7 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
   }
 
   const chartDefinitions = await getChartDefinitions();
+  const analysisLink = `${config.url}${asPath}`;
 
   return {
     chartDefinitions,
@@ -228,7 +229,7 @@ AnalysisPage.getInitialProps = async ({ query, req }) => {
     topicsNavigation,
     readNextTitle,
     indicatorId,
-    analysisLink: `${req.protocol}://${req.headers.host}${req.url}`
+    analysisLink
   };
 };
 
