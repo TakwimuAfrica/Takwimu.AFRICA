@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import NextLink from 'next/link';
-
 import { Link, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -47,19 +45,21 @@ function Links({ items }) {
             >
               {/* Only relative URLs should be opened on the same page. */}
               {/* Otherwise, they should be opened in new tab */}
+              {/* Note: Next.js uses filesystem-based routing & since we can't */}
+              {/*       determine dynamically the filesystem route based on */}
+              {/*       href, we'll use normal Link which means server-based */}
+              {/*       routing instead of client-side */}
               {/^\/(?!\/)/.test(item.link) ? (
-                <NextLink href={item.link}>
-                  <Link
-                    href={item.link}
-                    variant="inherit"
-                    color="inherit"
-                    underline="always"
-                    noWrap
-                    className={classes.listItem}
-                  >
-                    {item.title}
-                  </Link>
-                </NextLink>
+                <Link
+                  href={item.link}
+                  variant="inherit"
+                  color="inherit"
+                  underline="always"
+                  noWrap
+                  className={classes.listItem}
+                >
+                  {item.title}
+                </Link>
               ) : (
                 <A
                   href={item.link}
