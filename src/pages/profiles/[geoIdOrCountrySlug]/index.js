@@ -48,19 +48,16 @@ ProfileOrAnalysis.getInitialProps = async props => {
   const {
     query: { geoIdOrCountrySlug }
   } = props;
-  const isAnalysis = config.countries
-    .map(c => c.slug)
-    .includes(geoIdOrCountrySlug);
-
+  const isAnalysis =
+    config.countries.findIndex(
+      c => c.slug === geoIdOrCountrySlug.toLowerCase()
+    ) !== -1;
   const getInitialProps = isAnalysis
     ? Analysis.getInitialProps
     : Profile.getInitialProps;
+  const initialProps = getInitialProps ? await getInitialProps(props) : {};
 
-  if (getInitialProps) {
-    return { isAnalysis, initialProps: await getInitialProps(props) };
-  }
-
-  return { isAnalysis, initialProps: {} };
+  return { isAnalysis, initialProps };
 };
 
 export default ProfileOrAnalysis;
