@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { useRouter } from 'next/router';
-
 import classNames from 'classnames';
 
-import { ButtonBase, MenuList, Typography } from '@material-ui/core';
+import { MenuList, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
+import Link from './Link';
 import activeContentIcon from '../assets/images/active-page.svg';
 
 const DEFAULT_TOP = 120; // Navigation height + padding
@@ -66,13 +65,12 @@ const useStyles = makeStyles(theme => ({
 
 function TableOfContent({ children, content, current, generateHref, width }) {
   const classes = useStyles();
-  const router = useRouter();
   const [scrollDistance, setScrollDistance] = useState(0);
 
   useEffect(() => {
     const calculateScrollDistance = () => {
       const footer = document.getElementById('footer');
-      const { top } = footer.getBoundingClientRect();
+      const { top } = (footer && footer.getBoundingClientRect()) || { top: 0 };
       if (top < window.innerHeight) {
         return window.innerHeight - top;
       }
@@ -98,16 +96,31 @@ function TableOfContent({ children, content, current, generateHref, width }) {
       {children}
       <MenuList classes={{ root: classes.menuListRoot }}>
         {content.map((c, index) => (
-          <li key={generateHref(index)} className={classes.listItem}>
+          <li
+            key={
+              typeof generateHref(index) === 'object'
+                ? generateHref(index).as
+                : generateHref(index)
+            }
+            className={classes.listItem}
+          >
             <img
               alt=""
               src={activeContentIcon}
               hidden={current !== index}
               className={classes.activeContentIndicator}
             />
-            <ButtonBase
-              key={generateHref(index)}
-              onClick={() => router.push(generateHref(index))}
+            <Link
+              href={
+                typeof generateHref(index) === 'object'
+                  ? generateHref(index).href
+                  : generateHref(index)
+              }
+              as={
+                typeof generateHref(index) === 'object'
+                  ? generateHref(index).as
+                  : undefined
+              }
             >
               <Typography
                 variant="body2"
@@ -117,7 +130,7 @@ function TableOfContent({ children, content, current, generateHref, width }) {
               >
                 {c.title}
               </Typography>
-            </ButtonBase>
+            </Link>
           </li>
         ))}
       </MenuList>
