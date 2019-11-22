@@ -1,7 +1,6 @@
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +12,7 @@ import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
+import Portal from '../Portal';
 import RelatedContent from '../RelatedContent';
 import OtherInfoNav from './OtherInfoNav';
 
@@ -62,21 +62,30 @@ const useStyles = makeStyles(theme => ({
 
 function AnalysisContent({
   content,
-  topicIndex,
   takwimu,
-  onChange,
   topicsNavigation,
   readNextTitle,
   analysisLink,
   charts
 }) {
   const classes = useStyles();
+
+  const [topicIndex, setTopicIndex] = useState(0);
+  // If there is topic specified, it'll be as hash;
+  useEffect(() => {
+    const topicId = window.location.hash
+      ? window.location.hash.split('#')[1]
+      : '';
+    const foundTopicIndex = topicId
+      ? content.topics.findIndex(topic => topic.post_name === topicId)
+      : 0;
+    setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
+  }, [content]);
   const [hydrateElements, setHydrateElements] = useState({
     hurumap: [],
     flourish: [],
     indicators: []
   });
-
   useEffect(() => {
     setHydrateElements(
       getHydrateContent(document, 'indicators', 'hurumap', 'flourish')
@@ -84,24 +93,39 @@ function AnalysisContent({
   }, [charts, takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
-    content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
+    content.topics &&
+      content.topics[topicIndex] &&
+      content.topics[topicIndex].type === 'carousel_topic'
+      ? 0
+      : -1
   );
   useEffect(() => {
     setCarouselItemIndex(
-      content.topics[topicIndex].type === 'carousel_topic' ? 0 : -1
+      content.topics &&
+        content.topics[topicIndex] &&
+        content.topics[topicIndex].type === 'carousel_topic'
+        ? 0
+        : -1
     );
-  }, [content.topics, topicIndex]);
+  }, [content, topicIndex]);
 
+  const topic = content.topics && content.topics[topicIndex];
+  if (!topic) {
+    return null;
+  }
+
+  const changeTopic = next => {
+    setTopicIndex(next);
+    window.scrollTo(0, 0);
+  };
   const showContent = index => () => {
-    onChange(index);
+    changeTopic(index);
   };
-
-  const topicType = content.topics[topicIndex].type;
+  const topicType = topic.type;
   const data = {
-    content: content.topics[topicIndex],
-    item: carouselItemIndex !== -1 ? content.topics[topicIndex].carousel : null
+    content: topic,
+    item: carouselItemIndex !== -1 ? topic.carousel : null
   };
-
   return (
     <>
       <OtherInfoNav
@@ -115,7 +139,7 @@ function AnalysisContent({
 
       <div className={classes.root}>
         <Typography className={classes.title} variant="h2">
-          {content.topics[topicIndex].post_title}
+          {topic.post_title}
         </Typography>
 
         <ContentNavigation
@@ -127,7 +151,7 @@ function AnalysisContent({
         />
 
         <Actions
-          title={content.topics[topicIndex].post_title}
+          title={topic.post_title}
           page={takwimu.page}
           topic={topicType}
           data={data}
@@ -138,34 +162,32 @@ function AnalysisContent({
         {topicType === 'topic' ? (
           <Grid container direction="row">
             <RichTypography className={classes.body} component="div">
-              {content.topics[topicIndex].content}
+              {topic.content}
             </RichTypography>
           </Grid>
         ) : (
           <CarouselTopic
             key={topicIndex}
-            data={content.topics[topicIndex].carousel}
+            data={topic.carousel}
             onIndexChanged={setCarouselItemIndex}
             url={takwimu.url}
           />
         )}
 
-        {hydrateElements.hurumap.map(({ element, geoId, chartId }) =>
-          ReactDOM.createPortal(
+        {hydrateElements.hurumap.map(({ element, geoId, chartId }) => (
+          <Portal key={element.id} element={element}>
             <HURUmapChart
               geoId={geoId}
               chartId={chartId}
               charts={charts.hurumap}
-            />,
-            element
-          )
-        )}
-        {hydrateElements.flourish.map(({ element, chartId }) =>
-          ReactDOM.createPortal(
+            />
+          </Portal>
+        ))}
+        {hydrateElements.flourish.map(({ element, chartId }) => (
+          <Portal key={element.id} element={element}>
             <FlourishChart chartId={chartId} charts={charts.flourish} />,
-            element
-          )
-        )}
+          </Portal>
+        ))}
         {hydrateElements.indicators.map(
           ({ element, layout, title, src: source }) => {
             if (layout === 'document_widget') {
@@ -175,13 +197,14 @@ function AnalysisContent({
                */
               // eslint-disable-next-line no-param-reassign
               element.innerHTML = '';
-              return ReactDOM.createPortal(
-                <PDFDataContainer
-                  id={element.id}
-                  countryName={takwimu.country.name}
-                  data={{ title, source }}
-                />,
-                element
+              return (
+                <Portal key={element.id} element={element}>
+                  <PDFDataContainer
+                    id={element.id}
+                    countryName={takwimu.country.name}
+                    data={{ title, source }}
+                  />
+                </Portal>
               );
             }
             return null;
@@ -189,7 +212,7 @@ function AnalysisContent({
         )}
 
         <Actions
-          title={content.topics[topicIndex].post_title}
+          title={topic.post_title}
           page={takwimu.page}
           topic={topicType}
           data={data}
@@ -239,10 +262,8 @@ AnalysisContent.propTypes = {
     title: PropTypes.string,
     view_country_content: PropTypes.shape({})
   }).isRequired,
-  topicIndex: PropTypes.number.isRequired,
   topicsNavigation: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,

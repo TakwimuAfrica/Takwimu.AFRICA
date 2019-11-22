@@ -17,12 +17,15 @@ function AnalysisTableOfContent({ content, current, country }) {
   const classes = useStyles();
   const { slug: countrySlug } = country;
   const generateHref = index => {
-    const analysisUrl = `/profiles/${countrySlug}`;
-    if (index === 0) {
-      // if politics
-      return analysisUrl;
-    }
-    return `${analysisUrl}/${content[index].post_name}`;
+    const href =
+      index === 0
+        ? `/profiles/[geoIdOrCountrySlug]` // if politics
+        : `/profiles/[geoIdOrCountrySlug]/[analysisSlug]`;
+    const as =
+      index === 0
+        ? `/profiles/${countrySlug}` // if politics
+        : `/profiles/${countrySlug}/${content[index].post_name}`;
+    return { href, as };
   };
 
   const allSectionTitle = content.map(section => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -48,29 +48,9 @@ function AnalysisPage({
     flourish
   });
 
-  const [topicIndex, setTopicIndex] = useState(0);
-  const changeTopic = next => {
-    setTopicIndex(next);
-    window.scrollTo(0, 0);
-  };
-
-  useEffect(() => {
-    const topicId = window.location.hash
-      ? window.location.hash.split('#')[1]
-      : '';
-    if (topicId) {
-      const foundTopicIndex = activeAnalysis.topics.findIndex(
-        topic => topic.post_name === topicId
-      );
-
-      setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
-    }
-  }, [activeAnalysis]);
-
   if (analyses.length === 0) {
     return null;
   }
-
   return (
     <Page
       takwimu={takwimu}
@@ -89,9 +69,7 @@ function AnalysisPage({
       >
         <AnalysisContent
           content={activeAnalysis}
-          onChange={changeTopic}
           takwimu={takwimu}
-          topicIndex={topicIndex}
           analysisLink={analysisLink}
           charts={charts}
         />

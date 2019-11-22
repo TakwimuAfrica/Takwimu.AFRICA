@@ -30,6 +30,9 @@ function AnalysisContentNavigation({
     const item = content.topics[index];
     return item.post_title;
   };
+  const onClick = (e, index) => {
+    return showContent(index)();
+  };
 
   return (
     <ContentNavigation
@@ -44,7 +47,7 @@ function AnalysisContentNavigation({
       current={current}
       generateHref={generateHref}
       generateTitle={generateTitle}
-      onClick={(e, index) => showContent(index)()}
+      onClick={onClick}
       linksPrimaryColor={linksPrimaryColor}
       linksSecondaryColor={linksSecondaryColor}
     />

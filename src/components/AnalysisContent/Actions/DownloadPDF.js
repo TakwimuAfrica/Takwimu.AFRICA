@@ -1,5 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
+
+import ReactPDF, {
+  Document,
+  Page,
+  Text,
+  View,
+  Image,
+  Link,
+  StyleSheet
+} from '@react-pdf/renderer';
 
 import { ButtonBase } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,8 +29,8 @@ const useStyles = makeStyles({
   }
 });
 
-const createPdfStyles = StyleSheet =>
-  StyleSheet.create({
+const createPdfStyles = stylesheet =>
+  stylesheet.create({
     page: {
       padding: 20,
       paddingBottom: 50
@@ -117,7 +127,7 @@ const removeIndicatorWidgets = content => {
   return text;
 };
 
-const createPdf = (Document, Image, Link, Page, Text, View) => {
+const createPdf = () => {
   function AnalysisPDF({ pdfClasses, topic, data, takwimu }) {
     const classes = pdfClasses;
     return (
@@ -161,11 +171,11 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
           ) : (
             <View style={classes.section}>
               {data.item.map(c => (
-                <>
+                <Fragment key={c.carousel_title}>
                   <Text style={classes.boldText}>
                     {c.carousel_name.length > 0
                       ? `${c.carousel_name}, ${c.carousel_title}`
-                      : `${c.carousel_title}`}
+                      : c.carousel_title}
                   </Text>
                   {removeIndicatorWidgets(c.carousel_description)
                     .split('</p>')
@@ -174,7 +184,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
                         {t.replace(/<(?:.|\n)*?>/gi, '')}
                       </Text>
                     ))}
-                </>
+                </Fragment>
               ))}
             </View>
           )}
@@ -231,33 +241,12 @@ const isEmpty = obj =>
   obj === null ||
   (Object.keys(obj).length === 0 && obj.constructor === Object);
 
-function DownloadPDF({ title, topic, data, takwimu, top }) {
+function DownloadPDF({ id, title, topic, data, takwimu, top }) {
   const classes = useStyles();
-  const [reactPdf, setReactPdf] = useState(false);
   const [pdfBlob, setPdfBlob] = useState(null);
 
   useEffect(() => {
-    import('../../../modules/react-pdf').then(m => {
-      setReactPdf(m.default);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (
-      reactPdf &&
-      !isEmpty(data) &&
-      (topic === 'topic' || !isEmpty(data.item))
-    ) {
-      const {
-        ReactPDF,
-        Document,
-        Image,
-        Link,
-        Page,
-        StyleSheet,
-        Text,
-        View
-      } = reactPdf;
+    if (!isEmpty(data) && (topic === 'topic' || !isEmpty(data.item))) {
       const pdfClasses = createPdfStyles(StyleSheet);
       const AnalysisPDF = createPdf(Document, Image, Link, Page, Text, View);
       ReactPDF.pdf(
@@ -271,10 +260,11 @@ function DownloadPDF({ title, topic, data, takwimu, top }) {
         .toBlob()
         .then(setPdfBlob);
     }
-  }, [reactPdf, data, topic, takwimu]);
+  }, [data, topic, takwimu]);
 
   return (
     <ButtonBase
+      id={id}
       ga-on="click"
       ga-event-category="Analysis"
       ga-event-action="Download"
@@ -284,13 +274,16 @@ function DownloadPDF({ title, topic, data, takwimu, top }) {
       disabled={pdfBlob === null}
       onClick={() => {
         if (pdfBlob) {
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(pdfBlob);
-          link.download = `${title}.pdf`;
-          link.target = '_blank';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+          const node = document.getElementById(id);
+          if (node) {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(pdfBlob);
+            link.download = `${title}.pdf`;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
           URL.revokeObjectURL(pdfBlob);
         }
       }}
@@ -303,6 +296,7 @@ function DownloadPDF({ title, topic, data, takwimu, top }) {
 }
 
 DownloadPDF.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({

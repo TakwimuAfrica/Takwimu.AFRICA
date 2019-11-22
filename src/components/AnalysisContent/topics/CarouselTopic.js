@@ -186,6 +186,7 @@ function Topic({ data, onIndexChanged }) {
           <div id="carousel-content" className={classes.content}>
             {data.map((item, index) => (
               <div
+                key={item.carousel_title}
                 role="button"
                 tabIndex={0}
                 id={`profile-${index}`}
