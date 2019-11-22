@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 function DataContainer({ id, data, countryName }) {
   const classes = useStyles();
   const [page, setPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(10);
+  const [numberOfPages, setNumberOfPages] = useState(0);
 
   if (!data.source) {
     return null;
