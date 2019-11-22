@@ -122,6 +122,12 @@ function Profile({ chartDefinitions }) {
 
   const getSource = useCallback(
     table => {
+      if (
+        !(profiles.profile && profiles.profile.geoLevel) ||
+        !(country && country.slug)
+      ) {
+        return undefined;
+      }
       const source =
         chartSources[country.slug][profiles.profile.geoLevel][table];
       return source && source.source.href ? source.source : undefined;
