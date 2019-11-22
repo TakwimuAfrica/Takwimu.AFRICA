@@ -1,12 +1,11 @@
 import React from 'react';
 
-import NextLink from 'next/link';
-
 import classNames from 'classnames';
 
-import { Link, Typography } from '@material-ui/core';
+import { Link as MuiLink, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Link from '../Link';
 import Title from './Title';
 
 const useStyles = makeStyles(theme => ({
@@ -31,8 +30,16 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const LINKS = [
-  { href: '#topic', label: 'Explore data by topic' },
-  { href: '#analysis', label: 'Expert insights and analysis' },
+  {
+    href: '#topic',
+    label: 'Explore data by topic',
+    onClick: () => window.toggleDrawer('topic')()
+  },
+  {
+    href: '#analysis',
+    label: 'Expert insights and analysis',
+    onClick: () => window.toggleDrawer('analysis')()
+  },
   { href: '/about', label: 'About Takwimu' },
   { href: '/faqs', label: 'FAQs' },
   { href: '/contact', label: 'Contact Us' }
@@ -44,15 +51,6 @@ const LEGAL = [
 
 function QuickLinks() {
   const classes = useStyles();
-  const handleClick = clicked => {
-    if (clicked === '#topic') {
-      return window.toggleDrawer('topic')();
-    }
-    if (clicked === '#analysis') {
-      return window.toggleDrawer('analysis')();
-    }
-    return null;
-  };
 
   return (
     <div className={classes.root}>
@@ -64,16 +62,24 @@ function QuickLinks() {
       >
         {LINKS.map(link => (
           <li key={link.label}>
-            <NextLink href={link.href}>
+            {link.onClick ? (
+              <MuiLink
+                href={link.href}
+                underline="always"
+                className={classNames([classes.text, classes.link])}
+                onClick={e => link.onClick(e)}
+              >
+                {link.label}
+              </MuiLink>
+            ) : (
               <Link
                 href={link.href}
                 underline="always"
                 className={classNames([classes.text, classes.link])}
-                onClick={() => handleClick(link.href)}
               >
                 {link.label}
               </Link>
-            </NextLink>
+            )}
           </li>
         ))}
       </Typography>
@@ -84,15 +90,13 @@ function QuickLinks() {
       >
         {LEGAL.map(link => (
           <li key={link.label}>
-            <NextLink href={link.href}>
-              <Link
-                href={link.href}
-                className={classNames([classes.text, classes.link])}
-                underline="always"
-              >
-                {link.label}
-              </Link>
-            </NextLink>
+            <Link
+              href={link.href}
+              className={classNames([classes.text, classes.link])}
+              underline="always"
+            >
+              {link.label}
+            </Link>
           </li>
         ))}
       </Typography>
