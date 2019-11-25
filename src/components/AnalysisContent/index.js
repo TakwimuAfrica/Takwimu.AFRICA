@@ -185,7 +185,7 @@ function AnalysisContent({
         ))}
         {hydrateElements.flourish.map(({ element, chartId }) => (
           <Portal key={element.id} element={element}>
-            <FlourishChart chartId={chartId} charts={charts.flourish} />,
+            <FlourishChart chartId={chartId} charts={charts.flourish} />
           </Portal>
         ))}
         {hydrateElements.indicators.map(
