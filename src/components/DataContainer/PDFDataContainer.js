@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
+import dynamic from 'next/dynamic';
+
 import { ButtonBase, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -10,7 +12,7 @@ import DataActions from './DataActions';
 import leftArrow from '../../assets/images/left-arrow.svg';
 import rightArrow from '../../assets/images/right-arrow.svg';
 
-const PDF = React.lazy(() => import('../../modules/pdf'));
+const PDF = dynamic(() => import('../../modules/pdf'), { ssr: false });
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,20 +46,25 @@ function DataContainer({ id, data, countryName }) {
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
 
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = data.source;
-    link.download = data.source;
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  if (!data.source) {
+    return null;
+  }
 
+  const handleDownload = () => {
+    const node = document.getElementById(`${id}-container`);
+    if (node) {
+      const link = document.createElement('a');
+      link.href = data.source;
+      link.download = data.source;
+      link.target = '_blank';
+      node.appendChild(link);
+      link.click();
+      node.removeChild(link);
+    }
+  };
   const handleShare = () => {
     window.open(`https://twitter.com/intent/tweet?url=${escape(data.source)}`);
   };
-
   return (
     <div id={`${id}-container`} className={classes.root}>
       <div className={classes.dataContainer}>
@@ -78,16 +85,12 @@ function DataContainer({ id, data, countryName }) {
             >
               <img alt="" src={leftArrow} />
             </ButtonBase>
-            {data.source && (
-              <React.Suspense fallback={<div>Loading...</div>}>
-                <PDF
-                  scale={1}
-                  page={page}
-                  file={data.source}
-                  onDocumentComplete={setNumberOfPages}
-                />
-              </React.Suspense>
-            )}
+            <PDF
+              scale={1}
+              page={page}
+              file={data.source}
+              onDocumentComplete={setNumberOfPages}
+            />
             <ButtonBase
               ga-on="click"
               ga-event-category="Data (PDF)"

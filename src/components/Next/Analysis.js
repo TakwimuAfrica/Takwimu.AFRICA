@@ -1,8 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import NextLink from 'next/link';
-
 import classNames from 'classnames';
 
 import { Grid } from '@material-ui/core';
@@ -52,19 +50,20 @@ function AnalysisReadNext({ current, content, showContent, title }) {
       >
         {content.topics.map((c, index) =>
           index > current && index - current <= 2 ? (
-            <NextLink key={generateHref(index)} href={generateHref(index)}>
-              <Card
-                variant="dual"
-                classes={{
-                  root: classNames({
-                    [classes.cardMargin]: index - current > 1
-                  })
-                }}
-                onClick={showContent(index)}
-              >
-                {c.post_title}
-              </Card>
-            </NextLink>
+            <Card
+              key={generateHref(index)}
+              href={generateHref(index)}
+              component="a"
+              variant="dual"
+              classes={{
+                root: classNames({
+                  [classes.cardMargin]: index - current > 1
+                })
+              }}
+              onClick={showContent(index)}
+            >
+              {c.post_title}
+            </Card>
           ) : null
         )}
       </Grid>

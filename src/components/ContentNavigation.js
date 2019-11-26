@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import NextLink from 'next/link';
-
-import { Link, Typography } from '@material-ui/core';
+import { Link as MuiLink, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
 import ContentSection from './ContentSection';
+import Link from './Link';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,9 +60,9 @@ function ContentNavigation({
       </Typography>
 
       <div className={classes.topicLinks}>
-        {content.map((c, index) => (
-          <NextLink key={generateHref(index)} href={generateHref(index)}>
-            <Link
+        {content.map((c, index) =>
+          onClick ? (
+            <MuiLink
               key={generateHref(index)}
               variant="body2"
               href={generateHref(index)}
@@ -77,9 +76,37 @@ function ContentNavigation({
               onClick={e => onClick(e, index)}
             >
               {generateTitle(index)}
+            </MuiLink>
+          ) : (
+            <Link
+              key={
+                typeof generateHref(index) === 'object'
+                  ? generateHref(index).as
+                  : generateHref(index)
+              }
+              variant="body2"
+              href={
+                typeof generateHref(index) === 'object'
+                  ? generateHref(index).href
+                  : generateHref(index)
+              }
+              as={
+                typeof generateHref(index) === 'object'
+                  ? generateHref(index).as
+                  : undefined
+              }
+              color={
+                current === index ? linksSecondaryColor : linksPrimaryColor
+              }
+              classes={{ root: classes.topicLink }}
+              className={classNames({
+                [classes.topic]: current !== index
+              })}
+            >
+              {generateTitle(index)}
             </Link>
-          </NextLink>
-        ))}
+          )
+        )}
       </div>
     </ContentSection>
   );
@@ -92,7 +119,7 @@ ContentNavigation.propTypes = {
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
   generateTitle: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   linksPrimaryColor: PropTypes.string,
   linksSecondaryColor: PropTypes.string
 };
@@ -100,7 +127,8 @@ ContentNavigation.propTypes = {
 ContentNavigation.defaultProps = {
   contentTitle: '',
   linksPrimaryColor: 'primary',
-  linksSecondaryColor: 'textPrimary'
+  linksSecondaryColor: 'textPrimary',
+  onClick: undefined
 };
 
 export default ContentNavigation;

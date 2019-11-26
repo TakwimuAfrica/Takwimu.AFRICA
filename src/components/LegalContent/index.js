@@ -77,6 +77,7 @@ function LegalContent({
       />
       {contents.map((content, i) => (
         <RichTextSection
+          key={contentHeadings[i].link}
           id={contentHeadings[i].link}
           classes={{ root: classes.section }}
           title={content.title}

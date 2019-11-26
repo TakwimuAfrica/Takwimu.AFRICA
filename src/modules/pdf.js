@@ -1,3 +1,1 @@
-import PDF from 'react-pdf-js';
-
-export default PDF;
+export { default } from '@mikecousins/react-pdf';
