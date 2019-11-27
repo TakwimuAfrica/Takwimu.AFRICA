@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -45,9 +44,11 @@ function FlourishChart({ chartId, charts }) {
     // provide a default height to start
     const height =
       wrapper && wrapper.offsetHeight > 420 ? wrapper.offsetHeight : 420;
+    /* eslint-disable no-param-reassign */
     iframe.style.height = `${height}px`;
     iframe.contentDocument.body.style.fontFamily = theme.typography.fontText;
     iframe.contentDocument.body.style.background = 'rgb(0,0,0) !important';
+    /* eslint-enable no-param-reassign */
     const headers = iframe.contentDocument.getElementsByClassName(
       'flourish-header'
     );
