@@ -134,15 +134,15 @@ const createPdf = () => {
       <Document>
         <Page size="A4" style={classes.page}>
           <View style={classes.header} fixed>
-            <Link href="https://takwimu.africa" style={classes.linkTakwimu}>
-              www.takwimu.africa
+            <Link href={takwimu.url} style={classes.linkTakwimu}>
+              {new URL(takwimu.url).hostname}
             </Link>
             <View style={classes.divider} />
             <Link
               style={classes.linkLicense}
               href="//creativecommons.org/licenses/by/4.0/"
             >
-              2018 Takwimu CC by 4.0
+              2018 {takwimu.name} CC by 4.0
             </Link>
             <View style={classes.logoBackground}>
               <Image style={classes.logo} src={logoWhite} />
@@ -198,11 +198,8 @@ const createPdf = () => {
                 year: 'numeric'
               })}
             </Text>
-            <Link
-              href="https://takwimu.africa"
-              style={classes.linkTakwimuFooter}
-            >
-              www.takwimu.africa
+            <Link href={takwimu.url} style={classes.linkTakwimuFooter}>
+              {new URL(takwimu.url).hostname}
             </Link>
           </View>
         </Page>
@@ -229,7 +226,9 @@ const createPdf = () => {
     topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
     takwimu: PropTypes.shape({
       country: PropTypes.shape({}),
-      countries: PropTypes.arrayOf(PropTypes.shape({}))
+      countries: PropTypes.arrayOf(PropTypes.shape({})),
+      name: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired
     }).isRequired
   };
   return AnalysisPDF;
@@ -241,7 +240,7 @@ const isEmpty = obj =>
   obj === null ||
   (Object.keys(obj).length === 0 && obj.constructor === Object);
 
-function DownloadPDF({ id, title, topic, data, takwimu, top }) {
+function DownloadPDF({ title, topic, data, takwimu, top }) {
   const classes = useStyles();
   const [pdfBlob, setPdfBlob] = useState(null);
 
@@ -264,7 +263,6 @@ function DownloadPDF({ id, title, topic, data, takwimu, top }) {
 
   return (
     <ButtonBase
-      id={id}
       ga-on="click"
       ga-event-category="Analysis"
       ga-event-action="Download"
@@ -274,16 +272,13 @@ function DownloadPDF({ id, title, topic, data, takwimu, top }) {
       disabled={pdfBlob === null}
       onClick={() => {
         if (pdfBlob) {
-          const node = document.getElementById(id);
-          if (node) {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(pdfBlob);
-            link.download = `${title}.pdf`;
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(pdfBlob);
+          link.download = `${title}.pdf`;
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
           URL.revokeObjectURL(pdfBlob);
         }
       }}
@@ -296,7 +291,6 @@ function DownloadPDF({ id, title, topic, data, takwimu, top }) {
 }
 
 DownloadPDF.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({
