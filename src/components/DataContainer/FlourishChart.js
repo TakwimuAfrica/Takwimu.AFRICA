@@ -46,7 +46,6 @@ function FlourishChart({ chartId, charts }) {
       wrapper && wrapper.offsetHeight > 420 ? wrapper.offsetHeight : 420;
     /* eslint-disable no-param-reassign */
     iframe.style.height = `${height}px`;
-    iframe.contentDocument.body.style.fontFamily = theme.typography.fontText;
     iframe.contentDocument.body.style.background = 'rgb(0,0,0) !important';
     /* eslint-enable no-param-reassign */
     const headers = iframe.contentDocument.getElementsByClassName(
