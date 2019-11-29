@@ -2,8 +2,10 @@
 import React from 'react';
 import PropTyes from 'prop-types';
 import Head from 'next/head';
+import { Typography } from '@material-ui/core';
 import Page from '../../../components/Page';
 import { get } from '../../../getTakwimuPage';
+import Section from '../../../components/Section';
 
 function P({ takwimu, wp }) {
   return (
@@ -22,10 +24,13 @@ function P({ takwimu, wp }) {
           src="http://localhost:8080/wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js"
         />
       </Head>
-      <div
-        style={{ margin: wp.acf.margin }}
-        dangerouslySetInnerHTML={{ __html: wp.content.rendered }}
-      />
+      <Section>
+        <Typography variant="h2">{wp.title.rendered}</Typography>
+        <div
+          style={{ margin: wp.acf.margin }}
+          dangerouslySetInnerHTML={{ __html: wp.content.rendered }}
+        />
+      </Section>
     </Page>
   );
 }
@@ -38,12 +43,15 @@ P.propTypes = {
     }),
     content: PropTyes.shape({
       rendered: PropTyes.string
+    }),
+    title: PropTyes.shape({
+      rendered: PropTyes.string
     })
   }).isRequired
 };
 
-P.getInitialProps = async ({ query: { post } }) => {
-  return get('posts', post);
+P.getInitialProps = async ({ query: { page, post } }) => {
+  return get(page, post);
 };
 
 export default P;

@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Page from '../../components/Page';
 
 import { get } from '../../getTakwimuPage';
+import Section from '../../components/Section';
 
 function P({ takwimu, wp }) {
   return (
@@ -23,10 +24,12 @@ function P({ takwimu, wp }) {
           src="http://localhost:8080/wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js"
         />
       </Head>
-      <div
-        style={{ margin: wp.acf.margin }}
-        dangerouslySetInnerHTML={{ __html: wp.content.rendered }}
-      />
+      <Section>
+        <div
+          style={{ margin: wp.acf && wp.acf.margin }}
+          dangerouslySetInnerHTML={{ __html: wp.content.rendered }}
+        />
+      </Section>
     </Page>
   );
 }
