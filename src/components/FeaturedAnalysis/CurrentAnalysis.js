@@ -1,12 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Button, Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+import config from '../../config';
+import flags from '../../flags';
+import ButtonLink from '../Link/Button';
 import { RichTypography } from '../core';
-
-const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,6 +92,11 @@ function CurrentAnalysis({
   viewProfileTitle
 }) {
   const classes = useStyles();
+  const country = config.countries.find(c => c.slug === countrySlug);
+  if (!country) {
+    return null;
+  }
+
   return (
     <div className={classes.root}>
       <Grid
@@ -107,7 +113,7 @@ function CurrentAnalysis({
             className={classes.header}
           >
             <img
-              src={flagSrc(`./${countrySlug}.svg`)}
+              src={flags[country.iso_code]}
               alt={countrySlug}
               className={classes.flag}
             />
@@ -133,20 +139,22 @@ function CurrentAnalysis({
             alignItems="center"
             className={classes.actions}
           >
-            <Button
-              href={`/profiles/${countrySlug}/${currentAnalysis.post_name}`}
+            <ButtonLink
+              href="/profiles/[geoIdOrCountrySlug]/[analysisSlug]"
+              as={`/profiles/${countrySlug}/${currentAnalysis.post_name}`}
               className={classes.primaryAction}
             >
               {readAnalysisTitle}
-            </Button>
-            <Button
-              href={`/profiles/${countrySlug}`}
+            </ButtonLink>
+            <ButtonLink
+              href="/profiles/[geoIdOrCountrySlug]"
+              as={`/profiles/${countrySlug}`}
               className={classes.secondaryAction}
               classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"
             >
               {viewProfileTitle}
-            </Button>
+            </ButtonLink>
           </Grid>
         </Grid>
       </Grid>

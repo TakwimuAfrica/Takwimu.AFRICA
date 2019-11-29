@@ -2,7 +2,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import DataActions from './DataActions';
 
@@ -29,15 +29,18 @@ function DataContainer({
 }) {
   const classes = useStyles();
   const handleDownload = () => {
-    const index = src.lastIndexOf('.');
-    const ext = index !== -1 ? src.substring(index + 1) : '';
-    const link = document.createElement('a');
-    link.download = `${title}.${ext}`;
-    link.target = '_blank';
-    link.href = src;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const node = document.getElementById(`data-indicator-${id}`);
+    if (node) {
+      const index = src.lastIndexOf('.');
+      const ext = index !== -1 ? src.substring(index + 1) : '';
+      const link = document.createElement('a');
+      link.download = `${title}.${ext}`;
+      link.target = '_blank';
+      link.href = src;
+      node.body.appendChild(link);
+      link.click();
+      node.body.removeChild(link);
+    }
   };
 
   const handleShare = () => {

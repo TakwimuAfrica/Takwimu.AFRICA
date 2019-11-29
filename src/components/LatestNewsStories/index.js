@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button, Grid } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 import { RichTypography } from '../core';

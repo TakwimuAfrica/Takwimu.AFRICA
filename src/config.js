@@ -4,13 +4,19 @@ const config = {
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
   WP_BACKEND_URL:
+    // eslint-disable-next-line no-nested-ternary
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:8080'
-      : 'https://takwimutech.wpengine.com',
+      : process.env.NODE_ENV === 'staging'
+      ? 'https://takwimutech.wpengine.com'
+      : 'https://dashboard.takwimu.africa',
   WP_HURUMAP_DATA_API:
+    // eslint-disable-next-line no-nested-ternary
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:8080'
-      : 'https://takwimutech.wpengine.com/wp-json/hurumap-data',
+      : process.env.NODE_ENV === 'staging'
+      ? 'https://takwimutech.wpengine.com'
+      : 'https://dashboard.takwimu.africa/wp-json/hurumap-data',
   country: {},
   countries: [
     {

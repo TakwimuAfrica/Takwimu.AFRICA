@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { Typography, ButtonBase } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 import { PropTypes } from 'prop-types';
-import { useRouter } from 'next/router';
+
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
+import Link from '../Link';
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
@@ -46,7 +46,6 @@ const useStyles = makeStyles(theme => ({
 
 function AboutContentNav({ title, current, contentHeadings }) {
   const classes = useStyles();
-  const router = useRouter();
   const showShadow = useScrollListener(10);
   const generateHref = index => {
     const item = contentHeadings[index];
@@ -60,20 +59,17 @@ function AboutContentNav({ title, current, contentHeadings }) {
         </Typography>
         <div className={classes.otherTopicLinks}>
           {contentHeadings.map((item, index) => (
-            <ButtonBase
+            <Link
               key={item.link}
-              onClick={() => router.push(generateHref(index))}
+              href={generateHref(index)}
+              variant="body2"
+              color="textSecondary"
+              className={classNames(classes.otherTopic, {
+                [classes.topicSelected]: current === index
+              })}
             >
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                className={classNames(classes.otherTopic, {
-                  [classes.topicSelected]: current === index
-                })}
-              >
-                {item.title}
-              </Typography>
-            </ButtonBase>
+              {item.title}
+            </Link>
           ))}
         </div>
       </Layout>

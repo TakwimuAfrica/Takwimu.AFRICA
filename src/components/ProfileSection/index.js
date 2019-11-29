@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/styles';
-
 import classNames from 'classnames';
+
+import { makeStyles } from '@material-ui/core/styles';
+
 import { RichTypography } from '../core';
 import Section from '../Section';
 import Tabs from './Tabs';

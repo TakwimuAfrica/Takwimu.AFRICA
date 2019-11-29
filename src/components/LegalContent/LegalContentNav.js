@@ -1,12 +1,13 @@
 import React from 'react';
-
-import { Typography, ButtonBase } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
-import { makeStyles } from '@material-ui/styles';
-import Router from 'next/router';
 
+import { Typography } from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/core/styles';
+
+import Link from '../Link';
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 
@@ -56,20 +57,17 @@ function LegalContentNav({ title, current, contentHeadings }) {
         </Typography>
         <div className={classes.otherTopicLinks}>
           {contentHeadings.map((item, index) => (
-            <ButtonBase
+            <Link
               key={item.link}
-              onClick={() => Router.push(generateHref(index))}
+              href={generateHref(index)}
+              variant="body2"
+              color="textSecondary"
+              className={classNames(classes.otherTopic, {
+                [classes.topicSelected]: current === index
+              })}
             >
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                className={classNames(classes.otherTopic, {
-                  [classes.topicSelected]: current === index
-                })}
-              >
-                {item.title}
-              </Typography>
-            </ButtonBase>
+              {item.title}
+            </Link>
           ))}
         </div>
       </Layout>

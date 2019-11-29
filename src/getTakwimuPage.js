@@ -30,7 +30,11 @@ export async function getSitePage(slug) {
   );
   const data = await res.json();
 
-  Object.assign(config.page, data[0].acf);
+  Object.assign(
+    config.page,
+    { rendered: data[0].content.rendered },
+    data[0].acf
+  );
 
   return config;
 }

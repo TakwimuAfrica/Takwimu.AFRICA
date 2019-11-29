@@ -2,8 +2,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { FormControl, Input, MenuItem, Select } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
-import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {

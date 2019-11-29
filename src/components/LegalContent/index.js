@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import ContentNavigation from './ContentNavigation';
 import ContentSection from '../ContentSection';
@@ -77,6 +77,7 @@ function LegalContent({
       />
       {contents.map((content, i) => (
         <RichTextSection
+          key={contentHeadings[i].link}
           id={contentHeadings[i].link}
           classes={{ root: classes.section }}
           title={content.title}

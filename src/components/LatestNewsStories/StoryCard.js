@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 

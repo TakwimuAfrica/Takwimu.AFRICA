@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+
+import classNames from 'classnames';
+
 import {
   Typography,
   ButtonBase,
-  Button,
   Grid,
   Input,
   Popper,
@@ -11,16 +13,15 @@ import {
   MenuList,
   MenuItem
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-import classNames from 'classnames';
+import flags from '../../flags';
+import ButtonLink from '../Link/Button';
 import Layout from '../Layout';
 
 import searchIcon from '../../assets/images/icon-search.svg';
 import downArrow from '../../assets/images/down-arrow-green.svg';
 import config from '../../config';
-
-const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -129,7 +130,7 @@ function CountrySelectorComponent({ context, country }) {
         className={classes.chooserButton}
         onClick={process.browser && window.toggleDrawer(context)}
       >
-        <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
+        <img alt="" height="37" src={flags[country.iso_code]} />
         <Typography variant="subtitle2" className={classes.countryName}>
           {country.short_name}
         </Typography>
@@ -142,6 +143,7 @@ function CountrySelectorComponent({ context, country }) {
 CountrySelectorComponent.propTypes = {
   context: PropTypes.string.isRequired,
   country: PropTypes.shape({
+    iso_code: PropTypes.string,
     slug: PropTypes.string,
     short_name: PropTypes.string
   }).isRequired
@@ -276,9 +278,13 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
               </Grid>
             )}
           </Grid>
-          <Button href={`/profiles/${country.slug}`} fullWidth>
+          <ButtonLink
+            href="/profiles/[geoIdOrCountrySlug]"
+            as={`/profiles/${country.slug}`}
+            fullWidth
+          >
             Read the full country analysis
-          </Button>
+          </ButtonLink>
         </div>
       </Layout>
     </Grid>

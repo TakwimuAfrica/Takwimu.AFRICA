@@ -1,16 +1,18 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 import React, { useState, useEffect } from 'react';
+import { PropTypes } from 'prop-types';
+
+import dynamic from 'next/dynamic';
 
 import { Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import { PropTypes } from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { TwitterShareButton } from 'react-share';
 
-import DownloadPDF from './DownloadPDF';
-
 import shareIcon from '../../../assets/images/analysis/share.svg';
+
+const DownloadPDF = dynamic(() => import('./DownloadPDF'), { ssr: false });
 
 const useStyles = makeStyles({
   root: {

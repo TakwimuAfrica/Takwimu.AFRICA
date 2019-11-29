@@ -5,8 +5,10 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { makeStyles } from '@material-ui/styles';
 import { useRouter } from 'next/router';
+
+import { makeStyles } from '@material-ui/core/styles';
+
 import Layout from '../Layout';
 import useScrollListener from '../../useScrollListener';
 

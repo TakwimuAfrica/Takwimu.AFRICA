@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 import Section from '../Section';
@@ -78,15 +78,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Footer({ takwimu: { settings } }) {
-  const classes = useStyles();
+function Footer({ takwimu: { settings }, ...props }) {
+  const classes = useStyles(props);
   return (
     <Grid
       id="footer"
       container
-      className={classes.root}
       justify="center"
       alignItems="flex-start"
+      className={classes.root}
     >
       <Section>
         <Grid container justify="flex-start" alignItems="flex-start">

@@ -1,93 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import ReactDOM from 'react-dom';
 
+import getHydrateContent from '../utils/getHydrateContent';
+import FlourishChart from './DataContainer/FlourishChart';
+import HURUmapChart from './DataContainer/HURUmapChart';
 import Section from './Section';
-import DataContainer from './DataContainer';
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1
-  },
-  content: {
-    paddingBottom: '1rem'
-  },
-  list: {
-    height: '100%'
-  }
-});
+function FeaturedData({ charts, children }) {
+  const [hydrateElements, setHydrateElements] = useState({
+    title: '',
+    hurumap: [],
+    flourish: []
+  });
+  useEffect(() => {
+    const featureDataElement = document.getElementById('featured-data');
+    const title = featureDataElement.attributes['data-title'].value;
+    setHydrateElements({
+      title,
+      ...getHydrateContent(featureDataElement, 'hurumap', 'flourish')
+    });
+  }, []);
 
-function FeaturedData({
-  takwimu: {
-    url,
-    page: {
-      featured_data: { value: featuredData }
-    }
-  }
-}) {
-  const classes = useStyles();
-  if (!featuredData) {
-    return null;
-  }
-
-  const { title, featured_data: indicators } = featuredData;
   return (
-    <Section title={title} variant="h2">
-      {indicators && indicators.length > 0 && (
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="flex-start"
-          className={classes.root}
-        >
-          <DataContainer
-            id={indicators[0].id}
-            color="secondary"
-            indicator={indicators[0]}
-            // Since we don't know the county of the featured data
-            country={{
-              name: 'Featured Data'
-            }}
-            url={url}
-          />
-          {indicators.length > 1 && (
-            <DataContainer
-              id={indicators[1].id}
-              color="primary"
-              indicator={indicators[1]}
-              // Since we don't know the county of the featured data
-              country={{
-                name: 'Featured Data'
-              }}
-              url={url}
-            />
-          )}
-        </Grid>
+    <Section title={hydrateElements.title} variant="h2">
+      {children}
+      {hydrateElements.hurumap.map(({ element, geoId, chartId }) =>
+        ReactDOM.createPortal(
+          <HURUmapChart
+            charts={charts.hurumap}
+            chartId={chartId}
+            geoId={geoId}
+          />,
+          element
+        )
+      )}
+      {hydrateElements.flourish.map(({ element, title, chartId }) =>
+        ReactDOM.createPortal(
+          <FlourishChart
+            charts={charts.flourish}
+            chartId={chartId}
+            title={title}
+          />,
+          element
+        )
       )}
     </Section>
   );
 }
 
 FeaturedData.propTypes = {
-  takwimu: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    page: PropTypes.shape({
-      featured_data: PropTypes.shape({
-        value: PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          featured_data: PropTypes.arrayOf(
-            PropTypes.shape({
-              value: PropTypes.shape({}).isRequired,
-              meta: PropTypes.shape({}).isRequired
-            }).isRequired
-          )
-        })
-      }).isRequired
-    }).isRequired
-  }).isRequired
+  charts: PropTypes.shape({
+    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
+    flourish: PropTypes.arrayOf(PropTypes.shape({}))
+  }).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 export default FeaturedData;

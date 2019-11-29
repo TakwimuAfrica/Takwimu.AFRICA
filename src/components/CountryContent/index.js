@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Button, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+import ButtonLink from '../Link/Button';
 import Section from '../Section';
 import Selection from './Selection';
 
@@ -144,15 +145,16 @@ class ViewAnalysis extends Component {
             value={countrySlug}
             onChange={this.handleCountryChange}
           />
-          <Button
-            href={href}
+          <ButtonLink
+            href="/profiles/[geoIdOrCountrySlug]"
+            as={href}
             classes={{
               root: classes.selectButtonRoot,
               label: classes.selectButtonLabel
             }}
           >
             {countryContent.view_content_action_label}
-          </Button>
+          </ButtonLink>
         </Grid>
       </Section>
     );

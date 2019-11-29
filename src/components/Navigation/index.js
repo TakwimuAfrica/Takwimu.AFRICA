@@ -13,7 +13,7 @@ import {
   MenuItem,
   ButtonBase
 } from '@material-ui/core';
-import withStyles from '@material-ui/styles/withStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Close from '@material-ui/icons/Close';
 import MenuOutlined from '@material-ui/icons/MenuOutlined';
 import Search from '@material-ui/icons/Search';
