@@ -1,5 +1,8 @@
 const WP_BACKEND_URL =
-  process.env.WP_BACKEND_URL || process.env.NODE_ENV === 'development'
+  // eslint-disable-next-line no-nested-ternary
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8080'
+    : process.env.NODE_ENV === 'staging'
     ? 'https://takwimutech.wpengine.com'
     : 'https://dashboard.takwimu.africa';
 
@@ -9,11 +12,7 @@ const config = {
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
   WP_BACKEND_URL,
-  WP_HURUMAP_DATA_API:
-    /**
-     * TODO: we need to set this such that we can intercept /flourish request in local dev so that we can test iframe downloads
-     */
-    `${WP_BACKEND_URL}/wp-json/hurumap-data`,
+  WP_HURUMAP_DATA_API: `${WP_BACKEND_URL}/wp-json/hurumap-data`,
   country: {},
   countries: [
     {

@@ -16,6 +16,10 @@ function FlourishChart({ chartId, charts }) {
     return null;
   }
 
+  if (!chart) {
+    return null;
+  }
+
   return (
     <InsightContainer
       actions={{

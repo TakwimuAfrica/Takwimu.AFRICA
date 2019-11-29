@@ -16,11 +16,13 @@ function FeaturedData({ charts, children }) {
   });
   useEffect(() => {
     const featureDataElement = document.getElementById('featured-data');
-    const title = featureDataElement.attributes['data-title'].value;
-    setHydrateElements({
-      title,
-      ...getHydrateContent(featureDataElement, 'hurumap', 'flourish')
-    });
+    if (featureDataElement) {
+      const title = featureDataElement.attributes['data-title'].value;
+      setHydrateElements({
+        title,
+        ...getHydrateContent(featureDataElement, 'hurumap', 'flourish')
+      });
+    }
   }, []);
 
   return (
