@@ -3,11 +3,15 @@ import React from 'react';
 import PropTyes from 'prop-types';
 import Head from 'next/head';
 import { Typography } from '@material-ui/core';
+import ErrorPage from 'next/error';
 import Page from '../../../components/Page';
 import { get } from '../../../getTakwimuPage';
 import Section from '../../../components/Section';
 
 function P({ takwimu, wp }) {
+  if (!wp) {
+    return <ErrorPage statusCode={404} />;
+  }
   return (
     <Page takwimu={takwimu}>
       <Head>
