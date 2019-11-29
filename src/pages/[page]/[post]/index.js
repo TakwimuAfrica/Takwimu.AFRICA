@@ -26,7 +26,7 @@ function P({ takwimu, wp }) {
         />
         <script
           type="text/javascript"
-          src={`${config.WP_BACKEND_URL}//wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js`}
+          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js`}
         />
       </Head>
       <Section>
