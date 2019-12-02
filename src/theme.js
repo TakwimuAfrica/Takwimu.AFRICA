@@ -186,8 +186,10 @@ const Theme = createTheme({
       variant: 'contained'
     },
     MuiPaper: {
-      elevation: 0,
-      square: true
+      elevation: 2
+    },
+    MuiDialogContentText: {
+      color: 'textSecondary'
     }
   },
   overrides: {
