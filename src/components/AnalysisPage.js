@@ -59,9 +59,17 @@ function AnalysisPage({
       title={`${takwimu.country.short_name}'s ${activeAnalysis.post_title} Analysis`}
     >
       <Head>
+        <link
+          rel="stylesheet"
+          href={`${config.WP_BACKEND_URL}/wp-admin/load-styles.php?c=0&dir=ltr&load%5B%5D=dashicons,buttons,media-views,wp-components,wp-nux,wp-block-library,wp-block-&load%5B%5D=library-theme,wp-format-library,common,forms,dashboard,list-tables,edit,revisions,media,t&load%5B%5D=hemes,about,nav-menus,wp-pointer,widgets,site-icon,l10n,wp-color-picker`}
+        />
+        <link
+          rel="stylesheet"
+          href={`${config.WP_BACKEND_URL}/wp-includes/js/mediaelement/wp-mediaelement.min.css`}
+        />
         <script
-          type="text/javascript"
-          src="http://localhost:8080/wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js"
+          crossOrigin
+          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
         />
       </Head>
       <ContentPage
