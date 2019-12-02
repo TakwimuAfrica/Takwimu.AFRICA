@@ -32,7 +32,7 @@ function P({ takwimu, wp }) {
         />
         <script
           crossOrigin
-          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui.js`}
+          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
         />
       </Head>
       <Section>
