@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTyes from 'prop-types';
 import Head from 'next/head';
 import { Typography } from '@material-ui/core';
@@ -9,7 +9,13 @@ import { get } from '../../../getTakwimuPage';
 import Section from '../../../components/Section';
 import config from '../../../config';
 
+import Theme from '../../../theme';
+
 function P({ takwimu, wp }) {
+  useEffect(() => {
+    // Expose theme
+    window.Theme = Theme;
+  }, []);
   if (!wp) {
     return <ErrorPage statusCode={404} />;
   }
@@ -25,8 +31,8 @@ function P({ takwimu, wp }) {
           href={`${config.WP_BACKEND_URL}/wp-includes/js/mediaelement/wp-mediaelement.min.css`}
         />
         <script
-          type="text/javascript"
-          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js`}
+          crossOrigin
+          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui.js`}
         />
       </Head>
       <Section>
