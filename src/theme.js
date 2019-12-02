@@ -189,7 +189,7 @@ const Theme = createTheme({
       elevation: 2
     },
     MuiDialogContentText: {
-      color: 'textSecondary'
+      color: 'textPrimary'
     }
   },
   overrides: {
