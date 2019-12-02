@@ -60,8 +60,8 @@ function AnalysisPage({
     >
       <Head>
         <script
-          type="text/javascript"
-          src="http://localhost:8080/wp-content/themes/hurumap/assets/js/hurumap-iframe-handler.js"
+          crossOrigin
+          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui.js`}
         />
       </Head>
       <ContentPage
