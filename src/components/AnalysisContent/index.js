@@ -19,8 +19,6 @@ import OtherInfoNav from './OtherInfoNav';
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
-import HURUmapChart from '../DataContainer/HURUmapChart';
-import FlourishChart from '../DataContainer/FlourishChart';
 import getHydrateContent from '../../utils/getHydrateContent';
 
 const useStyles = makeStyles(theme => ({
@@ -173,21 +171,6 @@ function AnalysisContent({
             url={takwimu.url}
           />
         )}
-
-        {hydrateElements.hurumap.map(({ element, geoId, chartId }) => (
-          <Portal key={element.id} element={element}>
-            <HURUmapChart
-              geoId={geoId}
-              chartId={chartId}
-              charts={charts.hurumap}
-            />
-          </Portal>
-        ))}
-        {hydrateElements.flourish.map(({ element, chartId }) => (
-          <Portal key={element.id} element={element}>
-            <FlourishChart chartId={chartId} charts={charts.flourish} />
-          </Portal>
-        ))}
         {hydrateElements.indicators.map(
           ({ element, layout, title, src: source }) => {
             if (layout === 'document_widget') {
