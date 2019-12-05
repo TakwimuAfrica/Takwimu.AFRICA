@@ -52,7 +52,7 @@ export default class MyApp extends App {
           <meta charSet="utf-8" />
         </Head>
         <ApolloProvider client={client}>
-          <StylesProvider jss={MyApp.jss} sheetsRegistry={MyApp.sheetsRegistry}>
+          <StylesProvider jss={MyApp.jss}>
             <ThemeProvider theme={Theme}>
               <CssBaseline />
               <Component {...pageProps} />
