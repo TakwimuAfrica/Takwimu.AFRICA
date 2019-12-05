@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTyes from 'prop-types';
 import Head from 'next/head';
 import { Typography } from '@material-ui/core';
@@ -9,13 +9,7 @@ import { get } from '../../../getTakwimuPage';
 import Section from '../../../components/Section';
 import config from '../../../config';
 
-import Theme from '../../../theme';
-
 function P({ takwimu, wp }) {
-  useEffect(() => {
-    // Expose theme
-    window.Theme = Theme;
-  }, []);
   if (!wp) {
     return <ErrorPage statusCode={404} />;
   }
