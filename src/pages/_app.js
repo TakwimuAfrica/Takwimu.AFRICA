@@ -8,7 +8,12 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import {
+  ThemeProvider,
+  StylesProvider,
+  jssPreset
+} from '@material-ui/core/styles';
+import { create } from 'jss';
 
 import theme from '../theme';
 
@@ -17,12 +22,16 @@ const client = new ApolloClient({
 });
 
 export default class MyApp extends App {
+  static jss = create(jssPreset());
+
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+
+    window.jss = MyApp.jss;
   }
 
   render() {
@@ -38,10 +47,12 @@ export default class MyApp extends App {
           <meta charSet="utf-8" />
         </Head>
         <ApolloProvider client={client}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
+          <StylesProvider jss={MyApp.jss}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </StylesProvider>
         </ApolloProvider>
       </>
     );
