@@ -120,27 +120,27 @@ function SearchResultsContainer({ results, filter: propFilter }) {
     filter: propFilter
   });
 
-  const handleNextClick = () => {
-    setState(prevState => ({
-      activePage: prevState.activePage + 1,
-      startIndex: prevState.startIndex + 10
-    }));
-  };
+  // const handleNextClick = () => {
+  //   setState(prevState => ({
+  //     activePage: prevState.activePage + 1,
+  //     startIndex: prevState.startIndex + 10
+  //   }));
+  // };
 
-  const handlePreviousClick = () => {
-    setState(prevState => ({
-      activePage: prevState.activePage - 1,
-      startIndex: prevState.startIndex - 10
-    }));
-  };
+  // const handlePreviousClick = () => {
+  //   setState(prevState => ({
+  //     activePage: prevState.activePage - 1,
+  //     startIndex: prevState.startIndex - 10
+  //   }));
+  // };
 
-  const handlePageClick = pageNum => {
-    const startIndex = (pageNum - 1) * 10;
-    setState({
-      activePage: pageNum - 1,
-      startIndex
-    });
-  };
+  // const handlePageClick = pageNum => {
+  //   const startIndex = (pageNum - 1) * 10;
+  //   setState({
+  //     activePage: pageNum - 1,
+  //     startIndex
+  //   });
+  // };
 
   const handleFilterClick = category => {
     setState({
@@ -154,9 +154,18 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   let filteredResults = results;
   // filter results with result_type equals to state's filter
-  if (filter !== 'All') {
+  if (filter === 'Analysis') {
     filteredResults = results.filter(
-      resultItem => resultItem.value.result_type === filter
+      resultItem =>
+        resultItem.subtype === 'profile_section_page' ||
+        resultItem.subtype === 'topic_page' ||
+        resultItem.subtype === 'profile'
+    );
+  } else if (filter === 'Data') {
+    filteredResults = results.filter(
+      resultItem =>
+        resultItem.subtype === 'attachment' ||
+        resultItem.subtype === 'hurumap_chart'
     );
   }
 
@@ -206,12 +215,11 @@ function SearchResultsContainer({ results, filter: propFilter }) {
         <div className={classes.searchResultsList}>
           {filteredResults.slice(startIndex, endIndex).map(result => (
             <SearchResultItem
-              resultType={result.value.result_type}
-              country={result.value.country}
-              link={result.value.link}
-              title={result.value.title}
-              summary={result.value.summary}
-              key={result.value.content_id}
+              resultType={result.subtype}
+              title={result.title}
+              url={result.url}
+              id={result.id}
+              key={`${result.subtype}-${result.id}`}
             />
           ))}
         </div>
@@ -222,7 +230,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
       )}
       <div className={classes.borderDiv} />
 
-      <div className={classes.paginationContainer}>
+      {/* <div className={classes.paginationContainer}>
         <Typography variant="body2">
           {`Showing ${resultIndexText}${filteredResults.length} results`}
         </Typography>
@@ -236,7 +244,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
             endIndex={endIndex}
           />
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

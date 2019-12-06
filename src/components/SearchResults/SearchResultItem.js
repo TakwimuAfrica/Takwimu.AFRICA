@@ -5,8 +5,7 @@ import NextLink from 'next/link';
 
 import { Link, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
-import { RichTypography } from '../core';
+import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,12 +25,50 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SearchResultItem({ country, title, link, summary, resultType }) {
+function SearchResultItem({ title, resultType, url, id }) {
   const classes = useStyles();
+  const type = ['topic_page', 'profile_page', 'profile'].includes(resultType)
+    ? 'Analysis'
+    : 'Data';
+  const itemSlug = url.replace(/\/$/, '').split('/')[-1];
+  const fetchCountyAndSectionSlug = (postType, postId) => {
+    fetch(`${config.WP_BACKEND_URL}/wp-json/acf/v3/${postType}/${postId}`).then(
+      response => {
+        if (response.status === 200) {
+          response.json().then(
+            ({
+              acf: {
+                geography: countrySlug,
+                section_topic: [{ post_name: profileSlug }]
+              }
+            }) => {
+              return { countrySlug, profileSlug };
+            }
+          );
+        }
+      }
+    );
+  };
+  console.log(fetchCountyAndSectionSlug(resultType, id));
+  // let { countrySlug, profileSlug } = fetchCountyAndSectionSlug(resultType, id);
+  const countrySlug = 'kenya';
+  const profileSlug = 'health';
+
+  const country = config.countries.find(c => c.slug === countrySlug).name;
+  let link;
+
+  if (resultType === 'topic_page') {
+    link = `/profiles/${countrySlug}/${profileSlug}#${itemSlug}`;
+  } else if (resultType === 'profile_page') {
+    link = `/profiles/${countrySlug}/${itemSlug}`;
+  } else if (resultType === 'profile') {
+    link = `/profiles/${countrySlug}`;
+  }
+
   return (
     <div className={classes.root}>
       <Typography variant="body1" className={classes.resultType}>
-        {resultType}
+        {type}
       </Typography>
       <NextLink href={link}>
         <Link href={link} className={classes.link}>
@@ -40,16 +77,14 @@ function SearchResultItem({ country, title, link, summary, resultType }) {
           </Typography>
         </Link>
       </NextLink>
-      <RichTypography variant="body2">{summary}</RichTypography>
     </div>
   );
 }
 
 SearchResultItem.propTypes = {
-  country: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
   resultType: PropTypes.string.isRequired,
-  summary: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired
 };
 

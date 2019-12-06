@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,24 +20,18 @@ function SearchResults({ takwimu: { page } }) {
   const classes = useStyles();
 
   const handleSearch = useCallback(searchTerm => {
-    fetch(`${config.url}/api/search?q=${searchTerm}&format=json`).then(
-      response => {
-        if (response.status === 200) {
-          response.json().then(data => {
-            setSearch(data.search);
-          });
-        }
+    fetch(
+      `${config.WP_BACKEND_URL}/wp-json/wp/v2/search?search=${searchTerm}`
+    ).then(response => {
+      if (response.status === 200) {
+        response.json().then(data => {
+          setSearch({ query: searchTerm, results: data });
+        });
       }
-    );
+    });
   }, []);
 
   const { query, results } = search || {};
-  useEffect(() => {
-    if (query) {
-      handleSearch(query);
-    }
-  }, [handleSearch, query]);
-
   return (
     <Section classes={{ root: classes.root }}>
       <SearchInput onRefresh={handleSearch} query={query} />
