@@ -65,17 +65,13 @@ function RenderPaginator({
   items,
   activePage,
   handleNextClick,
-  handlePreviousClick,
-  handlePageClick,
-  endIndex
+  handlePreviousClick
 }) {
-  const numPages = Math.floor(items / 10);
-  const pages = Array.from({ length: numPages }, (v, k) => k + 1);
   const classes = useStyles();
 
   return (
     <div className={classes.pagesList}>
-      {activePage > 0 && items > 0 && (
+      {activePage > 1 && items > 0 && (
         <ButtonBase
           className={classes.filterItem}
           onClick={handlePreviousClick}
@@ -83,18 +79,7 @@ function RenderPaginator({
           Previous
         </ButtonBase>
       )}
-      {pages.map(page => (
-        <ButtonBase
-          className={classNames([
-            classes.filterItem,
-            { [classes.filterActive]: page === activePage + 1 }
-          ])}
-          onClick={() => handlePageClick(page)}
-        >
-          {page}
-        </ButtonBase>
-      ))}
-      {endIndex < items && items > 0 && (
+      {items >= 10 && (
         <ButtonBase className={classes.filterItem} onClick={handleNextClick}>
           Next
         </ButtonBase>
@@ -106,45 +91,44 @@ RenderPaginator.propTypes = {
   items: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
   handleNextClick: PropTypes.func.isRequired,
-  handlePreviousClick: PropTypes.func.isRequired,
-  handlePageClick: PropTypes.func.isRequired,
-  endIndex: PropTypes.number.isRequired
+  handlePreviousClick: PropTypes.func.isRequired
 };
 export const Paginator = RenderPaginator;
 
-function SearchResultsContainer({ results, filter: propFilter }) {
+function SearchResultsContainer({
+  results,
+  filter: propFilter,
+  query,
+  onPaginate
+}) {
   const classes = useStyles();
   const [state, setState] = useState({
-    activePage: 0,
+    activePage: 1,
     startIndex: 0,
     filter: propFilter
   });
 
-  // const handleNextClick = () => {
-  //   setState(prevState => ({
-  //     activePage: prevState.activePage + 1,
-  //     startIndex: prevState.startIndex + 10
-  //   }));
-  // };
+  const handleNextClick = () => {
+    onPaginate(query, state.activePage + 1);
 
-  // const handlePreviousClick = () => {
-  //   setState(prevState => ({
-  //     activePage: prevState.activePage - 1,
-  //     startIndex: prevState.startIndex - 10
-  //   }));
-  // };
+    setState(prevState => ({
+      activePage: prevState.activePage + 1,
+      startIndex: prevState.startIndex + 10
+    }));
+  };
 
-  // const handlePageClick = pageNum => {
-  //   const startIndex = (pageNum - 1) * 10;
-  //   setState({
-  //     activePage: pageNum - 1,
-  //     startIndex
-  //   });
-  // };
+  const handlePreviousClick = () => {
+    onPaginate(query, state.activePage - 1);
+
+    setState(prevState => ({
+      activePage: prevState.activePage - 1,
+      startIndex: prevState.startIndex - 10
+    }));
+  };
 
   const handleFilterClick = category => {
     setState({
-      activePage: 0,
+      activePage: 1,
       startIndex: 0,
       filter: category
     });
@@ -173,20 +157,21 @@ function SearchResultsContainer({ results, filter: propFilter }) {
   let resultIndexText = '';
   let endIndex = 10;
   const resultsLength = filteredResults.length;
-  if (resultsLength > 10) {
-    endIndex += 10 * activePage;
 
-    if (resultsLength - startIndex < 10) {
-      endIndex = startIndex + (resultsLength - startIndex);
+  if (activePage > 0) {
+    endIndex += 10 * (activePage - 1);
+
+    if (resultsLength < 10) {
+      endIndex += resultsLength;
     }
-    resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
   }
+  resultIndexText = `Results ${startIndex + 1} - ${endIndex} `;
 
   return (
     <div className={classes.root}>
       <Grid className={classes.resultsFilter}>
         <Typography variant="body2" className={classes.showResult}>
-          {`Showing ${resultIndexText}${filteredResults.length} results`}
+          {`Showing ${resultIndexText} results`}
         </Typography>
         <Grid item className={classes.filter}>
           <Typography
@@ -213,7 +198,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
       <div className={classes.borderDiv} />
       {filteredResults.length > 0 ? (
         <div className={classes.searchResultsList}>
-          {filteredResults.slice(startIndex, endIndex).map(result => (
+          {filteredResults.map(result => (
             <SearchResultItem
               resultType={result.subtype}
               title={result.title}
@@ -230,28 +215,26 @@ function SearchResultsContainer({ results, filter: propFilter }) {
       )}
       <div className={classes.borderDiv} />
 
-      {/* <div className={classes.paginationContainer}>
+      <div className={classes.paginationContainer}>
         <Typography variant="body2">
-          {`Showing ${resultIndexText}${filteredResults.length} results`}
+          {`Showing ${resultIndexText} results`}
         </Typography>
-        {filteredResults.length > 10 && (
-          <Paginator
-            items={filteredResults.length}
-            activePage={activePage}
-            handleNextClick={handleNextClick}
-            handlePreviousClick={handlePreviousClick}
-            handlePageClick={handlePageClick}
-            endIndex={endIndex}
-          />
-        )}
-      </div> */}
+        <Paginator
+          items={filteredResults.length}
+          activePage={activePage}
+          handleNextClick={handleNextClick}
+          handlePreviousClick={handlePreviousClick}
+        />
+      </div>
     </div>
   );
 }
 
 SearchResultsContainer.propTypes = {
   filter: PropTypes.string,
-  results: PropTypes.arrayOf(PropTypes.shape({}))
+  results: PropTypes.arrayOf(PropTypes.shape({})),
+  onPaginate: PropTypes.func.isRequired,
+  query: PropTypes.string.isRequired
 };
 
 SearchResultsContainer.defaultProps = {

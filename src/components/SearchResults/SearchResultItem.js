@@ -35,23 +35,32 @@ function SearchResultItem({ title, resultType, url, id }) {
     fetch(`${config.WP_BACKEND_URL}/wp-json/acf/v3/${postType}/${postId}`).then(
       response => {
         if (response.status === 200) {
-          response.json().then(
-            ({
-              acf: {
-                geography: countrySlug,
-                section_topic: [{ post_name: profileSlug }]
-              }
-            }) => {
-              return { countrySlug, profileSlug };
-            }
+          console.log('Iam here');
+          console.log(
+            `${config.WP_BACKEND_URL}/wp-json/acf/v3/${postType}/${postId}`
           );
+          response
+            .json()
+            .then(
+              ({
+                acf: { geography: countrySlug, section_topic: sectionOrTopic }
+              }) => {
+                if (sectionOrTopic && sectionOrTopic.length > 1) {
+                  return {
+                    countrySlug,
+                    profileSlug: sectionOrTopic[0].post_name
+                  };
+                }
+                return { countrySlug, profileSlug: 'health' };
+              }
+            );
         }
       }
     );
   };
   console.log(fetchCountyAndSectionSlug(resultType, id));
   // let { countrySlug, profileSlug } = fetchCountyAndSectionSlug(resultType, id);
-  const countrySlug = 'kenya';
+  const countrySlug = 'tanzania';
   const profileSlug = 'health';
 
   const country = config.countries.find(c => c.slug === countrySlug).name;

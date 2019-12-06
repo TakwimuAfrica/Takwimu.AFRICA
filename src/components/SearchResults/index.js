@@ -19,9 +19,9 @@ function SearchResults({ takwimu: { page } }) {
   const [search, setSearch] = useState(page.search);
   const classes = useStyles();
 
-  const handleSearch = useCallback(searchTerm => {
+  const handleSearch = useCallback((searchTerm, numPage) => {
     fetch(
-      `${config.WP_BACKEND_URL}/wp-json/wp/v2/search?search=${searchTerm}`
+      `${config.WP_BACKEND_URL}/wp-json/wp/v2/search?search=${searchTerm}&page=${numPage}`
     ).then(response => {
       if (response.status === 200) {
         response.json().then(data => {
@@ -35,7 +35,12 @@ function SearchResults({ takwimu: { page } }) {
   return (
     <Section classes={{ root: classes.root }}>
       <SearchInput onRefresh={handleSearch} query={query} />
-      <SearchResultsContainer results={results} filter="All" />
+      <SearchResultsContainer
+        results={results}
+        onPaginate={handleSearch}
+        query={query}
+        filter="All"
+      />
     </Section>
   );
 }
