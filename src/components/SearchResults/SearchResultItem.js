@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import NextLink from 'next/link';
@@ -27,44 +27,37 @@ const useStyles = makeStyles(theme => ({
 
 function SearchResultItem({ title, resultType, url, id }) {
   const classes = useStyles();
+  const [countrySlug, setCountrySlug] = useState('');
+  const [profileSlug, setProfileSlug] = useState('');
+
   const type = ['topic_page', 'profile_page', 'profile'].includes(resultType)
     ? 'Analysis'
     : 'Data';
   const itemSlug = url.replace(/\/$/, '').split('/')[-1];
-  const fetchCountyAndSectionSlug = (postType, postId) => {
-    fetch(`${config.WP_BACKEND_URL}/wp-json/acf/v3/${postType}/${postId}`).then(
+
+  useEffect(() => {
+    fetch(`${config.WP_BACKEND_URL}/wp-json/acf/v3/${resultType}/${id}`).then(
       response => {
         if (response.status === 200) {
-          console.log('Iam here');
-          console.log(
-            `${config.WP_BACKEND_URL}/wp-json/acf/v3/${postType}/${postId}`
-          );
           response
             .json()
-            .then(
-              ({
-                acf: { geography: countrySlug, section_topic: sectionOrTopic }
-              }) => {
-                if (sectionOrTopic && sectionOrTopic.length > 1) {
-                  return {
-                    countrySlug,
-                    profileSlug: sectionOrTopic[0].post_name
-                  };
-                }
-                return { countrySlug, profileSlug: 'health' };
+            .then(({ acf: { geography, section_topic: sectionOrTopic } }) => {
+              setCountrySlug(geography);
+              if (sectionOrTopic && sectionOrTopic.length > 1) {
+                setProfileSlug(sectionOrTopic[0].post_name);
               }
-            );
+            });
         }
       }
     );
-  };
-  console.log(fetchCountyAndSectionSlug(resultType, id));
-  // let { countrySlug, profileSlug } = fetchCountyAndSectionSlug(resultType, id);
-  const countrySlug = 'tanzania';
-  const profileSlug = 'health';
+  }, [resultType, id]);
 
-  const country = config.countries.find(c => c.slug === countrySlug).name;
+  const countryFound = config.countries.find(c => c.slug === countrySlug);
   let link;
+  let country = '';
+  if (countryFound) {
+    country = countryFound.name;
+  }
 
   if (resultType === 'topic_page') {
     link = `/profiles/${countrySlug}/${profileSlug}#${itemSlug}`;
