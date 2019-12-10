@@ -15,8 +15,8 @@ const config = {
   WP_HURUMAP_DATA_API: `${WP_BACKEND_URL}/wp-json/hurumap-data`,
   ES_URL:
     process.env.NODE_ENV === 'development'
-      ? 'http:localhost:9200'
-      : 'search-cfa-openafrica-z56l24lkfbv5erjxxs76sevr3i.eu-west-1.es.amazonaws.com',
+      ? 'http://localhost:9200'
+      : 'https://search-cfa-openafrica-z56l24lkfbv5erjxxs76sevr3i.eu-west-1.es.amazonaws.com',
   country: {},
   countries: [
     {
