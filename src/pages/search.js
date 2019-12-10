@@ -15,9 +15,9 @@ function Search(takwimu) {
 Search.propTypes = {};
 
 Search.getInitialProps = async ({ query: { q: query } }) => {
-  let searchResults = [];
+  let results = [];
   if (query && query.length) {
-    searchResults = await fetch(
+    results = await fetch(
       `${config.ES_URL}/takwimu/post/_search?q=${query}`
     ).then(response => {
       if (response.status === 200) {
@@ -25,11 +25,7 @@ Search.getInitialProps = async ({ query: { q: query } }) => {
       }
       return Promise.resolve({});
     });
-    config.page.search = {
-      query,
-      results: searchResults.hits,
-      total: searchResults.total
-    };
+    config.page.search = { query, results };
   }
   return config;
 };
