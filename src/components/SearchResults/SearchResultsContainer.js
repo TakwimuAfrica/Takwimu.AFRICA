@@ -65,13 +65,17 @@ function RenderPaginator({
   items,
   activePage,
   handleNextClick,
-  handlePreviousClick
+  handlePreviousClick,
+  handlePageClick,
+  endIndex
 }) {
+  const numPages = Math.floor(items / 10);
+  const pages = Array.from({ length: numPages }, (v, k) => k + 1);
   const classes = useStyles();
 
   return (
     <div className={classes.pagesList}>
-      {activePage > 1 && items > 0 && (
+      {activePage > 0 && items > 0 && (
         <ButtonBase
           className={classes.filterItem}
           onClick={handlePreviousClick}
@@ -79,7 +83,18 @@ function RenderPaginator({
           Previous
         </ButtonBase>
       )}
-      {items >= 10 && (
+      {pages.map(page => (
+        <ButtonBase
+          className={classNames([
+            classes.filterItem,
+            { [classes.filterActive]: page === activePage + 1 }
+          ])}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </ButtonBase>
+      ))}
+      {endIndex < items && items > 0 && (
         <ButtonBase className={classes.filterItem} onClick={handleNextClick}>
           Next
         </ButtonBase>
@@ -91,26 +106,24 @@ RenderPaginator.propTypes = {
   items: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
   handleNextClick: PropTypes.func.isRequired,
-  handlePreviousClick: PropTypes.func.isRequired
+  handlePreviousClick: PropTypes.func.isRequired,
+  handlePageClick: PropTypes.func.isRequired,
+  endIndex: PropTypes.number.isRequired
 };
 export const Paginator = RenderPaginator;
 
 function SearchResultsContainer({
-  results,
-  filter: propFilter,
-  query,
-  onPaginate
+  results: { hits, total: resultsLength },
+  filter: propFilter
 }) {
   const classes = useStyles();
   const [state, setState] = useState({
-    activePage: 1,
+    activePage: 0,
     startIndex: 0,
     filter: propFilter
   });
 
   const handleNextClick = () => {
-    onPaginate(query, state.activePage + 1);
-
     setState(prevState => ({
       activePage: prevState.activePage + 1,
       startIndex: prevState.startIndex + 10
@@ -118,17 +131,23 @@ function SearchResultsContainer({
   };
 
   const handlePreviousClick = () => {
-    onPaginate(query, state.activePage - 1);
-
     setState(prevState => ({
       activePage: prevState.activePage - 1,
       startIndex: prevState.startIndex - 10
     }));
   };
 
+  const handlePageClick = pageNum => {
+    const startIndex = (pageNum - 1) * 10;
+    setState({
+      activePage: pageNum - 1,
+      startIndex
+    });
+  };
+
   const handleFilterClick = category => {
     setState({
-      activePage: 1,
+      activePage: 0,
       startIndex: 0,
       filter: category
     });
@@ -136,42 +155,44 @@ function SearchResultsContainer({
 
   const { activePage, startIndex, filter } = state;
 
-  let filteredResults = results;
+  let filteredResults = hits;
+
   // filter results with result_type equals to state's filter
   if (filter === 'Analysis') {
-    filteredResults = results.filter(
-      resultItem =>
-        resultItem.subtype === 'profile_section_page' ||
-        resultItem.subtype === 'topic_page' ||
-        resultItem.subtype === 'profile'
+    filteredResults = hits.filter(
+      // eslint-disable-next-line no-underscore-dangle
+      ({ _source: resultItem }) =>
+        resultItem.post_type === 'profile_section_page' ||
+        resultItem.post_type === 'topic_page' ||
+        resultItem.post_type === 'profile'
     );
   } else if (filter === 'Data') {
-    filteredResults = results.filter(
-      resultItem =>
-        resultItem.subtype === 'attachment' ||
-        resultItem.subtype === 'hurumap_chart'
+    filteredResults = hits.filter(
+      // eslint-disable-next-line no-underscore-dangle
+      ({ _source: resultItem }) =>
+        resultItem.post_type === 'attachment' ||
+        resultItem.post_type === 'hurumap_chart'
     );
   }
 
   // compose show result string
   let resultIndexText = '';
   let endIndex = 10;
-  const resultsLength = filteredResults.length;
 
-  if (activePage > 0) {
-    endIndex += 10 * (activePage - 1);
+  if (resultsLength > 10) {
+    endIndex += 10 * activePage;
 
-    if (resultsLength < 10) {
-      endIndex += resultsLength;
+    if (resultsLength - startIndex < 10) {
+      endIndex = startIndex + (resultsLength - startIndex);
     }
+    resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
   }
-  resultIndexText = `Results ${startIndex + 1} - ${endIndex} `;
 
   return (
     <div className={classes.root}>
       <Grid className={classes.resultsFilter}>
         <Typography variant="body2" className={classes.showResult}>
-          {`Showing ${resultIndexText} results`}
+          {`Showing ${resultIndexText}${filteredResults.length} results`}
         </Typography>
         <Grid item className={classes.filter}>
           <Typography
@@ -198,13 +219,19 @@ function SearchResultsContainer({
       <div className={classes.borderDiv} />
       {filteredResults.length > 0 ? (
         <div className={classes.searchResultsList}>
-          {filteredResults.map(result => (
+          {filteredResults.slice(startIndex, endIndex).map((
+            { _source: result } // eslint-disable-line no-underscore-dangle
+          ) => (
             <SearchResultItem
-              resultType={result.subtype}
-              title={result.title}
-              url={result.url}
-              id={result.id}
-              key={`${result.subtype}-${result.id}`}
+              resultType={result.post_type}
+              link={
+                result.post_type === 'attachment'
+                  ? result.guid
+                  : result.permalink
+              }
+              title={result.post_title}
+              id={result.post_id}
+              key={`${result.post_type}-${result.post_id}`}
             />
           ))}
         </div>
@@ -217,14 +244,18 @@ function SearchResultsContainer({
 
       <div className={classes.paginationContainer}>
         <Typography variant="body2">
-          {`Showing ${resultIndexText} results`}
+          {`Showing ${resultIndexText}${filteredResults.length} results`}
         </Typography>
-        <Paginator
-          items={filteredResults.length}
-          activePage={activePage}
-          handleNextClick={handleNextClick}
-          handlePreviousClick={handlePreviousClick}
-        />
+        {filteredResults.length > 10 && (
+          <Paginator
+            items={filteredResults.length}
+            activePage={activePage}
+            handleNextClick={handleNextClick}
+            handlePreviousClick={handlePreviousClick}
+            handlePageClick={handlePageClick}
+            endIndex={endIndex}
+          />
+        )}
       </div>
     </div>
   );
@@ -232,9 +263,14 @@ function SearchResultsContainer({
 
 SearchResultsContainer.propTypes = {
   filter: PropTypes.string,
-  results: PropTypes.arrayOf(PropTypes.shape({})),
-  onPaginate: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired
+  results: PropTypes.shape({
+    hits: PropTypes.arrayOf(
+      PropTypes.shape({
+        _source: PropTypes.shape({})
+      })
+    ),
+    total: PropTypes.number
+  })
 };
 
 SearchResultsContainer.defaultProps = {
