@@ -35,12 +35,7 @@ function SearchResults({ takwimu: { page } }) {
   return (
     <Section classes={{ root: classes.root }}>
       <SearchInput onRefresh={handleSearch} query={query} />
-      <SearchResultsContainer
-        results={results}
-        onPaginate={handleSearch}
-        query={query}
-        filter="All"
-      />
+      <SearchResultsContainer results={results} query={query} filter="All" />
     </Section>
   );
 }
