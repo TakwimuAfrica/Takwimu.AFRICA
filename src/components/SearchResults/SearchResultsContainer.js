@@ -224,7 +224,7 @@ function SearchResultsContainer({
           ) => (
             <SearchResultItem
               resultType={result.post_type}
-              link={
+              url={
                 result.post_type === 'attachment'
                   ? result.guid
                   : result.permalink

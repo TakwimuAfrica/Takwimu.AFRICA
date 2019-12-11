@@ -53,7 +53,7 @@ function SearchResultItem({ title, resultType, url, id }) {
   }, [resultType, id]);
 
   const countryFound = config.countries.find(c => c.slug === countrySlug);
-  let link;
+  let link = '';
   let country = '';
   if (countryFound) {
     country = countryFound.name;
