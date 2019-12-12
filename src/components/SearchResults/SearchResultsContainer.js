@@ -112,7 +112,10 @@ RenderPaginator.propTypes = {
 };
 export const Paginator = RenderPaginator;
 
-function SearchResultsContainer({ results, filter: propFilter }) {
+function SearchResultsContainer({
+  results: { hits, total: resultsLength },
+  filter: propFilter
+}) {
   const classes = useStyles();
   const [state, setState] = useState({
     activePage: 0,
@@ -152,18 +155,30 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   const { activePage, startIndex, filter } = state;
 
-  let filteredResults = results;
+  let filteredResults = hits;
+
   // filter results with result_type equals to state's filter
-  if (filter !== 'All') {
-    filteredResults = results.filter(
-      resultItem => resultItem.value.result_type === filter
+  if (filter === 'Analysis') {
+    filteredResults = hits.filter(
+      // eslint-disable-next-line no-underscore-dangle
+      ({ _source: resultItem }) =>
+        resultItem.post_type === 'profile_section_page' ||
+        resultItem.post_type === 'topic_page' ||
+        resultItem.post_type === 'profile'
+    );
+  } else if (filter === 'Data') {
+    filteredResults = hits.filter(
+      // eslint-disable-next-line no-underscore-dangle
+      ({ _source: resultItem }) =>
+        resultItem.post_type === 'attachment' ||
+        resultItem.post_type === 'hurumap_chart'
     );
   }
 
   // compose show result string
   let resultIndexText = '';
   let endIndex = 10;
-  const resultsLength = filteredResults.length;
+
   if (resultsLength > 10) {
     endIndex += 10 * activePage;
 
@@ -204,14 +219,20 @@ function SearchResultsContainer({ results, filter: propFilter }) {
       <div className={classes.borderDiv} />
       {filteredResults.length > 0 ? (
         <div className={classes.searchResultsList}>
-          {filteredResults.slice(startIndex, endIndex).map(result => (
+          {filteredResults.slice(startIndex, endIndex).map((
+            { _source: result } // eslint-disable-line no-underscore-dangle
+          ) => (
             <SearchResultItem
-              resultType={result.value.result_type}
-              country={result.value.country}
-              link={result.value.link}
-              title={result.value.title}
-              summary={result.value.summary}
-              key={result.value.content_id}
+              resultType={result.post_type}
+              slug={result.post_name}
+              title={result.post_title}
+              countrySlug={
+                result.post_type !== 'attachment' && result.meta.geography
+                  ? result.meta.geography[0].value
+                  : null
+              } // TODO: this would be replaced with category once country taxonomy is implemented
+              id={result.post_id}
+              key={`${result.post_type}-${result.post_id}`}
             />
           ))}
         </div>
@@ -243,7 +264,14 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
 SearchResultsContainer.propTypes = {
   filter: PropTypes.string,
-  results: PropTypes.arrayOf(PropTypes.shape({}))
+  results: PropTypes.shape({
+    hits: PropTypes.arrayOf(
+      PropTypes.shape({
+        _source: PropTypes.shape({})
+      })
+    ),
+    total: PropTypes.number
+  })
 };
 
 SearchResultsContainer.defaultProps = {
