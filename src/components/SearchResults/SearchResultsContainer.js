@@ -224,12 +224,13 @@ function SearchResultsContainer({
           ) => (
             <SearchResultItem
               resultType={result.post_type}
-              url={
-                result.post_type === 'attachment'
-                  ? result.guid
-                  : result.permalink
-              }
+              slug={result.post_name}
               title={result.post_title}
+              countrySlug={
+                result.post_type !== 'attachment' && result.meta.geography
+                  ? result.meta.geography[0].value
+                  : null
+              } // TODO: this would be replaced with category once country taxonomy is implemented
               id={result.post_id}
               key={`${result.post_type}-${result.post_id}`}
             />
