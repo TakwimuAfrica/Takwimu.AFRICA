@@ -50,6 +50,9 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
   numberTitle: {
     fontWeight: 'bold'
+  },
+  hideHighlightGrid: {
+    display: 'none'
   }
 }));
 
@@ -177,7 +180,9 @@ function Profile({ sectionedCharts }) {
                   }}
                   classes={{
                     root: classes.containerRoot,
-                    sourceGrid: classes.containerSourceGrid
+                    sourceGrid: classes.containerSourceGrid,
+                    highlightGrid:
+                      chart.type === 'flourish' && classes.hideHighlightGrid
                   }}
                   insight={{
                     dataLink: {
@@ -186,7 +191,8 @@ function Profile({ sectionedCharts }) {
                     }
                   }}
                   loading={chartData.isLoading}
-                  source={!chart.source && chart.source[geoId]}
+                  source={chart.source && chart.source[geoId]}
+                  variant={chart.type === 'flourish' && 'data'}
                 >
                   {chart.type === 'hurumap'
                     ? [
