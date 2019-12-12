@@ -39,9 +39,9 @@ export async function getSitePage(slug) {
   return config;
 }
 
-export async function getChartDefinitions() {
+export async function getSectionedCharts() {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts`
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts?sectioned=1`
   );
   return res.json();
 }

@@ -19,7 +19,7 @@ import ProfileDetail from './ProfileDetail';
 import ProfileSection, { ProfileSectionTitle } from './ProfileSection';
 import Section from './Section';
 
-import { getChartDefinitions } from '../getTakwimuPage';
+import { getSectionedCharts } from '../getTakwimuPage';
 
 import logo from '../assets/images/logo-white-all.png';
 
@@ -293,7 +293,7 @@ Profile.propTypes = {
 
 Profile.getInitialProps = async () => {
   return {
-    sectionedCharts: await getChartDefinitions()
+    sectionedCharts: await getSectionedCharts()
   };
 };
 
