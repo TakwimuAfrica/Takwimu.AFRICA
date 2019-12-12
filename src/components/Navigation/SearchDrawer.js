@@ -95,7 +95,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     border: 'none !important',
     fontFamily: '"Muli", sans-serif !important',
     fontSize: '3.563rem !important',
-    height: '70px important',
+    height: '70px !important',
     fontWeight: '600',
     opacity: 1,
     padding: '0 !important',
