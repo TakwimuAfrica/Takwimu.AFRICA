@@ -13,14 +13,12 @@ import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
 
 import config from '../config';
 import { shareIndicator } from '../common';
-import slugify from '../utils/slugify';
 
 import Page from './Page';
 import ProfileDetail from './ProfileDetail';
 import ProfileSection, { ProfileSectionTitle } from './ProfileSection';
 import Section from './Section';
 
-import chartSources from '../data/sources.json';
 import { getChartDefinitions } from '../getTakwimuPage';
 
 import logo from '../assets/images/logo-white-all.png';
@@ -68,7 +66,7 @@ function Chart({ chartData, definition, profiles, classes }) {
   );
 }
 
-function Profile({ chartDefinitions }) {
+function Profile({ sectionedCharts }) {
   const router = useRouter();
   const {
     query: { geoIdOrCountrySlug: geoId = '' }
@@ -80,26 +78,17 @@ function Profile({ chartDefinitions }) {
       : 'all'
   );
 
-  const { hurumap, sections } = chartDefinitions;
-
-  /**
-   * Apply queryAlias
-   */
-  const [charts] = useState(
-    hurumap.map((chart, i) => ({
-      ...chart,
-      visual: {
-        ...JSON.parse(chart.visual),
-        queryAlias: `v${i}`
-      },
-      stat: {
-        ...JSON.parse(chart.stat),
-        queryAlias: `v${i}`
-      }
-    }))
+  const charts = useMemo(
+    () =>
+      sectionedCharts
+        .map(({ charts: definitions }) => definitions)
+        .reduce((a, b) => a.concat(b), []),
+    [sectionedCharts]
   );
 
-  const [visuals] = useState(charts.map(({ visual }) => visual));
+  const [visuals] = useState(
+    charts.filter(({ type }) => type === 'hurumap').map(({ visual }) => visual)
+  );
 
   const { profiles, chartData } = useProfileLoader({
     geoId,
@@ -120,21 +109,6 @@ function Profile({ chartDefinitions }) {
     return config.countries.find(c => c.iso_code === profiles.parent.geoCode);
   }, [profiles]);
 
-  const getSource = useCallback(
-    table => {
-      if (
-        !(profiles.profile && profiles.profile.geoLevel) ||
-        !(country && country.slug)
-      ) {
-        return undefined;
-      }
-      const source =
-        chartSources[country.slug][profiles.profile.geoLevel][table];
-      return source && source.source.href ? source.source : undefined;
-    },
-    [profiles, country]
-  );
-
   const onClickGeoLayer = useCallback(
     area => {
       router.push(`/profiles/${area.codes.AFR}`);
@@ -149,32 +123,24 @@ function Profile({ chartDefinitions }) {
         name: 'All',
         slug: 'all'
       },
-      ...sections
-        .map((section, i) => ({
-          ...section,
-          index: i
-        }))
+      ...sectionedCharts
         // Filter empty sections
         .filter(
-          section =>
-            charts
-              .filter(c => c.section === section.id)
-              .filter(
-                ({ visual: { queryAlias } }) =>
-                  chartData.isLoading ||
-                  !(
-                    !chartData.profileVisualsData ||
-                    chartData.profileVisualsData[queryAlias].nodes.length === 0
-                  )
-              ).length !== 0
+          ({ charts: sectionCharts }) =>
+            sectionCharts.filter(
+              ({ type, visual }) =>
+                type !== 'hurumap' ||
+                chartData.isLoading ||
+                !(
+                  !chartData.profileVisualsData ||
+                  /* hurumap data is missing */
+                  chartData.profileVisualsData[visual.queryAlias].nodes
+                    .length === 0
+                )
+            ).length !== 0
         )
-        .map(section => ({
-          name: section.name,
-          slug: slugify(section.name),
-          index: section.index
-        }))
     ],
-    [chartData.isLoading, chartData.profileVisualsData, charts, sections]
+    [chartData.isLoading, chartData.profileVisualsData, sectionedCharts]
   );
 
   /**
@@ -187,24 +153,23 @@ function Profile({ chartDefinitions }) {
       profileTabs.slice(1).map(tab => (
         <Grid item container id={tab.slug} key={tab.slug}>
           <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
-          {charts
-            /**
-             * Filter charts belonging to section
-             */
-            .filter(chart => sections[tab.index].id === chart.section)
-            /**
-             * Filter loaded charts
-             */
+          {tab.charts
+            // Filter loaded charts
             .filter(
-              ({ visual: { queryAlias } }) =>
+              ({ type, visual }) =>
+                type !== 'hurumap' ||
                 chartData.isLoading ||
                 (chartData.profileVisualsData &&
-                  /* data is not missing */
-                  chartData.profileVisualsData[queryAlias].nodes.length !== 0)
+                  /* hurumap data is not missing */
+                  chartData.profileVisualsData[visual.queryAlias].nodes
+                    .length !== 0)
             )
             .map(chart => (
               <Grid item xs={12} key={chart.id} className={classes.container}>
                 <InsightContainer
+                  logo={logo}
+                  key={chart.id}
+                  title={chart.title}
                   actions={{
                     handleShare: shareIndicator.bind(null, chart.id),
                     handleShowData: () => {},
@@ -220,43 +185,40 @@ function Profile({ chartDefinitions }) {
                       title: 'Read the country analysis'
                     }
                   }}
-                  key={chart.id}
                   loading={chartData.isLoading}
-                  logo={logo}
-                  source={
-                    !chartData.isLoading
-                      ? getSource(chart.visual.table)
-                      : undefined
-                  }
-                  title={chart.title}
+                  source={!chart.source && chart.source[geoId]}
                 >
-                  <Chart
-                    chartData={chartData}
-                    definition={chart.stat}
-                    profiles={profiles}
-                    classes={classes}
-                  />
-                  <Chart
-                    chartData={chartData}
-                    definition={chart.visual}
-                    profiles={profiles}
-                    classes={classes}
-                  />
+                  {chart.type === 'hurumap'
+                    ? [
+                        <Chart
+                          chartData={chartData}
+                          definition={chart.stat}
+                          profiles={profiles}
+                          classes={classes}
+                        />,
+                        <Chart
+                          chartData={chartData}
+                          definition={chart.visual}
+                          profiles={profiles}
+                          classes={classes}
+                        />
+                      ]
+                    : [
+                        <div />,
+                        <iframe
+                          width="100%"
+                          scrolling="no"
+                          frameBorder="0"
+                          title={chart.title}
+                          src={`${config.WP_HURUMAP_DATA_API}/flourish/${chart.id}`}
+                        />
+                      ]}
                 </InsightContainer>
               </Grid>
             ))}
         </Grid>
       )),
-    [
-      profileTabs,
-      chartData,
-      charts,
-      sections,
-      classes,
-      getSource,
-      country.slug,
-      profiles
-    ]
+    [profileTabs, chartData, classes, country.slug, profiles, geoId]
   );
 
   // Show and hide sections
@@ -318,16 +280,20 @@ function Profile({ chartDefinitions }) {
 }
 
 Profile.propTypes = {
-  chartDefinitions: PropTypes.shape({
-    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
-    sections: PropTypes.arrayOf(PropTypes.shape({}))
-  }).isRequired
+  sectionedCharts: PropTypes.arrayOf(
+    PropTypes.shape({
+      charts: PropTypes.arrayOf(
+        PropTypes.shape({
+          type: PropTypes.string
+        })
+      ).isRequired
+    })
+  ).isRequired
 };
 
 Profile.getInitialProps = async () => {
-  const chartDefinitions = await getChartDefinitions();
   return {
-    chartDefinitions
+    sectionedCharts: await getChartDefinitions()
   };
 };
 

@@ -41,7 +41,14 @@ export async function getSitePage(slug) {
 
 export async function getChartDefinitions() {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts?published=1`
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts`
+  );
+  return res.json();
+}
+
+export async function getChartDefinition(chartId) {
+  const res = await fetch(
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${chartId}`
   );
   return res.json();
 }
