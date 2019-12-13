@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
-      width: '14.375rem',
+      width: 'fit-content',
       top: `${DEFAULT_TOP}px`,
       bottom: 0,
       overflow: 'hidden auto',
@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   menuListRoot: {
-    width: '14.188rem',
-    paddingTop: '2rem'
+    padding: 0,
+    width: '14.188rem'
   },
   activeContentIndicator: {
     marginLeft: '-1.5rem',

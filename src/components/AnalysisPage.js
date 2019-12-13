@@ -184,6 +184,8 @@ AnalysisPage.getInitialProps = async ({ query, asPath }) => {
 
   const analysisLink = `${config.url}${asPath}`;
 
+  console.log(config);
+
   return {
     takwimu: config,
     activeAnalysis,
