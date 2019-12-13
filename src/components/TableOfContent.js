@@ -50,7 +50,8 @@ const useStyles = makeStyles(theme => ({
   listItem: {
     // Use padding instead of lineHeight: 2.39 in case a list item is too
     // long to fit one line
-    padding: '0.625rem 0'
+    padding: '0.625rem 0',
+    display: 'flex'
   },
   linkRoot: {
     fontWeight: 'bold',
