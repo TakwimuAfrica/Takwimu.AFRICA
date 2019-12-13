@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   aside: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '14rem' // .75 of lg
+      width: '16rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
       width: '19.0625rem'
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   main: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '44.265625rem' // .75 of lg
+      width: '42.265625rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
       width: '58.4375rem'
