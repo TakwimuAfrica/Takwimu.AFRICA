@@ -164,7 +164,7 @@ const createPdf = () => {
                 .split('</p>')
                 .map(t => (
                   <Text key={t} style={classes.text}>
-                    {t.replace(/<(?:.|\n)*?>/gi, '')}
+                    {t.replace(/<(?:.|\n|)*?>|\n|\r/gi, '')}
                   </Text>
                 ))}
             </View>
