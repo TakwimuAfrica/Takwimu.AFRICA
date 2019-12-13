@@ -192,17 +192,18 @@ function Profile({ sectionedCharts }) {
                   }}
                   loading={chartData.isLoading}
                   source={chart.source && chart.source[geoId]}
-                  variant={chart.type === 'flourish' && 'data'}
                 >
                   {chart.type === 'hurumap'
                     ? [
                         <Chart
+                          key={chart.id}
                           chartData={chartData}
                           definition={chart.stat}
                           profiles={profiles}
                           classes={classes}
                         />,
                         <Chart
+                          key={chart.id}
                           chartData={chartData}
                           definition={chart.visual}
                           profiles={profiles}
@@ -210,8 +211,9 @@ function Profile({ sectionedCharts }) {
                         />
                       ]
                     : [
-                        <div />,
+                        <div key={chart.id} />,
                         <iframe
+                          key={chart.id}
                           width="100%"
                           scrolling="no"
                           frameBorder="0"
