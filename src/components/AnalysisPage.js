@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -9,7 +9,6 @@ import AnalysisContent from './AnalysisContent';
 import AnalysisTableOfContent from './AnalysisContent/TableOfContent';
 import ContentPage from './ContentPage';
 import Page from './Page';
-import { getChartDefinitions } from '../getTakwimuPage';
 
 const useStyles = makeStyles({
   root: {
@@ -19,7 +18,6 @@ const useStyles = makeStyles({
 });
 
 function AnalysisPage({
-  chartDefinitions,
   takwimu,
   initial,
   activeAnalysis,
@@ -28,26 +26,6 @@ function AnalysisPage({
   analysisLink
 }) {
   const classes = useStyles();
-
-  const { hurumap, flourish } = chartDefinitions;
-
-  /**
-   * Apply queryAlias
-   */
-  const [charts] = useState({
-    hurumap: hurumap.map((chart, i) => ({
-      ...chart,
-      visual: {
-        ...JSON.parse(chart.visual),
-        queryAlias: `v${i}`
-      },
-      stat: {
-        ...JSON.parse(chart.stat),
-        queryAlias: `v${i}`
-      }
-    })),
-    flourish
-  });
 
   if (analyses.length === 0) {
     return null;
@@ -86,7 +64,6 @@ function AnalysisPage({
           content={activeAnalysis}
           takwimu={takwimu}
           analysisLink={analysisLink}
-          charts={charts}
         />
       </ContentPage>
     </Page>
@@ -111,12 +88,7 @@ AnalysisPage.propTypes = {
       slug: PropTypes.string
     })
   }).isRequired,
-  analysisLink: PropTypes.string.isRequired,
-  chartDefinitions: PropTypes.shape({
-    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
-    flourish: PropTypes.arrayOf(PropTypes.shape({})),
-    sections: PropTypes.arrayOf(PropTypes.shape({}))
-  }).isRequired
+  analysisLink: PropTypes.string.isRequired
 };
 
 AnalysisPage.defaultProps = {
@@ -210,11 +182,9 @@ AnalysisPage.getInitialProps = async ({ query, asPath }) => {
     console.warn(err);
   }
 
-  const chartDefinitions = await getChartDefinitions();
   const analysisLink = `${config.url}${asPath}`;
 
   return {
-    chartDefinitions,
     takwimu: config,
     activeAnalysis,
     initial,

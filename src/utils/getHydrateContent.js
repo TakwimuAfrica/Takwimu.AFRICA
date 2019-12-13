@@ -9,22 +9,6 @@ export default function getHydrateContent(parent, ...types) {
           title: element.attributes['data-title'].value,
           src: element.attributes['data-src'].value
         })
-      ),
-    hurumap: () =>
-      Array.from(node.querySelectorAll('div[id^="indicator-hurumap"]')).map(
-        element => ({
-          element,
-          geoId: element.attributes['data-geo-type'].value,
-          chartId: element.attributes['data-chart-id'].value
-        })
-      ),
-    flourish: () =>
-      Array.from(node.querySelectorAll('div[id^="indicator-flourish"]')).map(
-        element => ({
-          element,
-          title: element.attributes['data-chart-title'].value,
-          chartId: element.attributes['data-chart-id'].value
-        })
       )
   };
   if (!Array.isArray(types)) {

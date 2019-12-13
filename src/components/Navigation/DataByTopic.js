@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 function profile(country) {
-  return `country-${country.iso_code}-${country.slug}`;
+  return `country-${country.iso_code}`;
 }
 
 function DataByTopic({

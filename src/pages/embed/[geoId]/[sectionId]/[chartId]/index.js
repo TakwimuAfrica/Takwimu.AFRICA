@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 
 import config from '../../../../../config';
-import { getChartDefinitions } from '../../../../../getTakwimuPage';
+import { getChartDefinition } from '../../../../../getTakwimuPage';
 import Error from '../../../../../components/Error';
 
 import logo from '../../../../../assets/images/logo-white-all.png';
@@ -84,20 +84,17 @@ function Embed(chart) {
   );
 }
 
-Embed.getInitialProps = async ({ query: { sectionId, chartId } }) => {
-  const { hurumap } = await getChartDefinitions();
-  const chart = hurumap.find(
-    ({ id, section }) => id === chartId && section === sectionId
-  );
+Embed.getInitialProps = async ({ query: { chartId } }) => {
+  const chart = await getChartDefinition(chartId);
   return chart
     ? {
         ...chart,
         visual: {
-          ...JSON.parse(chart.visual),
+          ...chart.visual,
           queryAlias: 'vizEmbeded'
         },
         stat: {
-          ...JSON.parse(chart.stat),
+          ...chart.stat,
           queryAlias: 'vizEmbeded'
         }
       }
