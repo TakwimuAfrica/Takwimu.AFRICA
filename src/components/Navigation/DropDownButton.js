@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
     padding: '7px'
   },
   rootCenter: {
+    borderRadius: '1.125rem',
     justifyContent: 'center'
   },
   img: {
