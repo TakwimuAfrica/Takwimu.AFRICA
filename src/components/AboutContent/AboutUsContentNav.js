@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: '0 2px 6px 2px rgba(0, 0, 0, 0.27)'
   },
   otherTopicLinks: {
-    '& > button:nth-child(2n)': {
+    '& > a:nth-child(2n)': {
       margin: '0 3.125rem'
     }
   },

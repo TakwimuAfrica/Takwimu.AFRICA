@@ -42,8 +42,8 @@ const styles = theme => ({
   expandedExpandSummaryTitle: {
     color: 'white'
   },
-
   iconButton: {
+    color: '#000',
     '&:hover': {
       backgroundColor: 'transparent'
     }
@@ -77,6 +77,7 @@ class Faq extends React.Component {
     return (
       <ExpansionPanel
         square
+        elevation={0}
         classes={{ root: classes.panel, expanded: classes.panelExpanded }}
       >
         <ExpansionPanelSummary
