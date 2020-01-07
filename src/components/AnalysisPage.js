@@ -149,7 +149,7 @@ AnalysisPage.getInitialProps = async ({ query, asPath }) => {
         );
 
         const topics = await Promise.all(
-          sectionTopics.map(async ({ profile_section_topic: topic }) => {
+          sectionTopics.map(async topic => {
             if (topic.post_content === '') {
               topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
               // add another backend call to fetch the carousel_topic
