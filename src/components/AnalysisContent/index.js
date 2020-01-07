@@ -82,6 +82,9 @@ function AnalysisContent({
     indicators: []
   });
   useEffect(() => {
+    if (window.renderBlocks) {
+      window.renderBlocks();
+    }
     setHydrateElements(getHydrateContent(document, 'indicators'));
   }, [takwimu.country.name, topicIndex]);
 
