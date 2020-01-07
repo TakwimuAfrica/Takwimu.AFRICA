@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
     color: 'white',
     backgroundColor: 'black',
     paddingTop: '4.5625rem',
-    paddingBottom: '5.3125rem'
+    paddingBottom: '5.3125rem',
+    marginTop: '1.875rem'
   },
   license: {
     marginTop: '2.3125rem'
