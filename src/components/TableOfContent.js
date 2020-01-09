@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 
-import { MenuList, Typography } from '@material-ui/core';
+import { MenuList, Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
-      width: '14.375rem',
+      width: 'fit-content',
       top: `${DEFAULT_TOP}px`,
       bottom: 0,
       overflow: 'hidden auto',
@@ -40,8 +40,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   menuListRoot: {
-    width: '14.188rem',
-    paddingTop: '2rem'
+    padding: 0,
+    width: '14.188rem'
   },
   activeContentIndicator: {
     marginLeft: '-1.5rem',
@@ -50,7 +50,8 @@ const useStyles = makeStyles(theme => ({
   listItem: {
     // Use padding instead of lineHeight: 2.39 in case a list item is too
     // long to fit one line
-    padding: '0.625rem 0'
+    padding: '0.625rem 0',
+    display: 'flex'
   },
   linkRoot: {
     fontWeight: 'bold',
@@ -92,49 +93,57 @@ function TableOfContent({ children, content, current, generateHref, width }) {
   const bottom = `${scrollDistance}px`;
 
   return (
-    <div className={classes.root} style={{ top, bottom }}>
-      {children}
-      <MenuList classes={{ root: classes.menuListRoot }}>
-        {content.map((c, index) => (
-          <li
-            key={
-              typeof generateHref(index) === 'object'
-                ? generateHref(index).as
-                : generateHref(index)
-            }
-            className={classes.listItem}
-          >
-            <img
-              alt=""
-              src={activeContentIcon}
-              hidden={current !== index}
-              className={classes.activeContentIndicator}
-            />
-            <Link
-              href={
-                typeof generateHref(index) === 'object'
-                  ? generateHref(index).href
-                  : generateHref(index)
-              }
-              as={
+    <Grid
+      container
+      className={classes.root}
+      style={{ top, bottom }}
+      direction="column"
+      wrap="nowrap"
+    >
+      <Grid item>{children}</Grid>
+      <Grid item>
+        <MenuList classes={{ root: classes.menuListRoot }}>
+          {content.map((c, index) => (
+            <li
+              key={
                 typeof generateHref(index) === 'object'
                   ? generateHref(index).as
-                  : undefined
+                  : generateHref(index)
               }
+              className={classes.listItem}
             >
-              <Typography
-                variant="body2"
-                className={classNames(classes.linkRoot, {
-                  [classes.activeLink]: current === index
-                })}
+              <img
+                alt=""
+                src={activeContentIcon}
+                hidden={current !== index}
+                className={classes.activeContentIndicator}
+              />
+              <Link
+                href={
+                  typeof generateHref(index) === 'object'
+                    ? generateHref(index).href
+                    : generateHref(index)
+                }
+                as={
+                  typeof generateHref(index) === 'object'
+                    ? generateHref(index).as
+                    : undefined
+                }
               >
-                {c.title}
-              </Typography>
-            </Link>
-          </li>
-        ))}
-      </MenuList>
-    </div>
+                <Typography
+                  variant="body2"
+                  className={classNames(classes.linkRoot, {
+                    [classes.activeLink]: current === index
+                  })}
+                >
+                  {c.title}
+                </Typography>
+              </Link>
+            </li>
+          ))}
+        </MenuList>
+      </Grid>
+    </Grid>
   );
 }
 

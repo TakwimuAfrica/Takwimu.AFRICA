@@ -63,8 +63,7 @@ function AnalysisContent({
   takwimu,
   topicsNavigation,
   readNextTitle,
-  analysisLink,
-  charts
+  analysisLink
 }) {
   const classes = useStyles();
 
@@ -80,15 +79,14 @@ function AnalysisContent({
     setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
   }, [content]);
   const [hydrateElements, setHydrateElements] = useState({
-    hurumap: [],
-    flourish: [],
     indicators: []
   });
   useEffect(() => {
-    setHydrateElements(
-      getHydrateContent(document, 'indicators', 'hurumap', 'flourish')
-    );
-  }, [charts, takwimu.country.name, topicIndex]);
+    if (window.renderBlocks) {
+      window.renderBlocks();
+    }
+    setHydrateElements(getHydrateContent(document, 'indicators'));
+  }, [takwimu.country.name, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics &&
@@ -255,15 +253,7 @@ AnalysisContent.propTypes = {
       slug: PropTypes.string
     }).isRequired
   }).isRequired,
-  analysisLink: PropTypes.string.isRequired,
-  charts: PropTypes.shape({
-    hurumap: PropTypes.arrayOf(PropTypes.shape({})),
-    flourish: PropTypes.arrayOf(PropTypes.shape({}))
-  })
-};
-
-AnalysisContent.defaultProps = {
-  charts: []
+  analysisLink: PropTypes.string.isRequired
 };
 
 export default AnalysisContent;

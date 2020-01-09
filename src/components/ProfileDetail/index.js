@@ -115,28 +115,31 @@ const useStyles = makeStyles(theme => ({
 function CountrySelectorComponent({ context, country }) {
   const classes = useStyles();
   return (
-    <div>
-      <Typography
-        variant="caption"
-        className={classNames([classes.label, classes.changeCountryLabel])}
-      >
-        Change Country
-      </Typography>
-
-      <ButtonBase
-        disableRipple
-        disableTouchRipple
-        style={{ outline: 'none' }}
-        className={classes.chooserButton}
-        onClick={process.browser && window.toggleDrawer(context)}
-      >
-        <img alt="" height="37" src={flags[country.iso_code]} />
-        <Typography variant="subtitle2" className={classes.countryName}>
-          {country.short_name}
+    <Grid container direction="column">
+      <Grid item>
+        <Typography
+          variant="caption"
+          className={classNames([classes.label, classes.changeCountryLabel])}
+        >
+          Change Country
         </Typography>
-        <img alt="" src={downArrow} />
-      </ButtonBase>
-    </div>
+      </Grid>
+      <Grid item>
+        <ButtonBase
+          disableRipple
+          disableTouchRipple
+          style={{ outline: 'none' }}
+          className={classes.chooserButton}
+          onClick={process.browser && window.toggleDrawer(context)}
+        >
+          <img alt="" height="37" src={flags[country.iso_code]} />
+          <Typography variant="subtitle2" className={classes.countryName}>
+            {country.short_name}
+          </Typography>
+          <img alt="" src={downArrow} />
+        </ButtonBase>
+      </Grid>
+    </Grid>
   );
 }
 
@@ -186,95 +189,101 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
       <Layout classes={{ root: classes.layout }}>
         <div className={classes.root}>
           <Grid container direction="column">
-            <CountrySelector country={country} context="topic" />
-            <Grid container direction="row" wrap="nowrap">
-              <Grid item>
-                <div className={classes.verticalLine} />
-              </Grid>
-              <Grid item container direction="column" justify="space-between">
-                {population && (
-                  <Grid item>
-                    <Typography
-                      variant="body1"
-                      className={classNames([
-                        classes.label,
-                        classes.detailLabel
-                      ])}
-                    >
-                      Population
-                    </Typography>
-                    <Typography variant="body1" className={classes.detail}>
-                      {Number(population).toLocaleString()}
-                    </Typography>
-                  </Grid>
-                )}
-                {squareKms && (
-                  <Grid item>
-                    <Typography
-                      variant="body1"
-                      className={classNames([
-                        classes.label,
-                        classes.detailLabel
-                      ])}
-                    >
-                      Square kilometres
-                    </Typography>
-                    <Typography variant="body1" className={classes.detail}>
-                      {Number(squareKms).toLocaleString()}
-                    </Typography>
-                  </Grid>
-                )}
-                {populationDensity && (
-                  <Grid item>
-                    <Typography
-                      variant="body1"
-                      className={classNames([
-                        classes.label,
-                        classes.detailLabel
-                      ])}
-                    >
-                      People per square kilometre
-                    </Typography>
-                    <Typography variant="body1" className={classes.detail}>
-                      {Number(populationDensity).toLocaleString()}
-                    </Typography>
-                  </Grid>
-                )}
+            <Grid item>
+              <CountrySelector country={country} context="topic" />
+            </Grid>
+            <Grid item>
+              <Grid container direction="row" wrap="nowrap">
+                <Grid item>
+                  <div className={classes.verticalLine} />
+                </Grid>
+                <Grid item container direction="column" justify="space-between">
+                  {population && (
+                    <Grid item>
+                      <Typography
+                        variant="body1"
+                        className={classNames([
+                          classes.label,
+                          classes.detailLabel
+                        ])}
+                      >
+                        Population
+                      </Typography>
+                      <Typography variant="body1" className={classes.detail}>
+                        {Number(population).toLocaleString()}
+                      </Typography>
+                    </Grid>
+                  )}
+                  {squareKms && (
+                    <Grid item>
+                      <Typography
+                        variant="body1"
+                        className={classNames([
+                          classes.label,
+                          classes.detailLabel
+                        ])}
+                      >
+                        Square kilometres
+                      </Typography>
+                      <Typography variant="body1" className={classes.detail}>
+                        {Number(squareKms).toLocaleString()}
+                      </Typography>
+                    </Grid>
+                  )}
+                  {populationDensity && (
+                    <Grid item>
+                      <Typography
+                        variant="body1"
+                        className={classNames([
+                          classes.label,
+                          classes.detailLabel
+                        ])}
+                      >
+                        People per square kilometre
+                      </Typography>
+                      <Typography variant="body1" className={classes.detail}>
+                        {Number(populationDensity).toLocaleString()}
+                      </Typography>
+                    </Grid>
+                  )}
+                </Grid>
               </Grid>
             </Grid>
             {comparable && (
-              <Grid container>
-                <div ref={searchBarRef} className={classes.searchBar}>
-                  <Input
-                    fullWidth
-                    disableUnderline
-                    className={classes.searchBarInput}
-                    onFocus={handleSearch}
-                    onBlur={() => setShowSearchResults(false)}
-                    placeholder="Compare with"
-                    onChange={handleSearch}
-                  />
-                  <img
-                    alt=""
-                    src={searchIcon}
-                    className={classes.searchBarIcon}
-                  />
-                </div>
+              <Grid item>
+                <Grid container>
+                  <div ref={searchBarRef} className={classes.searchBar}>
+                    <Input
+                      fullWidth
+                      disableUnderline
+                      className={classes.searchBarInput}
+                      onFocus={handleSearch}
+                      onBlur={() => setShowSearchResults(false)}
+                      placeholder="Compare with"
+                      onChange={handleSearch}
+                    />
+                    <img
+                      alt=""
+                      src={searchIcon}
+                      className={classes.searchBarIcon}
+                    />
+                  </div>
 
-                <Popper
-                  className={classes.popperIndex}
-                  open={showSearchResults}
-                  anchorEl={searchBarRef}
-                  style={{
-                    width: searchBarRef ? searchBarRef.clientWidth : null
-                  }}
-                >
-                  <Paper>
-                    <MenuList>
-                      <MenuItem>Example</MenuItem>
-                    </MenuList>
-                  </Paper>
-                </Popper>
+                  <Popper
+                    className={classes.popperIndex}
+                    open={showSearchResults}
+                    anchorEl={searchBarRef}
+                    style={{
+                      width: searchBarRef ? searchBarRef.clientWidth : null
+                    }}
+                  >
+                    <Paper>
+                      <MenuList>
+                        <MenuItem>Example</MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Popper>
+                </Grid>
               </Grid>
             )}
           </Grid>

@@ -66,14 +66,21 @@ function Actions({ hideLastUpdated, title, data, topic, takwimu, link }) {
     };
   }, []);
   const {
-    page: { last_published_at: lastUpdated }
+    page: { post_modified: lastUpdated }
   } = takwimu;
 
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
         <Typography className={classes.lastUpdated}>
-          Last Updated: <strong>{lastUpdated}</strong>
+          Last Updated:{' '}
+          <strong>
+            {new Intl.DateTimeFormat('en-GB', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            }).format(new Date(lastUpdated))}
+          </strong>
         </Typography>
       )}
 
@@ -115,7 +122,7 @@ Actions.propTypes = {
   topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      last_published_at: PropTypes.string
+      post_modified: PropTypes.string
     }).isRequired
   }).isRequired,
   link: PropTypes.string.isRequired

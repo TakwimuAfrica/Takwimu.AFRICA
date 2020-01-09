@@ -124,11 +124,7 @@ const config = {
       postalCode: '00100'
     }
   },
-  page: {
-    name: 'base',
-    first_published_at: '10th April 2019',
-    last_published_at: '24th July 2019'
-  },
+  page: {},
   name: 'Takwimu',
   description:
     'Data driven analysis on development policies, programmes & outcomes in 10 African countries.',

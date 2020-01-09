@@ -198,6 +198,14 @@ const Theme = createTheme({
         '*': {
           outline: 'none'
         },
+        p: {
+          fontSize: '1.25rem',
+          fontWeight: 'normal',
+          fontStyle: 'normal',
+          fontStretch: 'normal',
+          lineHeight: '2.05',
+          letterSpacing: 'normal'
+        },
         '#wpcontent': {
           paddingLeft: 0
         },
