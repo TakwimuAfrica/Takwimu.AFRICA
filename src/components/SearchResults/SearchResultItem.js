@@ -25,44 +25,43 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SearchResultItem({ title, resultType, url, id }) {
+function SearchResultItem({ title, resultType, slug, id, countrySlug }) {
   const classes = useStyles();
-  const [countrySlug, setCountrySlug] = useState('');
   const [profileSlug, setProfileSlug] = useState('');
 
   const type = ['topic_page', 'profile_page', 'profile'].includes(resultType)
     ? 'Analysis'
     : 'Data';
-  const itemSlug = url.replace(/\/$/, '').split('/')[-1];
 
   useEffect(() => {
-    fetch(`${config.WP_BACKEND_URL}/wp-json/acf/v3/${resultType}/${id}`).then(
-      response => {
-        if (response.status === 200) {
-          response
-            .json()
-            .then(({ acf: { geography, section_topic: sectionOrTopic } }) => {
-              setCountrySlug(geography);
-              if (sectionOrTopic && sectionOrTopic.length > 1) {
-                setProfileSlug(sectionOrTopic[0].post_name);
-              }
-            });
+    if (resultType === 'topic_page') {
+      fetch(`${config.WP_BACKEND_URL}/wp-json/acf/v3/${resultType}/${id}`).then(
+        response => {
+          if (response.status === 200) {
+            response
+              .json()
+              .then(({ acf: { section_topics: profileSection } }) => {
+                if (profileSection && profileSection.length > 0) {
+                  setProfileSlug(profileSection[0].post_name);
+                }
+              });
+          }
         }
-      }
-    );
+      );
+    }
   }, [resultType, id]);
 
   const countryFound = config.countries.find(c => c.slug === countrySlug);
-  let link;
+  let link = '';
   let country = '';
   if (countryFound) {
     country = countryFound.name;
   }
 
   if (resultType === 'topic_page') {
-    link = `/profiles/${countrySlug}/${profileSlug}#${itemSlug}`;
+    link = `/profiles/${countrySlug}/${profileSlug}#${slug}`;
   } else if (resultType === 'profile_page') {
-    link = `/profiles/${countrySlug}/${itemSlug}`;
+    link = `/profiles/${countrySlug}/${slug}`;
   } else if (resultType === 'profile') {
     link = `/profiles/${countrySlug}`;
   }
@@ -86,7 +85,8 @@ function SearchResultItem({ title, resultType, url, id }) {
 SearchResultItem.propTypes = {
   resultType: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  url: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  countrySlug: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired
 };
 

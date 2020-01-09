@@ -18,10 +18,10 @@ Search.getInitialProps = async ({ query: { q: query } }) => {
   let results = [];
   if (query && query.length) {
     results = await fetch(
-      `${config.WP_BACKEND_URL}/wp-json/wp/v2/search?search=${query}`
+      `${config.ES_URL}/takwimu/post/_search?q=${query}`
     ).then(response => {
       if (response.status === 200) {
-        return response.json().then(data => data);
+        return response.json().then(data => data.hits);
       }
       return Promise.resolve({});
     });

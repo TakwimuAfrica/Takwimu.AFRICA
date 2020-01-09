@@ -47,7 +47,7 @@ function Input({ onRefresh, placeholder, query }) {
         query: { q: searchTerm }
       });
       if (typeof onRefresh === 'function') {
-        onRefresh(searchTerm, 1);
+        onRefresh(searchTerm);
       }
     }
   };
