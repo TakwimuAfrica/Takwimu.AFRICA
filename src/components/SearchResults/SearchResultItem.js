@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
-import NextLink from 'next/link';
-
-import { Link, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import Link from '../Link';
 import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
@@ -71,13 +70,11 @@ function SearchResultItem({ title, resultType, slug, id, countrySlug }) {
       <Typography variant="body1" className={classes.resultType}>
         {type}
       </Typography>
-      <NextLink href={link}>
-        <Link href={link} className={classes.link}>
-          <Typography variant="body1" className={classes.searchResultItem}>
-            {country} - {title}
-          </Typography>
-        </Link>
-      </NextLink>
+      <Link href={link} as={link} className={classes.link}>
+        <Typography variant="body1" className={classes.searchResultItem}>
+          {country} - {title}
+        </Typography>
+      </Link>
     </div>
   );
 }
