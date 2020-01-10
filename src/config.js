@@ -11,6 +11,17 @@ const config = {
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
+  robots: {
+    devHosts: ['dev.takwimu.africa', 'now.sh', 'localhost:3000'],
+    dev: `
+User-agent: *
+Disallow: /
+    `,
+    prod: `
+User-agent: *
+Disallow:
+    `
+  },
   WP_BACKEND_URL,
   WP_HURUMAP_DATA_API: `${WP_BACKEND_URL}/wp-json/hurumap-data`,
   country: {},
