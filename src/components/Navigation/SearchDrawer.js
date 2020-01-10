@@ -61,7 +61,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     '& > div': {
       width: '100%'
     },
-    '& > div > div > div .css-1a2fxm3': {
+    '& > div > div > div': {
       top: '47px'
     }
   },
@@ -74,7 +74,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     borderRadius: '0.563rem',
     border: 'none !important',
     fontFamily: '"Muli", sans-serif !important',
-    fontSize: '3.563rem !important',
+    fontSize: '1.125rem !important',
     fontWeight: '600',
     opacity: 1,
     color: 'white !important',
@@ -88,7 +88,8 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     [breakpoints.up('md')]: {
       maxWidth: '46.875rem',
       padding: '1.25rem 0.938rem !important',
-      height: '128px !important'
+      height: '128px !important',
+      fontSize: '3.563rem !important'
     }
   },
   searchResults: {
@@ -196,8 +197,7 @@ function SearchDrawer({ children, active, toggle }) {
                   onBlur={e => {
                     handleInput(e);
                   }}
-                  onKeyPress={e => {
-                    setBackgroundVisible(true);
+                  onKeyDown={e => {
                     if (e.key === 'Enter') {
                       handleInput(e);
                     }
