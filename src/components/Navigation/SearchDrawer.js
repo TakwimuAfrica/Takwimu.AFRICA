@@ -44,49 +44,26 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
   },
   arrow: {
     marginLeft: '1rem',
-    marginRight: '1.25rem',
     [breakpoints.up('md')]: {
-      marginLeft: '4.406rem'
-    }
-  },
-  searchField: {
-    width: '100%',
-    [breakpoints.up('md')]: {
-      maxWidth: '46.875rem'
-    },
-    '& > input': {
-      fontFamily: typography.fontText,
-      fontSize: '1.375rem',
-      fontWeight: '600',
-      opacity: 1,
-      padding: 0,
-      color: 'white',
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: 'normal',
-      letterSpacing: 'normal',
-      [breakpoints.up('md')]: {
-        fontSize: '3.563rem'
-      }
+      marginLeft: '4.406rem',
+      marginRight: '-1.25rem'
     }
   },
   searchFieldBackground: {
     width: '100%',
-    padding: '0.625rem !important',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: '1.25rem',
     [breakpoints.up('md')]: {
-      maxWidth: '46.875rem',
-      padding: '1.25rem 0.938rem !important'
+      maxWidth: '50.95rem'
     },
     '& > div': {
       width: '100%'
     }
   },
   searchFieldBackgroundColor: {
-    backgroundColor: '#d8d8d826'
+    backgroundColor: '#d8d8d826 !important'
   },
   // Override styling from other sources such as hurumap
   searchFieldInput: {
@@ -95,19 +72,25 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     border: 'none !important',
     fontFamily: '"Muli", sans-serif !important',
     fontSize: '3.563rem !important',
-    height: '70px !important',
     fontWeight: '600',
     opacity: 1,
-    padding: '0 !important',
     color: 'white !important',
     '&::placeholder': {
       color: 'white',
       opacity: '0.59'
+    },
+    '&:focus': {
+      backgroundColor: '#d8d8d826 !important'
+    },
+    [breakpoints.up('md')]: {
+      maxWidth: '46.875rem',
+      padding: '1.25rem 0.938rem !important',
+      height: '128px !important'
     }
   },
   searchResults: {
     width: '100%',
-    maxWidth: '780px',
+    maxWidth: '742px',
     marginTop: '1.25rem',
     marginRight: '3.75rem',
     paddingLeft: '0.938rem',
@@ -117,7 +100,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     // Firefox only
     scrollbarColor: `white ${palette.primary.main}`,
     [breakpoints.up('md')]: {
-      marginRight: '6.25rem',
+      marginRight: '4.25rem',
       paddingLeft: '0.625rem'
     },
     '& > a': {
@@ -153,7 +136,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
 function SearchDrawer({ children, active, toggle }) {
   const classes = useStyles();
   const router = useRouter();
-  const [backgroundVisible, setBackgroundVisible] = useState(true);
+  const [backgroundVisible, setBackgroundVisible] = useState(false);
 
   const handleInput = e => {
     if (e.target.value.length > 0) {
@@ -211,6 +194,7 @@ function SearchDrawer({ children, active, toggle }) {
                     handleInput(e);
                   }}
                   onKeyPress={e => {
+                    setBackgroundVisible(true);
                     if (e.key === 'Enter') {
                       handleInput(e);
                     }
@@ -229,7 +213,8 @@ function SearchDrawer({ children, active, toggle }) {
                   innerClass={{
                     input: classNames(classes.searchFieldInput, {
                       [classes.searchFieldBackgroundColor]: backgroundVisible
-                    })
+                    }),
+                    icon: classes.arrowIcon
                   }}
                   render={({
                     data,
@@ -239,7 +224,7 @@ function SearchDrawer({ children, active, toggle }) {
                     return isOpen && Boolean(value.length) ? (
                       <Grid container justify="flex-end">
                         <MenuList className={classes.searchResults}>
-                          {data.slice(0, 5).map(suggestion => (
+                          {data.slice(0, 10).map(suggestion => (
                             <Link
                               href={`/search?q=${suggestion.value}`}
                               key={`${suggestion.value}-${suggestion._click_id}`} // eslint-disable-line no-underscore-dangle
