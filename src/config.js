@@ -12,7 +12,7 @@ const config = {
       ? 'http://localhost:3000'
       : 'https://takwimu.africa',
   robots: {
-    devHosts: ['dev.takwimu.africa', 'now.sh', 'localhost:3000'],
+    devHosts: ['dev.takwimu.africa', 'now.sh'],
     dev: `
 User-agent: *
 Disallow: /
