@@ -9,8 +9,8 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { ReactiveBase, DataSearch } from '@appbaseio/reactivesearch';
 import Link from '../Link';
-// import rightArrow from '../../assets/images/right-arrow.svg';
-// import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
+import rightArrow from '../../assets/images/right-arrow-white.svg';
+import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
 import Layout from '../Layout';
 import config from '../../config';
@@ -193,11 +193,20 @@ function SearchDrawer({ children, active, toggle }) {
                   componentId="autoSuggest"
                   dataField={['post_title']}
                   highlight
-                  showIcon
-                  iconPosition="left"
                   autosuggest
                   queryFormat="and"
                   placeholder="What are you looking for ?"
+                  showIcon
+                  iconPosition="right"
+                  icon={
+                    <img
+                      alt=""
+                      src={
+                        backgroundVisible ? rightArrow : rightArrowTransparent
+                      }
+                      className={classes.arrow}
+                    />
+                  }
                   onBlur={e => {
                     handleInput(e);
                   }}
