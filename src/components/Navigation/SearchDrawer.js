@@ -60,6 +60,9 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     },
     '& > div': {
       width: '100%'
+    },
+    '& > div > div > div .css-1a2fxm3': {
+      top: '47px'
     }
   },
   searchFieldBackgroundColor: {
