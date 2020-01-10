@@ -279,9 +279,6 @@ const Theme = createTheme({
           '@media (min-width: 782px)': {
             marginLeft: '32px'
           }
-        },
-        '.css-1nqnto3': {
-          display: 'none'
         }
       }
     },

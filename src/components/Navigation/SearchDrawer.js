@@ -193,11 +193,18 @@ function SearchDrawer({ children, active, toggle }) {
                   componentId="autoSuggest"
                   dataField={['post_title']}
                   highlight
+                  showIcon
+                  iconPosition="left"
                   autosuggest
                   queryFormat="and"
                   placeholder="What are you looking for ?"
                   onBlur={e => {
                     handleInput(e);
+                  }}
+                  onKeyPress={e => {
+                    if (e.key === 'Enter') {
+                      handleInput(e);
+                    }
                   }}
                   onFocus={e => {
                     if (!backgroundVisible && e.target.value.length > 0) {
