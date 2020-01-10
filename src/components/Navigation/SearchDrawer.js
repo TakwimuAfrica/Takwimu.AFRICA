@@ -43,26 +43,32 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     }
   },
   arrow: {
-    marginLeft: '1rem',
+    width: '10px',
+    marginRight: '1rem',
     [breakpoints.up('md')]: {
       marginLeft: '4.406rem',
-      marginRight: '-1.25rem'
+      marginRight: '-1.25rem',
+      width: 'auto'
     }
   },
   searchFieldBackground: {
-    width: '100%',
+    width: '90%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: '1.25rem',
-    [breakpoints.up('md')]: {
-      maxWidth: '50.95rem'
-    },
     '& > div': {
       width: '100%'
     },
     '& > div > div > div': {
-      top: '47px'
+      top: '5px'
+    },
+    [breakpoints.up('md')]: {
+      width: '100%',
+      maxWidth: '50.95rem',
+      '& > div > div > div': {
+        top: '47px'
+      }
     }
   },
   searchFieldBackgroundColor: {
@@ -94,32 +100,26 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
   },
   searchResults: {
     width: '100%',
-    maxWidth: '742px',
     marginTop: '1.25rem',
     marginRight: '3.75rem',
     paddingLeft: '0.938rem',
-    maxHeight: '25rem',
+    maxHeight: '12rem',
     overflowY: 'auto',
-
-    // Firefox only
-    scrollbarColor: `white ${palette.primary.main}`,
-    [breakpoints.up('md')]: {
-      marginRight: '4.25rem',
-      paddingLeft: '0.625rem'
-    },
     '& > a': {
-      height: '2.813rem',
+      height: '1.85rem',
       textDecoration: 'none'
     },
     '& > a > p': {
       fontFamily: typography.fontText,
-      fontSize: '2.938rem',
+      fontSize: '1.125rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: 1.7,
       letterSpacing: 'normal'
     },
+    // Firefox only
+    scrollbarColor: `white ${palette.primary.main}`,
     '&::-webkit-scrollbar': {
       width: '0.563rem'
     },
@@ -129,6 +129,21 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     },
     '&::-webkit-scrollbar-corner': {
       backgroundColor: 'transparent'
+    },
+    [breakpoints.up('md')]: {
+      marginRight: '4.25rem',
+      paddingLeft: '0.625rem',
+      maxWidth: '742px',
+      maxHeight: '25rem',
+      '& > a': {
+        height: '2.813rem'
+      },
+      '& > a > p': {
+        fontSize: '2.938rem'
+      },
+      '&::-webkit-scrollbar': {
+        width: '0.254rem'
+      }
     }
   },
   tooltip: {
