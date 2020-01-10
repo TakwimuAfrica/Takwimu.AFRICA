@@ -52,7 +52,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     }
   },
   searchFieldBackground: {
-    width: '90%',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -64,7 +64,6 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
       top: '5px'
     },
     [breakpoints.up('md')]: {
-      width: '100%',
       maxWidth: '50.95rem',
       '& > div > div > div': {
         top: '47px'
@@ -74,8 +73,8 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
   searchFieldBackgroundColor: {
     backgroundColor: '#d8d8d826 !important'
   },
-  // Override styling from other sources such as hurumap
   searchFieldInput: {
+    maxWidth: '90%',
     backgroundColor: 'inherit !important',
     borderRadius: '0.563rem',
     border: 'none !important',
@@ -121,7 +120,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     // Firefox only
     scrollbarColor: `white ${palette.primary.main}`,
     '&::-webkit-scrollbar': {
-      width: '0.563rem'
+      width: '0.254rem'
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'white',
@@ -142,7 +141,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
         fontSize: '2.938rem'
       },
       '&::-webkit-scrollbar': {
-        width: '0.254rem'
+        width: '0.563rem'
       }
     }
   },
