@@ -12,7 +12,7 @@ import Page from './Page';
 
 const useStyles = makeStyles({
   root: {
-    marginBottom: '5.5rem'
+    marginBottom: '88px'
   },
   asideRoot: {}
 });
@@ -102,9 +102,17 @@ const get = async url => {
   return data;
 };
 
-AnalysisPage.getInitialProps = async ({ query, asPath }) => {
+AnalysisPage.getInitialProps = async ({
+  query: { geoIdOrCountrySlug: slug, analysisSlug, indicator: indicatorId },
+  asPath
+}) => {
   const { WP_BACKEND_URL, countries } = config;
-  const { geoIdOrCountrySlug, analysisSlug, indicator: indicatorId } = query;
+
+  Object.assign(
+    config.country,
+    countries.find(c => c.slug === slug)
+  );
+
   let analyses = [];
   let activeAnalysis = {};
   let initial = 0;
@@ -113,22 +121,19 @@ AnalysisPage.getInitialProps = async ({ query, asPath }) => {
 
   try {
     const [profile] = await get(
-      `${WP_BACKEND_URL}/wp-json/wp/v2/profile?slug=${geoIdOrCountrySlug}`
+      `${WP_BACKEND_URL}/wp-json/wp/v2/profile?slug=${slug}`
     );
 
     if (profile && profile.acf) {
       const {
         acf: {
           sections,
-          geography,
           topics_navigation: topicsNav,
           read_other_topics_label: readTopics
         }
       } = profile;
       topicsNavigation = topicsNav;
       readNextTitle = readTopics;
-      const country = countries.find(c => c.slug === geography);
-      Object.assign(config.country, country);
 
       if (sections.length) {
         let foundIndex = -1;
@@ -143,13 +148,13 @@ AnalysisPage.getInitialProps = async ({ query, asPath }) => {
         // topics is an acf field on profile section
         // get the acfs fields from profile_section_page route for currentAnalysis
         const {
-          acf: { geography: sectionGeography, section_topics: sectionTopics }
+          acf: { section_topics: sectionTopics }
         } = await get(
           `${WP_BACKEND_URL}/wp-json/wp/v2/profile_section_page/${activeAnalysis.ID}`
         );
 
         const topics = await Promise.all(
-          sectionTopics.map(async topic => {
+          sectionTopics.map(async ({ profile_section_topic: topic }) => {
             if (topic.post_content === '') {
               topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
               // add another backend call to fetch the carousel_topic
@@ -172,7 +177,7 @@ AnalysisPage.getInitialProps = async ({ query, asPath }) => {
           })
         );
         activeAnalysis.topics = topics; // eslint-disable-line no-param-reassign
-        activeAnalysis.geography = sectionGeography; // eslint-disable-line no-param-reassign
+        activeAnalysis.geography = slug; // eslint-disable-line no-param-reassign
       }
       Object.assign(config.page, sections[0].section);
       analyses = sections.map(({ section }) => section);
