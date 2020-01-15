@@ -24,13 +24,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SearchResultItem({ title, resultType, slug, id, countrySlug }) {
+function SearchResultItem({ title, resultType, slug, id, country, item }) {
   const classes = useStyles();
   const [profileSlug, setProfileSlug] = useState('');
-
-  const type = ['topic_page', 'profile_page', 'profile'].includes(resultType)
-    ? 'Analysis'
-    : 'Data';
 
   useEffect(() => {
     if (resultType === 'topic_page') {
@@ -50,29 +46,23 @@ function SearchResultItem({ title, resultType, slug, id, countrySlug }) {
     }
   }, [resultType, id]);
 
-  const countryFound = config.countries.find(c => c.slug === countrySlug);
   let link = '';
-  let country = '';
-  if (countryFound) {
-    country = countryFound.name;
-  }
-
   if (resultType === 'topic_page') {
-    link = `/profiles/${countrySlug}/${profileSlug}#${slug}`;
+    link = `/profiles/${country.slug}/${profileSlug}#${slug}`;
   } else if (resultType === 'profile_page') {
-    link = `/profiles/${countrySlug}/${slug}`;
-  } else if (resultType === 'profile') {
-    link = `/profiles/${countrySlug}`;
+    link = `/profiles/${country.slug}/${slug}`;
+  } else {
+    link = `/profiles/${country.slug}`;
   }
 
   return (
     <div className={classes.root}>
       <Typography variant="body1" className={classes.resultType}>
-        {type}
+        {item}
       </Typography>
       <Link href={link} as={link} className={classes.link}>
         <Typography variant="body1" className={classes.searchResultItem}>
-          {country} - {title}
+          {country.name} - {title}
         </Typography>
       </Link>
     </div>
@@ -83,8 +73,12 @@ SearchResultItem.propTypes = {
   resultType: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
-  countrySlug: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  country: PropTypes.shape({
+    slug: PropTypes.string,
+    name: PropTypes.string
+  }).isRequired,
+  title: PropTypes.string.isRequired,
+  item: PropTypes.string.isRequired
 };
 
 export default SearchResultItem;
