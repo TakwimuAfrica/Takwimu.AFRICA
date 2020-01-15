@@ -177,7 +177,6 @@ AnalysisPage.getInitialProps = async ({
           })
         );
         activeAnalysis.topics = topics; // eslint-disable-line no-param-reassign
-        activeAnalysis.geography = slug; // eslint-disable-line no-param-reassign
       }
       Object.assign(config.page, sections[0].section);
       analyses = sections.map(({ section }) => section);
