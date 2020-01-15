@@ -86,6 +86,7 @@ function RenderPaginator({
       )}
       {pages.map(page => (
         <ButtonBase
+          key={`${page}`}
           className={classNames([
             classes.filterItem,
             { [classes.filterActive]: page === activePage + 1 }
@@ -113,10 +114,7 @@ RenderPaginator.propTypes = {
 };
 export const Paginator = RenderPaginator;
 
-function SearchResultsContainer({
-  results: { hits, total: resultsLength },
-  filter: propFilter
-}) {
+function SearchResultsContainer({ results, filter: propFilter }) {
   const classes = useStyles();
   const [state, setState] = useState({
     activePage: 0,
@@ -156,11 +154,11 @@ function SearchResultsContainer({
 
   const { activePage, startIndex, filter } = state;
 
-  let filteredResults = hits;
+  let filteredResults = results;
 
   // filter results with result_type equals to state's filter
   if (filter === 'Analysis') {
-    filteredResults = hits.filter(
+    filteredResults = results.filter(
       // eslint-disable-next-line no-underscore-dangle
       ({ _source: resultItem }) =>
         resultItem.post_type === 'profile_section_page' ||
@@ -168,23 +166,23 @@ function SearchResultsContainer({
         resultItem.post_type === 'profile'
     );
   } else if (filter === 'Data') {
-    filteredResults = hits.filter(
+    filteredResults = results.filter(
       // eslint-disable-next-line no-underscore-dangle
-      ({ _source: resultItem }) =>
-        resultItem.post_type === 'attachment' ||
-        resultItem.post_type === 'hurumap_chart'
+      ({ _source: resultItem }) => resultItem.post_type === 'hurumap-visual'
     );
   }
+
+  const filteredResultsLength = filteredResults.length;
 
   // compose show result string
   let resultIndexText = '';
   let endIndex = 10;
 
-  if (resultsLength > 10) {
+  if (filteredResultsLength > 10) {
     endIndex += 10 * activePage;
 
-    if (resultsLength - startIndex < 10) {
-      endIndex = startIndex + (resultsLength - startIndex);
+    if (filteredResultsLength - startIndex < 10) {
+      endIndex = startIndex + (filteredResultsLength - startIndex);
     }
     resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
   }
@@ -193,7 +191,7 @@ function SearchResultsContainer({
     <div className={classes.root}>
       <Grid className={classes.resultsFilter}>
         <Typography variant="body2" className={classes.showResult}>
-          {`Showing ${resultIndexText}${filteredResults.length} results`}
+          {`Showing ${resultIndexText}${filteredResultsLength} results`}
         </Typography>
         <Grid item className={classes.filter}>
           <Typography
@@ -218,7 +216,7 @@ function SearchResultsContainer({
         </Grid>
       </Grid>
       <div className={classes.borderDiv} />
-      {filteredResults.length > 0 ? (
+      {filteredResultsLength > 0 ? (
         <div className={classes.searchResultsList}>
           {filteredResults.slice(startIndex, endIndex).map((
             { _source: result } // eslint-disable-line no-underscore-dangle
@@ -231,7 +229,11 @@ function SearchResultsContainer({
                   resultType={result.post_type}
                   slug={result.post_name}
                   title={result.post_title}
-                  country={result.terms.category[0]}
+                  country={
+                    result.terms && result.terms.category
+                      ? result.terms.category[0]
+                      : ''
+                  }
                   id={result.post_id}
                   key={`${result.post_type}-${result.post_id}`}
                   item="Analysis"
@@ -239,8 +241,9 @@ function SearchResultsContainer({
               ) : (
                 <DataSearchResultItem
                   visualType={result.post_excerpt}
-                  visualData={JSON.parse(result.post_content)}
+                  visualData={result.post_content}
                   id={result.post_id}
+                  title={result.post_title}
                   key={`${result.post_type}-${result.post_id}`}
                   item="Data"
                 />
@@ -257,11 +260,11 @@ function SearchResultsContainer({
 
       <div className={classes.paginationContainer}>
         <Typography variant="body2">
-          {`Showing ${resultIndexText}${filteredResults.length} results`}
+          {`Showing ${resultIndexText}${filteredResultsLength} results`}
         </Typography>
-        {filteredResults.length > 10 && (
+        {filteredResultsLength > 10 && (
           <Paginator
-            items={filteredResults.length}
+            items={filteredResultsLength}
             activePage={activePage}
             handleNextClick={handleNextClick}
             handlePreviousClick={handlePreviousClick}
@@ -276,14 +279,11 @@ function SearchResultsContainer({
 
 SearchResultsContainer.propTypes = {
   filter: PropTypes.string,
-  results: PropTypes.shape({
-    hits: PropTypes.arrayOf(
-      PropTypes.shape({
-        _source: PropTypes.shape({})
-      })
-    ),
-    total: PropTypes.number
-  })
+  results: PropTypes.arrayOf(
+    PropTypes.shape({
+      _source: PropTypes.shape({})
+    })
+  )
 };
 
 SearchResultsContainer.defaultProps = {
