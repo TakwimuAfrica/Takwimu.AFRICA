@@ -22,7 +22,6 @@ function AnalysisPage({
   initial,
   activeAnalysis,
   analyses,
-  indicatorId,
   analysisLink
 }) {
   const classes = useStyles();
@@ -33,7 +32,6 @@ function AnalysisPage({
   return (
     <Page
       takwimu={takwimu}
-      indicatorId={indicatorId}
       title={`${takwimu.country.short_name}'s ${activeAnalysis.post_title} Analysis`}
     >
       <Head>
@@ -71,7 +69,6 @@ function AnalysisPage({
 }
 
 AnalysisPage.propTypes = {
-  indicatorId: PropTypes.string,
   initial: PropTypes.number.isRequired,
   activeAnalysis: PropTypes.shape({
     post_title: PropTypes.string,
@@ -91,10 +88,6 @@ AnalysisPage.propTypes = {
   analysisLink: PropTypes.string.isRequired
 };
 
-AnalysisPage.defaultProps = {
-  indicatorId: undefined
-};
-
 const get = async url => {
   const res = await fetch(url);
   const data = await res.json();
@@ -103,7 +96,7 @@ const get = async url => {
 };
 
 AnalysisPage.getInitialProps = async ({
-  query: { geoIdOrCountrySlug: slug, analysisSlug, indicator: indicatorId },
+  query: { geoIdOrCountrySlug: slug, analysisSlug },
   asPath
 }) => {
   const { WP_BACKEND_URL, countries } = config;
@@ -196,7 +189,6 @@ AnalysisPage.getInitialProps = async ({
     analyses,
     topicsNavigation,
     readNextTitle,
-    indicatorId,
     analysisLink
   };
 };
