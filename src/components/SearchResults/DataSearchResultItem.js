@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-// import Link from '../Link';
-// import config from '../../config';
+import Link from '../Link';
+import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,26 +24,128 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DataSearchResultItem({ item }) {
+function InTopicDataResult({ topicId, item, title, visualType, chartId }) {
   const classes = useStyles();
+  const [country, setCountry] = useState('');
+  const [sectionSlug, setSectionSlug] = useState('');
+  const [topicSlug, setTopicSlug] = useState('');
+
+  useEffect(() => {
+    fetch(
+      `${config.WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topicId}?_embed`
+    ).then(response => {
+      if (response.status === 200) {
+        response
+          .json()
+          .then(
+            ({ slug, acf: { section_topics: profileSection }, _embedded }) => {
+              setTopicSlug(slug);
+              if (profileSection && profileSection.length > 0) {
+                setSectionSlug(profileSection[0].post_name);
+              }
+              const category = _embedded['wp:term'][0][0];
+              setCountry(category);
+            }
+          );
+      }
+    });
+  }, [topicId]);
+
+  const link = `/profile/${country.slug}/${sectionSlug}#${topicSlug}?indicator=indicator-${visualType}-${chartId}`;
+
   return (
     <div className={classes.root}>
       <Typography variant="body1" className={classes.resultType}>
         {item}
       </Typography>
-      {/* <Link href={link} as={link} className={classes.link}>
+      <Link href={link} as={link} className={classes.link}>
         <Typography variant="body1" className={classes.searchResultItem}>
-          {country} - {title}
+          {country.name} - {title}
         </Typography>
-      </Link> */}
+      </Link>
     </div>
   );
 }
 
+InTopicDataResult.propTypes = {
+  topicId: PropTypes.number.isRequired,
+  visualType: PropTypes.string.isRequired,
+  chartId: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  item: PropTypes.string.isRequired
+};
+
+export const InTopicResult = InTopicDataResult;
+
+function InGeographyDataResult({ geoId, item, title, chartId }) {
+  const classes = useStyles();
+  const link = `/embed/${geoId}/${chartId}`; // TODO: link should be replaced with data-by-topics once we know section in belongs
+  const countryCode = geoId.split('-')[1].slice(2);
+  const country = config.countries.find(c => c.code === countryCode);
+
+  return (
+    <div className={classes.root}>
+      <Typography variant="body1" className={classes.resultType}>
+        {item}
+      </Typography>
+      <Link href={link} as={link} className={classes.link}>
+        <Typography variant="body1" className={classes.searchResultItem}>
+          {country.name} - {title}
+        </Typography>
+      </Link>
+    </div>
+  );
+}
+
+InGeographyDataResult.propTypes = {
+  chartId: PropTypes.number.isRequired,
+  geoId: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  item: PropTypes.string.isRequired
+};
+
+export const InGeographyResult = InGeographyDataResult;
+
+function DataSearchResultItem({ item, title, id, visualType, visualData }) {
+  const { inTopics, inGeography } = JSON.parse(visualData.replace('\\', ''));
+
+  if (inTopics && inTopics.length > 0) {
+    return (
+      <>
+        {inTopics.map(topicId => (
+          <InTopicResult
+            topicId={topicId}
+            title={title}
+            chartId={id}
+            visualType={visualType}
+            item={item}
+          />
+        ))}
+      </>
+    );
+  }
+  if (inGeography && inGeography.length > 0) {
+    return (
+      <>
+        {inGeography.map(geoId => (
+          <InGeographyResult
+            geoId={geoId}
+            chartId={id}
+            title={title}
+            item={item}
+          />
+        ))}
+      </>
+    );
+  }
+  return null;
+}
+
 DataSearchResultItem.propTypes = {
-  //  visualType: PropTypes.string.isRequired,
-  //  visualData: PropTypes.shape({}).isRequired,
-  // id: PropTypes.number.isRequired,
+  visualType: PropTypes.string.isRequired,
+  visualData: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
   item: PropTypes.string.isRequired
 };
 
