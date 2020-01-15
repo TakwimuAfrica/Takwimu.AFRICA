@@ -13,7 +13,7 @@ import WhereToNext from '../components/Next';
 import config from '../config';
 import Section from '../components/Section';
 
-function Home({ indicatorId, latestMediumPosts, takwimu }) {
+function Home({ latestMediumPosts, takwimu }) {
   const {
     page: {
       rendered: featuredData,
@@ -23,7 +23,7 @@ function Home({ indicatorId, latestMediumPosts, takwimu }) {
   } = takwimu;
 
   return (
-    <Page takwimu={takwimu} indicatorId={indicatorId}>
+    <Page takwimu={takwimu}>
       <Head>
         <script
           src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
@@ -51,7 +51,6 @@ function Home({ indicatorId, latestMediumPosts, takwimu }) {
 }
 
 Home.propTypes = {
-  indicatorId: PropTypes.string,
   latestMediumPosts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
@@ -62,17 +61,12 @@ Home.propTypes = {
   }).isRequired
 };
 
-Home.defaultProps = {
-  indicatorId: undefined
-};
-
-Home.getInitialProps = async ({ query: { indicator: indicatorId } }) => {
+Home.getInitialProps = async () => {
   const res = await fetch('https://stories.hurumap.org/@takwimu_africa/latest');
   const latestMediumPosts = await res.json();
   const takwimu = await getSitePage('index');
 
   return {
-    indicatorId,
     latestMediumPosts,
     takwimu
   };
