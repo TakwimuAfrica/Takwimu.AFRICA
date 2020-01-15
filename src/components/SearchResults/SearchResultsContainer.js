@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
@@ -86,7 +86,7 @@ function RenderPaginator({
       )}
       {pages.map(page => (
         <ButtonBase
-          key={`${page}`}
+          key={`button-${page}`}
           className={classNames([
             classes.filterItem,
             { [classes.filterActive]: page === activePage + 1 }
@@ -221,7 +221,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
           {filteredResults.slice(startIndex, endIndex).map((
             { _source: result } // eslint-disable-line no-underscore-dangle
           ) => (
-            <>
+            <Fragment key={result.post_name}>
               {['topic_page', 'profile_page', 'profile'].includes(
                 result.post_type
               ) ? (
@@ -248,7 +248,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
                   item="Data"
                 />
               )}
-            </>
+            </Fragment>
           ))}
         </div>
       ) : (

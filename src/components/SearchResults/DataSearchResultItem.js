@@ -51,7 +51,7 @@ function InTopicDataResult({ topicId, item, title, visualType, chartId }) {
     });
   }, [topicId]);
 
-  const link = `/profile/${country.slug}/${sectionSlug}#${topicSlug}?indicator=indicator-${visualType}-${chartId}`;
+  const link = `/profiles/${country.slug}/${sectionSlug}#${topicSlug}?indicator=indicator-${visualType}-${chartId}`;
 
   return (
     <div className={classes.root}>
@@ -107,13 +107,16 @@ InGeographyDataResult.propTypes = {
 export const InGeographyResult = InGeographyDataResult;
 
 function DataSearchResultItem({ item, title, id, visualType, visualData }) {
-  const { inTopics, inGeography } = JSON.parse(visualData.replace('\\', ''));
+  const { inTopics, inGeography } = visualData
+    ? JSON.parse(visualData.replace('\\', ''))
+    : { inTopics: {}, inGeography: {} };
 
   if (inTopics && inTopics.length > 0) {
     return (
       <>
         {inTopics.map(topicId => (
           <InTopicResult
+            key={`result-${topicId}-${id}`}
             topicId={topicId}
             title={title}
             chartId={id}
@@ -129,6 +132,7 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
       <>
         {inGeography.map(geoId => (
           <InGeographyResult
+            key={`result-${geoId}-${id}`}
             geoId={geoId}
             chartId={id}
             title={title}

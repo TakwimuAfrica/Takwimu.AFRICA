@@ -273,7 +273,6 @@ function SearchDrawer({ children, active, toggle }) {
 }
 
 SearchDrawer.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   active: PropTypes.bool,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
