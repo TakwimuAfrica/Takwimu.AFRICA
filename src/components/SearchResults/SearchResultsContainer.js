@@ -7,6 +7,7 @@ import { ButtonBase, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import SearchResultItem from './SearchResultItem';
+import DataSearchResultItem from './DataSearchResultItem';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -222,18 +223,29 @@ function SearchResultsContainer({
           {filteredResults.slice(startIndex, endIndex).map((
             { _source: result } // eslint-disable-line no-underscore-dangle
           ) => (
-            <SearchResultItem
-              resultType={result.post_type}
-              slug={result.post_name}
-              title={result.post_title}
-              countrySlug={
-                result.post_type !== 'attachment' && result.meta.geography
-                  ? result.meta.geography[0].value
-                  : null
-              } // TODO: this would be replaced with category once country taxonomy is implemented
-              id={result.post_id}
-              key={`${result.post_type}-${result.post_id}`}
-            />
+            <>
+              {['topic_page', 'profile_page', 'profile'].includes(
+                result.post_type
+              ) ? (
+                <SearchResultItem
+                  resultType={result.post_type}
+                  slug={result.post_name}
+                  title={result.post_title}
+                  country={result.terms.category[0]}
+                  id={result.post_id}
+                  key={`${result.post_type}-${result.post_id}`}
+                  item="Analysis"
+                />
+              ) : (
+                <DataSearchResultItem
+                  visualType={result.post_excerpt}
+                  visualData={JSON.parse(result.post_content)}
+                  id={result.post_id}
+                  key={`${result.post_type}-${result.post_id}`}
+                  item="Data"
+                />
+              )}
+            </>
           ))}
         </div>
       ) : (
