@@ -20,18 +20,19 @@ function SearchResults({ takwimu: { page } }) {
   const classes = useStyles();
 
   const handleSearch = useCallback(searchTerm => {
-    fetch(`${config.ES_URL}/takwimu/post/_search?q=${searchTerm}`).then(
-      response => {
-        if (response.status === 200) {
-          response.json().then(data => {
-            setSearch({ query: searchTerm, results: data.hits });
-          });
-        }
+    fetch(
+      `${config.ES_URL}/takwimu/post/_search?q=${searchTerm}&size=100`
+    ).then(response => {
+      if (response.status === 200) {
+        response.json().then(data => {
+          setSearch({ query: searchTerm, results: data.hits.hits });
+        });
       }
-    );
+    });
   }, []);
 
   const { query, results } = search || {};
+
   return (
     <Section classes={{ root: classes.root }}>
       <SearchInput onRefresh={handleSearch} query={query} />
@@ -45,11 +46,8 @@ SearchResults.propTypes = {
     page: PropTypes.shape({
       search: PropTypes.shape({
         query: PropTypes.string,
-        results: PropTypes.shape({
-          hits: PropTypes.arrayOf(PropTypes.shape({})),
-          total: PropTypes.number
-        })
-      })
+        results: PropTypes.arrayOf(PropTypes.shape({}))
+      }).isRequired
     }).isRequired
   }).isRequired
 };
