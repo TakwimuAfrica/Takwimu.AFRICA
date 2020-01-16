@@ -162,6 +162,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
       // eslint-disable-next-line no-underscore-dangle
       ({ _source: resultItem }) =>
         resultItem.post_type === 'profile_section_page' ||
+        resultItem.post_type === 'carousel_topic' ||
         resultItem.post_type === 'topic_page' ||
         resultItem.post_type === 'profile'
     );
@@ -222,9 +223,12 @@ function SearchResultsContainer({ results, filter: propFilter }) {
             { _source: result } // eslint-disable-line no-underscore-dangle
           ) => (
             <Fragment key={result.post_name}>
-              {['topic_page', 'profile_page', 'profile'].includes(
-                result.post_type
-              ) ? (
+              {[
+                'topic_page',
+                'profile_page',
+                'profile',
+                'carousel_topic'
+              ].includes(result.post_type) ? (
                 <SearchResultItem
                   resultType={result.post_type}
                   slug={result.post_name}

@@ -51,6 +51,8 @@ function SearchResultItem({ title, resultType, slug, id, country, item }) {
     link = `/profiles/${country.slug}/${profileSlug}#${slug}`;
   } else if (resultType === 'profile_page') {
     link = `/profiles/${country.slug}/${slug}`;
+  } else if (resultType === 'carousel_topic') {
+    link = `/profiles/${country.slug}#${slug}`;
   } else {
     link = `/profiles/${country.slug}`;
   }
