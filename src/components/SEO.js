@@ -1,15 +1,19 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import config from '../config';
 import defaultImage from '../assets/images/africanparliament.jpg';
 
-function SEO({ title, description, image, location = '', indicatorId }) {
+function SEO({ title, description, image, location = '' }) {
   const pageTitle = title ? `${title} | ${config.name}` : config.name;
   // indicator should override image, image should override defaultImage.
   let imageUrl = `${config.url}${image || defaultImage}`;
+  const {
+    query: { indicatorId }
+  } = useRouter();
   if (indicatorId) {
     imageUrl = `${config.media.imageUrl}/${indicatorId}${config.media.imageRendition}${config.media.imageType}`;
   }
@@ -18,7 +22,7 @@ function SEO({ title, description, image, location = '', indicatorId }) {
 		"@type": "Organization",
 		"legalName": "${config.legalName || config.name}",
 		"url": "${config.url}",
-		"logo": "${config.url}/static/images/logo-white-all.png",
+		"logo": "${config.url}/images/logo-white-all.png",
 		"contactPoint": [{
       "@type": "ContactPoint",
 			"url": "${config.url}/contact",
@@ -85,16 +89,14 @@ SEO.propTypes = {
   description: PropTypes.string,
   image: PropTypes.string,
   location: PropTypes.string,
-  title: PropTypes.string,
-  indicatorId: PropTypes.string
+  title: PropTypes.string
 };
 
 SEO.defaultProps = {
   description: undefined,
   image: undefined,
   location: undefined,
-  title: undefined,
-  indicatorId: undefined
+  title: undefined
 };
 
 export default SEO;
