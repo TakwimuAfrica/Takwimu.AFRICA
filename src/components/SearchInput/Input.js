@@ -39,11 +39,21 @@ function Input({ onRefresh, placeholder, query }) {
   const [searchTerm, setSearchTerm] = useState('');
   const handleSearchClick = () => {
     if (query !== searchTerm && searchTerm.length > 0) {
-      router.push({
-        pathname: '/search',
-        query: { q: searchTerm }
-      });
-      onRefresh(searchTerm);
+      // On the search page, onRefresh will be a function used to query the
+      // API. On all other pages that this component is used, onRefresh is
+      // expected to be null
+      if (typeof onRefresh === 'function') {
+        router.push({
+          pathname: '/search',
+          query: { q: searchTerm }
+        });
+        onRefresh(searchTerm);
+      } else {
+        router.push({
+          pathname: '/search',
+          query: { q: searchTerm }
+        });
+      }
     }
   };
 
