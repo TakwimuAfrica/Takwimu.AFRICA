@@ -22,7 +22,9 @@ function AnalysisPage({
   initial,
   activeAnalysis,
   analyses,
-  analysisLink
+  analysisLink,
+  readNextTitle,
+  topicsNavigation
 }) {
   const classes = useStyles();
 
@@ -62,6 +64,8 @@ function AnalysisPage({
           content={activeAnalysis}
           takwimu={takwimu}
           analysisLink={analysisLink}
+          readNextTitle={readNextTitle}
+          topicsNavigation={topicsNavigation}
         />
       </ContentPage>
     </Page>
@@ -85,7 +89,9 @@ AnalysisPage.propTypes = {
       slug: PropTypes.string
     })
   }).isRequired,
-  analysisLink: PropTypes.string.isRequired
+  analysisLink: PropTypes.string.isRequired,
+  readNextTitle: PropTypes.string.isRequired,
+  topicsNavigation: PropTypes.string.isRequired
 };
 
 const get = async url => {
