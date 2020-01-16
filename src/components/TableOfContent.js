@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 
-import { MenuList, Typography, Grid } from '@material-ui/core';
+import { Grid, MenuList } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
@@ -20,13 +20,19 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'flex-start',
     [theme.breakpoints.up('md')]: {
+      /**
+       * Since we want to negative margin for the current item image **and**
+       * overflow hidden, we'll set the negative margin on root and use padding
+       * to shift item's contents to the right
+       */
+      marginLeft: '-1.5rem',
       position: 'fixed',
       width: 'fit-content',
       top: `${DEFAULT_TOP}px`,
       bottom: 0,
       overflow: 'hidden auto',
 
-      scrollbarColor: '#d3d3d3',
+      scrollbarColor: '#d3d3d3 transparent',
       scrollbarWidth: 'thin',
       '&::-webkit-scrollbar': {
         width: '0.4rem'
@@ -39,12 +45,14 @@ const useStyles = makeStyles(theme => ({
       }
     }
   },
+  children: {
+    paddingLeft: '1.5rem'
+  },
   menuListRoot: {
     padding: 0,
     width: '14.188rem'
   },
   activeContentIndicator: {
-    marginLeft: '-1.5rem',
     marginRight: '1rem'
   },
   listItem: {
@@ -54,11 +62,13 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
   linkRoot: {
+    paddingLeft: '1.5rem',
     fontWeight: 'bold',
     textDecoration: 'underline',
     color: theme.palette.primary.main
   },
   activeLink: {
+    paddingLeft: 0,
     color: theme.palette.text.primary,
     textDecoration: 'none'
   }
@@ -100,7 +110,9 @@ function TableOfContent({ children, content, current, generateHref, width }) {
       direction="column"
       wrap="nowrap"
     >
-      <Grid item>{children}</Grid>
+      <Grid item className={classes.children}>
+        {children}
+      </Grid>
       <Grid item>
         <MenuList classes={{ root: classes.menuListRoot }}>
           {content.map((c, index) => (
@@ -129,15 +141,12 @@ function TableOfContent({ children, content, current, generateHref, width }) {
                     ? generateHref(index).as
                     : undefined
                 }
+                variant="body2"
+                className={classNames(classes.linkRoot, {
+                  [classes.activeLink]: current === index
+                })}
               >
-                <Typography
-                  variant="body2"
-                  className={classNames(classes.linkRoot, {
-                    [classes.activeLink]: current === index
-                  })}
-                >
-                  {c.title}
-                </Typography>
+                {c.title}
               </Link>
             </li>
           ))}

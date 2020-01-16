@@ -12,6 +12,7 @@ import gates3 from '../../assets/images/gates@3x.png';
 
 const useStyles = makeStyles({
   root: {
+    marginTop: '3.125rem',
     width: '14.375rem'
   },
   img: {
