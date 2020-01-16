@@ -107,7 +107,7 @@ InGeographyDataResult.propTypes = {
 export const InGeographyResult = InGeographyDataResult;
 
 function DataSearchResultItem({ item, title, id, visualType, visualData }) {
-  const { inTopics, inGeography } = visualData
+  const { inTopics, inGeographies } = visualData
     ? JSON.parse(visualData.replace('\\', ''))
     : { inTopics: {}, inGeography: {} };
 
@@ -127,10 +127,10 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
       </>
     );
   }
-  if (inGeography && inGeography.length > 0) {
+  if (inGeographies && inGeographies.length > 0) {
     return (
       <>
-        {inGeography.map(geoId => (
+        {inGeographies.map(geoId => (
           <InGeographyResult
             key={`result-${geoId}-${id}`}
             geoId={geoId}
