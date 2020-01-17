@@ -89,7 +89,7 @@ function InGeographyDataResult({
   const classes = useStyles();
   const link = `/embed/${geoLevel}-${geoCode}/${chartId}`; // TODO: link should be replaced with data-by-topics once we know section in belongs
   const countryCode = geoCode.slice(2);
-  const country = config.countries.find(c => c.code === countryCode);
+  const country = config.countries.find(c => c.iso_code === countryCode);
 
   return (
     <div className={classes.root}>
