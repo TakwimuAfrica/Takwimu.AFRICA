@@ -20,15 +20,15 @@ function SearchResults({ takwimu: { page } }) {
   const classes = useStyles();
 
   const handleSearch = useCallback(searchTerm => {
-    fetch(
-      `${config.ES_URL}/takwimu/post/_search?q=${searchTerm}&size=100`
-    ).then(response => {
-      if (response.status === 200) {
-        response.json().then(data => {
-          setSearch({ query: searchTerm, results: data.hits.hits });
-        });
+    fetch(`${config.ES_URL}/takwimu/post/_search?q=${searchTerm}&size=50`).then(
+      response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            setSearch({ query: searchTerm, results: data.hits.hits });
+          });
+        }
       }
-    });
+    );
   }, []);
 
   const { query, results } = search || {};
