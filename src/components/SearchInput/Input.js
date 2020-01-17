@@ -43,9 +43,8 @@ function Input({ onRefresh, placeholder, query }) {
       // API. On all other pages that this component is used, onRefresh is
       // expected to be null
       if (typeof onRefresh === 'function') {
-        router.push({
-          pathname: '/search',
-          query: { q: searchTerm }
+        router.push(`/search?q=${searchTerm}`, `/search?q=${searchTerm}`, {
+          shallow: true
         });
         onRefresh(searchTerm);
       } else {
