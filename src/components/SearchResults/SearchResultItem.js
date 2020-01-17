@@ -47,14 +47,19 @@ function SearchResultItem({ title, resultType, slug, id, country, item }) {
   }, [resultType, id]);
 
   let link = '';
+  let href = '';
   if (resultType === 'topic_page') {
     link = `/profiles/${country.slug}/${profileSlug}#${slug}`;
+    href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
   } else if (resultType === 'profile_page') {
     link = `/profiles/${country.slug}/${slug}`;
+    href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
   } else if (resultType === 'carousel_topic') {
     link = `/profiles/${country.slug}#${slug}`;
+    href = '/profiles/[geoIdOrCountrySlug]';
   } else {
     link = `/profiles/${country.slug}`;
+    href = '/profiles/[geoIdOrCountrySlug]';
   }
 
   return (
@@ -62,7 +67,7 @@ function SearchResultItem({ title, resultType, slug, id, country, item }) {
       <Typography variant="body1" className={classes.resultType}>
         {item}
       </Typography>
-      <Link href={link} as={link} className={classes.link}>
+      <Link href={href} as={link} className={classes.link}>
         <Typography variant="body1" className={classes.searchResultItem}>
           {country.name} - {title}
         </Typography>

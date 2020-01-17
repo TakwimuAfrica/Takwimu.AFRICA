@@ -52,13 +52,14 @@ function InTopicDataResult({ topicId, item, title, visualType, chartId }) {
   }, [topicId]);
 
   const link = `/profiles/${country.slug}/${sectionSlug}#${topicSlug}?indicator=indicator-${visualType}-${chartId}`;
+  const href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
 
   return (
     <div className={classes.root}>
       <Typography variant="body1" className={classes.resultType}>
         {item}
       </Typography>
-      <Link href={link} as={link} className={classes.link}>
+      <Link href={href} as={link} className={classes.link}>
         <Typography variant="body1" className={classes.searchResultItem}>
           {country.name} - {title}
         </Typography>
