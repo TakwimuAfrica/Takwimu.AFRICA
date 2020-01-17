@@ -78,10 +78,17 @@ InTopicDataResult.propTypes = {
 
 export const InTopicResult = InTopicDataResult;
 
-function InGeographyDataResult({ geoId, item, title, chartId }) {
+function InGeographyDataResult({
+  item,
+  title,
+  chartId,
+  geoCode,
+  geoLevel,
+  geoName
+}) {
   const classes = useStyles();
-  const link = `/embed/${geoId}/${chartId}`; // TODO: link should be replaced with data-by-topics once we know section in belongs
-  const countryCode = geoId.split('-')[1].slice(2);
+  const link = `/embed/${geoLevel}-${geoCode}/${chartId}`; // TODO: link should be replaced with data-by-topics once we know section in belongs
+  const countryCode = geoCode.slice(2);
   const country = config.countries.find(c => c.code === countryCode);
 
   return (
@@ -91,7 +98,8 @@ function InGeographyDataResult({ geoId, item, title, chartId }) {
       </Typography>
       <Link href={link} as={link} className={classes.link}>
         <Typography variant="body1" className={classes.searchResultItem}>
-          {country.name} - {title}
+          {geoLevel === 'country' ? country.name : `${geoName} ${country.name}`}{' '}
+          - {title}
         </Typography>
       </Link>
     </div>
@@ -100,7 +108,9 @@ function InGeographyDataResult({ geoId, item, title, chartId }) {
 
 InGeographyDataResult.propTypes = {
   chartId: PropTypes.number.isRequired,
-  geoId: PropTypes.number.isRequired,
+  geoCode: PropTypes.string.isRequired,
+  geoLevel: PropTypes.string.isRequired,
+  geoName: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   item: PropTypes.string.isRequired
 };
@@ -108,6 +118,7 @@ InGeographyDataResult.propTypes = {
 export const InGeographyResult = InGeographyDataResult;
 
 function DataSearchResultItem({ item, title, id, visualType, visualData }) {
+  const classes = useStyles();
   const { inTopics, inGeographies } = visualData
     ? JSON.parse(visualData.replace('\\', ''))
     : { inTopics: {}, inGeography: {} };
@@ -131,10 +142,12 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
   if (inGeographies && inGeographies.length > 0) {
     return (
       <>
-        {inGeographies.map(geoId => (
+        {inGeographies.map(({ geoLevel, geoCode, name }) => (
           <InGeographyResult
-            key={`result-${geoId}-${id}`}
-            geoId={geoId}
+            key={`result-${geoLevel}-${geoCode}-${id}`}
+            geoLevel={geoLevel}
+            geoCode={geoCode}
+            geoName={name}
             chartId={id}
             title={title}
             item={item}
@@ -143,7 +156,16 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
       </>
     );
   }
-  return null;
+  return (
+    <div className={classes.root}>
+      <Typography variant="body1" className={classes.resultType}>
+        {item}
+      </Typography>
+      <Typography variant="body1" className={classes.searchResultItem}>
+        {title}
+      </Typography>
+    </div>
+  );
 }
 
 DataSearchResultItem.propTypes = {
