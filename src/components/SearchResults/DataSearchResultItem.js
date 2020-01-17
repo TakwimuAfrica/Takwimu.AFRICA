@@ -51,7 +51,7 @@ function InTopicDataResult({ topicId, item, title, visualType, chartId }) {
     });
   }, [topicId]);
 
-  const link = `/profiles/${country.slug}/${sectionSlug}#${topicSlug}?indicator=indicator-${visualType}-${chartId}`;
+  const link = `/profiles/${country.slug}/${sectionSlug}#${topicSlug}?indicatorId=indicator-${visualType}-${chartId}`;
   const href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
 
   return (
