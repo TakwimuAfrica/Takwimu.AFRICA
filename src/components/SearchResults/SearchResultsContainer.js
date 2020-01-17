@@ -222,7 +222,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
           {filteredResults.slice(startIndex, endIndex).map((
             { _source: result } // eslint-disable-line no-underscore-dangle
           ) => (
-            <Fragment key={result.post_name}>
+            <Fragment key={`${result.post_type}-${result.post_id}`}>
               {[
                 'topic_page',
                 'profile_page',
