@@ -279,6 +279,19 @@ const Theme = createTheme({
           '@media (min-width: 782px)': {
             marginLeft: '32px'
           }
+        },
+        /**
+         * Override load-styles.php customizations
+         */
+        a: {
+          '&:focus': {
+            boxShadow: 'none',
+            color: 'black',
+            outline: 'none'
+          }
+        },
+        li: {
+          marginBottom: 0
         }
       }
     },

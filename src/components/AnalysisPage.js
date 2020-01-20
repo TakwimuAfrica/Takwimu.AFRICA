@@ -22,8 +22,9 @@ function AnalysisPage({
   initial,
   activeAnalysis,
   analyses,
-  indicatorId,
-  analysisLink
+  analysisLink,
+  readNextTitle,
+  topicsNavigation
 }) {
   const classes = useStyles();
 
@@ -33,7 +34,6 @@ function AnalysisPage({
   return (
     <Page
       takwimu={takwimu}
-      indicatorId={indicatorId}
       title={`${takwimu.country.short_name}'s ${activeAnalysis.post_title} Analysis`}
     >
       <Head>
@@ -60,6 +60,8 @@ function AnalysisPage({
           content={activeAnalysis}
           takwimu={takwimu}
           analysisLink={analysisLink}
+          readNextTitle={readNextTitle}
+          topicsNavigation={topicsNavigation}
         />
       </ContentPage>
     </Page>
@@ -67,7 +69,6 @@ function AnalysisPage({
 }
 
 AnalysisPage.propTypes = {
-  indicatorId: PropTypes.string,
   initial: PropTypes.number.isRequired,
   activeAnalysis: PropTypes.shape({
     post_title: PropTypes.string,
@@ -84,11 +85,9 @@ AnalysisPage.propTypes = {
       slug: PropTypes.string
     })
   }).isRequired,
-  analysisLink: PropTypes.string.isRequired
-};
-
-AnalysisPage.defaultProps = {
-  indicatorId: undefined
+  analysisLink: PropTypes.string.isRequired,
+  readNextTitle: PropTypes.string.isRequired,
+  topicsNavigation: PropTypes.string.isRequired
 };
 
 const get = async url => {
@@ -99,7 +98,7 @@ const get = async url => {
 };
 
 AnalysisPage.getInitialProps = async ({
-  query: { geoIdOrCountrySlug: slug, analysisSlug, indicator: indicatorId },
+  query: { geoIdOrCountrySlug: slug, analysisSlug },
   asPath
 }) => {
   const { WP_BACKEND_URL, countries } = config;
@@ -150,7 +149,7 @@ AnalysisPage.getInitialProps = async ({
         );
 
         const topics = await Promise.all(
-          sectionTopics.map(async ({ profile_section_topic: topic }) => {
+          sectionTopics.map(async topic => {
             if (topic.post_content === '') {
               topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
               // add another backend call to fetch the carousel_topic
@@ -192,7 +191,6 @@ AnalysisPage.getInitialProps = async ({
     analyses,
     topicsNavigation,
     readNextTitle,
-    indicatorId,
     analysisLink
   };
 };
