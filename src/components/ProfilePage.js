@@ -19,7 +19,7 @@ import ProfileDetail from './ProfileDetail';
 import ProfileSection, { ProfileSectionTitle } from './ProfileSection';
 import Section from './Section';
 
-import { getSectionedCharts } from '../getTakwimuPage';
+import { getSectionedCharts } from '../cms';
 
 import logo from '../assets/images/logo-white-all.png';
 

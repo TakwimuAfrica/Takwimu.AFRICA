@@ -30,13 +30,6 @@ export default class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-
-    /**
-     * Expose jss and theme
-     * Used by the micro-frontend components
-     */
-    window.jss = MyApp.jss;
-    window.Theme = Theme;
   }
 
   render() {

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import { getSitePage } from '../getTakwimuPage';
+import { getSitePage } from '../cms';
 import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
 import Page from '../components/Page';

@@ -45,10 +45,6 @@ function AnalysisPage({
           rel="stylesheet"
           href={`${config.WP_BACKEND_URL}/wp-includes/js/mediaelement/wp-mediaelement.min.css`}
         />
-        <script
-          crossOrigin
-          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
-        />
       </Head>
       <ContentPage
         aside={
@@ -154,7 +150,7 @@ AnalysisPage.getInitialProps = async ({
         );
 
         const topics = await Promise.all(
-          sectionTopics.map(async topic => {
+          sectionTopics.map(async ({ profile_section_topic: topic }) => {
             if (topic.post_content === '') {
               topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
               // add another backend call to fetch the carousel_topic

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
+import { renderBlocks } from '@codeforafrica/hurumap-ui/cms';
 import { RichTypography } from '../core';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
@@ -20,6 +21,9 @@ import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
 import getHydrateContent from '../../utils/getHydrateContent';
+
+import logo from '../../assets/images/logo-white-all.png';
+import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -82,9 +86,6 @@ function AnalysisContent({
     indicators: []
   });
   useEffect(() => {
-    if (window.renderBlocks) {
-      window.renderBlocks();
-    }
     setHydrateElements(getHydrateContent(document, 'indicators'));
   }, [takwimu.country.name, topicIndex]);
 
@@ -191,6 +192,24 @@ function AnalysisContent({
             return null;
           }
         )}
+
+        {process.browser &&
+          renderBlocks({
+            logo,
+            flourishUrl: id =>
+              `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
+            fetchDefinitionUrl: (type, id) => {
+              switch (type) {
+                case 'flourish':
+                case 'hurumap':
+                  return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
+                case 'snippet':
+                  return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
+                default:
+                  return '';
+              }
+            }
+          })}
 
         <Actions
           title={topic.post_title}

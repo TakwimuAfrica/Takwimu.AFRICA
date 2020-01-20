@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Head from 'next/head';
-import { getSitePage } from '../getTakwimuPage';
+import { renderBlocks } from '@codeforafrica/hurumap-ui/cms';
+import logo from '../assets/images/logo-white-all.png';
+
+import { getSitePage } from '../cms';
+
 import FeaturedAnalysis from '../components/FeaturedAnalysis';
 import Hero from '../components/Hero';
 import LatestNewsStories from '../components/LatestNewsStories';
@@ -10,8 +13,8 @@ import MakingOfTakwimu from '../components/MakingOfTakwimu';
 import Page from '../components/Page';
 import WhatYouDoWithTakwimu from '../components/WhatYouCanDoWithTakwimu';
 import WhereToNext from '../components/Next';
-import config from '../config';
 import Section from '../components/Section';
+import config from '../config';
 
 function Home({ indicatorId, latestMediumPosts, takwimu }) {
   const {
@@ -24,11 +27,6 @@ function Home({ indicatorId, latestMediumPosts, takwimu }) {
 
   return (
     <Page takwimu={takwimu} indicatorId={indicatorId}>
-      <Head>
-        <script
-          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
-        />
-      </Head>
       <Hero takwimu={takwimu} />
       <FeaturedAnalysis takwimu={takwimu} />
       <Section title="Featured Data">
@@ -39,6 +37,23 @@ function Home({ indicatorId, latestMediumPosts, takwimu }) {
           }}
         />
       </Section>
+      {process.browser &&
+        renderBlocks({
+          logo,
+          flourishUrl: id =>
+            `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
+          fetchDefinitionUrl: (type, id) => {
+            switch (type) {
+              case 'flourish':
+              case 'hurumap':
+                return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
+              case 'snippet':
+                return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
+              default:
+                return '';
+            }
+          }
+        })}
       <WhatYouDoWithTakwimu takwimu={takwimu} />
       <MakingOfTakwimu takwimu={takwimu} />
       <LatestNewsStories takwimu={takwimu} stories={latestMediumPosts} />

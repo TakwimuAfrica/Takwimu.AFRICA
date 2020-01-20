@@ -12,6 +12,17 @@ module.exports = withBundleAnalyzer(
       withTM({
         transpileModules: ['@codeforafrica/hurumap-ui'],
         target: 'serverless',
+        experimental: {
+          // https://github.com/zeit/next.js/issues/9081
+          async rewrites() {
+            return [
+              {
+                source: '/embed/:path*',
+                destination: '/embed'
+              }
+            ];
+          }
+        },
         webpack(config, { webpack }) {
           // ISSUE: https://github.com/bitinn/node-fetch/issues/412#issuecomment-379007792
           // Should be ignore: https://github.com/zeit/next.js/issues/7621#issuecomment-504694519
