@@ -11,26 +11,27 @@ const useStyles = makeStyles(theme => ({
     margin: '0 auto'
   },
   root: {
-    display: 'flex',
     alignItems: 'center',
-    width: '100%',
-    height: '6.25rem', // 100px / 16
     backgroundColor: '#f6f6f6',
-    scrollBehavior: 'smooth'
+    display: 'flex',
+    height: '5.8125rem', // 93px / 16
+    scrollBehavior: 'smooth',
+    width: '100%'
   },
   indicator: {
     display: 'none'
   },
   tab: {
     fontSize: '1.0625rem', // 17px
-    textTransform: 'none',
+    fontWeight: 'normal',
     padding: '0.6875rem 1rem 0.6875rem 1.125rem',
-    [theme.breakpoints.up('md')]: {
-      minWidth: 0
-    },
+    textTransform: 'none',
     '&$tabSelected': {
       backgroundColor: '#fff',
       borderRadius: 21.5
+    },
+    [theme.breakpoints.up('md')]: {
+      minWidth: 0
     }
   },
   tabSelected: {
