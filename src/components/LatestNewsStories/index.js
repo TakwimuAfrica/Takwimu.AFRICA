@@ -42,7 +42,9 @@ function LatestNewsStories({
 }) {
   const classes = useStyles();
   const theme = useTheme();
-  const Stories = useMediaQuery(theme.breakpoints.up('md'))
+  const Stories = useMediaQuery(theme.breakpoints.up('md'), {
+    defaultMatches: true
+  })
     ? StoryBlocks
     : StoryList;
   const hasDescription = () =>
