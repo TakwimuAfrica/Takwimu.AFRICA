@@ -28,7 +28,10 @@ function Story({ story }) {
       alignItems="center"
     >
       <StoryCard story={story} classes={{ root: classes.story }} />
-      <StorySummary story={story} classes={{ root: classes.story }} />
+      <StorySummary
+        subtitle={story.subtitle}
+        classes={{ root: classes.story }}
+      />
     </Grid>
   );
 }
@@ -38,7 +41,7 @@ Story.propTypes = {
     img: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    summary: PropTypes.string.isRequired
+    subtitle: PropTypes.string.isRequired
   }).isRequired
 };
 
