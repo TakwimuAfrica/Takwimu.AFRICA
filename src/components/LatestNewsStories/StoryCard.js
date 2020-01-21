@@ -21,7 +21,8 @@ const styles = theme => ({
   },
   link: {
     color: theme.palette.primary.main,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: theme.typography.body1.fontSize
   }
 });
 
