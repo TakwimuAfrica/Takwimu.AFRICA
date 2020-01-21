@@ -27,7 +27,7 @@ const styles = theme => ({
 
 function StoryCard({ classes, story }) {
   return (
-    <Card classes={{ root: classes.root }}>
+    <Card square classes={{ root: classes.root }}>
       <CardMedia
         className={classes.media}
         component="a"
