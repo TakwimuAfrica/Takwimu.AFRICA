@@ -38,12 +38,12 @@ class MyDocument extends Document {
 
           <link
             rel="preload"
-            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
+            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,600,700"
             as="style"
           />
           <link
+            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,600,700&display=swap"
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
           />
 
           <link rel="manifest" href="/manifest.json" />
