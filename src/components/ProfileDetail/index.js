@@ -24,15 +24,16 @@ import downArrow from '../../assets/images/down-arrow-green.svg';
 import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    height: '30rem',
-    padding: '1.438rem',
+  root: props => ({
+    alignItems: 'flex-start',
     backgroundColor: 'rgba(255, 255, 255, 0.63)',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    height: props.comparable ? '30rem' : '25.5rem',
     justifyContent: 'space-between',
+    lineHeight: 'normal',
+    padding: '0.875rem 1.438rem 1.5625rem 1.438rem',
+    width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
       pointerEvents: 'all',
       zIndex: '1'
     }
-  },
+  }),
   layout: {
     zIndex: 999,
     position: 'relative',
@@ -53,8 +54,10 @@ const useStyles = makeStyles(theme => ({
     }
   },
   label: {
+    color: '#231f20',
+    fontWeight: 'normal',
     fontSize: '0.938rem',
-    fontWeight: '600'
+    lineHeight: 'normal'
   },
   verticalLine: {
     width: '0.25rem',
@@ -64,27 +67,24 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main
   },
   countryName: {
-    marginLeft: '1.125rem',
-    textAlign: 'start',
     fontSize: '1.75rem',
-    width: '11.9rem',
-    fontFamily: theme.typography.fontHeading
+    fontFamily: theme.typography.fontHeading,
+    marginLeft: '1.125rem',
+    marginRight: '1.125rem',
+    textAlign: 'start'
   },
   chooserButton: {
     marginTop: '0.938rem',
     marginBottom: '1.375rem'
   },
   changeCountryLabel: {
+    fontWeight: 600,
+    fontSize: '0.8125rem',
     color: '#848484'
   },
-  detailLabel: {
-    color: '#231f20',
-    lineHeight: 'normal'
-  },
-  detail: {
+  valueLabel: {
     fontSize: '2rem',
-    lineHeight: 'normal',
-    fontWeight: '600',
+    fontWeight: 600,
     color: '#231f20'
   },
   datasetName: {
@@ -114,6 +114,7 @@ const useStyles = makeStyles(theme => ({
 
 function CountrySelectorComponent({ context, country }) {
   const classes = useStyles();
+
   return (
     <Grid container direction="column">
       <Grid item>
@@ -157,7 +158,7 @@ const CountrySelector = CountrySelectorComponent;
 export { CountrySelector };
 
 function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
-  const classes = useStyles();
+  const classes = useStyles({ comparable });
   const searchBarRef = useRef(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -188,7 +189,7 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
     <Grid container justify="center" className={classes.rootContainer}>
       <Layout classes={{ root: classes.layout }}>
         <div className={classes.root}>
-          <Grid container direction="column">
+          <Grid container direction="column" justify="flex-start">
             <Grid item>
               <CountrySelector country={country} context="topic" />
             </Grid>
@@ -200,48 +201,48 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
                 <Grid item container direction="column" justify="space-between">
                   {population && (
                     <Grid item>
+                      <Typography variant="body1" className={classes.label}>
+                        Population
+                      </Typography>
                       <Typography
                         variant="body1"
                         className={classNames([
                           classes.label,
-                          classes.detailLabel
+                          classes.valueLabel
                         ])}
                       >
-                        Population
-                      </Typography>
-                      <Typography variant="body1" className={classes.detail}>
                         {Number(population).toLocaleString()}
                       </Typography>
                     </Grid>
                   )}
                   {squareKms && (
                     <Grid item>
+                      <Typography variant="body1" className={classes.label}>
+                        Square kilometres
+                      </Typography>
                       <Typography
                         variant="body1"
                         className={classNames([
                           classes.label,
-                          classes.detailLabel
+                          classes.valueLabel
                         ])}
                       >
-                        Square kilometres
-                      </Typography>
-                      <Typography variant="body1" className={classes.detail}>
                         {Number(squareKms).toLocaleString()}
                       </Typography>
                     </Grid>
                   )}
                   {populationDensity && (
                     <Grid item>
+                      <Typography variant="body1" className={classes.label}>
+                        People per square kilometre
+                      </Typography>
                       <Typography
                         variant="body1"
                         className={classNames([
                           classes.label,
-                          classes.detailLabel
+                          classes.valueLabel
                         ])}
                       >
-                        People per square kilometre
-                      </Typography>
-                      <Typography variant="body1" className={classes.detail}>
                         {Number(populationDensity).toLocaleString()}
                       </Typography>
                     </Grid>
