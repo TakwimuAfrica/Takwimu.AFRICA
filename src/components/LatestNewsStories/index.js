@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Grid } from '@material-ui/core';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 import { RichTypography } from '../core';
@@ -38,22 +38,19 @@ function LatestNewsStories({
       socialMedia: { medium }
     }
   },
-  width,
   stories = []
 }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const Stories = useMediaQuery(theme.breakpoints.up('md'))
+    ? StoryBlocks
+    : StoryList;
+  const hasDescription = () =>
+    description && description.length > 0 && description !== '<p></p>';
+
   if (!title) {
     return null;
   }
-
-  // Wagtail inserts div/p when RichTextField is empty
-  const hasDescription = () =>
-    description &&
-    description.length > 0 &&
-    description !== '<p></p>' &&
-    description !== '<div class="rich-text"></div>';
-  const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
-
   return (
     <Section
       title={title}
@@ -116,10 +113,7 @@ LatestNewsStories.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
-  stories: PropTypes.arrayOf(PropTypes.shape({})),
-  width: PropTypes.string.isRequired
+  stories: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
-export default withWidth({
-  initialWidth: 'md'
-})(LatestNewsStories);
+export default LatestNewsStories;

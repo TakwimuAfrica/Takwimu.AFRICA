@@ -13,11 +13,17 @@ const styles = theme => ({
     height: '17.625rem',
     cursor: 'grabbing'
   },
+  title: {
+    lineHeight: 'normal'
+  },
   titleGutterBottom: {
     marginBottom: '1.375rem'
   },
-  title: {
-    lineHeight: 'normal'
+  titleContent: {
+    paddingBottom: 0,
+    '&:last-child': {
+      paddingBottom: 0
+    }
   },
   link: {
     color: theme.palette.primary.main,
@@ -37,7 +43,7 @@ function StoryCard({ classes, story }) {
         image={story.previewImageUrl}
         title={story.title}
       />
-      <CardContent>
+      <CardContent classes={{ root: classes.titleContent }}>
         <Typography
           gutterBottom
           variant="body1"

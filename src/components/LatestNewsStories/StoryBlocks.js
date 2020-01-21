@@ -30,12 +30,13 @@ const useStyles = makeStyles(theme => ({
 function StoryBlocks({ stories }) {
   const classes = useStyles();
   return (
-    <Grid container className={classes.root}>
+    <Grid container className={classes.root} spacing={0}>
       {stories.slice(0, 3).map((story, index) => (
         <StoryCard
           key={story.id}
           story={{
-            previewImageUrl: `https://cdn-images-1.medium.com/max/2600/${story.virtuals.previewImage.imageId}`,
+            previewImageUrl: `https://cdn-images-1.medium.com/max/480/${story.virtuals.previewImage.imageId}`,
+            subtitle: story.content.subtitle,
             title: story.title,
             url: `https://medium.com/@takwimu_africa/${story.uniqueSlug}`
           }}
