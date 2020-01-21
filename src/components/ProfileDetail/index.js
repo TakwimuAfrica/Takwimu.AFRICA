@@ -84,8 +84,7 @@ const useStyles = makeStyles(theme => ({
   },
   valueLabel: {
     fontSize: '2rem',
-    fontWeight: 600,
-    color: '#231f20'
+    fontWeight: 600
   },
   datasetName: {
     fontSize: '0.938rem',
