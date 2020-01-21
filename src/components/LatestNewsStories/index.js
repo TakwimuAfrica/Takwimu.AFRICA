@@ -17,10 +17,12 @@ const useStyles = makeStyles({
   },
   root: {},
   descriptionRoot: {
-    marginBottom: '2.1875rem',
-    padding: '1rem 0'
+    '& > p': {
+      margin: 0
+    }
   },
   buttonRoot: {
+    marginTop: '2.1875rem',
     marginBottom: '3.0625rem'
   }
 });
@@ -65,20 +67,31 @@ function LatestNewsStories({
         className={classes.root}
       >
         {hasDescription() && (
-          <Grid item xs={12}>
-            <RichTypography classes={{ root: classes.descriptionRoot }}>
-              {description}
-            </RichTypography>
-          </Grid>
+          <>
+            <Grid item xs={12}>
+              <RichTypography classes={{ root: classes.descriptionRoot }}>
+                {description}
+              </RichTypography>
+            </Grid>
+            <Grid item xs={12}>
+              <A href={medium} underline="none">
+                <Button classes={{ root: classes.buttonRoot }}>
+                  {readMore}
+                </Button>
+              </A>
+            </Grid>
+          </>
         )}
-        <Grid item xs={12}>
-          <A href={medium} underline="none">
-            <Button classes={{ root: classes.buttonRoot }}>{readMore}</Button>
-          </A>
-        </Grid>
         {stories && stories.length > 0 && (
           <Grid item xs={12}>
             <Stories stories={stories} />
+          </Grid>
+        )}
+        {!hasDescription() && (
+          <Grid item xs={12}>
+            <Button href={medium} classes={{ root: classes.buttonRoot }}>
+              {readMore}
+            </Button>
           </Grid>
         )}
       </Grid>
