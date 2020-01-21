@@ -92,8 +92,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DropDownContent({ width, title, description, countries, profile }) {
-  const classes = useStyles();
+function DropDownContent({
+  width,
+  title,
+  description,
+  countries,
+  profile,
+  classes: propClasses
+}) {
+  const classes = useStyles({ classes: propClasses });
   useEffect(() => {
     /**
      * Fix flagsContainer height to avoid modal overflow
