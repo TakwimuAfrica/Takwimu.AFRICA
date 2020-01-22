@@ -46,7 +46,7 @@ function AnalysisPage({
           href={`${config.WP_BACKEND_URL}/wp-includes/js/mediaelement/wp-mediaelement.min.css`}
         />
         <script
-          crossOrigin
+          crossOrigin="anonymous"
           src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
         />
       </Head>
