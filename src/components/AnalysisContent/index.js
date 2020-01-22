@@ -63,7 +63,8 @@ function AnalysisContent({
   takwimu,
   topicsNavigation,
   readNextTitle,
-  analysisLink
+  analysisLink,
+  contentSelector
 }) {
   const classes = useStyles();
 
@@ -215,7 +216,7 @@ function AnalysisContent({
           current={topicIndex}
           showContent={showContent}
         />
-        <CountryContent content={{}} takwimu={takwimu} />
+        <CountryContent content={contentSelector} takwimu={takwimu} />
         <RelatedContent content={{}} />
       </div>
     </>
@@ -232,19 +233,11 @@ AnalysisContent.propTypes = {
         type: PropTypes.string,
         carousel: PropTypes.arrayOf(PropTypes.shape({}))
       })
-    ),
-    profile_navigation: PropTypes.shape({
-      value: PropTypes.shape({})
-    }),
-    read_next: PropTypes.shape({
-      value: PropTypes.shape({})
-    }),
-    related_content: PropTypes.shape({}),
-    title: PropTypes.string,
-    view_country_content: PropTypes.shape({})
+    )
   }).isRequired,
   topicsNavigation: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
+  contentSelector: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
