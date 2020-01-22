@@ -11,10 +11,9 @@ import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
-import ContentNavigation from './ContentNavigation';
 import Portal from '../Portal';
 import RelatedContent from '../RelatedContent';
-import OtherInfoNav from './OtherInfoNav';
+import OtherInfo from './OtherInfo';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
@@ -124,13 +123,15 @@ function AnalysisContent({
   };
   return (
     <>
-      <OtherInfoNav
+      <OtherInfo
+        navigation
         labelText={topicsNavigation}
         labelTextStrong={content.post_title}
         content={content}
         current={topicIndex}
         showContent={showContent}
       />
+
       <div className={classes.hero} />
 
       <div className={classes.root}>
@@ -138,7 +139,7 @@ function AnalysisContent({
           {topic.post_title}
         </Typography>
 
-        <ContentNavigation
+        <OtherInfo
           labelText={topicsNavigation}
           labelTextStrong={content.post_title}
           current={topicIndex}
@@ -169,6 +170,7 @@ function AnalysisContent({
             url={takwimu.url}
           />
         )}
+
         {hydrateElements.indicators.map(
           ({ element, layout, title, src: source }) => {
             if (layout === 'document_widget') {
@@ -201,7 +203,7 @@ function AnalysisContent({
           hideLastUpdated
           link={analysisLink}
         />
-        <ContentNavigation
+        <OtherInfo
           labelText={topicsNavigation}
           labelTextStrong={content.post_title}
           current={topicIndex}
