@@ -45,7 +45,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '3.125rem',
     width: '100%',
     '& a': {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      fontWeight: 'bold'
     },
     [theme.breakpoints.up('md')]: {
       maxWidth: '27.375rem'
