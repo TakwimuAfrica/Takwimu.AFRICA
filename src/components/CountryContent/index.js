@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Grid, Typography } from '@material-ui/core';
@@ -68,29 +68,30 @@ const VIEW_ITEMS = [
   }
 ];
 
-const hrefForView = (view, country) => {
-  if (view === '/profiles/') {
-    return `${view}${country.slug}`;
-  }
-  if (view === '/profiles/country-') {
-    return `${view}${country.iso_code}-${country.slug}`;
-  }
-  return '#/';
-};
-
 function ViewAnalysis({ content, takwimu: { country, countries } }) {
   const classes = useStyles();
   const [countrySlug, setCountrySlug] = useState(country.slug);
   const [view, setView] = useState(VIEW_ITEMS[0].value);
+  const [href, setHref] = useState('');
+
+  useEffect(() => {
+    const selectedCountry = countries.find(c => c.slug === countrySlug);
+    if (view === '/profiles/') {
+      setHref(`${view}${selectedCountry.slug}`);
+    }
+    if (view === '/profiles/country-') {
+      setHref(`${view}${selectedCountry.iso_code}-${selectedCountry.slug}`);
+    }
+  }, [countries, countrySlug, view]);
 
   if (!content) {
     return null;
   }
-  const href = hrefForView(view, country);
   const countryItems = countries.map(c => ({
     value: c.slug,
     label: c.short_name
   }));
+
   return (
     <Section classes={{ root: classes.root }}>
       <Typography variant="body1" className={classes.title}>
