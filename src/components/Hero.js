@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: 'cover'
   },
   gradient: {
-    backgroundImage: `linear-gradient(89deg, #ffffff, rgba(255, 255, 255, 0)),
+    backgroundImage: `linear-gradient(89deg, #ffffff 30%, rgba(255, 255, 255, 0)),
       linear-gradient(to bottom, #ffffff, transparent)`
   },
   hero: {
