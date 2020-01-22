@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Grid } from '@material-ui/core';
@@ -41,12 +41,9 @@ function LatestNewsStories({
   stories = []
 }) {
   const classes = useStyles();
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => setIsClient(!!window), []);
-  const Stories =
-    useMediaQuery(theme => theme.breakpoints.up('md')) && isClient
-      ? StoryBlocks
-      : StoryList;
+  const Stories = useMediaQuery(theme => theme.breakpoints.up('md'))
+    ? StoryBlocks
+    : StoryList;
   const hasDescription = () =>
     description && description.length > 0 && description !== '<p></p>';
 
