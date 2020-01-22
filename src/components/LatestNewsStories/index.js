@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 import { RichTypography } from '../core';
@@ -38,11 +38,15 @@ function LatestNewsStories({
       socialMedia: { medium }
     }
   },
-  stories = [],
-  width
+  stories = []
 }) {
   const classes = useStyles();
-  const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(!!window), []);
+  const Stories =
+    useMediaQuery(theme => theme.breakpoints.up('md')) && isClient
+      ? StoryBlocks
+      : StoryList;
   const hasDescription = () =>
     description && description.length > 0 && description !== '<p></p>';
 
@@ -111,8 +115,7 @@ LatestNewsStories.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
-  stories: PropTypes.arrayOf(PropTypes.shape({})),
-  width: PropTypes.string.isRequired
+  stories: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
-export default withWidth({ initialWidth: 'md' })(LatestNewsStories);
+export default LatestNewsStories;
