@@ -15,7 +15,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
 import Router from 'next/router';
-import rightArrow from '../../assets/images/right-arrow.svg';
+import rightArrowOpaque from '../../assets/images/right-arrow-opaque.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
 import Layout from '../Layout';
@@ -237,7 +237,9 @@ class SearchDrawer extends React.Component {
                 </div>
                 <img
                   alt=""
-                  src={backgroundVisible ? rightArrow : rightArrowTransparent}
+                  src={
+                    backgroundVisible ? rightArrowOpaque : rightArrowTransparent
+                  }
                   className={classes.arrow}
                 />
               </Grid>
