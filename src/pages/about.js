@@ -82,11 +82,16 @@ function About(takwimu) {
   const changeActiveContent = useCallback(
     index => {
       setCurrent(index);
-      const activeElement = document.getElementById(
-        contentHeadings[index].link
-      );
-      if (activeElement) {
-        window.scrollTo(0, activeElement.offsetTop - 90);
+
+      if (contentHeadings[index].link === 'about') {
+        window.scrollTo(0, 0);
+      } else {
+        const activeElement = document.getElementById(
+          contentHeadings[index].link
+        );
+        if (activeElement) {
+          window.scrollTo(0, activeElement.offsetTop - 90);
+        }
       }
     },
     [contentHeadings]
