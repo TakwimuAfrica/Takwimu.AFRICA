@@ -5,10 +5,10 @@ import classNames from 'classnames';
 
 import { makeStyles } from '@material-ui/core';
 
-import ContentNavigation from '../ContentNavigation';
+import Layout from './Layout';
+import ContentNavigation from './ContentNavigation';
 
-import Layout from '../Layout';
-import useScrollListener from '../../useScrollListener';
+import useScrollListener from '../useScrollListener';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -18,10 +18,10 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100px',
     overflow: 'auto',
+    display: 'flex',
     justifyContent: 'center',
     zIndex: 2, // Ensure its ontop (data continer actions has index 1)
     backgroundColor: theme.palette.primary.main,
-    display: 'flex',
     boxShadow: '0 2px 6px 2px rgba(0, 0, 0, 0.27)'
   },
   containerNavigation: {
@@ -61,30 +61,21 @@ const useStyles = makeStyles(theme => ({
       : {}
 }));
 
-function OtherInfo({
+function PageContentNavigation({
   navigation,
-  labelText,
-  labelTextStrong,
+  title,
+  contentTitle,
   content,
   current,
-  showContent
+  generateHref,
+  generateTitle,
+  onClick
 }) {
   const scrollThreshold = useScrollListener(navigation && 100, {
     initial: true
   });
   const classes = useStyles({ navigation, scrollThreshold });
 
-  const generateHref = index => {
-    const item = content.topics[index];
-    return `#${item.post_name}`;
-  };
-  const generateTitle = index => {
-    const item = content.topics[index];
-    return item.post_title;
-  };
-  const onClick = (e, index) => {
-    return showContent(index)();
-  };
   const renderContent = () => (
     <ContentNavigation
       classes={{
@@ -94,12 +85,12 @@ function OtherInfo({
       }}
       current={current}
       onClick={onClick}
-      title={labelText}
-      content={content.topics}
-      contentTitle={labelTextStrong}
+      title={title}
+      content={content}
+      contentTitle={contentTitle}
       generateHref={generateHref}
       generateTitle={generateTitle}
-      linksPrimaryColor={navigation ? 'textPrimary' : 'primary'}
+      linksPrimaryColor={navigation ? 'textSecondary' : 'primary'}
       linksSecondaryColor={navigation ? 'textSecondary' : 'textPrimary'}
     />
   );
@@ -117,24 +108,21 @@ function OtherInfo({
   );
 }
 
-OtherInfo.propTypes = {
+PageContentNavigation.propTypes = {
   navigation: PropTypes.bool,
-  labelText: PropTypes.string.isRequired,
-  labelTextStrong: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  contentTitle: PropTypes.string,
   current: PropTypes.number.isRequired,
-  content: PropTypes.shape({
-    topics: PropTypes.arrayOf(
-      PropTypes.shape({
-        post_title: PropTypes.string,
-        post_name: PropTypes.string
-      })
-    )
-  }).isRequired,
-  showContent: PropTypes.func.isRequired
+  content: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  generateHref: PropTypes.func.isRequired,
+  generateTitle: PropTypes.func.isRequired,
+  onClick: PropTypes.func
 };
 
-OtherInfo.defaultProps = {
-  navigation: false
+PageContentNavigation.defaultProps = {
+  contentTitle: undefined,
+  navigation: false,
+  onClick: undefined
 };
 
-export default OtherInfo;
+export default PageContentNavigation;

@@ -9,11 +9,11 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { RichTypography } from '../core';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
-import CarouselTopic from './topics/CarouselTopic';
+import CarouselTopic from './CarouselTopic';
 import CountryContent from '../CountryContent';
 import Portal from '../Portal';
 import RelatedContent from '../RelatedContent';
-import OtherInfo from './OtherInfo';
+import OtherInfo from '../PageContentNavigation';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
@@ -69,17 +69,17 @@ function AnalysisContent({
   const [topicIndex, setTopicIndex] = useState(0);
   // If there is topic specified, it'll be as hash;
   useEffect(() => {
-    const topicId = window.location.hash
-      ? window.location.hash.split('#')[1]
-      : '';
+    const topicId = window.location.hash && window.location.hash.split('#')[1];
     const foundTopicIndex = topicId
       ? content.topics.findIndex(topic => topic.post_name === topicId)
       : 0;
     setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
   }, [content]);
+
   const [hydrateElements, setHydrateElements] = useState({
     indicators: []
   });
+
   useEffect(() => {
     if (window.renderBlocks) {
       window.renderBlocks();
@@ -94,14 +94,16 @@ function AnalysisContent({
       ? 0
       : -1
   );
+
   useEffect(() => {
-    setCarouselItemIndex(
+    if (
       content.topics &&
-        content.topics[topicIndex] &&
-        content.topics[topicIndex].type === 'carousel_topic'
-        ? 0
-        : -1
-    );
+      content.topics[topicIndex] &&
+      content.topics[topicIndex].type === 'carousel_topic'
+    ) {
+      setCarouselItemIndex(0);
+    }
+    window.scrollTo(0, 0);
   }, [content, topicIndex]);
 
   const topic = content.topics && content.topics[topicIndex];
@@ -109,28 +111,37 @@ function AnalysisContent({
     return null;
   }
 
-  const changeTopic = next => {
-    setTopicIndex(next);
-    window.scrollTo(0, 0);
-  };
-  const showContent = index => () => {
-    changeTopic(index);
-  };
-  const topicType = topic.type;
-  const data = {
-    content: topic,
-    item: carouselItemIndex !== -1 ? topic.carousel : null
-  };
+  const renderActions = props => (
+    <Actions
+      title={topic.post_title}
+      page={takwimu.page}
+      topic={topic.type}
+      data={{
+        content: topic,
+        item: carouselItemIndex !== -1 ? topic.carousel : null
+      }}
+      takwimu={takwimu}
+      link={analysisLink}
+      {...props}
+    />
+  );
+
+  const renderOtherTopics = props => (
+    <OtherInfo
+      title={topicsNavigation}
+      contentTitle={content.post_title}
+      content={content.topics}
+      current={topicIndex}
+      onClick={setTopicIndex}
+      generateHref={({ post_name: postName }) => `#${postName}`}
+      generateTitle={({ post_title: postTitle }) => postTitle}
+      {...props}
+    />
+  );
+
   return (
     <>
-      <OtherInfo
-        navigation
-        labelText={topicsNavigation}
-        labelTextStrong={content.post_title}
-        content={content}
-        current={topicIndex}
-        showContent={showContent}
-      />
+      {renderOtherTopics({ navigation: true })}
 
       <div className={classes.hero} />
 
@@ -139,24 +150,11 @@ function AnalysisContent({
           {topic.post_title}
         </Typography>
 
-        <OtherInfo
-          labelText={topicsNavigation}
-          labelTextStrong={content.post_title}
-          current={topicIndex}
-          content={content}
-          showContent={showContent}
-        />
+        {renderOtherTopics()}
 
-        <Actions
-          title={topic.post_title}
-          page={takwimu.page}
-          topic={topicType}
-          data={data}
-          takwimu={takwimu}
-          link={analysisLink}
-        />
+        {renderActions()}
 
-        {topicType === 'topic' ? (
+        {topic.type === 'topic' ? (
           <Grid container direction="row">
             <RichTypography className={classes.body} component="div">
               {topic.content}
@@ -194,28 +192,16 @@ function AnalysisContent({
           }
         )}
 
-        <Actions
-          title={topic.post_title}
-          page={takwimu.page}
-          topic={topicType}
-          data={data}
-          takwimu={takwimu}
-          hideLastUpdated
-          link={analysisLink}
-        />
-        <OtherInfo
-          labelText={topicsNavigation}
-          labelTextStrong={content.post_title}
-          current={topicIndex}
-          content={content}
-          showContent={showContent}
-        />
+        {renderActions({ hideLastUpdated: true })}
+
+        {renderOtherTopics()}
+
         <AnalysisReadNext
           classes={{ container: classes.readNextContainer }}
           title={readNextTitle}
           content={content}
           current={topicIndex}
-          showContent={showContent}
+          onClick={setTopicIndex}
         />
         <CountryContent content={{}} takwimu={takwimu} />
         <RelatedContent content={{}} />

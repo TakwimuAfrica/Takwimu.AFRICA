@@ -4,9 +4,8 @@ import { PropTypes } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import AboutUsContentNav from './AboutUsContentNav';
 import WhereToNext from '../Next';
-import ContentNavigation from './ContentNavigation';
+import ContentNavigation from '../PageContentNavigation';
 import ContentSection from '../ContentSection';
 import Faqs from '../Faqs';
 import RelatedContent from '../RelatedContent';
@@ -59,18 +58,23 @@ function AboutContent({
 
   return (
     <>
-      <AboutUsContentNav
-        title={contentNavigation}
+      <ContentNavigation
+        navigation
         current={current}
-        contentHeadings={contentHeadings}
+        title={contentNavigation}
+        content={contentHeadings}
+        generateHref={content => `/${content.link}`}
+        generateTitle={content => content.title}
       />
       <Typography variant="h2" className={classes.title}>
         {title}
       </Typography>
       <ContentNavigation
-        title={contentNavigation}
-        contentHeadings={contentHeadings}
         current={current}
+        title={contentNavigation}
+        content={contentHeadings}
+        generateHref={content => `/${content.link}`}
+        generateTitle={content => content.title}
       />
       <RichTextSection
         classes={{ root: classes.section }}
