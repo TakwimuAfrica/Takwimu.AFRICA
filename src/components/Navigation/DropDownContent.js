@@ -93,6 +93,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function DropDownContent({
+  type,
   width,
   title,
   description,
@@ -101,6 +102,7 @@ function DropDownContent({
   classes: propClasses
 }) {
   const classes = useStyles({ classes: propClasses });
+
   useEffect(() => {
     /**
      * Fix flagsContainer height to avoid modal overflow
@@ -116,6 +118,7 @@ function DropDownContent({
       }
     }
   });
+
   return (
     <div className={classes.root}>
       <Grid container direction="row" className={classes.container}>
@@ -155,6 +158,7 @@ function DropDownContent({
               href="/profiles/[geoIdOrCountrySlug]"
               as={`/profiles/${profile(country)}`}
               className={classes.countryLink}
+              onClick={() => window.toggleDrawer(type)()}
             >
               <img
                 alt={country.name}
@@ -171,6 +175,7 @@ function DropDownContent({
 }
 
 DropDownContent.propTypes = {
+  type: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,

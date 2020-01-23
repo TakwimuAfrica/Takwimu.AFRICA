@@ -68,33 +68,32 @@ export default function DropDownDrawer({
       PaperProps={{
         className: classes.drawer
       }}
-      open={active !== null}
+      open={active}
       elevation={0}
       transitionDuration={0}
       onEscapeKeyDown={toggle}
       onBackdropClick={toggle}
     >
       {children}
-      {active && (
-        <DropDownContent
-          classes={{
-            container: classes.container
-          }}
-          countries={countries}
-          profile={({ iso_code: isoCode, slug }) =>
-            active === 'analysis' ? slug : `country-${isoCode}`
-          }
-          title={active === 'analysis' ? 'Country Analysis' : 'Data by Topic'}
-          description={active === 'analysis' ? countryAnalysis : dataByTopic}
-        />
-      )}
+      <DropDownContent
+        classes={{
+          container: classes.container
+        }}
+        type={active}
+        countries={countries}
+        profile={({ iso_code: isoCode, slug }) =>
+          active === 'analysis' ? slug : `country-${isoCode}`
+        }
+        title={active === 'analysis' ? 'Country Analysis' : 'Data by Topic'}
+        description={active === 'analysis' ? countryAnalysis : dataByTopic}
+      />
     </Drawer>
   );
 }
 
 DropDownDrawer.propTypes = {
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
-  active: PropTypes.string,
+  active: PropTypes.oneOf(['analysis', 'topic']),
   toggle: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
