@@ -58,8 +58,11 @@ const styles = theme => ({
     }
   },
   searchButton: {
+    '& > svg': {
+      fontSize: '30px'
+    },
     color: theme.palette.text.secondary,
-    marginBottom: '0.313rem' // Move to align icon
+    marginBottom: '0.1rem' // Pixel perfect
   },
   iconLink: {
     margin: '1.375rem 0.7rem'
