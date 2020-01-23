@@ -225,7 +225,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
             <Fragment key={`${result.post_type}-${result.post_id}`}>
               {[
                 'topic_page',
-                'profile_page',
+                'profile_section_page',
                 'profile',
                 'carousel_topic'
               ].includes(result.post_type) ? (
