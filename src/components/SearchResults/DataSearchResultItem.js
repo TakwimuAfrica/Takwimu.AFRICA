@@ -168,7 +168,7 @@ function InGeographyDataResult({ item, title, chartId, inGeographies }) {
       </Grid>
       <Link
         href={href}
-        as={`/profile/${geo.geoLevel}-${geo.geoCode}#${chartId}`}
+        as={`/profiles/${geo.geoLevel}-${geo.geoCode}#${chartId}`}
         className={classes.link}
       >
         <Typography variant="body1" className={classes.searchResultItem}>
