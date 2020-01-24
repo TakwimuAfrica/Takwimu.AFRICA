@@ -4,20 +4,17 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { ButtonBase, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.primary.main,
+    borderRadius: 0,
     height: '14.875rem',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
 
     // Ensure padding in case of long text
-    paddingRight: '1rem',
-    paddingLeft: '1rem',
+    paddingRight: '2.5rem',
+    paddingLeft: '2.5rem',
 
     // Inheritable by `A` component
     textDecoration: 'none',
@@ -62,8 +59,9 @@ function Card({ children, variant, ...props }) {
   const classes = useStyles(props);
   const variantClass =
     variant === 'triple' ? classes.cardTriple : classes.cardDual;
+
   return (
-    <ButtonBase
+    <Button
       className={classNames(classes.root, variantClass)}
       color="primary"
       {...props}
@@ -75,7 +73,7 @@ function Card({ children, variant, ...props }) {
       >
         {children}
       </Typography>
-    </ButtonBase>
+    </Button>
   );
 }
 

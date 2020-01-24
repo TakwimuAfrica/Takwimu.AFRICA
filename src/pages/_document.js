@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Document, { Head, Main, NextScript } from 'next/document';
 
@@ -38,12 +38,12 @@ class MyDocument extends Document {
 
           <link
             rel="preload"
-            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
+            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,600,700"
             as="style"
           />
           <link
+            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,600,700&display=swap"
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
           />
 
           <link rel="manifest" href="/manifest.json" />
@@ -93,14 +93,10 @@ MyDocument.getInitialProps = async ctx => {
 
   return {
     ...initialProps,
-    /**
-     * Styles fragment is rendered after the app and page rendering finish.
-     */
+    // Styles fragment is rendered after the app and page rendering finish.
     styles: [
-      <Fragment key="styles">
-        {initialProps.styles}
-        {sheets.getStyleElement()}
-      </Fragment>
+      ...React.Children.toArray(initialProps.styles),
+      sheets.getStyleElement()
     ]
   };
 };

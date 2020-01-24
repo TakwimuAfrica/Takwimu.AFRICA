@@ -11,7 +11,7 @@ const COLOR_BREWER_DIVERGING = [
   '#5bc17d'
 ];
 
-const Theme = createTheme({
+const theme = createTheme({
   chart: {
     pie: {
       width: 350,
@@ -342,4 +342,4 @@ const Theme = createTheme({
   }
 });
 
-export default Theme;
+export default theme;

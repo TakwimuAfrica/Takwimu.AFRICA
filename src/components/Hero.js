@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: 'cover'
   },
   gradient: {
-    backgroundImage: `linear-gradient(89deg, #ffffff, rgba(255, 255, 255, 0)),
+    backgroundImage: `linear-gradient(89deg, #ffffff 30%, rgba(255, 255, 255, 0)),
       linear-gradient(to bottom, #ffffff, transparent)`
   },
   hero: {
@@ -45,7 +45,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '3.125rem',
     width: '100%',
     '& a': {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      fontWeight: 'bold'
     },
     [theme.breakpoints.up('md')]: {
       maxWidth: '27.375rem'
