@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import NextLink from 'next/link';
-
-import { Grid, Link } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Grid } from '@material-ui/core';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 
+import Link from '../Link';
 import Title from './Title';
 
 import email from '../../assets/images/email.svg';
@@ -18,6 +16,7 @@ import twitter from '../../assets/images/twitter.svg';
 
 const useStyles = makeStyles({
   root: {
+    marginTop: '3.125rem',
     width: '14.375rem'
   },
   icons: {
@@ -39,14 +38,13 @@ const useStyles = makeStyles({
 
 function StayInTouch({ settings: { support, socialMedia } }) {
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <Title>
-        <NextLink href="/contact">
-          <Link href="/contact" variant="subtitle1" className={classes.title}>
-            Stay in touch
-          </Link>
-        </NextLink>
+        <Link href="/contact" variant="subtitle1" className={classes.title}>
+          Stay in touch
+        </Link>
       </Title>
       <Grid
         container

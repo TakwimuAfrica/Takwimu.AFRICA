@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
+import { renderBlocks } from '@codeforafrica/hurumap-ui/cms';
 import { RichTypography } from '../core';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
@@ -20,6 +21,9 @@ import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import PDFDataContainer from '../DataContainer/PDFDataContainer';
 
 import getHydrateContent from '../../utils/getHydrateContent';
+
+import logo from '../../assets/images/logo-white-all.png';
+import config from '../../config';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -63,7 +67,8 @@ function AnalysisContent({
   takwimu,
   topicsNavigation,
   readNextTitle,
-  analysisLink
+  analysisLink,
+  contentSelector
 }) {
   const classes = useStyles();
 
@@ -81,10 +86,26 @@ function AnalysisContent({
   const [hydrateElements, setHydrateElements] = useState({
     indicators: []
   });
+  const [blocks, setBlocks] = useState();
   useEffect(() => {
-    if (window.renderBlocks) {
-      window.renderBlocks();
-    }
+    setBlocks(
+      renderBlocks({
+        logo,
+        flourishURL: id =>
+          `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
+        fetchDefinitionUrl: (type, id) => {
+          switch (type) {
+            case 'flourish':
+            case 'hurumap':
+              return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
+            case 'snippet':
+              return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
+            default:
+              return '';
+          }
+        }
+      })
+    );
     setHydrateElements(getHydrateContent(document, 'indicators'));
   }, [takwimu.country.name, topicIndex]);
 
@@ -192,6 +213,8 @@ function AnalysisContent({
           }
         )}
 
+        {blocks}
+
         <Actions
           title={topic.post_title}
           page={takwimu.page}
@@ -215,7 +238,7 @@ function AnalysisContent({
           current={topicIndex}
           showContent={showContent}
         />
-        <CountryContent content={{}} takwimu={takwimu} />
+        <CountryContent content={contentSelector} takwimu={takwimu} />
         <RelatedContent content={{}} />
       </div>
     </>
@@ -232,19 +255,11 @@ AnalysisContent.propTypes = {
         type: PropTypes.string,
         carousel: PropTypes.arrayOf(PropTypes.shape({}))
       })
-    ),
-    profile_navigation: PropTypes.shape({
-      value: PropTypes.shape({})
-    }),
-    read_next: PropTypes.shape({
-      value: PropTypes.shape({})
-    }),
-    related_content: PropTypes.shape({}),
-    title: PropTypes.string,
-    view_country_content: PropTypes.shape({})
+    )
   }).isRequired,
   topicsNavigation: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
+  contentSelector: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Grid } from '@material-ui/core';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import { makeStyles } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 import { RichTypography } from '../core';
@@ -17,10 +17,12 @@ const useStyles = makeStyles({
   },
   root: {},
   descriptionRoot: {
-    marginBottom: '2.1875rem',
-    padding: '1rem 0'
+    '& > p': {
+      margin: 0
+    }
   },
   buttonRoot: {
+    marginTop: '2.1875rem',
     marginBottom: '3.0625rem'
   }
 });
@@ -36,22 +38,18 @@ function LatestNewsStories({
       socialMedia: { medium }
     }
   },
-  width,
   stories = []
 }) {
   const classes = useStyles();
+  const Stories = useMediaQuery(theme => theme.breakpoints.up('md'))
+    ? StoryBlocks
+    : StoryList;
+  const hasDescription = () =>
+    description && description.length > 0 && description !== '<p></p>';
+
   if (!title) {
     return null;
   }
-
-  // Wagtail inserts div/p when RichTextField is empty
-  const hasDescription = () =>
-    description &&
-    description.length > 0 &&
-    description !== '<p></p>' &&
-    description !== '<div class="rich-text"></div>';
-  const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
-
   return (
     <Section
       title={title}
@@ -65,20 +63,31 @@ function LatestNewsStories({
         className={classes.root}
       >
         {hasDescription() && (
-          <Grid item xs={12}>
-            <RichTypography classes={{ root: classes.descriptionRoot }}>
-              {description}
-            </RichTypography>
-          </Grid>
+          <>
+            <Grid item xs={12}>
+              <RichTypography classes={{ root: classes.descriptionRoot }}>
+                {description}
+              </RichTypography>
+            </Grid>
+            <Grid item xs={12}>
+              <A href={medium} underline="none">
+                <Button classes={{ root: classes.buttonRoot }}>
+                  {readMore}
+                </Button>
+              </A>
+            </Grid>
+          </>
         )}
-        <Grid item xs={12}>
-          <A href={medium} underline="none">
-            <Button classes={{ root: classes.buttonRoot }}>{readMore}</Button>
-          </A>
-        </Grid>
         {stories && stories.length > 0 && (
           <Grid item xs={12}>
             <Stories stories={stories} />
+          </Grid>
+        )}
+        {!hasDescription() && (
+          <Grid item xs={12}>
+            <Button href={medium} classes={{ root: classes.buttonRoot }}>
+              {readMore}
+            </Button>
           </Grid>
         )}
       </Grid>
@@ -103,10 +112,7 @@ LatestNewsStories.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
-  stories: PropTypes.arrayOf(PropTypes.shape({})),
-  width: PropTypes.string.isRequired
+  stories: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
-export default withWidth({
-  initialWidth: 'md'
-})(LatestNewsStories);
+export default LatestNewsStories;

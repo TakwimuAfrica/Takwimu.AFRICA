@@ -11,7 +11,7 @@ const COLOR_BREWER_DIVERGING = [
   '#5bc17d'
 ];
 
-const Theme = createTheme({
+const theme = createTheme({
   chart: {
     pie: {
       width: 350,
@@ -279,6 +279,19 @@ const Theme = createTheme({
           '@media (min-width: 782px)': {
             marginLeft: '32px'
           }
+        },
+        /**
+         * Override load-styles.php customizations
+         */
+        a: {
+          '&:focus': {
+            boxShadow: 'none',
+            color: 'black',
+            outline: 'none'
+          }
+        },
+        li: {
+          marginBottom: 0
         }
       }
     },
@@ -329,4 +342,4 @@ const Theme = createTheme({
   }
 });
 
-export default Theme;
+export default theme;

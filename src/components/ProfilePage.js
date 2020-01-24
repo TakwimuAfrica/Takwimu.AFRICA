@@ -19,7 +19,7 @@ import ProfileDetail from './ProfileDetail';
 import ProfileSection, { ProfileSectionTitle } from './ProfileSection';
 import Section from './Section';
 
-import { getSectionedCharts } from '../getTakwimuPage';
+import { getSectionedCharts } from '../cms';
 
 import logo from '../assets/images/logo-white-all.png';
 
@@ -33,7 +33,13 @@ const MapIt = dynamic({
   }
 });
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(({ palette, breakpoints, typography }) => ({
+  actionsShareButton: {
+    minWidth: '4rem'
+  },
+  actionsRoot: {
+    border: 'solid 1px #eaeaea'
+  },
   container: {
     marginBottom: '0.625rem'
   },
@@ -43,9 +49,29 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     backgroundColor: '#f6f6f6',
     margin: 0
   }),
+  containerInsightAnalysisLink: {
+    padding: 0
+  },
+  containerInsightDataLink: {
+    backgroundColor: 'white',
+    borderRadius: '12px',
+    border: `solid 2px ${palette.primary.main}`,
+    padding: 0
+  },
   containerSourceGrid: {
     [breakpoints.up('md')]: {
       whiteSpace: 'nowrap'
+    }
+  },
+  containerSourceLink: {
+    fontSize: typography.caption.fontSize
+  },
+  insight: {
+    paddingTop: '1.275rem'
+  },
+  insightGrid: {
+    [breakpoints.up('lg')]: {
+      maxWidth: '23.6875rem'
     }
   },
   numberTitle: {
@@ -53,6 +79,28 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
   hideHighlightGrid: {
     display: 'none'
+  },
+  statDescription: {
+    fontWeight: 600,
+    fontSize: '1.5rem',
+    lineHeight: 1.71
+  },
+  statStatistic: {
+    fontWeight: 'bold',
+    fontSize: '2.5rem',
+    lineHeight: 1.03,
+    marginBottom: '0.6875rem',
+    marginTop: '1.125rem'
+  },
+  statSubtitle: {
+    fontWeight: 'bold',
+    fontSize: '1.25rem',
+    marginTop: '1rem'
+  },
+  title: {
+    fontFamily: typography.fontText,
+    lineHeight: 2.05,
+    marginTop: '1rem'
   }
 }));
 
@@ -175,14 +223,24 @@ function Profile({ sectionedCharts }) {
                   title={chart.title}
                   actions={{
                     handleShare: shareIndicator.bind(null, chart.id),
-                    handleShowData: () => {},
-                    handleCompare: () => {}
+                    handleShowData: null,
+                    handleCompare: null
                   }}
                   classes={{
+                    insight: classes.insight,
+                    actionsCompareButton: classes.actionsCompareButton,
+                    actionsShareButton: classes.actionsShareButton,
+                    actionsShowDataButton: classes.actionsShowDataButton,
+                    actionsRoot: classes.actionsRoot,
                     root: classes.containerRoot,
                     sourceGrid: classes.containerSourceGrid,
+                    sourceLink: classes.containerSourceLink,
+                    insightAnalysisLink: classes.containerInsightAnalysisLink,
+                    insightDataLink: classes.containerInsightDataLink,
+                    insightGrid: classes.insightGrid,
                     highlightGrid:
-                      chart.type === 'flourish' && classes.hideHighlightGrid
+                      chart.type === 'flourish' && classes.hideHighlightGrid,
+                    title: classes.title
                   }}
                   insight={{
                     dataLink: {
@@ -198,7 +256,17 @@ function Profile({ sectionedCharts }) {
                         <Chart
                           key={chart.id}
                           chartData={chartData}
-                          definition={chart.stat}
+                          definition={{
+                            ...chart.stat,
+                            typeProps: {
+                              ...chart.stat.typeProps,
+                              classes: {
+                                description: classes.statDescription,
+                                statistic: classes.statStatistic,
+                                subtitle: classes.statSubtitle
+                              }
+                            }
+                          }}
                           profiles={profiles}
                           classes={classes}
                         />,

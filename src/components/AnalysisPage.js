@@ -22,7 +22,10 @@ function AnalysisPage({
   initial,
   activeAnalysis,
   analyses,
-  analysisLink
+  analysisLink,
+  readNextTitle,
+  topicsNavigation,
+  contentSelector
 }) {
   const classes = useStyles();
 
@@ -43,10 +46,6 @@ function AnalysisPage({
           rel="stylesheet"
           href={`${config.WP_BACKEND_URL}/wp-includes/js/mediaelement/wp-mediaelement.min.css`}
         />
-        <script
-          crossOrigin
-          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
-        />
       </Head>
       <ContentPage
         aside={
@@ -62,6 +61,9 @@ function AnalysisPage({
           content={activeAnalysis}
           takwimu={takwimu}
           analysisLink={analysisLink}
+          readNextTitle={readNextTitle}
+          topicsNavigation={topicsNavigation}
+          contentSelector={contentSelector}
         />
       </ContentPage>
     </Page>
@@ -85,7 +87,10 @@ AnalysisPage.propTypes = {
       slug: PropTypes.string
     })
   }).isRequired,
-  analysisLink: PropTypes.string.isRequired
+  analysisLink: PropTypes.string.isRequired,
+  readNextTitle: PropTypes.string.isRequired,
+  topicsNavigation: PropTypes.string.isRequired,
+  contentSelector: PropTypes.shape({}).isRequired
 };
 
 const get = async url => {
@@ -111,6 +116,7 @@ AnalysisPage.getInitialProps = async ({
   let initial = 0;
   let topicsNavigation = '';
   let readNextTitle = '';
+  let contentSelector = {};
 
   try {
     const [profile] = await get(
@@ -122,11 +128,21 @@ AnalysisPage.getInitialProps = async ({
         acf: {
           sections,
           topics_navigation: topicsNav,
-          read_other_topics_label: readTopics
+          read_other_topics_label: readTopics,
+          profile_select_label: contentSelectLabel,
+          country_select_label: countrySelectLabel,
+          selector_title: contentSelectTitle,
+          button_label: actionLabel
         }
       } = profile;
       topicsNavigation = topicsNav;
       readNextTitle = readTopics;
+      contentSelector = {
+        contentSelectLabel,
+        countrySelectLabel,
+        contentSelectTitle,
+        actionLabel
+      };
 
       if (sections.length) {
         let foundIndex = -1;
@@ -147,7 +163,8 @@ AnalysisPage.getInitialProps = async ({
         );
 
         const topics = await Promise.all(
-          sectionTopics.map(async topic => {
+          sectionTopics.map(async t => {
+            const topic = t.profile_section_topic || t;
             if (topic.post_content === '') {
               topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
               // add another backend call to fetch the carousel_topic
@@ -158,9 +175,7 @@ AnalysisPage.getInitialProps = async ({
               );
               topic.carousel = carousel; // eslint-disable-line no-param-reassign
             } else {
-              const {
-                content: { rendered }
-              } = await get(
+              const { content: { rendered } = { rendered: '' } } = await get(
                 `${WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.ID}`
               );
               topic.type = 'topic'; // eslint-disable-line no-param-reassign
@@ -188,7 +203,8 @@ AnalysisPage.getInitialProps = async ({
     analyses,
     topicsNavigation,
     readNextTitle,
-    analysisLink
+    analysisLink,
+    contentSelector
   };
 };
 

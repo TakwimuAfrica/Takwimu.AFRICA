@@ -8,14 +8,13 @@ import Link from '@material-ui/core/Link';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import config from '../config';
-import { getSitePage } from '../getTakwimuPage';
+import { getSitePage } from '../cms';
 import Error from '../components/Error';
-import ErrorPage from '../components/ErrorPage';
+import CustomErrorPage from '../components/ErrorPage';
 import SearchInput from '../components/SearchInput';
 import WhereToNext from '../components/Next';
 
 const useStyles = makeStyles(theme => ({
-  root: {},
   whereToNext: {
     width: '100%',
     margin: 0,
@@ -29,11 +28,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function NotFoundError({ statusCode, whereToNextLink }) {
+function ErrorPage({ statusCode, whereToNextLink }) {
   const classes = useStyles();
   return (
-    <ErrorPage
-      classes={{ root: classes.root }}
+    <CustomErrorPage
       takwimu={config}
       title={statusCode === 404 ? 'Page Not Found' : 'Internal Server Error'}
     >
@@ -44,15 +42,19 @@ function NotFoundError({ statusCode, whereToNextLink }) {
               The page you are looking for does not exist.
             </Typography>
           </Error>
+
           <SearchInput title="Why not try searching…" />
-          <WhereToNext
-            variant="dual"
-            whereToNext={{
-              title: 'Explore further',
-              whereToNextLink
-            }}
-            classes={{ sectionRoot: classes.whereToNext }}
-          />
+
+          {whereToNextLink && (
+            <WhereToNext
+              variant="dual"
+              whereToNext={{
+                title: 'Explore further',
+                whereToNextLink
+              }}
+              classes={{ sectionRoot: classes.whereToNext }}
+            />
+          )}
         </>
       )}
 
@@ -70,20 +72,20 @@ function NotFoundError({ statusCode, whereToNextLink }) {
           </Typography>
         </Error>
       )}
-    </ErrorPage>
+    </CustomErrorPage>
   );
 }
 
-NotFoundError.propTypes = {
+ErrorPage.propTypes = {
   statusCode: PropTypes.number.isRequired,
   whereToNextLink: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
-NotFoundError.defaultProps = {
+ErrorPage.defaultProps = {
   whereToNextLink: []
 };
 
-NotFoundError.getInitialProps = async ({ res, err }) => {
+ErrorPage.getInitialProps = async ({ res, err }) => {
   const {
     page: { where_to_next_link: whereToNextLink }
   } = await getSitePage('about');
@@ -93,4 +95,4 @@ NotFoundError.getInitialProps = async ({ res, err }) => {
   };
 };
 
-export default NotFoundError;
+export default ErrorPage;
