@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTyes from 'prop-types';
 import Head from 'next/head';
-import ErrorPage from 'next/error';
+import ErrorPage from '../_error';
 import Page from '../../components/Page';
 
 import { getPage } from '../../cms';
