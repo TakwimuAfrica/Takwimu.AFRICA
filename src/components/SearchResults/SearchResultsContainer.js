@@ -124,6 +124,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   const handleNextClick = () => {
     setState(prevState => ({
+      ...prevState,
       activePage: prevState.activePage + 1,
       startIndex: prevState.startIndex + 10
     }));
@@ -131,6 +132,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   const handlePreviousClick = () => {
     setState(prevState => ({
+      ...prevState,
       activePage: prevState.activePage - 1,
       startIndex: prevState.startIndex - 10
     }));
@@ -138,10 +140,11 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   const handlePageClick = pageNum => {
     const startIndex = (pageNum - 1) * 10;
-    setState({
+    setState(prevState => ({
+      ...prevState,
       activePage: pageNum - 1,
       startIndex
-    });
+    }));
   };
 
   const handleFilterClick = category => {
