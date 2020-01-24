@@ -1,16 +1,19 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import dynamic from 'next/dynamic';
 
 import { Box, Typography } from '@material-ui/core';
-
-// import { useRouter } from 'next/router';
-
-import { Visual } from '@codeforafrica/hurumap-ui/components';
 import { useRouter } from 'next/router';
 import { getChartDefinition, getPostById } from '../cms';
 
 import Error from '../components/Error';
 import logo from '../assets/images/logo-white-all.png';
+import config from '../config';
+
+const Card = dynamic(
+  () => import('@codeforafrica/hurumap-ui/components/Card'),
+  { ssr: false }
+);
 
 function Embed({ error, type, id, geoId, definition }) {
   const { query } = useRouter();
@@ -37,7 +40,7 @@ function Embed({ error, type, id, geoId, definition }) {
     );
   }
   return (
-    <Visual
+    <Card
       id={id}
       type={type}
       logo={logo}
@@ -51,6 +54,11 @@ function Embed({ error, type, id, geoId, definition }) {
       analysisLinkCountrySlug={query.analysisLinkCountrySlug}
       analysisLinkTitle={query.analysisLinkTitle}
       dataGeoId={query.dataGeoId}
+      flourishURL={
+        type === `flourish`
+          ? `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`
+          : undefined
+      }
     />
   );
 }
