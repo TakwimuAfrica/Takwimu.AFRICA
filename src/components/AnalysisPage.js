@@ -24,7 +24,8 @@ function AnalysisPage({
   analyses,
   analysisLink,
   readNextTitle,
-  topicsNavigation
+  topicsNavigation,
+  contentSelector
 }) {
   const classes = useStyles();
 
@@ -66,6 +67,7 @@ function AnalysisPage({
           analysisLink={analysisLink}
           readNextTitle={readNextTitle}
           topicsNavigation={topicsNavigation}
+          contentSelector={contentSelector}
         />
       </ContentPage>
     </Page>
@@ -91,7 +93,8 @@ AnalysisPage.propTypes = {
   }).isRequired,
   analysisLink: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
-  topicsNavigation: PropTypes.string.isRequired
+  topicsNavigation: PropTypes.string.isRequired,
+  contentSelector: PropTypes.shape({}).isRequired
 };
 
 const get = async url => {
@@ -117,6 +120,7 @@ AnalysisPage.getInitialProps = async ({
   let initial = 0;
   let topicsNavigation = '';
   let readNextTitle = '';
+  let contentSelector = {};
 
   try {
     const [profile] = await get(
@@ -128,11 +132,21 @@ AnalysisPage.getInitialProps = async ({
         acf: {
           sections,
           topics_navigation: topicsNav,
-          read_other_topics_label: readTopics
+          read_other_topics_label: readTopics,
+          profile_select_label: contentSelectLabel,
+          country_select_label: countrySelectLabel,
+          selector_title: contentSelectTitle,
+          button_label: actionLabel
         }
       } = profile;
       topicsNavigation = topicsNav;
       readNextTitle = readTopics;
+      contentSelector = {
+        contentSelectLabel,
+        countrySelectLabel,
+        contentSelectTitle,
+        actionLabel
+      };
 
       if (sections.length) {
         let foundIndex = -1;
@@ -195,7 +209,8 @@ AnalysisPage.getInitialProps = async ({
     analyses,
     topicsNavigation,
     readNextTitle,
-    analysisLink
+    analysisLink,
+    contentSelector
   };
 };
 
