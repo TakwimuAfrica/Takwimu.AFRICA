@@ -193,7 +193,7 @@ export const InGeographyResult = InGeographyDataResult;
 
 function DataSearchResultItem({ item, title, id, visualType, visualData }) {
   const classes = useStyles();
-  const { inTopics, inGeographies, country } = visualData
+  const { inTopics, inGeographies } = visualData
     ? JSON.parse(visualData.replace('\\', ''))
     : { inTopics: [], inGeography: [] };
 
@@ -225,7 +225,7 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
       </Typography>
       <Link
         href="/embed"
-        as={`/embed/${visualType}/${country}/${id}`}
+        as={`/embed/${visualType}/${id}`}
         className={classes.link}
       >
         <Typography variant="body1" className={classes.searchResultItem}>
