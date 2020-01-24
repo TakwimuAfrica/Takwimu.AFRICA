@@ -42,7 +42,7 @@ export async function getSitePage(slug) {
 
 export async function getSectionedCharts() {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts?sectioned=1`
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts?sectioned=1&type=hurumap`
   );
   return res.ok ? res.json() : null;
 }
