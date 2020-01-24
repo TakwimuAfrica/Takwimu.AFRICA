@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { renderBlocks } from '@codeforafrica/hurumap-ui/cms';
@@ -25,19 +25,10 @@ function Home({ latestMediumPosts, takwimu }) {
     }
   } = takwimu;
 
-  return (
-    <Page takwimu={takwimu}>
-      <Hero takwimu={takwimu} />
-      <FeaturedAnalysis takwimu={takwimu} />
-      <Section title="Featured Data">
-        <div
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: featuredData
-          }}
-        />
-      </Section>
-      {process.browser &&
+  const [blocks, setBlocks] = useState();
+  useEffect(
+    () =>
+      setBlocks(
         renderBlocks({
           logo,
           flourishUrl: id =>
@@ -53,7 +44,24 @@ function Home({ latestMediumPosts, takwimu }) {
                 return '';
             }
           }
-        })}
+        })
+      ),
+    []
+  );
+
+  return (
+    <Page takwimu={takwimu}>
+      <Hero takwimu={takwimu} />
+      <FeaturedAnalysis takwimu={takwimu} />
+      <Section title="Featured Data">
+        <div
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: featuredData
+          }}
+        />
+        {blocks}
+      </Section>
       <WhatYouDoWithTakwimu takwimu={takwimu} />
       <MakingOfTakwimu takwimu={takwimu} />
       <LatestNewsStories takwimu={takwimu} stories={latestMediumPosts} />

@@ -85,7 +85,26 @@ function AnalysisContent({
   const [hydrateElements, setHydrateElements] = useState({
     indicators: []
   });
+  const [blocks, setBlocks] = useState();
   useEffect(() => {
+    setBlocks(
+      renderBlocks({
+        logo,
+        flourishUrl: id =>
+          `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
+        fetchDefinitionUrl: (type, id) => {
+          switch (type) {
+            case 'flourish':
+            case 'hurumap':
+              return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
+            case 'snippet':
+              return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
+            default:
+              return '';
+          }
+        }
+      })
+    );
     setHydrateElements(getHydrateContent(document, 'indicators'));
   }, [takwimu.country.name, topicIndex]);
 
@@ -193,23 +212,7 @@ function AnalysisContent({
           }
         )}
 
-        {process.browser &&
-          renderBlocks({
-            logo,
-            flourishUrl: id =>
-              `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
-            fetchDefinitionUrl: (type, id) => {
-              switch (type) {
-                case 'flourish':
-                case 'hurumap':
-                  return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
-                case 'snippet':
-                  return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
-                default:
-                  return '';
-              }
-            }
-          })}
+        {blocks}
 
         <Actions
           title={topic.post_title}

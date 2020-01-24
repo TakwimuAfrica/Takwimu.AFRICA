@@ -149,7 +149,8 @@ AnalysisPage.getInitialProps = async ({
         );
 
         const topics = await Promise.all(
-          sectionTopics.map(async topic => {
+          sectionTopics.map(async t => {
+            const topic = t.profile_section_topic || t;
             if (topic.post_content === '') {
               topic.type = 'carousel_topic'; // eslint-disable-line no-param-reassign
               // add another backend call to fetch the carousel_topic
@@ -160,9 +161,7 @@ AnalysisPage.getInitialProps = async ({
               );
               topic.carousel = carousel; // eslint-disable-line no-param-reassign
             } else {
-              const {
-                content: { rendered }
-              } = await get(
+              const { content: { rendered } = { rendered: '' } } = await get(
                 `${WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.ID}`
               );
               topic.type = 'topic'; // eslint-disable-line no-param-reassign
