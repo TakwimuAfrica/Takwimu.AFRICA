@@ -31,7 +31,7 @@ function Home({ latestMediumPosts, takwimu }) {
       setBlocks(
         renderBlocks({
           logo,
-          flourishUrl: id =>
+          flourishURL: id =>
             `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
           fetchDefinitionUrl: (type, id) => {
             switch (type) {
