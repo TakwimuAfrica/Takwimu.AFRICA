@@ -220,6 +220,16 @@ function Profile({ sectionedCharts }) {
                 chart.type === 'hurumap'
                   ? `hurumap/${geoId}/${chart.id}`
                   : `flourish/${chart.id}`;
+
+              const sourceResult = chartData.profileVisualsData
+                ? chartData.profileVisualsData[
+                    `${chart.visual.queryAlias}Source`
+                  ]
+                : null;
+              const source =
+                sourceResult && sourceResult.nodes && sourceResult.nodes.length
+                  ? sourceResult.nodes[0]
+                  : null;
               return (
                 <Grid item xs={12} key={chart.id} className={classes.container}>
                   <InsightContainer
@@ -246,11 +256,11 @@ function Profile({ sectionedCharts }) {
                       title: classes.title
                     }}
                     embedCode={`<iframe
-  id="${chart.id}"
-  src="${config.url}/embed/${embedPath}"
-  title="${chart.title}"
-  allowFullScreen
-/>`}
+                        id="${chart.id}"
+                        src="${config.url}/embed/${embedPath}"
+                        title="${chart.title}"
+                        allowFullScreen
+                      />`}
                     insight={{
                       dataLink: {
                         href: `/profiles/${country.slug}`,
@@ -259,7 +269,7 @@ function Profile({ sectionedCharts }) {
                     }}
                     loading={chartData.isLoading}
                     logo={logo}
-                    source={chart.source && chart.source[geoId]}
+                    source={source}
                     title={chart.title}
                   >
                     {chart.type === 'hurumap'
