@@ -142,7 +142,7 @@ const createPdf = () => {
               style={classes.linkLicense}
               href="//creativecommons.org/licenses/by/4.0/"
             >
-              2018 {takwimu.name} CC by 4.0
+              2020 {takwimu.name} CC by 4.0
             </Link>
             <View style={classes.logoBackground}>
               <Image style={classes.logo} src={logoWhite} />
