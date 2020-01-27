@@ -108,7 +108,7 @@ function Footer({ takwimu: { settings }, ...props }) {
         </Grid>
         <div className={classes.license}>
           <Typography variant="subtitle2" className={classes.text}>
-            2020 Takwimu{' '}
+            2018-2020 Takwimu{' '}
             <A
               href="//creativecommons.org/licenses/by/4.0/"
               className={classes.text}
