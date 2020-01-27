@@ -946,10 +946,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@codeforafrica/hurumap-ui@^0.2.0-rc.3":
-  version "0.2.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@codeforafrica/hurumap-ui/-/hurumap-ui-0.2.0-rc.3.tgz#86969c98068ca35806aa9f4b972d07ce5fe2a460"
-  integrity sha512-ioT4K3OxftdyErNU0LLhiQo+/kZzLNbIlphSGPazLJ/izqk5f/JUZ6yNCa8X65902JhMhifbOgddrH3LocRtIA==
+"@codeforafrica/hurumap-ui@^0.2.0-rc.5":
+  version "0.2.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@codeforafrica/hurumap-ui/-/hurumap-ui-0.2.0-rc.5.tgz#5604536cd4366b103a083551bad55ff3d24a3b07"
+  integrity sha512-cKKedFeu06Pk3HRoHieqiN286tII5iFHOT8GpqGCIyp/xsosxmcB2XBuJjtNul9vAdrdEzE71OuhiuzBL4uakA==
   dependencies:
     "@material-ui/core" "^4.5.1"
     "@material-ui/icons" "^4.5.1"
