@@ -155,3 +155,11 @@ typings/
 
 # ignore build folder
 build/
+
+### Zeit Now ###
+
+# Local development .env files
+.env
+.env.build
+
+# End of Customizations
