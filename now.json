@@ -1,0 +1,8 @@
+{
+  "env": {
+    "HURUMAP_AWS_ACCESS_KEY_ID": "@hurumap-aws-access-key-id",
+    "HURUMAP_AWS_SECRET_ACCESS_KEY": "@hurumap-aws-secret-access-key",
+    "HURUMAP_AWS_REGION": "@hurumap-aws-region",
+    "HURUMAP_AWS_S3_BUCKET": "@hurumap-aws-s3-bucket"
+  }
+}
