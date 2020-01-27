@@ -151,10 +151,10 @@ Disallow:
   populationTables: [
     'allPopulationSex2006S',
     'allPopulationSex2007S',
-    'allPopulationSex2009S',
     'allPopulationSex2011S',
     'allPopulationSex2012S',
     'allPopulationSex2013S',
+    'allPopulationSex2019S',
     'allPopulationSexYears',
     'allPopulationResidence2009S',
     'allPopulationResidence2012S',
