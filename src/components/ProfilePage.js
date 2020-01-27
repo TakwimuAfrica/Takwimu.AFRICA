@@ -64,7 +64,8 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }) => ({
     }
   },
   containerSourceLink: {
-    fontSize: typography.caption.fontSize
+    fontSize: typography.caption.fontSize,
+    color: palette.text.primary
   },
   insight: {
     paddingTop: '1.275rem'
