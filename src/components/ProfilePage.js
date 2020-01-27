@@ -118,6 +118,31 @@ function Chart({ chartData, definition, profiles, classes }) {
   );
 }
 
+const overrideTypePropsFor = chartType => {
+  switch (chartType) {
+    case 'column': // Fall through
+    case 'grouped_column':
+      return {
+        parts: {
+          axis: {
+            dependent: {
+              style: {
+                grid: {
+                  display: 'none'
+                },
+                tickLabels: {
+                  display: 'none'
+                }
+              }
+            }
+          }
+        }
+      };
+    default:
+      return {};
+  }
+};
+
 function Profile({ sectionedCharts }) {
   const router = useRouter();
   const {
@@ -295,7 +320,13 @@ function Profile({ sectionedCharts }) {
                           <Chart
                             key={chart.id}
                             chartData={chartData}
-                            definition={chart.visual}
+                            definition={{
+                              ...chart.visual,
+                              typeProps: {
+                                ...chart.visual.typeProps,
+                                ...overrideTypePropsFor(chart.visual.type)
+                              }
+                            }}
                             profiles={profiles}
                             classes={classes}
                           />
@@ -317,7 +348,7 @@ function Profile({ sectionedCharts }) {
             })}
         </Grid>
       )),
-    [profileTabs, chartData, classes, country.slug, profiles, geoId]
+    [profileTabs, chartData, geoId, classes, country.slug, profiles]
   );
 
   // Show and hide sections
