@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
   filterActive: {
     color: theme.palette.text.primary,
+    fontWeight: 'bold',
     textDecoration: 'none'
   },
   filterItemLabel: {
@@ -53,12 +54,15 @@ const useStyles = makeStyles(theme => ({
   },
   pagginationButton: {},
   borderDiv: {
-    borderStyle: 'solid',
-    borderBottom: '4px',
+    border: '2px solid',
     borderColor: theme.palette.primary.main
   },
   pagesList: {
     marginTop: '1rem'
+  },
+  pageActive: {
+    color: theme.palette.text.primary,
+    textDecoration: 'none'
   }
 }));
 
@@ -89,7 +93,7 @@ function RenderPaginator({
           key={`button-${page}`}
           className={classNames([
             classes.filterItem,
-            { [classes.filterActive]: page === activePage + 1 }
+            { [classes.pageActive]: page === activePage + 1 }
           ])}
           onClick={() => handlePageClick(page)}
         >
@@ -188,13 +192,13 @@ function SearchResultsContainer({ results, filter: propFilter }) {
     if (filteredResultsLength - startIndex < 10) {
       endIndex = startIndex + (filteredResultsLength - startIndex);
     }
-    resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
+    resultIndexText = `${startIndex + 1} - ${endIndex} of `;
   }
 
   return (
     <div className={classes.root}>
       <Grid className={classes.resultsFilter}>
-        <Typography variant="body2" className={classes.showResult}>
+        <Typography variant="subtitle2" className={classes.showResult}>
           {`Showing ${resultIndexText}${filteredResultsLength} results`}
         </Typography>
         <Grid item className={classes.filter}>
@@ -266,7 +270,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
       <div className={classes.borderDiv} />
 
       <div className={classes.paginationContainer}>
-        <Typography variant="body2">
+        <Typography variant="subtitle2">
           {`Showing ${resultIndexText}${filteredResultsLength} results`}
         </Typography>
         {filteredResultsLength > 10 && (
