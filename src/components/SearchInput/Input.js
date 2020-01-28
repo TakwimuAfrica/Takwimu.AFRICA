@@ -3,10 +3,9 @@ import { PropTypes } from 'prop-types';
 
 import { InputBase, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
-
 import { useRouter } from 'next/router';
+import searchIcon from '../../assets/images/search-black.svg';
 
 const useStyles = makeStyles(({ palette, typography }) => ({
   root: {
@@ -28,10 +27,14 @@ const useStyles = makeStyles(({ palette, typography }) => ({
   },
   searchInputButton: {
     padding: 0,
-    fontSize: '2.3125rem'
+    fontSize: '2.3125rem',
+    '&:hover': {
+      background: 'none'
+    }
   },
-  iconStyle: {
-    color: palette.text.primary
+  searchIcon: {
+    height: '2.4375rem',
+    width: '2.3125rem'
   }
 }));
 
@@ -79,10 +82,10 @@ function Input({ onRefresh, placeholder, query }) {
                 handleSearchClick(e);
               }}
             >
-              <SearchIcon
-                fontSize="inherit"
-                color="primary"
-                classes={{ colorPrimary: classes.iconStyle }}
+              <img
+                src={searchIcon}
+                alt="search"
+                className={classes.searchIcon}
               />
             </IconButton>
           </InputAdornment>
