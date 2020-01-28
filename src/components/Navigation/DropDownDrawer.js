@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
       boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
     }
   },
-  container: active => ({
+  container: ({ active }) => ({
     backgroundRepeat: 'no-repeat',
     backgroundImage: `url(${
       active === 'analysis' ? analysisDescriptionBG : dataByTopicDescriptionBG
