@@ -7,7 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Section from './Section';
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    marginTop: '3.875rem'
+  },
   aside: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
