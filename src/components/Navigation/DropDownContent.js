@@ -52,7 +52,10 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: 'transparent',
       color: theme.palette.text.secondary,
-      textDecoration: 'none'
+      textDecoration: 'none',
+      '& span': {
+        borderBottom: 'unset'
+      }
     },
     height: 'fit-content',
     marginBottom: '1.25em',
@@ -68,10 +71,12 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('md')]: {
       margin: '0 1.5rem'
+    },
+    '& span': {
+      borderBottom: '1px solid'
     }
   },
   countryName: {
-    borderBottom: '1px solid',
     lineHeight: 'unset'
   },
   leftContent: {
