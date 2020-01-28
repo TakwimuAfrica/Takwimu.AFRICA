@@ -10,19 +10,21 @@ import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(({ palette, typography }) => ({
   root: {
-    marginTop: '1rem',
-    marginBottom: '1rem'
+    marginTop: '1.3125rem'
   },
   searchInput: {
     width: '100%',
     backgroundColor: palette.background.light,
     borderStyle: 'None',
-    paddingBottom: '1.5rem',
-    paddingTop: '1.5rem',
+    paddingBottom: '1.152rem',
+    paddingTop: '1.152rem',
     paddingLeft: '2.0625rem',
     paddingRight: '2.4375rem',
-    color: palette.data.main,
-    fontSize: typography.h3.fontSize
+    color: palette.data.main
+  },
+  inputFont: {
+    fontSize: typography.h3.fontSize,
+    fontFamily: typography.fontText
   },
   searchInputButton: {
     padding: 0,
@@ -60,7 +62,7 @@ function Input({ onRefresh, placeholder, query }) {
     <div className={classes.root}>
       <InputBase
         id="searchInput"
-        classes={{ root: classes.searchInput }}
+        classes={{ root: classes.searchInput, input: classes.inputFont }}
         defaultValue={searchTerm || query}
         onChange={e => setSearchTerm(e.target.value)}
         onKeyDown={e => {
