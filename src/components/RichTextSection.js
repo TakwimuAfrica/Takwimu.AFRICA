@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,7 +13,7 @@ const useStyles = makeStyles({
 });
 
 function RichTextSection({ component, title, value, variant, ...props }) {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const text = (
     <RichTypography classes={{ root: classes.text }} component="div">
       {value}
