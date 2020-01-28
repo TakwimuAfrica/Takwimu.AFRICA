@@ -7,9 +7,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import TableOfContent from '../TableOfContent';
 
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    [theme.breakpoints.up('md')]: {
+      top: '10.375rem'
+    }
+  },
   sideMenuHeader: {
-    color: theme.palette.info.other
+    color: theme.palette.info.other,
+    marginTop: '2.875rem'
+  },
+  menuListRoot: {
+    marginTop: '1.625rem'
   }
 }));
 
@@ -23,7 +31,7 @@ function ContactUsTableOfContent({ current, contentHeadings }) {
   return (
     <TableOfContent
       current={current}
-      classes={{ root: classes.root }}
+      classes={{ root: classes.root, menuListRoot: classes.menuListRoot }}
       content={contentHeadings}
       generateHref={generateHref}
     >
