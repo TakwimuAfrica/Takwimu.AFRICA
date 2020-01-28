@@ -7,10 +7,10 @@ import classNames from 'classnames';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { RichTypography } from '../../core';
+import { RichTypography } from '../core';
 
-import leftArrow from '../../../assets/images/left-arrow.svg';
-import rightArrow from '../../../assets/images/right-arrow.svg';
+import leftArrow from '../../assets/images/left-arrow.svg';
+import rightArrow from '../../assets/images/right-arrow.svg';
 
 const useStyles = makeStyles(theme => ({
   root: {

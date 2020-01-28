@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { ReactiveBase, DataSearch } from '@appbaseio/reactivesearch';
 import Link from '../Link';
-import rightArrow from '../../assets/images/right-arrow-white.svg';
+import rightArrowOpaque from '../../assets/images/right-arrow-opaque.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
 import Layout from '../Layout';
@@ -200,13 +200,19 @@ function SearchDrawer({ children, active, toggle }) {
                   showIcon
                   iconPosition="right"
                   icon={
-                    <img
-                      alt=""
-                      src={
-                        backgroundVisible ? rightArrow : rightArrowTransparent
-                      }
-                      className={classes.arrow}
-                    />
+                    backgroundVisible ? (
+                      <img
+                        alt=""
+                        src={rightArrowOpaque}
+                        className={classes.arrow}
+                      />
+                    ) : (
+                      <img
+                        alt=""
+                        src={rightArrowTransparent}
+                        className={classes.arrow}
+                      />
+                    )
                   }
                   onBlur={e => {
                     handleInput(e);
@@ -216,13 +222,10 @@ function SearchDrawer({ children, active, toggle }) {
                       handleInput(e);
                     }
                   }}
-                  onFocus={e => {
-                    if (!backgroundVisible && e.target.value.length > 0) {
+                  onValueChange={value => {
+                    if (!backgroundVisible && value) {
                       setBackgroundVisible(true);
-                    } else if (
-                      backgroundVisible &&
-                      e.target.value.length === 0
-                    ) {
+                    } else if (backgroundVisible && !value) {
                       setBackgroundVisible(false);
                     }
                   }}

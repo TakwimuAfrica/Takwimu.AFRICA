@@ -52,7 +52,10 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: 'transparent',
       color: theme.palette.text.secondary,
-      textDecoration: 'none'
+      textDecoration: 'none',
+      '& span': {
+        borderBottom: 'unset'
+      }
     },
     height: 'fit-content',
     marginBottom: '1.25em',
@@ -68,10 +71,12 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up('md')]: {
       margin: '0 1.5rem'
+    },
+    '& span': {
+      borderBottom: '1px solid'
     }
   },
   countryName: {
-    borderBottom: '1px solid',
     lineHeight: 'unset'
   },
   leftContent: {
@@ -92,8 +97,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DropDownContent({ width, title, description, countries, profile }) {
-  const classes = useStyles();
+function DropDownContent({
+  type,
+  width,
+  title,
+  description,
+  countries,
+  profile,
+  classes: propClasses
+}) {
+  const classes = useStyles({ classes: propClasses });
+
   useEffect(() => {
     /**
      * Fix flagsContainer height to avoid modal overflow
@@ -109,6 +123,7 @@ function DropDownContent({ width, title, description, countries, profile }) {
       }
     }
   });
+
   return (
     <div className={classes.root}>
       <Grid container direction="row" className={classes.container}>
@@ -148,6 +163,7 @@ function DropDownContent({ width, title, description, countries, profile }) {
               href="/profiles/[geoIdOrCountrySlug]"
               as={`/profiles/${profile(country)}`}
               className={classes.countryLink}
+              onClick={() => window.toggleDrawer(type)()}
             >
               <img
                 alt={country.name}
@@ -164,6 +180,7 @@ function DropDownContent({ width, title, description, countries, profile }) {
 }
 
 DropDownContent.propTypes = {
+  type: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,

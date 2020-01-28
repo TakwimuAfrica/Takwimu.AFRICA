@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Link as MuiLink, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, makeStyles } from '@material-ui/core';
 
 import classNames from 'classnames';
 
@@ -14,20 +13,20 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.info.main,
     padding: '1.125rem 1.625rem'
   },
-  topicLinks: {
+  links: {
     '& > a:nth-child(n)': {
       lineHeight: 1.5,
       marginRight: '1.125rem'
     }
   },
-  topicLink: {
+  link: {
     display: 'inline-block',
     whiteSpace: 'nowrap'
   },
   topic: {
     textDecoration: 'underline'
   },
-  topicSelected: {},
+  selected: {},
   label: {
     fontSize: '0.813rem',
     marginBottom: '1rem'
@@ -59,54 +58,35 @@ function ContentNavigation({
         {contentTitle && <strong> {contentTitle}</strong>}
       </Typography>
 
-      <div className={classes.topicLinks}>
-        {content.map((c, index) =>
-          onClick ? (
-            <MuiLink
-              key={generateHref(index)}
-              variant="body2"
-              href={generateHref(index)}
-              color={
-                current === index ? linksSecondaryColor : linksPrimaryColor
-              }
-              classes={{ root: classes.topicLink }}
-              className={classNames({
-                [classes.topic]: current !== index
-              })}
-              onClick={e => onClick(e, index)}
-            >
-              {generateTitle(index)}
-            </MuiLink>
-          ) : (
+      <div className={classes.links}>
+        {content.map((item, index) => {
+          const generatedHref = generateHref(item);
+          const as =
+            typeof generatedHref === 'object' ? generatedHref.as : undefined;
+          const href =
+            typeof generatedHref === 'object'
+              ? generatedHref.as
+              : generatedHref;
+
+          return (
             <Link
-              key={
-                typeof generateHref(index) === 'object'
-                  ? generateHref(index).as
-                  : generateHref(index)
-              }
+              key={href}
+              as={as}
+              href={href}
               variant="body2"
-              href={
-                typeof generateHref(index) === 'object'
-                  ? generateHref(index).href
-                  : generateHref(index)
-              }
-              as={
-                typeof generateHref(index) === 'object'
-                  ? generateHref(index).as
-                  : undefined
-              }
               color={
                 current === index ? linksSecondaryColor : linksPrimaryColor
               }
-              classes={{ root: classes.topicLink }}
+              classes={{ root: classes.link }}
               className={classNames({
                 [classes.topic]: current !== index
               })}
+              onClick={e => onClick && onClick(index, e)}
             >
-              {generateTitle(index)}
+              {generateTitle(item)}
             </Link>
-          )
-        )}
+          );
+        })}
       </div>
     </ContentSection>
   );
@@ -115,7 +95,7 @@ function ContentNavigation({
 ContentNavigation.propTypes = {
   title: PropTypes.string.isRequired,
   contentTitle: PropTypes.string,
-  content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  content: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
   generateTitle: PropTypes.func.isRequired,
