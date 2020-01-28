@@ -23,9 +23,6 @@ const useStyles = makeStyles(theme => ({
       margin: '1.563rem'
     }
   },
-  item: {
-    padding: '7px'
-  },
   rootCenter: {
     borderRadius: '1.125rem',
     justifyContent: 'center'
@@ -37,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     margin: '-5px -20px',
     padding: '5px 20px',
     backgroundColor: 'white',
-    borderRadius: '1.125rem'
+    borderRadius: '1.5rem'
   },
   bubbleArrow: {
     position: 'absolute',
@@ -77,8 +74,9 @@ function DropDownButton({
           component="span"
           justify="space-around"
           alignItems="center"
+          spacing="1"
         >
-          <Grid item component="span" className={classes.item}>
+          <Grid item component="span">
             <img
               alt=""
               src={isHighlighted || isActive ? iconActive : icon}
