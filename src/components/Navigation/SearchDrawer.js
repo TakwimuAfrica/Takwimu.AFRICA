@@ -200,15 +200,19 @@ function SearchDrawer({ children, active, toggle }) {
                   showIcon
                   iconPosition="right"
                   icon={
-                    <img
-                      alt=""
-                      src={
-                        backgroundVisible
-                          ? rightArrowOpaque
-                          : rightArrowTransparent
-                      }
-                      className={classes.arrow}
-                    />
+                    backgroundVisible ? (
+                      <img
+                        alt=""
+                        src={rightArrowOpaque}
+                        className={classes.arrow}
+                      />
+                    ) : (
+                      <img
+                        alt=""
+                        src={rightArrowTransparent}
+                        className={classes.arrow}
+                      />
+                    )
                   }
                   onBlur={e => {
                     handleInput(e);
@@ -218,13 +222,10 @@ function SearchDrawer({ children, active, toggle }) {
                       handleInput(e);
                     }
                   }}
-                  onFocus={e => {
-                    if (!backgroundVisible && e.target.value.length > 0) {
+                  onValueChange={value => {
+                    if (!backgroundVisible && value) {
                       setBackgroundVisible(true);
-                    } else if (
-                      backgroundVisible &&
-                      e.target.value.length === 0
-                    ) {
+                    } else if (backgroundVisible && !value) {
                       setBackgroundVisible(false);
                     }
                   }}
