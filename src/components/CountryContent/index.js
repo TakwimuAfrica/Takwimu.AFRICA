@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Grid, Typography } from '@material-ui/core';
@@ -68,106 +68,72 @@ const VIEW_ITEMS = [
   }
 ];
 
-const hrefForView = (view, country) => {
-  if (view === '/profiles/') {
-    return `${view}${country.slug}`;
-  }
-  if (view === '/profiles/country-') {
-    return `${view}${country.iso_code}-${country.slug}`;
-  }
-  return '#/';
-};
+function ViewAnalysis({ content, takwimu: { country, countries } }) {
+  const classes = useStyles();
+  const [countrySlug, setCountrySlug] = useState(country.slug);
+  const [view, setView] = useState(VIEW_ITEMS[0].value);
+  const [href, setHref] = useState('');
 
-class ViewAnalysis extends Component {
-  constructor(props) {
-    super(props);
-
-    const {
-      takwimu: { country }
-    } = this.props;
-    this.state = {
-      view: VIEW_ITEMS[0].value,
-      countrySlug: country.slug
-    };
-    this.handleViewChange = this.handleViewChange.bind(this);
-    this.handleCountryChange = this.handleCountryChange.bind(this);
-  }
-
-  handleViewChange(e) {
-    this.setState({
-      view: e.target.value
-    });
-  }
-
-  handleCountryChange(e) {
-    this.setState({
-      countrySlug: e.target.value
-    });
-  }
-
-  render() {
-    const {
-      content: { value: countryContent },
-      takwimu: { countries }
-    } = this.props;
-    if (!countryContent) {
-      return null;
+  useEffect(() => {
+    const selectedCountry = countries.find(c => c.slug === countrySlug);
+    if (view === '/profiles/') {
+      setHref(`${view}${selectedCountry.slug}`);
     }
+    if (view === '/profiles/country-') {
+      setHref(`${view}${selectedCountry.iso_code}-${selectedCountry.slug}`);
+    }
+  }, [countries, countrySlug, view]);
 
-    const classes = useStyles();
-    const { view, countrySlug } = this.state;
-    const country = countries.find(c => c.slug === countrySlug);
-    const href = hrefForView(view, country);
-    const countryItems = countries.map(c => ({
-      value: c.slug,
-      label: c.short_name
-    }));
-    return (
-      <Section classes={{ root: classes.root }}>
-        <Typography variant="body1" className={classes.title}>
-          {countryContent.title}
-        </Typography>
-        <Grid container direction="row" alignItems="center">
-          <Typography variant="body1">
-            {countryContent.content_selection_label}
-          </Typography>
-          <Selection
-            items={VIEW_ITEMS}
-            value={view}
-            onChange={this.handleViewChange}
-          />
-          <Typography variant="body1" className={classes.countryText}>
-            {' '}
-            {countryContent.country_selection_label}
-          </Typography>
-          <Selection
-            items={countryItems}
-            value={countrySlug}
-            onChange={this.handleCountryChange}
-          />
-          <ButtonLink
-            href="/profiles/[geoIdOrCountrySlug]"
-            as={href}
-            classes={{
-              root: classes.selectButtonRoot,
-              label: classes.selectButtonLabel
-            }}
-          >
-            {countryContent.view_content_action_label}
-          </ButtonLink>
-        </Grid>
-      </Section>
-    );
+  if (!content) {
+    return null;
   }
+  const countryItems = countries.map(c => ({
+    value: c.slug,
+    label: c.short_name
+  }));
+
+  return (
+    <Section classes={{ root: classes.root }}>
+      <Typography variant="body1" className={classes.title}>
+        {content.contentSelectTitle}
+      </Typography>
+      <Grid container direction="row" alignItems="center">
+        <Typography variant="body1">{content.contentSelectLabel}</Typography>
+        <Selection
+          items={VIEW_ITEMS}
+          value={view}
+          onChange={e => setView(e.target.value)}
+        />
+        <Typography variant="body1" className={classes.countryText}>
+          {' '}
+          {content.countrySelectLabel}
+        </Typography>
+        <Selection
+          items={countryItems}
+          value={countrySlug}
+          onChange={e => setCountrySlug(e.target.value)}
+        />
+        <ButtonLink
+          href="/profiles/[geoIdOrCountrySlug]"
+          as={href}
+          classes={{
+            root: classes.selectButtonRoot,
+            label: classes.selectButtonLabel
+          }}
+        >
+          {content.actionLabel}
+        </ButtonLink>
+      </Grid>
+    </Section>
+  );
 }
 
 ViewAnalysis.propTypes = {
   content: PropTypes.shape({
-    value: PropTypes.shape({
-      content_selection_label: PropTypes.string,
-      country_selection_label: PropTypes.string,
-      view_content_action_label: PropTypes.string
-    })
+    contentSelectLabel: PropTypes.string,
+    countrySelectLabel: PropTypes.string,
+    contentSelectTitle: PropTypes.string,
+    actionLabel: PropTypes.string
   }).isRequired,
   takwimu: PropTypes.shape({
     country: PropTypes.shape({

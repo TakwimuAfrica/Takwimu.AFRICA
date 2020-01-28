@@ -30,10 +30,10 @@ function StoryList({ stories }) {
         <Story
           key={story.link}
           story={{
+            previewImageUrl: `https://cdn-images-1.medium.com/max/480/${story.virtuals.previewImage.imageId}`,
+            subtitle: story.content.subtitle,
             title: story.title,
-            img: `https://cdn-images-1.medium.com/max/2600/${story.virtuals.previewImage.imageId}`,
-            link: `https://medium.com/@takwimu_africa/${story.uniqueSlug}`,
-            summary: story.content.subtitle
+            url: `https://medium.com/@takwimu_africa/${story.uniqueSlug}`
           }}
           classes={{ root: classNames({ [classes.margin]: index > 0 }) }}
         />

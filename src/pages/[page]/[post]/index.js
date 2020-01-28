@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { Typography } from '@material-ui/core';
 import ErrorPage from 'next/error';
 import Page from '../../../components/Page';
-import { get } from '../../../getTakwimuPage';
+import { getPage } from '../../../cms';
 import Section from '../../../components/Section';
 import config from '../../../config';
 
@@ -23,10 +23,6 @@ function P({ takwimu, wp }) {
         <link
           rel="stylesheet"
           href={`${config.WP_BACKEND_URL}/wp-includes/js/mediaelement/wp-mediaelement.min.css`}
-        />
-        <script
-          crossOrigin
-          src={`${config.WP_BACKEND_URL}/wp-content/themes/hurumap/micro-frontend/build/hurumap-ui-blocks.js`}
         />
       </Head>
       <Section>
@@ -56,7 +52,7 @@ P.propTypes = {
 };
 
 P.getInitialProps = async ({ query: { page, post } }) => {
-  return get(page, post);
+  return getPage(page, post);
 };
 
 export default P;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
@@ -7,6 +7,7 @@ import { ButtonBase, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import SearchResultItem from './SearchResultItem';
+import DataSearchResultItem from './DataSearchResultItem';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -85,6 +86,7 @@ function RenderPaginator({
       )}
       {pages.map(page => (
         <ButtonBase
+          key={`button-${page}`}
           className={classNames([
             classes.filterItem,
             { [classes.filterActive]: page === activePage + 1 }
@@ -122,6 +124,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   const handleNextClick = () => {
     setState(prevState => ({
+      ...prevState,
       activePage: prevState.activePage + 1,
       startIndex: prevState.startIndex + 10
     }));
@@ -129,6 +132,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   const handlePreviousClick = () => {
     setState(prevState => ({
+      ...prevState,
       activePage: prevState.activePage - 1,
       startIndex: prevState.startIndex - 10
     }));
@@ -136,10 +140,11 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
   const handlePageClick = pageNum => {
     const startIndex = (pageNum - 1) * 10;
-    setState({
+    setState(prevState => ({
+      ...prevState,
       activePage: pageNum - 1,
       startIndex
-    });
+    }));
   };
 
   const handleFilterClick = category => {
@@ -153,22 +158,35 @@ function SearchResultsContainer({ results, filter: propFilter }) {
   const { activePage, startIndex, filter } = state;
 
   let filteredResults = results;
+
   // filter results with result_type equals to state's filter
-  if (filter !== 'All') {
+  if (filter === 'Analysis') {
     filteredResults = results.filter(
-      resultItem => resultItem.value.result_type === filter
+      // eslint-disable-next-line no-underscore-dangle
+      ({ _source: resultItem }) =>
+        resultItem.post_type === 'profile_section_page' ||
+        resultItem.post_type === 'carousel_topic' ||
+        resultItem.post_type === 'topic_page' ||
+        resultItem.post_type === 'profile'
+    );
+  } else if (filter === 'Data') {
+    filteredResults = results.filter(
+      // eslint-disable-next-line no-underscore-dangle
+      ({ _source: resultItem }) => resultItem.post_type === 'hurumap-visual'
     );
   }
+
+  const filteredResultsLength = filteredResults.length;
 
   // compose show result string
   let resultIndexText = '';
   let endIndex = 10;
-  const resultsLength = filteredResults.length;
-  if (resultsLength > 10) {
+
+  if (filteredResultsLength > 10) {
     endIndex += 10 * activePage;
 
-    if (resultsLength - startIndex < 10) {
-      endIndex = startIndex + (resultsLength - startIndex);
+    if (filteredResultsLength - startIndex < 10) {
+      endIndex = startIndex + (filteredResultsLength - startIndex);
     }
     resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
   }
@@ -177,7 +195,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
     <div className={classes.root}>
       <Grid className={classes.resultsFilter}>
         <Typography variant="body2" className={classes.showResult}>
-          {`Showing ${resultIndexText}${filteredResults.length} results`}
+          {`Showing ${resultIndexText}${filteredResultsLength} results`}
         </Typography>
         <Grid item className={classes.filter}>
           <Typography
@@ -202,17 +220,42 @@ function SearchResultsContainer({ results, filter: propFilter }) {
         </Grid>
       </Grid>
       <div className={classes.borderDiv} />
-      {filteredResults.length > 0 ? (
+      {filteredResultsLength > 0 ? (
         <div className={classes.searchResultsList}>
-          {filteredResults.slice(startIndex, endIndex).map(result => (
-            <SearchResultItem
-              resultType={result.value.result_type}
-              country={result.value.country}
-              link={result.value.link}
-              title={result.value.title}
-              summary={result.value.summary}
-              key={result.value.content_id}
-            />
+          {filteredResults.slice(startIndex, endIndex).map((
+            { _source: result } // eslint-disable-line no-underscore-dangle
+          ) => (
+            <Fragment key={`${result.post_type}-${result.post_id}`}>
+              {[
+                'topic_page',
+                'profile_section_page',
+                'profile',
+                'carousel_topic'
+              ].includes(result.post_type) ? (
+                <SearchResultItem
+                  resultType={result.post_type}
+                  slug={result.post_name}
+                  title={result.post_title}
+                  country={
+                    result.terms && result.terms.category
+                      ? result.terms.category[0]
+                      : ''
+                  }
+                  id={result.post_id}
+                  key={`${result.post_type}-${result.post_id}`}
+                  item="Analysis"
+                />
+              ) : (
+                <DataSearchResultItem
+                  visualType={result.post_excerpt}
+                  visualData={result.post_content}
+                  id={result.post_id}
+                  title={result.post_title}
+                  key={`${result.post_type}-${result.post_id}`}
+                  item="Data"
+                />
+              )}
+            </Fragment>
           ))}
         </div>
       ) : (
@@ -224,11 +267,11 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
       <div className={classes.paginationContainer}>
         <Typography variant="body2">
-          {`Showing ${resultIndexText}${filteredResults.length} results`}
+          {`Showing ${resultIndexText}${filteredResultsLength} results`}
         </Typography>
-        {filteredResults.length > 10 && (
+        {filteredResultsLength > 10 && (
           <Paginator
-            items={filteredResults.length}
+            items={filteredResultsLength}
             activePage={activePage}
             handleNextClick={handleNextClick}
             handlePreviousClick={handlePreviousClick}
@@ -243,7 +286,11 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
 SearchResultsContainer.propTypes = {
   filter: PropTypes.string,
-  results: PropTypes.arrayOf(PropTypes.shape({}))
+  results: PropTypes.arrayOf(
+    PropTypes.shape({
+      _source: PropTypes.shape({})
+    })
+  )
 };
 
 SearchResultsContainer.defaultProps = {

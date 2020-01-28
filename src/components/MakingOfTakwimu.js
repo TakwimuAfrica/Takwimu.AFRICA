@@ -63,7 +63,12 @@ function MakingOfTakwimu({
   }
 
   return (
-    <Section title={title} variant="h3" classes={{ title: classes.title }}>
+    <Section
+      id="takwimuMakingOf"
+      title={title}
+      variant="h3"
+      classes={{ title: classes.title }}
+    >
       <RichTypography>{description}</RichTypography>
       <div className={classes.container}>
         <iframe

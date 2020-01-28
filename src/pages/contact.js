@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useRouter } from 'next/router';
-import { getSitePage } from '../getTakwimuPage';
+import { getSitePage } from '../cms';
 import ContactContent from '../components/ContactContent';
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';

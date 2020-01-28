@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,11 +20,11 @@ function SearchResults({ takwimu: { page } }) {
   const classes = useStyles();
 
   const handleSearch = useCallback(searchTerm => {
-    fetch(`${config.url}/api/search?q=${searchTerm}&format=json`).then(
+    fetch(`${config.ES_URL}/takwimu/post/_search?q=${searchTerm}&size=50`).then(
       response => {
         if (response.status === 200) {
           response.json().then(data => {
-            setSearch(data.search);
+            setSearch({ query: searchTerm, results: data.hits.hits });
           });
         }
       }
@@ -32,11 +32,6 @@ function SearchResults({ takwimu: { page } }) {
   }, []);
 
   const { query, results } = search || {};
-  useEffect(() => {
-    if (query) {
-      handleSearch(query);
-    }
-  }, [handleSearch, query]);
 
   return (
     <Section classes={{ root: classes.root }}>
@@ -52,7 +47,7 @@ SearchResults.propTypes = {
       search: PropTypes.shape({
         query: PropTypes.string,
         results: PropTypes.arrayOf(PropTypes.shape({}))
-      })
+      }).isRequired
     }).isRequired
   }).isRequired
 };

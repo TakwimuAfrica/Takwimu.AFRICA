@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core/styles';
 import { create } from 'jss';
 
-import Theme from '../theme';
+import theme from '../theme';
 
 const client = new ApolloClient({
   uri: 'https://graphql.takwimu.africa/graphql'
@@ -30,13 +30,6 @@ export default class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-
-    /**
-     * Expose jss and theme
-     * Used by the micro-frontend components
-     */
-    window.jss = MyApp.jss;
-    window.Theme = Theme;
   }
 
   render() {
@@ -53,7 +46,7 @@ export default class MyApp extends App {
         </Head>
         <ApolloProvider client={client}>
           <StylesProvider jss={MyApp.jss}>
-            <ThemeProvider theme={Theme}>
+            <ThemeProvider theme={theme}>
               <CssBaseline />
               <Component {...pageProps} />
             </ThemeProvider>

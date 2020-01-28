@@ -1,102 +1,93 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { InputBase, IconButton } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
-const styles = theme => ({
+import { useRouter } from 'next/router';
+
+const useStyles = makeStyles(({ palette, typography }) => ({
   root: {
     marginTop: '1rem',
     marginBottom: '1rem'
   },
   searchInput: {
     width: '100%',
-    backgroundColor: theme.palette.background.light,
+    backgroundColor: palette.background.light,
     borderStyle: 'None',
     paddingBottom: '1.5rem',
     paddingTop: '1.5rem',
     paddingLeft: '2.0625rem',
     paddingRight: '2.4375rem',
-    color: theme.palette.data.main,
-    fontSize: theme.typography.h3.fontSize
+    color: palette.data.main,
+    fontSize: typography.h3.fontSize
   },
   searchInputButton: {
     padding: 0,
     fontSize: '2.3125rem'
   },
   iconStyle: {
-    color: theme.palette.text.primary
+    color: palette.text.primary
   }
-});
+}));
 
-class Input extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchTerm: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ searchTerm: event.target.value });
-  }
-
-  render() {
-    const { classes, onRefresh, placeholder, query } = this.props;
-    const { searchTerm } = this.state;
-    const handleSearchClick = () => {
-      if (query !== searchTerm && searchTerm.length > 0) {
-        // On the search page, onRefresh will be a function used to query the
-        // API. On all other pages that this component is used, onRefresh is
-        // expected to be null
-        if (typeof onRefresh === 'function') {
-          window.history.pushState(null, '', `/search?q=${searchTerm}`);
-          onRefresh(searchTerm);
-        } else {
-          window.history.push({
-            pathname: '/search',
-            search: `?q=${searchTerm}`
-          });
-        }
+function Input({ onRefresh, placeholder, query }) {
+  const classes = useStyles();
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSearchClick = () => {
+    if (query !== searchTerm && searchTerm.length > 0) {
+      // On the search page, onRefresh will be a function used to query the
+      // API. On all other pages that this component is used, onRefresh is
+      // expected to be null
+      if (typeof onRefresh === 'function') {
+        router.push(`/search?q=${searchTerm}`, `/search?q=${searchTerm}`, {
+          shallow: true
+        });
+        onRefresh(searchTerm);
+      } else {
+        router.push({
+          pathname: '/search',
+          query: { q: searchTerm }
+        });
       }
-    };
+    }
+  };
 
-    return (
-      <div className={classes.root}>
-        <InputBase
-          id="searchInput"
-          classes={{ root: classes.searchInput }}
-          defaultValue={searchTerm || query}
-          onChange={this.handleChange}
-          onKeyPress={e => {
-            if (e.key === 'Enter') {
-              handleSearchClick(e);
-            }
-          }}
-          placeholder={placeholder}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                classes={{ root: classes.searchInputButton }}
-                onClick={e => {
-                  handleSearchClick(e);
-                }}
-              >
-                <SearchIcon
-                  fontSize="inherit"
-                  color="primary"
-                  classes={{ colorPrimary: classes.iconStyle }}
-                />
-              </IconButton>
-            </InputAdornment>
+  return (
+    <div className={classes.root}>
+      <InputBase
+        id="searchInput"
+        classes={{ root: classes.searchInput }}
+        defaultValue={searchTerm || query}
+        onChange={e => setSearchTerm(e.target.value)}
+        onKeyDown={e => {
+          if (e.key === 'Enter') {
+            handleSearchClick(e);
           }
-        />
-      </div>
-    );
-  }
+        }}
+        placeholder={placeholder}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              classes={{ root: classes.searchInputButton }}
+              onClick={e => {
+                handleSearchClick(e);
+              }}
+            >
+              <SearchIcon
+                fontSize="inherit"
+                color="primary"
+                classes={{ colorPrimary: classes.iconStyle }}
+              />
+            </IconButton>
+          </InputAdornment>
+        }
+      />
+    </div>
+  );
 }
 
 Input.propTypes = {
@@ -109,4 +100,4 @@ Input.defaultProps = {
   placeholder: 'Enter search term'
 };
 
-export default withStyles(styles)(Input);
+export default Input;

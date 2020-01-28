@@ -48,7 +48,10 @@ const useStyles = makeStyles(theme => ({
   },
   body: {
     paddingBottom: '1.875rem',
-    lineHeight: 1.55
+    lineHeight: 1.55,
+    '& > p': {
+      lineHeight: 1.55
+    }
   },
   actions: {
     marginBottom: '3.0625rem'
@@ -63,7 +66,7 @@ const useStyles = makeStyles(theme => ({
   secondaryAction: {
     marginTop: '1rem',
     padding: 0,
-    borderWidth: '0.125rem',
+    border: '0.125rem solid',
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '2.15625rem' // .75 lg
@@ -74,6 +77,7 @@ const useStyles = makeStyles(theme => ({
 
     // Override original Takwimu & Bootstrap styles
     '&:hover': {
+      border: '0.125rem solid',
       color: theme.palette.primary.dark,
       textDecoration: 'none'
     }
