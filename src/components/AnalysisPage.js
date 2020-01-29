@@ -6,16 +6,20 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import Head from 'next/head';
 import config from '../config';
 import AnalysisContent from './AnalysisContent';
-import AnalysisTableOfContent from './AnalysisContent/TableOfContent';
 import ContentPage from './ContentPage';
 import Page from './Page';
+import AsideTableOfContent from './AsideTableOfContent';
+import CountrySelector from './CountrySelector';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     marginBottom: '5.5rem'
   },
-  asideRoot: {}
-});
+  asideRoot: {},
+  countrySelectorLabel: {
+    fontSize: theme.typography.caption.fontSize
+  }
+}));
 
 function AnalysisPage({
   takwimu,
@@ -49,11 +53,35 @@ function AnalysisPage({
       </Head>
       <ContentPage
         aside={
-          <AnalysisTableOfContent
-            country={takwimu.country}
-            content={analyses}
+          <AsideTableOfContent
+            hideTitle
+            top={120}
             current={initial}
-          />
+            contentHeadings={analyses.map(section => ({
+              title: section.post_title,
+              postName: section.post_name
+            }))}
+            generateHref={({ postName }, index) => {
+              const {
+                country: { slug: countrySlug }
+              } = takwimu;
+              const href =
+                index === 0
+                  ? `/profiles/[geoIdOrCountrySlug]` // if politics
+                  : `/profiles/[geoIdOrCountrySlug]/[analysisSlug]`;
+              const as =
+                index === 0
+                  ? `/profiles/${countrySlug}` // if politics
+                  : `/profiles/${countrySlug}/${postName}`;
+              return { href, as };
+            }}
+          >
+            <CountrySelector
+              context="analysis"
+              country={takwimu.country}
+              classes={{ label: classes.countrySelectorLabel }}
+            />
+          </AsideTableOfContent>
         }
         classes={{ root: classes.root, aside: classes.asideRoot }}
       >

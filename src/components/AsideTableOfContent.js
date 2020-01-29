@@ -20,7 +20,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AsideTableOfContent({ current, contentHeadings, ...props }) {
+function AsideTableOfContent({
+  hideTitle,
+  children,
+  current,
+  contentHeadings,
+  ...props
+}) {
   const classes = useStyles();
   return (
     <TableOfContent
@@ -32,20 +38,33 @@ function AsideTableOfContent({ current, contentHeadings, ...props }) {
       content={contentHeadings}
       {...props}
     >
-      <Typography variant="subtitle2" className={classes.asideHeader}>
-        Jump to:
-      </Typography>
+      {!hideTitle && (
+        <Typography variant="subtitle2" className={classes.asideHeader}>
+          Jump to:
+        </Typography>
+      )}
+      {children}
     </TableOfContent>
   );
 }
 
 AsideTableOfContent.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node)
+  ]),
+  hideTitle: PropTypes.bool,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(
     PropTypes.shape({
       link: PropTypes.string
     }).isRequired
   ).isRequired
+};
+
+AsideTableOfContent.defaultProps = {
+  hideTitle: false,
+  children: undefined
 };
 
 export default AsideTableOfContent;
