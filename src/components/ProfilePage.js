@@ -272,7 +272,12 @@ function Profile({ sectionedCharts }) {
                   <InsightContainer
                     key={chart.id}
                     actions={{
-                      handleShare: shareIndicator.bind(null, chart.id, geoId),
+                      handleShare: shareIndicator.bind(
+                        null,
+                        chart.id,
+                        geoId,
+                        `${config.url}/api/share`
+                      ),
                       handleShowData: null,
                       handleCompare: null
                     }}
