@@ -24,22 +24,21 @@ const styles = theme => ({
     }
   },
   panelExpanded: {
-    margin: '0.3125rem 0 0 0'
+    margin: '0.3125rem 0 0 0 !important'
   },
-
-  expandSummary: {
+  header: {
+    height: '5.25rem',
     backgroundColor: theme.palette.background.light
   },
-  expandedExpandSummary: {
+  expandedHeader: {
     backgroundColor: theme.palette.primary.main
   },
-
-  expandSummaryTitle: {
+  headerTitle: {
     color: theme.palette.primary.main,
     margin: '0.5rem',
     fontWeight: 600
   },
-  expandedExpandSummaryTitle: {
+  expandedHeaderTitle: {
     color: 'white'
   },
   iconButton: {
@@ -82,8 +81,8 @@ class Faq extends React.Component {
       >
         <ExpansionPanelSummary
           className={classNames([
-            classes.expandSummary,
-            { [classes.expandedExpandSummary]: expanded }
+            classes.header,
+            { [classes.expandedHeader]: expanded }
           ])}
           onClick={this.handleChange}
           disableRipple
@@ -111,8 +110,8 @@ class Faq extends React.Component {
         >
           <RichTypography
             className={classNames([
-              classes.expandSummaryTitle,
-              { [classes.expandedExpandSummaryTitle]: expanded }
+              classes.headerTitle,
+              { [classes.expandedHeaderTitle]: expanded }
             ])}
             onClick={this.handleChange}
           >
