@@ -107,6 +107,9 @@ function Contact(takwimu) {
 
     handleHash();
     router.events.on('hashChangeComplete', handleHash);
+    return () => {
+      router.events.off('hashChangeComplete', handleHash);
+    };
   }, [contentHeadings, router]);
 
   if (count < 1) {
