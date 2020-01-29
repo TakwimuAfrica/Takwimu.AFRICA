@@ -4,10 +4,10 @@ import { PropTypes } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import ContentNavigation from '../PageContentNavigation';
-import ContentSection from '../ContentSection';
-import RelatedContent from '../RelatedContent';
-import RichTextSection from '../RichTextSection';
+import ContentNavigation from './PageContentNavigation';
+import ContentSection from './ContentSection';
+import RelatedContent from './RelatedContent';
+import RichTextSection from './RichTextSection';
 
 const useStyles = makeStyles(theme => ({
   root: {

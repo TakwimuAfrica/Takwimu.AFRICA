@@ -126,9 +126,9 @@ function TableOfContent({
           {content.map((c, index) => (
             <li
               key={
-                typeof generateHref(index) === 'object'
-                  ? generateHref(index).as
-                  : generateHref(index)
+                typeof generateHref(c, index) === 'object'
+                  ? generateHref(c, index).as
+                  : generateHref(c, index)
               }
               className={classes.listItem}
             >
@@ -140,13 +140,13 @@ function TableOfContent({
               />
               <Link
                 href={
-                  typeof generateHref(index) === 'object'
-                    ? generateHref(index).href
-                    : generateHref(index)
+                  typeof generateHref(c, index) === 'object'
+                    ? generateHref(c, index).href
+                    : generateHref(c, index)
                 }
                 as={
-                  typeof generateHref(index) === 'object'
-                    ? generateHref(index).as
+                  typeof generateHref(c, index) === 'object'
+                    ? generateHref(c, index).as
                     : undefined
                 }
                 variant="body2"

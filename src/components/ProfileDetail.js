@@ -5,7 +5,6 @@ import classNames from 'classnames';
 
 import {
   Typography,
-  ButtonBase,
   Grid,
   Input,
   Popper,
@@ -15,13 +14,12 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import flags from '../../flags';
-import ButtonLink from '../Link/Button';
-import Layout from '../Layout';
+import ButtonLink from './Link/Button';
+import Layout from './Layout';
 
-import searchIcon from '../../assets/images/icon-search.svg';
-import downArrow from '../../assets/images/down-arrow-green.svg';
-import config from '../../config';
+import searchIcon from '../assets/images/icon-search.svg';
+import config from '../config';
+import CountrySelector from './CountrySelector';
 
 const useStyles = makeStyles(theme => ({
   root: props => ({
@@ -66,31 +64,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: '2.188rem',
     backgroundColor: theme.palette.primary.main
   },
-  countryName: {
-    fontSize: '1.75rem',
-    fontFamily: theme.typography.fontHeading,
-    marginLeft: '1.125rem',
-    marginRight: '1.125rem',
-    textAlign: 'start'
-  },
-  chooserButton: {
-    marginTop: '0.938rem',
-    marginBottom: '1.375rem'
-  },
-  changeCountryLabel: {
-    fontWeight: 600,
-    fontSize: '0.8125rem',
-    color: '#848484'
-  },
   valueLabel: {
     fontSize: '2rem',
     fontWeight: 600
-  },
-  datasetName: {
-    fontSize: '0.938rem',
-    textDecoration: 'underline',
-    marginRight: '0.625rem',
-    marginLeft: '0.25rem'
   },
   searchBar: {
     position: 'relative',
@@ -110,51 +86,6 @@ const useStyles = makeStyles(theme => ({
     zIndex: 2
   }
 }));
-
-function CountrySelectorComponent({ context, country }) {
-  const classes = useStyles();
-
-  return (
-    <Grid container direction="column">
-      <Grid item>
-        <Typography
-          variant="caption"
-          className={classNames([classes.label, classes.changeCountryLabel])}
-        >
-          Change Country
-        </Typography>
-      </Grid>
-      <Grid item>
-        <ButtonBase
-          disableRipple
-          disableTouchRipple
-          style={{ outline: 'none' }}
-          className={classes.chooserButton}
-          onClick={process.browser && window.toggleDrawer(context)}
-        >
-          <img alt="" height="37" src={flags[country.iso_code]} />
-          <Typography variant="subtitle2" className={classes.countryName}>
-            {country.short_name}
-          </Typography>
-          <img alt="" src={downArrow} />
-        </ButtonBase>
-      </Grid>
-    </Grid>
-  );
-}
-
-CountrySelectorComponent.propTypes = {
-  context: PropTypes.string.isRequired,
-  country: PropTypes.shape({
-    iso_code: PropTypes.string,
-    slug: PropTypes.string,
-    short_name: PropTypes.string
-  }).isRequired
-};
-
-const CountrySelector = CountrySelectorComponent;
-
-export { CountrySelector };
 
 function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
   const classes = useStyles({ comparable });

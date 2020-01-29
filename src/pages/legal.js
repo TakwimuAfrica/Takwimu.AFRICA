@@ -8,7 +8,7 @@ import { getSitePage } from '../cms';
 import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
 import Page from '../components/Page';
-import TableOfContent from '../components/LegalContent/TableOfContent';
+import AsideTableOfContent from '../components/AsideTableOfContent';
 
 const useStyles = makeStyles({
   root: {
@@ -69,7 +69,11 @@ function Legal(takwimu) {
       <ContentPage
         classes={{ root: classes.root }}
         aside={
-          <TableOfContent current={current} contentHeadings={contentHeadings} />
+          <AsideTableOfContent
+            current={current}
+            contentHeadings={contentHeadings}
+            generateHref={({ link }) => `/${link}`}
+          />
         }
       >
         <LegalContent

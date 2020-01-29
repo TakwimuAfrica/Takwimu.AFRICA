@@ -7,7 +7,7 @@ import { getSitePage } from '../cms';
 import ContactContent from '../components/ContactContent';
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
-import TableOfContent from '../components/ContactContent/TableOfContent';
+import AsideTableOfContent from '../components/AsideTableOfContent';
 
 const useStyles = makeStyles({
   root: {
@@ -117,7 +117,11 @@ function Contact(takwimu) {
     <Page takwimu={takwimu} title={title}>
       <ContentPage
         aside={
-          <TableOfContent current={current} contentHeadings={contentHeadings} />
+          <AsideTableOfContent
+            current={current}
+            contentHeadings={contentHeadings}
+            generateHref={({ link }) => `/contact#${link}`}
+          />
         }
         classes={{ root: classes.root }}
       >

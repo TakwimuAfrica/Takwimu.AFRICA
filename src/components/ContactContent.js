@@ -7,18 +7,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 
-import ContentSection from '../ContentSection';
-import RichTextSection from '../RichTextSection';
-import WhereToNext from '../Next';
-import RelatedContent from '../RelatedContent';
+import ContentSection from './ContentSection';
+import RichTextSection from './RichTextSection';
+import WhereToNext from './Next';
+import RelatedContent from './RelatedContent';
 
-import facebook from '../../assets/images/logo-facebook.svg';
-import github from '../../assets/images/logo-github.svg';
-import instagram from '../../assets/images/group-3.svg';
-import linkedin from '../../assets/images/group-3-copy.svg';
-import medium from '../../assets/images/logo-medium.svg';
-import twitter from '../../assets/images/logo-twitter.svg';
-import ContentNavigation from '../PageContentNavigation';
+import facebook from '../assets/images/logo-facebook.svg';
+import github from '../assets/images/logo-github.svg';
+import instagram from '../assets/images/group-3.svg';
+import linkedin from '../assets/images/group-3-copy.svg';
+import medium from '../assets/images/logo-medium.svg';
+import twitter from '../assets/images/logo-twitter.svg';
+import ContentNavigation from './PageContentNavigation';
 
 const useStyles = makeStyles(theme => ({
   root: {

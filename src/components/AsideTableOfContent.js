@@ -4,45 +4,42 @@ import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import TableOfContent from '../TableOfContent';
+import TableOfContent from './TableOfContent';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  asideRoot: {
     [theme.breakpoints.up('md')]: {
       top: '10.375rem'
     }
   },
-  sideMenuHeader: {
-    color: theme.palette.info.other,
-    marginTop: '2.875rem'
+  asideHeader: {
+    color: theme.palette.info.other
   },
-  menuListRoot: {
+  asideMenuListRoot: {
     marginTop: '1.625rem'
   }
 }));
 
-function ContactUsTableOfContent({ current, contentHeadings }) {
-  const generateHref = index => {
-    const item = contentHeadings[index];
-    return `/contact#${item.link}`;
-  };
+function AsideTableOfContent({ current, contentHeadings, ...props }) {
   const classes = useStyles();
-
   return (
     <TableOfContent
       current={current}
-      classes={{ root: classes.root, menuListRoot: classes.menuListRoot }}
+      classes={{
+        root: classes.asideRoot,
+        menuListRoot: classes.asideMenuListRoot
+      }}
       content={contentHeadings}
-      generateHref={generateHref}
+      {...props}
     >
-      <Typography variant="subtitle2" className={classes.sideMenuHeader}>
+      <Typography variant="subtitle2" className={classes.asideHeader}>
         Jump to:
       </Typography>
     </TableOfContent>
   );
 }
 
-ContactUsTableOfContent.propTypes = {
+AsideTableOfContent.propTypes = {
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(
     PropTypes.shape({
@@ -51,4 +48,4 @@ ContactUsTableOfContent.propTypes = {
   ).isRequired
 };
 
-export default ContactUsTableOfContent;
+export default AsideTableOfContent;

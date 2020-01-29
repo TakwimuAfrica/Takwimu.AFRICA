@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import { CountrySelector } from '../ProfileDetail';
+import CountrySelector from '../CountrySelector';
 import TableOfContent from '../TableOfContent';
 
 const useStyles = makeStyles(theme => ({
