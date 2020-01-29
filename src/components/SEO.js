@@ -15,7 +15,7 @@ function SEO({ title, description, image, location = '' }) {
     query: { indicatorId }
   } = useRouter();
   if (indicatorId) {
-    imageUrl = `${config.media.imageUrl}/${indicatorId}${config.media.imageRendition}${config.media.imageType}`;
+    imageUrl = `${config.media.imageUrl}/${indicatorId}${config.media.imageType}`;
   }
   const structuredDataOrganization = `{
 		"@context": "http://schema.org",

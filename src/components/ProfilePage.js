@@ -10,9 +10,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
 import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
+import { shareIndicator } from '@codeforafrica/hurumap-ui/components/utils';
 
 import config from '../config';
-import { shareIndicator } from '../common';
 
 import Page from './Page';
 import ProfileDetail from './ProfileDetail';
@@ -118,6 +118,17 @@ function Chart({ chartData, definition, profiles, classes }) {
   );
 }
 
+Chart.propTypes = {
+  chartData: PropTypes.shape({
+    isLoading: PropTypes.bool,
+    profileVisualsData: PropTypes.arrayOf(PropTypes.shape({}))
+  }).isRequired,
+  definition: PropTypes.shape({
+    queryAlias: PropTypes.string
+  }).isRequired,
+  profiles: PropTypes.shape({}).isRequired
+};
+
 const overrideTypePropsFor = chartType => {
   switch (chartType) {
     case 'column': // Fall through
@@ -193,7 +204,7 @@ function Profile({ sectionedCharts }) {
     [router]
   );
 
-  // get all available profiletabs
+  // get all available profile tabs
   const profileTabs = useMemo(
     () => [
       {
@@ -261,7 +272,12 @@ function Profile({ sectionedCharts }) {
                   <InsightContainer
                     key={chart.id}
                     actions={{
-                      handleShare: shareIndicator.bind(null, chart.id),
+                      handleShare: shareIndicator.bind(
+                        null,
+                        chart.id,
+                        geoId,
+                        `${config.url}/api/share`
+                      ),
                       handleShowData: null,
                       handleCompare: null
                     }}
