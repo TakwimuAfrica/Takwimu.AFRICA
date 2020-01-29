@@ -32,7 +32,8 @@ export default (req, res) => {
         res.end('');
         return res.statusCode;
       },
-      () => {
+      err => {
+        console.log('BOOM', JSON.stringify(err));
         res.statusCode = 500;
         res.end('');
         return res.statusCode;
