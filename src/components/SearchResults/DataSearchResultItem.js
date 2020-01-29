@@ -60,7 +60,7 @@ function InTopicDataResult({ inTopics, item, title, visualType, chartId }) {
                   sectionSlug = profileSection[0].post_name;
                 }
                 setLink(
-                  `/profiles/${topic.countrySlug}/${sectionSlug}#${topicSlug}?indicatorId=indicator-${visualType}-${chartId}`
+                  `/profiles/${topic.countrySlug}/${sectionSlug}?indicatorId=indicator-${visualType}-${chartId}#${topicSlug}`
                 );
               }
             );

@@ -1,13 +1,10 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import NextLink from 'next/link';
-
 import {
   withWidth,
   Grid,
   MenuList,
-  Link,
   Drawer,
   IconButton,
   MenuItem,
@@ -20,11 +17,14 @@ import Search from '@material-ui/icons/Search';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
 import classNames from 'classnames';
+import { withRouter } from 'next/router';
 import logoWhite from '../../assets/images/logo-white-all.png';
 
 import Layout from '../Layout';
-import DropDowns, { DropDownDrawer } from './DropDowns';
+import DropDownButtons from './DropDowns';
+import DropDownDrawer from './DropDownDrawer';
 import SearchDrawer from './SearchDrawer';
+import Link from '../Link';
 
 const styles = theme => ({
   root: {
@@ -49,24 +49,20 @@ const styles = theme => ({
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
   },
   link: {
-    color: theme.palette.text.secondary,
     margin: '1.375rem 3.25rem',
     [theme.breakpoints.up('md')]: {
       margin: '0.625rem'
     },
     [theme.breakpoints.up('lg')]: {
       margin: '1.375rem'
-    },
-
-    // Override original Takwimu & Bootstrap styles
-    '&:hover': {
-      color: theme.palette.text.secondary,
-      textDecoration: 'none'
     }
   },
   searchButton: {
+    '& > svg': {
+      fontSize: '30px'
+    },
     color: theme.palette.text.secondary,
-    marginBottom: '0.313rem' // Move to align icon
+    marginBottom: '0.1rem' // Pixel perfect
   },
   iconLink: {
     margin: '1.375rem 0.7rem'
@@ -119,11 +115,9 @@ class Navigation extends React.Component {
         <Layout>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <NextLink href="/">
-                <Link href="/">
-                  <img alt="logo" src={logoWhite} height={19} />
-                </Link>
-              </NextLink>
+              <Link href="/">
+                <img alt="logo" src={logoWhite} height={19} />
+              </Link>
             </Grid>
 
             {isWidthUp('md', width)
@@ -156,14 +150,15 @@ class Navigation extends React.Component {
   renderDesktopNav() {
     const {
       classes,
-      takwimu: { page, countries }
+      takwimu: { page, countries },
+      router: { pathname }
     } = this.props;
     const { openDrawer } = this.state;
 
     return (
       <>
         <Grid item>
-          <DropDowns
+          <DropDownButtons
             page={page}
             active={openDrawer}
             toggle={this.toggleDrawer}
@@ -171,25 +166,20 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <NextLink href="/about">
-            <Link color="textSecondary" className={classes.link} href="/about">
-              About Us
-            </Link>
-          </NextLink>
-          <NextLink href="/faqs">
-            <Link color="textSecondary" className={classes.link} href="/faqs">
-              FAQs
-            </Link>
-          </NextLink>
-          <NextLink href="/contact">
-            <Link
-              color="textSecondary"
-              className={classes.link}
-              href="/contact"
-            >
-              Contact Us
-            </Link>
-          </NextLink>
+          <Link
+            navigation
+            href="/about"
+            className={classes.link}
+            active={['/services', '/about', '/methodology'].includes(pathname)}
+          >
+            About Us
+          </Link>
+          <Link navigation href="/faqs" className={classes.link}>
+            FAQs
+          </Link>
+          <Link navigation className={classes.link} href="/contact">
+            Contact Us
+          </Link>
           <ButtonBase
             className={classes.searchButton}
             onClick={this.toggleDrawer('search')}
@@ -244,6 +234,7 @@ class Navigation extends React.Component {
   renderMobileDrawer() {
     const {
       classes,
+      router: { pathname },
       takwimu: { page, countries }
     } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
@@ -268,32 +259,33 @@ class Navigation extends React.Component {
         <Grid container direction="column" alignItems="flex-start">
           {this.renderNavBar(true)}
           <MenuList>
-            <DropDowns
+            <DropDownButtons
               page={page}
               active={openDrawer}
               countries={countries}
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <NextLink href="/about">
-                <Link className={classes.link} href="/about">
-                  About
-                </Link>
-              </NextLink>
+              <Link
+                navigation
+                href="/about"
+                className={classes.link}
+                active={['/services', '/about', '/methodology'].includes(
+                  pathname
+                )}
+              >
+                About
+              </Link>
             </MenuItem>
             <MenuItem>
-              <NextLink href="/faqs">
-                <Link className={classes.link} href="/faqs">
-                  FAQs
-                </Link>
-              </NextLink>
+              <Link navigation className={classes.link} href="/faqs">
+                FAQs
+              </Link>
             </MenuItem>
             <MenuItem>
-              <NextLink href="/contact">
-                <Link className={classes.link} href="/contact">
-                  Contact Us
-                </Link>
-              </NextLink>
+              <Link navigation className={classes.link} href="/contact">
+                Contact Us
+              </Link>
             </MenuItem>
             <MenuItem>
               <ButtonBase
@@ -330,9 +322,10 @@ Navigation.propTypes = {
     settings: PropTypes.shape({
       navigation: PropTypes.shape({})
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  router: PropTypes.shape({ pathname: PropTypes.string }).isRequired
 };
 
 export default withWidth({
   initialWidth: 'md'
-})(withStyles(styles)(Navigation));
+})(withStyles(styles)(withRouter(Navigation)));

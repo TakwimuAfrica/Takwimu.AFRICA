@@ -64,7 +64,8 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }) => ({
     }
   },
   containerSourceLink: {
-    fontSize: typography.caption.fontSize
+    fontSize: typography.caption.fontSize,
+    color: palette.text.primary
   },
   insight: {
     paddingTop: '1.275rem'
@@ -128,6 +129,31 @@ Chart.propTypes = {
   profiles: PropTypes.shape({}).isRequired
 };
 
+const overrideTypePropsFor = chartType => {
+  switch (chartType) {
+    case 'column': // Fall through
+    case 'grouped_column':
+      return {
+        parts: {
+          axis: {
+            dependent: {
+              style: {
+                grid: {
+                  display: 'none'
+                },
+                tickLabels: {
+                  display: 'none'
+                }
+              }
+            }
+          }
+        }
+      };
+    default:
+      return {};
+  }
+};
+
 function Profile({ sectionedCharts }) {
   const router = useRouter();
   const {
@@ -178,7 +204,7 @@ function Profile({ sectionedCharts }) {
     [router]
   );
 
-  // get all available profiletabs
+  // get all available profile tabs
   const profileTabs = useMemo(
     () => [
       {
@@ -231,6 +257,16 @@ function Profile({ sectionedCharts }) {
                 chart.type === 'hurumap'
                   ? `hurumap/${geoId}/${chart.id}`
                   : `flourish/${chart.id}`;
+
+              const sourceResult = chartData.profileVisualsData
+                ? chartData.profileVisualsData[
+                    `${chart.visual.queryAlias}Source`
+                  ]
+                : null;
+              const source =
+                sourceResult && sourceResult.nodes && sourceResult.nodes.length
+                  ? sourceResult.nodes[0]
+                  : null;
               return (
                 <Grid item xs={12} key={chart.id} className={classes.container}>
                   <InsightContainer
@@ -257,11 +293,11 @@ function Profile({ sectionedCharts }) {
                       title: classes.title
                     }}
                     embedCode={`<iframe
-  id="${chart.id}"
-  src="${config.url}/embed/${embedPath}"
-  title="${chart.title}"
-  allowFullScreen
-/>`}
+                        id="${chart.id}"
+                        src="${config.url}/embed/${embedPath}"
+                        title="${chart.title}"
+                        allowFullScreen
+                      />`}
                     insight={{
                       dataLink: {
                         href: `/profiles/${country.slug}`,
@@ -270,7 +306,7 @@ function Profile({ sectionedCharts }) {
                     }}
                     loading={chartData.isLoading}
                     logo={logo}
-                    source={chart.source && chart.source[geoId]}
+                    source={source}
                     title={chart.title}
                   >
                     {chart.type === 'hurumap'
@@ -295,7 +331,13 @@ function Profile({ sectionedCharts }) {
                           <Chart
                             key={chart.id}
                             chartData={chartData}
-                            definition={chart.visual}
+                            definition={{
+                              ...chart.visual,
+                              typeProps: {
+                                ...chart.visual.typeProps,
+                                ...overrideTypePropsFor(chart.visual.type)
+                              }
+                            }}
                             profiles={profiles}
                             classes={classes}
                           />
@@ -317,7 +359,7 @@ function Profile({ sectionedCharts }) {
             })}
         </Grid>
       )),
-    [profileTabs, chartData, classes, country.slug, profiles, geoId]
+    [profileTabs, chartData, geoId, classes, country.slug, profiles]
   );
 
   // Show and hide sections

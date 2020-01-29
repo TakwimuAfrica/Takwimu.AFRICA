@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -74,8 +75,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function TableOfContent({ children, content, current, generateHref, width }) {
-  const classes = useStyles();
+function TableOfContent({
+  children,
+  content,
+  current,
+  generateHref,
+  width,
+  ...props
+}) {
+  const classes = useStyles(props);
   const [scrollDistance, setScrollDistance] = useState(0);
 
   useEffect(() => {

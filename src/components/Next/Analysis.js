@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AnalysisReadNext({ current, content, showContent, title }) {
+function AnalysisReadNext({ current, content, onClick, title }) {
   const hasContent = current < content.topics.length - 1;
   const generateHref = index => {
     const item = content.topics[index];
@@ -60,7 +60,7 @@ function AnalysisReadNext({ current, content, showContent, title }) {
                   [classes.cardMargin]: index - current > 1
                 })
               }}
-              onClick={showContent(index)}
+              onClick={() => onClick(index)}
             >
               {c.post_title}
             </Card>
@@ -82,7 +82,7 @@ AnalysisReadNext.propTypes = {
       }).isRequired
     )
   }).isRequired,
-  showContent: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default AnalysisReadNext;

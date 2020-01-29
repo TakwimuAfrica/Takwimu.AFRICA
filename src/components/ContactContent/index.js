@@ -28,12 +28,22 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '1.375rem',
     padding: '0 0.75rem'
   },
+  addressText: {
+    marginTop: '2.5rem'
+  },
   body: {
     padding: '0 1.188rem'
   },
+  contactTitle: {
+    fontWeight: 'bold',
+    marginBottom: '0.5rem'
+  },
+  contactEmail: {
+    fontSize: '1.25rem'
+  },
   section: {
     marginTop: '2.5rem',
-    paddingTop: '1rem',
+    paddingTop: '1.5rem',
     paddingBottom: '1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
   },
@@ -48,10 +58,15 @@ const useStyles = makeStyles(theme => ({
       marginRight: '0.625rem'
     }
   },
+  socialGrid: {
+    marginTop: '2.8125rem'
+  },
+  whereToRoot: {
+    marginTop: '2.375rem'
+  },
   keyContacts: {
-    '& > :not(:last-child)': {
-      marginBottom: '2.5rem'
-    }
+    fontSize: '1.25rem',
+    marginBottom: '2.75rem'
   },
   whereToNext: {
     width: '100%',
@@ -108,20 +123,29 @@ function ContactContent({
           title={keyContacts.title}
           variant="h3"
         >
-          <div className={classes.keyContacts}>
+          <>
             {keyContacts.contacts.map(keyContact => (
-              <Grid key={keyContact.link} container direction="column">
-                <Typography>{keyContact.title}</Typography>
-                <A href={keyContact.link}>{keyContact.contact_details}</A>
+              <Grid
+                key={keyContact.link}
+                className={classes.keyContacts}
+                container
+                direction="column"
+              >
+                <Typography className={classes.contactTitle}>
+                  {keyContact.title}
+                </Typography>
+                <A href={keyContact.link} className={classes.contactEmail}>
+                  {keyContact.contact_details}
+                </A>
               </Grid>
             ))}
-          </div>
+          </>
         </ContentSection>
       )}
       {address && (
         <RichTextSection
           id={contentHeadings[addressIndex].link}
-          classes={{ root: classes.section }}
+          classes={{ root: classes.section, text: classes.addressText }}
           title={address.title}
           value={address.description}
           component={ContentSection}
@@ -134,7 +158,7 @@ function ContactContent({
           title={socialMedia.title}
           variant="h3"
         >
-          <Grid container direction="row">
+          <Grid container direction="row" className={classes.socialGrid}>
             {socialMedia.accounts.map(account => (
               <A
                 className={classes.social}
@@ -157,7 +181,10 @@ function ContactContent({
         </ContentSection>
       )}
       <WhereToNext
-        classes={{ sectionRoot: classes.whereToNext }}
+        classes={{
+          sectionRoot: classes.whereToNext,
+          root: classes.whereToRoot
+        }}
         variant="dual"
         whereToNext={whereToNext}
       />

@@ -9,7 +9,7 @@ import Input from './Input';
 const useStyles = makeStyles({
   root: {
     marginTop: '3.875rem',
-    marginBottom: '4.75rem'
+    marginBottom: '0.6875rem'
   },
   title: {}
 });
@@ -18,7 +18,7 @@ function SearchInput({ onRefresh, query, title }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Typography variant="h3" className={classes.title}>
+      <Typography variant="h2" className={classes.title}>
         {title}
       </Typography>
       <Input query={query} onRefresh={onRefresh} />
