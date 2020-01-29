@@ -7,18 +7,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
 
-import ContactContentNav from './ContactContentNav';
-import ContentSection from '../ContentSection';
-import RichTextSection from '../RichTextSection';
-import WhereToNext from '../Next';
-import RelatedContent from '../RelatedContent';
+import ContentSection from './ContentSection';
+import RichTextSection from './RichTextSection';
+import WhereToNext from './Next';
+import RelatedContent from './RelatedContent';
 
-import facebook from '../../assets/images/logo-facebook.svg';
-import github from '../../assets/images/logo-github.svg';
-import instagram from '../../assets/images/group-3.svg';
-import linkedin from '../../assets/images/group-3-copy.svg';
-import medium from '../../assets/images/logo-medium.svg';
-import twitter from '../../assets/images/logo-twitter.svg';
+import facebook from '../assets/images/logo-facebook.svg';
+import github from '../assets/images/logo-github.svg';
+import instagram from '../assets/images/group-3.svg';
+import linkedin from '../assets/images/group-3-copy.svg';
+import medium from '../assets/images/logo-medium.svg';
+import twitter from '../assets/images/logo-twitter.svg';
+import ContentNavigation from './PageContentNavigation';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -100,18 +100,19 @@ function ContactContent({
   socialMediaIndex,
   current,
   contentHeadings,
-  changeActiveContent,
   whereToNext,
   relatedContent
 }) {
   const classes = useStyles();
   return (
     <>
-      <ContactContentNav
-        title={contentHeadings[0].title}
+      <ContentNavigation
+        navigation
         current={current}
-        contentHeadings={contentHeadings}
-        changeActiveContent={changeActiveContent}
+        content={contentHeadings}
+        contentTitle={contentHeadings[0].title}
+        generateHref={({ link }) => `/contact#${link}`}
+        generateTitle={({ title: linkTitle }) => linkTitle}
       />
       <Typography variant="h2" className={classes.title}>
         {title}
@@ -123,23 +124,21 @@ function ContactContent({
           title={keyContacts.title}
           variant="h3"
         >
-          <>
-            {keyContacts.contacts.map(keyContact => (
-              <Grid
-                key={keyContact.link}
-                className={classes.keyContacts}
-                container
-                direction="column"
-              >
-                <Typography className={classes.contactTitle}>
-                  {keyContact.title}
-                </Typography>
-                <A href={keyContact.link} className={classes.contactEmail}>
-                  {keyContact.contact_details}
-                </A>
-              </Grid>
-            ))}
-          </>
+          {keyContacts.contacts.map(keyContact => (
+            <Grid
+              key={keyContact.link}
+              className={classes.keyContacts}
+              container
+              direction="column"
+            >
+              <Typography className={classes.contactTitle}>
+                {keyContact.title}
+              </Typography>
+              <A href={keyContact.link} className={classes.contactEmail}>
+                {keyContact.contact_details}
+              </A>
+            </Grid>
+          ))}
         </ContentSection>
       )}
       {address && (
@@ -166,15 +165,13 @@ function ContactContent({
                 underline="hover"
                 key={account.name}
               >
-                <>
-                  <img
-                    src={SOCIAL_MEDIA[account.name].logo}
-                    alt=""
-                    className={classes.icon}
-                  />
-                  <Icon className={classes.social} />
-                  {SOCIAL_MEDIA[account.name].name}
-                </>
+                <img
+                  src={SOCIAL_MEDIA[account.name].logo}
+                  alt=""
+                  className={classes.icon}
+                />
+                <Icon className={classes.social} />
+                {SOCIAL_MEDIA[account.name].name}
               </A>
             ))}
           </Grid>
@@ -221,8 +218,7 @@ ContactContent.propTypes = {
   whereToNext: PropTypes.shape({
     title: PropTypes.string,
     whereLink: PropTypes.arrayOf(PropTypes.shape({}))
-  }).isRequired,
-  changeActiveContent: PropTypes.func.isRequired
+  }).isRequired
 };
 
 export default ContactContent;

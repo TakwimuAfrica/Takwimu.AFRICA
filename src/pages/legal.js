@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -8,7 +8,7 @@ import { getSitePage } from '../cms';
 import ContentPage from '../components/ContentPage';
 import LegalContent from '../components/LegalContent';
 import Page from '../components/Page';
-import TableOfContent from '../components/LegalContent/TableOfContent';
+import AsideTableOfContent from '../components/AsideTableOfContent';
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 function Legal(takwimu) {
   const classes = useStyles();
   const { pathname } = useRouter();
-  const [current, setCurrent] = useState(-1);
   const {
     page: { title, content, navigation_title: navigationTitle }
   } = takwimu;
@@ -49,44 +48,40 @@ function Legal(takwimu) {
     return headings;
   }, [takwimu]);
 
-  const changeActiveContent = useCallback(
-    index => {
-      setCurrent(index);
-      const activeElement = document.getElementById(
-        contentHeadings[index].link
-      );
-      window.scrollTo(0, activeElement.offsetTop - 90);
-    },
-    [contentHeadings]
-  );
+  const current = useMemo(() => {
+    const currentLink = pathname.split('/').pop();
+    return contentHeadings.findIndex(x => x.link === currentLink);
+  }, [pathname, contentHeadings]);
 
   useEffect(() => {
-    const currentLink = pathname.split('/').pop();
-    const foundIndex = contentHeadings.findIndex(x => x.link === currentLink);
-    if (foundIndex !== -1) {
-      changeActiveContent(foundIndex);
+    if (current === -1) {
+      return;
     }
-  }, [changeActiveContent, contentHeadings, pathname]);
+    const { link } = contentHeadings[current];
+    const sectionEl = document.getElementById(link);
+    if (sectionEl) {
+      window.scrollTo(0, sectionEl.offsetTop - 90);
+    }
+  }, [contentHeadings, current]);
 
   return (
     <Page takwimu={takwimu} title={title}>
       <ContentPage
+        classes={{ root: classes.root }}
         aside={
-          <TableOfContent
+          <AsideTableOfContent
             current={current}
             contentHeadings={contentHeadings}
-            changeActiveContent={changeActiveContent}
+            generateHref={({ link }) => `/${link}`}
           />
         }
-        classes={{ root: classes.root }}
       >
         <LegalContent
           title={title}
-          navigationTitle={navigationTitle}
-          contents={content}
-          contentHeadings={contentHeadings}
           current={current}
-          changeActiveContent={changeActiveContent}
+          contents={content}
+          navigationTitle={navigationTitle}
+          contentHeadings={contentHeadings}
         />
       </ContentPage>
     </Page>

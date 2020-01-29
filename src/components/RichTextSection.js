@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Section from './Section';
-import { RichTypography } from './core';
+import RichTypography from './RichTypography';
 
 const useStyles = makeStyles({
   root: {},

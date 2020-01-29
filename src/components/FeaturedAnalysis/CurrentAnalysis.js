@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import config from '../../config';
 import flags from '../../flags';
 import ButtonLink from '../Link/Button';
-import { RichTypography } from '../core';
+import RichTypography from '../RichTypography';
 
 const useStyles = makeStyles(theme => ({
   root: {

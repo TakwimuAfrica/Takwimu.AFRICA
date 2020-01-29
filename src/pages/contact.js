@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -7,7 +7,7 @@ import { getSitePage } from '../cms';
 import ContactContent from '../components/ContactContent';
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
-import TableOfContent from '../components/ContactContent/TableOfContent';
+import AsideTableOfContent from '../components/AsideTableOfContent';
 
 const useStyles = makeStyles({
   root: {
@@ -18,8 +18,6 @@ const useStyles = makeStyles({
 
 function Contact(takwimu) {
   const classes = useStyles();
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const contentHeadings = [];
   const {
     page: {
       title,
@@ -67,6 +65,8 @@ function Contact(takwimu) {
   let addressIndex = -1;
   let socialMediaIndex = -1;
   let count = 0;
+
+  const contentHeadings = [];
   if (keyContacts) {
     contentHeadings.push({ title: keyContacts.label, link: 'contacts' });
     keyContactsIndex = count;
@@ -83,37 +83,34 @@ function Contact(takwimu) {
     count += 1;
   }
 
-  const changeActiveContent = useCallback(
-    index => {
-      setCurrentSectionIndex(index);
-      const activeElement = document.getElementById(
-        contentHeadings[index].link
-      );
-      window.scrollTo(0, activeElement.offsetTop - 90);
-    },
-    [contentHeadings]
-  );
-
+  const [current, setCurrent] = useState(-1);
   useEffect(() => {
-    const currentIndex = contentHeadings.findIndex(
-      x => x.link === window.location.hash.replace('#', '')
-    );
-    if (currentIndex !== -1) {
-      changeActiveContent(currentIndex);
+    if (current === -1) {
+      return;
     }
-  }, [changeActiveContent, contentHeadings]);
+    const { link } = contentHeadings[current];
+    const sectionEl = document.getElementById(link);
+    if (sectionEl) {
+      window.scrollTo(0, sectionEl.offsetTop - 90);
+    }
+  }, [contentHeadings, current]);
 
   const router = useRouter();
   useEffect(() => {
-    router.events.on('hashChangeComplete', () => {
-      const index = contentHeadings.findIndex(
-        heading => heading.link === window.location.hash.slice(1)
+    const handleHash = () => {
+      setCurrent(
+        contentHeadings.findIndex(
+          heading => heading.link === window.location.hash.slice(1)
+        )
       );
-      if (index !== -1) {
-        changeActiveContent(index);
-      }
-    });
-  }, [changeActiveContent, contentHeadings, router]);
+    };
+
+    handleHash();
+    router.events.on('hashChangeComplete', handleHash);
+    return () => {
+      router.events.off('hashChangeComplete', handleHash);
+    };
+  }, [contentHeadings, router]);
 
   if (count < 1) {
     return null;
@@ -123,10 +120,10 @@ function Contact(takwimu) {
     <Page takwimu={takwimu} title={title}>
       <ContentPage
         aside={
-          <TableOfContent
-            current={currentSectionIndex}
+          <AsideTableOfContent
+            current={current}
             contentHeadings={contentHeadings}
-            changeActiveContent={changeActiveContent}
+            generateHref={({ link }) => `/contact#${link}`}
           />
         }
         classes={{ root: classes.root }}
@@ -139,10 +136,9 @@ function Contact(takwimu) {
           keyContactsIndex={keyContactsIndex}
           socialMedia={socialMedia}
           socialMediaIndex={socialMediaIndex}
-          current={currentSectionIndex}
+          current={current}
           contentHeadings={contentHeadings}
           relatedContent={relatedContent}
-          changeActiveContent={changeActiveContent}
           whereToNext={whereToNext}
         />
       </ContentPage>

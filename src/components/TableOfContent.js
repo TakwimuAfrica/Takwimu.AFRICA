@@ -11,7 +11,6 @@ import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import Link from './Link';
 import activeContentIcon from '../assets/images/active-page.svg';
 
-const DEFAULT_TOP = 120; // Navigation height + padding
 const useStyles = makeStyles(theme => ({
   root: {
     position: 'relative',
@@ -29,7 +28,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: '-1.5rem',
       position: 'fixed',
       width: 'fit-content',
-      top: `${DEFAULT_TOP}px`,
+      top: ({ top }) => `${top}px`,
       bottom: 0,
       overflow: 'hidden auto',
 
@@ -76,6 +75,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function TableOfContent({
+  top: topProp, // Navigation height + padding
   children,
   content,
   current,
@@ -83,7 +83,7 @@ function TableOfContent({
   width,
   ...props
 }) {
-  const classes = useStyles(props);
+  const classes = useStyles({ ...props, top: topProp });
   const [scrollDistance, setScrollDistance] = useState(0);
 
   useEffect(() => {
@@ -106,15 +106,14 @@ function TableOfContent({
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const y = isWidthUp('md', width) ? DEFAULT_TOP : 0;
+  const y = isWidthUp('md', width) ? topProp : 0;
   const top = `${y - scrollDistance}px`;
-  const bottom = `${scrollDistance}px`;
 
   return (
     <Grid
       container
       className={classes.root}
-      style={{ top, bottom }}
+      style={{ top }}
       direction="column"
       wrap="nowrap"
     >
@@ -126,9 +125,9 @@ function TableOfContent({
           {content.map((c, index) => (
             <li
               key={
-                typeof generateHref(index) === 'object'
-                  ? generateHref(index).as
-                  : generateHref(index)
+                typeof generateHref(c, index) === 'object'
+                  ? generateHref(c, index).as
+                  : generateHref(c, index)
               }
               className={classes.listItem}
             >
@@ -140,13 +139,13 @@ function TableOfContent({
               />
               <Link
                 href={
-                  typeof generateHref(index) === 'object'
-                    ? generateHref(index).href
-                    : generateHref(index)
+                  typeof generateHref(c, index) === 'object'
+                    ? generateHref(c, index).href
+                    : generateHref(c, index)
                 }
                 as={
-                  typeof generateHref(index) === 'object'
-                    ? generateHref(index).as
+                  typeof generateHref(c, index) === 'object'
+                    ? generateHref(c, index).as
                     : undefined
                 }
                 variant="body2"
@@ -169,6 +168,7 @@ TableOfContent.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+  top: PropTypes.number,
   content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
@@ -176,7 +176,8 @@ TableOfContent.propTypes = {
 };
 
 TableOfContent.defaultProps = {
-  children: null
+  children: null,
+  top: 175 // navbar height + layout margin + some padding
 };
 
 export default withWidth({

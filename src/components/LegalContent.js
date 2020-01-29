@@ -4,11 +4,10 @@ import { PropTypes } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import ContentNavigation from './ContentNavigation';
-import ContentSection from '../ContentSection';
-import LegalContentNav from './LegalContentNav';
-import RelatedContent from '../RelatedContent';
-import RichTextSection from '../RichTextSection';
+import ContentNavigation from './PageContentNavigation';
+import ContentSection from './ContentSection';
+import RelatedContent from './RelatedContent';
+import RichTextSection from './RichTextSection';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,26 +53,28 @@ function LegalContent({
   contents,
   current,
   contentHeadings,
-  changeActiveContent,
   relatedContent
 }) {
   const classes = useStyles();
   return (
     <>
-      <LegalContentNav
-        title={navigationTitle}
+      <ContentNavigation
+        navigation
         current={current}
-        contentHeadings={contentHeadings}
-        changeActiveContent={index => () => changeActiveContent(index)}
+        content={contentHeadings}
+        contentTitle={navigationTitle}
+        generateHref={({ link }) => `/${link}`}
+        generateTitle={({ title: linkTitle }) => linkTitle}
       />
       <Typography variant="h2" className={classes.title}>
         {title}
       </Typography>
       <ContentNavigation
-        title={navigationTitle}
-        contentHeadings={contentHeadings}
         current={current}
-        changeActiveContent={index => () => changeActiveContent(index)}
+        content={contentHeadings}
+        contentTitle={navigationTitle}
+        generateHref={({ link }) => `/${link}`}
+        generateTitle={({ title: linkTitle }) => linkTitle}
       />
       {contents.map((content, i) => (
         <RichTextSection
@@ -100,7 +101,6 @@ LegalContent.propTypes = {
     }).isRequired
   ).isRequired,
   current: PropTypes.number.isRequired,
-  changeActiveContent: PropTypes.func.isRequired,
   relatedContent: PropTypes.shape({}).isRequired
 };
 

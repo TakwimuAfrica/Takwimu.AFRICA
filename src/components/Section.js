@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Layout from './Layout';
-import { RichTypography } from './core';
+import RichTypography from './RichTypography';
 
 const styles = theme => ({
   root: {

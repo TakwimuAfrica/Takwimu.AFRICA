@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useMemo, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -8,7 +8,7 @@ import { getSitePage } from '../cms';
 import AboutContent from '../components/AboutContent';
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
-import TableOfContent from '../components/AboutContent/TableOfContent';
+import AsideTableOfContent from '../components/AsideTableOfContent';
 
 const useStyles = makeStyles({
   root: {
@@ -78,56 +78,49 @@ function About(takwimu) {
     contentHeadings.push({ title: faqs.label, link: 'faqs' });
   }
 
-  const [current, setCurrent] = useState(-1);
-  const changeActiveContent = useCallback(
-    index => {
-      setCurrent(index);
-
-      if (contentHeadings[index].link === 'about') {
-        window.scrollTo(0, 0);
-      } else {
-        const activeElement = document.getElementById(
-          contentHeadings[index].link
-        );
-        if (activeElement) {
-          window.scrollTo(0, activeElement.offsetTop - 90);
-        }
-      }
-    },
-    [contentHeadings]
-  );
-  useEffect(() => {
+  const current = useMemo(() => {
     const currentLink = pathname.split('/').pop();
-    const foundIndex = contentHeadings.findIndex(x => x.link === currentLink);
-    if (foundIndex !== -1) {
-      changeActiveContent(foundIndex);
+    return contentHeadings.findIndex(x => x.link === currentLink);
+  }, [pathname, contentHeadings]);
+
+  useEffect(() => {
+    if (current === -1) {
+      return;
     }
-  }, [pathname, changeActiveContent, contentHeadings]);
+    const { link } = contentHeadings[current];
+    if (link === 'about') {
+      window.scrollTo(0, 0);
+    } else {
+      const sectionEl = document.getElementById(link);
+      if (sectionEl) {
+        window.scrollTo(0, sectionEl.offsetTop - 90);
+      }
+    }
+  }, [contentHeadings, current]);
 
   return (
     <Page takwimu={takwimu} title={title}>
       <ContentPage
         aside={
-          <TableOfContent
+          <AsideTableOfContent
             current={current}
             contentHeadings={contentHeadings}
-            changeActiveContent={changeActiveContent}
+            generateHref={({ link }) => `/${link}`}
           />
         }
         classes={{ root: classes.root }}
       >
         <AboutContent
           title={title}
+          faqs={faqs}
           contentNavigation={contentNavigation}
           aboutTakwimu={aboutTakwimu}
           methodology={methodology}
           relatedContent={relatedContent}
-          faqs={faqs}
           services={services}
           whereToNext={whereToNext}
           current={current}
           contentHeadings={contentHeadings}
-          changeActiveContent={changeActiveContent}
         />
       </ContentPage>
     </Page>

@@ -14,7 +14,7 @@ import ReactPDF, {
 import { ButtonBase } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { countrify } from '../../core';
+import { countrify } from '../../utils';
 
 import logoWhite from '../../../assets/images/logo-white-all.png';
 import downloadIcon from '../../../assets/images/analysis/download.svg';

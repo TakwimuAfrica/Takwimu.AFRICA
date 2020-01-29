@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import { renderBlocks } from '@codeforafrica/hurumap-ui/cms';
-import { RichTypography } from '../core';
+import RichTypography from '../RichTypography';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './CarouselTopic';

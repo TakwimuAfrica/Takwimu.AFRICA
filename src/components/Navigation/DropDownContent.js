@@ -7,7 +7,7 @@ import { isWidthDown } from '@material-ui/core/withWidth';
 
 import flags from '../../flags';
 import Link from '../Link';
-import { RichTypography } from '../core';
+import RichTypography from '../RichTypography';
 
 const useStyles = makeStyles(theme => ({
   root: {
