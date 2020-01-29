@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
-import { RichTypography } from '../core';
+import RichTypography from '../RichTypography';
 import Section from '../Section';
 import StoryBlocks from './StoryBlocks';
 import StoryList from './StoryList';

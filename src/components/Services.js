@@ -7,7 +7,7 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ContentSection from './ContentSection';
-import { RichTypography } from './core';
+import RichTypography from './RichTypography';
 
 const useStyles = makeStyles(theme => ({
   root: {},

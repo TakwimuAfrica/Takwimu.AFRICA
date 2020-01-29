@@ -3,10 +3,9 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Grid, makeStyles } from '@material-ui/core';
 
-import { RichTypography } from './core';
+import RichTypography from './RichTypography';
 import Section from './Section';
 
 import reasearchIcon from '../assets/images/a-chart.svg';

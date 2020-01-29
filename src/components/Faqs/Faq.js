@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import { RichTypography } from '../core';
+import RichTypography from '../RichTypography';
 
 const styles = theme => ({
   panel: {

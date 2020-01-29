@@ -74,7 +74,7 @@ function DropDownButton({
           component="span"
           justify="space-around"
           alignItems="center"
-          spacing="1"
+          spacing={1}
         >
           <Grid item component="span">
             <img

@@ -1,4 +1,6 @@
-const countrify = (title, country, countries, conj = '&rsquo;s ') => {
+/* eslint-disable import/prefer-default-export */
+
+export const countrify = (title, country, countries, conj = '&rsquo;s ') => {
   const foundCountry = countries.find(c => c.slug === country.slug);
   if (
     foundCountry &&
@@ -8,5 +10,3 @@ const countrify = (title, country, countries, conj = '&rsquo;s ') => {
   }
   return title;
 };
-
-export default countrify;

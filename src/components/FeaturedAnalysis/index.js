@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import { countrify } from '../core';
+import { countrify } from '../utils';
 import AnalysisList from './AnalysisList';
 import CurrentAnalysis from './CurrentAnalysis';
 import Section from '../Section';
