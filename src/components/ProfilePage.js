@@ -276,7 +276,7 @@ function Profile({ sectionedCharts }) {
                         null,
                         chart.id,
                         geoId,
-                        `${config.url}/api/share`
+                        '/api/share'
                       ),
                       handleShowData: null,
                       handleCompare: null
