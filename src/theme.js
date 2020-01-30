@@ -27,10 +27,25 @@ const theme = createTheme({
     group: {
       colorScale: COLOR_BREWER_DIVERGING
     },
+    line: {
+      offset: 70,
+      width: 350,
+      height: 350,
+      style: {
+        data: {
+          fill: COLOR_BREWER_DIVERGING[0]
+        },
+        labels: {
+          fontFamily: FONT_FAMILY_TEXT,
+          fill: 'rgb(0,0,0)'
+        }
+      }
+    },
     bar: {
       width: 350,
       height: 350,
-      offset: 50,
+      barWidth: 30,
+      offset: 32,
       style: {
         data: {
           fill: COLOR_BREWER_DIVERGING[0]
