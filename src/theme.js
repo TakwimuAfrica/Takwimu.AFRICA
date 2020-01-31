@@ -56,6 +56,10 @@ const theme = createTheme({
         }
       }
     },
+    dependentAxis: {
+      fixLabelOverlap: true,
+      tickCount: 3
+    },
     axis: {
       labelWidth: 100,
       style: {
