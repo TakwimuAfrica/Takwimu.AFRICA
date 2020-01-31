@@ -13,15 +13,15 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '100%'
+      width: '43.734375rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      width: '100%'
+      width: '58.3125rem'
     }
   },
   container: {
     flexGrow: 1,
-    paddingBottom: '6.25rem'
+    paddingBottom: '0.9375rem'
   },
   cardMargin: {
     marginTop: '2rem',
