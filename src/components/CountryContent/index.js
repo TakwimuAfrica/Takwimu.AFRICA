@@ -11,19 +11,19 @@ import Selection from './Selection';
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.light,
-    margin: '0 0 2.3125rem 0',
+    margin: '1.375rem 0 2.3125rem 0',
     paddingTop: '3.125rem',
     paddingBottom: '3.5rem',
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '44.015625rem', // .75 of lg
       paddingLeft: '1.625rem',
-      paddingRight: '1.625rem'
+      paddingRight: '1.625rem',
+      width: '43.734375rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      width: '58.6875rem',
       paddingLeft: '2.8125rem',
-      paddingRight: '2.8125rem'
+      paddingRight: '2.8125rem',
+      width: '58.3125rem'
     }
   },
   title: {
@@ -68,7 +68,7 @@ const VIEW_ITEMS = [
   }
 ];
 
-function ViewAnalysis({ content, takwimu: { country, countries } }) {
+function CountryContent({ content, takwimu: { country, countries } }) {
   const classes = useStyles();
   const [countrySlug, setCountrySlug] = useState(country.slug);
   const [view, setView] = useState(VIEW_ITEMS[0].value);
@@ -128,7 +128,7 @@ function ViewAnalysis({ content, takwimu: { country, countries } }) {
   );
 }
 
-ViewAnalysis.propTypes = {
+CountryContent.propTypes = {
   content: PropTypes.shape({
     contentSelectLabel: PropTypes.string,
     countrySelectLabel: PropTypes.string,
@@ -147,4 +147,4 @@ ViewAnalysis.propTypes = {
   }).isRequired
 };
 
-export default ViewAnalysis;
+export default CountryContent;
