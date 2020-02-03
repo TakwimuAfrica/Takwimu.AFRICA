@@ -228,19 +228,6 @@ const theme = createTheme({
         '#wpcontent': {
           paddingLeft: 0
         },
-        '.aligncenter': {
-          display: 'block',
-          'margin-left': 'auto',
-          'margin-right': 'auto'
-        },
-        '.alignleft': {
-          float: 'left',
-          marginRight: 20
-        },
-        '.alignright': {
-          float: 'right',
-          marginLeft: 20
-        },
         '.wp-block-columns': {
           display: 'flex',
           marginBottom: '28px',
@@ -310,6 +297,19 @@ const theme = createTheme({
           '@media (min-width: 782px)': {
             marginLeft: '32px'
           }
+        },
+        '.aligncenter': {
+          display: 'block',
+          'margin-left': 'auto',
+          'margin-right': 'auto'
+        },
+        '.alignleft': {
+          float: 'left',
+          marginRight: '1em'
+        },
+        '.alignright': {
+          float: 'right',
+          marginLeft: '1em'
         },
         /**
          * Override load-styles.php customizations
