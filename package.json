@@ -38,6 +38,7 @@
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
+    "react-lazyload": "^2.6.5",
     "react-router-dom": "^5.0.1",
     "react-share": "^3.0.0",
     "shortid": "^2.2.15",

@@ -6,6 +6,7 @@ import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import A from '@codeforafrica/hurumap-ui/core/A';
+import LazyLoad from 'react-lazyload';
 
 const styles = theme => ({
   root: {},
@@ -35,14 +36,16 @@ const styles = theme => ({
 function StoryCard({ classes, story }) {
   return (
     <Card square classes={{ root: classes.root }}>
-      <CardMedia
-        className={classes.media}
-        component="a"
-        href={story.url}
-        target="_blank"
-        image={story.previewImageUrl}
-        title={story.title}
-      />
+      <LazyLoad>
+        <CardMedia
+          className={classes.media}
+          component="a"
+          href={story.url}
+          target="_blank"
+          image={story.previewImageUrl}
+          title={story.title}
+        />
+      </LazyLoad>
       <CardContent classes={{ root: classes.titleContent }}>
         <Typography
           gutterBottom
