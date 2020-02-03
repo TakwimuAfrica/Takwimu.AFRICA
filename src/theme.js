@@ -280,11 +280,6 @@ const theme = createTheme({
             flexGrow: '0'
           }
         },
-        '.wp-block-column:nth-child(even)': {
-          '@media (min-width: 600px)': {
-            marginLeft: '32px'
-          }
-        },
         '.indicator-widget': {
           width: '100%'
         },
@@ -293,6 +288,20 @@ const theme = createTheme({
         },
         '.flourish-embed': {
           width: '100%'
+        },
+        [`.wp-block-columns,
+          .wp-block-hurumap-data-hurumap-block,
+          .wp-block-hurumap-data-hurumap-card-block,
+          .wp-block-hurumap-data-flourish-block`]: {
+          margin: '1em 0',
+          '& > div': {
+            margin: 0
+          }
+        },
+        '.wp-block-column:nth-child(even)': {
+          '@media (min-width: 600px)': {
+            marginLeft: '32px'
+          }
         },
         '.wp-block-column:not(:first-child)': {
           '@media (min-width: 782px)': {
