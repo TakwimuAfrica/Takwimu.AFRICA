@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
+import classNames from 'classnames';
+
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -16,19 +18,24 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: '3.5rem',
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      paddingLeft: '1.625rem',
-      paddingRight: '1.625rem',
-      width: '43.734375rem' // .75 of lg
+      width: '44.015625rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      paddingLeft: '2.8125rem',
-      paddingRight: '2.8125rem',
-      width: '58.3125rem'
+      width: '58.6875rem'
     }
+  },
+  label: {
+    lineHeight: 'normal'
   },
   title: {
     paddingBottom: '2.375rem',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: '1.625rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: '2.8125rem'
+    }
   },
   countryText: {
     marginTop: '0.9375rem',
@@ -41,10 +48,10 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     marginTop: '0.9375rem',
     [theme.breakpoints.up('md')]: {
+      marginTop: 0,
       width: '6.609375rem'
     },
     [theme.breakpoints.up('lg')]: {
-      marginTop: 0,
       marginLeft: '0.9375rem',
       width: '8.8125rem'
     }
@@ -97,14 +104,19 @@ function CountryContent({ content, takwimu: { country, countries } }) {
       <Typography variant="body1" className={classes.title}>
         {content.contentSelectTitle}
       </Typography>
-      <Grid container direction="row" alignItems="center">
-        <Typography variant="body1">{content.contentSelectLabel}</Typography>
+      <Grid container direction="row" alignItems="center" justify="center">
+        <Typography variant="body1" className={classes.label}>
+          {content.contentSelectLabel}
+        </Typography>
         <Selection
           items={VIEW_ITEMS}
           value={view}
           onChange={e => setView(e.target.value)}
         />
-        <Typography variant="body1" className={classes.countryText}>
+        <Typography
+          variant="body1"
+          className={classNames(classes.label, classes.countryText)}
+        >
           {' '}
           {content.countrySelectLabel}
         </Typography>
