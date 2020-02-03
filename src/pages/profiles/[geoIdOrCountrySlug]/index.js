@@ -11,6 +11,17 @@ function ProfileOrAnalysis({ isAnalysis, initialProps }) {
   return (
     <>
       <Head>
+        <link
+          rel="preconnect"
+          href="https://dashboard.takwimu.africa"
+          crossOrigin="anonymous"
+        />
+        {/** Flourish */}
+        <link
+          rel="preconnect"
+          href="https://upload.wikimedia.org"
+          crossOrigin="anonymous"
+        />
         {/** Graphql Preconnect */}
         <link
           rel="preconnect"
