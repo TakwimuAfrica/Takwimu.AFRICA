@@ -290,13 +290,16 @@ const theme = createTheme({
           width: '100%'
         },
         [`.wp-block-columns,
+          .wp-block-hurumap-card-block,
           .wp-block-hurumap-data-hurumap-block,
-          .wp-block-hurumap-data-hurumap-card-block,
           .wp-block-hurumap-data-flourish-block`]: {
           margin: '1em 0',
           '& > div': {
             margin: 0
           }
+        },
+        '.wp-block-columns > .wp-block-column': {
+          width: '100%'
         },
         '.wp-block-column:nth-child(even)': {
           '@media (min-width: 600px)': {
