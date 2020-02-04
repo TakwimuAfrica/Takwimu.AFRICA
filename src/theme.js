@@ -270,9 +270,6 @@ const theme = createTheme({
         '.indicator-widget': {
           width: '100%'
         },
-        '.indicator-div': {
-          display: 'flex'
-        },
         '.flourish-embed': {
           width: '100%'
         },
