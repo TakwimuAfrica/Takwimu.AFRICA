@@ -285,7 +285,10 @@ const theme = createTheme({
             margin: 0
           }
         },
-        '.wp-block-columns > .wp-block-column': {
+        '.wp-block-columns .wp-block-column': {
+          width: '100%'
+        },
+        '.wp-block-column > div': {
           width: '100%'
         },
         '.wp-block-column:nth-child(even)': {
