@@ -62,8 +62,10 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: '1.0625rem'
   },
   marginBottom: {
-    '& > *': {
-      marginBottom: '1.25rem'
+    [theme.breakpoints.up('md')]: {
+      '& > *': {
+        marginBottom: '1.25rem'
+      }
     }
   }
 }));
