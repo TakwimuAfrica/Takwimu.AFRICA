@@ -105,7 +105,7 @@ function AnalysisContent({
       })
     );
     setHydrateElements(getHydrateContent(document, 'indicators'));
-  }, [takwimu.country.name, topicIndex]);
+  }, [takwimu.country.name, content, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics &&

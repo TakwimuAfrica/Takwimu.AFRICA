@@ -228,19 +228,6 @@ const theme = createTheme({
         '#wpcontent': {
           paddingLeft: 0
         },
-        '.aligncenter': {
-          display: 'block',
-          'margin-left': 'auto',
-          'margin-right': 'auto'
-        },
-        '.alignleft': {
-          float: 'left',
-          marginRight: 20
-        },
-        '.alignright': {
-          float: 'right',
-          marginLeft: 20
-        },
         '.wp-block-columns': {
           display: 'flex',
           marginBottom: '28px',
@@ -280,24 +267,49 @@ const theme = createTheme({
             flexGrow: '0'
           }
         },
+        '.indicator-widget': {
+          width: '100%'
+        },
+        '.flourish-embed': {
+          width: '100%'
+        },
+        [`.wp-block-columns,
+          .wp-block-hurumap-card-block,
+          .wp-block-hurumap-data-hurumap-block,
+          .wp-block-hurumap-data-flourish-block`]: {
+          margin: '1em 0',
+          '& > div': {
+            margin: 0
+          }
+        },
+        '.wp-block-columns .wp-block-column': {
+          width: '100%'
+        },
+        '.wp-block-column > div': {
+          width: '100%'
+        },
         '.wp-block-column:nth-child(even)': {
           '@media (min-width: 600px)': {
             marginLeft: '32px'
           }
         },
-        '.indicator-widget': {
-          width: '100%'
-        },
-        '.indicator-div': {
-          display: 'flex'
-        },
-        '.flourish-embed': {
-          width: '100%'
-        },
         '.wp-block-column:not(:first-child)': {
           '@media (min-width: 782px)': {
             marginLeft: '32px'
           }
+        },
+        '.aligncenter': {
+          display: 'block',
+          'margin-left': 'auto',
+          'margin-right': 'auto'
+        },
+        '.alignleft': {
+          float: 'left',
+          marginRight: '1em'
+        },
+        '.alignright': {
+          float: 'right',
+          marginLeft: '1em'
         },
         /**
          * Override load-styles.php customizations
