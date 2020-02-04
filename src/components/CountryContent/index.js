@@ -46,13 +46,12 @@ const useStyles = makeStyles(theme => ({
   selectButtonRoot: {
     width: '100%',
     padding: 0,
-    marginTop: '0.9375rem',
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
       width: '6.609375rem'
     },
     [theme.breakpoints.up('lg')]: {
-      marginLeft: '0.9375rem',
+      marginTop: 0,
       width: '8.8125rem'
     }
   },
@@ -61,6 +60,11 @@ const useStyles = makeStyles(theme => ({
     fontFamily: theme.typography.body1.fontFamily,
     paddingTop: '1.125rem',
     paddingBottom: '1.0625rem'
+  },
+  marginBottom: {
+    '& > *': {
+      marginBottom: '1.25rem'
+    }
   }
 }));
 
@@ -104,7 +108,13 @@ function CountryContent({ content, takwimu: { country, countries } }) {
       <Typography variant="body1" className={classes.title}>
         {content.contentSelectTitle}
       </Typography>
-      <Grid container direction="row" alignItems="center" justify="center">
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify="center"
+        className={classes.marginBottom}
+      >
         <Typography variant="body1" className={classes.label}>
           {content.contentSelectLabel}
         </Typography>
@@ -117,7 +127,6 @@ function CountryContent({ content, takwimu: { country, countries } }) {
           variant="body1"
           className={classNames(classes.label, classes.countryText)}
         >
-          {' '}
           {content.countrySelectLabel}
         </Typography>
         <Selection
