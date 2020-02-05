@@ -267,6 +267,10 @@ function Profile({ sectionedCharts }) {
                 sourceResult && sourceResult.nodes && sourceResult.nodes.length
                   ? sourceResult.nodes[0]
                   : null;
+
+              const rawData =
+                !chartData.isLoading &&
+                chartData.profileVisualsData[chart.visual.queryAlias].nodes;
               return (
                 <Grid item xs={12} key={chart.id} className={classes.container}>
                   <InsightContainer
@@ -313,6 +317,13 @@ function Profile({ sectionedCharts }) {
                     logo={logo}
                     source={source}
                     title={chart.title}
+                    dataTable={{
+                      tableTitle: chart.visual.table.slice(3),
+                      dataValueTitle: chart.visual.y,
+                      dataLabelTitle: chart.visual.x,
+                      groupByTitle: chart.visual.groupBy,
+                      rawData
+                    }}
                   >
                     {chart.type === 'hurumap'
                       ? [
