@@ -49,6 +49,20 @@ export default class MyApp extends App {
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <Component {...pageProps} />
+              {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+              <script
+                async
+                src="https://www.googletagmanager.com/gtag/js?id=UA-115543098-1"
+              />
+              <script
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                  __html: ` window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'UA-115543098-1');`
+                }}
+              />
             </ThemeProvider>
           </StylesProvider>
         </ApolloProvider>
