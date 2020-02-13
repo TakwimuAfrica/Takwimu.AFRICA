@@ -84,7 +84,8 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }) => ({
   statDescription: {
     fontWeight: 600,
     fontSize: '1.5rem',
-    lineHeight: 1.71
+    lineHeight: 1.71,
+    wordBreak: 'break-word'
   },
   statStatistic: {
     fontWeight: 'bold',
@@ -96,7 +97,8 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }) => ({
   statSubtitle: {
     fontWeight: 'bold',
     fontSize: '1.25rem',
-    marginTop: '1rem'
+    marginTop: '1rem',
+    paddingRight: '1.25rem' // On the same line as chart title hence better to have spacing between them
   },
   title: {
     fontFamily: typography.fontText,
