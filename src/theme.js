@@ -62,7 +62,7 @@ const theme = createTheme({
       tickCount: 3
     },
     axis: {
-      labelWidth: 100,
+      labelWidth: 150,
       style: {
         tickLabels: {
           fontFamily: FONT_FAMILY_TEXT,
