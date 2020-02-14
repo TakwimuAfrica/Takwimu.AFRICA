@@ -324,6 +324,12 @@ const theme = createTheme({
         },
         li: {
           marginBottom: 0
+        },
+        '.wp-block-hurumap-data-featured-data': {
+          '& .wp-block-column > div': {
+            background: '#f6f6f6',
+            minHeight: '400px'
+          }
         }
       }
     },
