@@ -39,9 +39,6 @@ const useStyles = makeStyles(({ palette, breakpoints, typography }) => ({
   actionsRoot: {
     border: 'solid 1px #eaeaea'
   },
-  container: {
-    marginBottom: '0.625rem'
-  },
   containerRoot: ({ loading }) => ({
     width: '100%',
     minHeight: loading && '300px',
@@ -133,6 +130,8 @@ const overrideTypePropsFor = chartType => {
 
 function Profile({ sectionedCharts }) {
   const router = useRouter();
+  const classes = useStyles();
+
   const {
     query: { geoIdOrCountrySlug: geoId = '' }
   } = router;
@@ -143,12 +142,31 @@ function Profile({ sectionedCharts }) {
       : 'all'
   );
 
-  const classes = useStyles();
+  const filterByGeography = useCallback(
+    ({ type, inGeographies }) =>
+      type !== 'hurumap' ||
+      inGeographies
+        .map(({ geoLevel, geoCode }) => `${geoLevel}-${geoCode}`)
+        .includes(geoId),
+    [geoId]
+  );
 
-  const { profiles } = useProfileLoader({
+  const { profiles, chartData } = useProfileLoader({
     geoId,
+    visuals: sectionedCharts
+      .reduce((a, b) => a.concat(b.charts), [])
+      .filter(filterByGeography)
+      .map(({ visual }) => visual),
     populationTables: config.populationTables
   });
+
+  const useProfileAndChartData = useCallback(
+    () => ({
+      profiles,
+      chartData
+    }),
+    [chartData, profiles]
+  );
   const country = useMemo(() => {
     if (!profiles.profile || !profiles.profile.geoLevel) {
       return {};
@@ -179,16 +197,10 @@ function Profile({ sectionedCharts }) {
         // Filter empty sections
         .filter(
           ({ charts: sectionCharts }) =>
-            sectionCharts.filter(
-              ({ type, inGeographies }) =>
-                type !== 'hurumap' ||
-                inGeographies
-                  .map(({ geoLevel, geoCode }) => `${geoLevel}-${geoCode}`)
-                  .includes(geoId)
-            ).length !== 0
+            sectionCharts.filter(filterByGeography).length !== 0
         )
     ],
-    [geoId, sectionedCharts]
+    [sectionedCharts, filterByGeography]
   );
 
   // Show and hide sections
@@ -213,8 +225,6 @@ function Profile({ sectionedCharts }) {
       });
     }
   }, [activeTab, profileTabs]);
-
-  console.log('Render');
 
   return (
     <Page takwimu={config}>
@@ -248,78 +258,70 @@ function Profile({ sectionedCharts }) {
       )}
       <Section>
         {profileTabs.slice(1).map(tab => (
-          <Grid item container id={tab.slug} key={tab.slug}>
-            <ProfileSectionTitle loading={false} tab={tab} />
-            {tab.charts
-              // Filter loaded charts
-              .filter(
-                ({ type, inGeographies }) =>
-                  type !== 'hurumap' ||
-                  inGeographies
-                    .map(({ geoLevel, geoCode }) => `${geoLevel}-${geoCode}`)
-                    .includes(geoId)
-              )
-              .map(chart => {
-                return (
-                  <Grid
-                    item
-                    xs={12}
-                    key={chart.id}
-                    className={classes.container}
-                  >
-                    <Card
-                      key={chart.id}
-                      type="hurumap"
-                      geoId={geoId}
-                      id={chart.id}
-                      logo={logo}
-                      showInsight
-                      showStatVisual
-                      definition={{
-                        ...chart,
-                        visual: {
-                          ...chart.visual,
-                          typeProps: {
-                            ...chart.visual.typeProps,
-                            ...overrideTypePropsFor(chart.visual.type)
+          <Grid item id={tab.slug} key={tab.slug}>
+            <Grid container spacing={4}>
+              <ProfileSectionTitle tab={tab} />
+              {tab.charts
+                // Filter loaded charts
+                .filter(filterByGeography)
+                .map(chart => {
+                  return (
+                    <Grid item xs={12} key={chart.id}>
+                      <Card
+                        key={chart.id}
+                        type="hurumap"
+                        geoId={geoId}
+                        id={chart.id}
+                        logo={logo}
+                        showInsight
+                        showStatVisual
+                        definition={{
+                          ...chart,
+                          visual: {
+                            ...chart.visual,
+                            typeProps: {
+                              ...chart.visual.typeProps,
+                              ...overrideTypePropsFor(chart.visual.type)
+                            }
                           }
-                        }
-                      }}
-                      dataLinkHref="#"
-                      dataLinkTitle="Read the country analysis"
-                      analysisLinkCountrySlug={country.slug}
-                      actions={{
-                        handleShare: shareIndicator.bind(
-                          null,
-                          chart.id,
-                          geoId,
-                          '/api/share'
-                        ),
-                        handleShowData: null,
-                        handleCompare: null
-                      }}
-                      classes={{
-                        insight: classes.insight,
-                        actionsCompareButton: classes.actionsCompareButton,
-                        actionsShareButton: classes.actionsShareButton,
-                        actionsShowDataButton: classes.actionsShowDataButton,
-                        actionsRoot: classes.actionsRoot,
-                        root: classes.containerRoot,
-                        sourceGrid: classes.containerSourceGrid,
-                        sourceLink: classes.containerSourceLink,
-                        insightAnalysisLink:
-                          classes.containerInsightAnalysisLink,
-                        insightDataLink: classes.containerInsightDataLink,
-                        insightGrid: classes.insightGrid,
-                        highlightGrid:
-                          chart.type === 'flourish' &&
-                          classes.hideHighlightGrid,
-                        title: classes.title
-                      }}
-                    />
-                  </Grid>
-                );
-              })}
+                        }}
+                        useLoader={useProfileAndChartData}
+                        dataLinkHref="#"
+                        dataLinkTitle="Read the country analysis"
+                        analysisLinkCountrySlug={country.slug}
+                        actions={{
+                          handleShare: shareIndicator.bind(
+                            null,
+                            chart.id,
+                            geoId,
+                            '/api/share'
+                          ),
+                          handleShowData: null,
+                          handleCompare: null
+                        }}
+                        classes={{
+                          insight: classes.insight,
+                          actionsCompareButton: classes.actionsCompareButton,
+                          actionsShareButton: classes.actionsShareButton,
+                          actionsShowDataButton: classes.actionsShowDataButton,
+                          actionsRoot: classes.actionsRoot,
+                          root: classes.containerRoot,
+                          sourceGrid: classes.containerSourceGrid,
+                          sourceLink: classes.containerSourceLink,
+                          insightAnalysisLink:
+                            classes.containerInsightAnalysisLink,
+                          insightDataLink: classes.containerInsightDataLink,
+                          insightGrid: classes.insightGrid,
+                          highlightGrid:
+                            chart.type === 'flourish' &&
+                            classes.hideHighlightGrid,
+                          title: classes.title
+                        }}
+                      />
+                    </Grid>
+                  );
+                })}
+            </Grid>
           </Grid>
         ))}
       </Section>

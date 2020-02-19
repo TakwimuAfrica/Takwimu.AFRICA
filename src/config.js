@@ -1,7 +1,7 @@
 const WP_BACKEND_URL =
   // eslint-disable-next-line no-nested-ternary
   process.env.NODE_ENV === 'development'
-    ? 'https://dashboard.takwimu.africa'
+    ? 'http://localhost:8080'
     : process.env.NODE_ENV === 'staging'
     ? 'https://takwimutech.wpengine.com'
     : 'https://dashboard.takwimu.africa';
