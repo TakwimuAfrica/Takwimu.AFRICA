@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
@@ -151,12 +151,18 @@ function Profile({ sectionedCharts }) {
     [geoId]
   );
 
+  const visuals = useMemo(
+    () =>
+      sectionedCharts
+        .reduce((a, b) => a.concat(b.charts), [])
+        .filter(filterByGeography)
+        .map(({ visual }) => visual),
+    [filterByGeography, sectionedCharts]
+  );
+
   const { profiles, chartData } = useProfileLoader({
     geoId,
-    visuals: sectionedCharts
-      .reduce((a, b) => a.concat(b.charts), [])
-      .filter(filterByGeography)
-      .map(({ visual }) => visual),
+    visuals,
     populationTables: config.populationTables
   });
 
@@ -209,7 +215,7 @@ function Profile({ sectionedCharts }) {
       profileTabs.slice(1).forEach(tab => {
         const tabElement = document.getElementById(tab.slug);
         // Remember to display all section titles
-        tabElement.children[0].style.display = 'block';
+        tabElement.children[0].children[0].style.display = 'block';
         tabElement.style.display = 'flex';
       });
     } else {
@@ -217,7 +223,7 @@ function Profile({ sectionedCharts }) {
         const tabElement = document.getElementById(tab.slug);
         if (tab.slug === activeTab) {
           // Hide section title for active tab
-          tabElement.children[0].style.display = 'none';
+          tabElement.children[0].children[0].style.display = 'none';
           tabElement.style.display = 'flex';
         } else {
           tabElement.style.display = 'none';
@@ -235,8 +241,7 @@ function Profile({ sectionedCharts }) {
           }}
         />
       )}
-
-      <div style={{ width: '100%', height: '500px', overflow: 'hidden' }}>
+      <Box width="100%" height="500px" overflow="hidden">
         <MapIt
           drawProfile
           codeType="AFR"
@@ -247,7 +252,7 @@ function Profile({ sectionedCharts }) {
           geoCode={geoId.split('-')[1]}
           onClickGeoLayer={onClickGeoLayer}
         />
-      </div>
+      </Box>
       {!profiles.isLoading && (
         <ProfileSection
           profile={{ geo: profiles.profile }}
@@ -259,68 +264,74 @@ function Profile({ sectionedCharts }) {
       <Section>
         {profileTabs.slice(1).map(tab => (
           <Grid item id={tab.slug} key={tab.slug}>
-            <Grid container spacing={4}>
+            <Grid container>
               <ProfileSectionTitle tab={tab} />
-              {tab.charts
-                // Filter loaded charts
-                .filter(filterByGeography)
-                .map(chart => {
-                  return (
-                    <Grid item xs={12} key={chart.id}>
-                      <Card
-                        key={chart.id}
-                        type="hurumap"
-                        geoId={geoId}
-                        id={chart.id}
-                        logo={logo}
-                        showInsight
-                        showStatVisual
-                        definition={{
-                          ...chart,
-                          visual: {
-                            ...chart.visual,
-                            typeProps: {
-                              ...chart.visual.typeProps,
-                              ...overrideTypePropsFor(chart.visual.type)
-                            }
-                          }
-                        }}
-                        useLoader={useProfileAndChartData}
-                        dataLinkHref="#"
-                        dataLinkTitle="Read the country analysis"
-                        analysisLinkCountrySlug={country.slug}
-                        actions={{
-                          handleShare: shareIndicator.bind(
-                            null,
-                            chart.id,
-                            geoId,
-                            '/api/share'
-                          ),
-                          handleShowData: null,
-                          handleCompare: null
-                        }}
-                        classes={{
-                          insight: classes.insight,
-                          actionsCompareButton: classes.actionsCompareButton,
-                          actionsShareButton: classes.actionsShareButton,
-                          actionsShowDataButton: classes.actionsShowDataButton,
-                          actionsRoot: classes.actionsRoot,
-                          root: classes.containerRoot,
-                          sourceGrid: classes.containerSourceGrid,
-                          sourceLink: classes.containerSourceLink,
-                          insightAnalysisLink:
-                            classes.containerInsightAnalysisLink,
-                          insightDataLink: classes.containerInsightDataLink,
-                          insightGrid: classes.insightGrid,
-                          highlightGrid:
-                            chart.type === 'flourish' &&
-                            classes.hideHighlightGrid,
-                          title: classes.title
-                        }}
-                      />
-                    </Grid>
-                  );
-                })}
+              <Grid item>
+                <Grid container spacing={4}>
+                  {tab.charts
+                    // Filter loaded charts
+                    .filter(filterByGeography)
+                    .map(chart => {
+                      return (
+                        <Grid item xs={12} key={chart.id}>
+                          <Card
+                            key={chart.id}
+                            type="hurumap"
+                            geoId={geoId}
+                            id={chart.id}
+                            logo={logo}
+                            showInsight
+                            showStatVisual
+                            definition={{
+                              ...chart,
+                              visual: {
+                                ...chart.visual,
+                                typeProps: {
+                                  ...chart.visual.typeProps,
+                                  ...overrideTypePropsFor(chart.visual.type)
+                                }
+                              }
+                            }}
+                            useLoader={useProfileAndChartData}
+                            dataLinkHref="#"
+                            dataLinkTitle="Read the country analysis"
+                            analysisLinkCountrySlug={country.slug}
+                            actions={{
+                              handleShare: shareIndicator.bind(
+                                null,
+                                chart.id,
+                                geoId,
+                                '/api/share'
+                              ),
+                              handleShowData: null,
+                              handleCompare: null
+                            }}
+                            classes={{
+                              insight: classes.insight,
+                              actionsCompareButton:
+                                classes.actionsCompareButton,
+                              actionsShareButton: classes.actionsShareButton,
+                              actionsShowDataButton:
+                                classes.actionsShowDataButton,
+                              actionsRoot: classes.actionsRoot,
+                              root: classes.containerRoot,
+                              sourceGrid: classes.containerSourceGrid,
+                              sourceLink: classes.containerSourceLink,
+                              insightAnalysisLink:
+                                classes.containerInsightAnalysisLink,
+                              insightDataLink: classes.containerInsightDataLink,
+                              insightGrid: classes.insightGrid,
+                              highlightGrid:
+                                chart.type === 'flourish' &&
+                                classes.hideHighlightGrid,
+                              title: classes.title
+                            }}
+                          />
+                        </Grid>
+                      );
+                    })}
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         ))}
