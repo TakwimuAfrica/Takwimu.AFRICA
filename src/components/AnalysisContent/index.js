@@ -190,8 +190,8 @@ function AnalysisContent({
         )}
 
         {hydrateElements.indicators.map(
-          ({ element, layout, title, src: source }) => {
-            if (layout === 'document_widget') {
+          ({ element, widget, title, src: source }) => {
+            if (widget === 'document') {
               /**
                * Currently the content returned from wp contains styling.
                * Remove this styling and render the appropriate container.
