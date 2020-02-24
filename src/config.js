@@ -149,12 +149,10 @@ Disallow:
   },
   populationTables: [
     'allPopulationSex2006S',
-    'allPopulationSex2007S',
     'allPopulationSex2011S',
     'allPopulationSex2012S',
     'allPopulationSex2013S',
     'allPopulationSex2019S',
-    'allPopulationSexYears',
     'allPopulationResidence2012S',
     'allPopulationResidence2013S',
     /**
