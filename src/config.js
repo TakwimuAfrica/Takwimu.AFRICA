@@ -153,7 +153,6 @@ Disallow:
     'allPopulationSex2012S',
     'allPopulationSex2013S',
     'allPopulationSex2019S',
-    'allPopulationSexYears',
     'allPopulationResidence2012S',
     'allPopulationResidence2013S',
     /**
