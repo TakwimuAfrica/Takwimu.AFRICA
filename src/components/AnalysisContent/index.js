@@ -12,14 +12,10 @@ import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
 import CarouselTopic from './CarouselTopic';
 import CountryContent from '../CountryContent';
-import Portal from '../Portal';
 import RelatedContent from '../RelatedContent';
 import OtherInfo from '../PageContentNavigation';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
-import PDFDataContainer from '../DataContainer/PDFDataContainer';
-
-import getHydrateContent from '../../utils/getHydrateContent';
 
 import logo from '../../assets/images/logo-white-all.png';
 import config from '../../config';
@@ -81,9 +77,6 @@ function AnalysisContent({
     setTopicIndex(foundTopicIndex !== -1 ? foundTopicIndex : 0);
   }, [content]);
 
-  const [hydrateElements, setHydrateElements] = useState({
-    indicators: []
-  });
   const [blocks, setBlocks] = useState();
   useEffect(() => {
     setBlocks(
@@ -104,7 +97,6 @@ function AnalysisContent({
         }
       })
     );
-    setHydrateElements(getHydrateContent(document, 'indicators'));
   }, [takwimu.country.name, content, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
@@ -187,29 +179,6 @@ function AnalysisContent({
             onIndexChanged={setCarouselItemIndex}
             url={takwimu.url}
           />
-        )}
-
-        {hydrateElements.indicators.map(
-          ({ element, widget, title, src: source }) => {
-            if (widget === 'document') {
-              /**
-               * Currently the content returned from wp contains styling.
-               * Remove this styling and render the appropriate container.
-               */
-              // eslint-disable-next-line no-param-reassign
-              element.innerHTML = '';
-              return (
-                <Portal key={element.id} element={element}>
-                  <PDFDataContainer
-                    id={element.id}
-                    countryName={takwimu.country.name}
-                    data={{ title, source }}
-                  />
-                </Portal>
-              );
-            }
-            return null;
-          }
         )}
 
         {blocks}
