@@ -20,6 +20,7 @@ import classNames from 'classnames';
 import { withRouter } from 'next/router';
 import logoWhite from '../../assets/images/logo-white-all.png';
 
+import LanguageSelector from './LanguageSelector';
 import Layout from '../Layout';
 import DropDownButtons from './DropDowns';
 import DropDownDrawer from './DropDownDrawer';
@@ -123,6 +124,7 @@ class Navigation extends React.Component {
             {isWidthUp('md', width)
               ? this.renderDesktopNav()
               : this.renderMobileNav()}
+            <LanguageSelector />
           </Grid>
         </Layout>
       </nav>
