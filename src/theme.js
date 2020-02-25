@@ -271,6 +271,9 @@ const theme = createTheme({
         '.indicator-widget': {
           width: '100%'
         },
+        '.indicator-description': {
+          display: 'none' // deprecated php indicator has div with this class name which is redundant
+        },
         '.flourish-embed': {
           width: '100%'
         },
