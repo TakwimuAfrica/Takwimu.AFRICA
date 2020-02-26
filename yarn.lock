@@ -939,7 +939,7 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@codeforafrica/hurumap-ui@^0.2.2":
+"@codeforafrica/hurumap-ui@^0.2.3":
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/@codeforafrica/hurumap-ui/-/hurumap-ui-0.2.3.tgz#0052e6f336769aedb61dd53298106a2658bdd93e"
   integrity sha512-z/pz9Qcm+4XIVMv/4Z3Ve+tMVojzP5PeKzsJXiuazxwXxVTaxMENvM0fBXypjdPXrYxB7g7Q99qKIO5bd0uc5g==
