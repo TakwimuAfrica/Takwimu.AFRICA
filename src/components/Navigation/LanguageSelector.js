@@ -61,12 +61,11 @@ function LanguageSelector({ defaultLanguage, availableLanguages, ...props }) {
 }
 
 LanguageSelector.defaultProps = {
-  defaultLanguage: 'en',
   availableLanguages: ['en', 'fr']
 };
 
 LanguageSelector.propTypes = {
-  defaultLanguage: PropTypes.string,
+  defaultLanguage: PropTypes.string.isRequired,
   availableLanguages: PropTypes.arrayOf(PropTypes.string)
 };
 
