@@ -129,7 +129,7 @@ const get = async url => {
 };
 
 AnalysisPage.getInitialProps = async ({
-  query: { geoIdOrCountrySlug: slug, analysisSlug },
+  query: { geoIdOrCountrySlug: slug, analysisSlug, lang: queryLang },
   asPath
 }) => {
   const { WP_BACKEND_URL, countries } = config;
@@ -138,6 +138,7 @@ AnalysisPage.getInitialProps = async ({
     config.country,
     countries.find(c => c.slug === slug)
   );
+  const lang = queryLang || config.country.lang || config.DEFAULT_LANG;
 
   let analyses = [];
   let activeAnalysis = {};
@@ -148,7 +149,7 @@ AnalysisPage.getInitialProps = async ({
 
   try {
     const [profile] = await get(
-      `${WP_BACKEND_URL}/wp-json/wp/v2/profile?slug=${slug}`
+      `${WP_BACKEND_URL}/wp-json/wp/v2/profile?slug=${slug}&lang=${lang}`
     );
 
     if (profile && profile.acf) {
@@ -187,7 +188,7 @@ AnalysisPage.getInitialProps = async ({
         const {
           acf: { section_topics: sectionTopics }
         } = await get(
-          `${WP_BACKEND_URL}/wp-json/wp/v2/profile_section_page/${activeAnalysis.ID}`
+          `${WP_BACKEND_URL}/wp-json/wp/v2/profile_section_page/${activeAnalysis.ID}?lang=${lang}`
         );
 
         const topics = await Promise.all(
@@ -199,12 +200,12 @@ AnalysisPage.getInitialProps = async ({
               const {
                 acf: { topic_carousel_body: carousel }
               } = await get(
-                `${WP_BACKEND_URL}/wp-json/wp/v2/carousel_topic/${topic.ID}`
+                `${WP_BACKEND_URL}/wp-json/wp/v2/carousel_topic/${topic.ID}?lang=${lang}`
               );
               topic.carousel = carousel; // eslint-disable-line no-param-reassign
             } else {
               const { content: { rendered } = { rendered: '' } } = await get(
-                `${WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.ID}`
+                `${WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.ID}?lang=${lang}`
               );
               topic.type = 'topic'; // eslint-disable-line no-param-reassign
               topic.content = rendered; // eslint-disable-line no-param-reassign
