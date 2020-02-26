@@ -4,6 +4,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import { MenuItem, Select } from '@material-ui/core';
 import languages from '../../languages';
+import Link from '../Link';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -45,11 +46,13 @@ function LanguageSelector({ defaultLanguage, availableLanguages, ...props }) {
       >
         {availableLanguages.map(lang => (
           <MenuItem key={lang} value={lang} className={classes.flagOption}>
-            <img
-              src={languages[lang.toUpperCase()]}
-              className={classes.flagImage}
-              alt="language option"
-            />
+            <Link href={`?lang=${lang}`}>
+              <img
+                src={languages[lang.toUpperCase()]}
+                className={classes.flagImage}
+                alt="language option"
+              />
+            </Link>
           </MenuItem>
         ))}
       </Select>

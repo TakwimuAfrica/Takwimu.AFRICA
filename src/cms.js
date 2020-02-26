@@ -12,9 +12,9 @@ export async function getPage(type) {
   return config;
 }
 
-export async function getPostBySlug(type, slug) {
+export async function getPostBySlug(type, slug, lang = 'en') {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}?slug=${slug}`
+    `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}?slug=${slug}&lang=${lang}`
   );
   const data = res.ok ? await res.json() : {};
 
@@ -24,9 +24,9 @@ export async function getPostBySlug(type, slug) {
   };
 }
 
-export async function getSitePage(slug) {
+export async function getSitePage(slug, lang = 'en') {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/wp/v2/pages?slug=${slug}`
+    `${config.WP_BACKEND_URL}/wp-json/wp/v2/pages?slug=${slug}&lang=${lang}`
   );
 
   const data = res.ok ? await res.json() : {};
@@ -40,23 +40,23 @@ export async function getSitePage(slug) {
   return config;
 }
 
-export async function getSectionedCharts() {
+export async function getSectionedCharts(lang = 'en') {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts?sectioned=1&type=hurumap`
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts?sectioned=1&type=hurumap&lang=${lang}`
   );
   return res.ok ? res.json() : null;
 }
 
-export async function getChartDefinition(chartId) {
+export async function getChartDefinition(chartId, lang = 'en') {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${chartId}`
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${chartId}&lang=${lang}`
   );
   return res.ok ? res.json() : null;
 }
 
-export async function getPostById(type, id) {
+export async function getPostById(type, id, lang = 'en') {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`
+    `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}&lang=${lang}`
   );
   return res.ok ? res.json() : null;
 }

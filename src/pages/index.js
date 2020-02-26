@@ -84,10 +84,13 @@ Home.propTypes = {
   }).isRequired
 };
 
-Home.getInitialProps = async () => {
+Home.getInitialProps = async props => {
+  const {
+    query: { lang }
+  } = props;
   const res = await fetch('https://stories.hurumap.org/@takwimu_africa/latest');
   const latestMediumPosts = await res.json();
-  const takwimu = await getSitePage('index');
+  const takwimu = await getSitePage('index', lang);
 
   return {
     latestMediumPosts,
