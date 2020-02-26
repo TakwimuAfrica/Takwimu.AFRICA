@@ -8,9 +8,11 @@ import theme from '../theme';
 
 class MyDocument extends Document {
   render() {
+    const { lang } = this.props;
     return (
-      <html lang="en">
+      <html lang={lang}>
         <Head>
+          <base href={`/${lang}`} />
           <meta name="theme-color" content={theme.palette.primary.main} />
 
           <link
@@ -93,6 +95,7 @@ MyDocument.getInitialProps = async ctx => {
 
   return {
     ...initialProps,
+    lang: ctx.query.lang || 'en',
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),

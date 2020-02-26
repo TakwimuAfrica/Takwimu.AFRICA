@@ -3,7 +3,7 @@ import config from './config';
 
 export async function getPage(type) {
   const res = await fetch(
-    `${config.url}/api/v2/pages/?type=${type}&fields=*&format=json`
+    `${config.WP_BACKEND_URL}/api/v2/pages/?type=${type}&fields=*&format=json`
   );
   const data = res.ok ? await res.json() : {};
 

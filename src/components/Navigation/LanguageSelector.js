@@ -1,23 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import { Input, MenuItem, Select } from '@material-ui/core';
+import { MenuItem, ButtonBase, Menu } from '@material-ui/core';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import { useRouter } from 'next/router';
 import languages from '../../languages';
 import Link from '../Link';
 
-const useStyles = makeStyles(({ breakpoints }) => ({
-  root: {
-    [breakpoints.up('md')]: {
-      marginRight: '-6rem'
-    }
-  },
-  select: {
-    paddingRight: 0
-  },
+const useStyles = makeStyles(() => ({
+  root: {},
   flagImage: {
-    width: '1.3rem',
-    height: '1.3rem'
+    width: '20.8px',
+    height: '20.8px'
   },
   flagOptions: {
     '& ul': {
@@ -25,53 +20,70 @@ const useStyles = makeStyles(({ breakpoints }) => ({
     }
   },
   flagOption: {
-    padding: '0.5rem'
+    padding: '8px'
   }
 }));
 
-function LanguageSelector({ defaultLanguage, availableLanguages, ...props }) {
+function LanguageSelector({ lang, options, ...props }) {
   const classes = useStyles(props);
-  const [selectedLang, setSelectedLang] = useState(defaultLanguage);
+  const { query } = useRouter();
+
+  const hrefTrimmedLang =
+    typeof window !== 'undefined'
+      ? `${window.location.href.replace(
+          `${window.location.origin}${query.lang ? `/${query.lang}` : ''}`,
+          ''
+        )}`
+      : '/';
 
   return (
     <div className={classes.root}>
-      <Select
-        value={selectedLang}
-        renderValue={value => (
-          <img
-            src={languages[value.toUpperCase()]}
-            className={classes.flagImage}
-            alt="language option"
-          />
-        )}
-        classes={{ select: classes.select }}
-        IconComponent={() => null}
-        input={<Input disableUnderline />}
-        onChange={e => setSelectedLang(e.target.value)}
-      >
-        {availableLanguages.map(lang => (
-          <MenuItem key={lang} value={lang} className={classes.flagOption}>
-            <Link href={`?lang=${lang}`}>
+      <PopupState variant="popover" popupId="language-popup-menu">
+        {popupState => (
+          <>
+            <ButtonBase
+              variant="contained"
+              color="primary"
+              {...bindTrigger(popupState)}
+            >
               <img
                 src={languages[lang.toUpperCase()]}
                 className={classes.flagImage}
-                alt="language option"
+                alt="lang"
               />
-            </Link>
-          </MenuItem>
-        ))}
-      </Select>
+            </ButtonBase>
+            <Menu {...bindMenu(popupState)}>
+              {options.map(option => (
+                <MenuItem
+                  key={option}
+                  value={option}
+                  disabled={option === lang}
+                  className={classes.flagOption}
+                >
+                  <Link base={option} href={hrefTrimmedLang}>
+                    <img
+                      src={languages[option.toUpperCase()]}
+                      className={classes.flagImage}
+                      alt="lang option"
+                    />
+                  </Link>
+                </MenuItem>
+              ))}
+            </Menu>
+          </>
+        )}
+      </PopupState>
     </div>
   );
 }
 
 LanguageSelector.defaultProps = {
-  availableLanguages: ['en', 'fr']
+  options: ['en', 'fr']
 };
 
 LanguageSelector.propTypes = {
-  defaultLanguage: PropTypes.string.isRequired,
-  availableLanguages: PropTypes.arrayOf(PropTypes.string)
+  lang: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default LanguageSelector;

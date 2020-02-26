@@ -40,6 +40,7 @@ function Link(props) {
     href,
     innerRef,
     naked,
+    base,
     ...other
   } = props;
   const router = useRouter();
@@ -50,11 +51,17 @@ function Link(props) {
     [activeClassName]: active && activeClassName
   });
 
+  const basePath = () => {
+    return `/${base || router.query.lang}${
+      href[0] === '/' ? href : `/${href}`
+    }`;
+  };
+
   if (naked) {
     return (
       <NextComposed
         className={className}
-        href={href}
+        href={basePath()}
         ref={innerRef}
         {...other}
       />
@@ -65,7 +72,7 @@ function Link(props) {
     <MuiLink
       component={NextComposed}
       className={className}
-      href={href}
+      href={basePath()}
       ref={innerRef}
       {...other}
     />
@@ -78,6 +85,7 @@ Link.propTypes = {
   activeClassName: PropTypes.string,
   as: PropTypes.string,
   className: PropTypes.string,
+  base: PropTypes.string,
   href: PropTypes.string,
   innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   naked: PropTypes.bool,
@@ -95,7 +103,8 @@ Link.defaultProps = {
   innerRef: undefined,
   naked: undefined,
   onClick: undefined,
-  prefetch: undefined
+  prefetch: undefined,
+  base: undefined
 };
 
 export default React.forwardRef((props, ref) => (

@@ -8,7 +8,8 @@ import {
   Drawer,
   IconButton,
   MenuItem,
-  ButtonBase
+  ButtonBase,
+  Box
 } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Close from '@material-ui/icons/Close';
@@ -132,17 +133,27 @@ class Navigation extends React.Component {
 
   renderMobileNav() {
     const { openDrawer } = this.state;
+    const {
+      takwimu: { language }
+    } = this.props;
     return (
       <>
         <Grid item>
-          <IconButton
-            disableRipple
-            disableTouchRipple
-            color="inherit"
-            onClick={this.toggleMobileDrawer}
-          >
-            {openDrawer === 'search' ? <Close /> : <MenuOutlined />}
-          </IconButton>
+          <Grid container direction="row" alignItems="center" spacing={2}>
+            <Grid item>
+              <LanguageSelector lang={language} />
+            </Grid>
+            <Grid item>
+              <IconButton
+                disableRipple
+                disableTouchRipple
+                color="inherit"
+                onClick={this.toggleMobileDrawer}
+              >
+                {openDrawer === 'search' ? <Close /> : <MenuOutlined />}
+              </IconButton>
+            </Grid>
+          </Grid>
         </Grid>
       </>
     );
@@ -167,28 +178,44 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Link
-            navigation
-            href="/about"
-            className={classes.link}
-            active={['/services', '/about', '/methodology'].includes(pathname)}
-          >
-            About Us
-          </Link>
-          <Link navigation href="/faqs" className={classes.link}>
-            FAQs
-          </Link>
-          <Link navigation className={classes.link} href="/contact">
-            Contact Us
-          </Link>
-          <ButtonBase
-            className={classes.searchButton}
-            onClick={this.toggleDrawer('search')}
-          >
-            {openDrawer === 'search' ? <Close /> : <Search />}
-          </ButtonBase>
+          <Grid container direction="row">
+            <Grid item>
+              <Link
+                navigation
+                href="/about"
+                className={classes.link}
+                active={['/services', '/about', '/methodology'].includes(
+                  pathname
+                )}
+              >
+                About Us
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link navigation href="/faqs" className={classes.link}>
+                FAQs
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link navigation className={classes.link} href="/contact">
+                Contact Us
+              </Link>
+            </Grid>
+            <Grid item>
+              <ButtonBase
+                className={classes.searchButton}
+                onClick={this.toggleDrawer('search')}
+              >
+                {openDrawer === 'search' ? <Close /> : <Search />}
+              </ButtonBase>
+            </Grid>
+            <Grid item>
+              <Box marginLeft="1.875rem">
+                <LanguageSelector lang={language} />
+              </Box>
+            </Grid>
+          </Grid>
         </Grid>
-        <LanguageSelector defaultLanguage={language} />
       </>
     );
   }
@@ -237,7 +264,7 @@ class Navigation extends React.Component {
     const {
       classes,
       router: { pathname },
-      takwimu: { page, countries, language }
+      takwimu: { page, countries }
     } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
 
@@ -296,9 +323,6 @@ class Navigation extends React.Component {
               >
                 <Search className={classes.search} />
               </ButtonBase>
-            </MenuItem>
-            <MenuItem>
-              <LanguageSelector defaultLanguage={language} />
             </MenuItem>
           </MenuList>
         </Grid>
