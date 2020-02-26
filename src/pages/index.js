@@ -86,8 +86,9 @@ Home.propTypes = {
 
 Home.getInitialProps = async props => {
   const {
-    query: { lang }
+    query: { lang: pageLanguage }
   } = props;
+  const lang = pageLanguage || config.DEFAULT_LANG;
   const res = await fetch('https://stories.hurumap.org/@takwimu_africa/latest');
   const latestMediumPosts = await res.json();
   const takwimu = await getSitePage('index', lang);

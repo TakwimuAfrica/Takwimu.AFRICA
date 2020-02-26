@@ -8,6 +8,7 @@ import ContactContent from '../components/ContactContent';
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
 import AsideTableOfContent from '../components/AsideTableOfContent';
+import config from '../config';
 
 const useStyles = makeStyles({
   root: {
@@ -146,8 +147,12 @@ function Contact(takwimu) {
   );
 }
 
-Contact.getInitialProps = async () => {
-  return getSitePage('contact');
+Contact.getInitialProps = async props => {
+  const {
+    query: { lang: pageLanguage }
+  } = props;
+  const lang = pageLanguage || config.DEFAULT_LANG;
+  return getSitePage('contact', lang);
 };
 
 export default Contact;

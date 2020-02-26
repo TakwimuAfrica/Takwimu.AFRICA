@@ -450,9 +450,10 @@ Profile.propTypes = {
   ).isRequired
 };
 
-Profile.getInitialProps = async () => {
+Profile.getInitialProps = async ({ query: { lang: queryLang } }) => {
+  const lang = queryLang || config.DEFAULT_LANG;
   return {
-    sectionedCharts: await getSectionedCharts()
+    sectionedCharts: await getSectionedCharts(lang)
   };
 };
 

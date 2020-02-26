@@ -9,6 +9,7 @@ import AboutContent from '../components/AboutContent';
 import ContentPage from '../components/ContentPage';
 import Page from '../components/Page';
 import AsideTableOfContent from '../components/AsideTableOfContent';
+import config from '../config';
 
 const useStyles = makeStyles({
   root: {
@@ -127,8 +128,12 @@ function About(takwimu) {
   );
 }
 
-About.getInitialProps = async () => {
-  return getSitePage('about');
+About.getInitialProps = async props => {
+  const {
+    query: { lang: pageLanguage }
+  } = props;
+  const lang = pageLanguage || config.DEFAULT_LANG;
+  return getSitePage('about', lang);
 };
 
 export default About;
