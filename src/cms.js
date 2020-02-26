@@ -18,10 +18,7 @@ export async function getPostBySlug(type, slug, lang) {
   );
   const data = res.ok ? await res.json() : {};
 
-  return {
-    takwimu: config,
-    wp: data[0]
-  };
+  return data;
 }
 
 export async function getSitePage(slug, lang) {
