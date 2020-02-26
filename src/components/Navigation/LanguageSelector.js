@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import { MenuItem, Select } from '@material-ui/core';
+import { Input, MenuItem, Select } from '@material-ui/core';
 import languages from '../../languages';
 import Link from '../Link';
 
@@ -10,7 +10,9 @@ const useStyles = makeStyles(() => ({
   root: {
     marginRight: '-6rem'
   },
-  selectedFlag: {},
+  select: {
+    paddingRight: 0
+  },
   flagImage: {
     width: '1.3rem',
     height: '1.3rem'
@@ -40,8 +42,9 @@ function LanguageSelector({ defaultLanguage, availableLanguages, ...props }) {
             alt="language option"
           />
         )}
+        classes={{ select: classes.select }}
         IconComponent={() => null}
-        inputProps={{ disableUnderline: true }}
+        input={<Input disableUnderline />}
         onChange={e => setSelectedLang(e.target.value)}
       >
         {availableLanguages.map(lang => (
