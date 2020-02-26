@@ -34,6 +34,8 @@ export async function getSitePage(slug, lang) {
     data[0].acf
   );
 
+  config.language = lang;
+
   return config;
 }
 
@@ -46,14 +48,14 @@ export async function getSectionedCharts(lang) {
 
 export async function getChartDefinition(chartId, lang) {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${chartId}&lang=${lang}`
+    `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${chartId}?lang=${lang}`
   );
   return res.ok ? res.json() : null;
 }
 
 export async function getPostById(type, id, lang) {
   const res = await fetch(
-    `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}&lang=${lang}`
+    `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}?lang=${lang}`
   );
   return res.ok ? res.json() : null;
 }

@@ -134,6 +134,7 @@ AnalysisPage.getInitialProps = async ({
     countries.find(c => c.slug === slug)
   );
   const lang = queryLang || config.country.lang || config.DEFAULT_LANG;
+  config.language = lang; // eslint-disable-line no-param-reassign
 
   let analyses = [];
   let activeAnalysis = {};

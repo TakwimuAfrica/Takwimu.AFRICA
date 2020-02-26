@@ -108,7 +108,11 @@ class Navigation extends React.Component {
   }
 
   renderNavBar(inDrawer = false) {
-    const { width, classes } = this.props;
+    const {
+      width,
+      classes,
+      takwimu: { language }
+    } = this.props;
     return (
       <nav
         className={classNames(classes.root, { [classes.noShadow]: inDrawer })}
@@ -124,7 +128,7 @@ class Navigation extends React.Component {
             {isWidthUp('md', width)
               ? this.renderDesktopNav()
               : this.renderMobileNav()}
-            <LanguageSelector />
+            <LanguageSelector defaultLanguage={language} />
           </Grid>
         </Layout>
       </nav>
@@ -320,6 +324,7 @@ Navigation.propTypes = {
   width: PropTypes.string.isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({}).isRequired,
+    language: PropTypes.string.isRequired,
     countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
     settings: PropTypes.shape({
       navigation: PropTypes.shape({})
