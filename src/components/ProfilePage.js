@@ -156,7 +156,7 @@ const overrideTypePropsFor = chartType => {
   }
 };
 
-function Profile({ sectionedCharts }) {
+function Profile({ sectionedCharts, language }) {
   const router = useRouter();
   const {
     query: { geoIdOrCountrySlug: geoId = '' }
@@ -404,7 +404,7 @@ function Profile({ sectionedCharts }) {
   }, [activeTab, profileTabs]);
 
   return (
-    <Page takwimu={config}>
+    <Page takwimu={{ ...config, language }}>
       {!profiles.isLoading && (
         <ProfileDetail
           profile={{
@@ -439,6 +439,7 @@ function Profile({ sectionedCharts }) {
 }
 
 Profile.propTypes = {
+  language: PropTypes.string.isRequired,
   sectionedCharts: PropTypes.arrayOf(
     PropTypes.shape({
       charts: PropTypes.arrayOf(
@@ -453,7 +454,8 @@ Profile.propTypes = {
 Profile.getInitialProps = async ({ query: { lang: queryLang } }) => {
   const lang = queryLang || config.DEFAULT_LANG;
   return {
-    sectionedCharts: await getSectionedCharts(lang)
+    sectionedCharts: await getSectionedCharts(lang),
+    language: lang
   };
 };
 
