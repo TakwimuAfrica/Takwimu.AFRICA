@@ -1,10 +1,4 @@
-const WP_BACKEND_URL =
-  // eslint-disable-next-line no-nested-ternary
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080'
-    : process.env.NODE_ENV === 'staging'
-    ? 'https://takwimutech.wpengine.com'
-    : 'https://dashboard.takwimu.africa';
+const WP_BACKEND_URL = 'https://dashboard.takwimu.africa';
 
 const config = {
   url:
@@ -28,6 +22,7 @@ Disallow:
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:9200'
       : 'https://search-cfa-openafrica-z56l24lkfbv5erjxxs76sevr3i.eu-west-1.es.amazonaws.com',
+  DEFAULT_LANG: 'en',
   country: {},
   countries: [
     {
@@ -36,6 +31,7 @@ Disallow:
       iso_name: 'Burkina Faso',
       short_name: 'Burkina Faso',
       slug: 'burkina-faso',
+      lang: 'en',
       published: true
     },
     {
@@ -44,6 +40,7 @@ Disallow:
       iso_name: 'Congo, the Democratic Republic of the',
       short_name: 'DR Congo',
       slug: 'democratic-republic-of-congo',
+      lang: 'en',
       published: true
     },
     {
@@ -52,6 +49,7 @@ Disallow:
       iso_name: 'Ethiopia',
       short_name: 'Ethiopia',
       slug: 'ethiopia',
+      lang: 'en',
       published: true
     },
     {
@@ -60,6 +58,7 @@ Disallow:
       iso_name: 'Kenya',
       short_name: 'Kenya',
       slug: 'kenya',
+      lang: 'en',
       published: true
     },
     {
@@ -68,6 +67,7 @@ Disallow:
       iso_name: 'Nigeria',
       short_name: 'Nigeria',
       slug: 'nigeria',
+      lang: 'en',
       published: true
     },
     {
@@ -76,6 +76,7 @@ Disallow:
       iso_name: 'Senegal',
       short_name: 'Senegal',
       slug: 'senegal',
+      lang: 'fr',
       published: true
     },
     {
@@ -84,6 +85,7 @@ Disallow:
       iso_name: 'South Africa',
       short_name: 'South Africa',
       slug: 'south-africa',
+      lang: 'en',
       published: true
     },
     {
@@ -92,6 +94,7 @@ Disallow:
       iso_name: 'Tanzania, United Republic of',
       short_name: 'Tanzania',
       slug: 'tanzania',
+      lang: 'en',
       published: true
     },
     {
@@ -100,6 +103,7 @@ Disallow:
       iso_name: 'Uganda',
       short_name: 'Uganda',
       slug: 'uganda',
+      lang: 'en',
       published: true
     },
     {
@@ -108,6 +112,7 @@ Disallow:
       iso_name: 'Zambia',
       short_name: 'Zambia',
       slug: 'zambia',
+      lang: 'en',
       published: true
     }
   ],
