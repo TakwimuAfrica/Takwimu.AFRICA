@@ -6,9 +6,11 @@ import { Input, MenuItem, Select } from '@material-ui/core';
 import languages from '../../languages';
 import Link from '../Link';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
-    marginRight: '-6rem'
+    [breakpoints.up('md')]: {
+      marginRight: '-6rem'
+    }
   },
   select: {
     paddingRight: 0

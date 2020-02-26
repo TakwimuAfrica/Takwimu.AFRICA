@@ -108,11 +108,7 @@ class Navigation extends React.Component {
   }
 
   renderNavBar(inDrawer = false) {
-    const {
-      width,
-      classes,
-      takwimu: { language }
-    } = this.props;
+    const { width, classes } = this.props;
     return (
       <nav
         className={classNames(classes.root, { [classes.noShadow]: inDrawer })}
@@ -128,7 +124,6 @@ class Navigation extends React.Component {
             {isWidthUp('md', width)
               ? this.renderDesktopNav()
               : this.renderMobileNav()}
-            <LanguageSelector defaultLanguage={language} />
           </Grid>
         </Layout>
       </nav>
@@ -156,7 +151,7 @@ class Navigation extends React.Component {
   renderDesktopNav() {
     const {
       classes,
-      takwimu: { page, countries },
+      takwimu: { page, countries, language },
       router: { pathname }
     } = this.props;
     const { openDrawer } = this.state;
@@ -193,6 +188,7 @@ class Navigation extends React.Component {
             {openDrawer === 'search' ? <Close /> : <Search />}
           </ButtonBase>
         </Grid>
+        <LanguageSelector defaultLanguage={language} />
       </>
     );
   }
@@ -241,7 +237,7 @@ class Navigation extends React.Component {
     const {
       classes,
       router: { pathname },
-      takwimu: { page, countries }
+      takwimu: { page, countries, language }
     } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
 
@@ -300,6 +296,9 @@ class Navigation extends React.Component {
               >
                 <Search className={classes.search} />
               </ButtonBase>
+            </MenuItem>
+            <MenuItem>
+              <LanguageSelector defaultLanguage={language} />
             </MenuItem>
           </MenuList>
         </Grid>
