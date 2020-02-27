@@ -12,7 +12,6 @@ class MyDocument extends Document {
     return (
       <html lang={lang}>
         <Head>
-          <base href={`/${lang}`} />
           <meta name="theme-color" content={theme.palette.primary.main} />
 
           <link

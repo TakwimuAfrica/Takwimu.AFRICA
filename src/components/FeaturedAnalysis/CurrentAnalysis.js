@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import config from '../../config';
 import flags from '../../flags';
-import ButtonLink from '../Link/Button';
+import Link from '../Link';
 import RichTypography from '../RichTypography';
 
 const useStyles = makeStyles(theme => ({
@@ -143,14 +143,16 @@ function CurrentAnalysis({
             alignItems="center"
             className={classes.actions}
           >
-            <ButtonLink
+            <Link
+              button
               href="/profiles/[geoIdOrCountrySlug]/[analysisSlug]"
               as={`/profiles/${countrySlug}/${currentAnalysis.post_name}`}
               className={classes.primaryAction}
             >
               {readAnalysisTitle}
-            </ButtonLink>
-            <ButtonLink
+            </Link>
+            <Link
+              button
               href="/profiles/[geoIdOrCountrySlug]"
               as={`/profiles/${countrySlug}`}
               className={classes.secondaryAction}
@@ -158,7 +160,7 @@ function CurrentAnalysis({
               variant="outlined"
             >
               {viewProfileTitle}
-            </ButtonLink>
+            </Link>
           </Grid>
         </Grid>
       </Grid>

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import ButtonLink from '../Link/Button';
+import Link from '../Link';
 import Section from '../Section';
 import Selection from './Selection';
 
@@ -136,7 +136,8 @@ function CountryContent({ content, takwimu: { country, countries } }) {
           value={countrySlug}
           onChange={e => setCountrySlug(e.target.value)}
         />
-        <ButtonLink
+        <Link
+          button
           href="/profiles/[geoIdOrCountrySlug]"
           as={href}
           classes={{
@@ -145,7 +146,7 @@ function CountryContent({ content, takwimu: { country, countries } }) {
           }}
         >
           {content.actionLabel}
-        </ButtonLink>
+        </Link>
       </Grid>
     </Section>
   );

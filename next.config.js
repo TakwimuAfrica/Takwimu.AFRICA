@@ -17,14 +17,6 @@ module.exports = withBundleAnalyzer(
           async rewrites() {
             return [
               {
-                source: '/:lang(en|fr)',
-                destination: '/'
-              },
-              {
-                source: '/:lang(en|fr)/:path(.*)?',
-                destination: '/:path(.*)?'
-              },
-              {
                 source: '/embed/:path*',
                 destination: '/embed'
               }
