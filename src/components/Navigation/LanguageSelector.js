@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import { MenuItem, ButtonBase, Menu } from '@material-ui/core';
+import {
+  MenuItem,
+  ButtonBase,
+  Menu,
+  Typography,
+  Grid
+} from '@material-ui/core';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import languages from '../../languages';
 import Link from '../Link';
@@ -10,8 +16,7 @@ import Link from '../Link';
 const useStyles = makeStyles(() => ({
   root: {},
   flagImage: {
-    width: '20.8px',
-    height: '20.8px'
+    width: '20.8px'
   },
   flagOptions: {
     '& ul': {
@@ -27,7 +32,7 @@ function LanguageSelector({ lang, options, ...props }) {
   const classes = useStyles(props);
   return (
     <div className={classes.root}>
-      <PopupState variant="popover" popupId="language-popup-menu">
+      <PopupState key={lang} variant="popover" popupId="language-popup-menu">
         {popupState => (
           <>
             <ButtonBase
@@ -35,36 +40,50 @@ function LanguageSelector({ lang, options, ...props }) {
               color="primary"
               {...bindTrigger(popupState)}
             >
-              <img
-                src={languages[lang.toUpperCase()]}
-                className={classes.flagImage}
-                alt="lang"
-              />
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <img
+                    src={languages[lang.toUpperCase()]}
+                    className={classes.flagImage}
+                    alt="lang"
+                  />
+                </Grid>
+                <Grid item>
+                  <Typography color="textSecondary">
+                    {lang.toUpperCase()}
+                  </Typography>
+                </Grid>
+              </Grid>
             </ButtonBase>
             <Menu {...bindMenu(popupState)}>
-              {options.map(option => (
+              {options.map(({ code, name }) => (
                 <MenuItem
-                  key={option}
-                  value={option}
-                  disabled={option === lang}
+                  key={code}
+                  value={code}
+                  component={Link}
+                  disabled={code === lang}
                   className={classes.flagOption}
+                  lang={code}
+                  href={
+                    typeof window !== 'undefined'
+                      ? window.location.pathname +
+                        window.location.search +
+                        window.location.hash
+                      : '/'
+                  }
                 >
-                  <Link
-                    lang={option}
-                    href={
-                      typeof window !== 'undefined'
-                        ? window.location.pathname +
-                          window.location.search +
-                          window.location.hash
-                        : '/'
-                    }
-                  >
-                    <img
-                      src={languages[option.toUpperCase()]}
-                      className={classes.flagImage}
-                      alt="lang option"
-                    />
-                  </Link>
+                  <Grid container spacing={1} alignItems="center">
+                    <Grid item>
+                      <img
+                        src={languages[code.toUpperCase()]}
+                        className={classes.flagImage}
+                        alt="lang option"
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Typography color="textPrimary">{name}</Typography>
+                    </Grid>
+                  </Grid>
                 </MenuItem>
               ))}
             </Menu>
@@ -76,7 +95,10 @@ function LanguageSelector({ lang, options, ...props }) {
 }
 
 LanguageSelector.defaultProps = {
-  options: ['en', 'fr']
+  options: [
+    { code: 'en', name: 'English' },
+    { code: 'fr', name: 'French' }
+  ]
 };
 
 LanguageSelector.propTypes = {
