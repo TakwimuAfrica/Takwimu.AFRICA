@@ -5,7 +5,7 @@ import { Typography, Grid, Icon } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import A from '@codeforafrica/hurumap-ui/core/A';
+import A from '@hurumap-ui/core/A';
 
 import ContentSection from './ContentSection';
 import RichTextSection from './RichTextSection';

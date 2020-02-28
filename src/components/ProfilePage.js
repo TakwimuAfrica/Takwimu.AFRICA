@@ -7,10 +7,9 @@ import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
-import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
-import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
-import { shareIndicator } from '@codeforafrica/hurumap-ui/components/utils';
+import InsightContainer from '@hurumap-ui/core/InsightContainer';
+import { useProfileLoader, ChartFactory } from '@hurumap-ui/core';
+import { shareIndicator } from '@hurumap-ui/core/utils';
 
 import config from '../config';
 
@@ -26,10 +25,7 @@ import logo from '../assets/images/logo-white-all.png';
 const MapIt = dynamic({
   ssr: false,
   loader: () => {
-    return (
-      typeof window !== 'undefined' &&
-      import('@codeforafrica/hurumap-ui/core/MapIt')
-    );
+    return typeof window !== 'undefined' && import('@hurumap-ui/core/MapIt');
   }
 });
 

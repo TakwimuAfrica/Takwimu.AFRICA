@@ -10,7 +10,7 @@ module.exports = withBundleAnalyzer(
   withCSS(
     withImages(
       withTM({
-        transpileModules: ['@codeforafrica/hurumap-ui'],
+        transpileModules: ['@hurumap-ui/core'],
         target: 'serverless',
         experimental: {
           // https://github.com/zeit/next.js/issues/9081
