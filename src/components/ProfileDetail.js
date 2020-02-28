@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import ButtonLink from './Link/Button';
+import Link from './Link';
 import Layout from './Layout';
 
 import searchIcon from '../assets/images/icon-search.svg';
@@ -218,13 +218,14 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
               </Grid>
             )}
           </Grid>
-          <ButtonLink
+          <Link
+            button
             href="/profiles/[geoIdOrCountrySlug]"
             as={`/profiles/${country.slug}`}
             fullWidth
           >
             Read the full country analysis
-          </ButtonLink>
+          </Link>
         </div>
       </Layout>
     </Grid>

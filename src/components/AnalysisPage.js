@@ -11,6 +11,8 @@ import Page from './Page';
 import AsideTableOfContent from './AsideTableOfContent';
 import CountrySelector from './CountrySelector';
 
+import { getPostById, getPostBySlug } from '../cms';
+
 const useStyles = makeStyles(theme => ({
   root: {
     marginBottom: '5.5rem'
@@ -121,24 +123,18 @@ AnalysisPage.propTypes = {
   contentSelector: PropTypes.shape({}).isRequired
 };
 
-const get = async url => {
-  const res = await fetch(url);
-  const data = await res.json();
-
-  return data;
-};
-
 AnalysisPage.getInitialProps = async ({
   query: { geoIdOrCountrySlug: slug, analysisSlug, lang: queryLang },
   asPath
 }) => {
-  const { WP_BACKEND_URL, countries } = config;
+  const { countries } = config;
 
   Object.assign(
     config.country,
     countries.find(c => c.slug === slug)
   );
   const lang = queryLang || config.country.lang || config.DEFAULT_LANG;
+  config.language = lang; // eslint-disable-line no-param-reassign
 
   let analyses = [];
   let activeAnalysis = {};
@@ -148,9 +144,7 @@ AnalysisPage.getInitialProps = async ({
   let contentSelector = {};
 
   try {
-    const [profile] = await get(
-      `${WP_BACKEND_URL}/wp-json/wp/v2/profile?slug=${slug}&lang=${lang}`
-    );
+    const [profile] = await getPostBySlug('profile', slug, lang);
 
     if (profile && profile.acf) {
       const {
@@ -187,9 +181,7 @@ AnalysisPage.getInitialProps = async ({
         // get the acfs fields from profile_section_page route for currentAnalysis
         const {
           acf: { section_topics: sectionTopics }
-        } = await get(
-          `${WP_BACKEND_URL}/wp-json/wp/v2/profile_section_page/${activeAnalysis.ID}?lang=${lang}`
-        );
+        } = await getPostById('profile_section_page', activeAnalysis.ID, lang);
 
         const topics = await Promise.all(
           sectionTopics.map(async t => {
@@ -199,14 +191,13 @@ AnalysisPage.getInitialProps = async ({
               // add another backend call to fetch the carousel_topic
               const {
                 acf: { topic_carousel_body: carousel }
-              } = await get(
-                `${WP_BACKEND_URL}/wp-json/wp/v2/carousel_topic/${topic.ID}?lang=${lang}`
-              );
+              } = await getPostById('carousel_topic', topic.ID, lang);
+
               topic.carousel = carousel; // eslint-disable-line no-param-reassign
             } else {
-              const { content: { rendered } = { rendered: '' } } = await get(
-                `${WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.ID}?lang=${lang}`
-              );
+              const {
+                content: { rendered } = { rendered: '' }
+              } = await getPostById('topic_page', topic.ID, lang);
               topic.type = 'topic'; // eslint-disable-line no-param-reassign
               topic.content = rendered; // eslint-disable-line no-param-reassign
             }
