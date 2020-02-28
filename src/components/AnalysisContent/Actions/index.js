@@ -81,8 +81,7 @@ function Actions({
     <div className={classes.root}>
       {!hideLastUpdated && (
         <Typography className={classes.lastUpdated}>
-          {lastUpdateLabel}
-          {': '}
+          {`${lastUpdateLabel}: `}
           <strong>
             {new Intl.DateTimeFormat('en-GB', {
               day: 'numeric',
