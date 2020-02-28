@@ -31,7 +31,8 @@ function AnalysisPage({
   analysisLink,
   readNextTitle,
   topicsNavigation,
-  contentSelector
+  contentSelector,
+  contentActionsLabels
 }) {
   const classes = useStyles();
 
@@ -94,6 +95,7 @@ function AnalysisPage({
           readNextTitle={readNextTitle}
           topicsNavigation={topicsNavigation}
           contentSelector={contentSelector}
+          contentActionsLabels={contentActionsLabels}
         />
       </ContentPage>
     </Page>
@@ -120,7 +122,8 @@ AnalysisPage.propTypes = {
   analysisLink: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
   topicsNavigation: PropTypes.string.isRequired,
-  contentSelector: PropTypes.shape({}).isRequired
+  contentSelector: PropTypes.shape({}).isRequired,
+  contentActionsLabels: PropTypes.shape({}).isRequired
 };
 
 AnalysisPage.getInitialProps = async ({
@@ -142,6 +145,7 @@ AnalysisPage.getInitialProps = async ({
   let topicsNavigation = '';
   let readNextTitle = '';
   let contentSelector = {};
+  let contentActionsLabels = {};
 
   try {
     const [profile] = await getPostBySlug('profile', slug, lang);
@@ -155,7 +159,10 @@ AnalysisPage.getInitialProps = async ({
           profile_select_label: contentSelectLabel,
           country_select_label: countrySelectLabel,
           selector_title: contentSelectTitle,
-          button_label: actionLabel
+          button_label: actionLabel,
+          analysis_share_label: analysisShareLabel,
+          analysis_download_label: analysisDownloadLabel,
+          last_update_label: lastUpdateLabel
         }
       } = profile;
       topicsNavigation = topicsNav;
@@ -165,6 +172,11 @@ AnalysisPage.getInitialProps = async ({
         countrySelectLabel,
         contentSelectTitle,
         actionLabel
+      };
+      contentActionsLabels = {
+        analysisDownloadLabel,
+        analysisShareLabel,
+        lastUpdateLabel
       };
 
       if (sections.length) {
@@ -224,7 +236,8 @@ AnalysisPage.getInitialProps = async ({
     topicsNavigation,
     readNextTitle,
     analysisLink,
-    contentSelector
+    contentSelector,
+    contentActionsLabels
   };
 };
 

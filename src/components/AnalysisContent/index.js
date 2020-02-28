@@ -67,7 +67,8 @@ function AnalysisContent({
   topicsNavigation,
   readNextTitle,
   analysisLink,
-  contentSelector
+  contentSelector,
+  contentActionsLabel
 }) {
   const classes = useStyles();
 
@@ -140,6 +141,7 @@ function AnalysisContent({
         content: topic,
         item: carouselItemIndex !== -1 ? topic.carousel : null
       }}
+      labels={contentActionsLabel}
       takwimu={takwimu}
       link={analysisLink}
       {...props}
@@ -247,6 +249,7 @@ AnalysisContent.propTypes = {
   topicsNavigation: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
   contentSelector: PropTypes.shape({}).isRequired,
+  contentActionsLabel: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,

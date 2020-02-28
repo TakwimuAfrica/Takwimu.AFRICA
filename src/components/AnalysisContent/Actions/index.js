@@ -50,7 +50,15 @@ const useStyles = makeStyles({
   }
 });
 
-function Actions({ hideLastUpdated, title, data, topic, takwimu, link }) {
+function Actions({
+  hideLastUpdated,
+  title,
+  data,
+  topic,
+  takwimu,
+  link,
+  labels: { lastUpdateLabel, analysisShareLabel, analysisDownloadLabel }
+}) {
   const classes = useStyles();
   const [analysisLink, setAnalysisLink] = useState(link);
 
@@ -73,7 +81,8 @@ function Actions({ hideLastUpdated, title, data, topic, takwimu, link }) {
     <div className={classes.root}>
       {!hideLastUpdated && (
         <Typography className={classes.lastUpdated}>
-          Last Updated:{' '}
+          {lastUpdateLabel}
+          {': '}
           <strong>
             {new Intl.DateTimeFormat('en-GB', {
               day: 'numeric',
@@ -100,7 +109,7 @@ function Actions({ hideLastUpdated, title, data, topic, takwimu, link }) {
         >
           <img alt="share" src={shareIcon} className={classes.actionIcon} />
           <Typography className={classes.buttonText}>
-            Share this analysis
+            {analysisShareLabel}
           </Typography>
         </Grid>
       </TwitterShareButton>
@@ -108,6 +117,7 @@ function Actions({ hideLastUpdated, title, data, topic, takwimu, link }) {
         title={title}
         topic={topic}
         data={data}
+        label={analysisDownloadLabel}
         takwimu={takwimu}
         top={!hideLastUpdated}
       />
@@ -125,7 +135,12 @@ Actions.propTypes = {
       post_modified: PropTypes.string
     }).isRequired
   }).isRequired,
-  link: PropTypes.string.isRequired
+  link: PropTypes.string.isRequired,
+  labels: PropTypes.shape({
+    analysisShareLabel: PropTypes.string,
+    analysisDownloadLabel: PropTypes.string,
+    lastUpdateLabel: PropTypes.string
+  }).isRequired
 };
 
 Actions.defaultProps = {
