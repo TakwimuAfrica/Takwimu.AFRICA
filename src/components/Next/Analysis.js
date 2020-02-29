@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Card from './Card';
 import Section from '../Section';
+import Link from '../Link';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,7 +54,7 @@ function AnalysisReadNext({ current, content, onClick, title }) {
             <Card
               key={generateHref(index)}
               href={generateHref(index)}
-              component="a"
+              component={Link}
               variant="dual"
               classes={{
                 root: classNames({

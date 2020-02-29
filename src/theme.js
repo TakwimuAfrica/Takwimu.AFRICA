@@ -373,6 +373,12 @@ const theme = createTheme({
       root: {
         padding: '1.4375rem 0'
       }
+    },
+    MuiList: {
+      padding: {
+        paddingTop: 0,
+        paddingBottom: 0
+      }
     }
   }
 });

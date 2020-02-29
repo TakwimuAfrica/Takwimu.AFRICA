@@ -8,6 +8,7 @@ import A from '@codeforafrica/hurumap-ui/core/A';
 
 import Card from './Card';
 import Section from '../Section';
+import Link from '../Link';
 
 const useStyles = makeStyles(theme => ({
   sectionRoot: {},
@@ -47,7 +48,7 @@ function WhereToNext({
               /*       routing instead of client-side */
               <Card
                 key={where.link}
-                component="a"
+                component={Link}
                 href={where.link}
                 variant={variant}
               >
