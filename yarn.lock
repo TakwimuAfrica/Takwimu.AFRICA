@@ -946,13 +946,19 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@codeforafrica/hurumap-ui@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@codeforafrica/hurumap-ui/-/hurumap-ui-0.2.3.tgz#0052e6f336769aedb61dd53298106a2658bdd93e"
-  integrity sha512-z/pz9Qcm+4XIVMv/4Z3Ve+tMVojzP5PeKzsJXiuazxwXxVTaxMENvM0fBXypjdPXrYxB7g7Q99qKIO5bd0uc5g==
+"@bundled-es-modules/pdfjs-dist@^2.2.228-alpha1":
+  version "2.2.228-alpha1"
+  resolved "https://registry.yarnpkg.com/@bundled-es-modules/pdfjs-dist/-/pdfjs-dist-2.2.228-alpha1.tgz#7b86d623973c3ba0bd688f9650b10f79ab8e69d2"
+  integrity sha512-fXr94eQWCFcG31nGBP7nI5+Oa/BJWCwItB4wGVkXuS1qhFyo486y0jZ+XSUJYpo0A15FJ5c/fmewLWDq9IorAA==
+
+"@codeforafrica/hurumap-ui@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@codeforafrica/hurumap-ui/-/hurumap-ui-0.2.6.tgz#f1bf0ce24368e95ae0d9ba56276a79e718677488"
+  integrity sha512-OclVAIN2AUip5BlGTzSiTofQiagCkHOG8cKd1lTHRFdMyFTOphSkNJ5BfFhlWMMzZ0GoxbUKSYHlplX9QzKmew==
   dependencies:
     "@material-ui/core" "^4.5.1"
     "@material-ui/icons" "^4.5.1"
+    "@mikecousins/react-pdf" "^5.5.1"
     "@types/react" "^16.9.11"
     apollo-client "^2.6.8"
     apollo-utilities "^1.3.3"
@@ -1368,6 +1374,13 @@
   integrity sha512-SLRu5l0ZazZL9ShKcTaRvEcmw7Ar9k5XVRFGa8mZmPXGiKYxh2x4unctebdDo9Vrhg9VVzzU6XE8q4vTALWUqw==
   dependencies:
     pdfjs-dist "2.2.228"
+
+"@mikecousins/react-pdf@^5.5.1":
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/@mikecousins/react-pdf/-/react-pdf-5.5.1.tgz#80ce071d54872b9f4b1888d78932b92a8f6bc91b"
+  integrity sha512-QnR2FdSjNUCl6LaUbajff7OJhj93xCIpdf5h+fBDyx5iahM74jVh0XVG4YOu+ml6rRS/7OE4NOcbVDBBVPzrtg==
+  dependencies:
+    "@bundled-es-modules/pdfjs-dist" "^2.2.228-alpha1"
 
 "@next/bundle-analyzer@^9.1.4":
   version "9.2.1"
