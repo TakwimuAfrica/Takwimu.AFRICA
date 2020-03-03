@@ -139,11 +139,16 @@ Actions.propTypes = {
     analysisShareLabel: PropTypes.string,
     analysisDownloadLabel: PropTypes.string,
     lastUpdateLabel: PropTypes.string
-  }).isRequired
+  })
 };
 
 Actions.defaultProps = {
-  hideLastUpdated: false
+  hideLastUpdated: false,
+  labels: {
+    analysisShareLabel: 'Share this analysis',
+    analysisDownloadLabel: 'Download this analysis',
+    lastUpdateLabel: 'Last Updated'
+  }
 };
 
 export default Actions;
