@@ -10,7 +10,7 @@ import Error from '../components/Error';
 import logo from '../assets/images/logo-white-all.png';
 import config from '../config';
 
-const Card = dynamic(() => import('@hurumap-ui/core/components/Card'), {
+const Card = dynamic(() => import('@hurumap-ui/core/Card'), {
   ssr: false
 });
 
