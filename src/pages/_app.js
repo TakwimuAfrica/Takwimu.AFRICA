@@ -8,9 +8,11 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import StylesProvider from '@material-ui/styles/StylesProvider';
-import jssPreset from '@material-ui/styles/jssPreset';
+import {
+  jssPreset,
+  StylesProvider,
+  ThemeProvider
+} from '@material-ui/core/styles';
 import { create } from 'jss';
 
 import theme from '../theme';
