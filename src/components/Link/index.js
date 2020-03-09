@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { useRouter } from 'next/router';
-import { makeStyles, Link as MuiLink, Button } from '@material-ui/core';
+import { Link as MuiLink, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import NextComposed from './NextComposed';
 

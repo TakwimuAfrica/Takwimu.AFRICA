@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid, Typography, withWidth } from '@material-ui/core';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 import { isWidthDown } from '@material-ui/core/withWidth';
 
 import flags from '../../flags';

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import {
   MenuItem,
@@ -9,6 +8,7 @@ import {
   Typography,
   Grid
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import languages from '../../languages';
 import Link from '../Link';
