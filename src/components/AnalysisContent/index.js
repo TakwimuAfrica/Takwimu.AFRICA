@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-import { renderBlocks } from '@hurumap-ui/content';
+import renderBlocks from '@hurumap-ui/content/renderBlocks';
 import RichTypography from '../RichTypography';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';
