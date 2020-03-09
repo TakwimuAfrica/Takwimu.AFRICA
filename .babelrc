@@ -1,3 +1,25 @@
 {
-  "presets": ["next/babel"]
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "transform-imports",
+      {
+        "@material-ui/core": {
+          "transform": "@material-ui/core/${member}",
+          // Whether or not to throw when an import is encountered which would cause the entire module to be imported.
+          "preventFullImport": true
+        },
+        "@hurumap-ui/charts": {
+          "transform": "@hurumap-ui/charts/${member}",
+          // Whether or not to throw when an import is encountered which would cause the entire module to be imported.
+          "preventFullImport": true
+        },
+        "@hurumap-ui/content": {
+          "transform": "@hurumap-ui/content/${member}",
+          // Whether or not to throw when an import is encountered which would cause the entire module to be imported.
+          "preventFullImport": true
+        }
+      }
+    ]
+  ]
 }
