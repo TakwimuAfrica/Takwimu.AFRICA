@@ -13,7 +13,7 @@ module.exports = {
         '@material-ui/core(?!/)': {
           transform: importName =>
             importName.toLowerCase().includes('style')
-              ? `@material-ui/styles/${importName}`
+              ? `@material-ui/core/styles/${importName}`
               : `@material-ui/core/${importName}`,
           // Whether or not to throw when an import is encountered which would cause the entire module to be imported.
           preventFullImport: true
