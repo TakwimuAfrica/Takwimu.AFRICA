@@ -29,7 +29,8 @@ function AnalysisPage({
   analysisLink,
   readNextTitle,
   topicsNavigation,
-  contentSelector
+  contentSelector,
+  contentActionsLabels
 }) {
   const classes = useStyles();
 
@@ -92,6 +93,7 @@ function AnalysisPage({
           readNextTitle={readNextTitle}
           topicsNavigation={topicsNavigation}
           contentSelector={contentSelector}
+          contentActionsLabels={contentActionsLabels}
         />
       </ContentPage>
     </Page>
@@ -118,7 +120,8 @@ AnalysisPage.propTypes = {
   analysisLink: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
   topicsNavigation: PropTypes.string.isRequired,
-  contentSelector: PropTypes.shape({}).isRequired
+  contentSelector: PropTypes.shape({}).isRequired,
+  contentActionsLabels: PropTypes.shape({}).isRequired
 };
 
 export default AnalysisPage;

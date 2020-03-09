@@ -20,6 +20,7 @@ export default async function({
   let topicsNavigation = '';
   let readNextTitle = '';
   let contentSelector = {};
+  let contentActionsLabels = {};
 
   try {
     const [profile] = await getPostBySlug('profile', slug, lang);
@@ -33,7 +34,10 @@ export default async function({
           profile_select_label: contentSelectLabel,
           country_select_label: countrySelectLabel,
           selector_title: contentSelectTitle,
-          button_label: actionLabel
+          button_label: actionLabel,
+          analysis_share_label: analysisShareLabel,
+          analysis_download_label: analysisDownloadLabel,
+          last_update_label: lastUpdateLabel
         }
       } = profile;
       topicsNavigation = topicsNav;
@@ -43,6 +47,11 @@ export default async function({
         countrySelectLabel,
         contentSelectTitle,
         actionLabel
+      };
+      contentActionsLabels = {
+        analysisDownloadLabel,
+        analysisShareLabel,
+        lastUpdateLabel
       };
 
       if (sections.length) {
@@ -102,6 +111,7 @@ export default async function({
     topicsNavigation,
     readNextTitle,
     analysisLink,
-    contentSelector
+    contentSelector,
+    contentActionsLabels
   };
 }

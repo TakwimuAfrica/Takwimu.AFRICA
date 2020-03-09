@@ -17,32 +17,34 @@ function SEO({ title, description, image, location = '' }) {
   if (indicatorId) {
     imageUrl = `${config.media.imageUrl}/${indicatorId}${config.media.imageType}`;
   }
-  const structuredDataOrganization = `{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"legalName": "${config.legalName || config.name}",
-		"url": "${config.url}",
-		"logo": "${config.url}/images/logo-white-all.png",
-		"contactPoint": [{
-      "@type": "ContactPoint",
-			"url": "${config.url}/contact",
-			"email": "${config.settings.support.hello}",
-			"contactType": "customer service"
-		}],
-		"address": {
-			"@type": "PostalAddress",
-			"addressLocality": "${config.settings.address.locality}",
-			"addressRegion": "${config.settings.address.region}",
-			"addressCountry": "${config.settings.address.country}",
-			"postalCode": "${config.settings.address.postalCode}"
-		},
-		"sameAs": [
-			"${config.settings.socialMedia.facebook}",
-			"${config.settings.socialMedia.twitter}",
-			"${config.settings.socialMedia.medium}",
-			"${config.settings.socialMedia.linkedin}"
-		]
-    }`;
+  const structuredDataOrganization = {
+    __html: `{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "legalName": "${config.legalName || config.name}",
+  "url": "${config.url}",
+  "logo": "${config.url}/images/logo-white-all.png",
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "url": "${config.url}/contact",
+    "email": "${config.settings.support.hello}",
+    "contactType": "customer service"
+  }],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "${config.settings.address.locality}",
+    "addressRegion": "${config.settings.address.region}",
+    "addressCountry": "${config.settings.address.country}",
+    "postalCode": "${config.settings.address.postalCode}"
+  },
+  "sameAs": [
+    "${config.settings.socialMedia.facebook}",
+    "${config.settings.socialMedia.twitter}",
+    "${config.settings.socialMedia.medium}",
+    "${config.settings.socialMedia.linkedin}"
+  ]
+}`
+  };
 
   return (
     <Head>
@@ -78,7 +80,11 @@ function SEO({ title, description, image, location = '' }) {
       <meta name="twitter:image" content={imageUrl} />
 
       {/* Structured data (Google) */}
-      <script type="application/ld+json">{structuredDataOrganization}</script>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={structuredDataOrganization}
+      />
 
       <title>{pageTitle}</title>
     </Head>

@@ -240,7 +240,7 @@ const isEmpty = obj =>
   obj === null ||
   (Object.keys(obj).length === 0 && obj.constructor === Object);
 
-function DownloadPDF({ title, topic, data, takwimu, top }) {
+function DownloadPDF({ title, topic, data, takwimu, top, label }) {
   const classes = useStyles();
   const [pdfBlob, setPdfBlob] = useState(null);
 
@@ -284,14 +284,14 @@ function DownloadPDF({ title, topic, data, takwimu, top }) {
       }}
     >
       <img alt="download" src={downloadIcon} className={classes.actionIcon} />
-      Download this analysis (PDF
-      {pdfBlob && ` ${(pdfBlob.size / 1000).toFixed(1)}kb`})
+      {`${label} (PDF `} {pdfBlob && ` ${(pdfBlob.size / 1000).toFixed(1)}kb)`}
     </ButtonBase>
   );
 }
 
 DownloadPDF.propTypes = {
   title: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   data: PropTypes.shape({
     content: PropTypes.shape({
       content: PropTypes.string,
