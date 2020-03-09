@@ -4,18 +4,9 @@ module.exports = {
     [
       'transform-imports',
       {
-        '@material-ui/core/styles': {
+        '@material-ui/core': {
           // eslint-disable-next-line no-template-curly-in-string
-          transform: '@material-ui/styles/${member}',
-          // Whether or not to throw when an import is encountered which would cause the entire module to be imported.
-          preventFullImport: true
-        },
-        '@material-ui/core(?!/)': {
-          transform: importName =>
-            importName.toLowerCase().includes('style')
-              ? `@material-ui/core/styles/${importName}`
-              : `@material-ui/core/${importName}`,
-          // Whether or not to throw when an import is encountered which would cause the entire module to be imported.
+          transform: '@material-ui/core/${member}',
           preventFullImport: true
         },
         '@hurumap-ui/charts': {
@@ -30,7 +21,6 @@ module.exports = {
         '@hurumap-ui/content': {
           // eslint-disable-next-line no-template-curly-in-string
           transform: '@hurumap-ui/content/${member}',
-          // Whether or not to throw when an import is encountered which would cause the entire module to be imported.
           preventFullImport: true
         }
       }
