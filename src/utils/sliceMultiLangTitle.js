@@ -1,7 +1,11 @@
 export default function sliceMultiLangTitle(title, lang) {
   const searchTerm = `[:${lang}]`;
-  const startIndex = title.indexOf(searchTerm);
-  const endIndex = title.indexOf('[:', startIndex + searchTerm.length);
+  const langIndex = title.indexOf(searchTerm);
+  if (langIndex !== -1) {
+    const startIndex = langIndex + searchTerm.length;
+    const endIndex = title.indexOf('[:', startIndex);
 
-  return title.slice(startIndex, endIndex);
+    return title.slice(startIndex, endIndex);
+  }
+  return title;
 }

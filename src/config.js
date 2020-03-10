@@ -1,7 +1,7 @@
 const WP_BACKEND_URL =
   // eslint-disable-next-line no-nested-ternary
   process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080'
+    ? 'https://dashboard.takwimu.africa'
     : 'https://dashboard.takwimu.africa';
 
 const config = {
@@ -24,7 +24,7 @@ Disallow:
   WP_HURUMAP_DATA_API: `${WP_BACKEND_URL}/wp-json/hurumap-data`,
   ES_URL:
     process.env.NODE_ENV === 'development'
-      ? 'http://localhost:9200'
+      ? 'https://search-cfa-openafrica-z56l24lkfbv5erjxxs76sevr3i.eu-west-1.es.amazonaws.com'
       : 'https://search-cfa-openafrica-z56l24lkfbv5erjxxs76sevr3i.eu-west-1.es.amazonaws.com',
   DEFAULT_LANG: 'en',
   country: {},

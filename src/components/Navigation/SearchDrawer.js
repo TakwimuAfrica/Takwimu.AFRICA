@@ -153,7 +153,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
   }
 }));
 
-function SearchDrawer({ children, active, toggle }) {
+function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
   const classes = useStyles();
   const router = useRouter();
   const [backgroundVisible, setBackgroundVisible] = useState(false);
@@ -258,7 +258,10 @@ function SearchDrawer({ children, active, toggle }) {
                                 classes={{ tooltip: classes.tooltip }}
                               >
                                 <Typography color="textSecondary" noWrap>
-                                  {sliceMultiLangTitle(suggestion.value)}
+                                  {sliceMultiLangTitle(
+                                    suggestion.value,
+                                    language
+                                  )}
                                 </Typography>
                               </Tooltip>
                             </Link>
@@ -280,6 +283,9 @@ function SearchDrawer({ children, active, toggle }) {
 SearchDrawer.propTypes = {
   active: PropTypes.bool,
   toggle: PropTypes.func.isRequired,
+  takwimu: PropTypes.shape({
+    language: PropTypes.string
+  }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
