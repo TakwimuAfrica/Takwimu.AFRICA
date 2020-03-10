@@ -2,8 +2,6 @@ const WP_BACKEND_URL =
   // eslint-disable-next-line no-nested-ternary
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:8080'
-    : process.env.NODE_ENV === 'staging'
-    ? 'https://takwimutech.wpengine.com'
     : 'https://dashboard.takwimu.africa';
 
 const config = {
@@ -182,7 +180,7 @@ Disallow:
 
 if (typeof document !== 'undefined') {
   // Same-Origin Policy
-  document.domain = new URL(config.url).hostname;
+  document.domain = window.location.hostname;
 }
 
 export default config;
