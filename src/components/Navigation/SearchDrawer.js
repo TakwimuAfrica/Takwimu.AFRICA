@@ -12,6 +12,8 @@ import Link from '../Link';
 import rightArrowOpaque from '../../assets/images/right-arrow-opaque.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
+import sliceMultiLangTitle from '../../utils/sliceMultiLangTitle';
+
 import Layout from '../Layout';
 import config from '../../config';
 
@@ -256,7 +258,7 @@ function SearchDrawer({ children, active, toggle }) {
                                 classes={{ tooltip: classes.tooltip }}
                               >
                                 <Typography color="textSecondary" noWrap>
-                                  {suggestion.value}
+                                  {sliceMultiLangTitle(suggestion.value)}
                                 </Typography>
                               </Tooltip>
                             </Link>
