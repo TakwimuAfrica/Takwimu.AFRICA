@@ -2,9 +2,9 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 
-import A from '@codeforafrica/hurumap-ui/core/A';
+import A from '@hurumap-ui/core/A';
 
 import Card from './Card';
 import Section from '../Section';

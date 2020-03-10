@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { renderBlocks } from '@codeforafrica/hurumap-ui/cms';
+import renderBlocks from '@hurumap-ui/content/renderBlocks';
 import RichTypography from '../RichTypography';
 import Actions from './Actions';
 import AnalysisReadNext from '../Next/Analysis';

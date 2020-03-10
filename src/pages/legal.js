@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 
 import { useRouter } from 'next/router';
 
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { getSitePage } from '../cms';
 import ContentPage from '../components/ContentPage';

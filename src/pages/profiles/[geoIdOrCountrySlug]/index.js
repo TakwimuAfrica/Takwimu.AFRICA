@@ -2,12 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 
 import config from '../../../config';
-import Analysis from '../../../components/AnalysisPage';
-import Profile from '../../../components/ProfilePage';
 
-function ProfileOrAnalysis({ isAnalysis, initialProps }) {
+import getProfileProps from '../../../components/ProfilePage/getInitialProps';
+import getAnalysisProps from '../../../components/AnalysisPage/getInitialProps';
+
+const Analysis = dynamic({
+  ssr: true,
+  loader: () => import('../../../components/AnalysisPage')
+});
+const Profile = dynamic({
+  ssr: true,
+  loader: () => import('../../../components/ProfilePage')
+});
+
+function ProfileOrAnalysisPage({ isAnalysis, initialProps }) {
   return (
     <>
       <Head>
@@ -50,12 +61,12 @@ function ProfileOrAnalysis({ isAnalysis, initialProps }) {
   );
 }
 
-ProfileOrAnalysis.propTypes = {
+ProfileOrAnalysisPage.propTypes = {
   isAnalysis: PropTypes.bool.isRequired,
   initialProps: PropTypes.shape({}).isRequired
 };
 
-ProfileOrAnalysis.getInitialProps = async props => {
+ProfileOrAnalysisPage.getInitialProps = async props => {
   const {
     query: { geoIdOrCountrySlug }
   } = props;
@@ -63,12 +74,10 @@ ProfileOrAnalysis.getInitialProps = async props => {
     config.countries.findIndex(
       c => c.slug === geoIdOrCountrySlug.toLowerCase()
     ) !== -1;
-  const getInitialProps = isAnalysis
-    ? Analysis.getInitialProps
-    : Profile.getInitialProps;
+  const getInitialProps = isAnalysis ? getAnalysisProps : getProfileProps;
   const initialProps = getInitialProps ? await getInitialProps(props) : {};
 
   return { isAnalysis, initialProps };
 };
 
-export default ProfileOrAnalysis;
+export default ProfileOrAnalysisPage;

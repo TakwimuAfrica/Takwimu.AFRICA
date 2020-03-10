@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import A from '@codeforafrica/hurumap-ui/core/A';
+import A from '@hurumap-ui/core/A';
 
 import Link from '../Link';
 import Title from './Title';

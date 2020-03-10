@@ -10,10 +10,9 @@ import Error from '../components/Error';
 import logo from '../assets/images/logo-white-all.png';
 import config from '../config';
 
-const Card = dynamic(
-  () => import('@codeforafrica/hurumap-ui/components/Card'),
-  { ssr: false }
-);
+const Card = dynamic(() => import('@hurumap-ui/core/Card'), {
+  ssr: false
+});
 
 function Embed({ error, type, id, geoId, definition }) {
   const { query } = useRouter();

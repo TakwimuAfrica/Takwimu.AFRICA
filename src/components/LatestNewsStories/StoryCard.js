@@ -5,7 +5,7 @@ import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import A from '@codeforafrica/hurumap-ui/core/A';
+import A from '@hurumap-ui/core/A';
 import LazyLoad from 'react-lazyload';
 
 const styles = theme => ({

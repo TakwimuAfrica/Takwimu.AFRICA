@@ -9,9 +9,9 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {
-  ThemeProvider,
+  jssPreset,
   StylesProvider,
-  jssPreset
+  ThemeProvider
 } from '@material-ui/core/styles';
 import { create } from 'jss';
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { renderBlocks } from '@codeforafrica/hurumap-ui/cms';
+import renderBlocks from '@hurumap-ui/content/renderBlocks';
 import logo from '../assets/images/logo-white-all.png';
 
 import { getSitePage } from '../cms';

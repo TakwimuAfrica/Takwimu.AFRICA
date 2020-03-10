@@ -7,29 +7,24 @@ import { useRouter } from 'next/router';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import InsightContainer from '@codeforafrica/hurumap-ui/core/InsightContainer';
-import { useProfileLoader } from '@codeforafrica/hurumap-ui/factory';
-import ChartFactory from '@codeforafrica/hurumap-ui/factory/ChartFactory';
-import { shareIndicator } from '@codeforafrica/hurumap-ui/components/utils';
+import InsightContainer from '@hurumap-ui/core/InsightContainer';
+import ChartFactory from '@hurumap-ui/charts/ChartFactory';
+import useProfileLoader from '@hurumap-ui/core/useProfileLoader';
+import { shareIndicator } from '@hurumap-ui/core/utils';
 
-import config from '../config';
+import config from '../../config';
 
-import Page from './Page';
-import ProfileDetail from './ProfileDetail';
-import ProfileSection, { ProfileSectionTitle } from './ProfileSection';
-import Section from './Section';
+import Page from '../Page';
+import ProfileDetail from '../ProfileDetail';
+import ProfileSection, { ProfileSectionTitle } from '../ProfileSection';
+import Section from '../Section';
 
-import { getSectionedCharts } from '../cms';
-
-import logo from '../assets/images/logo-white-all.png';
+import logo from '../../assets/images/logo-white-all.png';
 
 const MapIt = dynamic({
   ssr: false,
   loader: () => {
-    return (
-      typeof window !== 'undefined' &&
-      import('@codeforafrica/hurumap-ui/core/MapIt')
-    );
+    return typeof window !== 'undefined' && import('@hurumap-ui/core/MapIt');
   }
 });
 
@@ -449,14 +444,6 @@ Profile.propTypes = {
       ).isRequired
     })
   ).isRequired
-};
-
-Profile.getInitialProps = async ({ query: { lang: queryLang } }) => {
-  const lang = queryLang || config.DEFAULT_LANG;
-  return {
-    sectionedCharts: await getSectionedCharts(lang),
-    language: lang
-  };
 };
 
 export default Profile;
