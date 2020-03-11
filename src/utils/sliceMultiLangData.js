@@ -1,15 +1,15 @@
-export default function sliceMultiLangData(title, lang) {
+export default function sliceMultiLangData(value, lang) {
   const langTerm = `[:${lang}]`;
   const defaultLangTerm = '[:en]';
-  const langIndex = title.includes(langTerm)
-    ? title.indexOf(langTerm)
-    : title.indexOf(defaultLangTerm);
+  const langIndex = value.includes(langTerm)
+    ? value.indexOf(langTerm)
+    : value.indexOf(defaultLangTerm);
 
   if (langIndex !== -1) {
     const startIndex = langIndex + langTerm.length;
-    const endIndex = title.indexOf('[:', startIndex);
+    const endIndex = value.indexOf('[:', startIndex);
 
-    return title.slice(startIndex, endIndex);
+    return value.slice(startIndex, endIndex);
   }
-  return title;
+  return value;
 }
