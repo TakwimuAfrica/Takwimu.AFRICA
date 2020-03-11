@@ -50,7 +50,7 @@ function Input({ onRefresh, placeholder, query, language }) {
       if (typeof onRefresh === 'function') {
         router.push(
           `/search?q=${searchTerm}&lang=${language}`,
-          `/search?q=${searchTerm}&lang=${language}`,
+          undefined,
           {
             shallow: true
           }

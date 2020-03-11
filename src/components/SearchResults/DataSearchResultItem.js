@@ -179,7 +179,7 @@ function InGeographyDataResult({
       </Grid>
       <Link
         href={href}
-        as={`/profiles/${geo.geoLevel}-${geo.geoCode}?lang=${language}#${chartId}`}
+        as={`/profiles/${geo.geoLevel}-${geo.geoCode}?lang=${language}&indicatorId=${chartId}`}
         className={classes.link}
       >
         <Typography variant="body1" className={classes.searchResultItem}>
