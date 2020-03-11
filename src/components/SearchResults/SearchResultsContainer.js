@@ -249,6 +249,7 @@ function SearchResultsContainer({ results, filter: propFilter, language }) {
                   id={result.post_id}
                   key={`${result.post_type}-${result.post_id}`}
                   item="Analysis"
+                  language={language}
                 />
               ) : (
                 <DataSearchResultItem
@@ -258,6 +259,7 @@ function SearchResultsContainer({ results, filter: propFilter, language }) {
                   title={sliceMultiLangData(result.post_title, language)}
                   key={`${result.post_type}-${result.post_id}`}
                   item="Data"
+                  language={language}
                 />
               )}
             </Fragment>

@@ -39,35 +39,39 @@ const useStyles = makeStyles(({ breakpoints, palette }) => ({
   }
 }));
 
-function InTopicDataResult({ inTopics, item, title, visualType, chartId }) {
+function InTopicDataResult({
+  inTopics,
+  item,
+  title,
+  visualType,
+  chartId,
+  language
+}) {
   const classes = useStyles();
   const [topic, setTopic] = useState(inTopics[0]);
   const [link, setLink] = useState('');
 
   useEffect(() => {
-    fetch(`${config.WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.id}`).then(
-      response => {
-        if (response.status === 200) {
-          response
-            .json()
-            .then(
-              ({
-                slug: topicSlug,
-                acf: { section_topics: profileSection }
-              }) => {
-                let sectionSlug = '';
-                if (profileSection && profileSection.length > 0) {
-                  sectionSlug = profileSection[0].post_name;
-                }
-                setLink(
-                  `/profiles/${topic.countrySlug}/${sectionSlug}?indicatorId=indicator-${visualType}-${chartId}#${topicSlug}`
-                );
+    fetch(
+      `${config.WP_BACKEND_URL}/wp-json/wp/v2/topic_page/${topic.id}?lang=${language}`
+    ).then(response => {
+      if (response.status === 200) {
+        response
+          .json()
+          .then(
+            ({ slug: topicSlug, acf: { section_topics: profileSection } }) => {
+              let sectionSlug = '';
+              if (profileSection && profileSection.length > 0) {
+                sectionSlug = profileSection[0].post_name;
               }
-            );
-        }
+              setLink(
+                `/profiles/${topic.countrySlug}/${sectionSlug}?lang=${language}&indicatorId=indicator-${visualType}-${chartId}#${topicSlug}`
+              );
+            }
+          );
       }
-    );
-  }, [topic.id, topic.countrySlug, visualType, chartId]);
+    });
+  }, [topic.id, topic.countrySlug, visualType, chartId, language]);
 
   const handleTopicIdChanges = e => {
     const topicId = e.target.value;
@@ -119,12 +123,19 @@ InTopicDataResult.propTypes = {
   visualType: PropTypes.string.isRequired,
   chartId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired,
   item: PropTypes.string.isRequired
 };
 
 export const InTopicResult = InTopicDataResult;
 
-function InGeographyDataResult({ item, title, chartId, inGeographies }) {
+function InGeographyDataResult({
+  item,
+  title,
+  chartId,
+  inGeographies,
+  language
+}) {
   const classes = useStyles();
   const [geo, setGeo] = useState(inGeographies[0]);
   const countryCode = geo.geoCode.slice(0, 2);
@@ -168,7 +179,7 @@ function InGeographyDataResult({ item, title, chartId, inGeographies }) {
       </Grid>
       <Link
         href={href}
-        as={`/profiles/${geo.geoLevel}-${geo.geoCode}#${chartId}`}
+        as={`/profiles/${geo.geoLevel}-${geo.geoCode}?lang=${language}#${chartId}`}
         className={classes.link}
       >
         <Typography variant="body1" className={classes.searchResultItem}>
@@ -185,13 +196,21 @@ function InGeographyDataResult({ item, title, chartId, inGeographies }) {
 InGeographyDataResult.propTypes = {
   chartId: PropTypes.number.isRequired,
   inGeographies: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  language: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   item: PropTypes.string.isRequired
 };
 
 export const InGeographyResult = InGeographyDataResult;
 
-function DataSearchResultItem({ item, title, id, visualType, visualData }) {
+function DataSearchResultItem({
+  item,
+  title,
+  id,
+  visualType,
+  visualData,
+  language
+}) {
   const classes = useStyles();
   const { inTopics, inGeographies } = visualData
     ? JSON.parse(visualData.replace('\\', ''))
@@ -204,6 +223,7 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
         title={title}
         chartId={id}
         visualType={visualType}
+        language={language}
         item={item}
       />
     );
@@ -214,6 +234,7 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
         inGeographies={inGeographies}
         chartId={id}
         title={title}
+        language={language}
         item={item}
       />
     );
@@ -225,7 +246,7 @@ function DataSearchResultItem({ item, title, id, visualType, visualData }) {
       </Typography>
       <Link
         href="/embed"
-        as={`/embed/${visualType}/${id}`}
+        as={`/embed/${visualType}/${id}?lang=${language}`}
         className={classes.link}
       >
         <Typography variant="body1" className={classes.searchResultItem}>
@@ -241,7 +262,8 @@ DataSearchResultItem.propTypes = {
   visualData: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  item: PropTypes.string.isRequired
+  item: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired
 };
 
 export default DataSearchResultItem;
