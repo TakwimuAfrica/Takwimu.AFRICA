@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Drawer, MenuList, Tooltip, Typography } from '@material-ui/core';
+import {
+  Grid,
+  Drawer,
+  MenuList,
+  Typography,
+  MenuItem
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
 import { useRouter } from 'next/router';
 import { ReactiveBase, DataSearch } from '@appbaseio/reactivesearch';
-import Link from '../Link';
 import rightArrowOpaque from '../../assets/images/right-arrow-opaque.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
@@ -105,11 +110,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     paddingLeft: '0.938rem',
     maxHeight: '12rem',
     overflowY: 'auto',
-    '& > a': {
-      height: '1.85rem',
-      textDecoration: 'none'
-    },
-    '& > a > p': {
+    '& > li > p': {
       fontFamily: typography.fontText,
       fontSize: '1.125rem',
       fontWeight: 'normal',
@@ -135,20 +136,13 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
       paddingLeft: '0.625rem',
       maxWidth: '742px',
       maxHeight: '25rem',
-      '& > a': {
-        height: '2.813rem'
-      },
-      '& > a > p': {
+      '& > li > p': {
         fontSize: '2.938rem'
       },
       '&::-webkit-scrollbar': {
         width: '0.563rem'
       }
     }
-  },
-  tooltip: {
-    fontSize: typography.caption.fontSize,
-    backgroundColor: palette.primary.dark
   }
 }));
 
@@ -157,12 +151,11 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
   const router = useRouter();
   const [backgroundVisible, setBackgroundVisible] = useState(false);
 
-  const handleInput = e => {
-    if (e.target.value.length > 0) {
-      const queryTerm = e.target.value;
+  const handleInput = queryTerm => {
+    if (queryTerm.length > 0) {
       router.push({
         pathname: '/search',
-        query: { q: queryTerm }
+        query: { q: queryTerm, lang: language }
       });
     }
   };
@@ -215,14 +208,12 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                       />
                     )
                   }
-                  onBlur={e => {
-                    handleInput(e);
-                  }}
                   onKeyDown={e => {
                     if (e.key === 'Enter') {
-                      handleInput(e);
+                      handleInput(e.target.value);
                     }
                   }}
+                  onValueSelected={value => handleInput(value)}
                   onValueChange={value => {
                     if (!backgroundVisible && value) {
                       setBackgroundVisible(true);
@@ -237,6 +228,21 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                     }),
                     icon: classes.arrowIcon
                   }}
+                  parseSuggestion={suggestion => ({
+                    label: (
+                      <Typography color="textSecondary" noWrap>
+                        {sliceMultiLangData(
+                          suggestion.source.post_title,
+                          language
+                        )}
+                      </Typography>
+                    ),
+                    value: sliceMultiLangData(
+                      suggestion.source.post_title,
+                      language
+                    ),
+                    source: suggestion.source
+                  })}
                   render={({
                     data,
                     value,
@@ -246,30 +252,12 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                       <Grid container justify="flex-end">
                         <MenuList className={classes.searchResults}>
                           {data.slice(0, 10).map(suggestion => (
-                            <Link
-                              href={`/search?q=${sliceMultiLangData(
-                                suggestion.value,
-                                language
-                              )}`}
+                            <MenuItem
                               key={`${suggestion.value}-${suggestion._click_id}`} // eslint-disable-line no-underscore-dangle
                               {...getItemProps({ item: suggestion })}
                             >
-                              <Tooltip
-                                title={sliceMultiLangData(
-                                  suggestion.value,
-                                  language
-                                )}
-                                placement="bottom-start"
-                                classes={{ tooltip: classes.tooltip }}
-                              >
-                                <Typography color="textSecondary" noWrap>
-                                  {sliceMultiLangData(
-                                    suggestion.value,
-                                    language
-                                  )}
-                                </Typography>
-                              </Tooltip>
-                            </Link>
+                              {suggestion.label}
+                            </MenuItem>
                           ))}
                         </MenuList>
                       </Grid>
