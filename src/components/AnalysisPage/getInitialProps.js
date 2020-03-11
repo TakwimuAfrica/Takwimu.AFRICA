@@ -2,7 +2,12 @@ import { getPostById, getPostBySlug } from '../../cms';
 import config from '../../config';
 
 export default async function({
-  query: { geoIdOrCountrySlug: slug, analysisSlug, lang: queryLang },
+  query: {
+    geoIdOrCountrySlug: slug,
+    analysisSlug,
+    lang: queryLang,
+    indicatorId
+  },
   asPath
 }) {
   const { countries } = config;
@@ -112,6 +117,7 @@ export default async function({
     readNextTitle,
     analysisLink,
     contentSelector,
-    contentActionsLabels
+    contentActionsLabels,
+    indicatorId
   };
 }
