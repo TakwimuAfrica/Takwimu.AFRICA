@@ -38,7 +38,13 @@ function AnalysisPage({
   useEffect(() => {
     const el = document.getElementById(indicatorId);
     if (el) {
-      el.scrollIntoView();
+      setTimeout(() => {
+        el.scrollIntoView({
+          behavior: 'auto',
+          block: 'center',
+          inline: 'center'
+        });
+      }, 1000);
     }
   }, [indicatorId]);
 
