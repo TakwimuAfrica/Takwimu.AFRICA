@@ -248,12 +248,18 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                         <MenuList className={classes.searchResults}>
                           {data.slice(0, 10).map(suggestion => (
                             <Link
-                              href={`/search?q=${suggestion.value}`}
+                              href={`/search?q=${sliceMultiLangTitle(
+                                suggestion.value,
+                                language
+                              )}`}
                               key={`${suggestion.value}-${suggestion._click_id}`} // eslint-disable-line no-underscore-dangle
                               {...getItemProps({ item: suggestion })}
                             >
                               <Tooltip
-                                title={suggestion.value}
+                                title={sliceMultiLangTitle(
+                                  suggestion.value,
+                                  language
+                                )}
                                 placement="bottom-start"
                                 classes={{ tooltip: classes.tooltip }}
                               >
