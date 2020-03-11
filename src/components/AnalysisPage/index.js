@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,9 +30,23 @@ function AnalysisPage({
   readNextTitle,
   topicsNavigation,
   contentSelector,
-  contentActionsLabels
+  contentActionsLabels,
+  indicatorId
 }) {
   const classes = useStyles();
+
+  useEffect(() => {
+    const el = document.getElementById(indicatorId);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({
+          behavior: 'auto',
+          block: 'center',
+          inline: 'center'
+        });
+      }, 1000);
+    }
+  }, [indicatorId]);
 
   if (analyses.length === 0) {
     return null;
@@ -121,7 +135,11 @@ AnalysisPage.propTypes = {
   readNextTitle: PropTypes.string.isRequired,
   topicsNavigation: PropTypes.string.isRequired,
   contentSelector: PropTypes.shape({}).isRequired,
-  contentActionsLabels: PropTypes.shape({}).isRequired
+  contentActionsLabels: PropTypes.shape({}).isRequired,
+  indicatorId: PropTypes.shape({})
 };
 
+AnalysisPage.defaultProps = {
+  indicatorId: undefined
+};
 export default AnalysisPage;
