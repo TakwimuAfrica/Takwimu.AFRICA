@@ -156,7 +156,8 @@ const overrideTypePropsFor = chartType => {
   }
 };
 
-function Profile({ sectionedCharts, language }) {
+function Profile({ indicatorId, sectionedCharts, language }) {
+  console.log(indicatorId);
   const router = useRouter();
   const {
     query: { geoIdOrCountrySlug: geoId = '' }
@@ -226,7 +227,24 @@ function Profile({ sectionedCharts, language }) {
   );
 
   // get all available profile tabs
-  const [profileTabs, setProfileTabs] = useState([]);
+  const [profileTabs, setProfileTabs] = useState([
+    {
+      name: 'All',
+      slug: 'all'
+    },
+    ...sectionedCharts
+      // Filter empty sections
+      .reduce((a, { charts, ...rest }) => {
+        const filteredCharts = charts.filter(filterByGeography);
+        if (filteredCharts.length) {
+          a.push({
+            ...rest,
+            charts: filteredCharts
+          });
+        }
+        return a;
+      }, [])
+  ]);
 
   const setProfileTabsDebounced = _debounce(setProfileTabs, 2000);
 
@@ -257,144 +275,6 @@ function Profile({ sectionedCharts, language }) {
     filterByGeography,
     sectionedCharts
   ]);
-
-  /**
-   * Victory renders take a lot of time
-   * causing a few seconds UI block which is bad UX.
-   * This caches the components so they do not have to render again.
-   */
-  const chartComponents = useMemo(
-    () =>
-      profileTabs.slice(1).map(tab => (
-        <Grid item container id={tab.slug} key={tab.slug}>
-          <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
-          {tab.charts.map(chart => {
-            const embedPath =
-              chart.type === 'hurumap'
-                ? `hurumap/${geoId}/${chart.id}`
-                : `flourish/${chart.id}`;
-            const sourceResult = chartData.profileVisualsData
-              ? chartData.profileVisualsData[`${chart.visual.queryAlias}Source`]
-              : null;
-            const source =
-              sourceResult && sourceResult.nodes && sourceResult.nodes.length
-                ? sourceResult.nodes[0]
-                : null;
-
-            return (
-              <Grid item xs={12} key={chart.id} className={classes.container}>
-                <InsightContainer
-                  key={chart.id}
-                  actions={{
-                    handleShare: shareIndicator.bind(
-                      null,
-                      `hurumap-${chart.id}`,
-                      /**
-                       * TODO:
-                       *
-                       * HURUmap UI to remove this variable and allow custom ID
-                       */
-                      null,
-                      '/api/share'
-                    ),
-                    handleShowData: null,
-                    handleCompare: null
-                  }}
-                  classes={{
-                    insight: classes.insight,
-                    actionsCompareButton: classes.actionsCompareButton,
-                    actionsShareButton: classes.actionsShareButton,
-                    actionsShowDataButton: classes.actionsShowDataButton,
-                    actionsRoot: classes.actionsRoot,
-                    root: classes.containerRoot,
-                    sourceGrid: classes.containerSourceGrid,
-                    sourceLink: classes.containerSourceLink,
-                    insightAnalysisLink: classes.containerInsightAnalysisLink,
-                    insightDataLink: classes.containerInsightDataLink,
-                    insightGrid: classes.insightGrid,
-                    highlightGrid:
-                      chart.type === 'flourish' && classes.hideHighlightGrid,
-                    title: classes.title
-                  }}
-                  embedCode={`<iframe
-                        id="${chart.id}"
-                        src="${config.url}/embed/${embedPath}"
-                        title="${chart.title}"
-                        allowFullScreen
-                      />`}
-                  insight={{
-                    dataLink: {
-                      href: `/profiles/${country.slug}`,
-                      title: 'Read the country analysis'
-                    }
-                  }}
-                  loading={chartData.isLoading}
-                  logo={logo}
-                  source={source}
-                  title={chart.title}
-                  dataTable={{
-                    tableTitle: chart.visual.table.slice(3),
-                    dataValueTitle: chart.visual.y,
-                    dataLabelTitle: chart.visual.x,
-                    groupByTitle: chart.visual.groupBy,
-                    rawData:
-                      !chartData.isLoading &&
-                      chartData.profileVisualsData[chart.visual.queryAlias]
-                        .nodes
-                  }}
-                >
-                  {chart.type === 'hurumap'
-                    ? [
-                        <Chart
-                          key={chart.id}
-                          chartData={chartData}
-                          definition={{
-                            ...chart.stat,
-                            typeProps: {
-                              ...chart.stat.typeProps,
-                              classes: {
-                                description: classes.statDescription,
-                                statistic: classes.statStatistic,
-                                subtitle: classes.statSubtitle
-                              }
-                            }
-                          }}
-                          profiles={profiles}
-                          classes={classes}
-                        />,
-                        <Chart
-                          key={chart.id}
-                          chartData={chartData}
-                          definition={{
-                            ...chart.visual,
-                            typeProps: {
-                              ...chart.visual.typeProps,
-                              ...overrideTypePropsFor(chart.visual.type)
-                            }
-                          }}
-                          profiles={profiles}
-                          classes={classes}
-                        />
-                      ]
-                    : [
-                        <div key={chart.id} />,
-                        <iframe
-                          key={chart.id}
-                          width="100%"
-                          scrolling="no"
-                          frameBorder="0"
-                          title={chart.title}
-                          src={`${config.WP_HURUMAP_DATA_API}/flourish/${chart.id}`}
-                        />
-                      ]}
-                </InsightContainer>
-              </Grid>
-            );
-          })}
-        </Grid>
-      )),
-    [profileTabs, chartData, geoId, classes, country.slug, profiles]
-  );
 
   // Show and hide sections
   useEffect(() => {
@@ -449,12 +329,150 @@ function Profile({ sectionedCharts, language }) {
           setActiveTab={setActiveTab}
         />
       )}
-      <Section>{chartComponents}</Section>
+      <Section>
+        {profileTabs.slice(1).map(tab => (
+          <Grid item container id={tab.slug} key={tab.slug}>
+            <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
+            {tab.charts.map(chart => {
+              const embedPath =
+                chart.type === 'hurumap'
+                  ? `hurumap/${geoId}/${chart.id}`
+                  : `flourish/${chart.id}`;
+              const sourceResult = chartData.profileVisualsData
+                ? chartData.profileVisualsData[
+                    `${chart.visual.queryAlias}Source`
+                  ]
+                : null;
+              const source =
+                sourceResult && sourceResult.nodes && sourceResult.nodes.length
+                  ? sourceResult.nodes[0]
+                  : null;
+
+              return (
+                <Grid
+                  item
+                  xs={12}
+                  key={chart.id}
+                  className={classes.container}
+                  id={`${chart.type}-${chart.id}`}
+                >
+                  <InsightContainer
+                    key={chart.id}
+                    actions={{
+                      handleShare: shareIndicator.bind(
+                        null,
+                        `${chart.type}-${chart.id}`,
+                        /**
+                         * TODO:
+                         *
+                         * HURUmap UI to remove this variable and allow custom ID
+                         */
+                        null,
+                        '/api/share'
+                      ),
+                      handleShowData: null,
+                      handleCompare: null
+                    }}
+                    classes={{
+                      insight: classes.insight,
+                      actionsCompareButton: classes.actionsCompareButton,
+                      actionsShareButton: classes.actionsShareButton,
+                      actionsShowDataButton: classes.actionsShowDataButton,
+                      actionsRoot: classes.actionsRoot,
+                      root: classes.containerRoot,
+                      sourceGrid: classes.containerSourceGrid,
+                      sourceLink: classes.containerSourceLink,
+                      insightAnalysisLink: classes.containerInsightAnalysisLink,
+                      insightDataLink: classes.containerInsightDataLink,
+                      insightGrid: classes.insightGrid,
+                      highlightGrid:
+                        chart.type === 'flourish' && classes.hideHighlightGrid,
+                      title: classes.title
+                    }}
+                    embedCode={`<iframe
+                        id="${chart.id}"
+                        src="${config.url}/embed/${embedPath}"
+                        title="${chart.title}"
+                        allowFullScreen
+                      />`}
+                    insight={{
+                      dataLink: {
+                        href: `/profiles/${country.slug}`,
+                        title: 'Read the country analysis'
+                      }
+                    }}
+                    loading={chartData.isLoading}
+                    logo={logo}
+                    source={source}
+                    title={chart.title}
+                    dataTable={{
+                      tableTitle: chart.visual.table.slice(3),
+                      dataValueTitle: chart.visual.y,
+                      dataLabelTitle: chart.visual.x,
+                      groupByTitle: chart.visual.groupBy,
+                      rawData:
+                        !chartData.isLoading &&
+                        chartData.profileVisualsData[chart.visual.queryAlias]
+                          .nodes
+                    }}
+                  >
+                    {chart.type === 'hurumap'
+                      ? [
+                          <Chart
+                            key={chart.id}
+                            chartData={chartData}
+                            definition={{
+                              ...chart.stat,
+                              typeProps: {
+                                ...chart.stat.typeProps,
+                                classes: {
+                                  description: classes.statDescription,
+                                  statistic: classes.statStatistic,
+                                  subtitle: classes.statSubtitle
+                                }
+                              }
+                            }}
+                            profiles={profiles}
+                            classes={classes}
+                          />,
+                          <Chart
+                            key={chart.id}
+                            chartData={chartData}
+                            definition={{
+                              ...chart.visual,
+                              typeProps: {
+                                ...chart.visual.typeProps,
+                                ...overrideTypePropsFor(chart.visual.type)
+                              }
+                            }}
+                            profiles={profiles}
+                            classes={classes}
+                          />
+                        ]
+                      : [
+                          <div key={chart.id} />,
+                          <iframe
+                            key={chart.id}
+                            width="100%"
+                            scrolling="no"
+                            frameBorder="0"
+                            title={chart.title}
+                            src={`${config.WP_HURUMAP_DATA_API}/flourish/${chart.id}`}
+                          />
+                        ]}
+                  </InsightContainer>
+                </Grid>
+              );
+            })}
+          </Grid>
+        ))}
+      </Section>
     </Page>
   );
 }
 
 Profile.propTypes = {
+  indicatorId: PropTypes.string,
   language: PropTypes.string.isRequired,
   sectionedCharts: PropTypes.arrayOf(
     PropTypes.shape({
@@ -465,6 +483,10 @@ Profile.propTypes = {
       ).isRequired
     })
   ).isRequired
+};
+
+Profile.defaultProps = {
+  indicatorId: undefined
 };
 
 export default Profile;
