@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import SearchResultItem from './SearchResultItem';
 import DataSearchResultItem from './DataSearchResultItem';
-import sliceMultiLangTitle from '../../utils/sliceMultiLangTitle';
+import sliceMultiLangData from '../../utils/sliceMultiLangData';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -240,7 +240,7 @@ function SearchResultsContainer({ results, filter: propFilter, language }) {
                 <SearchResultItem
                   resultType={result.post_type}
                   slug={result.post_name}
-                  title={sliceMultiLangTitle(result.post_title, language)}
+                  title={sliceMultiLangData(result.post_title, language)}
                   country={
                     result.terms && result.terms.category
                       ? result.terms.category[0]
@@ -253,12 +253,9 @@ function SearchResultsContainer({ results, filter: propFilter, language }) {
               ) : (
                 <DataSearchResultItem
                   visualType={result.post_excerpt}
-                  visualData={sliceMultiLangTitle(
-                    result.post_content,
-                    language
-                  )}
+                  visualData={sliceMultiLangData(result.post_content, language)}
                   id={result.post_id}
-                  title={sliceMultiLangTitle(result.post_title, language)}
+                  title={sliceMultiLangData(result.post_title, language)}
                   key={`${result.post_type}-${result.post_id}`}
                   item="Data"
                 />

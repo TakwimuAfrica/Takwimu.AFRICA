@@ -12,7 +12,7 @@ import Link from '../Link';
 import rightArrowOpaque from '../../assets/images/right-arrow-opaque.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
-import sliceMultiLangTitle from '../../utils/sliceMultiLangTitle';
+import sliceMultiLangData from '../../utils/sliceMultiLangData';
 
 import Layout from '../Layout';
 import config from '../../config';
@@ -248,7 +248,7 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                         <MenuList className={classes.searchResults}>
                           {data.slice(0, 10).map(suggestion => (
                             <Link
-                              href={`/search?q=${sliceMultiLangTitle(
+                              href={`/search?q=${sliceMultiLangData(
                                 suggestion.value,
                                 language
                               )}`}
@@ -256,7 +256,7 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                               {...getItemProps({ item: suggestion })}
                             >
                               <Tooltip
-                                title={sliceMultiLangTitle(
+                                title={sliceMultiLangData(
                                   suggestion.value,
                                   language
                                 )}
@@ -264,7 +264,7 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                                 classes={{ tooltip: classes.tooltip }}
                               >
                                 <Typography color="textSecondary" noWrap>
-                                  {sliceMultiLangTitle(
+                                  {sliceMultiLangData(
                                     suggestion.value,
                                     language
                                   )}

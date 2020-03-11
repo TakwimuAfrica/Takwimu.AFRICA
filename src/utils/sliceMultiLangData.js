@@ -1,4 +1,4 @@
-export default function sliceMultiLangTitle(title, lang) {
+export default function sliceMultiLangData(title, lang) {
   const searchTerm = `[:${lang}]`;
   const langIndex = title.indexOf(searchTerm);
   if (langIndex !== -1) {
