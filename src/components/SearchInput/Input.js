@@ -38,7 +38,7 @@ const useStyles = makeStyles(({ palette, typography }) => ({
   }
 }));
 
-function Input({ onRefresh, placeholder, query }) {
+function Input({ onRefresh, placeholder, query, language }) {
   const classes = useStyles();
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
@@ -48,9 +48,13 @@ function Input({ onRefresh, placeholder, query }) {
       // API. On all other pages that this component is used, onRefresh is
       // expected to be null
       if (typeof onRefresh === 'function') {
-        router.push(`/search?q=${searchTerm}`, `/search?q=${searchTerm}`, {
-          shallow: true
-        });
+        router.push(
+          `/search?q=${searchTerm}&lang=${language}`,
+          undefined,
+          {
+            shallow: true
+          }
+        );
         onRefresh(searchTerm);
       } else {
         router.push({
@@ -98,7 +102,8 @@ function Input({ onRefresh, placeholder, query }) {
 Input.propTypes = {
   onRefresh: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  query: PropTypes.string.isRequired
+  query: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired
 };
 
 Input.defaultProps = {

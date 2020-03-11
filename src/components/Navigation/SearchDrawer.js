@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Drawer, MenuList, Tooltip, Typography } from '@material-ui/core';
+import {
+  Grid,
+  Drawer,
+  MenuList,
+  Tooltip,
+  Typography,
+  MenuItem
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
 import { useRouter } from 'next/router';
 import { ReactiveBase, DataSearch } from '@appbaseio/reactivesearch';
-import Link from '../Link';
 import rightArrowOpaque from '../../assets/images/right-arrow-opaque.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
+import sliceMultiLangData from '../../utils/sliceMultiLangData';
 import Layout from '../Layout';
 import config from '../../config';
 
@@ -104,11 +111,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
     paddingLeft: '0.938rem',
     maxHeight: '12rem',
     overflowY: 'auto',
-    '& > a': {
-      height: '1.85rem',
-      textDecoration: 'none'
-    },
-    '& > a > p': {
+    '& > li > p': {
       fontFamily: typography.fontText,
       fontSize: '1.125rem',
       fontWeight: 'normal',
@@ -134,10 +137,7 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
       paddingLeft: '0.625rem',
       maxWidth: '742px',
       maxHeight: '25rem',
-      '& > a': {
-        height: '2.813rem'
-      },
-      '& > a > p': {
+      '& > li > p': {
         fontSize: '2.938rem'
       },
       '&::-webkit-scrollbar': {
@@ -151,17 +151,16 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
   }
 }));
 
-function SearchDrawer({ children, active, toggle }) {
+function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
   const classes = useStyles();
   const router = useRouter();
   const [backgroundVisible, setBackgroundVisible] = useState(false);
 
-  const handleInput = e => {
-    if (e.target.value.length > 0) {
-      const queryTerm = e.target.value;
+  const handleInput = queryTerm => {
+    if (queryTerm.length > 0) {
       router.push({
         pathname: '/search',
-        query: { q: queryTerm }
+        query: { q: queryTerm, lang: language }
       });
     }
   };
@@ -214,14 +213,12 @@ function SearchDrawer({ children, active, toggle }) {
                       />
                     )
                   }
-                  onBlur={e => {
-                    handleInput(e);
-                  }}
                   onKeyDown={e => {
                     if (e.key === 'Enter') {
-                      handleInput(e);
+                      handleInput(e.target.value);
                     }
                   }}
+                  onValueSelected={value => handleInput(value)}
                   onValueChange={value => {
                     if (!backgroundVisible && value) {
                       setBackgroundVisible(true);
@@ -236,6 +233,21 @@ function SearchDrawer({ children, active, toggle }) {
                     }),
                     icon: classes.arrowIcon
                   }}
+                  parseSuggestion={suggestion => ({
+                    label: (
+                      <Typography color="textSecondary" noWrap>
+                        {sliceMultiLangData(
+                          suggestion.source.post_title,
+                          language
+                        )}
+                      </Typography>
+                    ),
+                    value: sliceMultiLangData(
+                      suggestion.source.post_title,
+                      language
+                    ),
+                    source: suggestion.source
+                  })}
                   render={({
                     data,
                     value,
@@ -245,8 +257,7 @@ function SearchDrawer({ children, active, toggle }) {
                       <Grid container justify="flex-end">
                         <MenuList className={classes.searchResults}>
                           {data.slice(0, 10).map(suggestion => (
-                            <Link
-                              href={`/search?q=${suggestion.value}`}
+                            <MenuItem
                               key={`${suggestion.value}-${suggestion._click_id}`} // eslint-disable-line no-underscore-dangle
                               {...getItemProps({ item: suggestion })}
                             >
@@ -255,11 +266,9 @@ function SearchDrawer({ children, active, toggle }) {
                                 placement="bottom-start"
                                 classes={{ tooltip: classes.tooltip }}
                               >
-                                <Typography color="textSecondary" noWrap>
-                                  {suggestion.value}
-                                </Typography>
+                                {suggestion.label}
                               </Tooltip>
-                            </Link>
+                            </MenuItem>
                           ))}
                         </MenuList>
                       </Grid>
@@ -278,6 +287,9 @@ function SearchDrawer({ children, active, toggle }) {
 SearchDrawer.propTypes = {
   active: PropTypes.bool,
   toggle: PropTypes.func.isRequired,
+  takwimu: PropTypes.shape({
+    language: PropTypes.string
+  }).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

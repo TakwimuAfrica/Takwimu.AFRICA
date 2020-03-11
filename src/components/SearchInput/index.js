@@ -14,14 +14,14 @@ const useStyles = makeStyles({
   title: {}
 });
 
-function SearchInput({ onRefresh, query, title }) {
+function SearchInput({ onRefresh, query, title, language }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <Typography variant="h2" className={classes.title}>
         {title}
       </Typography>
-      <Input query={query} onRefresh={onRefresh} />
+      <Input query={query} onRefresh={onRefresh} language={language} />
     </div>
   );
 }
@@ -29,7 +29,8 @@ function SearchInput({ onRefresh, query, title }) {
 SearchInput.propTypes = {
   onRefresh: PropTypes.func,
   query: PropTypes.string.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  language: PropTypes.string.isRequired
 };
 
 SearchInput.defaultProps = {

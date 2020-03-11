@@ -24,7 +24,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SearchResultItem({ title, resultType, slug, id, country, item }) {
+function SearchResultItem({
+  title,
+  resultType,
+  slug,
+  id,
+  country,
+  item,
+  language
+}) {
   const classes = useStyles();
   const [profileSlug, setProfileSlug] = useState('');
 
@@ -49,16 +57,16 @@ function SearchResultItem({ title, resultType, slug, id, country, item }) {
   let link = '';
   let href = '';
   if (resultType === 'topic_page') {
-    link = `/profiles/${country.slug}/${profileSlug}#${slug}`;
+    link = `/profiles/${country.slug}/${profileSlug}?lang=${language}#${slug}`;
     href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
   } else if (resultType === 'profile_page') {
-    link = `/profiles/${country.slug}/${slug}`;
+    link = `/profiles/${country.slug}/${slug}?lang=${language}`;
     href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
   } else if (resultType === 'carousel_topic') {
-    link = `/profiles/${country.slug}#${slug}`;
+    link = `/profiles/${country.slug}?lang=${language}#${slug}`;
     href = '/profiles/[geoIdOrCountrySlug]';
   } else {
-    link = `/profiles/${country.slug}`;
+    link = `/profiles/${country.slug}?lang=${language}`;
     href = '/profiles/[geoIdOrCountrySlug]';
   }
 
@@ -85,7 +93,8 @@ SearchResultItem.propTypes = {
     name: PropTypes.string
   }).isRequired,
   title: PropTypes.string.isRequired,
-  item: PropTypes.string.isRequired
+  item: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired
 };
 
 export default SearchResultItem;

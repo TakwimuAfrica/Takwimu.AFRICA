@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   }
 });
 
-function SearchResults({ takwimu: { page } }) {
+function SearchResults({ takwimu: { page, language } }) {
   const [search, setSearch] = useState(page.search);
   const classes = useStyles();
 
@@ -35,8 +35,12 @@ function SearchResults({ takwimu: { page } }) {
 
   return (
     <Section classes={{ root: classes.root }}>
-      <SearchInput onRefresh={handleSearch} query={query} />
-      <SearchResultsContainer results={results} filter="All" />
+      <SearchInput onRefresh={handleSearch} query={query} language={language} />
+      <SearchResultsContainer
+        results={results}
+        filter="All"
+        language={language}
+      />
     </Section>
   );
 }
@@ -48,7 +52,8 @@ SearchResults.propTypes = {
         query: PropTypes.string,
         results: PropTypes.arrayOf(PropTypes.shape({}))
       }).isRequired
-    }).isRequired
+    }).isRequired,
+    language: PropTypes.string.isRequired
   }).isRequired
 };
 

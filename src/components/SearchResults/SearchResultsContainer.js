@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import SearchResultItem from './SearchResultItem';
 import DataSearchResultItem from './DataSearchResultItem';
+import sliceMultiLangData from '../../utils/sliceMultiLangData';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -118,7 +119,7 @@ RenderPaginator.propTypes = {
 };
 export const Paginator = RenderPaginator;
 
-function SearchResultsContainer({ results, filter: propFilter }) {
+function SearchResultsContainer({ results, filter: propFilter, language }) {
   const classes = useStyles();
   const [state, setState] = useState({
     activePage: 0,
@@ -239,7 +240,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
                 <SearchResultItem
                   resultType={result.post_type}
                   slug={result.post_name}
-                  title={result.post_title}
+                  title={sliceMultiLangData(result.post_title, language)}
                   country={
                     result.terms && result.terms.category
                       ? result.terms.category[0]
@@ -248,15 +249,17 @@ function SearchResultsContainer({ results, filter: propFilter }) {
                   id={result.post_id}
                   key={`${result.post_type}-${result.post_id}`}
                   item="Analysis"
+                  language={language}
                 />
               ) : (
                 <DataSearchResultItem
                   visualType={result.post_excerpt}
-                  visualData={result.post_content}
+                  visualData={sliceMultiLangData(result.post_content, language)}
                   id={result.post_id}
-                  title={result.post_title}
+                  title={sliceMultiLangData(result.post_title, language)}
                   key={`${result.post_type}-${result.post_id}`}
                   item="Data"
+                  language={language}
                 />
               )}
             </Fragment>
@@ -290,6 +293,7 @@ function SearchResultsContainer({ results, filter: propFilter }) {
 
 SearchResultsContainer.propTypes = {
   filter: PropTypes.string,
+  language: PropTypes.string.isRequired,
   results: PropTypes.arrayOf(
     PropTypes.shape({
       _source: PropTypes.shape({})

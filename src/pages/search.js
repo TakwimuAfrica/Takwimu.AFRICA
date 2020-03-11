@@ -14,7 +14,10 @@ function Search(takwimu) {
 
 Search.propTypes = {};
 
-Search.getInitialProps = async ({ query: { q: query } }) => {
+Search.getInitialProps = async ({
+  query: { q: query, lang: pageLanguage }
+}) => {
+  const lang = pageLanguage || config.DEFAULT_LANG;
   let results = [];
   if (query && query.length) {
     results = await fetch(
@@ -27,6 +30,7 @@ Search.getInitialProps = async ({ query: { q: query } }) => {
     });
     config.page.search = { query, results };
   }
+  config.language = lang;
   return config;
 };
 
