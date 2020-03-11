@@ -49,7 +49,7 @@ function Input({ onRefresh, placeholder, query, language }) {
       // expected to be null
       if (typeof onRefresh === 'function') {
         router.push(
-          `/search?q=${searchTerm}`,
+          `/search?q=${searchTerm}&lang=${language}`,
           `/search?q=${searchTerm}&lang=${language}`,
           {
             shallow: true

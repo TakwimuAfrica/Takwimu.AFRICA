@@ -13,7 +13,6 @@ import rightArrowOpaque from '../../assets/images/right-arrow-opaque.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
 import sliceMultiLangData from '../../utils/sliceMultiLangData';
-
 import Layout from '../Layout';
 import config from '../../config';
 
