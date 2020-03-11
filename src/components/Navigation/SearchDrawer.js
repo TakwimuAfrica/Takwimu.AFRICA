@@ -5,6 +5,7 @@ import {
   Grid,
   Drawer,
   MenuList,
+  Tooltip,
   Typography,
   MenuItem
 } from '@material-ui/core';
@@ -143,6 +144,10 @@ const useStyles = makeStyles(({ breakpoints, palette, typography }) => ({
         width: '0.563rem'
       }
     }
+  },
+  tooltip: {
+    fontSize: typography.caption.fontSize,
+    backgroundColor: palette.primary.dark
   }
 }));
 
@@ -256,7 +261,13 @@ function SearchDrawer({ children, active, toggle, takwimu: { language } }) {
                               key={`${suggestion.value}-${suggestion._click_id}`} // eslint-disable-line no-underscore-dangle
                               {...getItemProps({ item: suggestion })}
                             >
-                              {suggestion.label}
+                              <Tooltip
+                                title={suggestion.value}
+                                placement="bottom-start"
+                                classes={{ tooltip: classes.tooltip }}
+                              >
+                                {suggestion.label}
+                              </Tooltip>
                             </MenuItem>
                           ))}
                         </MenuList>
