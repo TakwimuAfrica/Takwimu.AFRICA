@@ -64,7 +64,8 @@ function AnalysisPage({
             }))}
             generateHref={({ postName }, index) => {
               const {
-                country: { slug: countrySlug }
+                country: { slug: countrySlug },
+                language
               } = takwimu;
               const href =
                 index === 0
@@ -72,8 +73,8 @@ function AnalysisPage({
                   : `/profiles/[geoIdOrCountrySlug]/[analysisSlug]`;
               const as =
                 index === 0
-                  ? `/profiles/${countrySlug}` // if politics
-                  : `/profiles/${countrySlug}/${postName}`;
+                  ? `/profiles/${countrySlug}?lang=${language}` // if politics
+                  : `/profiles/${countrySlug}/${postName}?lang=${language}`;
               return { href, as };
             }}
           >
@@ -115,7 +116,8 @@ AnalysisPage.propTypes = {
     country: PropTypes.shape({
       short_name: PropTypes.string,
       slug: PropTypes.string
-    })
+    }),
+    language: PropTypes.string.isRequired
   }).isRequired,
   analysisLink: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
