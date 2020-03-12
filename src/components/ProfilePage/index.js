@@ -157,7 +157,6 @@ const overrideTypePropsFor = chartType => {
 };
 
 function Profile({ indicatorId, sectionedCharts, language }) {
-  console.log(indicatorId);
   const router = useRouter();
   const {
     query: { geoIdOrCountrySlug: geoId = '' }
@@ -246,58 +245,48 @@ function Profile({ indicatorId, sectionedCharts, language }) {
       }, [])
   ]);
 
-  const setProfileTabsDebounced = _debounce(setProfileTabs, 2000);
+  const debouceSetProfileTabs = _debounce(setProfileTabs, 2000);
+
+  useEffect(
+    () =>
+      debouceSetProfileTabs([
+        {
+          name: 'All',
+          slug: 'all'
+        },
+        ...sectionedCharts
+          // Filter empty sections
+          .reduce((a, { charts, ...rest }) => {
+            const filteredCharts = charts
+              .filter(filterByGeography)
+              .filter(filterByChartData);
+            if (filteredCharts.length) {
+              a.push({
+                ...rest,
+                charts: filteredCharts
+              });
+            }
+            return a;
+          }, [])
+      ]),
+    [
+      debouceSetProfileTabs,
+      filterByChartData,
+      filterByGeography,
+      sectionedCharts
+    ]
+  );
 
   useEffect(() => {
-    setProfileTabsDebounced([
-      {
-        name: 'All',
-        slug: 'all'
-      },
-      ...sectionedCharts
-        // Filter empty sections
-        .reduce((a, { charts, ...rest }) => {
-          const filteredCharts = charts
-            .filter(filterByGeography)
-            .filter(filterByChartData);
-          if (filteredCharts.length) {
-            a.push({
-              ...rest,
-              charts: filteredCharts
-            });
-          }
-          return a;
-        }, [])
-    ]);
-  }, [
-    setProfileTabsDebounced,
-    filterByChartData,
-    filterByGeography,
-    sectionedCharts
-  ]);
-
-  // Show and hide sections
-  useEffect(() => {
-    if (activeTab === 'all') {
-      profileTabs.slice(1).forEach(tab => {
-        const tabElement = document.getElementById(tab.slug);
-        // Remember to display all section titles
-        tabElement.children[0].style.display = 'block';
-        tabElement.style.display = 'flex';
-      });
-    } else {
-      profileTabs.slice(1).forEach(tab => {
-        const tabElement = document.getElementById(tab.slug);
-        if (tab.slug === activeTab) {
-          // Hide section title for active tab
-          tabElement.children[0].style.display = 'none';
-          tabElement.style.display = 'flex';
-        } else {
-          tabElement.style.display = 'none';
-        }
-      });
+    if (indicatorId) {
+      setTimeout(() => {
+        document.getElementById(indicatorId).scrollIntoView({
+          inline: 'center',
+          block: 'center'
+        });
+      }, 1000);
     }
-  }, [activeTab, profileTabs]);
+  }, [indicatorId]);
 
   return (
     <Page takwimu={{ ...config, language }}>
@@ -331,8 +320,26 @@ function Profile({ indicatorId, sectionedCharts, language }) {
       )}
       <Section>
         {profileTabs.slice(1).map(tab => (
-          <Grid item container id={tab.slug} key={tab.slug}>
-            <ProfileSectionTitle loading={chartData.isLoading} tab={tab} />
+          <Grid
+            item
+            container
+            id={tab.slug}
+            key={tab.slug}
+            style={{
+              display:
+                activeTab === 'all' || activeTab === tab.slug ? 'flex' : 'none'
+            }}
+          >
+            <ProfileSectionTitle
+              loading={chartData.isLoading}
+              tab={tab}
+              style={{
+                display:
+                  activeTab === 'all' || activeTab === tab.slug
+                    ? 'block'
+                    : 'none'
+              }}
+            />
             {tab.charts.map(chart => {
               const embedPath =
                 chart.type === 'hurumap'
@@ -348,25 +355,22 @@ function Profile({ indicatorId, sectionedCharts, language }) {
                   ? sourceResult.nodes[0]
                   : null;
 
+              const id = `indicator-${chart.type}-${chart.id}`;
+
               return (
                 <Grid
                   item
+                  id={id}
                   xs={12}
                   key={chart.id}
                   className={classes.container}
-                  id={`${chart.type}-${chart.id}`}
                 >
                   <InsightContainer
                     key={chart.id}
                     actions={{
                       handleShare: shareIndicator.bind(
                         null,
-                        `${chart.type}-${chart.id}`,
-                        /**
-                         * TODO:
-                         *
-                         * HURUmap UI to remove this variable and allow custom ID
-                         */
+                        id,
                         null,
                         '/api/share'
                       ),
