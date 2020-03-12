@@ -281,8 +281,8 @@ function Profile({ indicatorId, sectionedCharts, language }) {
     if (indicatorId) {
       setTimeout(() => {
         document.getElementById(indicatorId).scrollIntoView({
-          inline: 'center',
-          block: 'center'
+          inline: 'nearest',
+          block: 'nearest'
         });
       }, 1000);
     }
