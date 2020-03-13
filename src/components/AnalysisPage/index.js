@@ -64,17 +64,27 @@ function AnalysisPage({
             }))}
             generateHref={({ postName }, index) => {
               const {
-                country: { slug: countrySlug },
+                country: { slug: countrySlug, lang },
                 language
               } = takwimu;
+
+              const initUrl =
+                lang === language
+                  ? `/profiles/${countrySlug}`
+                  : `/profiles/${countrySlug}?lang=${language}`;
+              const sectionUrl =
+                lang === language
+                  ? `/profiles/${countrySlug}/${postName}`
+                  : `/profiles/${countrySlug}/${postName}?lang=${language}`;
+
               const href =
                 index === 0
                   ? `/profiles/[geoIdOrCountrySlug]` // if politics
                   : `/profiles/[geoIdOrCountrySlug]/[analysisSlug]`;
               const as =
                 index === 0
-                  ? `/profiles/${countrySlug}?lang=${language}` // if politics
-                  : `/profiles/${countrySlug}/${postName}?lang=${language}`;
+                  ? initUrl // if politics
+                  : sectionUrl;
               return { href, as };
             }}
           >
@@ -115,7 +125,8 @@ AnalysisPage.propTypes = {
   takwimu: PropTypes.shape({
     country: PropTypes.shape({
       short_name: PropTypes.string,
-      slug: PropTypes.string
+      slug: PropTypes.string,
+      lang: PropTypes.string
     }),
     language: PropTypes.string.isRequired
   }).isRequired,
