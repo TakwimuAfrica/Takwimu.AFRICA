@@ -277,20 +277,6 @@ function Profile({ indicatorId, sectionedCharts, language }) {
     ]
   );
 
-  useEffect(() => {
-    if (indicatorId) {
-      const el = document.getElementById(indicatorId);
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({
-            inline: 'nearest',
-            block: 'nearest'
-          });
-        }, 1000);
-      }
-    }
-  }, [indicatorId]);
-
   const charts = useMemo(
     () =>
       profileTabs.slice(1).map(
@@ -437,6 +423,20 @@ function Profile({ indicatorId, sectionedCharts, language }) {
       ),
     [activeTab, chartData, classes, country.slug, geoId, profileTabs, profiles]
   );
+
+  useEffect(() => {
+    if (indicatorId) {
+      const el = document.getElementById(indicatorId);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({
+            inline: 'center',
+            block: 'center'
+          });
+        }, 1000);
+      }
+    }
+  }, [indicatorId]);
 
   return (
     <Page takwimu={{ ...config, language }}>
