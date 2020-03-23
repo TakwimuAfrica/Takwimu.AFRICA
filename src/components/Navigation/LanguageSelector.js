@@ -13,6 +13,8 @@ import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import languages from '../../languages';
 import Link from '../Link';
 
+import config from '../../config';
+
 const useStyles = makeStyles(() => ({
   root: {},
   flagImage: {
@@ -28,8 +30,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function LanguageSelector({ lang, options, ...props }) {
+function LanguageSelector({ lang: propLang, options, ...props }) {
   const classes = useStyles(props);
+  const lang = typeof propLang === 'string' ? propLang : config.DEFAULT_LANG;
   return (
     <div className={classes.root}>
       <PopupState key={lang} variant="popover" popupId="language-popup-menu">
@@ -95,6 +98,7 @@ function LanguageSelector({ lang, options, ...props }) {
 }
 
 LanguageSelector.defaultProps = {
+  lang: config.DEFAULT_LANG,
   options: [
     { code: 'en', name: 'English' },
     { code: 'fr', name: 'French' }
@@ -102,7 +106,7 @@ LanguageSelector.defaultProps = {
 };
 
 LanguageSelector.propTypes = {
-  lang: PropTypes.string.isRequired,
+  lang: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string)
 };
 
