@@ -22,7 +22,8 @@ function Home({ latestMediumPosts, takwimu }) {
       rendered: featuredData,
       where_to_next_title: whereToNextTitle,
       where_to_next_link: whereToNextLink
-    }
+    },
+    language
   } = takwimu;
 
   const [blocks, setBlocks] = useState();
@@ -32,21 +33,21 @@ function Home({ latestMediumPosts, takwimu }) {
         renderBlocks({
           logo,
           flourishURL: id =>
-            `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
+            `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/?lang=${language}`,
           fetchDefinitionUrl: (type, id) => {
             switch (type) {
               case 'flourish':
               case 'hurumap':
-                return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
+                return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}?lang=${language}`;
               case 'snippet':
-                return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
+                return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}?lang=${language}`;
               default:
                 return '';
             }
           }
         })
       ),
-    []
+    [language]
   );
 
   return (
@@ -76,6 +77,7 @@ function Home({ latestMediumPosts, takwimu }) {
 Home.propTypes = {
   latestMediumPosts: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   takwimu: PropTypes.shape({
+    language: PropTypes.string,
     page: PropTypes.shape({
       rendered: PropTypes.string,
       where_to_next_title: PropTypes.string,
