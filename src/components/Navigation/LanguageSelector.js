@@ -30,8 +30,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function LanguageSelector({ lang, options, ...props }) {
+function LanguageSelector({ lang: propLang, options, ...props }) {
   const classes = useStyles(props);
+  const lang = typeof propLang === 'string' ? propLang : config.DEFAULT_LANG;
   return (
     <div className={classes.root}>
       <PopupState key={lang} variant="popover" popupId="language-popup-menu">
