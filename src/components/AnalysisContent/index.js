@@ -88,16 +88,16 @@ function AnalysisContent({
           switch (type) {
             case 'flourish':
             case 'hurumap':
-              return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
+              return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}?lang=${takwimu.language}`;
             case 'snippet':
-              return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
+              return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}?lang=${takwimu.language}`;
             default:
               return '';
           }
         }
       })
     );
-  }, [takwimu.country.name, content, topicIndex]);
+  }, [takwimu.country.name, takwimu.language, content, topicIndex]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics &&
@@ -219,6 +219,7 @@ AnalysisContent.propTypes = {
   contentSelector: PropTypes.shape({}).isRequired,
   contentActionsLabels: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
+    language: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
     country: PropTypes.shape({
