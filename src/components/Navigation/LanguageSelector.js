@@ -102,8 +102,12 @@ LanguageSelector.defaultProps = {
 };
 
 LanguageSelector.propTypes = {
-  lang: PropTypes.string.isRequired,
+  lang: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string)
+};
+
+LanguageSelector.defaultProps = {
+  lang: 'en'
 };
 
 export default LanguageSelector;
