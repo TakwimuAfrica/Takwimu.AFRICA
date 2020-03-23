@@ -83,21 +83,21 @@ function AnalysisContent({
       renderBlocks({
         logo,
         flourishURL: id =>
-          `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/`,
+          `${config.WP_BACKEND_URL}/wp-json/hurumap-data/flourish/${id}/?lang=${takwimu.language}`,
         fetchDefinitionUrl: (type, id) => {
           switch (type) {
             case 'flourish':
             case 'hurumap':
-              return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}`;
+              return `${config.WP_BACKEND_URL}/wp-json/hurumap-data/charts/${id}?lang=${takwimu.language}`;
             case 'snippet':
-              return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}`;
+              return `${config.WP_BACKEND_URL}/wp-json/wp/v2/${type}/${id}?lang=${takwimu.language}`;
             default:
               return '';
           }
         }
       })
     );
-  }, [takwimu.country.name, content, topicIndex]);
+  }, [takwimu.country.name, content, topicIndex, takwimu.language]);
 
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.topics &&
@@ -220,6 +220,7 @@ AnalysisContent.propTypes = {
   contentActionsLabels: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     url: PropTypes.string.isRequired,
+    language: PropTypes.string.isRequired,
     page: PropTypes.shape({}).isRequired,
     country: PropTypes.shape({
       name: PropTypes.string,
