@@ -48,13 +48,9 @@ function Input({ onRefresh, placeholder, query, language }) {
       // API. On all other pages that this component is used, onRefresh is
       // expected to be null
       if (typeof onRefresh === 'function') {
-        router.push(
-          `/search?q=${searchTerm}&lang=${language}`,
-          undefined,
-          {
-            shallow: true
-          }
-        );
+        router.push(`/search?q=${searchTerm}&lang=${language}`, undefined, {
+          shallow: true
+        });
         onRefresh(searchTerm);
       } else {
         router.push({

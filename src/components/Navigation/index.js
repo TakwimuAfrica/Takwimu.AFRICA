@@ -182,6 +182,15 @@ class Navigation extends React.Component {
             <Grid item>
               <Link
                 navigation
+                href="/profiles/covid-19"
+                className={classes.link}
+              >
+                COVID-19
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link
+                navigation
                 href="/about"
                 className={classes.link}
                 active={['/services', '/about', '/methodology'].includes(
@@ -294,6 +303,15 @@ class Navigation extends React.Component {
               countries={countries}
               toggle={this.toggleDrawer}
             />
+            <MenuItem>
+              <Link
+                navigation
+                className={classes.link}
+                href="/profiles/covid-19"
+              >
+                COVID-19
+              </Link>
+            </MenuItem>
             <MenuItem>
               <Link
                 navigation
