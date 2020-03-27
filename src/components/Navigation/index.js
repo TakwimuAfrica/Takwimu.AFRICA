@@ -182,7 +182,8 @@ class Navigation extends React.Component {
             <Grid item>
               <Link
                 navigation
-                href="/profiles/covid-19"
+                href="/profiles/[...geoIdOrCountrySlug]"
+                as="/profiles/covid-19"
                 className={classes.link}
               >
                 COVID-19
@@ -307,7 +308,8 @@ class Navigation extends React.Component {
               <Link
                 navigation
                 className={classes.link}
-                href="/profiles/covid-19"
+                href="/profiles/[...geoIdOrCountrySlug]"
+                as="/profiles/covid-19"
               >
                 COVID-19
               </Link>
