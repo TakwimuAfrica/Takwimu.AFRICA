@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
-import config from '../../../config';
+import config from '../../config';
 
-import getProfileProps from '../../../components/ProfilePage/getInitialProps';
-import getAnalysisProps from '../../../components/AnalysisPage/getInitialProps';
+import getProfileProps from '../../components/ProfilePage/getInitialProps';
+import getAnalysisProps from '../../components/AnalysisPage/getInitialProps';
 
 const Analysis = dynamic({
   ssr: true,
-  loader: () => import('../../../components/AnalysisPage')
+  loader: () => import('../../components/AnalysisPage')
 });
 const Profile = dynamic({
   ssr: true,
-  loader: () => import('../../../components/ProfilePage')
+  loader: () => import('../../components/ProfilePage')
 });
 
-function ProfileOrAnalysisPage({ isAnalysis, initialProps }) {
+function ProfileOrAnalysisPage({ isProfile, initialProps }) {
   return (
     <>
       <Head>
@@ -52,17 +52,17 @@ function ProfileOrAnalysisPage({ isAnalysis, initialProps }) {
           crossOrigin="anonymous"
         />
       </Head>
-      {isAnalysis ? (
-        <Analysis {...initialProps} />
-      ) : (
+      {isProfile ? (
         <Profile {...initialProps} />
+      ) : (
+        <Analysis {...initialProps} />
       )}
     </>
   );
 }
 
 ProfileOrAnalysisPage.propTypes = {
-  isAnalysis: PropTypes.bool.isRequired,
+  isProfile: PropTypes.bool.isRequired,
   initialProps: PropTypes.shape({}).isRequired
 };
 
@@ -70,14 +70,13 @@ ProfileOrAnalysisPage.getInitialProps = async props => {
   const {
     query: { geoIdOrCountrySlug }
   } = props;
-  const isAnalysis =
-    config.countries.findIndex(
-      c => c.slug === geoIdOrCountrySlug.toLowerCase()
-    ) !== -1;
-  const getInitialProps = isAnalysis ? getAnalysisProps : getProfileProps;
+  const [, countryCode] = geoIdOrCountrySlug[0].split('-');
+  const isProfile =
+    config.countries.findIndex(c => c.iso_code === countryCode) !== -1;
+  const getInitialProps = isProfile ? getProfileProps : getAnalysisProps;
   const initialProps = getInitialProps ? await getInitialProps(props) : {};
 
-  return { isAnalysis, initialProps };
+  return { isProfile, initialProps };
 };
 
 export default ProfileOrAnalysisPage;
