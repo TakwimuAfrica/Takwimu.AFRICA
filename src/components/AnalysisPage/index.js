@@ -34,6 +34,7 @@ function AnalysisPage({
   indicatorId
 }) {
   const classes = useStyles();
+  const { country, language } = takwimu;
 
   useEffect(() => {
     const el = document.getElementById(indicatorId);
@@ -51,11 +52,12 @@ function AnalysisPage({
   if (analyses.length === 0) {
     return null;
   }
+  let title = activeAnalysis.post_title;
+  title = country.short_name
+    ? `${country.short_name}: ${title} Analysis`
+    : title;
   return (
-    <Page
-      takwimu={takwimu}
-      title={`${takwimu.country.short_name}'s ${activeAnalysis.post_title} Analysis`}
-    >
+    <Page takwimu={takwimu} title={title}>
       <Head>
         <link
           rel="stylesheet"
@@ -72,41 +74,32 @@ function AnalysisPage({
             hideTitle
             top={120}
             current={initial}
-            contentHeadings={analyses.map(section => ({
-              title: section.post_title,
-              postName: section.post_name
-            }))}
+            contentHeadings={analyses
+              .filter(section => section) // ensure no `null`
+              .map(section => ({
+                title: section.post_title,
+                postName: section.post_name
+              }))}
             generateHref={({ postName }, index) => {
-              const {
-                country: { slug: countrySlug, lang },
-                language
-              } = takwimu;
-
-              const initUrl =
-                lang === language
-                  ? `/profiles/${countrySlug}`
-                  : `/profiles/${countrySlug}?lang=${language}`;
-              const sectionUrl =
-                lang === language
-                  ? `/profiles/${countrySlug}/${postName}`
-                  : `/profiles/${countrySlug}/${postName}?lang=${language}`;
-
-              const href =
-                index === 0
+              const { slug: countrySlug, lang } = country;
+              const linkHref =
+                index === 0 || !countrySlug
                   ? `/profiles/[geoIdOrCountrySlug]` // if politics
                   : `/profiles/[geoIdOrCountrySlug]/[analysisSlug]`;
-              const as =
-                index === 0
-                  ? initUrl // if politics
-                  : sectionUrl;
-              return { href, as };
+              let linkAs = '/profiles';
+              linkAs = countrySlug ? `${linkAs}/${countrySlug}` : linkAs;
+              linkAs = postName ? `${linkAs}/${postName}` : linkAs;
+              linkAs = lang !== language ? `${linkAs}?lang=${lang}` : linkAs;
+              return { href: linkHref, as: linkAs };
             }}
           >
-            <CountrySelector
-              context="analysis"
-              country={takwimu.country}
-              classes={{ label: classes.countrySelectorLabel }}
-            />
+            {takwimu.country.slug && (
+              <CountrySelector
+                context="analysis"
+                country={takwimu.country}
+                classes={{ label: classes.countrySelectorLabel }}
+              />
+            )}
           </AsideTableOfContent>
         }
         classes={{ root: classes.root, aside: classes.asideRoot }}

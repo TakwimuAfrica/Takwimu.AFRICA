@@ -2,21 +2,17 @@ import { getPostById, getPostBySlug } from '../../cms';
 import config from '../../config';
 
 export default async function({
-  query: {
-    geoIdOrCountrySlug: slug,
-    analysisSlug,
-    lang: queryLang,
-    indicatorId
-  },
+  query: { geoIdOrCountrySlug, lang: queryLang, indicatorId },
   asPath
 }) {
   const { countries } = config;
-
+  const [slug, analysisSlug] = geoIdOrCountrySlug;
   Object.assign(
     config.country,
+    { lang: config.DEFAULT_LANG },
     countries.find(c => c.slug === slug)
   );
-  const lang = queryLang || config.country.lang || config.DEFAULT_LANG;
+  const lang = queryLang || config.country.lang;
   config.language = lang; // eslint-disable-line no-param-reassign
 
   let analyses = [];

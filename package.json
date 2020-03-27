@@ -64,7 +64,7 @@
     "husky": "^3.0.4",
     "jimp": "^0.8.4",
     "lint-staged": "^9.2.4",
-    "now": "^16.5.2",
+    "now": "^17.1.1",
     "prettier": "^1.16.1",
     "responsive-loader": "^1.2.0"
   },
