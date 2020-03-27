@@ -81,7 +81,6 @@ Embed.defaultProps = {
 };
 
 Embed.getInitialProps = async ({ query: { path } }) => {
-  console.log('BOOM', { path });
   const [$0, $1, $2] = path || [];
   let definition;
 
