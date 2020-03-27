@@ -154,8 +154,13 @@ const overrideTypePropsFor = chartType => {
 function Profile({ sectionedCharts, language }) {
   const router = useRouter();
   const {
-    query: { geoIdOrCountrySlug: geoId = '' }
+    query: { geoIdOrCountrySlug }
   } = router;
+  const geoId =
+    (geoIdOrCountrySlug &&
+      geoIdOrCountrySlug.length &&
+      geoIdOrCountrySlug[0]) ||
+    '';
 
   const [activeTab, setActiveTab] = useState(
     process.browser && window.location.hash.slice(1)
