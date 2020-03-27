@@ -195,7 +195,9 @@ function AnalysisContent({
           current={topicIndex}
           onClick={setTopicIndex}
         />
-        <CountryContent content={contentSelector} takwimu={takwimu} />
+        {takwimu.country.slug && (
+          <CountryContent content={contentSelector} takwimu={takwimu} />
+        )}
         <RelatedContent content={{}} />
       </div>
     </>
