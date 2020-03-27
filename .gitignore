@@ -158,6 +158,8 @@ build/
 
 ### Zeit Now ###
 
+.now
+
 # Local development .env files
 .env
 .env.build
