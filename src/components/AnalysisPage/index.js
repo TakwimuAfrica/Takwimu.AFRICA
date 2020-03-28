@@ -80,11 +80,13 @@ function AnalysisPage({
                 title: section.post_title,
                 postName: section.post_name
               }))}
-            generateHref={({ postName }) => {
+            generateHref={({ postName }, index) => {
               const { slug: countrySlug, lang } = country;
               const linkHref = `/profiles/[...geoIdOrCountrySlug]`;
               let linkAs = '/profiles';
-              linkAs = countrySlug ? `${linkAs}/${countrySlug}` : linkAs;
+              const parentSlug =
+                countrySlug || (index > 0 && analyses[0].post_name);
+              linkAs = parentSlug ? `${linkAs}/${parentSlug}` : linkAs;
               linkAs = postName ? `${linkAs}/${postName}` : linkAs;
               linkAs = lang !== language ? `${linkAs}?lang=${lang}` : linkAs;
               return { href: linkHref, as: linkAs };
@@ -125,7 +127,11 @@ AnalysisPage.propTypes = {
       })
     )
   }).isRequired,
-  analyses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  analyses: PropTypes.arrayOf(
+    PropTypes.shape({
+      post_name: PropTypes.string.isRequired
+    })
+  ).isRequired,
   takwimu: PropTypes.shape({
     country: PropTypes.shape({
       short_name: PropTypes.string,
