@@ -7,11 +7,14 @@ export default async function({
 }) {
   const { countries } = config;
   const [slug, analysisSlug] = geoIdOrCountrySlug;
-  Object.assign(
-    config.country,
-    { lang: config.DEFAULT_LANG },
-    countries.find(c => c.slug === slug)
-  );
+  // For non-country analysis, ensure country specific props are reset
+  const defaultCountry = {
+    lang: config.DEFAULT_LANG,
+    short_name: undefined,
+    slug: undefined
+  };
+  const foundCountry = countries.find(c => c.slug === slug);
+  Object.assign(config.country, defaultCountry, foundCountry);
   const lang = queryLang || config.country.lang;
   config.language = lang; // eslint-disable-line no-param-reassign
 

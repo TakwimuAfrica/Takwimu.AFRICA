@@ -80,12 +80,9 @@ function AnalysisPage({
                 title: section.post_title,
                 postName: section.post_name
               }))}
-            generateHref={({ postName }, index) => {
+            generateHref={({ postName }) => {
               const { slug: countrySlug, lang } = country;
-              const linkHref =
-                index === 0 || !countrySlug
-                  ? `/profiles/[geoIdOrCountrySlug]` // if politics
-                  : `/profiles/[geoIdOrCountrySlug]/[analysisSlug]`;
+              const linkHref = `/profiles/[...geoIdOrCountrySlug]`;
               let linkAs = '/profiles';
               linkAs = countrySlug ? `${linkAs}/${countrySlug}` : linkAs;
               linkAs = postName ? `${linkAs}/${postName}` : linkAs;
