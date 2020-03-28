@@ -145,7 +145,7 @@ function CurrentAnalysis({
           >
             <Link
               button
-              href="/profiles/[geoIdOrCountrySlug]/[analysisSlug]"
+              href="/profiles/[...geoIdOrCountrySlug]"
               as={`/profiles/${countrySlug}/${currentAnalysis.post_name}`}
               className={classes.primaryAction}
             >
@@ -153,7 +153,7 @@ function CurrentAnalysis({
             </Link>
             <Link
               button
-              href="/profiles/[geoIdOrCountrySlug]"
+              href="/profiles/[...geoIdOrCountrySlug]"
               as={`/profiles/${countrySlug}`}
               className={classes.secondaryAction}
               classes={{ label: classes.secondaryActionLabel }}

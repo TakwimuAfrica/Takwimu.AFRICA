@@ -138,7 +138,7 @@ function CountryContent({ content, takwimu: { country, countries } }) {
         />
         <Link
           button
-          href="/profiles/[geoIdOrCountrySlug]"
+          href="/profiles/[...geoIdOrCountrySlug]"
           as={href}
           classes={{
             root: classes.selectButtonRoot,

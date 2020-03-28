@@ -54,20 +54,16 @@ function SearchResultItem({
     }
   }, [resultType, id]);
 
-  let link = '';
-  let href = '';
+  const linkHref = '/profiles/[...geoIdOrCountrySlug]';
+  let linkAs = '';
   if (resultType === 'topic_page') {
-    link = `/profiles/${country.slug}/${profileSlug}?lang=${language}#${slug}`;
-    href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
+    linkAs = `/profiles/${country.slug}/${profileSlug}?lang=${language}#${slug}`;
   } else if (resultType === 'profile_page') {
-    link = `/profiles/${country.slug}/${slug}?lang=${language}`;
-    href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
+    linkAs = `/profiles/${country.slug}/${slug}?lang=${language}`;
   } else if (resultType === 'carousel_topic') {
-    link = `/profiles/${country.slug}?lang=${language}#${slug}`;
-    href = '/profiles/[geoIdOrCountrySlug]';
+    linkAs = `/profiles/${country.slug}?lang=${language}#${slug}`;
   } else {
-    link = `/profiles/${country.slug}?lang=${language}`;
-    href = '/profiles/[geoIdOrCountrySlug]';
+    linkAs = `/profiles/${country.slug}?lang=${language}`;
   }
 
   return (
@@ -75,7 +71,7 @@ function SearchResultItem({
       <Typography variant="body1" className={classes.resultType}>
         {item}
       </Typography>
-      <Link href={href} as={link} className={classes.link}>
+      <Link href={linkHref} as={linkAs} className={classes.link}>
         <Typography variant="body1" className={classes.searchResultItem}>
           {country.name} - {title}
         </Typography>

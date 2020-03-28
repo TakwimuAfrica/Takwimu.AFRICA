@@ -220,7 +220,7 @@ function ProfileDetail({ profile: { comparable = false, geo = {} } }) {
           </Grid>
           <Link
             button
-            href="/profiles/[geoIdOrCountrySlug]"
+            href="/profiles/[...geoIdOrCountrySlug]"
             as={`/profiles/${country.slug}`}
             fullWidth
           >

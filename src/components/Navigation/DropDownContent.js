@@ -160,7 +160,7 @@ function DropDownContent({
               key={country.slug}
               underline="none"
               color="textSecondary"
-              href="/profiles/[geoIdOrCountrySlug]"
+              href="/profiles/[...geoIdOrCountrySlug]"
               as={`/profiles/${profile(country)}`}
               className={classes.countryLink}
               onClick={() => window.toggleDrawer(type)()}

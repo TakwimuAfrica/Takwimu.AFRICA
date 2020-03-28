@@ -88,7 +88,7 @@ function InTopicDataResult({
     };
   });
 
-  const href = '/profiles/[geoIdOrCountrySlug]/[analysisSlug]';
+  const href = '/profiles/[...geoIdOrCountrySlug]';
   const country = config.countries.find(c => c.slug === topic.countrySlug);
 
   return (
@@ -140,7 +140,7 @@ function InGeographyDataResult({
   const [geo, setGeo] = useState(inGeographies[0]);
   const countryCode = geo.geoCode.slice(0, 2);
   const country = config.countries.find(c => c.iso_code === countryCode);
-  const href = '/profiles/[geoIdOrCountrySlug]';
+  const href = '/profiles/[...geoIdOrCountrySlug]';
 
   const handleGeoIdChanges = e => {
     const geoId = e.target.value;
