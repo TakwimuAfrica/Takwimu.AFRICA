@@ -45,8 +45,11 @@ function Link({
   lang,
   ...other
 }) {
-  const router = useRouter();
-  const active = activeProp || router.pathname === href;
+  const { asPath, query } = useRouter();
+  const active =
+    activeProp ||
+    (asHref && asPath.startsWith(asHref)) ||
+    (!asHref && asPath.startsWith(href));
   const classes = useStyles({ navigation, active });
 
   const className = classNames(classes.root, classNameProps, {
@@ -60,9 +63,9 @@ function Link({
 
     const [h, hash] = link.split('#');
     const [path, search] = h.split('?');
-    if (lang || router.query.lang) {
+    if (lang || query.lang) {
       const searchParams = new URLSearchParams(search);
-      searchParams.set('lang', lang || router.query.lang);
+      searchParams.set('lang', lang || query.lang);
 
       return `${path}?${searchParams.toString()}${hash ? `#${hash}` : ''}`;
     }
