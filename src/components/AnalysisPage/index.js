@@ -104,6 +104,7 @@ function AnalysisPage({
         classes={{ root: classes.root, aside: classes.asideRoot }}
       >
         <AnalysisContent
+          profile={country.slug || analyses[0].post_name}
           content={activeAnalysis}
           takwimu={takwimu}
           analysisLink={analysisLink}
