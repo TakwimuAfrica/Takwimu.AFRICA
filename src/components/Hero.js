@@ -6,17 +6,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import RichTypography from './RichTypography';
 import Section from './Section';
+import Link from './Link';
 
-import africanParliament from '../assets/images/africanparliament.jpg';
+import heroImage from '../assets/images/africanparliament.jpg';
+import bannerImage from '../assets/images/covid-19-logo.png';
 import triangle from '../assets/images/triangle.svg';
 
 const useStyles = makeStyles(theme => ({
   section: {
-    marginTop: '2.25rem'
+    marginTop: '2.25rem',
+    [theme.breakpoints.up('md')]: {
+      position: 'relative'
+    }
   },
   root: {
     width: '100%',
-    backgroundImage: `url(${africanParliament})`,
+    backgroundImage: `url(${heroImage})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'right bottom',
     backgroundSize: 'cover'
@@ -60,6 +65,22 @@ const useStyles = makeStyles(theme => ({
   },
   buttonIcon: {
     marginLeft: '1.9375rem'
+  },
+  banner: {
+    display: 'none', // kilemensi(2020-03-31): The banner doesn't look good in < md
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      position: 'absolute',
+      right: 0,
+      top: 0
+    }
+  },
+  bannerImg: {
+    [theme.breakpoints.up('md')]: {
+      maxHeight: '100%',
+      height: 'auto',
+      width: '18.75rem'
+    }
   }
 }));
 
@@ -103,6 +124,17 @@ function Hero({
               </Button>
             </Grid>
           </Grid>
+          <Link
+            href="/profiles/[...geoIdOrCountrySlug]"
+            as="/profiles/covid-19"
+            className={classes.banner}
+          >
+            <img
+              alt="COVID-19"
+              src={bannerImage}
+              className={classes.bannerImg}
+            />
+          </Link>
         </Section>
       </div>
     </div>
