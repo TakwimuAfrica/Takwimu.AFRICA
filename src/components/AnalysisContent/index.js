@@ -14,13 +14,48 @@ import CountryContent from '../CountryContent';
 import RelatedContent from '../RelatedContent';
 import OtherInfo from '../PageContentNavigation';
 
+import covid19HeroImage from '../../assets/images/covid-19-hero.png';
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 
 import logo from '../../assets/images/logo-white-all.png';
 import config from '../../config';
 
+const HERO_STYLES = {
+  'covid-19': () => ({
+    backgroundImage: `url(${covid19HeroImage})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100%',
+    width: '100%',
+    height: '0',
+    paddingTop: '30%' /* (img-height / img-width * container-width) */
+  })
+};
+
+const DEFAULT_HERO_STYLES = theme => ({
+  backgroundImage: `url(${profileHeroImage})`,
+  backgroundPosition: 'center',
+  backgroundPositionY: '-6.25rem',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: '100%',
+  marginTop: '0.375rem',
+  width: '100%',
+  height: '21.125rem',
+  [theme.breakpoints.up('md')]: {
+    height: '17.125rem',
+    backgroundPositionY: '-3rem'
+  },
+  [theme.breakpoints.up('lg')]: {
+    height: '21.125rem',
+    backgroundPositionY: '-6.25rem'
+  }
+});
+
 const useStyles = makeStyles(theme => ({
   root: {
+    borderTopColor: theme.palette.primary.main,
+    borderTopStyle: 'solid',
+    borderTopWidth: '0.25rem',
     maxWidth: '933px'
   },
   title: {
@@ -33,31 +68,12 @@ const useStyles = makeStyles(theme => ({
   readNextContainer: {
     paddingBottom: '2.25rem'
   },
-  hero: {
-    backgroundImage: `url(${profileHeroImage})`,
-    backgroundPosition: 'center',
-    backgroundPositionY: '-6.25rem',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100%',
-    borderBottomColor: theme.palette.primary.main,
-    borderBottomStyle: 'solid',
-    borderBottomWidth: '0.25rem',
-    marginTop: '0.375rem',
-    width: '100%',
-    height: '21.125rem',
-    [theme.breakpoints.up('md')]: {
-      height: '17.125rem',
-      backgroundPositionY: '-3rem'
-    },
-    [theme.breakpoints.up('lg')]: {
-      height: '21.125rem',
-      backgroundPositionY: '-6.25rem'
-    }
-  }
+  hero: ({ heroStyle }) => heroStyle(theme)
 }));
 
 function AnalysisContent({
   content,
+  profile,
   takwimu,
   topicsNavigation,
   readNextTitle,
@@ -65,7 +81,9 @@ function AnalysisContent({
   contentSelector,
   contentActionsLabels
 }) {
-  const classes = useStyles();
+  const foundKey = Object.keys(HERO_STYLES).find(key => key === profile);
+  const heroStyle = (foundKey && HERO_STYLES[foundKey]) || DEFAULT_HERO_STYLES;
+  const classes = useStyles({ heroStyle });
 
   const [topicIndex, setTopicIndex] = useState(0);
   // If there is topic specified, it'll be as hash;
@@ -216,6 +234,7 @@ AnalysisContent.propTypes = {
       })
     )
   }).isRequired,
+  profile: PropTypes.string.isRequired,
   topicsNavigation: PropTypes.string.isRequired,
   readNextTitle: PropTypes.string.isRequired,
   contentSelector: PropTypes.shape({}).isRequired,
