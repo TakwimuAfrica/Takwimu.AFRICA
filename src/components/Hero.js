@@ -79,7 +79,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       maxHeight: '100%',
       height: 'auto',
-      width: '18.75rem'
+      width: '14.53125rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '19.375rem'
     }
   }
 }));
