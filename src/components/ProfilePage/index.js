@@ -385,19 +385,23 @@ function Profile({ sectionedCharts, language }) {
     if (activeTab === 'all') {
       profileTabs.slice(1).forEach(tab => {
         const tabElement = document.getElementById(tab.slug);
-        // Remember to display all section titles
-        tabElement.children[0].style.display = 'block';
-        tabElement.style.display = 'flex';
+        if (tabElement && tabElement.children[0]) {
+          // Remember to display all section titles
+          tabElement.children[0].style.display = 'block';
+          tabElement.style.display = 'flex';
+        }
       });
     } else {
       profileTabs.slice(1).forEach(tab => {
         const tabElement = document.getElementById(tab.slug);
-        if (tab.slug === activeTab) {
-          // Hide section title for active tab
-          tabElement.children[0].style.display = 'none';
-          tabElement.style.display = 'flex';
-        } else {
-          tabElement.style.display = 'none';
+        if (tabElement && tabElement.children[0]) {
+          if (tab.slug === activeTab) {
+            // Hide section title for active tab
+            tabElement.children[0].style.display = 'none';
+            tabElement.style.display = 'flex';
+          } else {
+            tabElement.style.display = 'none';
+          }
         }
       });
     }
