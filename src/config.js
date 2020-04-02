@@ -28,9 +28,11 @@ Disallow:
       : 'https://search-cfa-openafrica-z56l24lkfbv5erjxxs76sevr3i.eu-west-1.es.amazonaws.com',
   DEFAULT_LANG: 'en',
   country: {},
+  /* Name translations are taken from: https://unstats.un.org/unsd/geoinfo/UNGEGN/docs/11th-uncsgn-docs/E_Conf.105_13_CRP.13_15_UNGEGN%20WG%20Country%20Names%20Document.pdf */
   countries: [
     {
       iso_code: 'BF',
+      // Same names in EN & FR
       name: 'Burkina Faso',
       iso_name: 'Burkina Faso',
       short_name: 'Burkina Faso',
@@ -40,18 +42,45 @@ Disallow:
     },
     {
       iso_code: 'CD',
-      name: 'Democratic Republic of Congo',
-      iso_name: 'Congo, the Democratic Republic of the',
-      short_name: 'DR Congo',
+      get name() {
+        if (config.language === 'fr') {
+          return 'République Démocratique du Congo';
+        }
+        return 'Democratic Republic of Congo';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'Congo, la République Démocratique du';
+        }
+        return 'Congo, the Democratic Republic of the';
+      },
+      get short_name() {
+        if (config.language === 'fr') {
+          return 'RD Congo';
+        }
+        return 'DR Congo';
+      },
       slug: 'democratic-republic-of-congo',
       lang: 'en',
       published: true
     },
     {
       iso_code: 'ET',
-      name: 'Ethiopia',
-      iso_name: 'Ethiopia',
-      short_name: 'Ethiopia',
+      get name() {
+        if (config.language === 'fr') {
+          return 'Éthiopie';
+        }
+        return 'Ethiopia';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'République Fédérale Démocratiqued’Ethiopie';
+        }
+        return 'Federal Democratic Republic of Ethiopia';
+      },
+      get short_name() {
+        return this.name;
+      },
       slug: 'ethiopia',
       lang: 'en',
       published: true
@@ -59,7 +88,12 @@ Disallow:
     {
       iso_code: 'KE',
       name: 'Kenya',
-      iso_name: 'Kenya',
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'République du Kenya';
+        }
+        return 'Republic of Kenya';
+      },
       short_name: 'Kenya',
       slug: 'kenya',
       lang: 'en',
@@ -67,54 +101,126 @@ Disallow:
     },
     {
       iso_code: 'NG',
-      name: 'Nigeria',
-      iso_name: 'Nigeria',
-      short_name: 'Nigeria',
+      get name() {
+        if (config.language === 'fr') {
+          return 'Nigéria';
+        }
+        return 'Nigeria';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'République Fédérale du Nigéria';
+        }
+        return 'Federal Republic of Nigeria';
+      },
+      get short_name() {
+        return this.name;
+      },
       slug: 'nigeria',
       lang: 'en',
       published: true
     },
     {
       iso_code: 'SN',
-      name: 'Senegal',
-      iso_name: 'Senegal',
-      short_name: 'Senegal',
+      get name() {
+        if (config.language === 'fr') {
+          return 'Sénégal';
+        }
+        return 'Senegal';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'République du Sénégal';
+        }
+        return 'Republic of Senegal';
+      },
+      get short_name() {
+        return this.name;
+      },
       slug: 'senegal',
       lang: 'fr',
       published: true
     },
     {
       iso_code: 'ZA',
-      name: 'South Africa',
-      iso_name: 'South Africa',
-      short_name: 'South Africa',
+      get name() {
+        if (config.language === 'fr') {
+          return 'Afrique du Sud';
+        }
+        return 'South Africa';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'Republic of South Africa';
+        }
+        return 'République sud-africaine';
+      },
+      get short_name() {
+        return this.name;
+      },
       slug: 'south-africa',
       lang: 'en',
       published: true
     },
     {
       iso_code: 'TZ',
-      name: 'Tanzania',
-      iso_name: 'Tanzania, United Republic of',
-      short_name: 'Tanzania',
+      get name() {
+        if (config.language === 'fr') {
+          return 'Tanzanie';
+        }
+        return 'Tanzania';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'Tanzanie, République-Unie de';
+        }
+        return 'Tanzania, United Republic of';
+      },
+      get short_name() {
+        return this.name;
+      },
       slug: 'tanzania',
       lang: 'en',
       published: true
     },
     {
       iso_code: 'UG',
-      name: 'Uganda',
-      iso_name: 'Uganda',
-      short_name: 'Uganda',
+      get name() {
+        if (config.language === 'fr') {
+          return 'Ouganda';
+        }
+        return 'Uganda';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'République de l’Ouganda';
+        }
+        return 'Republic of Uganda';
+      },
+      get short_name() {
+        return this.name;
+      },
       slug: 'uganda',
       lang: 'en',
       published: true
     },
     {
       iso_code: 'ZM',
-      name: 'Zambia',
-      iso_name: 'Zambia',
-      short_name: 'Zambia',
+      get name() {
+        if (config.language === 'fr') {
+          return 'Zambie';
+        }
+        return 'Zambia';
+      },
+      get iso_name() {
+        if (config.language === 'fr') {
+          return 'République de Zambie';
+        }
+        return 'Republic of Zambia';
+      },
+      get short_name() {
+        return this.name;
+      },
       slug: 'zambia',
       lang: 'en',
       published: true
