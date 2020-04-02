@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import config from '../config';
 
-const DEFAULT_CONJ = ' ';
+const DEFAULT_CONJ = ': ';
 
 export const countrify = (
   title,
@@ -18,9 +18,6 @@ export const countrify = (
     let langConj = conj;
     if (!langConj) {
       switch (language) {
-        case 'en':
-          langConj = '&rsquo;s ';
-          break;
         default:
           langConj = DEFAULT_CONJ;
           break;
