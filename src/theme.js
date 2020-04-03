@@ -315,6 +315,12 @@ const theme = createTheme({
           float: 'right',
           marginLeft: '1em'
         },
+        '.wp-block-table': {
+          fontSize: '0.75rem'
+        },
+        '.wp-block-table table': {
+          borderCollapse: 'collapse'
+        },
         /**
          * Override load-styles.php customizations
          */
