@@ -316,7 +316,7 @@ const theme = createTheme({
           marginLeft: '1em'
         },
         '.wp-block-table': {
-          fontSize: '12px'
+          fontSize: '0.75rem'
         },
         '.wp-block-table table': {
           borderCollapse: 'collapse'
