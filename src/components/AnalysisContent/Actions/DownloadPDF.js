@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 
+import { useRouter } from 'next/router';
+
 import ReactPDF, {
   Document,
   Page,
@@ -243,9 +245,14 @@ const isEmpty = obj =>
 function DownloadPDF({ title, topic, data, takwimu, top, label }) {
   const classes = useStyles();
   const [pdfBlob, setPdfBlob] = useState(null);
+  const { asPath } = useRouter();
 
   useEffect(() => {
-    if (!isEmpty(data) && (topic === 'topic' || !isEmpty(data.item))) {
+    if (
+      !isEmpty(data) &&
+      !asPath.startsWith('/profiles/covid-19') &&
+      (topic === 'topic' || !isEmpty(data.item))
+    ) {
       const pdfClasses = createPdfStyles(StyleSheet);
       const AnalysisPDF = createPdf(Document, Image, Link, Page, Text, View);
       ReactPDF.pdf(
@@ -259,8 +266,11 @@ function DownloadPDF({ title, topic, data, takwimu, top, label }) {
         .toBlob()
         .then(setPdfBlob);
     }
-  }, [data, topic, takwimu]);
+  }, [asPath, data, takwimu, topic]);
 
+  if (!pdfBlob) {
+    return null;
+  }
   return (
     <ButtonBase
       ga-on="click"
@@ -269,22 +279,19 @@ function DownloadPDF({ title, topic, data, takwimu, top, label }) {
       ga-event-label={`${takwimu.country.name}: ${title}`}
       ga-event-value={top ? 1 : 0}
       className={classes.root}
-      disabled={pdfBlob === null}
       onClick={() => {
-        if (pdfBlob) {
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(pdfBlob);
-          link.download = `${title}.pdf`;
-          link.target = '_blank';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(pdfBlob);
-        }
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(pdfBlob);
+        link.download = `${title}.pdf`;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(pdfBlob);
       }}
     >
       <img alt="download" src={downloadIcon} className={classes.actionIcon} />
-      {`${label} (PDF `} {pdfBlob && ` ${(pdfBlob.size / 1000).toFixed(1)}kb)`}
+      {`${label} (PDF `} {` ${(pdfBlob.size / 1000).toFixed(1)}kb)`}
     </ButtonBase>
   );
 }
