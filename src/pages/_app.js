@@ -43,6 +43,10 @@ export default class MyApp extends App {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <meta charSet="utf-8" />
+          <meta
+            httpEquiv="Content-Security-Policy"
+            content="default-src 'self' 'unsafe-inline'; img-src * data:; connect-src *; style-src * 'unsafe-eval' 'unsafe-inline'; font-src * data:; script-src-elem * 'unsafe-inline'; frame-src * data:"
+          />
         </Head>
         <ApolloProvider client={client}>
           <StylesProvider jss={MyApp.jss}>
