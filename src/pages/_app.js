@@ -45,7 +45,7 @@ export default class MyApp extends App {
           <meta charSet="utf-8" />
           <meta
             httpEquiv="Content-Security-Policy"
-            content="default-src * 'unsafe-inline'; img-src * data:; connect-src *; style-src * 'unsafe-eval' 'unsafe-inline'; font-src * data:; script-src-elem * 'unsafe-inline'; frame-src * data:"
+            content="default-src * 'unsafe-inline'; img-src * data:; connect-src *; style-src * 'unsafe-eval' 'unsafe-inline'; font-src * data:; script-src-elem * 'unsafe-inline'; frame-src * data: 'unsafe-inline'"
           />
         </Head>
         <ApolloProvider client={client}>
