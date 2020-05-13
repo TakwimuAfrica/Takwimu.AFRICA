@@ -51,13 +51,14 @@ const useStyles = makeStyles({
 });
 
 function Actions({
-  hideLastUpdated,
-  title,
   data,
-  topic,
-  takwimu,
+  hideLastUpdated,
+  labels: { lastUpdateLabel, analysisShareLabel, analysisDownloadLabel },
   link,
-  labels: { lastUpdateLabel, analysisShareLabel, analysisDownloadLabel }
+  page: pageProp,
+  takwimu,
+  title,
+  topic
 }) {
   const classes = useStyles();
   const [analysisLink, setAnalysisLink] = useState(link);
@@ -73,9 +74,8 @@ function Actions({
       window.removeEventListener('hashchange', locationHashChanged);
     };
   }, []);
-  const {
-    page: { post_modified: lastUpdated }
-  } = takwimu;
+  const page = pageProp || takwimu.page;
+  const { post_modified: lastUpdated } = page;
 
   return (
     <div className={classes.root}>
@@ -125,21 +125,22 @@ function Actions({
 }
 
 Actions.propTypes = {
-  hideLastUpdated: PropTypes.bool,
-  title: PropTypes.string.isRequired,
   data: PropTypes.shape({}).isRequired,
-  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
-  takwimu: PropTypes.shape({
-    page: PropTypes.shape({
-      post_modified: PropTypes.string
-    }).isRequired
-  }).isRequired,
+  hideLastUpdated: PropTypes.bool,
   link: PropTypes.string.isRequired,
   labels: PropTypes.shape({
     analysisShareLabel: PropTypes.string,
     analysisDownloadLabel: PropTypes.string,
     lastUpdateLabel: PropTypes.string
-  })
+  }),
+  page: PropTypes.shape({
+    post_modified: PropTypes.string
+  }).isRequired,
+  takwimu: PropTypes.shape({
+    page: PropTypes.shape({}).isRequired
+  }).isRequired,
+  title: PropTypes.string.isRequired,
+  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired
 };
 
 Actions.defaultProps = {

@@ -144,7 +144,7 @@ function AnalysisContent({
   const renderActions = props => (
     <Actions
       title={topic.post_title}
-      page={takwimu.page}
+      page={topic}
       topic={topic.type}
       data={{
         content: topic,
