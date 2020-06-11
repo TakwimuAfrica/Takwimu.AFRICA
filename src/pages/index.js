@@ -14,6 +14,7 @@ import Page from '../components/Page';
 import WhatYouDoWithTakwimu from '../components/WhatYouCanDoWithTakwimu';
 import WhereToNext from '../components/Next';
 import Section from '../components/Section';
+import fetchStories from '../utils/fetchStories';
 import config from '../config';
 
 function Home({ latestMediumPosts, takwimu }) {
@@ -91,8 +92,7 @@ Home.getInitialProps = async props => {
     query: { lang: pageLanguage }
   } = props;
   const lang = pageLanguage || config.DEFAULT_LANG;
-  const res = await fetch('https://stories.hurumap.org/@takwimu_africa/latest');
-  const latestMediumPosts = await res.json();
+  const latestMediumPosts = await fetchStories();
   const takwimu = await getSitePage('index', lang);
 
   return {
