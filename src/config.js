@@ -281,7 +281,10 @@ Disallow:
         first: 1
       }
     ]
-  ]
+  ],
+  stories: {
+    url: 'https://medium.com/@takwimu_africa'
+  }
 };
 
 if (typeof document !== 'undefined') {
