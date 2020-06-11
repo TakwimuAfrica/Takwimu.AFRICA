@@ -9,7 +9,6 @@ export default async function fetchStories() {
   );
   const json = await JSON.parse(jsonClean);
   const reportStreamItems = await json.payload.streamItems;
-  // console.log('BOOM', { json, reportStreamItems });
   const reports = await reportStreamItems.map(
     reportStreamItem =>
       reportStreamItem.postPreview &&
