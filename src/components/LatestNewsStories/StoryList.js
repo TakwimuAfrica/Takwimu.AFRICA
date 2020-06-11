@@ -17,8 +17,9 @@ const useStyles = makeStyles({
   }
 });
 
-function StoryList({ stories }) {
-  const classes = useStyles();
+function StoryList({ stories, ...props }) {
+  const classes = useStyles(props);
+
   return (
     <Grid
       container
@@ -28,7 +29,7 @@ function StoryList({ stories }) {
     >
       {stories.slice(0, 3).map((story, index) => (
         <Story
-          key={story.link}
+          key={story.uniqueSlug}
           story={{
             previewImageUrl: `https://cdn-images-1.medium.com/max/480/${story.virtuals.previewImage.imageId}`,
             subtitle: story.content.subtitle,

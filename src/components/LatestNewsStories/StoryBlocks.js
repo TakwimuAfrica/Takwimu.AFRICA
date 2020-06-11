@@ -33,7 +33,7 @@ function StoryBlocks({ stories }) {
     <Grid container className={classes.root} spacing={0}>
       {stories.slice(0, 3).map((story, index) => (
         <StoryCard
-          key={story.id}
+          key={story.uniqueSlug}
           story={{
             previewImageUrl: `https://cdn-images-1.medium.com/max/480/${story.virtuals.previewImage.imageId}`,
             subtitle: story.content.subtitle,
@@ -47,7 +47,7 @@ function StoryBlocks({ stories }) {
       ))}
       {stories.slice(0, 3).map((story, index) => (
         <StorySummary
-          key={story.id}
+          key={story.uniqueSlug}
           subtitle={story.content.subtitle}
           classes={{
             root: classNames([classes.story, { [classes.margin]: index > 0 }])
