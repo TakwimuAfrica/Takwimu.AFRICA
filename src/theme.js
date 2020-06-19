@@ -288,6 +288,25 @@ const theme = createTheme({
             margin: 0
           }
         },
+        // Reset lists in cards
+        '.wp-block-hurumap-card-block ul': {
+          listStyleType: 'disc',
+          listStylePosition: 'inside',
+          paddingLeft: 40
+        },
+        '.wp-block-hurumap-card-block ol': {
+          listStyleType: 'decimal',
+          listStylePosition: 'inside',
+          paddingLeft: 40
+        },
+        [`.wp-block-hurumap-card-block ul ul, .wp-block-hurumap-card-block ol ul`]: {
+          listStyleType: 'circle',
+          listStylePosition: 'inside'
+        },
+        [`.wp-block-hurumap-card-block ol ol, .wp-block-hurumap-card-block ul ol`]: {
+          listStyleType: 'lower-latin',
+          listStylePosition: 'inside'
+        },
         '.wp-block-columns .wp-block-column': {
           width: '100%'
         },
