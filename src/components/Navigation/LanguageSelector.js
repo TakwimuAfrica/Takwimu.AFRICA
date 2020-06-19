@@ -1,33 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  MenuItem,
-  ButtonBase,
-  Menu,
-  Typography,
-  Grid
-} from '@material-ui/core';
+import { MenuItem, ButtonBase, Menu, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import TranslateIcon from '@material-ui/icons/Translate';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import languages from '../../languages';
+// import languages from '../../languages';
 import Link from '../Link';
 
 import config from '../../config';
 
 const useStyles = makeStyles(() => ({
-  root: {},
-  flagImage: {
-    width: '20.8px'
-  },
-  flagOptions: {
-    '& ul': {
-      padding: 0
-    }
-  },
-  flagOption: {
-    padding: '8px'
-  }
+  root: {}
 }));
 
 function LanguageSelector({ lang: propLang, options, ...props }) {
@@ -43,20 +28,12 @@ function LanguageSelector({ lang: propLang, options, ...props }) {
               color="primary"
               {...bindTrigger(popupState)}
             >
-              <Grid container spacing={1} alignItems="center">
-                <Grid item>
-                  <img
-                    src={languages[lang.toUpperCase()]}
-                    className={classes.flagImage}
-                    alt="lang"
-                  />
-                </Grid>
-                <Grid item>
-                  <Typography color="textSecondary">
-                    {lang.toUpperCase()}
-                  </Typography>
-                </Grid>
-              </Grid>
+              <TranslateIcon fontSize="small" />
+              <Box mr={1} />
+              <Typography color="textSecondary">
+                {lang.toUpperCase()}
+              </Typography>
+              <ExpandMoreIcon fontSize="small" />
             </ButtonBase>
             <Menu {...bindMenu(popupState)}>
               {options.map(({ code, name }) => (
@@ -65,8 +42,8 @@ function LanguageSelector({ lang: propLang, options, ...props }) {
                   value={code}
                   component={Link}
                   disabled={code === lang}
-                  className={classes.flagOption}
                   lang={code}
+                  px={2}
                   href={
                     typeof window !== 'undefined'
                       ? window.location.pathname +
@@ -75,18 +52,7 @@ function LanguageSelector({ lang: propLang, options, ...props }) {
                       : '/'
                   }
                 >
-                  <Grid container spacing={1} alignItems="center">
-                    <Grid item>
-                      <img
-                        src={languages[code.toUpperCase()]}
-                        className={classes.flagImage}
-                        alt="lang option"
-                      />
-                    </Grid>
-                    <Grid item>
-                      <Typography color="textPrimary">{name}</Typography>
-                    </Grid>
-                  </Grid>
+                  <Typography color="textPrimary">{name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -101,7 +67,7 @@ LanguageSelector.defaultProps = {
   lang: config.DEFAULT_LANG,
   options: [
     { code: 'en', name: 'English' },
-    { code: 'fr', name: 'French' }
+    { code: 'fr', name: 'Français' }
   ]
 };
 

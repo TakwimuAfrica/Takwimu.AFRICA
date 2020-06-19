@@ -56,7 +56,7 @@ const styles = theme => ({
       margin: '0.625rem'
     },
     [theme.breakpoints.up('lg')]: {
-      margin: '1.375rem'
+      margin: theme.spacing(2)
     }
   },
   searchButton: {
@@ -178,7 +178,7 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Grid container direction="row">
+          <Grid container direction="row" alignItems="center">
             <Grid item>
               <Link
                 navigation
@@ -220,7 +220,7 @@ class Navigation extends React.Component {
               </ButtonBase>
             </Grid>
             <Grid item>
-              <Box marginLeft="1.875rem">
+              <Box ml={2}>
                 <LanguageSelector lang={language} />
               </Box>
             </Grid>
