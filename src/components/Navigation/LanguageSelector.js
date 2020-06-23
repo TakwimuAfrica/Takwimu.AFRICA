@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import TranslateIcon from '@material-ui/icons/Translate';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-// import languages from '../../languages';
 import Link from '../Link';
 
 import config from '../../config';
