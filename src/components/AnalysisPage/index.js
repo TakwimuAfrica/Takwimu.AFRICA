@@ -38,8 +38,10 @@ function AnalysisPage({
 
   useEffect(() => {
     const el = document.getElementById(indicatorId);
+    let timer;
     if (el) {
-      setTimeout(() => {
+      el.style.scrollMarginTop = el.style.scrollMarginTop || '120px';
+      timer = setTimeout(() => {
         el.scrollIntoView({
           behavior: 'auto',
           block: 'center',
@@ -47,6 +49,11 @@ function AnalysisPage({
         });
       }, 1000);
     }
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
   }, [indicatorId]);
 
   if (analyses.length === 0) {
