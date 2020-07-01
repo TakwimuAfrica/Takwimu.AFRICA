@@ -201,7 +201,10 @@ function Profile({ sectionedCharts, language }) {
 
   const onClickGeoLayer = useCallback(
     area => {
-      router.push(`/profiles/${area.codes.AFR}`);
+      router.push(
+        '/profiles/[...geoIdOrCountrySlug]',
+        `/profiles/${area.codes.AFR}`
+      );
     },
     [router]
   );
