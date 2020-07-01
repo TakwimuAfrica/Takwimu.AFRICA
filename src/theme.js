@@ -288,6 +288,10 @@ const theme = createTheme({
             margin: 0
           }
         },
+        // Prevent long links in snippets from overflowing
+        '.wp-block-hurumap-card-block div.MuiTypography-root a': {
+          wordBreak: 'break-all'
+        },
         // Reset lists in cards
         '.wp-block-hurumap-card-block ul': {
           listStyleType: 'disc',

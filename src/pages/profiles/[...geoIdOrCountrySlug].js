@@ -70,7 +70,8 @@ ProfileOrAnalysisPage.getInitialProps = async props => {
   const {
     query: { geoIdOrCountrySlug }
   } = props;
-  const [, countryCode] = geoIdOrCountrySlug[0].split('-');
+  const [, geoCode] = geoIdOrCountrySlug[0].split('-');
+  const [countryCode] = geoCode ? geoCode.split('_') : [];
   const isProfile =
     config.countries.findIndex(c => c.iso_code === countryCode) !== -1;
   const getInitialProps = isProfile ? getProfileProps : getAnalysisProps;
