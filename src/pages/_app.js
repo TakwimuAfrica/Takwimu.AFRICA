@@ -15,6 +15,8 @@ import {
 } from '@material-ui/core/styles';
 import { create } from 'jss';
 
+import 'leaflet/dist/leaflet.css';
+
 import theme from '../theme';
 
 const client = new ApolloClient({
