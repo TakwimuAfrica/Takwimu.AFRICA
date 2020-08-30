@@ -1,7 +1,7 @@
 import { getPostById, getPostBySlug } from '../../cms';
 import config from '../../config';
 
-export default async function({
+export default async function getInitialProps({
   query: { geoIdOrCountrySlug, lang: queryLang, indicatorId },
   asPath
 }) {
@@ -105,7 +105,7 @@ export default async function({
     console.warn(err);
   }
 
-  const analysisLink = `${config.url}${asPath}`;
+  const analysisLink = `${asPath}`;
 
   return {
     takwimu: config,
