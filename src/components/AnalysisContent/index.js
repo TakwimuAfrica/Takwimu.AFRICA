@@ -152,7 +152,7 @@ function AnalysisContent({
       }}
       labels={contentActionsLabels}
       takwimu={takwimu}
-      link={analysisLink}
+      link={`${config.url}${analysisLink}`}
       {...props}
     />
   );
@@ -164,7 +164,7 @@ function AnalysisContent({
       content={content.topics}
       current={topicIndex}
       onClick={setTopicIndex}
-      generateHref={({ post_name: postName }) => `#${postName}`}
+      generateHref={({ post_name: postName }) => `${analysisLink}#${postName}`}
       generateTitle={({ post_title: postTitle }) => postTitle}
       {...props}
     />
