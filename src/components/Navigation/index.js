@@ -122,9 +122,9 @@ class Navigation extends React.Component {
               </Link>
             </Grid>
 
-            {isWidthUp('md', width)
+            {/* {isWidthUp('md', width)
               ? this.renderDesktopNav()
-              : this.renderMobileNav()}
+              : this.renderMobileNav()} */}
           </Grid>
         </Layout>
       </nav>
@@ -354,9 +354,9 @@ class Navigation extends React.Component {
     return (
       <>
         {this.renderNavBar()}
-        {this.renderMobileDrawer()}
+        {/* {this.renderMobileDrawer()}
         {this.renderDropDownDrawer()}
-        {this.renderSearchDrawer()}
+        {this.renderSearchDrawer()} */}
       </>
     );
   }
