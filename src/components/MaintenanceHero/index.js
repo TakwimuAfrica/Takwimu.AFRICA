@@ -67,6 +67,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   message: {
+    marginTop: '2.25rem',
     backgroundColor: '#ececec',
     border: '1px dashed #979797',
     padding: '1.25rem',
@@ -79,6 +80,9 @@ const useStyles = makeStyles(theme => ({
       maxWidth: theme.typography.pxToRem(140),
       minWidth: theme.typography.pxToRem(140),
       padding: '0.5rem 0'
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: 0
     }
   },
   team: {
@@ -115,7 +119,13 @@ function MaintenanceHero({ message, title, ...props }) {
               <Grid item xs={12}>
                 <RichTypography component="div">{message}</RichTypography>
               </Grid>
-              <Grid item xs={12} container justify="space-between">
+              <Grid
+                item
+                xs={12}
+                container
+                justify="space-between"
+                alignItems="center"
+              >
                 <Grid item>
                   <RichTypography className={classes.team}>
                     The Takwimu Team
