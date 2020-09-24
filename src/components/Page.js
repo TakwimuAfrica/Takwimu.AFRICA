@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Footer from './Footer';
+// import Footer from './Footer';
 import Navigation from './Navigation';
 import SEO from './SEO';
 
@@ -11,7 +11,7 @@ function Page({ children, takwimu, ...props }) {
       <SEO {...props} />
       <Navigation takwimu={takwimu} />
       {children}
-      <Footer takwimu={takwimu} />
+      {/* <Footer takwimu={takwimu} /> */}
     </>
   );
 }
