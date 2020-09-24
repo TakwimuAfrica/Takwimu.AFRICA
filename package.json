@@ -77,14 +77,12 @@
   },
   "lint-staged": {
     "src/**/*.{js,json,scss,md}": [
-      "yarn lint-staged",
       "git add"
     ]
   },
   "scripts": {
     "lint": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md' './'",
     "lint-staged": "yarn eslint --fix --ignore-path './.gitignore' --ext '.js,.json,.md'",
-    "predev": "yarn lint",
     "dev": "NODE_ENV=development PORT=3000 node ./devServer.js",
     "dev:now": "yarn now dev",
     "build": "next build",
