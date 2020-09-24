@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Button, Grid, Link } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import RichTypography from '../RichTypography';
@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   root: {
+    minWidth: theme.typography.pxToRem(360),
     width: '100%'
   },
   gradient: {
@@ -25,15 +26,20 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   title: {
+    fontSize: '2.85rem',
     margin: 0,
-    width: '100%',
     paddingTop: '0.5625rem',
+    width: '100%',
 
     // Some words are too big to fit mobile so break them
-    wordBreak: 'break-all',
+    // wordBreak: 'break-all',
     [theme.breakpoints.up('md')]: {
       maxWidth: '40rem',
+      fontSize: '3rem',
       wordBreak: 'initial'
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '3.375rem'
     }
   },
   description: {
@@ -106,7 +112,7 @@ function MaintenanceHero({ message, title, ...props }) {
             alignItems="center"
             className={classes.hero}
           >
-            <Grid item xs={12} lg={7}>
+            <Grid item xs={12} md={7}>
               <RichTypography
                 component="div"
                 variant="h1"
@@ -115,7 +121,7 @@ function MaintenanceHero({ message, title, ...props }) {
                 {title}
               </RichTypography>
             </Grid>
-            <Grid item xs={12} lg={5} container className={classes.message}>
+            <Grid item xs={12} md={5} container className={classes.message}>
               <Grid item xs={12}>
                 <RichTypography component="div">{message}</RichTypography>
               </Grid>
