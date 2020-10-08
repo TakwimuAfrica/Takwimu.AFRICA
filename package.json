@@ -33,7 +33,7 @@
     "leaflet": "^1.6.0",
     "lodash": "^4.17.19",
     "material-ui-popup-state": "^1.5.3",
-    "next": "^9.0.7",
+    "next": "^9.5.4",
     "next-images": "^1.2.0",
     "prop-types": "^15.6.2",
     "react": "^16.10.2",
